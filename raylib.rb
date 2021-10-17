@@ -15,6 +15,13 @@ module Raylib
     )
   end
 
+  class Vector2 < FFI::Struct
+    layout(
+      :x, :float,
+      :y, :float,
+    )
+  end
+
   def self.load_lib(libpath = './raylib.dylib', output_error = false)
     ffi_lib_flags :now, :global
     ffi_lib libpath
@@ -31,6 +38,8 @@ module Raylib
       :DrawText,
       :EndDrawing,
       :CloseWindow,
+
+      :DrawLineV,
     ]
     args = {
       :InitWindow => [:int, :int, :pointer],
@@ -41,6 +50,8 @@ module Raylib
       :DrawText => [:pointer, :int, :int, :int, Color.by_value],
       :EndDrawing => [],
       :CloseWindow => [],
+
+      :DrawLineV => [Vector2.by_value, Vector2.by_value, Color.by_value],
     }
     retvals = {
       :InitWindow => :void,
@@ -51,6 +62,8 @@ module Raylib
       :DrawText => :void,
       :EndDrawing => :void,
       :CloseWindow => :void,
+
+      :DrawLineV => :void,
     }
 
     symbols.each do |sym|
