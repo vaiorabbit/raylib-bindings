@@ -1,6 +1,6 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION" : null
+    , "RAYLIB_VERSION" : "\"4.0\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : null

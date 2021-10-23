@@ -1,4 +1,4 @@
-require_relative 'raylib'
+require_relative 'lib/raylib'
 
 $lib_path = case RUBY_PLATFORM
             when /mswin|msys|mingw|cygwin/
@@ -16,7 +16,7 @@ Raylib.load_lib($lib_path)
 include Raylib
 
 if __FILE__ == $0
-  InitWindow(800, 450, "Yet Another Ruby-raylib bindings");
+  InitWindow(800, 450, "Yet Another Ruby-raylib bindings")
   SetTargetFPS(60)
 
   ray_white = Color.new

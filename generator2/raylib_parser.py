@@ -493,6 +493,9 @@ def collect_decl_struct(ctx, cursor, struct_name=None, typedef_name=None):
             return
         struct_info.name = typedef_name
 
+    # Name of struct/class must be start with capital letter
+    struct_info.name = struct_info.name[0].upper() + struct_info.name[1:]
+
     # fields = cursor.type.get_fields()
     #
     # for field in fields:
@@ -582,13 +585,15 @@ def collect_decl(ctx, cursor):
         elif child.kind == CursorKind.FUNCTION_DECL:
             collect_decl_function(ctx, child)
         else:
-            pass
+            for grand_child in child.get_children():
+                collect_decl_function(ctx, grand_child)
 
     ctx.pop()
 
 
 parser_arg = [
-    "-fsyntax-only", "-std=c++17"
+    "-fsyntax-only", "-std=c++17",
+    "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
 ]
 
 parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
