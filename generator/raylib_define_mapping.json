@@ -55,7 +55,7 @@
     , "MatrixToFloat" : null
     , "Vector3ToFloat" : null
     , "RLGL_H" : null
-    , "RLGL_VERSION" : null
+    , "RLGL_VERSION" : "\"4.0\""
     , "TRACELOG" : null
     , "TRACELOGD" : null
     , "GRAPHICS_API_OPENGL_33" : null
