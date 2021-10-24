@@ -73,4 +73,41 @@ module Raylib
   MAGENTA    = Color.from_u8(255, 0, 255, 255)
   RAYWHITE   = Color.from_u8(245, 245, 245, 255)
 
+  #
+  # Math helper
+  #
+
+  def Vector2.create(x = 0, y = 0)
+    instance = Vector2.new
+    instance[:x] = x
+    instance[:y] = y
+    return instance
+  end
+
+  def Vector3.create(x = 0, y = 0, z = 0)
+    instance = Vector3.new
+    instance[:x] = x
+    instance[:y] = y
+    instance[:z] = z
+    return instance
+  end
+
+  def Vector4.create(x = 0, y = 0, z = 0, w = 0)
+    instance = Vector4.new
+    instance[:x] = x
+    instance[:y] = y
+    instance[:z] = z
+    instance[:w] = w
+    return instance
+  end
+
+  def Quaternion.create(x = 0, y = 0, z = 0, w = 0)
+    instance = Quaternion.new
+    instance[:x] = x
+    instance[:y] = y
+    instance[:z] = z
+    instance[:w] = w
+    return instance
+  end
+
 end

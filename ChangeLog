@@ -5,7 +5,7 @@
 	* examples: Added
 	* examples/shapes_basic_shapes.rb: Added
 	* generator: Now correctly handles variable-length arguments (TextFormat and TraceLog)
-	* Added Color.from_u8
+	* Added helper functions (Color.from_u8, Vector2.create, etc.)
 
 2021-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
