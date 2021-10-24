@@ -1,12 +1,11 @@
 import raylib_parser, raylib_generator
 
-STRUCT_POSTFIX_RAYLIB = """
-  Texture2D = Texture
-  TextureCubemap = Texture
-  Camera = Camera3D
-  Quaternion = Vector4
-  RenderTexture2D = RenderTexture;
-"""
+RAYLIB_STRUCT_ALIAS = {
+    "Vector4": ["Quaternion"],
+    "Texture": ["Texture2D", "TextureCubemap"],
+    "RenderTexture": ["RenderTexture2D"],
+    "Camera3D": ["Camera"],
+}
 
 if __name__ == "__main__":
 
@@ -16,4 +15,4 @@ if __name__ == "__main__":
     raylib_generator.sanitize(ctx)
     raylib_generator.generate(ctx,
                               module_name = 'raylib',
-                              struct_postfix = STRUCT_POSTFIX_RAYLIB)
+                              struct_alias = RAYLIB_STRUCT_ALIAS)

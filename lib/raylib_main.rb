@@ -652,6 +652,8 @@ module Raylib
     )
   end
 
+  Quaternion = Vector4
+
   class Matrix < FFI::Struct
     layout(
       :m0, :float,
@@ -711,6 +713,9 @@ module Raylib
     )
   end
 
+  Texture2D = Texture
+  TextureCubemap = Texture
+
   class RenderTexture < FFI::Struct
     layout(
       :id, :uint,
@@ -718,6 +723,8 @@ module Raylib
       :depth, Texture,
     )
   end
+
+  RenderTexture2D = RenderTexture
 
   class NPatchInfo < FFI::Struct
     layout(
@@ -760,6 +767,8 @@ module Raylib
       :projection, :int,
     )
   end
+
+  Camera = Camera3D
 
   class Camera2D < FFI::Struct
     layout(
@@ -937,13 +946,6 @@ module Raylib
       :scaleIn, [:float, 2],
     )
   end
-
-
-  Texture2D = Texture
-  TextureCubemap = Texture
-  Camera = Camera3D
-  Quaternion = Vector4
-  RenderTexture2D = RenderTexture;
 
 
   # Function

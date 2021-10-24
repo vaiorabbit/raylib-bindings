@@ -112,7 +112,7 @@ def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_postfix != "":
         print(typedef_postfix, file = sys.stdout)
 
-def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix=""):
+def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None):
     if struct_prefix != "":
         print(struct_prefix, file = sys.stdout)
     for struct_name, struct_info in ctx.decl_structs.items():
@@ -127,6 +127,13 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix=""):
                 print(indent + "    :%s, [%s, %s]," % (field.element_name, field.type_kind, field.element_count), file = sys.stdout)
         print(indent + "  )", file = sys.stdout)
         print(indent + "end\n", file = sys.stdout)
+        if struct_alias:
+            if struct_name in struct_alias.keys():
+                names = struct_alias[struct_name]
+                for name in names:
+                    print(indent + name + ' = ' + struct_name, file = sys.stdout)
+                print("", file = sys.stdout)
+            pass
     if struct_postfix != "":
         print(struct_postfix, file = sys.stdout)
 
@@ -175,7 +182,7 @@ def generate_function(ctx, indent = "", module_name = ""):
     print(indent + "end", file = sys.stdout)
 
 
-def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix=""):
+def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None):
 
     print(prefix, file = sys.stdout)
 
@@ -202,7 +209,7 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 
     # struct/union
     print(indent + "# Struct\n", file = sys.stdout)
-    generate_structunion(ctx, indent, struct_prefix, struct_postfix)
+    generate_structunion(ctx, indent, struct_prefix, struct_postfix, struct_alias)
     print("", file = sys.stdout)
 
     # function
