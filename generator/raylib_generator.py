@@ -155,9 +155,13 @@ def generate_function(ctx, indent = "", module_name = ""):
         if len(func_info.args) > 0:
             # Get Ruby FFI arguments
             args_ctype_list = list(map((lambda t: str(t.type_kind)), func_info.args))
+
             # Add ".by_value" to struct arguments (e.g.: Color -> Color.by_value)
             arg_is_record = lambda arg: raylib_parser.query_raylib_cindex_mapping_entry_exists(arg) and raylib_parser.get_raylib_cindex_mapping_value(arg) == "TypeKind.RECORD"
             args_ctype_list = list(map((lambda arg: arg + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
+
+            # 
+
             print(', '.join(args_ctype_list), file = sys.stdout, end='')
         print("],", file = sys.stdout)
     print(indent + "  }", file = sys.stdout)

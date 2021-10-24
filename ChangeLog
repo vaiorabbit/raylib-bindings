@@ -4,6 +4,7 @@
 	* generator: Add struct alias hook
 	* examples: Added
 	* examples/shapes_basic_shapes.rb: Added
+	* generator: Now correctly handles variable-length arguments (TextFormat and TraceLog)
 
 2021-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 

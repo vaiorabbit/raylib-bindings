@@ -113,39 +113,44 @@ def _init_type_mapping(mapping_filename = './raylib_cindex_mapping.json'):
 
     return True
 
-def register_raylib_cindex_mapping(strTypeKind, strSDL2Typedef):
+def register_raylib_cindex_mapping(strTypeKind, strRaylibTypedef):
     if cindex_mapping == None:
         _init_type_mapping()
-    if strSDL2Typedef not in cindex_mapping:
-        cindex_mapping[strSDL2Typedef] = strTypeKind
+    if strRaylibTypedef not in cindex_mapping:
+        cindex_mapping[strRaylibTypedef] = strTypeKind
 
-def query_raylib_cindex_mapping_entry_exists(strSDL2Typedef):
+def query_raylib_cindex_mapping_entry_exists(strRaylibTypedef):
     if cindex_mapping == None:
         _init_type_mapping()
-    return strSDL2Typedef in cindex_mapping
+    return strRaylibTypedef in cindex_mapping
 
-def get_raylib_cindex_mapping_value(strSDL2Typedef):
+def get_raylib_cindex_mapping_value(strRaylibTypedef):
     if cindex_mapping == None:
         _init_type_mapping()
-    return cindex_mapping[strSDL2Typedef]
+    return cindex_mapping[strRaylibTypedef]
 
 
-def get_cindex_ctypes_mapping(strTypeKind, strSDL2Typedef):
+def get_cindex_ctypes_mapping(strTypeKind, strRaylibTypedef):
 
     if strTypeKind == 'TypeKind.RECORD':
-        return strSDL2Typedef
+        return strRaylibTypedef
+
+    # Handle variable length arguments
+    # - Check special marks recoreded in collect_decl_function
+    if strTypeKind == 'TypeKind.INVALID' and strRaylibTypedef == 'va_list':
+        return ':varargs'
 
     isPointerToChar = False
     if strTypeKind == 'TypeKind.POINTER':
         pattern = re.compile(r"\s*char\s*\*")
-        m = re.search(pattern, strSDL2Typedef)
+        m = re.search(pattern, strRaylibTypedef)
         if m:
             isPointerToChar = True
 
     isSizeType = False
     if strTypeKind == 'TypeKind.TYPEDEF':
         pattern = re.compile(r"\s*size_t\s*")
-        m = re.search(pattern, strSDL2Typedef)
+        m = re.search(pattern, strRaylibTypedef)
         if m:
             isSizeType = True
 
@@ -179,6 +184,7 @@ def get_cindex_ctypes_mapping(strTypeKind, strSDL2Typedef):
         'TypeKind.FUNCTIONPROTO' : ':pointer',
         'TypeKind.CONSTANTARRAY' : ':pointer', # 'va_list' on macOS
         'TypeKind.RECORD' : 'nil',
+        'TypeKind.INVALID' : 'nil',
     }
 
     if isPointerToChar:
@@ -190,15 +196,15 @@ def get_cindex_ctypes_mapping(strTypeKind, strSDL2Typedef):
         if strTypeKind != 'TypeKind.TYPEDEF':
             mapping_key = strTypeKind
         else:
-            mapping_key = get_raylib_cindex_mapping_value(strSDL2Typedef)
+            mapping_key = get_raylib_cindex_mapping_value(strRaylibTypedef)
 
         if mapping_key == "TypeKind.RECORD":
-            return str(strSDL2Typedef)
+            return str(strRaylibTypedef)
         else:
             return ctypes_mapping[mapping_key]
 
-def is_raylib_callback_type(strTypeKind, strSDL2Typedef):
-    return query_raylib_cindex_mapping_entry_exists(strSDL2Typedef) and (get_raylib_cindex_mapping_value(strSDL2Typedef) == "TypeKind.FUNCTIONPROTO")
+def is_raylib_callback_type(strTypeKind, strRaylibTypedef):
+    return query_raylib_cindex_mapping_entry_exists(strRaylibTypedef) and (get_raylib_cindex_mapping_value(strRaylibTypedef) == "TypeKind.FUNCTIONPROTO")
 
 ####################################################################################################
 
@@ -358,7 +364,7 @@ class ParseContext(object):
 def collect_decl_macro(ctx, cursor):
 
     if str(cursor.location.file) != ctx.parse_file:
-        return # pass
+        return
 
     tokens = list(cursor.get_tokens())
     macro_name = str(tokens[0].spelling)
@@ -446,7 +452,7 @@ def collect_decl_typedef(ctx, cursor):
 def collect_decl_enum(ctx, cursor):
 
     if str(cursor.location.file) != ctx.parse_file:
-        return # pass
+        return
 
     ctx.collection_mode = ParseContext.Decl_Enum
     val = []
@@ -496,9 +502,6 @@ def collect_decl_struct(ctx, cursor, struct_name=None, typedef_name=None):
     # Name of struct/class must be start with capital letter
     struct_info.name = struct_info.name[0].upper() + struct_info.name[1:]
 
-    # fields = cursor.type.get_fields()
-    #
-    # for field in fields:
     for field in cursor.get_children():
 
         if not field.is_definition(): # e.g.) struct SDL_BlitMap *map;
@@ -529,11 +532,7 @@ def collect_decl_struct(ctx, cursor, struct_name=None, typedef_name=None):
                 collect_decl_struct(ctx, cursor_decl, cursor_decl.spelling)
                 ctx.pop()
         else:
-            # [2018-03-21] A wrong member 'packed' is mixed in the parsed result of 'SDL_AudioCVT'.
-            # "#define SDL_AUDIOCVT_PACKED __attribute__((packed))" and "SDL_AUDIOCVT_PACKED SDL_AudioCVT;" might cause this problem.
-            # The condition below seems useful for preventing wrong members to be added.
-            if field_info.type_kind == TypeKind.INVALID and field.get_field_offsetof() == -1:
-                continue
+            pass
 
         struct_info.push(field_info)
 
@@ -564,6 +563,15 @@ def collect_decl_function(ctx, cursor):
         arg_info.name = arg.spelling
         arg_info.type_name = arg.type.spelling
         arg_info.type_kind = arg.type.get_canonical().kind
+        func_info.args.append(arg_info)
+
+    # Detect if this function uses variable length arguments
+    use_vararg = '...' in cursor.displayname
+    if use_vararg:
+        arg_info = ArgumentInfo()
+        arg_info.name = '...'
+        arg_info.type_name = 'va_list'
+        arg_info.type_kind = TypeKind.INVALID
         func_info.args.append(arg_info)
 
     ctx.add_decl_function(func_info.name, func_info)
