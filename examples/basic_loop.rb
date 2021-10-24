@@ -1,22 +1,6 @@
-require_relative 'lib/raylib'
-#require_relative 'raylib'
+require_relative 'util/setup_dll'
 
-$lib_path = case RUBY_PLATFORM
-            when /mswin|msys|mingw|cygwin/
-              Dir.pwd + '/' + 'raylib.dll'
-            when /darwin/
-              'libraylib.dylib'
-            when /linux/
-              'libraylib.so'
-            else
-              raise RuntimeError, "test.rb : Unknown OS: #{RUBY_PLATFORM}"
-            end
-
-Raylib.load_lib($lib_path)
-
-include Raylib
-
-if __FILE__ == $0
+if __FILE__ == $PROGRAM_NAME
   InitWindow(800, 450, "Yet Another Ruby-raylib bindings")
   SetTargetFPS(60)
 

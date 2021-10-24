@@ -2,6 +2,7 @@
 
 	* generator: Add ".by_value" to struct arguments
 	* generator: Add struct alias hook
+	* examples: Added
 
 2021-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
