@@ -160,8 +160,6 @@ def generate_function(ctx, indent = "", module_name = ""):
             arg_is_record = lambda arg: raylib_parser.query_raylib_cindex_mapping_entry_exists(arg) and raylib_parser.get_raylib_cindex_mapping_value(arg) == "TypeKind.RECORD"
             args_ctype_list = list(map((lambda arg: arg + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
 
-            # 
-
             print(', '.join(args_ctype_list), file = sys.stdout, end='')
         print("],", file = sys.stdout)
     print(indent + "  }", file = sys.stdout)
@@ -170,7 +168,12 @@ def generate_function(ctx, indent = "", module_name = ""):
     for func_name, func_info in ctx.decl_functions.items():
         if func_info == None:
             continue
-        print(indent + "    :%s => %s," % (func_name, str(func_info.retval.type_kind)), file = sys.stdout)
+
+        # Add ".by_value" to struct return value (e.g.: Color -> Color.by_value)
+        retval_is_record = raylib_parser.query_raylib_cindex_mapping_entry_exists(func_info.retval.type_kind) and raylib_parser.get_raylib_cindex_mapping_value(func_info.retval.type_kind) == "TypeKind.RECORD"
+        retval_str = str(func_info.retval.type_kind) + ".by_value" if retval_is_record else str(func_info.retval.type_kind)
+
+        print(indent + "    :%s => %s," % (func_name, retval_str), file = sys.stdout)
     print(indent + "  }", file = sys.stdout)
 
     print(indent +

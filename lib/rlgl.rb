@@ -651,7 +651,7 @@ module Raylib
       :rlGetTextureIdDefault => :uint,
       :rlGetShaderIdDefault => :uint,
       :rlGetShaderLocsDefault => :pointer,
-      :rlLoadRenderBatch => rlRenderBatch,
+      :rlLoadRenderBatch => rlRenderBatch.by_value,
       :rlUnloadRenderBatch => :void,
       :rlDrawRenderBatch => :void,
       :rlSetRenderBatchActive => :void,
