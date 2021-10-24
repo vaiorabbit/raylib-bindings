@@ -521,7 +521,7 @@ module Raylib
       :rlGetShaderIdDefault => [],
       :rlGetShaderLocsDefault => [],
       :rlLoadRenderBatch => [:int, :int],
-      :rlUnloadRenderBatch => [rlRenderBatch],
+      :rlUnloadRenderBatch => [rlRenderBatch.by_value],
       :rlDrawRenderBatch => [:pointer],
       :rlSetRenderBatchActive => [:pointer],
       :rlDrawRenderBatchActive => [],

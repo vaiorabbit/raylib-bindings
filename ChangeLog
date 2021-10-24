@@ -1,3 +1,7 @@
+2021-10-24  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator: Add ".by_value" to struct arguments
+
 2021-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Experimental raylib header parser

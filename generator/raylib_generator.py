@@ -112,7 +112,9 @@ def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_postfix != "":
         print(typedef_postfix, file = sys.stdout)
 
-def generate_structunion(ctx, indent = ""):
+def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix=""):
+    if struct_prefix != "":
+        print(struct_prefix, file = sys.stdout)
     for struct_name, struct_info in ctx.decl_structs.items():
         if struct_info == None:
             continue
@@ -125,6 +127,8 @@ def generate_structunion(ctx, indent = ""):
                 print(indent + "    :%s, [%s, %s]," % (field.element_name, field.type_kind, field.element_count), file = sys.stdout)
         print(indent + "  )", file = sys.stdout)
         print(indent + "end\n", file = sys.stdout)
+    if struct_postfix != "":
+        print(struct_postfix, file = sys.stdout)
 
 def generate_function(ctx, indent = "", module_name = ""):
     print(indent + "def self.setup_%s_symbols()" % module_name , file = sys.stdout)
@@ -142,7 +146,11 @@ def generate_function(ctx, indent = "", module_name = ""):
             continue
         print(indent + "    :%s => [" % func_name, file = sys.stdout, end='')
         if len(func_info.args) > 0:
+            # Get Ruby FFI arguments
             args_ctype_list = list(map((lambda t: str(t.type_kind)), func_info.args))
+            # Add ".by_value" to struct arguments (e.g.: Color -> Color.by_value)
+            arg_is_record = lambda arg: raylib_parser.query_raylib_cindex_mapping_entry_exists(arg) and raylib_parser.get_raylib_cindex_mapping_value(arg) == "TypeKind.RECORD"
+            args_ctype_list = list(map((lambda arg: arg + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
             print(', '.join(args_ctype_list), file = sys.stdout, end='')
         print("],", file = sys.stdout)
     print(indent + "  }", file = sys.stdout)
@@ -167,7 +175,7 @@ def generate_function(ctx, indent = "", module_name = ""):
     print(indent + "end", file = sys.stdout)
 
 
-def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix=""):
+def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix=""):
 
     print(prefix, file = sys.stdout)
 
@@ -194,7 +202,7 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 
     # struct/union
     print(indent + "# Struct\n", file = sys.stdout)
-    generate_structunion(ctx, indent)
+    generate_structunion(ctx, indent, struct_prefix, struct_postfix)
     print("", file = sys.stdout)
 
     # function

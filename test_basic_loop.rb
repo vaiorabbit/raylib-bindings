@@ -1,4 +1,5 @@
 require_relative 'lib/raylib'
+#require_relative 'raylib'
 
 $lib_path = case RUBY_PLATFORM
             when /mswin|msys|mingw|cygwin/
