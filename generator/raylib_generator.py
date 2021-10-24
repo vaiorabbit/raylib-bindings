@@ -118,6 +118,8 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
     for struct_name, struct_info in ctx.decl_structs.items():
         if struct_info == None:
             continue
+        # Name of struct/class must be start with capital letter
+        struct_name = struct_name[0].upper() + struct_name[1:]
         print(indent + "class %s < %s" % (struct_name, struct_info.kind), file = sys.stdout)
         print(indent + "  layout(", file = sys.stdout)
         for field in struct_info.fields:
@@ -156,9 +158,9 @@ def generate_function(ctx, indent = "", module_name = ""):
             # Get Ruby FFI arguments
             args_ctype_list = list(map((lambda t: str(t.type_kind)), func_info.args))
 
-            # Add ".by_value" to struct arguments (e.g.: Color -> Color.by_value)
+            # Capitalize and add ".by_value" to struct arguments (e.g.: Color -> Color.by_value)
             arg_is_record = lambda arg: raylib_parser.query_raylib_cindex_mapping_entry_exists(arg) and raylib_parser.get_raylib_cindex_mapping_value(arg) == "TypeKind.RECORD"
-            args_ctype_list = list(map((lambda arg: arg + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
+            args_ctype_list = list(map((lambda arg: arg[0].upper() + arg[1:] + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
 
             print(', '.join(args_ctype_list), file = sys.stdout, end='')
         print("],", file = sys.stdout)
@@ -169,9 +171,10 @@ def generate_function(ctx, indent = "", module_name = ""):
         if func_info == None:
             continue
 
-        # Add ".by_value" to struct return value (e.g.: Color -> Color.by_value)
+        # Capitalize and add ".by_value" to struct return value (e.g.: Color -> Color.by_value, float3 -> Float3.by_value)
         retval_is_record = raylib_parser.query_raylib_cindex_mapping_entry_exists(func_info.retval.type_kind) and raylib_parser.get_raylib_cindex_mapping_value(func_info.retval.type_kind) == "TypeKind.RECORD"
-        retval_str = str(func_info.retval.type_kind) + ".by_value" if retval_is_record else str(func_info.retval.type_kind)
+        name = str(func_info.retval.type_kind)
+        retval_str = name[0].upper() + name[1:] + ".by_value" if retval_is_record else name
 
         print(indent + "    :%s => %s," % (func_name, retval_str), file = sys.stdout)
     print(indent + "  }", file = sys.stdout)

@@ -8,6 +8,7 @@
 	* Added helper functions (Color.from_u8, Vector2.create, etc.)
 	* examples/core_3d_camera_first_person.rb: Added
 	* generator: Now correctly handles return values
+	* Bugfix: Removed duplicated enums / Names of some structs must start with capital letter
 
 2021-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 

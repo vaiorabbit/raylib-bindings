@@ -436,10 +436,6 @@ def collect_decl_typedef(ctx, cursor):
             ctx.push()
             collect_decl_struct(ctx, cursor_decl, cursor_decl.spelling, typedef_info.name)
             ctx.pop()
-        elif cursor_decl.kind == CursorKind.ENUM_DECL:
-            ctx.push()
-            collect_decl_enum(ctx, cursor_decl)
-            ctx.pop()
         else:
             pass
     else:
@@ -498,9 +494,6 @@ def collect_decl_struct(ctx, cursor, struct_name=None, typedef_name=None):
         if typedef_name == None:
             return
         struct_info.name = typedef_name
-
-    # Name of struct/class must be start with capital letter
-    struct_info.name = struct_info.name[0].upper() + struct_info.name[1:]
 
     for field in cursor.get_children():
 
