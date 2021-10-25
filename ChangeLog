@@ -1,3 +1,7 @@
+2021-10-25  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/utf8_font.rb: Added
+
 2021-10-24  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator: Add ".by_value" to struct arguments
