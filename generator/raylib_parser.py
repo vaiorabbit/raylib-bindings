@@ -599,11 +599,11 @@ parser_arg = [
 
 parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
 
-def execute(ctx):
+def execute(ctx, arg=[]):
     idx = Index.create()
 
     try:
-        tu = idx.parse(ctx.parse_file, args=parser_arg, unsaved_files=None, options=parser_opt)
+        tu = idx.parse(ctx.parse_file, args=parser_arg + arg, unsaved_files=None, options=parser_opt)
         ctx.depth = 0
         collect_decl(ctx, tu.cursor)
 

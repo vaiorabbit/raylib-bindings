@@ -10,8 +10,6 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  DEG2RAD = Math::PI / 180.0
-  RAD2DEG = 180.0 / Math::PI
 
   # Enum
 

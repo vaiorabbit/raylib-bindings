@@ -1,6 +1,7 @@
 2021-10-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/models_rlgl_solar_system.rb: Added
+	* Bugfix: DEG2RAD and RAD2DEG duplication
 
 2021-10-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
