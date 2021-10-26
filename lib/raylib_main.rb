@@ -11,6 +11,8 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION = "4.0"
+  DEG2RAD = Math::PI / 180.0
+  RAD2DEG = 180.0 / Math::PI
 
   # Enum
 

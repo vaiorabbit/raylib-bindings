@@ -3,8 +3,8 @@
     , "RAYLIB_VERSION" : "\"4.0\""
     , "RLAPI" : null
     , "PI" : null
-    , "DEG2RAD" : null
-    , "RAD2DEG" : null
+    , "DEG2RAD" : "Math::PI / 180.0"
+    , "RAD2DEG" : "180.0 / Math::PI"
     , "RL_MALLOC" : null
     , "RL_CALLOC" : null
     , "RL_REALLOC" : null
