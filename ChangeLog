@@ -2,6 +2,7 @@
 
 	* examples/models_rlgl_solar_system.rb: Added
 	* Bugfix: DEG2RAD and RAD2DEG duplication
+	* examples/models_cubicmap.rb: Added
 
 2021-10-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
