@@ -6,19 +6,26 @@ require 'ffi'
 require_relative 'raylib_main.rb'
 require_relative 'raymath.rb'
 require_relative 'rlgl.rb'
+require_relative 'raygui.rb'
 
 module Raylib
 
   extend FFI::Library
 
   @@raylib_import_done = false
-  def self.load_lib(libpath)
+  def self.load_lib(libpath, raygui_libpath: nil)
 
     unless @@raylib_import_done
       begin
+        lib_paths = [libpath, raygui_libpath].compact
+
         ffi_lib_flags :now, :global
-        ffi_lib libpath
+        ffi_lib *lib_paths
         setup_symbols()
+
+        if raygui_libpath != nil
+          setup_raygui_symbols()
+        end
       rescue => error
         puts error
       end
@@ -107,6 +114,15 @@ module Raylib
     instance[:y] = y
     instance[:z] = z
     instance[:w] = w
+    return instance
+  end
+
+  def Rectangle.create(x = 0, y = 0, width = 0, height = 0)
+    instance = Rectangle.new
+    instance[:x] = x
+    instance[:y] = y
+    instance[:width] = width
+    instance[:height] = height
     return instance
   end
 

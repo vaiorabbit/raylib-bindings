@@ -105,4 +105,10 @@
     , "RL_COMPUTE_SHADER" : "0x91B9"
     , "RL_SHADER_LOC_MAP_DIFFUSE" : null
     , "RL_SHADER_LOC_MAP_SPECULAR" : null
+    , "RAYGUI_H" : null
+    , "RAYGUI_VERSION" : "\"3.0\""
+    , "RAYGUIAPI" : null
+    , "RAYGUI_MALLOC" : null
+    , "RAYGUI_CALLOC" : null
+    , "RAYGUI_FREE" : null
 }

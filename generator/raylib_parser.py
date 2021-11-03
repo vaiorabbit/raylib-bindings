@@ -7,7 +7,7 @@ Config.set_library_path("/opt/homebrew/opt/llvm/lib")
 
 ####################################################################################################
 
-def generate_type_mapping(headers_list_filename = './raylib_headers_list.json', headers_dir = '../raylib_dll/raylib/src'):
+def generate_type_mapping(headers_list_filename = './raylib_headers_list.json'):
     headers_list_file = Path(headers_list_filename)
 
     if not headers_list_file.exists():
@@ -19,7 +19,6 @@ def generate_type_mapping(headers_list_filename = './raylib_headers_list.json', 
 
     ctx = ParseContext()
     for header_filename in headers_list:
-        header_filename = headers_dir + '/' + header_filename
         if not Path(header_filename).exists():
             continue
 
@@ -41,7 +40,7 @@ def generate_type_mapping(headers_list_filename = './raylib_headers_list.json', 
     print("}", file = sys.stdout)
 
 
-def generate_define_list(headers_list_filename = './raylib_headers_list.json', headers_dir = '../raylib_dll/raylib/src', concatinate = True):
+def generate_define_list(headers_list_filename = './raylib_headers_list.json', concatinate = True):
     headers_list_file = Path(headers_list_filename)
 
     if not headers_list_file.exists():
@@ -53,7 +52,6 @@ def generate_define_list(headers_list_filename = './raylib_headers_list.json', h
 
     ctx = ParseContext()
     for header_filename in headers_list:
-        header_filename = headers_dir + '/' + header_filename
         if not Path(header_filename).exists():
             continue
 

@@ -18,11 +18,11 @@ include Raylib
 
 case RUBY_PLATFORM
 when /mswin|msys|mingw|cygwin/
-  Raylib.load_lib(Dir.pwd + '/../lib/' + 'raylib.dll')
+  Raylib.load_lib(Dir.pwd + '/../lib/' + 'raylib.dll', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dll')
 when /darwin/
-  Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dylib')
+  Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dylib', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dylib')
 when /linux/
-  Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.so')
+  Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.so', raygui_libpath: Dir.pwd + '/../lib/' + 'libraygui.so')
 else
   raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
 end

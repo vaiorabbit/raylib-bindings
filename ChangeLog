@@ -1,3 +1,8 @@
+2021-11-03  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Added raygui wrapper and wrapper generator
+	* examples/shapes_draw_circle_sector.rb: Added
+
 2021-10-31  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/text_unicode.rb: Added

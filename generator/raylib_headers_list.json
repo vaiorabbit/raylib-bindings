@@ -1,5 +1,6 @@
 [
-    "raylib.h",
-    "raymath.h",
-    "rlgl.h"
+    "../raylib_dll/raylib/src/raylib.h",
+    "../raylib_dll/raylib/src/raymath.h",
+    "../raylib_dll/raylib/src/rlgl.h",
+    "../raygui_dll/raygui/src/raygui.h"
 ]
