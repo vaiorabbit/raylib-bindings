@@ -1,6 +1,8 @@
 2021-11-04  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Bugfix: Generate correct signatures for raymath and rlgl
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/d18f3fca30858916546908e40cc2e0cea2be03ca )
+	* Bugfix: Fixed wrong signature in raymath.rb (generator will be fixed later)
 
 2021-11-03  vaiorabbit  <http://twitter.com/vaiorabbit>
 
