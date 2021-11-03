@@ -592,7 +592,7 @@ def collect_decl(ctx, cursor):
 
 parser_arg = [
     "-fsyntax-only", "-std=c++17",
-    "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
+    # "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
 ]
 
 parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
