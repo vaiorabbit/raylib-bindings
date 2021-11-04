@@ -126,4 +126,18 @@ module Raylib
     return instance
   end
 
+  def BoundingBox.create(min, max)
+    instance = BoundingBox.new
+    instance[:min] = min
+    instance[:max] = max
+    return instance
+  end
+
+  def BoundingBox.create(min_x, min_y, min_z, max_x, max_y, max_z)
+    instance = BoundingBox.new
+    instance[:min] = Vector3.create(min_x, min_y, min_z)
+    instance[:max] = Vector3.create(max_x, max_y, max_z)
+    return instance
+  end
+
 end
