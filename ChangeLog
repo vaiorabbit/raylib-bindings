@@ -3,6 +3,7 @@
 	* Bugfix: Generate correct signatures for raymath and rlgl
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/d18f3fca30858916546908e40cc2e0cea2be03ca )
 	* Bugfix: Fixed wrong signature in raymath.rb
+	* examples/audio_sound_loading: Added
 
 2021-11-03  vaiorabbit  <http://twitter.com/vaiorabbit>
 
