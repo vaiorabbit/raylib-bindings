@@ -129,6 +129,8 @@ def get_raylib_cindex_mapping_value(strRaylibTypedef):
 
 
 def get_cindex_ctypes_mapping(strTypeKind, strRaylibTypedef):
+    # Remove const declaration
+    strRaylibTypedef = re.sub(r"^\s*const\s*", '', strRaylibTypedef)
 
     if strTypeKind == 'TypeKind.RECORD':
         return strRaylibTypedef
