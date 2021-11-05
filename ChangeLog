@@ -2,6 +2,7 @@
 
 	* examples/models_box_collisions.rb: Added
 	* Added physac wrapper and wrapper generator
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/2021f09db4df72aea9f963666435bddf0718df94 )
 
 2021-11-04  vaiorabbit  <http://twitter.com/vaiorabbit>
 
