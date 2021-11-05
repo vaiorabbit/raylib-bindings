@@ -111,4 +111,17 @@
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null
     , "RAYGUI_FREE" : null
+    , "PHYSAC_H" : null
+    , "PHYSACDEF" : null
+    , "PHYSAC_MAX_BODIES" : "64"
+    , "PHYSAC_MAX_MANIFOLDS" : "4096"
+    , "PHYSAC_MAX_VERTICES" : "24"
+    , "PHYSAC_CIRCLE_VERTICES" : "24"
+    , "PHYSAC_COLLISION_ITERATIONS" : "100"
+    , "PHYSAC_PENETRATION_ALLOWANCE" : "0.05"
+    , "PHYSAC_PENETRATION_CORRECTION" : "0.4"
+    , "PHYSAC_PI" : "3.14159265358979323846"
+    , "PHYSAC_DEG2RAD" : null
+    , "PHYSAC_MALLOC" : null
+    , "PHYSAC_FREE" : null
 }

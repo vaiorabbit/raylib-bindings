@@ -7,25 +7,25 @@ require_relative 'raylib_main.rb'
 require_relative 'raymath.rb'
 require_relative 'rlgl.rb'
 require_relative 'raygui.rb'
+require_relative 'physac.rb'
 
 module Raylib
 
   extend FFI::Library
 
   @@raylib_import_done = false
-  def self.load_lib(libpath, raygui_libpath: nil)
+  def self.load_lib(libpath, raygui_libpath: nil, physac_libpath: nil)
 
     unless @@raylib_import_done
       begin
-        lib_paths = [libpath, raygui_libpath].compact
+        lib_paths = [libpath, raygui_libpath, physac_libpath].compact
 
         ffi_lib_flags :now, :global
         ffi_lib *lib_paths
         setup_symbols()
 
-        if raygui_libpath != nil
-          setup_raygui_symbols()
-        end
+        setup_raygui_symbols() if raygui_libpath != nil
+        setup_physac_symbols() if physac_libpath != nil
       rescue => error
         puts error
       end

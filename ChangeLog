@@ -1,6 +1,7 @@
 2021-11-05  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/models_box_collisions.rb: Added
+	* Added physac wrapper and wrapper generator
 
 2021-11-04  vaiorabbit  <http://twitter.com/vaiorabbit>
 

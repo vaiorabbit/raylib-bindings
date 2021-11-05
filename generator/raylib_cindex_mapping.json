@@ -95,4 +95,12 @@
     , "GuiScrollBarSide" : "TypeKind.ENUM"
     , "GuiListViewProperty" : "TypeKind.ENUM"
     , "GuiColorPickerProperty" : "TypeKind.ENUM"
+    , "PhysicsShapeType" : "TypeKind.ENUM"
+    , "PhysicsBody" : "TypeKind.POINTER"
+    , "Mat2" : "TypeKind.RECORD"
+    , "PolygonData" : "TypeKind.RECORD"
+    , "PhysicsShape" : "TypeKind.RECORD"
+    , "PhysicsBodyData" : "TypeKind.RECORD"
+    , "PhysicsManifoldData" : "TypeKind.RECORD"
+    , "PhysicsManifold" : "TypeKind.POINTER"
 }
