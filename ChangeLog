@@ -1,3 +1,7 @@
+2021-11-07  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/rlgl_compute_shader.rb: Added
+
 2021-11-06  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/physics_demo.rb: Added

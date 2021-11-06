@@ -19,7 +19,7 @@ if not exist build (
     mkdir build
 )
 cd build
-%CMAKE_EXE% -G "MSYS Makefiles" -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D BUILD_EXAMPLES=OFF -D CMAKE_C_COMPILER=gcc ../raylib
+%CMAKE_EXE% -G "MSYS Makefiles" -D GRAPHICS=GRAPHICS_API_OPENGL_43 -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D BUILD_EXAMPLES=OFF -D CMAKE_C_COMPILER=gcc ../raylib
 make
 copy raylib\libraylib.dll ..\..\lib
 popd
