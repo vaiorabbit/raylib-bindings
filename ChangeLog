@@ -2,6 +2,7 @@
 
 	* examples/physics_demo.rb: Added
 	* examples/textures_background_scrolling.rb: Added
+	* Added dll build scripts for Windows
 
 2021-11-05  vaiorabbit  <http://twitter.com/vaiorabbit>
 
