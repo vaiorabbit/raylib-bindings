@@ -18,7 +18,7 @@ include Raylib
 
 case RUBY_PLATFORM
 when /mswin|msys|mingw|cygwin/
-  Raylib.load_lib(Dir.pwd + '/../lib/' + 'raylib.dll', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dll', physac_libpath: Dir.pwd + '/../lib/' + 'physac.dll')
+  Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dll', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dll', physac_libpath: Dir.pwd + '/../lib/' + 'physac.dll')
 when /darwin/
   Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dylib', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dylib', physac_libpath: Dir.pwd + '/../lib/' + 'physac.dylib')
 when /linux/
