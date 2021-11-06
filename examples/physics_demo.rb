@@ -53,8 +53,10 @@ if __FILE__ == $PROGRAM_NAME
     # Destroy falling physics bodies
     bodiesCount = GetPhysicsBodiesCount()
     (bodiesCount - 1).downto(0) do |i|
-      body = PhysicsBodyData.new(GetPhysicsBody(i))
-      if body != nil && (body[:position][:y] > screenHeight*2)
+      body_ptr = GetPhysicsBody(i)
+      body = PhysicsBodyData.new(body_ptr)
+      if body_ptr != nil && (body[:position][:y] > screenHeight*2)
+        physics_bodies.delete(body_ptr)
         DestroyPhysicsBody(body)
       end
     end
