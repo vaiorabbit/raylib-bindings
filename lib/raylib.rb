@@ -140,4 +140,12 @@ module Raylib
     return instance
   end
 
+  def Vector3ToFloat(v)
+    return Vector3ToFloatV(mat)[:v].to_a
+  end
+
+  def MatrixToFloat(mat)
+    return MatrixToFloatV(mat)[:v].to_a
+  end
+
 end
