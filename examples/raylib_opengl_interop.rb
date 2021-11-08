@@ -21,15 +21,15 @@ end
 if __FILE__ == $PROGRAM_NAME
 
   GLSL_VERSION = 330
-  MAX_PARTICLES = 10000
+  MAX_PARTICLES = 1000
 
   screenWidth = 800
   screenHeight = 450
 
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - point particles")
 
-  shader = LoadShader(TextFormat("#{RAYLIB_OTHERS_PATH}resources/shaders/glsl%i/point_particle.vs", :int, GLSL_VERSION),
-                      TextFormat("#{RAYLIB_OTHERS_PATH}resources/shaders/glsl%i/point_particle.fs", :int, GLSL_VERSION))
+  shader = LoadShader(TextFormat("#{RAYLIB_OTHERS_PATH}resources/shaders/glsl#{GLSL_VERSION}/point_particle.vs"),
+                      TextFormat("#{RAYLIB_OTHERS_PATH}resources/shaders/glsl#{GLSL_VERSION}/point_particle.fs"))
 
   currentTimeLoc = GetShaderLocation(shader, "currentTime")
   colorLoc = GetShaderLocation(shader, "color")
