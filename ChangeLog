@@ -1,6 +1,7 @@
 2021-11-08  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/raylib_opengl_interop.rb: Added
+	* examples/models_geometric_shapes.rb: Added
 
 2021-11-07  vaiorabbit  <http://twitter.com/vaiorabbit>
 

@@ -21,7 +21,7 @@ end
 if __FILE__ == $PROGRAM_NAME
 
   GLSL_VERSION = 330
-  MAX_PARTICLES = 1000
+  MAX_PARTICLES = 10000
 
   screenWidth = 800
   screenHeight = 450
