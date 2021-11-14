@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2021-11-13
+*   Last modified : 2021-11-14
 
 ## Prerequisites ##
 
