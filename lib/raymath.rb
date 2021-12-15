@@ -270,7 +270,7 @@ module Raylib
       :Vector3LengthSqr => :float,
       :Vector3DotProduct => :float,
       :Vector3Distance => :float,
-      :Vector3Angle => Vector2.by_value,
+      :Vector3Angle => :float,
       :Vector3Negate => Vector3.by_value,
       :Vector3Divide => Vector3.by_value,
       :Vector3Normalize => Vector3.by_value,

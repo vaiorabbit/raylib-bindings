@@ -1,9 +1,19 @@
 import os, pprint, re, sys
 import json
+import platform
 from pathlib import Path
-from clang.cindex import Config, CursorKind, Index, TranslationUnit, TranslationUnitLoadError, TypeKind
+from clang.cindex import Config, CursorKind, Index, TranslationUnit, TranslationUnitLoadError, TypeKind, _CXString
 
-Config.set_library_path("/opt/homebrew/opt/llvm/lib")
+# Config.set_compatibility_check(False)
+if platform.system() == 'Windows':
+    Config.set_library_path('D:/Program Files/LLVM/bin')
+elif platform.system() == 'Dawrin':
+    Config.set_library_path("/opt/homebrew/opt/llvm/lib")
+else:
+    raise Exception("Unsupported platform")
+
+# conf = Config()
+# print(conf.lib.clang_getClangVersion())
 
 ####################################################################################################
 
@@ -593,13 +603,15 @@ def collect_decl(ctx, cursor):
 
 
 parser_arg = [
-    "-fsyntax-only", "-std=c++17",
+    #"-fsyntax-only", "-std=c++17",
     # "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
+    '-x', 'c++'
 ]
 
 parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
 
 def execute(ctx, arg=[]):
+
     idx = Index.create()
 
     try:

@@ -331,7 +331,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :int], :void
+  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :uint], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
@@ -689,6 +689,8 @@ module Raylib
       :GetWindowHandle,
       :GetScreenWidth,
       :GetScreenHeight,
+      :GetRenderWidth,
+      :GetRenderHeight,
       :GetMonitorCount,
       :GetCurrentMonitor,
       :GetMonitorPosition,
@@ -1178,6 +1180,8 @@ module Raylib
       :GetWindowHandle => [],
       :GetScreenWidth => [],
       :GetScreenHeight => [],
+      :GetRenderWidth => [],
+      :GetRenderHeight => [],
       :GetMonitorCount => [],
       :GetCurrentMonitor => [],
       :GetMonitorPosition => [:int],
@@ -1667,6 +1671,8 @@ module Raylib
       :GetWindowHandle => :pointer,
       :GetScreenWidth => :int,
       :GetScreenHeight => :int,
+      :GetRenderWidth => :int,
+      :GetRenderHeight => :int,
       :GetMonitorCount => :int,
       :GetCurrentMonitor => :int,
       :GetMonitorPosition => Vector2.by_value,
