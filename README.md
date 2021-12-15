@@ -2,8 +2,16 @@
 
 # Yet another raylib wrapper for Ruby #
 
+Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
+
 *   Created : 2021-10-17
 *   Last modified : 2021-12-15
+
+## Features ##
+
+*   Generated semi-automatically
+*   Based on Ruby/FFI
+    *   No need to build C extension library
 
 ## Prerequisites ##
 
@@ -28,3 +36,41 @@
                 gcc (Rev5, Built by MSYS2 project) 10.3.0
 
 *   CMake https://cmake.org/download/
+
+## License ##
+
+Shared libraries in `lib` directory are built on top of these products and are available under the terms of these licenses:
+
+*   `libraylib.dylib`, `libraylib.dll`
+    *   raylib ( https://github.com/raysan5/raylib )
+        *   https://github.com/raysan5/raylib/blob/master/LICENSE
+*   `raygui.dylib`, `raygui.dll`
+    *   raygui ( https://github.com/raysan5/raygui )
+        *   https://github.com/raysan5/raygui/blob/master/LICENSE
+*   `physac.dylib`, `physac.dll`
+    *   Physac ( https://github.com/victorfisac/Physac )
+        *   https://github.com/victorfisac/Physac/blob/a8a6c864bfc809f8e4b2f88bb916b90d736b3f4a/src/physac.h#L59-L76
+
+All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
+
+Ruby-raylib : Yet another raylib wrapper for Ruby
+Copyright (c) 2021 vaiorabbit <http://twitter.com/vaiorabbit>
+
+This software is provided 'as-is', without any express or implied
+warranty. In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+    1. The origin of this software must not be misrepresented; you must not
+    claim that you wrote the original software. If you use this software
+    in a product, an acknowledgment in the product documentation would be
+    appreciated but is not required.
+
+    2. Altered source versions must be plainly marked as such, and must not be
+    misrepresented as being the original software.
+
+    3. This notice may not be removed or altered from any source
+    distribution.
