@@ -2,6 +2,7 @@
 
 	* raylib_parser.py: Typo
 	* Python cindex reports va_list as int on macOS
+	* examples/models_loading_gltf.rb: Added
 
 2021-12-15  vaiorabbit  <http://twitter.com/vaiorabbit>
 
