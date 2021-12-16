@@ -1,3 +1,8 @@
+2021-12-16  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* raylib_parser.py: Typo
+	* Python cindex reports va_list as int on macOS
+
 2021-12-15  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/0454acaacfaae4a3269d443d3d88045240f738c3 )
