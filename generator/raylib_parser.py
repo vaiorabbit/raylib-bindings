@@ -15,6 +15,14 @@ else:
 # conf = Config()
 # print(conf.lib.clang_getClangVersion())
 
+parser_arg = [
+    #"-fsyntax-only", "-std=c++17",
+    # "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
+    '-x', 'c++'
+]
+
+parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
+
 ####################################################################################################
 
 def generate_type_mapping(headers_list_filename = './raylib_headers_list.json'):
@@ -601,14 +609,6 @@ def collect_decl(ctx, cursor):
 
     ctx.pop()
 
-
-parser_arg = [
-    #"-fsyntax-only", "-std=c++17",
-    # "-DRL_VECTOR2_TYPE", "-DRL_VECTOR3_TYPE", "-DRL_VECTOR4_TYPE", "-DRL_QUATERNION_TYPE", "-DRL_MATRIX_TYPE",
-    '-x', 'c++'
-]
-
-parser_opt = TranslationUnit.PARSE_SKIP_FUNCTION_BODIES | TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD | TranslationUnit.PARSE_INCOMPLETE
 
 def execute(ctx, arg=[]):
 
