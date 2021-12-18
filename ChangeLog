@@ -2,6 +2,7 @@
 
 	* examples/models_mesh_generation.rb: Added
 	* examples/utf8_font.rb: Added another font
+	* examples/core_3d_split_screen.rb: Added
 
 2021-12-16  vaiorabbit  <http://twitter.com/vaiorabbit>
 
