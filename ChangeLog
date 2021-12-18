@@ -4,6 +4,7 @@
 	* examples/utf8_font.rb: Added another font
 	* examples/core_3d_split_screen.rb: Added
 	* examples/core_world_screen.rb: Added
+	* examples/models_yaw_pitch_roll.rb: Added
 
 2021-12-16  vaiorabbit  <http://twitter.com/vaiorabbit>
 
