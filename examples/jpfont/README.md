@@ -1,8 +1,11 @@
-*   GenShinGothic-Normal.ttf (¸»¿¿¥´¥·¥Ã¥¯)
+*   GenShinGothic-Normal.ttf (æºçœŸã‚´ã‚·ãƒƒã‚¯)
 	*   Available under the terms of SIL Open FontLicense 1.1.
 	*   See SIL_Open_Font_License_1.1.txt and README_GenShin.txt.
 
-*   jpfont.txt
-	*   ²ÆÌÜŞûÀĞ¡Ø¸ãÇÚ¤ÏÇ­¤Ç¤¢¤ë¡Ù
-	*   http://www.aozora.gr.jp/cards/000148/files/789_14547.html
+*   x12y16pxMaruMonica.ttf (ãƒãƒ«ãƒ¢ãƒ‹ã‚«)
+    *   According to the license ( http://www17.plala.or.jp/xxxxxxx/00ff/ ), this font is freely available and redistribution is granted.
+    *   See README_Monica.txt.
 
+*   jpfont.txt
+	*   å¤ç›®æ¼±çŸ³ã€å¾è¼©ã¯çŒ«ã§ã‚ã‚‹ã€
+	*   http://www.aozora.gr.jp/cards/000148/files/789_14547.html

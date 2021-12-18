@@ -1,35 +1,33 @@
 require_relative 'util/setup_dll'
 require_relative 'util/resource_path'
 
-def AllocateMeshData(mesh, triangleCount)
-    mesh[:vertexCount] = triangleCount * 3
-    mesh[:triangleCount] = triangleCount
-
-    mesh[:vertices] = MemAlloc(mesh[:vertexCount] * 3 * FFI.type_size(:float))
-    mesh[:texcoords] = MemAlloc(mesh[:vertexCount] * 2 * FFI.type_size(:float))
-    mesh[:normals] = MemAlloc(mesh[:vertexCount] * 3 * FFI.type_size(:float))
-end
-
 # generate a simple triangle mesh from code
-def MakeMesh()
+def GenMeshCustom()
   mesh = Mesh.new
-  AllocateMeshData(mesh, 1)
+  mesh[:triangleCount] = 1
+  mesh[:vertexCount] = mesh[:triangleCount] * 3
 
-  # vertex at the origin
+  sizeof_float = FFI.type_size(:float)
+  mesh[:vertices] = MemAlloc(mesh[:vertexCount] * 3 * sizeof_float)
+  mesh[:texcoords] = MemAlloc(mesh[:vertexCount] * 2 * sizeof_float)
+  mesh[:normals] = MemAlloc(mesh[:vertexCount] * 3 * sizeof_float)
+
+  # vertex at (0, 0, 0)
   mesh[:vertices].put_array_of_float32(0, [0, 0, 0])
   mesh[:normals].put_array_of_float32(0, [0, 1, 0])
   mesh[:texcoords].put_array_of_float32(0, [0, 0])
 
-  # vertex at 1,0,2
-  mesh[:vertices].put_array_of_float32(3 * FFI.type_size(:float), [1, 0, 2])
-  mesh[:normals].put_array_of_float32(3 * FFI.type_size(:float), [0, 1, 0])
-  mesh[:texcoords].put_array_of_float32(2 * FFI.type_size(:float), [0.5, 1.0])
+  # vertex at (1, 0, 2)
+  mesh[:vertices].put_array_of_float32(3 * sizeof_float, [1, 0, 2])
+  mesh[:normals].put_array_of_float32(3 * sizeof_float, [0, 1, 0])
+  mesh[:texcoords].put_array_of_float32(2 * sizeof_float, [0.5, 1.0])
 
-  # vertex at 2,0,0
-  mesh[:vertices].put_array_of_float32(6 * FFI.type_size(:float), [2, 0, 0])
-  mesh[:normals].put_array_of_float32(6 * FFI.type_size(:float), [0, 1, 0])
-  mesh[:texcoords].put_array_of_float32(4 * FFI.type_size(:float), [1, 0])
+  # vertex at (2, 0, 0)
+  mesh[:vertices].put_array_of_float32(6 * sizeof_float, [2, 0, 0])
+  mesh[:normals].put_array_of_float32(6 * sizeof_float, [0, 1, 0])
+  mesh[:texcoords].put_array_of_float32(4 * sizeof_float, [1, 0])
 
+  # Upload mesh data from CPU (RAM) to GPU (VRAM) memory
   UploadMesh(mesh, false)
 
   return mesh
@@ -56,7 +54,7 @@ if __FILE__ == $PROGRAM_NAME
     LoadModelFromMesh(GenMeshTorus(0.25, 4.0, 16, 32)),
     LoadModelFromMesh(GenMeshKnot(1.0, 2.0, 16, 128)),
     LoadModelFromMesh(GenMeshPoly(5, 2.0)),
-    LoadModelFromMesh(MakeMesh()),
+    LoadModelFromMesh(GenMeshCustom()),
   ]
   NUM_MODELS = models.length # Parametric 3d shapes to generate
 
