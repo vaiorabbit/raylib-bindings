@@ -47,10 +47,7 @@ if __FILE__ == $PROGRAM_NAME
   texture = LoadTextureFromImage(checked)
   UnloadImage(checked)
 
-  NUM_MODELS = 9 # Parametric 3d shapes to generate
-
   models = [
-    LoadModelFromMesh(MakeMesh()),
     LoadModelFromMesh(GenMeshPlane(2, 2, 5, 5)),
     LoadModelFromMesh(GenMeshCube(2.0, 1.0, 2.0)),
     LoadModelFromMesh(GenMeshSphere(2, 32, 32)),
@@ -59,7 +56,9 @@ if __FILE__ == $PROGRAM_NAME
     LoadModelFromMesh(GenMeshTorus(0.25, 4.0, 16, 32)),
     LoadModelFromMesh(GenMeshKnot(1.0, 2.0, 16, 128)),
     LoadModelFromMesh(GenMeshPoly(5, 2.0)),
+    LoadModelFromMesh(MakeMesh()),
   ]
+  NUM_MODELS = models.length # Parametric 3d shapes to generate
 
   # Set checked texture as default diffuse component for all models material
   models.each do |model|
@@ -127,7 +126,7 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  UnloadTexture(texture) # Unload texture
+  UnloadTexture(texture)
 
   models.each do |model|
     UnloadModel(model)
