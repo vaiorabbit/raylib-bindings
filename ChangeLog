@@ -1,6 +1,8 @@
 2021-12-19  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/models_mesh_picking.rb: Added
+	* examples/text_font_filters.rb: Added
+	* examples/utf8_font.rb: Modified to use texture filter
 
 2021-12-18  vaiorabbit  <http://twitter.com/vaiorabbit>
 
