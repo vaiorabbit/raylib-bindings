@@ -166,7 +166,7 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   UnloadModel(tower)
-  UnloadTexture(textformat)
+  UnloadTexture(texture)
 
   CloseWindow()
 end
