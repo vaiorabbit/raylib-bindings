@@ -1,6 +1,10 @@
+2021-12-24  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/text_rectangle_bounds.rb: Added
+
 2021-12-20  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* examples/text_draw_3drb: Added
+	* examples/text_draw_3d.rb: Added
 
 2021-12-19  vaiorabbit  <http://twitter.com/vaiorabbit>
 
