@@ -5,7 +5,7 @@
 Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 
 *   Created : 2021-10-17
-*   Last modified : 2021-12-24
+*   Last modified : 2021-12-26
 
 ## Features ##
 
@@ -36,6 +36,11 @@ Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
                 gcc (Rev5, Built by MSYS2 project) 10.3.0
 
 *   CMake https://cmake.org/download/
+
+## Limitation ##
+
+*   `SetTraceLogCallback` and `TraceLogCallback` are unusable since Ruby-FFI does not support `:varargs` parameter in callbacks (`Proc`, etc.)
+    *   Ref.: https://ffi.github.io/ruby-ffi-archive/messages/20130214-%5Bruby-ffi%5D%20Re_%20Callback%20Function%20with%20varargs-345.html
 
 ## License ##
 
