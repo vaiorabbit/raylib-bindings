@@ -126,18 +126,21 @@ module Raylib
     return instance
   end
 
-  def BoundingBox.create(min, max)
-    instance = BoundingBox.new
-    instance[:min] = min
-    instance[:max] = max
-    return instance
-  end
-
-  def BoundingBox.create(min_x, min_y, min_z, max_x, max_y, max_z)
-    instance = BoundingBox.new
-    instance[:min] = Vector3.create(min_x, min_y, min_z)
-    instance[:max] = Vector3.create(max_x, max_y, max_z)
-    return instance
+  def BoundingBox.create(*args)
+    case args.size
+    when 2
+      instance = BoundingBox.new
+      instance[:min] = args[0] # min
+      instance[:max] = args[1] # max
+      return instance
+    when 6
+      instance = BoundingBox.new
+      instance[:min] = Vector3.create(args[0], args[1], args[2]) # min_x, min_y, min_z
+      instance[:max] = Vector3.create(args[3], args[4], args[5]) # max_x, max_y, max_z
+      return instance
+    else
+      raise ArgumentError.new "BoundingBox.create : Number of arguments must be 2 or 6"
+    end
   end
 
   def Vector3ToFloat(v)

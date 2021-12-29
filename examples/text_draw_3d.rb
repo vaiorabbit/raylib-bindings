@@ -357,8 +357,8 @@ if __FILE__ == $PROGRAM_NAME
       ray = GetMouseRay(GetMousePosition(), camera)
 
       # Check collision between ray and box
-      collision = GetRayCollisionBox(ray, BoundingBox.create(Vector3.create(cubePosition[:x] - cubeSize[:x]/2, cubePosition[:y] - cubeSize[:y]/2, cubePosition[:z] - cubeSize[:z]/2),
-                                                             Vector3.create(cubePosition[:x] + cubeSize[:x]/2, cubePosition[:y] + cubeSize[:y]/2, cubePosition[:z] + cubeSize[:z]/2)))
+      collision = GetRayCollisionBox(ray, BoundingBox.create(cubePosition[:x] - cubeSize[:x]/2, cubePosition[:y] - cubeSize[:y]/2, cubePosition[:z] - cubeSize[:z]/2,
+                                                             cubePosition[:x] + cubeSize[:x]/2, cubePosition[:y] + cubeSize[:y]/2, cubePosition[:z] + cubeSize[:z]/2))
 
       if collision[:hit]
         # Generate new random colors

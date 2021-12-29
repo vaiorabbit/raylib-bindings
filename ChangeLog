@@ -1,3 +1,7 @@
+2021-12-30  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* BoundingBox.create (lib/raylib.rb): Fixed wrong implementation
+
 2021-12-29  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/procedural_texture.rb: Added

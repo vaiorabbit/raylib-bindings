@@ -5,7 +5,7 @@
 Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 
 *   Created : 2021-10-17
-*   Last modified : 2021-12-29
+*   Last modified : 2021-12-30
 
 ## Features ##
 
@@ -18,6 +18,7 @@ Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
+            *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
