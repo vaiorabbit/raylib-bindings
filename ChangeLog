@@ -1,3 +1,7 @@
+2022-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* raylib-bindings.gemspec: Bump version
+
 2021-12-30  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* BoundingBox.create (lib/raylib.rb): Fixed wrong implementation

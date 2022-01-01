@@ -5,7 +5,7 @@
 Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 
 *   Created : 2021-10-17
-*   Last modified : 2021-12-30
+*   Last modified : 2022-01-01
 
 ## Features ##
 
@@ -60,7 +60,7 @@ Shared libraries in `lib` directory are built on top of these products and are a
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 
 Ruby-raylib : Yet another raylib wrapper for Ruby
-Copyright (c) 2021 vaiorabbit <http://twitter.com/vaiorabbit>
+Copyright (c) 2021-2022 vaiorabbit <http://twitter.com/vaiorabbit>
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
