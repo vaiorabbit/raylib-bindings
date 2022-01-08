@@ -1,3 +1,7 @@
+2022-01-08  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/raylib_opengl_interop.rb: Use opengl-bindings2
+
 2022-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* raylib-bindings.gemspec: Bump version
