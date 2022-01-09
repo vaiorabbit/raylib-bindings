@@ -2,21 +2,24 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-Gem::Specification.new do |gem|
-  gem.name          = "raylib-bindings"
-  gem.version       = "0.0.2"
-  gem.authors       = ["vaiorabbit"]
-  gem.email         = ["vaiorabbit@gmail.com"]
-  gem.summary       = %q{Provides latest raylib API for Ruby}
-  gem.homepage      = "https://github.com/vaiorabbit/raylib-bindings"
-  gem.require_paths = ["lib"]
-  gem.license       = "Zlib"
-  gem.description   = <<-DESC
-Ruby bindings for SDL2.
+Gem::Specification.new do |spec|
+  spec.name          = "raylib-bindings"
+  spec.version       = "0.0.3"
+  spec.authors       = ["vaiorabbit"]
+  spec.email         = ["vaiorabbit@gmail.com"]
+  spec.summary       = %q{Provides latest raylib API for Ruby}
+  spec.homepage      = "https://github.com/vaiorabbit/raylib-bindings"
+  spec.require_paths = ["lib"]
+  spec.license       = "Zlib"
+  spec.description   = <<-DESC
+Ruby bindings for Raylib ( https://github.com/raysan5/raylib ).
   DESC
 
-  gem.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 3.0.0'
 
-  gem.files = Dir.glob("lib/*") +
-              ["README.md", "LICENSE.txt", "ChangeLog"]
+  spec.add_runtime_dependency 'ffi', '~> 1.15'
+  spec.add_runtime_dependency 'opengl-bindings2', '~> 2'
+
+  spec.files = Dir.glob("lib/*") +
+               ["README.md", "LICENSE.txt", "ChangeLog"]
 end

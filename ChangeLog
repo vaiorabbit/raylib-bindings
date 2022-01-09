@@ -1,6 +1,7 @@
 2022-01-08  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/raylib_opengl_interop.rb: Use opengl-bindings2
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/549ca669aa42462662a610ff240aa4d5736240e5 ) and raygui ( https://github.com/raysan5/raygui/commit/c7eb9268535298ee25be90739c86d1be215f53e5 )
 
 2022-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
 
