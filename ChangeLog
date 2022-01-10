@@ -1,3 +1,7 @@
+2022-01-10  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/models_animation.rb: Added
+
 2022-01-08  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/raylib_opengl_interop.rb: Use opengl-bindings2

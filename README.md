@@ -5,7 +5,7 @@
 Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 
 *   Created : 2021-10-17
-*   Last modified : 2022-01-08
+*   Last modified : 2022-01-10
 
 ## Features ##
 
