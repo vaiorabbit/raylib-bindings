@@ -331,7 +331,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :int], :void
+  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :uint], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
@@ -782,6 +782,7 @@ module Raylib
       :GetDirectoryPath,
       :GetPrevDirectoryPath,
       :GetWorkingDirectory,
+      :GetApplicationDirectory,
       :GetDirectoryFiles,
       :ClearDirectoryFiles,
       :ChangeDirectory,
@@ -1275,6 +1276,7 @@ module Raylib
       :GetDirectoryPath => [:pointer],
       :GetPrevDirectoryPath => [:pointer],
       :GetWorkingDirectory => [],
+      :GetApplicationDirectory => [],
       :GetDirectoryFiles => [:pointer, :pointer],
       :ClearDirectoryFiles => [],
       :ChangeDirectory => [:pointer],
@@ -1768,6 +1770,7 @@ module Raylib
       :GetDirectoryPath => :pointer,
       :GetPrevDirectoryPath => :pointer,
       :GetWorkingDirectory => :pointer,
+      :GetApplicationDirectory => :pointer,
       :GetDirectoryFiles => :pointer,
       :ClearDirectoryFiles => :void,
       :ChangeDirectory => :bool,
