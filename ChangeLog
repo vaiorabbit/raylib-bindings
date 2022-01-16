@@ -1,3 +1,7 @@
+2022-01-16  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/audio_raw_stream.rb: Added
+
 2022-01-15  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* raylib_dll/build_raylib_macos.sh: Stop copying symbolic links

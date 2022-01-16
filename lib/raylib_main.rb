@@ -331,7 +331,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
+  callback :TraceLogCallback, [:int, :pointer, :int], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :uint], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
@@ -1123,6 +1123,7 @@ module Raylib
       :GetSoundsPlaying,
       :IsSoundPlaying,
       :SetSoundVolume,
+      :SetSoundPan,
       :SetSoundPitch,
       :WaveFormat,
       :WaveCopy,
@@ -1140,6 +1141,7 @@ module Raylib
       :ResumeMusicStream,
       :SeekMusicStream,
       :SetMusicVolume,
+      :SetMusicPan,
       :SetMusicPitch,
       :GetMusicTimeLength,
       :GetMusicTimePlayed,
@@ -1154,6 +1156,7 @@ module Raylib
       :StopAudioStream,
       :SetAudioStreamVolume,
       :SetAudioStreamPitch,
+      :SetAudioStreamPan,
       :SetAudioStreamBufferSizeDefault,
     ]
     args = {
@@ -1617,6 +1620,7 @@ module Raylib
       :GetSoundsPlaying => [],
       :IsSoundPlaying => [Sound.by_value],
       :SetSoundVolume => [Sound.by_value, :float],
+      :SetSoundPan => [Sound.by_value, :float],
       :SetSoundPitch => [Sound.by_value, :float],
       :WaveFormat => [:pointer, :int, :int, :int],
       :WaveCopy => [Wave.by_value],
@@ -1634,6 +1638,7 @@ module Raylib
       :ResumeMusicStream => [Music.by_value],
       :SeekMusicStream => [Music.by_value, :float],
       :SetMusicVolume => [Music.by_value, :float],
+      :SetMusicPan => [Music.by_value, :float],
       :SetMusicPitch => [Music.by_value, :float],
       :GetMusicTimeLength => [Music.by_value],
       :GetMusicTimePlayed => [Music.by_value],
@@ -1648,6 +1653,7 @@ module Raylib
       :StopAudioStream => [AudioStream.by_value],
       :SetAudioStreamVolume => [AudioStream.by_value, :float],
       :SetAudioStreamPitch => [AudioStream.by_value, :float],
+      :SetAudioStreamPan => [AudioStream.by_value, :float],
       :SetAudioStreamBufferSizeDefault => [:int],
     }
     retvals = {
@@ -2111,6 +2117,7 @@ module Raylib
       :GetSoundsPlaying => :int,
       :IsSoundPlaying => :bool,
       :SetSoundVolume => :void,
+      :SetSoundPan => :void,
       :SetSoundPitch => :void,
       :WaveFormat => :void,
       :WaveCopy => Wave.by_value,
@@ -2128,6 +2135,7 @@ module Raylib
       :ResumeMusicStream => :void,
       :SeekMusicStream => :void,
       :SetMusicVolume => :void,
+      :SetMusicPan => :void,
       :SetMusicPitch => :void,
       :GetMusicTimeLength => :float,
       :GetMusicTimePlayed => :float,
@@ -2142,6 +2150,7 @@ module Raylib
       :StopAudioStream => :void,
       :SetAudioStreamVolume => :void,
       :SetAudioStreamPitch => :void,
+      :SetAudioStreamPan => :void,
       :SetAudioStreamBufferSizeDefault => :void,
     }
     symbols.each do |sym|
