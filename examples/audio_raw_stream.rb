@@ -113,7 +113,7 @@ if __FILE__ == $PROGRAM_NAME
       # Draw the current buffer state proportionate to the screen
       screenWidth.times do |i|
         position[:x] = i.to_f
-        position[:y] = 250 + 50 * data.get_int16(((i.to_f / screenWidth.to_f) * MAX_SAMPLES).to_i * FFI::NativeType::INT16.size) / 32000.0
+        position[:y] = 250 + 50 * data.get_int16((i * MAX_SAMPLES / screenWidth.to_f).to_i * FFI::NativeType::INT16.size) / 32000.0
         DrawPixelV(position, RED)
       end
     EndDrawing()
