@@ -1,3 +1,7 @@
+2022-01-19  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/lissajous_curve.rb: Added
+
 2022-01-17  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* raygui: Revert to https://github.com/raysan5/raygui/commit/7a2964302ada73438092d0ad11e54f9f9590547a (See https://github.com/vaiorabbit/raylib-bindings/issues/2 for details)
