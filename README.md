@@ -21,6 +21,7 @@ Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
 
 *   Compiler
@@ -34,7 +35,7 @@ Provides latest [raylib](https://github.com/raysan5/raylib) API for Ruby
 
         *   [Windows] gcc
 
-                gcc (Rev5, Built by MSYS2 project) 10.3.0
+                gcc (Rev9, Built by MSYS2 project) 11.2.0
 
 *   CMake https://cmake.org/download/
 
