@@ -2,17 +2,17 @@
 
 # Yet another raylib wrapper for Ruby #
 
-Provides Ruby bindings for raylib-related libraries including:
-
-    *   [raylib](https://github.com/raysan5/raylib)
-        *   raylib
-        *   raymath
-        *   rlgl
-    *   [raygui](https://github.com/raysan5/raygui)
-    *   [Physac](https://github.com/victorfisac/Physac)
-
 *   Created : 2021-10-17
 *   Last modified : 2022-02-26
+
+Provides Ruby bindings for raylib-related libraries including:
+
+*   [raylib](https://github.com/raysan5/raylib)
+    *   raylib
+    *   raymath
+    *   rlgl
+*   [raygui](https://github.com/raysan5/raygui)
+*   [Physac](https://github.com/victorfisac/Physac)
 
 ## Features ##
 
