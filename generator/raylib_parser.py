@@ -592,23 +592,28 @@ def collect_decl_function(ctx, cursor):
 
 def collect_decl(ctx, cursor):
     ctx.push()
+
     for child in cursor.get_children():
         if child.kind == CursorKind.MACRO_DEFINITION:
             collect_decl_macro(ctx, child)
-        elif child.kind == CursorKind.TYPEDEF_DECL:
+    for child in cursor.get_children():
+        if child.kind == CursorKind.TYPEDEF_DECL:
              collect_decl_typedef(ctx, child)
-        elif child.kind == CursorKind.ENUM_DECL:
+    for child in cursor.get_children():
+        if child.kind == CursorKind.ENUM_DECL:
             collect_decl_enum(ctx, child)
-        elif child.kind in {CursorKind.STRUCT_DECL, CursorKind.UNION_DECL}:
+    for child in cursor.get_children():
+        if child.kind in {CursorKind.STRUCT_DECL, CursorKind.UNION_DECL}:
             collect_decl_struct(ctx, child)
-        elif child.kind == CursorKind.FUNCTION_DECL:
+    for child in cursor.get_children():
+        if child.kind == CursorKind.FUNCTION_DECL:
             collect_decl_function(ctx, child)
-        else:
-            for grand_child in child.get_children():
-                collect_decl_function(ctx, grand_child)
+    for child in cursor.get_children():
+        parse_recursively = child.kind not in {CursorKind.MACRO_DEFINITION, CursorKind.TYPEDEF_DECL, CursorKind.ENUM_DECL, CursorKind.STRUCT_DECL, CursorKind.UNION_DECL, CursorKind.FUNCTION_DECL}
+        if parse_recursively:
+            collect_decl(ctx, child)
 
     ctx.pop()
-
 
 def execute(ctx, arg=[]):
 
