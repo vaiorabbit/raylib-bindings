@@ -10,7 +10,7 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  RAYLIB_VERSION = "4.0"
+  RAYLIB_VERSION = "4.1-dev"
   DEG2RAD = Math::PI / 180.0
   RAD2DEG = 180.0 / Math::PI
 
@@ -285,7 +285,8 @@ module Raylib
   BLEND_MULTIPLIED = 2
   BLEND_ADD_COLORS = 3
   BLEND_SUBTRACT_COLORS = 4
-  BLEND_CUSTOM = 5
+  BLEND_ALPHA_PREMUL = 5
+  BLEND_CUSTOM = 6
   GESTURE_NONE = 0
   GESTURE_TAP = 1
   GESTURE_DOUBLETAP = 2
@@ -776,6 +777,7 @@ module Raylib
       :FileExists,
       :DirectoryExists,
       :IsFileExtension,
+      :GetFileLength,
       :GetFileExtension,
       :GetFileName,
       :GetFileNameWithoutExt,
@@ -1002,6 +1004,7 @@ module Raylib
       :DrawTextEx,
       :DrawTextPro,
       :DrawTextCodepoint,
+      :DrawTextCodepoints,
       :MeasureText,
       :MeasureTextEx,
       :GetGlyphIndex,
@@ -1123,11 +1126,11 @@ module Raylib
       :GetSoundsPlaying,
       :IsSoundPlaying,
       :SetSoundVolume,
-      :SetSoundPan,
       :SetSoundPitch,
-      :WaveFormat,
+      :SetSoundPan,
       :WaveCopy,
       :WaveCrop,
+      :WaveFormat,
       :LoadWaveSamples,
       :UnloadWaveSamples,
       :LoadMusicStream,
@@ -1141,8 +1144,8 @@ module Raylib
       :ResumeMusicStream,
       :SeekMusicStream,
       :SetMusicVolume,
-      :SetMusicPan,
       :SetMusicPitch,
+      :SetMusicPan,
       :GetMusicTimeLength,
       :GetMusicTimePlayed,
       :LoadAudioStream,
@@ -1273,6 +1276,7 @@ module Raylib
       :FileExists => [:pointer],
       :DirectoryExists => [:pointer],
       :IsFileExtension => [:pointer, :pointer],
+      :GetFileLength => [:pointer],
       :GetFileExtension => [:pointer],
       :GetFileName => [:pointer],
       :GetFileNameWithoutExt => [:pointer],
@@ -1499,6 +1503,7 @@ module Raylib
       :DrawTextEx => [Font.by_value, :pointer, Vector2.by_value, :float, :float, Color.by_value],
       :DrawTextPro => [Font.by_value, :pointer, Vector2.by_value, Vector2.by_value, :float, :float, :float, Color.by_value],
       :DrawTextCodepoint => [Font.by_value, :int, Vector2.by_value, :float, Color.by_value],
+      :DrawTextCodepoints => [Font.by_value, :pointer, :int, Vector2.by_value, :float, :float, Color.by_value],
       :MeasureText => [:pointer, :int],
       :MeasureTextEx => [Font.by_value, :pointer, :float, :float],
       :GetGlyphIndex => [Font.by_value, :int],
@@ -1620,11 +1625,11 @@ module Raylib
       :GetSoundsPlaying => [],
       :IsSoundPlaying => [Sound.by_value],
       :SetSoundVolume => [Sound.by_value, :float],
-      :SetSoundPan => [Sound.by_value, :float],
       :SetSoundPitch => [Sound.by_value, :float],
-      :WaveFormat => [:pointer, :int, :int, :int],
+      :SetSoundPan => [Sound.by_value, :float],
       :WaveCopy => [Wave.by_value],
       :WaveCrop => [:pointer, :int, :int],
+      :WaveFormat => [:pointer, :int, :int, :int],
       :LoadWaveSamples => [Wave.by_value],
       :UnloadWaveSamples => [:pointer],
       :LoadMusicStream => [:pointer],
@@ -1638,8 +1643,8 @@ module Raylib
       :ResumeMusicStream => [Music.by_value],
       :SeekMusicStream => [Music.by_value, :float],
       :SetMusicVolume => [Music.by_value, :float],
-      :SetMusicPan => [Music.by_value, :float],
       :SetMusicPitch => [Music.by_value, :float],
+      :SetMusicPan => [Music.by_value, :float],
       :GetMusicTimeLength => [Music.by_value],
       :GetMusicTimePlayed => [Music.by_value],
       :LoadAudioStream => [:uint, :uint, :uint],
@@ -1770,6 +1775,7 @@ module Raylib
       :FileExists => :bool,
       :DirectoryExists => :bool,
       :IsFileExtension => :bool,
+      :GetFileLength => :int,
       :GetFileExtension => :pointer,
       :GetFileName => :pointer,
       :GetFileNameWithoutExt => :pointer,
@@ -1996,6 +2002,7 @@ module Raylib
       :DrawTextEx => :void,
       :DrawTextPro => :void,
       :DrawTextCodepoint => :void,
+      :DrawTextCodepoints => :void,
       :MeasureText => :int,
       :MeasureTextEx => Vector2.by_value,
       :GetGlyphIndex => :int,
@@ -2117,11 +2124,11 @@ module Raylib
       :GetSoundsPlaying => :int,
       :IsSoundPlaying => :bool,
       :SetSoundVolume => :void,
-      :SetSoundPan => :void,
       :SetSoundPitch => :void,
-      :WaveFormat => :void,
+      :SetSoundPan => :void,
       :WaveCopy => Wave.by_value,
       :WaveCrop => :void,
+      :WaveFormat => :void,
       :LoadWaveSamples => :pointer,
       :UnloadWaveSamples => :void,
       :LoadMusicStream => Music.by_value,
@@ -2135,8 +2142,8 @@ module Raylib
       :ResumeMusicStream => :void,
       :SeekMusicStream => :void,
       :SetMusicVolume => :void,
-      :SetMusicPan => :void,
       :SetMusicPitch => :void,
+      :SetMusicPan => :void,
       :GetMusicTimeLength => :float,
       :GetMusicTimePlayed => :float,
       :LoadAudioStream => AudioStream.by_value,

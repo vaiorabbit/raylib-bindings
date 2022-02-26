@@ -10,7 +10,9 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  RAYGUI_VERSION = "3.0"
+  RAYGUI_VERSION = "3.2-dev"
+  SCROLLBAR_LEFT_SIDE = 0
+  SCROLLBAR_RIGHT_SIDE = 1
 
   # Enum
 
@@ -61,27 +63,23 @@ module Raylib
   SLIDER_WIDTH = 16
   SLIDER_PADDING = 17
   PROGRESS_PADDING = 16
-  CHECK_PADDING = 16
-  COMBO_BUTTON_WIDTH = 16
-  COMBO_BUTTON_PADDING = 17
-  ARROW_PADDING = 16
-  DROPDOWN_ITEMS_PADDING = 17
-  TEXT_INNER_PADDING = 16
-  TEXT_LINES_PADDING = 17
-  COLOR_SELECTED_FG = 18
-  COLOR_SELECTED_BG = 19
-  SPIN_BUTTON_WIDTH = 16
-  SPIN_BUTTON_PADDING = 17
   ARROWS_SIZE = 16
   ARROWS_VISIBLE = 17
   SCROLL_SLIDER_PADDING = 18
   SCROLL_SLIDER_SIZE = 19
   SCROLL_PADDING = 20
   SCROLL_SPEED = 21
-  SCROLLBAR_LEFT_SIDE = 0
-  SCROLLBAR_RIGHT_SIDE = 1
+  CHECK_PADDING = 16
+  COMBO_BUTTON_WIDTH = 16
+  COMBO_BUTTON_SPACING = 17
+  ARROW_PADDING = 16
+  DROPDOWN_ITEMS_SPACING = 17
+  TEXT_INNER_PADDING = 16
+  TEXT_LINES_SPACING = 17
+  SPIN_BUTTON_WIDTH = 16
+  SPIN_BUTTON_SPACING = 17
   LIST_ITEMS_HEIGHT = 16
-  LIST_ITEMS_PADDING = 17
+  LIST_ITEMS_SPACING = 17
   SCROLLBAR_WIDTH = 18
   SCROLLBAR_SIDE = 19
   COLOR_SELECTOR_SIZE = 16
@@ -100,13 +98,12 @@ module Raylib
   typedef :int, :GuiToggleProperty
   typedef :int, :GuiSliderProperty
   typedef :int, :GuiProgressBarProperty
+  typedef :int, :GuiScrollBarProperty
   typedef :int, :GuiCheckBoxProperty
   typedef :int, :GuiComboBoxProperty
   typedef :int, :GuiDropdownBoxProperty
   typedef :int, :GuiTextBoxProperty
   typedef :int, :GuiSpinnerProperty
-  typedef :int, :GuiScrollBarProperty
-  typedef :int, :GuiScrollBarSide
   typedef :int, :GuiListViewProperty
   typedef :int, :GuiColorPickerProperty
 
@@ -159,7 +156,6 @@ module Raylib
       :GuiProgressBar,
       :GuiStatusBar,
       :GuiDummyRec,
-      :GuiScrollBar,
       :GuiGrid,
       :GuiListView,
       :GuiListViewEx,
@@ -179,6 +175,8 @@ module Raylib
       :GuiSetIconPixel,
       :GuiClearIconPixel,
       :GuiCheckIconPixel,
+      :,
+      :guiIconName,
     ]
     args = {
       :GuiEnable => [],
@@ -196,8 +194,8 @@ module Raylib
       :GuiWindowBox => [Rectangle.by_value, :pointer],
       :GuiGroupBox => [Rectangle.by_value, :pointer],
       :GuiLine => [Rectangle.by_value, :pointer],
-      :GuiPanel => [Rectangle.by_value],
-      :GuiScrollPanel => [Rectangle.by_value, Rectangle.by_value, :pointer],
+      :GuiPanel => [Rectangle.by_value, :pointer],
+      :GuiScrollPanel => [Rectangle.by_value, :pointer, Rectangle.by_value, :pointer],
       :GuiLabel => [Rectangle.by_value, :pointer],
       :GuiButton => [Rectangle.by_value, :pointer],
       :GuiLabelButton => [Rectangle.by_value, :pointer],
@@ -215,16 +213,15 @@ module Raylib
       :GuiProgressBar => [Rectangle.by_value, :pointer, :pointer, :float, :float, :float],
       :GuiStatusBar => [Rectangle.by_value, :pointer],
       :GuiDummyRec => [Rectangle.by_value, :pointer],
-      :GuiScrollBar => [Rectangle.by_value, :int, :int, :int],
-      :GuiGrid => [Rectangle.by_value, :float, :int],
+      :GuiGrid => [Rectangle.by_value, :pointer, :float, :int],
       :GuiListView => [Rectangle.by_value, :pointer, :pointer, :int],
       :GuiListViewEx => [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :int],
       :GuiMessageBox => [Rectangle.by_value, :pointer, :pointer, :pointer],
       :GuiTextInputBox => [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer],
-      :GuiColorPicker => [Rectangle.by_value, Color.by_value],
-      :GuiColorPanel => [Rectangle.by_value, Color.by_value],
-      :GuiColorBarAlpha => [Rectangle.by_value, :float],
-      :GuiColorBarHue => [Rectangle.by_value, :float],
+      :GuiColorPicker => [Rectangle.by_value, :pointer, Color.by_value],
+      :GuiColorPanel => [Rectangle.by_value, :pointer, Color.by_value],
+      :GuiColorBarAlpha => [Rectangle.by_value, :pointer, :float],
+      :GuiColorBarHue => [Rectangle.by_value, :pointer, :float],
       :GuiLoadStyle => [:pointer],
       :GuiLoadStyleDefault => [],
       :GuiIconText => [:int, :pointer],
@@ -235,6 +232,8 @@ module Raylib
       :GuiSetIconPixel => [:int, :int, :int],
       :GuiClearIconPixel => [:int, :int, :int],
       :GuiCheckIconPixel => [:int, :int, :int],
+      : => [],
+      :guiIconName => [],
     }
     retvals = {
       :GuiEnable => :void,
@@ -271,7 +270,6 @@ module Raylib
       :GuiProgressBar => :float,
       :GuiStatusBar => :void,
       :GuiDummyRec => :void,
-      :GuiScrollBar => :int,
       :GuiGrid => Vector2.by_value,
       :GuiListView => :int,
       :GuiListViewEx => :int,
@@ -291,6 +289,8 @@ module Raylib
       :GuiSetIconPixel => :void,
       :GuiClearIconPixel => :void,
       :GuiCheckIconPixel => :bool,
+      : => nil,
+      :guiIconName => nil,
     }
     symbols.each do |sym|
       begin

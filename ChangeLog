@@ -1,3 +1,7 @@
+2022-02-26  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/ead8003044aab21f8d155b91ec0bce90cd193500 ), raygui ( https://github.com/raysan5/raygui/commit/c8d8fb5a865a6730cec2c609704333577463feb1 ) and Physac ( https://github.com/victorfisac/Physac/commit/c9c6b3e7054d609e93e52e70f17d5b4dd043575d )
+
 2022-01-20  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/core_2d_camera.rb: Added

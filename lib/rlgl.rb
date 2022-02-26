@@ -120,7 +120,8 @@ module Raylib
   RL_BLEND_MULTIPLIED = 2
   RL_BLEND_ADD_COLORS = 3
   RL_BLEND_SUBTRACT_COLORS = 4
-  RL_BLEND_CUSTOM = 5
+  RL_BLEND_ALPHA_PREMUL = 5
+  RL_BLEND_CUSTOM = 6
   RL_SHADER_LOC_VERTEX_POSITION = 0
   RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
   RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
@@ -298,6 +299,7 @@ module Raylib
       :rlLoadVertexBuffer,
       :rlLoadVertexBufferElement,
       :rlUpdateVertexBuffer,
+      :rlUpdateVertexBufferElements,
       :rlUnloadVertexArray,
       :rlUnloadVertexBuffer,
       :rlSetVertexAttribute,
@@ -439,6 +441,7 @@ module Raylib
       :rlLoadVertexBuffer => [:pointer, :int, :bool],
       :rlLoadVertexBufferElement => [:pointer, :int, :bool],
       :rlUpdateVertexBuffer => [:uint, :pointer, :int, :int],
+      :rlUpdateVertexBufferElements => [:uint, :pointer, :int, :int],
       :rlUnloadVertexArray => [:uint],
       :rlUnloadVertexBuffer => [:uint],
       :rlSetVertexAttribute => [:uint, :int, :int, :bool, :int, :pointer],
@@ -580,6 +583,7 @@ module Raylib
       :rlLoadVertexBuffer => :uint,
       :rlLoadVertexBufferElement => :uint,
       :rlUpdateVertexBuffer => :void,
+      :rlUpdateVertexBufferElements => :void,
       :rlUnloadVertexArray => :void,
       :rlUnloadVertexBuffer => :void,
       :rlSetVertexAttribute => :void,

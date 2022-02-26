@@ -1,6 +1,6 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION" : "\"4.0\""
+    , "RAYLIB_VERSION" : "\"4.1-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
@@ -106,11 +106,15 @@
     , "RL_SHADER_LOC_MAP_DIFFUSE" : null
     , "RL_SHADER_LOC_MAP_SPECULAR" : null
     , "RAYGUI_H" : null
-    , "RAYGUI_VERSION" : "\"3.0\""
+    , "RAYGUI_VERSION" : "\"3.2-dev\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null
     , "RAYGUI_FREE" : null
+    , "RAYGUI_SUPPORT_LOG_INFO" : null
+    , "RAYGUI_LOG" : null
+    , "SCROLLBAR_LEFT_SIDE" : "0"
+    , "SCROLLBAR_RIGHT_SIDE" : "1"
     , "PHYSAC_H" : null
     , "PHYSACDEF" : null
     , "PHYSAC_MAX_BODIES" : "64"
