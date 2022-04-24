@@ -95,7 +95,7 @@ module Raylib
   RAYGUI_ICON_FILE_OPEN = 5
   RAYGUI_ICON_FILE_SAVE = 6
   RAYGUI_ICON_FILE_EXPORT = 7
-  RAYGUI_ICON_FILE_NEW = 8
+  RAYGUI_ICON_FILE_ADD = 8
   RAYGUI_ICON_FILE_DELETE = 9
   RAYGUI_ICON_FILETYPE_TEXT = 10
   RAYGUI_ICON_FILETYPE_AUDIO = 11
@@ -290,8 +290,8 @@ module Raylib
   RAYGUI_ICON_FILETYPE_BINARY = 200
   RAYGUI_ICON_HEX = 201
   RAYGUI_ICON_SHIELD = 202
-  RAYGUI_ICON_203 = 203
-  RAYGUI_ICON_204 = 204
+  RAYGUI_ICON_FILE_NEW = 203
+  RAYGUI_ICON_FOLDER_ADD = 204
   RAYGUI_ICON_205 = 205
   RAYGUI_ICON_206 = 206
   RAYGUI_ICON_207 = 207
@@ -429,6 +429,7 @@ module Raylib
       :GuiGetIcons,
       :GuiGetIconData,
       :GuiSetIconData,
+      :GuiSetIconScale,
       :GuiSetIconPixel,
       :GuiClearIconPixel,
       :GuiCheckIconPixel,
@@ -472,7 +473,7 @@ module Raylib
       :GuiListView => [Rectangle.by_value, :pointer, :pointer, :int],
       :GuiListViewEx => [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :int],
       :GuiMessageBox => [Rectangle.by_value, :pointer, :pointer, :pointer],
-      :GuiTextInputBox => [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer],
+      :GuiTextInputBox => [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer, :int, :pointer],
       :GuiColorPicker => [Rectangle.by_value, :pointer, Color.by_value],
       :GuiColorPanel => [Rectangle.by_value, :pointer, Color.by_value],
       :GuiColorBarAlpha => [Rectangle.by_value, :pointer, :float],
@@ -484,6 +485,7 @@ module Raylib
       :GuiGetIcons => [],
       :GuiGetIconData => [:int],
       :GuiSetIconData => [:int, :pointer],
+      :GuiSetIconScale => [:uint],
       :GuiSetIconPixel => [:int, :int, :int],
       :GuiClearIconPixel => [:int, :int, :int],
       :GuiCheckIconPixel => [:int, :int, :int],
@@ -539,6 +541,7 @@ module Raylib
       :GuiGetIcons => :pointer,
       :GuiGetIconData => :pointer,
       :GuiSetIconData => :void,
+      :GuiSetIconScale => :void,
       :GuiSetIconPixel => :void,
       :GuiClearIconPixel => :void,
       :GuiCheckIconPixel => :bool,

@@ -1,3 +1,8 @@
+2022-04-24  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/233cf3970c9148c4963cfdea20e49e761104f9de ) and raygui ( https://github.com/raysan5/raygui/commit/865bb293764073c01e74314ef647464f1f10fd96 )
+	* examples/models_mesh_picking.rb:  Applied changes done by https://github.com/raysan5/raylib/commit/90fc7c0376f39d7b19d632e1d69dec715ec3f2a8
+
 2022-02-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/ead8003044aab21f8d155b91ec0bce90cd193500 ), raygui ( https://github.com/raysan5/raygui/commit/c8d8fb5a865a6730cec2c609704333577463feb1 ) and Physac ( https://github.com/victorfisac/Physac/commit/c9c6b3e7054d609e93e52e70f17d5b4dd043575d )

@@ -96,10 +96,16 @@ if __FILE__ == $PROGRAM_NAME
       hitObjectName = "Box"
 
       # Check ray collision against model
-      # NOTE: It considers model.transform matrix!
-      meshHitInfo = GetRayCollisionModel(ray, tower)
+      meshHitInfo = nil
+      tower[:meshCount].times do |m|
+        # NOTE: We consider the model.transform for the collision check but 
+        # it can be checked against any transform Matrix, used when checking against same
+        # model drawn multiple times with multiple transforms
+        mesh = Mesh.new(tower[:meshes] + m * FFI::NativeType::POINTER.size)
+        meshHitInfo = GetRayCollisionMesh(ray, mesh, tower[:transform])
+      end
 
-      if meshHitInfo[:hit]
+      if meshHitInfo && meshHitInfo[:hit]
         collision = meshHitInfo
         cursorColor = ORANGE
         hitObjectName = "Mesh"

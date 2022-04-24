@@ -337,6 +337,7 @@ module Raylib
   callback :SaveFileDataCallback, [:pointer, :pointer, :uint], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
   callback :SaveFileTextCallback, [:pointer, :pointer], :bool
+  callback :AudioCallback, [:pointer, :uint], :void
 
   # Struct
 
@@ -608,6 +609,7 @@ module Raylib
   class AudioStream < FFI::Struct
     layout(
       :buffer, :pointer,
+      :processor, :pointer,
       :sampleRate, :uint,
       :sampleSize, :uint,
       :channels, :uint,
@@ -1100,7 +1102,6 @@ module Raylib
       :CheckCollisionBoxSphere,
       :GetRayCollisionSphere,
       :GetRayCollisionBox,
-      :GetRayCollisionModel,
       :GetRayCollisionMesh,
       :GetRayCollisionTriangle,
       :GetRayCollisionQuad,
@@ -1161,6 +1162,9 @@ module Raylib
       :SetAudioStreamPitch,
       :SetAudioStreamPan,
       :SetAudioStreamBufferSizeDefault,
+      :SetAudioStreamCallback,
+      :AttachAudioStreamProcessor,
+      :DetachAudioStreamProcessor,
     ]
     args = {
       :InitWindow => [:int, :int, :pointer],
@@ -1599,7 +1603,6 @@ module Raylib
       :CheckCollisionBoxSphere => [BoundingBox.by_value, Vector3.by_value, :float],
       :GetRayCollisionSphere => [Ray.by_value, Vector3.by_value, :float],
       :GetRayCollisionBox => [Ray.by_value, BoundingBox.by_value],
-      :GetRayCollisionModel => [Ray.by_value, Model.by_value],
       :GetRayCollisionMesh => [Ray.by_value, Mesh.by_value, Matrix.by_value],
       :GetRayCollisionTriangle => [Ray.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value],
       :GetRayCollisionQuad => [Ray.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value],
@@ -1660,6 +1663,9 @@ module Raylib
       :SetAudioStreamPitch => [AudioStream.by_value, :float],
       :SetAudioStreamPan => [AudioStream.by_value, :float],
       :SetAudioStreamBufferSizeDefault => [:int],
+      :SetAudioStreamCallback => [AudioStream.by_value, :AudioCallback],
+      :AttachAudioStreamProcessor => [AudioStream.by_value, :AudioCallback],
+      :DetachAudioStreamProcessor => [AudioStream.by_value, :AudioCallback],
     }
     retvals = {
       :InitWindow => :void,
@@ -2098,7 +2104,6 @@ module Raylib
       :CheckCollisionBoxSphere => :bool,
       :GetRayCollisionSphere => RayCollision.by_value,
       :GetRayCollisionBox => RayCollision.by_value,
-      :GetRayCollisionModel => RayCollision.by_value,
       :GetRayCollisionMesh => RayCollision.by_value,
       :GetRayCollisionTriangle => RayCollision.by_value,
       :GetRayCollisionQuad => RayCollision.by_value,
@@ -2159,6 +2164,9 @@ module Raylib
       :SetAudioStreamPitch => :void,
       :SetAudioStreamPan => :void,
       :SetAudioStreamBufferSizeDefault => :void,
+      :SetAudioStreamCallback => :void,
+      :AttachAudioStreamProcessor => :void,
+      :DetachAudioStreamProcessor => :void,
     }
     symbols.each do |sym|
       begin
