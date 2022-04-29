@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2022-04-24
+*   Last modified : 2022-04-29
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -21,6 +21,31 @@ Provides Ruby bindings for raylib-related libraries including:
     *   No need to build C extension library
 
 ## Prerequisites ##
+
+*   Ruby interpreter
+    *   Tested on:
+        *   [macOS]
+            *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
+        *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
+
+*   Compiler
+    *   Tested on:
+        *   [macOS] clang
+
+                Apple clang version 13.0.0 (clang-1300.0.29.3)
+                Target: arm64-apple-darwin20.6.0
+                Thread model: posix
+                InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+
+        *   [Windows] gcc
+
+                gcc (Rev10, Built by MSYS2 project) 11.2.0
+
+*   CMake https://cmake.org/download/
+
+<details>
+<summary>Older versions</summary>
 
 *   Ruby interpreter
     *   Tested on:
@@ -44,7 +69,7 @@ Provides Ruby bindings for raylib-related libraries including:
 
                 gcc (Rev9, Built by MSYS2 project) 11.2.0
 
-*   CMake https://cmake.org/download/
+</details>
 
 ## Limitation ##
 
