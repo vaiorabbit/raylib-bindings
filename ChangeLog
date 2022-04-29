@@ -3,6 +3,7 @@
 	* script/rebuild_libs_windows.cmd: Added
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/5c66cc1c9bb4a3ae4af7cc6f82a521137ed5484d ) / Updated submodules appropriately 
 	* [Windows] Updated DLLs with the latest raylib ( https://github.com/raysan5/raylib/commit/5c66cc1c9bb4a3ae4af7cc6f82a521137ed5484d ) and raygui ( https://github.com/raysan5/raygui/commit/865bb293764073c01e74314ef647464f1f10fd96 )
+	* [macOS] Updated DLLs with the latest raylib
 
 2022-04-24  vaiorabbit  <http://twitter.com/vaiorabbit>
 
