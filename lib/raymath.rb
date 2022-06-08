@@ -10,6 +10,7 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
+  EPSILON = 0.000001
 
   # Enum
 

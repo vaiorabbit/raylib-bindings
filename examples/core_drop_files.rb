@@ -14,7 +14,7 @@ if __FILE__ == $PROGRAM_NAME
 
     if IsFileDropped()
       count_buf = FFI::MemoryPointer.new(:int, 1)
-      droppedFiles = GetDroppedFiles(count_buf)
+      droppedFiles = LoadDroppedFiles(count_buf)
       count = count_buf.read(:int)
       droppedFiles = droppedFiles.read_array_of_pointer(count).map! {|filenamePtr| filenamePtr.read_string}
     end
@@ -41,6 +41,6 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  ClearDroppedFiles()
+  UnloadDroppedFiles()
   CloseWindow()
 end

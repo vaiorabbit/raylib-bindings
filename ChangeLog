@@ -1,3 +1,8 @@
+2022-06-08  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/70ec71a373db426685590127122e77bfd66cbf69 ) / and raygui ( https://github.com/raysan5/raygui/commit/47269f30ce55f0399096d1bee4188b8b8c0d7186 )
+	* Updated submodules appropriately
+
 2022-04-29  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* script/rebuild_libs_windows.cmd: Added

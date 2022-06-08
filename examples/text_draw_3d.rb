@@ -317,7 +317,7 @@ if __FILE__ == $PROGRAM_NAME
     # Load a dropped TTF file dynamically (at current fontSize)
     if IsFileDropped()
       count = FFI::MemoryPointer.new :int
-      droppedFiles = GetDroppedFiles(count)
+      droppedFiles = LoadDroppedFiles(count)
 
       # NOTE: We only support first ttf file dropped
       file_path = droppedFiles.read_pointer.read_string
@@ -329,7 +329,7 @@ if __FILE__ == $PROGRAM_NAME
         font = LoadFont(file_path)
         fontSize = font[:baseSize]
       end
-      ClearDroppedFiles()
+      UnloadDroppedFiles()
     end
 
     # Handle Events

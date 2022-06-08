@@ -1,6 +1,6 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION" : "\"4.1-dev\""
+    , "RAYLIB_VERSION" : "\"4.2-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
@@ -52,6 +52,7 @@
     , "SHADER_LOC_MAP_SPECULAR" : null
     , "RAYMATH_H" : null
     , "RMAPI" : null
+    , "EPSILON" : "0.000001"
     , "MatrixToFloat" : null
     , "Vector3ToFloat" : null
     , "RLGL_H" : null

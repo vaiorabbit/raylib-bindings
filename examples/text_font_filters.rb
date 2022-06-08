@@ -58,14 +58,14 @@ if __FILE__ == $PROGRAM_NAME
     # Load a dropped TTF file dynamically (at current fontSize)
     if IsFileDropped()
       count = FFI::MemoryPointer.new :int
-      droppedFiles = GetDroppedFiles(count)
+      droppedFiles = LoadDroppedFiles(count)
 
       # NOTE: We only support first ttf file dropped
       file_path = droppedFiles.read_pointer.read_string
       if IsFileExtension(file_path, ".ttf")
         UnloadFont(font)
         font = LoadFontEx(file_path, fontSize.to_i, nil, 0)
-        ClearDroppedFiles()
+        UnloadDroppedFiles()
       end
     end
 
@@ -98,7 +98,7 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  ClearDroppedFiles()
+  UnloadDroppedFiles()
   UnloadFont(font)
   CloseWindow()
 
