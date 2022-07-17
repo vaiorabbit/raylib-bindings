@@ -13,7 +13,6 @@ module Raylib
   PHYSAC_MAX_BODIES = 64
   PHYSAC_MAX_MANIFOLDS = 4096
   PHYSAC_MAX_VERTICES = 24
-  PHYSAC_CIRCLE_VERTICES = 24
   PHYSAC_COLLISION_ITERATIONS = 100
   PHYSAC_PENETRATION_ALLOWANCE = 0.05
   PHYSAC_PENETRATION_CORRECTION = 0.4
@@ -32,7 +31,7 @@ module Raylib
 
   # Struct
 
-  class Mat2 < FFI::Struct
+  class Matrix2x2 < FFI::Struct
     layout(
       :m00, :float,
       :m01, :float,
@@ -41,7 +40,7 @@ module Raylib
     )
   end
 
-  class PolygonData < FFI::Struct
+  class PhysicsVertexData < FFI::Struct
     layout(
       :vertexCount, :uint,
       :positions, [Vector2, 24],
@@ -53,9 +52,9 @@ module Raylib
     layout(
       :type, :int,
       :body, :pointer,
+      :vertexData, PhysicsVertexData,
       :radius, :float,
-      :transform, Mat2,
-      :vertexData, PolygonData,
+      :transform, Matrix2x2,
     )
   end
 
@@ -104,66 +103,66 @@ module Raylib
   def self.setup_physac_symbols()
     symbols = [
       :InitPhysics,
-      :RunPhysicsStep,
+      :UpdatePhysics,
+      :ResetPhysics,
+      :ClosePhysics,
       :SetPhysicsTimeStep,
-      :IsPhysicsEnabled,
       :SetPhysicsGravity,
       :CreatePhysicsBodyCircle,
       :CreatePhysicsBodyRectangle,
       :CreatePhysicsBodyPolygon,
+      :DestroyPhysicsBody,
       :PhysicsAddForce,
       :PhysicsAddTorque,
       :PhysicsShatter,
-      :GetPhysicsBodiesCount,
+      :SetPhysicsBodyRotation,
       :GetPhysicsBody,
+      :GetPhysicsBodiesCount,
       :GetPhysicsShapeType,
       :GetPhysicsShapeVerticesCount,
       :GetPhysicsShapeVertex,
-      :SetPhysicsBodyRotation,
-      :DestroyPhysicsBody,
-      :ClosePhysics,
     ]
     args = {
       :InitPhysics => [],
-      :RunPhysicsStep => [],
+      :UpdatePhysics => [],
+      :ResetPhysics => [],
+      :ClosePhysics => [],
       :SetPhysicsTimeStep => [:double],
-      :IsPhysicsEnabled => [],
       :SetPhysicsGravity => [:float, :float],
       :CreatePhysicsBodyCircle => [Vector2.by_value, :float, :float],
       :CreatePhysicsBodyRectangle => [Vector2.by_value, :float, :float, :float],
       :CreatePhysicsBodyPolygon => [Vector2.by_value, :float, :int, :float],
+      :DestroyPhysicsBody => [:pointer],
       :PhysicsAddForce => [:pointer, Vector2.by_value],
       :PhysicsAddTorque => [:pointer, :float],
       :PhysicsShatter => [:pointer, Vector2.by_value, :float],
-      :GetPhysicsBodiesCount => [],
+      :SetPhysicsBodyRotation => [:pointer, :float],
       :GetPhysicsBody => [:int],
+      :GetPhysicsBodiesCount => [],
       :GetPhysicsShapeType => [:int],
       :GetPhysicsShapeVerticesCount => [:int],
       :GetPhysicsShapeVertex => [:pointer, :int],
-      :SetPhysicsBodyRotation => [:pointer, :float],
-      :DestroyPhysicsBody => [:pointer],
-      :ClosePhysics => [],
     }
     retvals = {
       :InitPhysics => :void,
-      :RunPhysicsStep => :void,
+      :UpdatePhysics => :void,
+      :ResetPhysics => :void,
+      :ClosePhysics => :void,
       :SetPhysicsTimeStep => :void,
-      :IsPhysicsEnabled => :bool,
       :SetPhysicsGravity => :void,
       :CreatePhysicsBodyCircle => :pointer,
       :CreatePhysicsBodyRectangle => :pointer,
       :CreatePhysicsBodyPolygon => :pointer,
+      :DestroyPhysicsBody => :void,
       :PhysicsAddForce => :void,
       :PhysicsAddTorque => :void,
       :PhysicsShatter => :void,
-      :GetPhysicsBodiesCount => :int,
+      :SetPhysicsBodyRotation => :void,
       :GetPhysicsBody => :pointer,
+      :GetPhysicsBodiesCount => :int,
       :GetPhysicsShapeType => :int,
       :GetPhysicsShapeVerticesCount => :int,
       :GetPhysicsShapeVertex => Vector2.by_value,
-      :SetPhysicsBodyRotation => :void,
-      :DestroyPhysicsBody => :void,
-      :ClosePhysics => :void,
     }
     symbols.each do |sym|
       begin

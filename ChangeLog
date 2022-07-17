@@ -1,3 +1,9 @@
+2022-07-17  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/49a534b5d478fd2f195380143ded4f0ab764c228 ) / and raygui ( https://github.com/raysan5/raygui/commit/9c826f213f5b287159a0b0e1a0670a27c09dcc7e )
+	* physac_dll now refers new repository ( https://github.com/raysan5/physac )
+	* examples/core_storage_values.rb: Removed ( see https://github.com/raysan5/raylib/commit/e722a8dbef59cf0ecccf141af61e1e1c8a24849f )
+
 2022-06-08  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/70ec71a373db426685590127122e77bfd66cbf69 ) / and raygui ( https://github.com/raysan5/raygui/commit/47269f30ce55f0399096d1bee4188b8b8c0d7186 )

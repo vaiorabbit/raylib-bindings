@@ -6,4 +6,4 @@
 	url = https://github.com/raysan5/raygui.git
 [submodule "physac_dll/Physac"]
 	path = physac_dll/Physac
-	url = https://github.com/victorfisac/Physac.git
+	url = https://github.com/raysan5/physac.git

@@ -28,6 +28,7 @@ module Raylib
   FLAG_WINDOW_ALWAYS_RUN = 256
   FLAG_WINDOW_TRANSPARENT = 16
   FLAG_WINDOW_HIGHDPI = 8192
+  FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
   FLAG_MSAA_4X_HINT = 32
   FLAG_INTERLACED_HINT = 65536
   LOG_ALL = 0
@@ -661,6 +662,14 @@ module Raylib
     )
   end
 
+  class FilePathList < FFI::Struct
+    layout(
+      :capacity, :uint,
+      :count, :uint,
+      :paths, :pointer,
+    )
+  end
+
 
   # Function
 
@@ -767,6 +776,7 @@ module Raylib
       :MemAlloc,
       :MemRealloc,
       :MemFree,
+      :OpenURL,
       :SetTraceLogCallback,
       :SetLoadFileDataCallback,
       :SetSaveFileDataCallback,
@@ -791,7 +801,9 @@ module Raylib
       :GetWorkingDirectory,
       :GetApplicationDirectory,
       :ChangeDirectory,
+      :IsPathFile,
       :LoadDirectoryFiles,
+      :LoadDirectoryFilesEx,
       :UnloadDirectoryFiles,
       :IsFileDropped,
       :LoadDroppedFiles,
@@ -801,9 +813,6 @@ module Raylib
       :DecompressData,
       :EncodeDataBase64,
       :DecodeDataBase64,
-      :SaveStorageValue,
-      :LoadStorageValue,
-      :OpenURL,
       :IsKeyPressed,
       :IsKeyDown,
       :IsKeyReleased,
@@ -833,6 +842,7 @@ module Raylib
       :SetMouseOffset,
       :SetMouseScale,
       :GetMouseWheelMove,
+      :GetMouseWheelMoveV,
       :SetMouseCursor,
       :GetTouchX,
       :GetTouchY,
@@ -1078,7 +1088,6 @@ module Raylib
       :ExportMesh,
       :GetMeshBoundingBox,
       :GenMeshTangents,
-      :GenMeshBinormals,
       :GenMeshPoly,
       :GenMeshPlane,
       :GenMeshCube,
@@ -1271,6 +1280,7 @@ module Raylib
       :MemAlloc => [:int],
       :MemRealloc => [:pointer, :int],
       :MemFree => [:pointer],
+      :OpenURL => [:pointer],
       :SetTraceLogCallback => [:TraceLogCallback],
       :SetLoadFileDataCallback => [:LoadFileDataCallback],
       :SetSaveFileDataCallback => [:SaveFileDataCallback],
@@ -1295,19 +1305,18 @@ module Raylib
       :GetWorkingDirectory => [],
       :GetApplicationDirectory => [],
       :ChangeDirectory => [:pointer],
-      :LoadDirectoryFiles => [:pointer, :pointer],
-      :UnloadDirectoryFiles => [],
+      :IsPathFile => [:pointer],
+      :LoadDirectoryFiles => [:pointer],
+      :LoadDirectoryFilesEx => [:pointer, :pointer, :bool],
+      :UnloadDirectoryFiles => [FilePathList.by_value],
       :IsFileDropped => [],
-      :LoadDroppedFiles => [:pointer],
-      :UnloadDroppedFiles => [],
+      :LoadDroppedFiles => [],
+      :UnloadDroppedFiles => [FilePathList.by_value],
       :GetFileModTime => [:pointer],
       :CompressData => [:pointer, :int, :pointer],
       :DecompressData => [:pointer, :int, :pointer],
       :EncodeDataBase64 => [:pointer, :int, :pointer],
       :DecodeDataBase64 => [:pointer, :pointer],
-      :SaveStorageValue => [:uint, :int],
-      :LoadStorageValue => [:uint],
-      :OpenURL => [:pointer],
       :IsKeyPressed => [:int],
       :IsKeyDown => [:int],
       :IsKeyReleased => [:int],
@@ -1337,6 +1346,7 @@ module Raylib
       :SetMouseOffset => [:int, :int],
       :SetMouseScale => [:float, :float],
       :GetMouseWheelMove => [],
+      :GetMouseWheelMoveV => [],
       :SetMouseCursor => [:int],
       :GetTouchX => [],
       :GetTouchY => [],
@@ -1582,7 +1592,6 @@ module Raylib
       :ExportMesh => [Mesh.by_value, :pointer],
       :GetMeshBoundingBox => [Mesh.by_value],
       :GenMeshTangents => [:pointer],
-      :GenMeshBinormals => [:pointer],
       :GenMeshPoly => [:int, :float],
       :GenMeshPlane => [:float, :float, :int, :int],
       :GenMeshCube => [:float, :float, :float],
@@ -1775,6 +1784,7 @@ module Raylib
       :MemAlloc => :pointer,
       :MemRealloc => :pointer,
       :MemFree => :void,
+      :OpenURL => :void,
       :SetTraceLogCallback => :void,
       :SetLoadFileDataCallback => :void,
       :SetSaveFileDataCallback => :void,
@@ -1799,19 +1809,18 @@ module Raylib
       :GetWorkingDirectory => :pointer,
       :GetApplicationDirectory => :pointer,
       :ChangeDirectory => :bool,
-      :LoadDirectoryFiles => :pointer,
+      :IsPathFile => :bool,
+      :LoadDirectoryFiles => FilePathList.by_value,
+      :LoadDirectoryFilesEx => FilePathList.by_value,
       :UnloadDirectoryFiles => :void,
       :IsFileDropped => :bool,
-      :LoadDroppedFiles => :pointer,
+      :LoadDroppedFiles => FilePathList.by_value,
       :UnloadDroppedFiles => :void,
       :GetFileModTime => :long,
       :CompressData => :pointer,
       :DecompressData => :pointer,
       :EncodeDataBase64 => :pointer,
       :DecodeDataBase64 => :pointer,
-      :SaveStorageValue => :bool,
-      :LoadStorageValue => :int,
-      :OpenURL => :void,
       :IsKeyPressed => :bool,
       :IsKeyDown => :bool,
       :IsKeyReleased => :bool,
@@ -1841,6 +1850,7 @@ module Raylib
       :SetMouseOffset => :void,
       :SetMouseScale => :void,
       :GetMouseWheelMove => :float,
+      :GetMouseWheelMoveV => Vector2.by_value,
       :SetMouseCursor => :void,
       :GetTouchX => :int,
       :GetTouchY => :int,
@@ -2086,7 +2096,6 @@ module Raylib
       :ExportMesh => :bool,
       :GetMeshBoundingBox => BoundingBox.by_value,
       :GenMeshTangents => :void,
-      :GenMeshBinormals => :void,
       :GenMeshPoly => Mesh.by_value,
       :GenMeshPlane => Mesh.by_value,
       :GenMeshCube => Mesh.by_value,
