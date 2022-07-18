@@ -28,7 +28,7 @@ if __FILE__ == $PROGRAM_NAME
 
   until WindowShouldClose()
 
-    RunPhysicsStep() # Update physics system
+    UpdatePhysics() # Update physics system
     if IsKeyPressed(KEY_R) # Reset physics system
       # ResetPhysics()
       physics_bodies.each do |body|
