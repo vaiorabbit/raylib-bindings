@@ -12,7 +12,7 @@ Provides Ruby bindings for raylib-related libraries including:
     *   raymath
     *   rlgl
 *   [raygui](https://github.com/raysan5/raygui)
-*   [Physac](https://github.com/victorfisac/Physac)
+*   [Physac](https://github.com/raysan5/physac)
 
 ## Features ##
 
