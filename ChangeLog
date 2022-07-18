@@ -4,6 +4,7 @@
 	* examples/core_drop_files.rb: Updated ( see https://github.com/raysan5/raylib/commit/b8f67c628553cb9199f51efc9b20eb5991d58e8f )
 	* Updated DLLs
 	* examples/textures_sprite_anim.rb: Added
+	* examples/textures_gif_player.rb: Added
 
 2022-07-17  vaiorabbit  <http://twitter.com/vaiorabbit>
 
