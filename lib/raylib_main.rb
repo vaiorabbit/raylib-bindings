@@ -10,7 +10,7 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  RAYLIB_VERSION = "4.2-dev"
+  RAYLIB_VERSION = "4.2"
   DEG2RAD = Math::PI / 180.0
   RAD2DEG = 180.0 / Math::PI
 

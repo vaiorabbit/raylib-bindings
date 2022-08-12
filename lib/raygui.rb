@@ -10,7 +10,7 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  RAYGUI_VERSION = "3.2-dev"
+  RAYGUI_VERSION = "3.2"
   SCROLLBAR_LEFT_SIDE = 0
   SCROLLBAR_RIGHT_SIDE = 1
 

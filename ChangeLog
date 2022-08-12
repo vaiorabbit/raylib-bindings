@@ -1,3 +1,7 @@
+2022-08-12  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/d658e6772d75bce52fbe46cc9789f0b33500bc0f ) and added raylib v4.2.0 features ( https://github.com/raysan5/raylib/releases/tag/4.2.0 )
+
 2022-07-18  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/core_storage_values.rb: Removed ( see https://github.com/raysan5/raylib/commit/e722a8dbef59cf0ecccf141af61e1e1c8a24849f )

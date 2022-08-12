@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2022-07-18
+*   Last modified : 2022-08-12
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -25,7 +25,7 @@ Provides Ruby bindings for raylib-related libraries including:
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
-            *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
+            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin21]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
 
@@ -34,7 +34,7 @@ Provides Ruby bindings for raylib-related libraries including:
         *   [macOS] clang
 
                 $ clang --version
-                Apple clang version 13.1.6 (clang-1316.0.21.2.3)
+                Apple clang version 13.1.6 (clang-1316.0.21.2.5)
                 Target: arm64-apple-darwin21.5.0
                 Thread model: posix
                 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
@@ -60,6 +60,12 @@ Provides Ruby bindings for raylib-related libraries including:
 *   Compiler
     *   Tested on:
         *   [macOS] clang
+
+                $ clang --version
+                Apple clang version 13.1.6 (clang-1316.0.21.2.3)
+                Target: arm64-apple-darwin21.5.0
+                Thread model: posix
+                InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
                 Apple clang version 13.0.0 (clang-1300.0.29.3)
                 Target: arm64-apple-darwin20.6.0
@@ -88,8 +94,8 @@ Shared libraries in `lib` directory are built on top of these products and are a
     *   raygui ( https://github.com/raysan5/raygui )
         *   https://github.com/raysan5/raygui/blob/master/LICENSE
 *   `physac.dylib`, `physac.dll`
-    *   Physac ( https://github.com/victorfisac/Physac )
-        *   https://github.com/victorfisac/Physac/blob/a8a6c864bfc809f8e4b2f88bb916b90d736b3f4a/src/physac.h#L59-L76
+    *   Physac ( https://github.com/raysan5/physac )
+        *   https://github.com/raysan5/physac/blob/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833/src/physac.h#L51-L68
 
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 

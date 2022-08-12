@@ -1,6 +1,6 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION" : "\"4.2-dev\""
+    , "RAYLIB_VERSION" : "\"4.2\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
@@ -107,7 +107,7 @@
     , "RL_SHADER_LOC_MAP_DIFFUSE" : null
     , "RL_SHADER_LOC_MAP_SPECULAR" : null
     , "RAYGUI_H" : null
-    , "RAYGUI_VERSION" : "\"3.2-dev\""
+    , "RAYGUI_VERSION" : "\"3.2\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null
@@ -118,15 +118,16 @@
     , "SCROLLBAR_RIGHT_SIDE" : "1"
     , "PHYSAC_H" : null
     , "PHYSACDEF" : null
+    , "PHYSAC_MALLOC" : null
+    , "PHYSAC_CALLOC" : null
+    , "PHYSAC_FREE" : null
     , "PHYSAC_MAX_BODIES" : "64"
     , "PHYSAC_MAX_MANIFOLDS" : "4096"
     , "PHYSAC_MAX_VERTICES" : "24"
-    , "PHYSAC_CIRCLE_VERTICES" : "24"
+    , "PHYSAC_DEFAULT_CIRCLE_VERTICES" : "24"
     , "PHYSAC_COLLISION_ITERATIONS" : "100"
     , "PHYSAC_PENETRATION_ALLOWANCE" : "0.05"
     , "PHYSAC_PENETRATION_CORRECTION" : "0.4"
     , "PHYSAC_PI" : "3.14159265358979323846"
     , "PHYSAC_DEG2RAD" : null
-    , "PHYSAC_MALLOC" : null
-    , "PHYSAC_FREE" : null
 }
