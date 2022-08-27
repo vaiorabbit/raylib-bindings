@@ -1,3 +1,7 @@
+2022-08-28  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/template.rb: Added demonstration program included in gem package
+
 2022-08-12  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/d658e6772d75bce52fbe46cc9789f0b33500bc0f ) and added raylib v4.2.0 features ( https://github.com/raysan5/raylib/releases/tag/4.2.0 )

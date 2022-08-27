@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "raylib-bindings"
-  spec.version       = "0.0.10"
+  spec.version       = "0.0.11"
   spec.authors       = ["vaiorabbit"]
   spec.email         = ["vaiorabbit@gmail.com"]
   spec.summary       = %q{Provides latest raylib API for Ruby}
@@ -21,5 +21,6 @@ Ruby bindings for Raylib ( https://github.com/raysan5/raylib ).
   spec.add_runtime_dependency 'opengl-bindings2', '~> 2'
 
   spec.files = Dir.glob("lib/*") +
-               ["README.md", "LICENSE.txt", "ChangeLog"]
+               ["README.md", "LICENSE.txt", "ChangeLog"] +
+               ["examples/template.rb"]
 end
