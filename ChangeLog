@@ -1,6 +1,7 @@
 2022-08-28  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/template.rb: Added demonstration program included in gem package
+	* lib/raylib.rb: Added method 'Raylib.template' to generate template code
 
 2022-08-12  vaiorabbit  <http://twitter.com/vaiorabbit>
 

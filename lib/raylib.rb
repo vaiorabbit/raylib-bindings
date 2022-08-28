@@ -3,6 +3,7 @@
 # * https://github.com/vaiorabbit/raylib-bindings
 
 require 'ffi'
+require 'fileutils'
 require_relative 'raylib_main.rb'
 require_relative 'raymath.rb'
 require_relative 'rlgl.rb'
@@ -149,6 +150,29 @@ module Raylib
 
   def MatrixToFloat(mat)
     return MatrixToFloatV(mat)[:v].to_a
+  end
+
+  #
+  # Generate sample code
+  #
+  def self.template
+    # Copy template code to user's current directory
+    example_path = Gem::Specification.find_by_name('raylib-bindings').full_gem_path + '/examples'
+    template_code_src = example_path + '/template.rb'
+    unless File.exist? template_code_src
+      $stderr.puts "[Error] Raylib.template : Template source #{template_code_src} not found"
+      return false
+    end
+
+    template_code_dst = Dir.getwd + '/template.rb'
+    if File.exist? template_code_dst
+      $stderr.puts "[Error] Raylib.template : Template destination #{template_code_dst} already exists"
+      return false
+    end
+
+    $stderr.puts "[Info] Raylib.template : #{template_code_src} => #{template_code_dst}"
+    FileUtils.copy template_code_src, template_code_dst
+    $stderr.puts "[Info] Raylib.template : Done"
   end
 
 end

@@ -20,6 +20,26 @@ Provides Ruby bindings for raylib-related libraries including:
 *   Based on Ruby/FFI
     *   No need to build C extension library
 
+## Quick Start ##
+
+For Windows and macOS users:
+
+```
+D:\> gem install raylib-bindings
+Fetching raylib-bindings-...
+...
+1 gem installed
+
+D:\> ruby -r raylib -e 'Raylib.template'
+[Info] Raylib.template : C:/Ruby31-x64/lib/ruby/gems/3.1.0/gems/raylib-bindings-0.0.11/examples/template.rb => d://template.rb
+[Info] Raylib.template : Done
+
+D:\> ruby template.rb
+```
+↓
+
+<img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/template_screenshot.png" width="400">
+
 ## Prerequisites ##
 
 *   Ruby interpreter
@@ -29,21 +49,22 @@ Provides Ruby bindings for raylib-related libraries including:
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
 
-*   Compiler
-    *   Tested on:
-        *   [macOS] clang
+*   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
+    *   CMake https://cmake.org/download/
+    *   C Compiler
+        *   Tested compilers:
+            *   [macOS] clang
 
-                $ clang --version
-                Apple clang version 13.1.6 (clang-1316.0.21.2.5)
-                Target: arm64-apple-darwin21.5.0
-                Thread model: posix
-                InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+                    $ clang --version
+                    Apple clang version 13.1.6 (clang-1316.0.21.2.5)
+                    Target: arm64-apple-darwin21.5.0
+                    Thread model: posix
+                    InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
-        *   [Windows] gcc
+            *   [Windows] gcc
 
-                gcc (Rev10, Built by MSYS2 project) 11.2.0
+                    gcc (Rev10, Built by MSYS2 project) 11.2.0
 
-*   CMake https://cmake.org/download/
 
 <details>
 <summary>Older versions</summary>
