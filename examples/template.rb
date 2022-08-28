@@ -122,6 +122,7 @@ if __FILE__ == $PROGRAM_NAME
         DrawCubeWires(obstacle_cube_pos, obstacle_cube_size[:x], obstacle_cube_size[:y], obstacle_cube_size[:z], DARKGRAY)
         # Obstacle sphere
         DrawSphere(obstacle_sphere_pos, obstacle_sphere_size, GRAY)
+        DrawSphereWires(obstacle_sphere_pos, obstacle_sphere_size, 16, 16, DARKGRAY)
         # Floor
         DrawGrid(10, 1)
       EndMode3D()
