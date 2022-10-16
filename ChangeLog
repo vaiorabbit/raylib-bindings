@@ -3,6 +3,7 @@
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/c5e89241c515d12a739a0d0bacb6a05395bf2a95 ) / and raygui ( https://github.com/raysan5/raygui/commit/98df231227d87dbf5954520169af29e610cd6a87 )
 	* example/models_loading_m3d.rb: Added
 	* example/models_loading_gltf.rb: Fixed model paths
+	* [Windows] Updated DLLs with the latest raylib
 
 2022-08-28  vaiorabbit  <http://twitter.com/vaiorabbit>
 
