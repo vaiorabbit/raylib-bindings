@@ -293,17 +293,17 @@ module Raylib
   ICON_FILE_NEW = 203
   ICON_FOLDER_ADD = 204
   ICON_ALARM = 205
-  ICON_206 = 206
-  ICON_207 = 207
-  ICON_208 = 208
-  ICON_209 = 209
-  ICON_210 = 210
-  ICON_211 = 211
-  ICON_212 = 212
-  ICON_213 = 213
-  ICON_214 = 214
-  ICON_215 = 215
-  ICON_216 = 216
+  ICON_CPU = 206
+  ICON_ROM = 207
+  ICON_STEP_OVER = 208
+  ICON_STEP_INTO = 209
+  ICON_STEP_OUT = 210
+  ICON_RESTART = 211
+  ICON_BREAKPOINT_ON = 212
+  ICON_BREAKPOINT_OFF = 213
+  ICON_BURGER_MENU = 214
+  ICON_CASE_SENSITIVE = 215
+  ICON_REG_EXP = 216
   ICON_217 = 217
   ICON_218 = 218
   ICON_219 = 219
@@ -395,6 +395,7 @@ module Raylib
       :GuiGroupBox,
       :GuiLine,
       :GuiPanel,
+      :GuiTabBar,
       :GuiScrollPanel,
       :GuiLabel,
       :GuiButton,
@@ -425,14 +426,9 @@ module Raylib
       :GuiLoadStyle,
       :GuiLoadStyleDefault,
       :GuiIconText,
-      :GuiDrawIcon,
       :GuiGetIcons,
-      :GuiGetIconData,
-      :GuiSetIconData,
-      :GuiSetIconScale,
-      :GuiSetIconPixel,
-      :GuiClearIconPixel,
-      :GuiCheckIconPixel,
+      :GuiLoadIcons,
+      :GuiDrawIcon,
     ]
     args = {
       :GuiEnable => [],
@@ -451,6 +447,7 @@ module Raylib
       :GuiGroupBox => [Rectangle.by_value, :pointer],
       :GuiLine => [Rectangle.by_value, :pointer],
       :GuiPanel => [Rectangle.by_value, :pointer],
+      :GuiTabBar => [Rectangle.by_value, :pointer, :int, :pointer],
       :GuiScrollPanel => [Rectangle.by_value, :pointer, Rectangle.by_value, :pointer],
       :GuiLabel => [Rectangle.by_value, :pointer],
       :GuiButton => [Rectangle.by_value, :pointer],
@@ -481,14 +478,9 @@ module Raylib
       :GuiLoadStyle => [:pointer],
       :GuiLoadStyleDefault => [],
       :GuiIconText => [:int, :pointer],
-      :GuiDrawIcon => [:int, :int, :int, :int, Color.by_value],
       :GuiGetIcons => [],
-      :GuiGetIconData => [:int],
-      :GuiSetIconData => [:int, :pointer],
-      :GuiSetIconScale => [:uint],
-      :GuiSetIconPixel => [:int, :int, :int],
-      :GuiClearIconPixel => [:int, :int, :int],
-      :GuiCheckIconPixel => [:int, :int, :int],
+      :GuiLoadIcons => [:pointer, :bool],
+      :GuiDrawIcon => [:int, :int, :int, :int, Color.by_value],
     }
     retvals = {
       :GuiEnable => :void,
@@ -507,6 +499,7 @@ module Raylib
       :GuiGroupBox => :void,
       :GuiLine => :void,
       :GuiPanel => :void,
+      :GuiTabBar => :int,
       :GuiScrollPanel => Rectangle.by_value,
       :GuiLabel => :void,
       :GuiButton => :bool,
@@ -537,14 +530,9 @@ module Raylib
       :GuiLoadStyle => :void,
       :GuiLoadStyleDefault => :void,
       :GuiIconText => :pointer,
-      :GuiDrawIcon => :void,
       :GuiGetIcons => :pointer,
-      :GuiGetIconData => :pointer,
-      :GuiSetIconData => :void,
-      :GuiSetIconScale => :void,
-      :GuiSetIconPixel => :void,
-      :GuiClearIconPixel => :void,
-      :GuiCheckIconPixel => :bool,
+      :GuiLoadIcons => :pointer,
+      :GuiDrawIcon => :void,
     }
     symbols.each do |sym|
       begin

@@ -16,16 +16,17 @@ if __FILE__ == $PROGRAM_NAME
   camera[:fovy] = 45.0
   camera[:projection] = CAMERA_PERSPECTIVE
 
-  MAX_GLTF_MODELS = 8
+  MAX_GLTF_MODELS = 1
   models = [
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/raylib_32x32.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/rigged_figure.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/GearboxAssy.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/BoxAnimated.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedTriangle.gltf"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedMorphCube.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/vertex_colored_object.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/girl.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/raylib_32x32.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/rigged_figure.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/GearboxAssy.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/BoxAnimated.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedTriangle.gltf"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedMorphCube.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/vertex_colored_object.glb"),
+    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/girl.glb"),
+    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/robot.glb"),
   ]
 
   currentModel = 0

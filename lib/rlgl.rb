@@ -30,6 +30,7 @@ module Raylib
   RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 0x2701
   RL_TEXTURE_FILTER_MIP_LINEAR = 0x2703
   RL_TEXTURE_FILTER_ANISOTROPIC = 0x3000
+  RL_TEXTURE_MIPMAP_BIAS_RATIO = 0x4000
   RL_TEXTURE_WRAP_REPEAT = 0x2901
   RL_TEXTURE_WRAP_CLAMP = 0x812F
   RL_TEXTURE_WRAP_MIRROR_REPEAT = 0x8370
@@ -57,29 +58,11 @@ module Raylib
 
   # Enum
 
-  OPENGL_11 = 1
-  OPENGL_21 = 2
-  OPENGL_33 = 3
-  OPENGL_43 = 4
-  OPENGL_ES_20 = 5
-  RL_ATTACHMENT_COLOR_CHANNEL0 = 0
-  RL_ATTACHMENT_COLOR_CHANNEL1 = 1
-  RL_ATTACHMENT_COLOR_CHANNEL2 = 2
-  RL_ATTACHMENT_COLOR_CHANNEL3 = 3
-  RL_ATTACHMENT_COLOR_CHANNEL4 = 4
-  RL_ATTACHMENT_COLOR_CHANNEL5 = 5
-  RL_ATTACHMENT_COLOR_CHANNEL6 = 6
-  RL_ATTACHMENT_COLOR_CHANNEL7 = 7
-  RL_ATTACHMENT_DEPTH = 100
-  RL_ATTACHMENT_STENCIL = 200
-  RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
-  RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
-  RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
-  RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
-  RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
-  RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
-  RL_ATTACHMENT_TEXTURE2D = 100
-  RL_ATTACHMENT_RENDERBUFFER = 200
+  RL_OPENGL_11 = 1
+  RL_OPENGL_21 = 2
+  RL_OPENGL_33 = 3
+  RL_OPENGL_43 = 4
+  RL_OPENGL_ES_20 = 5
   RL_LOG_ALL = 0
   RL_LOG_TRACE = 1
   RL_LOG_DEBUG = 2
@@ -122,6 +105,7 @@ module Raylib
   RL_BLEND_SUBTRACT_COLORS = 4
   RL_BLEND_ALPHA_PREMULTIPLY = 5
   RL_BLEND_CUSTOM = 6
+  RL_BLEND_CUSTOM_SEPARATE = 7
   RL_SHADER_LOC_VERTEX_POSITION = 0
   RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1
   RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2
@@ -161,12 +145,28 @@ module Raylib
   RL_SHADER_ATTRIB_VEC2 = 1
   RL_SHADER_ATTRIB_VEC3 = 2
   RL_SHADER_ATTRIB_VEC4 = 3
+  RL_ATTACHMENT_COLOR_CHANNEL0 = 0
+  RL_ATTACHMENT_COLOR_CHANNEL1 = 1
+  RL_ATTACHMENT_COLOR_CHANNEL2 = 2
+  RL_ATTACHMENT_COLOR_CHANNEL3 = 3
+  RL_ATTACHMENT_COLOR_CHANNEL4 = 4
+  RL_ATTACHMENT_COLOR_CHANNEL5 = 5
+  RL_ATTACHMENT_COLOR_CHANNEL6 = 6
+  RL_ATTACHMENT_COLOR_CHANNEL7 = 7
+  RL_ATTACHMENT_DEPTH = 100
+  RL_ATTACHMENT_STENCIL = 200
+  RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0
+  RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1
+  RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2
+  RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3
+  RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4
+  RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
+  RL_ATTACHMENT_TEXTURE2D = 100
+  RL_ATTACHMENT_RENDERBUFFER = 200
 
   # Typedef
 
   typedef :int, :rlGlVersion
-  typedef :int, :rlFramebufferAttachType
-  typedef :int, :rlFramebufferAttachTextureType
   typedef :int, :rlTraceLogLevel
   typedef :int, :rlPixelFormat
   typedef :int, :rlTextureFilter
@@ -174,6 +174,8 @@ module Raylib
   typedef :int, :rlShaderLocationIndex
   typedef :int, :rlShaderUniformDataType
   typedef :int, :rlShaderAttributeDataType
+  typedef :int, :rlFramebufferAttachType
+  typedef :int, :rlFramebufferAttachTextureType
 
   # Struct
 
@@ -279,6 +281,7 @@ module Raylib
       :rlCheckErrors,
       :rlSetBlendMode,
       :rlSetBlendFactors,
+      :rlSetBlendFactorsSeparate,
       :rlglInit,
       :rlglClose,
       :rlLoadExtensions,
@@ -339,11 +342,11 @@ module Raylib
       :rlComputeShaderDispatch,
       :rlLoadShaderBuffer,
       :rlUnloadShaderBuffer,
-      :rlUpdateShaderBufferElements,
-      :rlGetShaderBufferSize,
-      :rlReadShaderBufferElements,
+      :rlUpdateShaderBuffer,
       :rlBindShaderBuffer,
-      :rlCopyBuffersElements,
+      :rlReadShaderBuffer,
+      :rlCopyShaderBuffer,
+      :rlGetShaderBufferSize,
       :rlBindImageTexture,
       :rlGetMatrixModelview,
       :rlGetMatrixProjection,
@@ -423,6 +426,7 @@ module Raylib
       :rlCheckErrors => [],
       :rlSetBlendMode => [:int],
       :rlSetBlendFactors => [:int, :int, :int],
+      :rlSetBlendFactorsSeparate => [:int, :int, :int, :int, :int, :int],
       :rlglInit => [:int, :int],
       :rlglClose => [],
       :rlLoadExtensions => [:pointer],
@@ -481,13 +485,13 @@ module Raylib
       :rlSetShader => [:uint, :pointer],
       :rlLoadComputeShaderProgram => [:uint],
       :rlComputeShaderDispatch => [:uint, :uint, :uint],
-      :rlLoadShaderBuffer => [:ulong_long, :pointer, :int],
+      :rlLoadShaderBuffer => [:uint, :pointer, :int],
       :rlUnloadShaderBuffer => [:uint],
-      :rlUpdateShaderBufferElements => [:uint, :pointer, :ulong_long, :ulong_long],
-      :rlGetShaderBufferSize => [:uint],
-      :rlReadShaderBufferElements => [:uint, :pointer, :ulong_long, :ulong_long],
+      :rlUpdateShaderBuffer => [:uint, :pointer, :uint, :uint],
       :rlBindShaderBuffer => [:uint, :uint],
-      :rlCopyBuffersElements => [:uint, :uint, :ulong_long, :ulong_long, :ulong_long],
+      :rlReadShaderBuffer => [:uint, :pointer, :uint, :uint],
+      :rlCopyShaderBuffer => [:uint, :uint, :uint, :uint, :uint],
+      :rlGetShaderBufferSize => [:uint],
       :rlBindImageTexture => [:uint, :uint, :uint, :int],
       :rlGetMatrixModelview => [],
       :rlGetMatrixProjection => [],
@@ -567,6 +571,7 @@ module Raylib
       :rlCheckErrors => :void,
       :rlSetBlendMode => :void,
       :rlSetBlendFactors => :void,
+      :rlSetBlendFactorsSeparate => :void,
       :rlglInit => :void,
       :rlglClose => :void,
       :rlLoadExtensions => :void,
@@ -627,11 +632,11 @@ module Raylib
       :rlComputeShaderDispatch => :void,
       :rlLoadShaderBuffer => :uint,
       :rlUnloadShaderBuffer => :void,
-      :rlUpdateShaderBufferElements => :void,
-      :rlGetShaderBufferSize => :ulong_long,
-      :rlReadShaderBufferElements => :void,
+      :rlUpdateShaderBuffer => :void,
       :rlBindShaderBuffer => :void,
-      :rlCopyBuffersElements => :void,
+      :rlReadShaderBuffer => :void,
+      :rlCopyShaderBuffer => :void,
+      :rlGetShaderBufferSize => :uint,
       :rlBindImageTexture => :void,
       :rlGetMatrixModelview => Matrix.by_value,
       :rlGetMatrixProjection => Matrix.by_value,

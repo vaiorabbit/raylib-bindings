@@ -3,5 +3,5 @@
     "../raylib_dll/raylib/src/raymath.h",
     "../raylib_dll/raylib/src/rlgl.h",
     "../raygui_dll/raygui/src/raygui.h",
-    "../physac_dll/Physac/src/physac.h"
+    "../physac_dll/physac/src/physac.h"
 ]

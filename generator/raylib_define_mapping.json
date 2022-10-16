@@ -1,6 +1,6 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION" : "\"4.2\""
+    , "RAYLIB_VERSION" : "\"4.5-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
@@ -80,6 +80,7 @@
     , "RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST" : "0x2701"
     , "RL_TEXTURE_FILTER_MIP_LINEAR" : "0x2703"
     , "RL_TEXTURE_FILTER_ANISOTROPIC" : "0x3000"
+    , "RL_TEXTURE_MIPMAP_BIAS_RATIO" : "0x4000"
     , "RL_TEXTURE_WRAP_REPEAT" : "0x2901"
     , "RL_TEXTURE_WRAP_CLAMP" : "0x812F"
     , "RL_TEXTURE_WRAP_MIRROR_REPEAT" : "0x8370"
