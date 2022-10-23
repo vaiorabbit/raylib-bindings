@@ -34,6 +34,9 @@ if __FILE__ == $PROGRAM_NAME
         DrawCylinder(Vector3.create(1.0, 0.0, -4.0), 0.0, 1.5, 3.0, 8, GOLD)
         DrawCylinderWires(Vector3.create(1.0, 0.0, -4.0), 0.0, 1.5, 3.0, 8, PINK)
 
+        DrawCapsule(Vector3.create(-3.0, 1.5, -4.0), Vector3.create(-4.0, -1.0, -4.0), 1.2, 8, 8, VIOLET)
+        DrawCapsuleWires(Vector3.create(-3.0, 1.5, -4.0), Vector3.create(-4.0, -1.0, -4.0), 1.2, 8, 8, PURPLE)
+
         DrawGrid(10, 1.0) # Draw a grid
       EndMode3D()
       DrawFPS(10, 10)
