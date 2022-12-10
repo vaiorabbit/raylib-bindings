@@ -84,7 +84,7 @@ if __FILE__ == $PROGRAM_NAME
       # Process transfert buffer
 
       # Send SSBO buffer to GPU
-      rlUpdateShaderBufferElements(transfertSSBO, transfertBuffer, GolUpdateSSBO.size, 0)
+      rlUpdateShaderBuffer(transfertSSBO, transfertBuffer, GolUpdateSSBO.size, 0)
 
       # Process ssbo command
       rlEnableShader(golTransfertProgram)

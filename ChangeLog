@@ -1,6 +1,8 @@
 2022-12-10  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/2c9d116a5ce835328dc3267313f1b34b2e7ad8c9 ) / and raygui ( https://github.com/raysan5/raygui/commit/64179558e425f6e05054d2a70eb12530e0fec103 )
+	* [Windows] Updated DLLs with the latest raylib
+	* example/rlgl_compute_shader.rb: Fixed API usage
 
 2022-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
