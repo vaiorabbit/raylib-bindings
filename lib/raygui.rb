@@ -304,8 +304,8 @@ module Raylib
   ICON_BURGER_MENU = 214
   ICON_CASE_SENSITIVE = 215
   ICON_REG_EXP = 216
-  ICON_217 = 217
-  ICON_218 = 218
+  ICON_FOLDER = 217
+  ICON_FILE = 218
   ICON_219 = 219
   ICON_220 = 220
   ICON_221 = 221
@@ -425,6 +425,9 @@ module Raylib
       :GuiColorBarHue,
       :GuiLoadStyle,
       :GuiLoadStyleDefault,
+      :GuiEnableTooltip,
+      :GuiDisableTooltip,
+      :GuiSetTooltip,
       :GuiIconText,
       :GuiGetIcons,
       :GuiLoadIcons,
@@ -477,6 +480,9 @@ module Raylib
       :GuiColorBarHue => [Rectangle.by_value, :pointer, :float],
       :GuiLoadStyle => [:pointer],
       :GuiLoadStyleDefault => [],
+      :GuiEnableTooltip => [],
+      :GuiDisableTooltip => [],
+      :GuiSetTooltip => [:pointer],
       :GuiIconText => [:int, :pointer],
       :GuiGetIcons => [],
       :GuiLoadIcons => [:pointer, :bool],
@@ -529,6 +535,9 @@ module Raylib
       :GuiColorBarHue => :float,
       :GuiLoadStyle => :void,
       :GuiLoadStyleDefault => :void,
+      :GuiEnableTooltip => :void,
+      :GuiDisableTooltip => :void,
+      :GuiSetTooltip => :void,
       :GuiIconText => :pointer,
       :GuiGetIcons => :pointer,
       :GuiLoadIcons => :pointer,

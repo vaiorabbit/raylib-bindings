@@ -11,6 +11,7 @@ if __name__ == "__main__":
         'Color',
         'Rectangle',
         'Texture2D',
+        'Image',
         'GlyphInfo',
         'Font',
     ]

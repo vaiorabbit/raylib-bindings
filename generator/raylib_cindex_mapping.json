@@ -80,6 +80,7 @@
     , "rlShaderAttributeDataType" : "TypeKind.ENUM"
     , "rlFramebufferAttachType" : "TypeKind.ENUM"
     , "rlFramebufferAttachTextureType" : "TypeKind.ENUM"
+    , "rlCullMode" : "TypeKind.ENUM"
     , "GuiStyleProp" : "TypeKind.RECORD"
     , "GuiState" : "TypeKind.ENUM"
     , "GuiTextAlignment" : "TypeKind.ENUM"

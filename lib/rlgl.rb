@@ -55,6 +55,32 @@ module Raylib
   RL_FRAGMENT_SHADER = 0x8B30
   RL_VERTEX_SHADER = 0x8B31
   RL_COMPUTE_SHADER = 0x91B9
+  RL_ZERO = 0
+  RL_ONE = 1
+  RL_SRC_COLOR = 0x0300
+  RL_ONE_MINUS_SRC_COLOR = 0x0301
+  RL_SRC_ALPHA = 0x0302
+  RL_ONE_MINUS_SRC_ALPHA = 0x0303
+  RL_DST_ALPHA = 0x0304
+  RL_ONE_MINUS_DST_ALPHA = 0x0305
+  RL_DST_COLOR = 0x0306
+  RL_ONE_MINUS_DST_COLOR = 0x0307
+  RL_SRC_ALPHA_SATURATE = 0x0308
+  RL_CONSTANT_COLOR = 0x8001
+  RL_ONE_MINUS_CONSTANT_COLOR = 0x8002
+  RL_CONSTANT_ALPHA = 0x8003
+  RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004
+  RL_FUNC_ADD = 0x8006
+  RL_FUNC_SUBTRACT = 0x800A
+  RL_FUNC_REVERSE_SUBTRACT = 0x800B
+  RL_BLEND_EQUATION = 0x8009
+  RL_BLEND_EQUATION_RGB = 0x8009
+  RL_BLEND_EQUATION_ALPHA = 0x883D
+  RL_BLEND_DST_RGB = 0x80C8
+  RL_BLEND_SRC_RGB = 0x80C9
+  RL_BLEND_DST_ALPHA = 0x80CA
+  RL_BLEND_SRC_ALPHA = 0x80CB
+  RL_BLEND_COLOR = 0x8005
 
   # Enum
 
@@ -163,6 +189,8 @@ module Raylib
   RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5
   RL_ATTACHMENT_TEXTURE2D = 100
   RL_ATTACHMENT_RENDERBUFFER = 200
+  RL_CULL_FACE_FRONT = 0
+  RL_CULL_FACE_BACK = 1
 
   # Typedef
 
@@ -176,6 +204,7 @@ module Raylib
   typedef :int, :rlShaderAttributeDataType
   typedef :int, :rlFramebufferAttachType
   typedef :int, :rlFramebufferAttachTextureType
+  typedef :int, :rlCullMode
 
   # Struct
 
@@ -264,6 +293,7 @@ module Raylib
       :rlDisableDepthMask,
       :rlEnableBackfaceCulling,
       :rlDisableBackfaceCulling,
+      :rlSetCullFace,
       :rlEnableScissorTest,
       :rlDisableScissorTest,
       :rlScissor,
@@ -409,6 +439,7 @@ module Raylib
       :rlDisableDepthMask => [],
       :rlEnableBackfaceCulling => [],
       :rlDisableBackfaceCulling => [],
+      :rlSetCullFace => [:int],
       :rlEnableScissorTest => [],
       :rlDisableScissorTest => [],
       :rlScissor => [:int, :int, :int, :int],
@@ -492,7 +523,7 @@ module Raylib
       :rlReadShaderBuffer => [:uint, :pointer, :uint, :uint],
       :rlCopyShaderBuffer => [:uint, :uint, :uint, :uint, :uint],
       :rlGetShaderBufferSize => [:uint],
-      :rlBindImageTexture => [:uint, :uint, :uint, :int],
+      :rlBindImageTexture => [:uint, :uint, :int, :bool],
       :rlGetMatrixModelview => [],
       :rlGetMatrixProjection => [],
       :rlGetMatrixTransform => [],
@@ -554,6 +585,7 @@ module Raylib
       :rlDisableDepthMask => :void,
       :rlEnableBackfaceCulling => :void,
       :rlDisableBackfaceCulling => :void,
+      :rlSetCullFace => :void,
       :rlEnableScissorTest => :void,
       :rlDisableScissorTest => :void,
       :rlScissor => :void,
