@@ -674,6 +674,18 @@ module Raylib
 
   # Function
 
+  def DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    # [TODO] Fix matrix copy
+    # - In C, DrawModelEx uses the whole copy of `model` on stack, which will never affect the content of original `model`.
+    #   But Ruby FFI seems to pass the reference of `model` to DrawModelEx, which results in transform accumulation (e.g.:`model` get rotated by `rotationAngle` around `rotationAxis` every frame).
+    #   So here I copy the transform into `mtx_clone` and copy back this to the original after finished calling DrawModelEx.
+    # - Other DrawXXX members (DrawModel, DrawModelWires, DrawModelWiresEx) are free from this problem.
+    #   - They call DrawModelEx in C layer, which will use the copy of `model` on stack.
+    mtx_clone = model[:transform].clone
+    rbDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    model[:transform] = mtx_clone
+  end
+
   def self.setup_raylib_symbols(output_error = false)
     entries = [
       [:InitWindow, :InitWindow, [:int, :int, :pointer], :void],
@@ -1083,7 +1095,7 @@ module Raylib
       [:UnloadModelKeepMeshes, :UnloadModelKeepMeshes, [Model.by_value], :void],
       [:GetModelBoundingBox, :GetModelBoundingBox, [Model.by_value], BoundingBox.by_value],
       [:DrawModel, :DrawModel, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
-      [:DrawModelEx, :DrawModelEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
+      [:rbDrawModelEx, :DrawModelEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
       [:DrawModelWires, :DrawModelWires, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
       [:DrawModelWiresEx, :DrawModelWiresEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
       [:DrawBoundingBox, :DrawBoundingBox, [BoundingBox.by_value, Color.by_value], :void],

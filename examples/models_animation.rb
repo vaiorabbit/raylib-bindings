@@ -52,16 +52,7 @@ if __FILE__ == $PROGRAM_NAME
     BeginDrawing()
       ClearBackground(RAYWHITE)
       BeginMode3D(camera)
-        # [TODO] Fix matrix copy
-        # - In C, DrawModelEx uses the whole copy of `model` on stack, which will never affect the content of original `model`.
-        #   But Ruby FFI seems to pass the reference of `model` to DrawModelEx, which results in transform accumulation (`model` get rotated -90 degree around X axis every frame).
-        #   So here I copy the transform into `mtx_clone` and copy back this to the original after finished calling DrawModelEx.
-        # - Other DrawXXX members (DrawModel, DrawModelWires, DrawModelWiresEx) are free from this problem.
-        #   - They call DrawModelEx in C layer, which will use the copy of `model` on stack.
-        mtx_clone = model[:transform].clone
         DrawModelEx(model, position, Vector3.create(1.0, 0.0, 0.0), -90.0, Vector3.create(1.0, 1.0, 1.0), WHITE)
-        model[:transform] = mtx_clone
-
         model[:boneCount].times do |i|
           transform = Transform.new(framePose.read_pointer + i * Transform.size)
           DrawCube(transform[:translation], 0.2, 0.2, 0.2, RED)

@@ -32,8 +32,6 @@ module Raylib
       end
     end
 
-    pp Raylib.methods
-
   end
 
   def self.setup_symbols(output_error)

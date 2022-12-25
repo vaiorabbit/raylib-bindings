@@ -147,7 +147,10 @@ class FunctionEntry:
         self.retval = None
         self.args = ""
 
-def generate_function(ctx, indent = "", module_name = ""):
+def generate_function(ctx, indent = "", module_name = "", function_prefix = "", function_postfix = ""):
+    if function_prefix != "":
+        print(function_prefix, file = sys.stdout)
+
     func_entries = []
     for func_name, func_info in ctx.decl_functions.items():
         if func_info == None:
@@ -195,8 +198,10 @@ def generate_function(ctx, indent = "", module_name = ""):
     indent = "  "
     print(indent + "end", file = sys.stdout)
 
+    if function_postfix != "":
+        print(function_postfix, file = sys.stdout)
 
-def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None):
+def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix=""):
 
     print(prefix, file = sys.stdout)
 
@@ -228,7 +233,7 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 
     # function
     print(indent + "# Function\n", file = sys.stdout)
-    generate_function(ctx, indent, module_name)
+    generate_function(ctx, indent, module_name, function_prefix, function_postfix)
     print(postfix, file = sys.stdout)
 
 if __name__ == "__main__":
