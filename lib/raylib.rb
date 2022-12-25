@@ -15,7 +15,7 @@ module Raylib
   extend FFI::Library
 
   @@raylib_import_done = false
-  def self.load_lib(libpath, raygui_libpath: nil, physac_libpath: nil)
+  def self.load_lib(libpath, output_error = false, raygui_libpath: nil, physac_libpath: nil)
 
     unless @@raylib_import_done
       begin
@@ -23,21 +23,23 @@ module Raylib
 
         ffi_lib_flags :now, :global
         ffi_lib *lib_paths
-        setup_symbols()
+        setup_symbols(output_error)
 
-        setup_raygui_symbols() if raygui_libpath != nil
-        setup_physac_symbols() if physac_libpath != nil
+        setup_raygui_symbols(output_error) if raygui_libpath != nil
+        setup_physac_symbols(output_error) if physac_libpath != nil
       rescue => error
         puts error
       end
     end
 
+    pp Raylib.methods
+
   end
 
-  def self.setup_symbols()
-    setup_raylib_symbols()
-    setup_raymath_symbols()
-    setup_rlgl_symbols()
+  def self.setup_symbols(output_error)
+    setup_raylib_symbols(output_error)
+    setup_raymath_symbols(output_error)
+    setup_rlgl_symbols(output_error)
   end
 
   #
