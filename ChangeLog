@@ -1,3 +1,9 @@
+2022-12-25  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Converted DrawModelEx into a wrapper function of rbDrawModelEx to avoid Matrix problem found in models_animation sample
+	* Attach functions with an explicit name - Ref.: https://www.rubydoc.info/github/ffi/ffi/FFI%2FLibrary:attach_function
+	* setup_xxx_symbols : name, retval and arguments of one function are now packed into one line
+
 2022-12-24  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Experimental Linux (Chromebook) support
