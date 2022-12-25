@@ -1,3 +1,4 @@
+import json
 import raylib_parser, raylib_generator
 
 RAYLIB_STRUCT_ALIAS = {
@@ -27,9 +28,14 @@ if __name__ == "__main__":
 
     ctx.decl_functions["DrawModelEx"].explicit_name = 'rbDrawModelEx'
 
+    api_schema = None
+    with open('./raylib_api.json') as f:
+        api_schema = json.load(f)
+
     raylib_generator.sanitize(ctx)
     raylib_generator.generate(ctx,
                               module_name = 'raylib',
                               struct_alias = RAYLIB_STRUCT_ALIAS,
-                              function_prefix = FUNCTION_PREFIX
+                              function_prefix = FUNCTION_PREFIX,
+                              json_schema = api_schema
                               )

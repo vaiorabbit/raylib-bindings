@@ -10,10 +10,10 @@ module Raylib
   extend FFI::Library
   # Define/Macro
 
-  PHYSAC_MAX_BODIES = 64
-  PHYSAC_MAX_MANIFOLDS = 4096
-  PHYSAC_MAX_VERTICES = 24
-  PHYSAC_DEFAULT_CIRCLE_VERTICES = 24
+  PHYSAC_MAX_BODIES = 64 # Maximum number of physic bodies supported
+  PHYSAC_MAX_MANIFOLDS = 4096 # Maximum number of physic bodies interactions (64x64)
+  PHYSAC_MAX_VERTICES = 24 # Maximum number of vertex for polygons shapes
+  PHYSAC_DEFAULT_CIRCLE_VERTICES = 24 # Default number of vertices for circle shapes
   PHYSAC_COLLISION_ITERATIONS = 100
   PHYSAC_PENETRATION_ALLOWANCE = 0.05
   PHYSAC_PENETRATION_CORRECTION = 0.4

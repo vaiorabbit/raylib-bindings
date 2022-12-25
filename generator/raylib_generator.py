@@ -1,4 +1,5 @@
 import ctypes, re, sys
+import json
 import raylib_parser
 
 PREFIX = """# Yet another raylib wrapper for Ruby
@@ -85,15 +86,38 @@ def sanitize(ctx):
 
 ####################################################################################################
 
-def generate_macrodefine(ctx, indent = ""):
+def generate_macrodefine(ctx, indent = "", json_schema=None):
+    json_defines = None
+    if json_schema:
+        json_defines = json_schema['defines']
+
     for macro_name, macro_value in ctx.decl_macros.items():
         if macro_value != None:
-            print(indent + "%s = %s" % (macro_name, macro_value[0]), file = sys.stdout)
+            json_define = [json_define for json_define in json_defines if json_define['name'] == macro_name][0]
+            description = json_define['description']
+            if description != "":
+                print(indent + "%s = %s # %s" % (macro_name, macro_value[0], description.strip()), file = sys.stdout)
+            else:
+                print(indent + "%s = %s" % (macro_name, macro_value[0]), file = sys.stdout)
 
-def generate_enum(ctx, indent = ""):
+def generate_enum(ctx, indent = "", json_schema=None):
+    json_enums = None
+    if json_schema:
+        json_enums = json_schema['enums']
+
     for enum_name, enum_value in ctx.decl_enums.items():
         for enum in enum_value:
-            print(indent + "%s = %s" % (enum[0], enum[1]), file = sys.stdout)
+            json_enum_value = None
+            for json_enum in json_enums:
+                json_enum_values = json_enum['values']
+                json_enum_value = [j for j in json_enum_values if j['name'] == enum[0]]
+                if json_enum_value:
+                    break
+            enum_value_description = json_enum_value[0]['description'] if json_enum_value != None else ""
+            if enum_value_description != "":
+                print(indent + "%s = %s # %s" % (enum[0], enum[1], enum_value_description.strip()), file = sys.stdout)
+            else:
+                print(indent + "%s = %s" % (enum[0], enum[1]), file = sys.stdout)
 
 def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_prefix != "":
@@ -201,7 +225,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     if function_postfix != "":
         print(function_postfix, file = sys.stdout)
 
-def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix=""):
+def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
 
     print(prefix, file = sys.stdout)
 
@@ -213,12 +237,12 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 
     # macro
     print(indent + "# Define/Macro\n", file = sys.stdout)
-    generate_macrodefine(ctx, indent)
+    generate_macrodefine(ctx, indent, json_schema)
     print("", file = sys.stdout)
 
     # enum
     print(indent + "# Enum\n", file = sys.stdout)
-    generate_enum(ctx, indent)
+    generate_enum(ctx, indent, json_schema)
     print("", file = sys.stdout)
 
     # typedef
