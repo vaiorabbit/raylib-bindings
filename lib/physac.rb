@@ -103,29 +103,29 @@ module Raylib
 
   def self.setup_physac_symbols(output_error = false)
     entries = [
-      [:InitPhysics, [], :void],
-      [:UpdatePhysics, [], :void],
-      [:ResetPhysics, [], :void],
-      [:ClosePhysics, [], :void],
-      [:SetPhysicsTimeStep, [:double], :void],
-      [:SetPhysicsGravity, [:float, :float], :void],
-      [:CreatePhysicsBodyCircle, [Vector2.by_value, :float, :float], :pointer],
-      [:CreatePhysicsBodyRectangle, [Vector2.by_value, :float, :float, :float], :pointer],
-      [:CreatePhysicsBodyPolygon, [Vector2.by_value, :float, :int, :float], :pointer],
-      [:DestroyPhysicsBody, [:pointer], :void],
-      [:PhysicsAddForce, [:pointer, Vector2.by_value], :void],
-      [:PhysicsAddTorque, [:pointer, :float], :void],
-      [:PhysicsShatter, [:pointer, Vector2.by_value, :float], :void],
-      [:SetPhysicsBodyRotation, [:pointer, :float], :void],
-      [:GetPhysicsBody, [:int], :pointer],
-      [:GetPhysicsBodiesCount, [], :int],
-      [:GetPhysicsShapeType, [:int], :int],
-      [:GetPhysicsShapeVerticesCount, [:int], :int],
-      [:GetPhysicsShapeVertex, [:pointer, :int], Vector2.by_value],
+      [:InitPhysics, :InitPhysics, [], :void],
+      [:UpdatePhysics, :UpdatePhysics, [], :void],
+      [:ResetPhysics, :ResetPhysics, [], :void],
+      [:ClosePhysics, :ClosePhysics, [], :void],
+      [:SetPhysicsTimeStep, :SetPhysicsTimeStep, [:double], :void],
+      [:SetPhysicsGravity, :SetPhysicsGravity, [:float, :float], :void],
+      [:CreatePhysicsBodyCircle, :CreatePhysicsBodyCircle, [Vector2.by_value, :float, :float], :pointer],
+      [:CreatePhysicsBodyRectangle, :CreatePhysicsBodyRectangle, [Vector2.by_value, :float, :float, :float], :pointer],
+      [:CreatePhysicsBodyPolygon, :CreatePhysicsBodyPolygon, [Vector2.by_value, :float, :int, :float], :pointer],
+      [:DestroyPhysicsBody, :DestroyPhysicsBody, [:pointer], :void],
+      [:PhysicsAddForce, :PhysicsAddForce, [:pointer, Vector2.by_value], :void],
+      [:PhysicsAddTorque, :PhysicsAddTorque, [:pointer, :float], :void],
+      [:PhysicsShatter, :PhysicsShatter, [:pointer, Vector2.by_value, :float], :void],
+      [:SetPhysicsBodyRotation, :SetPhysicsBodyRotation, [:pointer, :float], :void],
+      [:GetPhysicsBody, :GetPhysicsBody, [:int], :pointer],
+      [:GetPhysicsBodiesCount, :GetPhysicsBodiesCount, [], :int],
+      [:GetPhysicsShapeType, :GetPhysicsShapeType, [:int], :int],
+      [:GetPhysicsShapeVerticesCount, :GetPhysicsShapeVerticesCount, [:int], :int],
+      [:GetPhysicsShapeVertex, :GetPhysicsShapeVertex, [:pointer, :int], Vector2.by_value],
     ]
     entries.each do |entry|
       begin
-        attach_function entry[0], entry[0], entry[1], entry[2]
+        attach_function entry[0], entry[1], entry[2], entry[3]
       rescue FFI::NotFoundError => error
         $stderr.puts("[Warning] Failed to import #{entry[0]} (#{error}).") if output_error
       end

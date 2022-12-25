@@ -307,7 +307,8 @@ class FunctionInfo(object):
     """
 
     def __init__(self):
-        self.name = ""
+        self.original_name = ""
+        self.explicit_name = ""
         self.args = []
         self.retval = None
 
@@ -560,7 +561,8 @@ def collect_decl_function(ctx, cursor):
     ctx.push()
 
     func_info = FunctionInfo()
-    func_info.name = cursor.spelling
+    func_info.original_name = cursor.spelling
+    func_info.explicit_name = cursor.spelling
 
     retval_info = RetvalInfo()
     retval_info.type_name = cursor.result_type.spelling
@@ -585,7 +587,7 @@ def collect_decl_function(ctx, cursor):
         arg_info.type_kind = TypeKind.INVALID
         func_info.args.append(arg_info)
 
-    ctx.add_decl_function(func_info.name, func_info)
+    ctx.add_decl_function(func_info.original_name, func_info)
 
     ctx.pop()
     ctx.collection_mode = ParseContext.Decl_Unknown

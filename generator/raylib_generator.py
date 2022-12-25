@@ -141,8 +141,9 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
 
 
 class FunctionEntry:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, original_name, explicit_name):
+        self.original_name = original_name
+        self.explicit_name = explicit_name
         self.retval = None
         self.args = ""
 
@@ -151,7 +152,7 @@ def generate_function(ctx, indent = "", module_name = ""):
     for func_name, func_info in ctx.decl_functions.items():
         if func_info == None:
             continue
-        func_entry = FunctionEntry(func_name)
+        func_entry = FunctionEntry(func_info.original_name, func_info.explicit_name)
 
         # Arguments
         if len(func_info.args) > 0:
@@ -178,14 +179,14 @@ def generate_function(ctx, indent = "", module_name = ""):
     indent = "  "
     print(indent + "  entries = [", file = sys.stdout)
     for func_entry in func_entries:
-        entry_str = f':{func_entry.name}, [{func_entry.args}], {func_entry.retval}'
+        entry_str = f':{func_entry.explicit_name}, :{func_entry.original_name}, [{func_entry.args}], {func_entry.retval}'
         print(indent + f'    [{entry_str}],', file = sys.stdout)
     print(indent + "  ]", file = sys.stdout)
 
     print(indent +
       """  entries.each do |entry|
       begin
-        attach_function entry[0], entry[0], entry[1], entry[2]
+        attach_function entry[0], entry[1], entry[2], entry[3]
       rescue FFI::NotFoundError => error
         $stderr.puts("[Warning] Failed to import #{s}.") if output_error
       end""".format(s="{entry[0]} (#{error})"))
