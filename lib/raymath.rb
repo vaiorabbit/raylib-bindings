@@ -20,6 +20,7 @@ module Raylib
 
   # Struct
 
+  # NOTE: Helper types to be used instead of array return types for *ToFloat functions
   class Float3 < FFI::Struct
     layout(
       :v, [:float, 3],

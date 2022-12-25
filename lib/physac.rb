@@ -32,6 +32,7 @@ module Raylib
 
   # Struct
 
+  # Matrix2x2 type (used for polygon shape rotation matrix)
   class Matrix2x2 < FFI::Struct
     layout(
       :m00, :float,
@@ -43,58 +44,58 @@ module Raylib
 
   class PhysicsVertexData < FFI::Struct
     layout(
-      :vertexCount, :uint,
-      :positions, [Vector2, 24],
-      :normals, [Vector2, 24],
+      :vertexCount, :uint, # Vertex count (positions and normals)
+      :positions, [Vector2, 24], # Vertex positions vectors
+      :normals, [Vector2, 24], # Vertex normals vectors
     )
   end
 
   class PhysicsShape < FFI::Struct
     layout(
-      :type, :int,
-      :body, :pointer,
-      :vertexData, PhysicsVertexData,
-      :radius, :float,
-      :transform, Matrix2x2,
+      :type, :int, # Shape type (circle or polygon)
+      :body, :pointer, # Shape physics body data pointer
+      :vertexData, PhysicsVertexData, # Shape vertices data (used for polygon shapes)
+      :radius, :float, # Shape radius (used for circle shapes)
+      :transform, Matrix2x2, # Vertices transform matrix 2x2
     )
   end
 
   class PhysicsBodyData < FFI::Struct
     layout(
-      :id, :uint,
-      :enabled, :bool,
-      :position, Vector2,
-      :velocity, Vector2,
-      :force, Vector2,
-      :angularVelocity, :float,
-      :torque, :float,
-      :orient, :float,
-      :inertia, :float,
-      :inverseInertia, :float,
-      :mass, :float,
-      :inverseMass, :float,
-      :staticFriction, :float,
-      :dynamicFriction, :float,
-      :restitution, :float,
-      :useGravity, :bool,
-      :isGrounded, :bool,
-      :freezeOrient, :bool,
-      :shape, PhysicsShape,
+      :id, :uint, # Unique identifier
+      :enabled, :bool, # Enabled dynamics state (collisions are calculated anyway)
+      :position, Vector2, # Physics body shape pivot
+      :velocity, Vector2, # Current linear velocity applied to position
+      :force, Vector2, # Current linear force (reset to 0 every step)
+      :angularVelocity, :float, # Current angular velocity applied to orient
+      :torque, :float, # Current angular force (reset to 0 every step)
+      :orient, :float, # Rotation in radians
+      :inertia, :float, # Moment of inertia
+      :inverseInertia, :float, # Inverse value of inertia
+      :mass, :float, # Physics body mass
+      :inverseMass, :float, # Inverse value of mass
+      :staticFriction, :float, # Friction when the body has not movement (0 to 1)
+      :dynamicFriction, :float, # Friction when the body has movement (0 to 1)
+      :restitution, :float, # Restitution coefficient of the body (0 to 1)
+      :useGravity, :bool, # Apply gravity force to dynamics
+      :isGrounded, :bool, # Physics grounded on other body state
+      :freezeOrient, :bool, # Physics rotation constraint
+      :shape, PhysicsShape, # Physics body shape information (type, radius, vertices, transform)
     )
   end
 
   class PhysicsManifoldData < FFI::Struct
     layout(
-      :id, :uint,
-      :bodyA, :pointer,
-      :bodyB, :pointer,
-      :penetration, :float,
-      :normal, Vector2,
-      :contacts, [Vector2, 2],
-      :contactsCount, :uint,
-      :restitution, :float,
-      :dynamicFriction, :float,
-      :staticFriction, :float,
+      :id, :uint, # Unique identifier
+      :bodyA, :pointer, # Manifold first physics body reference
+      :bodyB, :pointer, # Manifold second physics body reference
+      :penetration, :float, # Depth of penetration from collision
+      :normal, Vector2, # Normal direction vector from 'a' to 'b'
+      :contacts, [Vector2, 2], # Points of contact during collision
+      :contactsCount, :uint, # Current collision number of contacts
+      :restitution, :float, # Mixed restitution during collision
+      :dynamicFriction, :float, # Mixed dynamic friction during collision
+      :staticFriction, :float, # Mixed static friction during collision
     )
   end
 

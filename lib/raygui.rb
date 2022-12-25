@@ -366,6 +366,7 @@ module Raylib
 
   # Struct
 
+  # Style property
   class GuiStyleProp < FFI::Struct
     layout(
       :controlId, :ushort,

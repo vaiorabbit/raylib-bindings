@@ -208,35 +208,38 @@ module Raylib
 
   # Struct
 
+  # Dynamic vertex buffers (position + texcoords + colors + indices arrays)
   class RlVertexBuffer < FFI::Struct
     layout(
-      :elementCount, :int,
-      :vertices, :pointer,
-      :texcoords, :pointer,
-      :colors, :pointer,
-      :indices, :pointer,
-      :vaoId, :uint,
-      :vboId, [:uint, 4],
+      :elementCount, :int, # Number of elements in the buffer (QUADS)
+      :vertices, :pointer, # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+      :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+      :colors, :pointer, # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+      :indices, :pointer, # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+      :vaoId, :uint, # OpenGL Vertex Array Object id
+      :vboId, [:uint, 4], # OpenGL Vertex Buffer Objects id (4 types of vertex data)
     )
   end
 
+  # of those state-change happens (this is done in core module)
   class RlDrawCall < FFI::Struct
     layout(
-      :mode, :int,
-      :vertexCount, :int,
-      :vertexAlignment, :int,
-      :textureId, :uint,
+      :mode, :int, # Drawing mode: LINES, TRIANGLES, QUADS
+      :vertexCount, :int, # Number of vertex of the draw
+      :vertexAlignment, :int, # Number of vertex required for index alignment (LINES, TRIANGLES)
+      :textureId, :uint, # Texture id to be used on the draw -> Use to create new draw call if changes
     )
   end
 
+  # rlRenderBatch type
   class RlRenderBatch < FFI::Struct
     layout(
-      :bufferCount, :int,
-      :currentBuffer, :int,
-      :vertexBuffer, :pointer,
-      :draws, :pointer,
-      :drawCounter, :int,
-      :currentDepth, :float,
+      :bufferCount, :int, # Number of vertex buffers (multi-buffering support)
+      :currentBuffer, :int, # Current buffer tracking in case of multi-buffering
+      :vertexBuffer, :pointer, # Dynamic buffer(s) for vertex data
+      :draws, :pointer, # Draw calls array, depends on textureId
+      :drawCounter, :int, # Draw calls counter
+      :currentDepth, :float, # Current depth value for next draw
     )
   end
 

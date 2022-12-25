@@ -343,331 +343,363 @@ module Raylib
 
   # Struct
 
+  # Vector2, 2 components
   class Vector2 < FFI::Struct
     layout(
-      :x, :float,
-      :y, :float,
+      :x, :float, # Vector x component
+      :y, :float, # Vector y component
     )
   end
 
+  # Vector3, 3 components
   class Vector3 < FFI::Struct
     layout(
-      :x, :float,
-      :y, :float,
-      :z, :float,
+      :x, :float, # Vector x component
+      :y, :float, # Vector y component
+      :z, :float, # Vector z component
     )
   end
 
+  # Vector4, 4 components
   class Vector4 < FFI::Struct
     layout(
-      :x, :float,
-      :y, :float,
-      :z, :float,
-      :w, :float,
+      :x, :float, # Vector x component
+      :y, :float, # Vector y component
+      :z, :float, # Vector z component
+      :w, :float, # Vector w component
     )
   end
 
   Quaternion = Vector4
 
+  # Matrix, 4x4 components, column major, OpenGL style, right handed
   class Matrix < FFI::Struct
     layout(
-      :m0, :float,
-      :m4, :float,
-      :m8, :float,
-      :m12, :float,
-      :m1, :float,
-      :m5, :float,
-      :m9, :float,
-      :m13, :float,
-      :m2, :float,
-      :m6, :float,
-      :m10, :float,
-      :m14, :float,
-      :m3, :float,
-      :m7, :float,
-      :m11, :float,
-      :m15, :float,
+      :m0, :float, # Matrix first row (4 components)
+      :m4, :float, # Matrix first row (4 components)
+      :m8, :float, # Matrix first row (4 components)
+      :m12, :float, # Matrix first row (4 components)
+      :m1, :float, # Matrix second row (4 components)
+      :m5, :float, # Matrix second row (4 components)
+      :m9, :float, # Matrix second row (4 components)
+      :m13, :float, # Matrix second row (4 components)
+      :m2, :float, # Matrix third row (4 components)
+      :m6, :float, # Matrix third row (4 components)
+      :m10, :float, # Matrix third row (4 components)
+      :m14, :float, # Matrix third row (4 components)
+      :m3, :float, # Matrix fourth row (4 components)
+      :m7, :float, # Matrix fourth row (4 components)
+      :m11, :float, # Matrix fourth row (4 components)
+      :m15, :float, # Matrix fourth row (4 components)
     )
   end
 
+  # Color, 4 components, R8G8B8A8 (32bit)
   class Color < FFI::Struct
     layout(
-      :r, :uchar,
-      :g, :uchar,
-      :b, :uchar,
-      :a, :uchar,
+      :r, :uchar, # Color red value
+      :g, :uchar, # Color green value
+      :b, :uchar, # Color blue value
+      :a, :uchar, # Color alpha value
     )
   end
 
+  # Rectangle, 4 components
   class Rectangle < FFI::Struct
     layout(
-      :x, :float,
-      :y, :float,
-      :width, :float,
-      :height, :float,
+      :x, :float, # Rectangle top-left corner position x
+      :y, :float, # Rectangle top-left corner position y
+      :width, :float, # Rectangle width
+      :height, :float, # Rectangle height
     )
   end
 
+  # Image, pixel data stored in CPU memory (RAM)
   class Image < FFI::Struct
     layout(
-      :data, :pointer,
-      :width, :int,
-      :height, :int,
-      :mipmaps, :int,
-      :format, :int,
+      :data, :pointer, # Image raw data
+      :width, :int, # Image base width
+      :height, :int, # Image base height
+      :mipmaps, :int, # Mipmap levels, 1 by default
+      :format, :int, # Data format (PixelFormat type)
     )
   end
 
+  # Texture, tex data stored in GPU memory (VRAM)
   class Texture < FFI::Struct
     layout(
-      :id, :uint,
-      :width, :int,
-      :height, :int,
-      :mipmaps, :int,
-      :format, :int,
+      :id, :uint, # OpenGL texture id
+      :width, :int, # Texture base width
+      :height, :int, # Texture base height
+      :mipmaps, :int, # Mipmap levels, 1 by default
+      :format, :int, # Data format (PixelFormat type)
     )
   end
 
   Texture2D = Texture
   TextureCubemap = Texture
 
+  # RenderTexture, fbo for texture rendering
   class RenderTexture < FFI::Struct
     layout(
-      :id, :uint,
-      :texture, Texture,
-      :depth, Texture,
+      :id, :uint, # OpenGL framebuffer object id
+      :texture, Texture, # Color buffer attachment texture
+      :depth, Texture, # Depth buffer attachment texture
     )
   end
 
   RenderTexture2D = RenderTexture
 
+  # NPatchInfo, n-patch layout info
   class NPatchInfo < FFI::Struct
     layout(
-      :source, Rectangle,
-      :left, :int,
-      :top, :int,
-      :right, :int,
-      :bottom, :int,
-      :layout, :int,
+      :source, Rectangle, # Texture source rectangle
+      :left, :int, # Left border offset
+      :top, :int, # Top border offset
+      :right, :int, # Right border offset
+      :bottom, :int, # Bottom border offset
+      :layout, :int, # Layout of the n-patch: 3x3, 1x3 or 3x1
     )
   end
 
+  # GlyphInfo, font characters glyphs info
   class GlyphInfo < FFI::Struct
     layout(
-      :value, :int,
-      :offsetX, :int,
-      :offsetY, :int,
-      :advanceX, :int,
-      :image, Image,
+      :value, :int, # Character value (Unicode)
+      :offsetX, :int, # Character offset X when drawing
+      :offsetY, :int, # Character offset Y when drawing
+      :advanceX, :int, # Character advance position X
+      :image, Image, # Character image data
     )
   end
 
+  # Font, font texture and GlyphInfo array data
   class Font < FFI::Struct
     layout(
-      :baseSize, :int,
-      :glyphCount, :int,
-      :glyphPadding, :int,
-      :texture, Texture2D,
-      :recs, :pointer,
-      :glyphs, :pointer,
+      :baseSize, :int, # Base size (default chars height)
+      :glyphCount, :int, # Number of glyph characters
+      :glyphPadding, :int, # Padding around the glyph characters
+      :texture, Texture2D, # Texture atlas containing the glyphs
+      :recs, :pointer, # Rectangles in texture for the glyphs
+      :glyphs, :pointer, # Glyphs info data
     )
   end
 
+  # Camera, defines position/orientation in 3d space
   class Camera3D < FFI::Struct
     layout(
-      :position, Vector3,
-      :target, Vector3,
-      :up, Vector3,
-      :fovy, :float,
-      :projection, :int,
+      :position, Vector3, # Camera position
+      :target, Vector3, # Camera target it looks-at
+      :up, Vector3, # Camera up vector (rotation over its axis)
+      :fovy, :float, # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+      :projection, :int, # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
     )
   end
 
   Camera = Camera3D
 
+  # Camera2D, defines position/orientation in 2d space
   class Camera2D < FFI::Struct
     layout(
-      :offset, Vector2,
-      :target, Vector2,
-      :rotation, :float,
-      :zoom, :float,
+      :offset, Vector2, # Camera offset (displacement from target)
+      :target, Vector2, # Camera target (rotation and zoom origin)
+      :rotation, :float, # Camera rotation in degrees
+      :zoom, :float, # Camera zoom (scaling), should be 1.0f by default
     )
   end
 
+  # Mesh, vertex data and vao/vbo
   class Mesh < FFI::Struct
     layout(
-      :vertexCount, :int,
-      :triangleCount, :int,
-      :vertices, :pointer,
-      :texcoords, :pointer,
-      :texcoords2, :pointer,
-      :normals, :pointer,
-      :tangents, :pointer,
-      :colors, :pointer,
-      :indices, :pointer,
-      :animVertices, :pointer,
-      :animNormals, :pointer,
-      :boneIds, :pointer,
-      :boneWeights, :pointer,
-      :vaoId, :uint,
-      :vboId, :pointer,
+      :vertexCount, :int, # Number of vertices stored in arrays
+      :triangleCount, :int, # Number of triangles stored (indexed or not)
+      :vertices, :pointer, # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+      :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+      :texcoords2, :pointer, # Vertex texture second coordinates (UV - 2 components per vertex) (shader-location = 5)
+      :normals, :pointer, # Vertex normals (XYZ - 3 components per vertex) (shader-location = 2)
+      :tangents, :pointer, # Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4)
+      :colors, :pointer, # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+      :indices, :pointer, # Vertex indices (in case vertex data comes indexed)
+      :animVertices, :pointer, # Animated vertex positions (after bones transformations)
+      :animNormals, :pointer, # Animated normals (after bones transformations)
+      :boneIds, :pointer, # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning)
+      :boneWeights, :pointer, # Vertex bone weight, up to 4 bones influence by vertex (skinning)
+      :vaoId, :uint, # OpenGL Vertex Array Object id
+      :vboId, :pointer, # OpenGL Vertex Buffer Objects id (default vertex data)
     )
   end
 
+  # Shader
   class Shader < FFI::Struct
     layout(
-      :id, :uint,
-      :locs, :pointer,
+      :id, :uint, # Shader program id
+      :locs, :pointer, # Shader locations array (RL_MAX_SHADER_LOCATIONS)
     )
   end
 
+  # MaterialMap
   class MaterialMap < FFI::Struct
     layout(
-      :texture, Texture2D,
-      :color, Color,
-      :value, :float,
+      :texture, Texture2D, # Material map texture
+      :color, Color, # Material map color
+      :value, :float, # Material map value
     )
   end
 
+  # Material, includes shader and maps
   class Material < FFI::Struct
     layout(
-      :shader, Shader,
-      :maps, :pointer,
-      :params, [:float, 4],
+      :shader, Shader, # Material shader
+      :maps, :pointer, # Material maps array (MAX_MATERIAL_MAPS)
+      :params, [:float, 4], # Material generic parameters (if required)
     )
   end
 
+  # Transform, vertex transformation data
   class Transform < FFI::Struct
     layout(
-      :translation, Vector3,
-      :rotation, Quaternion,
-      :scale, Vector3,
+      :translation, Vector3, # Translation
+      :rotation, Quaternion, # Rotation
+      :scale, Vector3, # Scale
     )
   end
 
+  # Bone, skeletal animation bone
   class BoneInfo < FFI::Struct
     layout(
-      :name, [:char, 32],
-      :parent, :int,
+      :name, [:char, 32], # Bone name
+      :parent, :int, # Bone parent
     )
   end
 
+  # Model, meshes, materials and animation data
   class Model < FFI::Struct
     layout(
-      :transform, Matrix,
-      :meshCount, :int,
-      :materialCount, :int,
-      :meshes, :pointer,
-      :materials, :pointer,
-      :meshMaterial, :pointer,
-      :boneCount, :int,
-      :bones, :pointer,
-      :bindPose, :pointer,
+      :transform, Matrix, # Local transform matrix
+      :meshCount, :int, # Number of meshes
+      :materialCount, :int, # Number of materials
+      :meshes, :pointer, # Meshes array
+      :materials, :pointer, # Materials array
+      :meshMaterial, :pointer, # Mesh material number
+      :boneCount, :int, # Number of bones
+      :bones, :pointer, # Bones information (skeleton)
+      :bindPose, :pointer, # Bones base transformation (pose)
     )
   end
 
+  # ModelAnimation
   class ModelAnimation < FFI::Struct
     layout(
-      :boneCount, :int,
-      :frameCount, :int,
-      :bones, :pointer,
-      :framePoses, :pointer,
+      :boneCount, :int, # Number of bones
+      :frameCount, :int, # Number of animation frames
+      :bones, :pointer, # Bones information (skeleton)
+      :framePoses, :pointer, # Poses array by frame
     )
   end
 
+  # Ray, ray for raycasting
   class Ray < FFI::Struct
     layout(
-      :position, Vector3,
-      :direction, Vector3,
+      :position, Vector3, # Ray position (origin)
+      :direction, Vector3, # Ray direction
     )
   end
 
+  # RayCollision, ray hit information
   class RayCollision < FFI::Struct
     layout(
-      :hit, :bool,
-      :distance, :float,
-      :point, Vector3,
-      :normal, Vector3,
+      :hit, :bool, # Did the ray hit something?
+      :distance, :float, # Distance to nearest hit
+      :point, Vector3, # Point of nearest hit
+      :normal, Vector3, # Surface normal of hit
     )
   end
 
+  # BoundingBox
   class BoundingBox < FFI::Struct
     layout(
-      :min, Vector3,
-      :max, Vector3,
+      :min, Vector3, # Minimum vertex box-corner
+      :max, Vector3, # Maximum vertex box-corner
     )
   end
 
+  # Wave, audio wave data
   class Wave < FFI::Struct
     layout(
-      :frameCount, :uint,
-      :sampleRate, :uint,
-      :sampleSize, :uint,
-      :channels, :uint,
-      :data, :pointer,
+      :frameCount, :uint, # Total number of frames (considering channels)
+      :sampleRate, :uint, # Frequency (samples per second)
+      :sampleSize, :uint, # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+      :channels, :uint, # Number of channels (1-mono, 2-stereo, ...)
+      :data, :pointer, # Buffer data pointer
     )
   end
 
+  # AudioStream, custom audio stream
   class AudioStream < FFI::Struct
     layout(
-      :buffer, :pointer,
-      :processor, :pointer,
-      :sampleRate, :uint,
-      :sampleSize, :uint,
-      :channels, :uint,
+      :buffer, :pointer, # Pointer to internal data used by the audio system
+      :processor, :pointer, # Pointer to internal data processor, useful for audio effects
+      :sampleRate, :uint, # Frequency (samples per second)
+      :sampleSize, :uint, # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+      :channels, :uint, # Number of channels (1-mono, 2-stereo, ...)
     )
   end
 
+  # Sound
   class Sound < FFI::Struct
     layout(
-      :stream, AudioStream,
-      :frameCount, :uint,
+      :stream, AudioStream, # Audio stream
+      :frameCount, :uint, # Total number of frames (considering channels)
     )
   end
 
+  # Music, audio stream, anything longer than ~10 seconds should be streamed
   class Music < FFI::Struct
     layout(
-      :stream, AudioStream,
-      :frameCount, :uint,
-      :looping, :bool,
-      :ctxType, :int,
-      :ctxData, :pointer,
+      :stream, AudioStream, # Audio stream
+      :frameCount, :uint, # Total number of frames (considering channels)
+      :looping, :bool, # Music looping enable
+      :ctxType, :int, # Type of music context (audio filetype)
+      :ctxData, :pointer, # Audio context data, depends on type
     )
   end
 
+  # VrDeviceInfo, Head-Mounted-Display device parameters
   class VrDeviceInfo < FFI::Struct
     layout(
-      :hResolution, :int,
-      :vResolution, :int,
-      :hScreenSize, :float,
-      :vScreenSize, :float,
-      :vScreenCenter, :float,
-      :eyeToScreenDistance, :float,
-      :lensSeparationDistance, :float,
-      :interpupillaryDistance, :float,
-      :lensDistortionValues, [:float, 4],
-      :chromaAbCorrection, [:float, 4],
+      :hResolution, :int, # Horizontal resolution in pixels
+      :vResolution, :int, # Vertical resolution in pixels
+      :hScreenSize, :float, # Horizontal size in meters
+      :vScreenSize, :float, # Vertical size in meters
+      :vScreenCenter, :float, # Screen center in meters
+      :eyeToScreenDistance, :float, # Distance between eye and display in meters
+      :lensSeparationDistance, :float, # Lens separation distance in meters
+      :interpupillaryDistance, :float, # IPD (distance between pupils) in meters
+      :lensDistortionValues, [:float, 4], # Lens distortion constant parameters
+      :chromaAbCorrection, [:float, 4], # Chromatic aberration correction parameters
     )
   end
 
+  # VrStereoConfig, VR stereo rendering configuration for simulator
   class VrStereoConfig < FFI::Struct
     layout(
-      :projection, [Matrix, 2],
-      :viewOffset, [Matrix, 2],
-      :leftLensCenter, [:float, 2],
-      :rightLensCenter, [:float, 2],
-      :leftScreenCenter, [:float, 2],
-      :rightScreenCenter, [:float, 2],
-      :scale, [:float, 2],
-      :scaleIn, [:float, 2],
+      :projection, [Matrix, 2], # VR projection matrices (per eye)
+      :viewOffset, [Matrix, 2], # VR view offset matrices (per eye)
+      :leftLensCenter, [:float, 2], # VR left lens center
+      :rightLensCenter, [:float, 2], # VR right lens center
+      :leftScreenCenter, [:float, 2], # VR left screen center
+      :rightScreenCenter, [:float, 2], # VR right screen center
+      :scale, [:float, 2], # VR distortion scale
+      :scaleIn, [:float, 2], # VR distortion scale in
     )
   end
 
+  # File path list
   class FilePathList < FFI::Struct
     layout(
-      :capacity, :uint,
-      :count, :uint,
-      :paths, :pointer,
+      :capacity, :uint, # Filepaths max entries
+      :count, :uint, # Filepaths entries count
+      :paths, :pointer, # Filepaths entries
     )
   end
 

@@ -136,21 +136,35 @@ def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_postfix != "":
         print(typedef_postfix, file = sys.stdout)
 
-def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None):
+def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    json_structs = None
+    if json_schema:
+        json_structs = json_schema['structs']
+
     if struct_prefix != "":
         print(struct_prefix, file = sys.stdout)
     for struct_name, struct_info in ctx.decl_structs.items():
         if struct_info == None:
             continue
+
+        json_struct = [j for j in json_structs if j['name'] == struct_name][0]
+        struct_description = json_struct['description']
+
         # Name of struct/class must be start with capital letter
+        if struct_description != "":
+            print(indent + "# %s" % (struct_description), file = sys.stdout)
         struct_name = struct_name[0].upper() + struct_name[1:]
         print(indent + "class %s < %s" % (struct_name, struct_info.kind), file = sys.stdout)
         print(indent + "  layout(", file = sys.stdout)
         for field in struct_info.fields:
+            json_field = [j for j in json_struct['fields'] if j['name'] == field.element_name]
+            member_description = json_field[0]['description'] if json_field else ""
+            if member_description != "":
+                member_description = " # " + member_description
             if field.element_count <= 1:
-                print(indent + "    :%s, %s," % (field.element_name, field.type_kind), file = sys.stdout)
+                print(indent + "    :%s, %s,%s" % (field.element_name, field.type_kind, member_description), file = sys.stdout)
             else:
-                print(indent + "    :%s, [%s, %s]," % (field.element_name, field.type_kind, field.element_count), file = sys.stdout)
+                print(indent + "    :%s, [%s, %s],%s" % (field.element_name, field.type_kind, field.element_count, member_description), file = sys.stdout)
         print(indent + "  )", file = sys.stdout)
         print(indent + "end\n", file = sys.stdout)
         if struct_alias:
@@ -252,7 +266,7 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 
     # struct/union
     print(indent + "# Struct\n", file = sys.stdout)
-    generate_structunion(ctx, indent, struct_prefix, struct_postfix, struct_alias)
+    generate_structunion(ctx, indent, struct_prefix, struct_postfix, struct_alias, json_schema)
     print("", file = sys.stdout)
 
     # function
