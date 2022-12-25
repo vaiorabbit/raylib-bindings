@@ -8,12 +8,10 @@ require 'ffi'
 
 module Raylib
   extend FFI::Library
+
   # Define/Macro
 
   EPSILON = 0.000001
-
-  # Enum
-
 
   # Typedef
 
@@ -38,116 +36,668 @@ module Raylib
 
   def self.setup_raymath_symbols(output_error = false)
     entries = [
+
+      # Clamp : 
+      # @param value [float]
+      # @param min [float]
+      # @param max [float]
+      # @return [float]
       [:Clamp, :Clamp, [:float, :float, :float], :float],
+
+      # Lerp : 
+      # @param start [float]
+      # @param end [float]
+      # @param amount [float]
+      # @return [float]
       [:Lerp, :Lerp, [:float, :float, :float], :float],
+
+      # Normalize : 
+      # @param value [float]
+      # @param start [float]
+      # @param end [float]
+      # @return [float]
       [:Normalize, :Normalize, [:float, :float, :float], :float],
+
+      # Remap : 
+      # @param value [float]
+      # @param inputStart [float]
+      # @param inputEnd [float]
+      # @param outputStart [float]
+      # @param outputEnd [float]
+      # @return [float]
       [:Remap, :Remap, [:float, :float, :float, :float, :float], :float],
+
+      # Wrap : 
+      # @param value [float]
+      # @param min [float]
+      # @param max [float]
+      # @return [float]
       [:Wrap, :Wrap, [:float, :float, :float], :float],
+
+      # FloatEquals : 
+      # @param x [float]
+      # @param y [float]
+      # @return [int]
       [:FloatEquals, :FloatEquals, [:float, :float], :int],
+
+      # Vector2Zero : 
+      # @return [Vector2]
       [:Vector2Zero, :Vector2Zero, [], Vector2.by_value],
+
+      # Vector2One : 
+      # @return [Vector2]
       [:Vector2One, :Vector2One, [], Vector2.by_value],
+
+      # Vector2Add : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [Vector2]
       [:Vector2Add, :Vector2Add, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2AddValue : 
+      # @param v [Vector2]
+      # @param add [float]
+      # @return [Vector2]
       [:Vector2AddValue, :Vector2AddValue, [Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2Subtract : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [Vector2]
       [:Vector2Subtract, :Vector2Subtract, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2SubtractValue : 
+      # @param v [Vector2]
+      # @param sub [float]
+      # @return [Vector2]
       [:Vector2SubtractValue, :Vector2SubtractValue, [Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2Length : 
+      # @param v [Vector2]
+      # @return [float]
       [:Vector2Length, :Vector2Length, [Vector2.by_value], :float],
+
+      # Vector2LengthSqr : 
+      # @param v [Vector2]
+      # @return [float]
       [:Vector2LengthSqr, :Vector2LengthSqr, [Vector2.by_value], :float],
+
+      # Vector2DotProduct : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [float]
       [:Vector2DotProduct, :Vector2DotProduct, [Vector2.by_value, Vector2.by_value], :float],
+
+      # Vector2Distance : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [float]
       [:Vector2Distance, :Vector2Distance, [Vector2.by_value, Vector2.by_value], :float],
+
+      # Vector2DistanceSqr : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [float]
       [:Vector2DistanceSqr, :Vector2DistanceSqr, [Vector2.by_value, Vector2.by_value], :float],
+
+      # Vector2Angle : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [float]
       [:Vector2Angle, :Vector2Angle, [Vector2.by_value, Vector2.by_value], :float],
+
+      # Vector2Scale : 
+      # @param v [Vector2]
+      # @param scale [float]
+      # @return [Vector2]
       [:Vector2Scale, :Vector2Scale, [Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2Multiply : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [Vector2]
       [:Vector2Multiply, :Vector2Multiply, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2Negate : 
+      # @param v [Vector2]
+      # @return [Vector2]
       [:Vector2Negate, :Vector2Negate, [Vector2.by_value], Vector2.by_value],
+
+      # Vector2Divide : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @return [Vector2]
       [:Vector2Divide, :Vector2Divide, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2Normalize : 
+      # @param v [Vector2]
+      # @return [Vector2]
       [:Vector2Normalize, :Vector2Normalize, [Vector2.by_value], Vector2.by_value],
+
+      # Vector2Transform : 
+      # @param v [Vector2]
+      # @param mat [Matrix]
+      # @return [Vector2]
       [:Vector2Transform, :Vector2Transform, [Vector2.by_value, Matrix.by_value], Vector2.by_value],
+
+      # Vector2Lerp : 
+      # @param v1 [Vector2]
+      # @param v2 [Vector2]
+      # @param amount [float]
+      # @return [Vector2]
       [:Vector2Lerp, :Vector2Lerp, [Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2Reflect : 
+      # @param v [Vector2]
+      # @param normal [Vector2]
+      # @return [Vector2]
       [:Vector2Reflect, :Vector2Reflect, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2Rotate : 
+      # @param v [Vector2]
+      # @param angle [float]
+      # @return [Vector2]
       [:Vector2Rotate, :Vector2Rotate, [Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2MoveTowards : 
+      # @param v [Vector2]
+      # @param target [Vector2]
+      # @param maxDistance [float]
+      # @return [Vector2]
       [:Vector2MoveTowards, :Vector2MoveTowards, [Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # Vector2Invert : 
+      # @param v [Vector2]
+      # @return [Vector2]
       [:Vector2Invert, :Vector2Invert, [Vector2.by_value], Vector2.by_value],
+
+      # Vector2Clamp : 
+      # @param v [Vector2]
+      # @param min [Vector2]
+      # @param max [Vector2]
+      # @return [Vector2]
       [:Vector2Clamp, :Vector2Clamp, [Vector2.by_value, Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # Vector2ClampValue : 
+      # @param v [Vector2]
+      # @param min [float]
+      # @param max [float]
+      # @return [Vector2]
       [:Vector2ClampValue, :Vector2ClampValue, [Vector2.by_value, :float, :float], Vector2.by_value],
+
+      # Vector2Equals : 
+      # @param p [Vector2]
+      # @param q [Vector2]
+      # @return [int]
       [:Vector2Equals, :Vector2Equals, [Vector2.by_value, Vector2.by_value], :int],
+
+      # Vector3Zero : 
+      # @return [Vector3]
       [:Vector3Zero, :Vector3Zero, [], Vector3.by_value],
+
+      # Vector3One : 
+      # @return [Vector3]
       [:Vector3One, :Vector3One, [], Vector3.by_value],
+
+      # Vector3Add : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Add, :Vector3Add, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3AddValue : 
+      # @param v [Vector3]
+      # @param add [float]
+      # @return [Vector3]
       [:Vector3AddValue, :Vector3AddValue, [Vector3.by_value, :float], Vector3.by_value],
+
+      # Vector3Subtract : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Subtract, :Vector3Subtract, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3SubtractValue : 
+      # @param v [Vector3]
+      # @param sub [float]
+      # @return [Vector3]
       [:Vector3SubtractValue, :Vector3SubtractValue, [Vector3.by_value, :float], Vector3.by_value],
+
+      # Vector3Scale : 
+      # @param v [Vector3]
+      # @param scalar [float]
+      # @return [Vector3]
       [:Vector3Scale, :Vector3Scale, [Vector3.by_value, :float], Vector3.by_value],
+
+      # Vector3Multiply : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Multiply, :Vector3Multiply, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3CrossProduct : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3CrossProduct, :Vector3CrossProduct, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Perpendicular : 
+      # @param v [Vector3]
+      # @return [Vector3]
       [:Vector3Perpendicular, :Vector3Perpendicular, [Vector3.by_value], Vector3.by_value],
+
+      # Vector3Length : 
+      # @param v [const Vector3]
+      # @return [float]
       [:Vector3Length, :Vector3Length, [Vector3.by_value], :float],
+
+      # Vector3LengthSqr : 
+      # @param v [const Vector3]
+      # @return [float]
       [:Vector3LengthSqr, :Vector3LengthSqr, [Vector3.by_value], :float],
+
+      # Vector3DotProduct : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [float]
       [:Vector3DotProduct, :Vector3DotProduct, [Vector3.by_value, Vector3.by_value], :float],
+
+      # Vector3Distance : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [float]
       [:Vector3Distance, :Vector3Distance, [Vector3.by_value, Vector3.by_value], :float],
+
+      # Vector3DistanceSqr : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [float]
       [:Vector3DistanceSqr, :Vector3DistanceSqr, [Vector3.by_value, Vector3.by_value], :float],
+
+      # Vector3Angle : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [float]
       [:Vector3Angle, :Vector3Angle, [Vector3.by_value, Vector3.by_value], :float],
+
+      # Vector3Negate : 
+      # @param v [Vector3]
+      # @return [Vector3]
       [:Vector3Negate, :Vector3Negate, [Vector3.by_value], Vector3.by_value],
+
+      # Vector3Divide : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Divide, :Vector3Divide, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Normalize : 
+      # @param v [Vector3]
+      # @return [Vector3]
       [:Vector3Normalize, :Vector3Normalize, [Vector3.by_value], Vector3.by_value],
+
+      # Vector3OrthoNormalize : 
+      # @param v1 [Vector3 *]
+      # @param v2 [Vector3 *]
+      # @return [void]
       [:Vector3OrthoNormalize, :Vector3OrthoNormalize, [:pointer, :pointer], :void],
+
+      # Vector3Transform : 
+      # @param v [Vector3]
+      # @param mat [Matrix]
+      # @return [Vector3]
       [:Vector3Transform, :Vector3Transform, [Vector3.by_value, Matrix.by_value], Vector3.by_value],
+
+      # Vector3RotateByQuaternion : 
+      # @param v [Vector3]
+      # @param q [Quaternion]
+      # @return [Vector3]
       [:Vector3RotateByQuaternion, :Vector3RotateByQuaternion, [Vector3.by_value, Quaternion.by_value], Vector3.by_value],
+
+      # Vector3RotateByAxisAngle : 
+      # @param v [Vector3]
+      # @param axis [Vector3]
+      # @param angle [float]
+      # @return [Vector3]
       [:Vector3RotateByAxisAngle, :Vector3RotateByAxisAngle, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
+      # Vector3Lerp : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @param amount [float]
+      # @return [Vector3]
       [:Vector3Lerp, :Vector3Lerp, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
+      # Vector3Reflect : 
+      # @param v [Vector3]
+      # @param normal [Vector3]
+      # @return [Vector3]
       [:Vector3Reflect, :Vector3Reflect, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Min : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Min, :Vector3Min, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Max : 
+      # @param v1 [Vector3]
+      # @param v2 [Vector3]
+      # @return [Vector3]
       [:Vector3Max, :Vector3Max, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Barycenter : 
+      # @param p [Vector3]
+      # @param a [Vector3]
+      # @param b [Vector3]
+      # @param c [Vector3]
+      # @return [Vector3]
       [:Vector3Barycenter, :Vector3Barycenter, [Vector3.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3Unproject : 
+      # @param source [Vector3]
+      # @param projection [Matrix]
+      # @param view [Matrix]
+      # @return [Vector3]
       [:Vector3Unproject, :Vector3Unproject, [Vector3.by_value, Matrix.by_value, Matrix.by_value], Vector3.by_value],
+
+      # Vector3ToFloatV : 
+      # @param v [Vector3]
+      # @return [float3]
       [:Vector3ToFloatV, :Vector3ToFloatV, [Vector3.by_value], Float3.by_value],
+
+      # Vector3Invert : 
+      # @param v [Vector3]
+      # @return [Vector3]
       [:Vector3Invert, :Vector3Invert, [Vector3.by_value], Vector3.by_value],
+
+      # Vector3Clamp : 
+      # @param v [Vector3]
+      # @param min [Vector3]
+      # @param max [Vector3]
+      # @return [Vector3]
       [:Vector3Clamp, :Vector3Clamp, [Vector3.by_value, Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # Vector3ClampValue : 
+      # @param v [Vector3]
+      # @param min [float]
+      # @param max [float]
+      # @return [Vector3]
       [:Vector3ClampValue, :Vector3ClampValue, [Vector3.by_value, :float, :float], Vector3.by_value],
+
+      # Vector3Equals : 
+      # @param p [Vector3]
+      # @param q [Vector3]
+      # @return [int]
       [:Vector3Equals, :Vector3Equals, [Vector3.by_value, Vector3.by_value], :int],
+
+      # Vector3Refract : 
+      # @param v [Vector3]
+      # @param n [Vector3]
+      # @param r [float]
+      # @return [Vector3]
       [:Vector3Refract, :Vector3Refract, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
+      # MatrixDeterminant : 
+      # @param mat [Matrix]
+      # @return [float]
       [:MatrixDeterminant, :MatrixDeterminant, [Matrix.by_value], :float],
+
+      # MatrixTrace : 
+      # @param mat [Matrix]
+      # @return [float]
       [:MatrixTrace, :MatrixTrace, [Matrix.by_value], :float],
+
+      # MatrixTranspose : 
+      # @param mat [Matrix]
+      # @return [Matrix]
       [:MatrixTranspose, :MatrixTranspose, [Matrix.by_value], Matrix.by_value],
+
+      # MatrixInvert : 
+      # @param mat [Matrix]
+      # @return [Matrix]
       [:MatrixInvert, :MatrixInvert, [Matrix.by_value], Matrix.by_value],
+
+      # MatrixIdentity : 
+      # @return [Matrix]
       [:MatrixIdentity, :MatrixIdentity, [], Matrix.by_value],
+
+      # MatrixAdd : 
+      # @param left [Matrix]
+      # @param right [Matrix]
+      # @return [Matrix]
       [:MatrixAdd, :MatrixAdd, [Matrix.by_value, Matrix.by_value], Matrix.by_value],
+
+      # MatrixSubtract : 
+      # @param left [Matrix]
+      # @param right [Matrix]
+      # @return [Matrix]
       [:MatrixSubtract, :MatrixSubtract, [Matrix.by_value, Matrix.by_value], Matrix.by_value],
+
+      # MatrixMultiply : 
+      # @param left [Matrix]
+      # @param right [Matrix]
+      # @return [Matrix]
       [:MatrixMultiply, :MatrixMultiply, [Matrix.by_value, Matrix.by_value], Matrix.by_value],
+
+      # MatrixTranslate : 
+      # @param x [float]
+      # @param y [float]
+      # @param z [float]
+      # @return [Matrix]
       [:MatrixTranslate, :MatrixTranslate, [:float, :float, :float], Matrix.by_value],
+
+      # MatrixRotate : 
+      # @param axis [Vector3]
+      # @param angle [float]
+      # @return [Matrix]
       [:MatrixRotate, :MatrixRotate, [Vector3.by_value, :float], Matrix.by_value],
+
+      # MatrixRotateX : 
+      # @param angle [float]
+      # @return [Matrix]
       [:MatrixRotateX, :MatrixRotateX, [:float], Matrix.by_value],
+
+      # MatrixRotateY : 
+      # @param angle [float]
+      # @return [Matrix]
       [:MatrixRotateY, :MatrixRotateY, [:float], Matrix.by_value],
+
+      # MatrixRotateZ : 
+      # @param angle [float]
+      # @return [Matrix]
       [:MatrixRotateZ, :MatrixRotateZ, [:float], Matrix.by_value],
+
+      # MatrixRotateXYZ : 
+      # @param angle [Vector3]
+      # @return [Matrix]
       [:MatrixRotateXYZ, :MatrixRotateXYZ, [Vector3.by_value], Matrix.by_value],
+
+      # MatrixRotateZYX : 
+      # @param angle [Vector3]
+      # @return [Matrix]
       [:MatrixRotateZYX, :MatrixRotateZYX, [Vector3.by_value], Matrix.by_value],
+
+      # MatrixScale : 
+      # @param x [float]
+      # @param y [float]
+      # @param z [float]
+      # @return [Matrix]
       [:MatrixScale, :MatrixScale, [:float, :float, :float], Matrix.by_value],
+
+      # MatrixFrustum : 
+      # @param left [double]
+      # @param right [double]
+      # @param bottom [double]
+      # @param top [double]
+      # @param near [double]
+      # @param far [double]
+      # @return [Matrix]
       [:MatrixFrustum, :MatrixFrustum, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
+
+      # MatrixPerspective : 
+      # @param fovy [double]
+      # @param aspect [double]
+      # @param near [double]
+      # @param far [double]
+      # @return [Matrix]
       [:MatrixPerspective, :MatrixPerspective, [:double, :double, :double, :double], Matrix.by_value],
+
+      # MatrixOrtho : 
+      # @param left [double]
+      # @param right [double]
+      # @param bottom [double]
+      # @param top [double]
+      # @param near [double]
+      # @param far [double]
+      # @return [Matrix]
       [:MatrixOrtho, :MatrixOrtho, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
+
+      # MatrixLookAt : 
+      # @param eye [Vector3]
+      # @param target [Vector3]
+      # @param up [Vector3]
+      # @return [Matrix]
       [:MatrixLookAt, :MatrixLookAt, [Vector3.by_value, Vector3.by_value, Vector3.by_value], Matrix.by_value],
+
+      # MatrixToFloatV : 
+      # @param mat [Matrix]
+      # @return [float16]
       [:MatrixToFloatV, :MatrixToFloatV, [Matrix.by_value], Float16.by_value],
+
+      # QuaternionAdd : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @return [Quaternion]
       [:QuaternionAdd, :QuaternionAdd, [Quaternion.by_value, Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionAddValue : 
+      # @param q [Quaternion]
+      # @param add [float]
+      # @return [Quaternion]
       [:QuaternionAddValue, :QuaternionAddValue, [Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionSubtract : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @return [Quaternion]
       [:QuaternionSubtract, :QuaternionSubtract, [Quaternion.by_value, Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionSubtractValue : 
+      # @param q [Quaternion]
+      # @param sub [float]
+      # @return [Quaternion]
       [:QuaternionSubtractValue, :QuaternionSubtractValue, [Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionIdentity : 
+      # @return [Quaternion]
       [:QuaternionIdentity, :QuaternionIdentity, [], Quaternion.by_value],
+
+      # QuaternionLength : 
+      # @param q [Quaternion]
+      # @return [float]
       [:QuaternionLength, :QuaternionLength, [Quaternion.by_value], :float],
+
+      # QuaternionNormalize : 
+      # @param q [Quaternion]
+      # @return [Quaternion]
       [:QuaternionNormalize, :QuaternionNormalize, [Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionInvert : 
+      # @param q [Quaternion]
+      # @return [Quaternion]
       [:QuaternionInvert, :QuaternionInvert, [Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionMultiply : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @return [Quaternion]
       [:QuaternionMultiply, :QuaternionMultiply, [Quaternion.by_value, Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionScale : 
+      # @param q [Quaternion]
+      # @param mul [float]
+      # @return [Quaternion]
       [:QuaternionScale, :QuaternionScale, [Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionDivide : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @return [Quaternion]
       [:QuaternionDivide, :QuaternionDivide, [Quaternion.by_value, Quaternion.by_value], Quaternion.by_value],
+
+      # QuaternionLerp : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @param amount [float]
+      # @return [Quaternion]
       [:QuaternionLerp, :QuaternionLerp, [Quaternion.by_value, Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionNlerp : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @param amount [float]
+      # @return [Quaternion]
       [:QuaternionNlerp, :QuaternionNlerp, [Quaternion.by_value, Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionSlerp : 
+      # @param q1 [Quaternion]
+      # @param q2 [Quaternion]
+      # @param amount [float]
+      # @return [Quaternion]
       [:QuaternionSlerp, :QuaternionSlerp, [Quaternion.by_value, Quaternion.by_value, :float], Quaternion.by_value],
+
+      # QuaternionFromVector3ToVector3 : 
+      # @param from [Vector3]
+      # @param to [Vector3]
+      # @return [Quaternion]
       [:QuaternionFromVector3ToVector3, :QuaternionFromVector3ToVector3, [Vector3.by_value, Vector3.by_value], Quaternion.by_value],
+
+      # QuaternionFromMatrix : 
+      # @param mat [Matrix]
+      # @return [Quaternion]
       [:QuaternionFromMatrix, :QuaternionFromMatrix, [Matrix.by_value], Quaternion.by_value],
+
+      # QuaternionToMatrix : 
+      # @param q [Quaternion]
+      # @return [Matrix]
       [:QuaternionToMatrix, :QuaternionToMatrix, [Quaternion.by_value], Matrix.by_value],
+
+      # QuaternionFromAxisAngle : 
+      # @param axis [Vector3]
+      # @param angle [float]
+      # @return [Quaternion]
       [:QuaternionFromAxisAngle, :QuaternionFromAxisAngle, [Vector3.by_value, :float], Quaternion.by_value],
+
+      # QuaternionToAxisAngle : 
+      # @param q [Quaternion]
+      # @param outAxis [Vector3 *]
+      # @param outAngle [float *]
+      # @return [void]
       [:QuaternionToAxisAngle, :QuaternionToAxisAngle, [Quaternion.by_value, :pointer, :pointer], :void],
+
+      # QuaternionFromEuler : 
+      # @param pitch [float]
+      # @param yaw [float]
+      # @param roll [float]
+      # @return [Quaternion]
       [:QuaternionFromEuler, :QuaternionFromEuler, [:float, :float, :float], Quaternion.by_value],
+
+      # QuaternionToEuler : 
+      # @param q [Quaternion]
+      # @return [Vector3]
       [:QuaternionToEuler, :QuaternionToEuler, [Quaternion.by_value], Vector3.by_value],
+
+      # QuaternionTransform : 
+      # @param q [Quaternion]
+      # @param mat [Matrix]
+      # @return [Quaternion]
       [:QuaternionTransform, :QuaternionTransform, [Quaternion.by_value, Matrix.by_value], Quaternion.by_value],
+
+      # QuaternionEquals : 
+      # @param p [Quaternion]
+      # @param q [Quaternion]
+      # @return [int]
       [:QuaternionEquals, :QuaternionEquals, [Quaternion.by_value, Quaternion.by_value], :int],
     ]
     entries.each do |entry|

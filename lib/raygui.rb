@@ -8,6 +8,7 @@ require 'ffi'
 
 module Raylib
   extend FFI::Library
+
   # Define/Macro
 
   RAYGUI_VERSION = "3.2"
@@ -380,58 +381,353 @@ module Raylib
 
   def self.setup_raygui_symbols(output_error = false)
     entries = [
+
+      # GuiEnable : Enable gui controls (global state)
+      # @return [void]
       [:GuiEnable, :GuiEnable, [], :void],
+
+      # GuiDisable : Disable gui controls (global state)
+      # @return [void]
       [:GuiDisable, :GuiDisable, [], :void],
+
+      # GuiLock : Lock gui controls (global state)
+      # @return [void]
       [:GuiLock, :GuiLock, [], :void],
+
+      # GuiUnlock : Unlock gui controls (global state)
+      # @return [void]
       [:GuiUnlock, :GuiUnlock, [], :void],
+
+      # GuiIsLocked : Check if gui is locked (global state)
+      # @return [bool]
       [:GuiIsLocked, :GuiIsLocked, [], :bool],
+
+      # GuiFade : Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
+      # @param alpha [float]
+      # @return [void]
       [:GuiFade, :GuiFade, [:float], :void],
+
+      # GuiSetState : Set gui state (global state)
+      # @param state [int]
+      # @return [void]
       [:GuiSetState, :GuiSetState, [:int], :void],
+
+      # GuiGetState : Get gui state (global state)
+      # @return [int]
       [:GuiGetState, :GuiGetState, [], :int],
+
+      # GuiSetFont : Set gui custom font (global state)
+      # @param font [Font]
+      # @return [void]
       [:GuiSetFont, :GuiSetFont, [Font.by_value], :void],
+
+      # GuiGetFont : Get gui custom font (global state)
+      # @return [Font]
       [:GuiGetFont, :GuiGetFont, [], Font.by_value],
+
+      # GuiSetStyle : Set one style property
+      # @param control [int]
+      # @param property [int]
+      # @param value [int]
+      # @return [void]
       [:GuiSetStyle, :GuiSetStyle, [:int, :int, :int], :void],
+
+      # GuiGetStyle : Get one style property
+      # @param control [int]
+      # @param property [int]
+      # @return [int]
       [:GuiGetStyle, :GuiGetStyle, [:int, :int], :int],
+
+      # GuiWindowBox : Window Box control, shows a window that can be closed
+      # @param bounds [Rectangle]
+      # @param title [const char *]
+      # @return [bool]
       [:GuiWindowBox, :GuiWindowBox, [Rectangle.by_value, :pointer], :bool],
+
+      # GuiGroupBox : Group Box control with text name
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiGroupBox, :GuiGroupBox, [Rectangle.by_value, :pointer], :void],
+
+      # GuiLine : Line separator control, could contain text
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiLine, :GuiLine, [Rectangle.by_value, :pointer], :void],
+
+      # GuiPanel : Panel control, useful to group controls
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiPanel, :GuiPanel, [Rectangle.by_value, :pointer], :void],
+
+      # GuiTabBar : Tab Bar control, returns TAB to be closed or -1
+      # @param bounds [Rectangle]
+      # @param text [const char **]
+      # @param count [int]
+      # @param active [int *]
+      # @return [int]
       [:GuiTabBar, :GuiTabBar, [Rectangle.by_value, :pointer, :int, :pointer], :int],
+
+      # GuiScrollPanel : Scroll Panel control
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param content [Rectangle]
+      # @param scroll [Vector2 *]
+      # @return [Rectangle]
       [:GuiScrollPanel, :GuiScrollPanel, [Rectangle.by_value, :pointer, Rectangle.by_value, :pointer], Rectangle.by_value],
+
+      # GuiLabel : Label control, shows text
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiLabel, :GuiLabel, [Rectangle.by_value, :pointer], :void],
+
+      # GuiButton : Button control, returns true when clicked
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [bool]
       [:GuiButton, :GuiButton, [Rectangle.by_value, :pointer], :bool],
+
+      # GuiLabelButton : Label button control, show true when clicked
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [bool]
       [:GuiLabelButton, :GuiLabelButton, [Rectangle.by_value, :pointer], :bool],
+
+      # GuiToggle : Toggle Button control, returns true when active
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param active [bool]
+      # @return [bool]
       [:GuiToggle, :GuiToggle, [Rectangle.by_value, :pointer, :bool], :bool],
+
+      # GuiToggleGroup : Toggle Group control, returns active toggle index
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param active [int]
+      # @return [int]
       [:GuiToggleGroup, :GuiToggleGroup, [Rectangle.by_value, :pointer, :int], :int],
+
+      # GuiCheckBox : Check Box control, returns true when active
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param checked [bool]
+      # @return [bool]
       [:GuiCheckBox, :GuiCheckBox, [Rectangle.by_value, :pointer, :bool], :bool],
+
+      # GuiComboBox : Combo Box control, returns selected item index
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param active [int]
+      # @return [int]
       [:GuiComboBox, :GuiComboBox, [Rectangle.by_value, :pointer, :int], :int],
+
+      # GuiDropdownBox : Dropdown Box control, returns selected item
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param active [int *]
+      # @param editMode [bool]
+      # @return [bool]
       [:GuiDropdownBox, :GuiDropdownBox, [Rectangle.by_value, :pointer, :pointer, :bool], :bool],
+
+      # GuiSpinner : Spinner control, returns selected value
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param value [int *]
+      # @param minValue [int]
+      # @param maxValue [int]
+      # @param editMode [bool]
+      # @return [bool]
       [:GuiSpinner, :GuiSpinner, [Rectangle.by_value, :pointer, :pointer, :int, :int, :bool], :bool],
+
+      # GuiValueBox : Value Box control, updates input text with numbers
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param value [int *]
+      # @param minValue [int]
+      # @param maxValue [int]
+      # @param editMode [bool]
+      # @return [bool]
       [:GuiValueBox, :GuiValueBox, [Rectangle.by_value, :pointer, :pointer, :int, :int, :bool], :bool],
+
+      # GuiTextBox : Text Box control, updates input text
+      # @param bounds [Rectangle]
+      # @param text [char *]
+      # @param textSize [int]
+      # @param editMode [bool]
+      # @return [bool]
       [:GuiTextBox, :GuiTextBox, [Rectangle.by_value, :pointer, :int, :bool], :bool],
+
+      # GuiTextBoxMulti : Text Box control with multiple lines
+      # @param bounds [Rectangle]
+      # @param text [char *]
+      # @param textSize [int]
+      # @param editMode [bool]
+      # @return [bool]
       [:GuiTextBoxMulti, :GuiTextBoxMulti, [Rectangle.by_value, :pointer, :int, :bool], :bool],
+
+      # GuiSlider : Slider control, returns selected value
+      # @param bounds [Rectangle]
+      # @param textLeft [const char *]
+      # @param textRight [const char *]
+      # @param value [float]
+      # @param minValue [float]
+      # @param maxValue [float]
+      # @return [float]
       [:GuiSlider, :GuiSlider, [Rectangle.by_value, :pointer, :pointer, :float, :float, :float], :float],
+
+      # GuiSliderBar : Slider Bar control, returns selected value
+      # @param bounds [Rectangle]
+      # @param textLeft [const char *]
+      # @param textRight [const char *]
+      # @param value [float]
+      # @param minValue [float]
+      # @param maxValue [float]
+      # @return [float]
       [:GuiSliderBar, :GuiSliderBar, [Rectangle.by_value, :pointer, :pointer, :float, :float, :float], :float],
+
+      # GuiProgressBar : Progress Bar control, shows current progress value
+      # @param bounds [Rectangle]
+      # @param textLeft [const char *]
+      # @param textRight [const char *]
+      # @param value [float]
+      # @param minValue [float]
+      # @param maxValue [float]
+      # @return [float]
       [:GuiProgressBar, :GuiProgressBar, [Rectangle.by_value, :pointer, :pointer, :float, :float, :float], :float],
+
+      # GuiStatusBar : Status Bar control, shows info text
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiStatusBar, :GuiStatusBar, [Rectangle.by_value, :pointer], :void],
+
+      # GuiDummyRec : Dummy control for placeholders
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @return [void]
       [:GuiDummyRec, :GuiDummyRec, [Rectangle.by_value, :pointer], :void],
+
+      # GuiGrid : Grid control, returns mouse cell position
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param spacing [float]
+      # @param subdivs [int]
+      # @return [Vector2]
       [:GuiGrid, :GuiGrid, [Rectangle.by_value, :pointer, :float, :int], Vector2.by_value],
+
+      # GuiListView : List View control, returns selected list item index
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param scrollIndex [int *]
+      # @param active [int]
+      # @return [int]
       [:GuiListView, :GuiListView, [Rectangle.by_value, :pointer, :pointer, :int], :int],
+
+      # GuiListViewEx : List View with extended parameters
+      # @param bounds [Rectangle]
+      # @param text [const char **]
+      # @param count [int]
+      # @param focus [int *]
+      # @param scrollIndex [int *]
+      # @param active [int]
+      # @return [int]
       [:GuiListViewEx, :GuiListViewEx, [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :int], :int],
+
+      # GuiMessageBox : Message Box control, displays a message
+      # @param bounds [Rectangle]
+      # @param title [const char *]
+      # @param message [const char *]
+      # @param buttons [const char *]
+      # @return [int]
       [:GuiMessageBox, :GuiMessageBox, [Rectangle.by_value, :pointer, :pointer, :pointer], :int],
+
+      # GuiTextInputBox : Text Input Box control, ask for text, supports secret
+      # @param bounds [Rectangle]
+      # @param title [const char *]
+      # @param message [const char *]
+      # @param buttons [const char *]
+      # @param text [char *]
+      # @param textMaxSize [int]
+      # @param secretViewActive [int *]
+      # @return [int]
       [:GuiTextInputBox, :GuiTextInputBox, [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer, :int, :pointer], :int],
+
+      # GuiColorPicker : Color Picker control (multiple color controls)
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param color [Color]
+      # @return [Color]
       [:GuiColorPicker, :GuiColorPicker, [Rectangle.by_value, :pointer, Color.by_value], Color.by_value],
+
+      # GuiColorPanel : Color Panel control
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param color [Color]
+      # @return [Color]
       [:GuiColorPanel, :GuiColorPanel, [Rectangle.by_value, :pointer, Color.by_value], Color.by_value],
+
+      # GuiColorBarAlpha : Color Bar Alpha control
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param alpha [float]
+      # @return [float]
       [:GuiColorBarAlpha, :GuiColorBarAlpha, [Rectangle.by_value, :pointer, :float], :float],
+
+      # GuiColorBarHue : Color Bar Hue control
+      # @param bounds [Rectangle]
+      # @param text [const char *]
+      # @param value [float]
+      # @return [float]
       [:GuiColorBarHue, :GuiColorBarHue, [Rectangle.by_value, :pointer, :float], :float],
+
+      # GuiLoadStyle : Load style file over global style variable (.rgs)
+      # @param fileName [const char *]
+      # @return [void]
       [:GuiLoadStyle, :GuiLoadStyle, [:pointer], :void],
+
+      # GuiLoadStyleDefault : Load style default over global style
+      # @return [void]
       [:GuiLoadStyleDefault, :GuiLoadStyleDefault, [], :void],
+
+      # GuiEnableTooltip : Enable gui tooltips (global state)
+      # @return [void]
       [:GuiEnableTooltip, :GuiEnableTooltip, [], :void],
+
+      # GuiDisableTooltip : Disable gui tooltips (global state)
+      # @return [void]
       [:GuiDisableTooltip, :GuiDisableTooltip, [], :void],
+
+      # GuiSetTooltip : Set tooltip string
+      # @param tooltip [const char *]
+      # @return [void]
       [:GuiSetTooltip, :GuiSetTooltip, [:pointer], :void],
+
+      # GuiIconText : Get text with icon id prepended (if supported)
+      # @param iconId [int]
+      # @param text [const char *]
+      # @return [const char *]
       [:GuiIconText, :GuiIconText, [:int, :pointer], :pointer],
+
+      # GuiGetIcons : Get raygui icons data pointer
+      # @return [unsigned int *]
       [:GuiGetIcons, :GuiGetIcons, [], :pointer],
+
+      # GuiLoadIcons : Load raygui icons file (.rgi) into internal icons data
+      # @param fileName [const char *]
+      # @param loadIconsName [bool]
+      # @return [char **]
       [:GuiLoadIcons, :GuiLoadIcons, [:pointer, :bool], :pointer],
+
+      # GuiDrawIcon : 
+      # @param iconId [int]
+      # @param posX [int]
+      # @param posY [int]
+      # @param pixelSize [int]
+      # @param color [Color]
+      # @return [void]
       [:GuiDrawIcon, :GuiDrawIcon, [:int, :int, :int, :int, Color.by_value], :void],
     ]
     entries.each do |entry|

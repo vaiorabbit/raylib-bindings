@@ -16,7 +16,7 @@ FUNCTION_PREFIX = """  def DrawModelEx(model, position, rotationAxis, rotationAn
     # - Other DrawXXX members (DrawModel, DrawModelWires, DrawModelWiresEx) are free from this problem.
     #   - They call DrawModelEx in C layer, which will use the copy of `model` on stack.
     mtx_clone = model[:transform].clone
-    rbDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    internalDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
     model[:transform] = mtx_clone
   end
 """
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     ctx = raylib_parser.ParseContext('../raylib_dll/raylib/src/raylib.h')
     raylib_parser.execute(ctx)
 
-    ctx.decl_functions["DrawModelEx"].explicit_name = 'rbDrawModelEx'
+    ctx.decl_functions["DrawModelEx"].explicit_name = 'internalDrawModelEx'
 
     api_schema = None
     with open('./raylib_api.json') as f:

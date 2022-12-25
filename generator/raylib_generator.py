@@ -184,8 +184,15 @@ class FunctionEntry:
         self.explicit_name = explicit_name
         self.retval = None
         self.args = ""
+        self.description = ""
+        self.ret_description = ""
+        self.arg_descriptions = []
 
-def generate_function(ctx, indent = "", module_name = "", function_prefix = "", function_postfix = ""):
+def generate_function(ctx, indent = "", module_name = "", function_prefix = "", function_postfix = "", json_schema=None):
+    json_functions = None
+    if json_schema:
+        json_functions = json_schema['functions']
+
     if function_prefix != "":
         print(function_prefix, file = sys.stdout)
 
@@ -194,6 +201,14 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
         if func_info == None:
             continue
         func_entry = FunctionEntry(func_info.original_name, func_info.explicit_name)
+
+        # Collect documentation from JSON API Schema
+        json_function = [j for j in json_functions if j['name'] == func_info.original_name][0]
+        func_entry.description = json_function['description']
+        func_entry.ret_description = json_function['returnType']
+        if 'params' in json_function:
+            for j in json_function['params']:
+                func_entry.arg_descriptions.append([j['type'], j['name']])
 
         # Arguments
         if len(func_info.args) > 0:
@@ -221,6 +236,11 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     print(indent + "  entries = [", file = sys.stdout)
     for func_entry in func_entries:
         entry_str = f':{func_entry.explicit_name}, :{func_entry.original_name}, [{func_entry.args}], {func_entry.retval}'
+        print('', file = sys.stdout)
+        print(indent + f'    # {func_entry.original_name} : {func_entry.description}', file = sys.stdout)
+        for arg_description in func_entry.arg_descriptions:
+            print(indent + f'    # @param {arg_description[1]} [{arg_description[0]}]', file = sys.stdout)
+        print(indent + f'    # @return [{func_entry.ret_description}]', file = sys.stdout)
         print(indent + f'    [{entry_str}],', file = sys.stdout)
     print(indent + "  ]", file = sys.stdout)
 
@@ -250,29 +270,35 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
     print(indent + "extend FFI::Library")
 
     # macro
-    print(indent + "# Define/Macro\n", file = sys.stdout)
-    generate_macrodefine(ctx, indent, json_schema)
-    print("", file = sys.stdout)
+    if len(ctx.decl_macros) > 0:
+        print("")
+        print(indent + "# Define/Macro\n", file = sys.stdout)
+        generate_macrodefine(ctx, indent, json_schema)
+        print("", file = sys.stdout)
 
     # enum
-    print(indent + "# Enum\n", file = sys.stdout)
-    generate_enum(ctx, indent, json_schema)
-    print("", file = sys.stdout)
+    if len(ctx.decl_enums) > 0:
+        print(indent + "# Enum\n", file = sys.stdout)
+        generate_enum(ctx, indent, json_schema)
+        print("", file = sys.stdout)
 
     # typedef
-    print(indent + "# Typedef\n", file = sys.stdout)
-    generate_typedef(ctx, indent, typedef_prefix, typedef_postfix)
-    print("", file = sys.stdout)
+    if len(ctx.decl_typedefs) > 0:
+        print(indent + "# Typedef\n", file = sys.stdout)
+        generate_typedef(ctx, indent, typedef_prefix, typedef_postfix)
+        print("", file = sys.stdout)
 
     # struct/union
-    print(indent + "# Struct\n", file = sys.stdout)
-    generate_structunion(ctx, indent, struct_prefix, struct_postfix, struct_alias, json_schema)
-    print("", file = sys.stdout)
+    if len(ctx.decl_structs) > 0:
+        print(indent + "# Struct\n", file = sys.stdout)
+        generate_structunion(ctx, indent, struct_prefix, struct_postfix, struct_alias, json_schema)
+        print("", file = sys.stdout)
 
     # function
-    print(indent + "# Function\n", file = sys.stdout)
-    generate_function(ctx, indent, module_name, function_prefix, function_postfix)
-    print(postfix, file = sys.stdout)
+    if len(ctx.decl_functions) > 0:
+        print(indent + "# Function\n", file = sys.stdout)
+        generate_function(ctx, indent, module_name, function_prefix, function_postfix, json_schema)
+        print(postfix, file = sys.stdout)
 
 if __name__ == "__main__":
     pass

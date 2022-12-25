@@ -8,6 +8,7 @@ require 'ffi'
 
 module Raylib
   extend FFI::Library
+
   # Define/Macro
 
   PHYSAC_MAX_BODIES = 64 # Maximum number of physic bodies supported
@@ -104,24 +105,110 @@ module Raylib
 
   def self.setup_physac_symbols(output_error = false)
     entries = [
+
+      # InitPhysics : Initializes physics system
+      # @return [void]
       [:InitPhysics, :InitPhysics, [], :void],
+
+      # UpdatePhysics : Update physics system
+      # @return [void]
       [:UpdatePhysics, :UpdatePhysics, [], :void],
+
+      # ResetPhysics : Reset physics system (global variables)
+      # @return [void]
       [:ResetPhysics, :ResetPhysics, [], :void],
+
+      # ClosePhysics : Close physics system and unload used memory
+      # @return [void]
       [:ClosePhysics, :ClosePhysics, [], :void],
+
+      # SetPhysicsTimeStep : Sets physics fixed time step in milliseconds. 1.666666 by default
+      # @param delta [double]
+      # @return [void]
       [:SetPhysicsTimeStep, :SetPhysicsTimeStep, [:double], :void],
+
+      # SetPhysicsGravity : Sets physics global gravity force
+      # @param x [float]
+      # @param y [float]
+      # @return [void]
       [:SetPhysicsGravity, :SetPhysicsGravity, [:float, :float], :void],
+
+      # CreatePhysicsBodyCircle : Creates a new circle physics body with generic parameters
+      # @param pos [Vector2]
+      # @param radius [float]
+      # @param density [float]
+      # @return [PhysicsBody]
       [:CreatePhysicsBodyCircle, :CreatePhysicsBodyCircle, [Vector2.by_value, :float, :float], :pointer],
+
+      # CreatePhysicsBodyRectangle : Creates a new rectangle physics body with generic parameters
+      # @param pos [Vector2]
+      # @param width [float]
+      # @param height [float]
+      # @param density [float]
+      # @return [PhysicsBody]
       [:CreatePhysicsBodyRectangle, :CreatePhysicsBodyRectangle, [Vector2.by_value, :float, :float, :float], :pointer],
+
+      # CreatePhysicsBodyPolygon : Creates a new polygon physics body with generic parameters
+      # @param pos [Vector2]
+      # @param radius [float]
+      # @param sides [int]
+      # @param density [float]
+      # @return [PhysicsBody]
       [:CreatePhysicsBodyPolygon, :CreatePhysicsBodyPolygon, [Vector2.by_value, :float, :int, :float], :pointer],
+
+      # DestroyPhysicsBody : Destroy a physics body
+      # @param body [PhysicsBody]
+      # @return [void]
       [:DestroyPhysicsBody, :DestroyPhysicsBody, [:pointer], :void],
+
+      # PhysicsAddForce : Adds a force to a physics body
+      # @param body [PhysicsBody]
+      # @param force [Vector2]
+      # @return [void]
       [:PhysicsAddForce, :PhysicsAddForce, [:pointer, Vector2.by_value], :void],
+
+      # PhysicsAddTorque : Adds an angular force to a physics body
+      # @param body [PhysicsBody]
+      # @param amount [float]
+      # @return [void]
       [:PhysicsAddTorque, :PhysicsAddTorque, [:pointer, :float], :void],
+
+      # PhysicsShatter : Shatters a polygon shape physics body to little physics bodies with explosion force
+      # @param body [PhysicsBody]
+      # @param position [Vector2]
+      # @param force [float]
+      # @return [void]
       [:PhysicsShatter, :PhysicsShatter, [:pointer, Vector2.by_value, :float], :void],
+
+      # SetPhysicsBodyRotation : Sets physics body shape transform based on radians parameter
+      # @param body [PhysicsBody]
+      # @param radians [float]
+      # @return [void]
       [:SetPhysicsBodyRotation, :SetPhysicsBodyRotation, [:pointer, :float], :void],
+
+      # GetPhysicsBody : Returns a physics body of the bodies pool at a specific index
+      # @param index [int]
+      # @return [PhysicsBody]
       [:GetPhysicsBody, :GetPhysicsBody, [:int], :pointer],
+
+      # GetPhysicsBodiesCount : Returns the current amount of created physics bodies
+      # @return [int]
       [:GetPhysicsBodiesCount, :GetPhysicsBodiesCount, [], :int],
+
+      # GetPhysicsShapeType : Returns the physics body shape type (PHYSICS_CIRCLE or PHYSICS_POLYGON)
+      # @param index [int]
+      # @return [int]
       [:GetPhysicsShapeType, :GetPhysicsShapeType, [:int], :int],
+
+      # GetPhysicsShapeVerticesCount : Returns the amount of vertices of a physics body shape
+      # @param index [int]
+      # @return [int]
       [:GetPhysicsShapeVerticesCount, :GetPhysicsShapeVerticesCount, [:int], :int],
+
+      # GetPhysicsShapeVertex : Returns transformed position of a body shape (body position + vertex transformed position)
+      # @param body [PhysicsBody]
+      # @param vertex [int]
+      # @return [Vector2]
       [:GetPhysicsShapeVertex, :GetPhysicsShapeVertex, [:pointer, :int], Vector2.by_value],
     ]
     entries.each do |entry|
