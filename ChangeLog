@@ -1,3 +1,7 @@
+2022-12-29  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator: Now generates enum descriptions
+
 2022-12-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Converted DrawModelEx into a wrapper function of rbDrawModelEx to avoid Matrix problem found in models_animation sample
