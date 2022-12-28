@@ -17,6 +17,8 @@ module Raylib
 
   # Enum
 
+  # enum ConfigFlags
+  # System/Window config flags
   FLAG_VSYNC_HINT = 64 # Set to try enabling V-Sync on GPU
   FLAG_FULLSCREEN_MODE = 2 # Set to run program in fullscreen
   FLAG_WINDOW_RESIZABLE = 4 # Set to allow resizable window
@@ -32,6 +34,9 @@ module Raylib
   FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384 # Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
   FLAG_MSAA_4X_HINT = 32 # Set to try enabling MSAA 4X
   FLAG_INTERLACED_HINT = 65536 # Set to try enabling interlaced video format (for V3D)
+
+  # enum TraceLogLevel
+  # Trace log level
   LOG_ALL = 0 # Display all logs
   LOG_TRACE = 1 # Trace logging, intended for internal use only
   LOG_DEBUG = 2 # Debug logging, used for internal debugging, it should be disabled on release builds
@@ -40,6 +45,9 @@ module Raylib
   LOG_ERROR = 5 # Error logging, used on unrecoverable failures
   LOG_FATAL = 6 # Fatal logging, used to abort program: exit(EXIT_FAILURE)
   LOG_NONE = 7 # Disable logging
+
+  # enum KeyboardKey
+  # Keyboard keys (US keyboard layout)
   KEY_NULL = 0 # Key: NULL, used for no key pressed
   KEY_APOSTROPHE = 39 # Key: '
   KEY_COMMA = 44 # Key: ,
@@ -150,6 +158,9 @@ module Raylib
   KEY_MENU = 82 # Key: Android menu button
   KEY_VOLUME_UP = 24 # Key: Android volume up button
   KEY_VOLUME_DOWN = 25 # Key: Android volume down button
+
+  # enum MouseButton
+  # Mouse buttons
   MOUSE_BUTTON_LEFT = 0 # Mouse button left
   MOUSE_BUTTON_RIGHT = 1 # Mouse button right
   MOUSE_BUTTON_MIDDLE = 2 # Mouse button middle (pressed wheel)
@@ -157,6 +168,9 @@ module Raylib
   MOUSE_BUTTON_EXTRA = 4 # Mouse button extra (advanced mouse device)
   MOUSE_BUTTON_FORWARD = 5 # Mouse button forward (advanced mouse device)
   MOUSE_BUTTON_BACK = 6 # Mouse button back (advanced mouse device)
+
+  # enum MouseCursor
+  # Mouse cursor
   MOUSE_CURSOR_DEFAULT = 0 # Default pointer shape
   MOUSE_CURSOR_ARROW = 1 # Arrow shape
   MOUSE_CURSOR_IBEAM = 2 # Text writing cursor shape
@@ -168,6 +182,9 @@ module Raylib
   MOUSE_CURSOR_RESIZE_NESW = 8 # The top-right to bottom-left diagonal resize/move arrow shape
   MOUSE_CURSOR_RESIZE_ALL = 9 # The omni-directional resize/move cursor shape
   MOUSE_CURSOR_NOT_ALLOWED = 10 # The operation-not-allowed shape
+
+  # enum GamepadButton
+  # Gamepad buttons
   GAMEPAD_BUTTON_UNKNOWN = 0 # Unknown button, just for error checking
   GAMEPAD_BUTTON_LEFT_FACE_UP = 1 # Gamepad left DPAD up button
   GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2 # Gamepad left DPAD right button
@@ -186,12 +203,18 @@ module Raylib
   GAMEPAD_BUTTON_MIDDLE_RIGHT = 15 # Gamepad center buttons, right one (i.e. PS3: Start)
   GAMEPAD_BUTTON_LEFT_THUMB = 16 # Gamepad joystick pressed button left
   GAMEPAD_BUTTON_RIGHT_THUMB = 17 # Gamepad joystick pressed button right
+
+  # enum GamepadAxis
+  # Gamepad axis
   GAMEPAD_AXIS_LEFT_X = 0 # Gamepad left stick X axis
   GAMEPAD_AXIS_LEFT_Y = 1 # Gamepad left stick Y axis
   GAMEPAD_AXIS_RIGHT_X = 2 # Gamepad right stick X axis
   GAMEPAD_AXIS_RIGHT_Y = 3 # Gamepad right stick Y axis
   GAMEPAD_AXIS_LEFT_TRIGGER = 4 # Gamepad back trigger left, pressure level: [1..-1]
   GAMEPAD_AXIS_RIGHT_TRIGGER = 5 # Gamepad back trigger right, pressure level: [1..-1]
+
+  # enum MaterialMapIndex
+  # Material map index
   MATERIAL_MAP_ALBEDO = 0 # Albedo material (same as: MATERIAL_MAP_DIFFUSE)
   MATERIAL_MAP_METALNESS = 1 # Metalness material (same as: MATERIAL_MAP_SPECULAR)
   MATERIAL_MAP_NORMAL = 2 # Normal material
@@ -203,6 +226,9 @@ module Raylib
   MATERIAL_MAP_IRRADIANCE = 8 # Irradiance material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
   MATERIAL_MAP_PREFILTER = 9 # Prefilter material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
   MATERIAL_MAP_BRDF = 10 # Brdf material
+
+  # enum ShaderLocationIndex
+  # Shader location index
   SHADER_LOC_VERTEX_POSITION = 0 # Shader location: vertex attribute: position
   SHADER_LOC_VERTEX_TEXCOORD01 = 1 # Shader location: vertex attribute: texcoord01
   SHADER_LOC_VERTEX_TEXCOORD02 = 2 # Shader location: vertex attribute: texcoord02
@@ -229,6 +255,9 @@ module Raylib
   SHADER_LOC_MAP_IRRADIANCE = 23 # Shader location: samplerCube texture: irradiance
   SHADER_LOC_MAP_PREFILTER = 24 # Shader location: samplerCube texture: prefilter
   SHADER_LOC_MAP_BRDF = 25 # Shader location: sampler2d texture: brdf
+
+  # enum ShaderUniformDataType
+  # Shader uniform data type
   SHADER_UNIFORM_FLOAT = 0 # Shader uniform type: float
   SHADER_UNIFORM_VEC2 = 1 # Shader uniform type: vec2 (2 float)
   SHADER_UNIFORM_VEC3 = 2 # Shader uniform type: vec3 (3 float)
@@ -238,10 +267,16 @@ module Raylib
   SHADER_UNIFORM_IVEC3 = 6 # Shader uniform type: ivec3 (3 int)
   SHADER_UNIFORM_IVEC4 = 7 # Shader uniform type: ivec4 (4 int)
   SHADER_UNIFORM_SAMPLER2D = 8 # Shader uniform type: sampler2d
+
+  # enum ShaderAttributeDataType
+  # Shader attribute data types
   SHADER_ATTRIB_FLOAT = 0 # Shader attribute type: float
   SHADER_ATTRIB_VEC2 = 1 # Shader attribute type: vec2 (2 float)
   SHADER_ATTRIB_VEC3 = 2 # Shader attribute type: vec3 (3 float)
   SHADER_ATTRIB_VEC4 = 3 # Shader attribute type: vec4 (4 float)
+
+  # enum PixelFormat
+  # Pixel formats
   PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1 # 8 bit per pixel (no alpha)
   PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2 # 8*2 bpp (2 channels)
   PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3 # 16 bpp
@@ -263,25 +298,40 @@ module Raylib
   PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19 # 4 bpp
   PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20 # 8 bpp
   PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21 # 2 bpp
+
+  # enum TextureFilter
+  # Texture parameters: filter mode
   TEXTURE_FILTER_POINT = 0 # No filter, just pixel approximation
   TEXTURE_FILTER_BILINEAR = 1 # Linear filtering
   TEXTURE_FILTER_TRILINEAR = 2 # Trilinear filtering (linear with mipmaps)
   TEXTURE_FILTER_ANISOTROPIC_4X = 3 # Anisotropic filtering 4x
   TEXTURE_FILTER_ANISOTROPIC_8X = 4 # Anisotropic filtering 8x
   TEXTURE_FILTER_ANISOTROPIC_16X = 5 # Anisotropic filtering 16x
+
+  # enum TextureWrap
+  # Texture parameters: wrap mode
   TEXTURE_WRAP_REPEAT = 0 # Repeats texture in tiled mode
   TEXTURE_WRAP_CLAMP = 1 # Clamps texture to edge pixel in tiled mode
   TEXTURE_WRAP_MIRROR_REPEAT = 2 # Mirrors and repeats the texture in tiled mode
   TEXTURE_WRAP_MIRROR_CLAMP = 3 # Mirrors and clamps to border the texture in tiled mode
+
+  # enum CubemapLayout
+  # Cubemap layouts
   CUBEMAP_LAYOUT_AUTO_DETECT = 0 # Automatically detect layout type
   CUBEMAP_LAYOUT_LINE_VERTICAL = 1 # Layout is defined by a vertical line with faces
   CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2 # Layout is defined by an horizontal line with faces
   CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3 # Layout is defined by a 3x4 cross with cubemap faces
   CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4 # Layout is defined by a 4x3 cross with cubemap faces
   CUBEMAP_LAYOUT_PANORAMA = 5 # Layout is defined by a panorama image (equirectangular map)
+
+  # enum FontType
+  # Font type, defines generation method
   FONT_DEFAULT = 0 # Default font generation, anti-aliased
   FONT_BITMAP = 1 # Bitmap font generation, no anti-aliasing
   FONT_SDF = 2 # SDF font generation, requires external shader
+
+  # enum BlendMode
+  # Color blending modes (pre-defined)
   BLEND_ALPHA = 0 # Blend textures considering alpha (default)
   BLEND_ADDITIVE = 1 # Blend textures adding colors
   BLEND_MULTIPLIED = 2 # Blend textures multiplying colors
@@ -290,6 +340,9 @@ module Raylib
   BLEND_ALPHA_PREMULTIPLY = 5 # Blend premultiplied textures considering alpha
   BLEND_CUSTOM = 6 # Blend textures using custom src/dst factors (use rlSetBlendFactors())
   BLEND_CUSTOM_SEPARATE = 7 # Blend textures using custom rgb/alpha separate src/dst factors (use rlSetBlendFactorsSeparate())
+
+  # enum Gesture
+  # Gesture
   GESTURE_NONE = 0 # No gesture
   GESTURE_TAP = 1 # Tap gesture
   GESTURE_DOUBLETAP = 2 # Double tap gesture
@@ -301,16 +354,26 @@ module Raylib
   GESTURE_SWIPE_DOWN = 128 # Swipe down gesture
   GESTURE_PINCH_IN = 256 # Pinch in gesture
   GESTURE_PINCH_OUT = 512 # Pinch out gesture
+
+  # enum CameraMode
+  # Camera system modes
   CAMERA_CUSTOM = 0 # Custom camera
   CAMERA_FREE = 1 # Free camera
   CAMERA_ORBITAL = 2 # Orbital camera
   CAMERA_FIRST_PERSON = 3 # First person camera
   CAMERA_THIRD_PERSON = 4 # Third person camera
+
+  # enum CameraProjection
+  # Camera projection
   CAMERA_PERSPECTIVE = 0 # Perspective projection
   CAMERA_ORTHOGRAPHIC = 1 # Orthographic projection
+
+  # enum NPatchLayout
+  # N-patch layout
   NPATCH_NINE_PATCH = 0 # Npatch layout: 3x3 tiles
   NPATCH_THREE_PATCH_VERTICAL = 1 # Npatch layout: 1x3 tiles
   NPATCH_THREE_PATCH_HORIZONTAL = 2 # Npatch layout: 3x1 tiles
+
 
   # Typedef
 
@@ -707,8 +770,16 @@ module Raylib
 
   # Function
 
+  # DrawModelEx : Draw a model with extended parameters
+  # @param model [Model]
+  # @param position [Vector3]
+  # @param rotationAxis [Vector3]
+  # @param rotationAngle [float]
+  # @param scale [Vector3]
+  # @param tint [Color]
+  # @return [void]
   def DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
-    # [TODO] Fix matrix copy
+    # [NOTE] Fixing unintended matrix modification
     # - In C, DrawModelEx uses the whole copy of `model` on stack, which will never affect the content of original `model`.
     #   But Ruby FFI seems to pass the reference of `model` to DrawModelEx, which results in transform accumulation (e.g.:`model` get rotated by `rotationAngle` around `rotationAxis` every frame).
     #   So here I copy the transform into `mtx_clone` and copy back this to the original after finished calling DrawModelEx.
@@ -3225,7 +3296,7 @@ module Raylib
       # @return [void]
       [:DrawModel, :DrawModel, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
-      # DrawModelEx : Draw a model with extended parameters
+      # internalDrawModelEx : Draw a model with extended parameters
       # @param model [Model]
       # @param position [Vector3]
       # @param rotationAxis [Vector3]

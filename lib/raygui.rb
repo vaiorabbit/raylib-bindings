@@ -17,13 +17,21 @@ module Raylib
 
   # Enum
 
+  # enum GuiState
+  # Gui control state
   STATE_NORMAL = 0
   STATE_FOCUSED = 1
   STATE_PRESSED = 2
   STATE_DISABLED = 3
+
+  # enum GuiTextAlignment
+  # Gui control text alignment
   TEXT_ALIGN_LEFT = 0
   TEXT_ALIGN_CENTER = 1
   TEXT_ALIGN_RIGHT = 2
+
+  # enum GuiControl
+  # Gui controls
   DEFAULT = 0
   LABEL = 1 # Used also for: LABELBUTTON
   BUTTON = 2
@@ -40,6 +48,9 @@ module Raylib
   COLORPICKER = 13
   SCROLLBAR = 14
   STATUSBAR = 15
+
+  # enum GuiControlProperty
+  # Gui base properties for every control
   BORDER_COLOR_NORMAL = 0
   BASE_COLOR_NORMAL = 1
   TEXT_COLOR_NORMAL = 2
@@ -56,38 +67,77 @@ module Raylib
   TEXT_PADDING = 13
   TEXT_ALIGNMENT = 14
   RESERVED = 15
+
+  # enum GuiDefaultProperty
+  # DEFAULT extended properties
   TEXT_SIZE = 16 # Text size (glyphs max height)
   TEXT_SPACING = 17 # Text spacing between glyphs
   LINE_COLOR = 18 # Line control color
   BACKGROUND_COLOR = 19 # Background color
+
+  # enum GuiToggleProperty
+  # Toggle/ToggleGroup
   GROUP_PADDING = 16 # ToggleGroup separation between toggles
+
+  # enum GuiSliderProperty
+  # Slider/SliderBar
   SLIDER_WIDTH = 16 # Slider size of internal bar
   SLIDER_PADDING = 17 # Slider/SliderBar internal bar padding
+
+  # enum GuiProgressBarProperty
+  # ProgressBar
   PROGRESS_PADDING = 16 # ProgressBar internal padding
+
+  # enum GuiScrollBarProperty
+  # ScrollBar
   ARROWS_SIZE = 16
   ARROWS_VISIBLE = 17
   SCROLL_SLIDER_PADDING = 18 # (SLIDERBAR, SLIDER_PADDING)
   SCROLL_SLIDER_SIZE = 19
   SCROLL_PADDING = 20
   SCROLL_SPEED = 21
+
+  # enum GuiCheckBoxProperty
+  # CheckBox
   CHECK_PADDING = 16 # CheckBox internal check padding
+
+  # enum GuiComboBoxProperty
+  # ComboBox
   COMBO_BUTTON_WIDTH = 16 # ComboBox right button width
   COMBO_BUTTON_SPACING = 17 # ComboBox button separation
+
+  # enum GuiDropdownBoxProperty
+  # DropdownBox
   ARROW_PADDING = 16 # DropdownBox arrow separation from border and items
   DROPDOWN_ITEMS_SPACING = 17 # DropdownBox items separation
+
+  # enum GuiTextBoxProperty
+  # TextBox/TextBoxMulti/ValueBox/Spinner
   TEXT_INNER_PADDING = 16 # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
   TEXT_LINES_SPACING = 17 # TextBoxMulti lines separation
+
+  # enum GuiSpinnerProperty
+  # Spinner
   SPIN_BUTTON_WIDTH = 16 # Spinner left/right buttons width
   SPIN_BUTTON_SPACING = 17 # Spinner buttons separation
+
+  # enum GuiListViewProperty
+  # ListView
   LIST_ITEMS_HEIGHT = 16 # ListView items height
   LIST_ITEMS_SPACING = 17 # ListView items separation
   SCROLLBAR_WIDTH = 18 # ListView scrollbar size (usually width)
   SCROLLBAR_SIDE = 19 # ListView scrollbar side (0-left, 1-right)
+
+  # enum GuiColorPickerProperty
+  # ColorPicker
   COLOR_SELECTOR_SIZE = 16
   HUEBAR_WIDTH = 17 # ColorPicker right hue bar width
   HUEBAR_PADDING = 18 # ColorPicker right hue bar separation from panel
   HUEBAR_SELECTOR_HEIGHT = 19 # ColorPicker right hue bar selector height
   HUEBAR_SELECTOR_OVERFLOW = 20 # ColorPicker right hue bar selector overflow
+
+  # enum GuiIconName
+  # 
   ICON_NONE = 0
   ICON_FOLDER_FILE_OPEN = 1
   ICON_FILE_SAVE_CLASSIC = 2
@@ -344,6 +394,7 @@ module Raylib
   ICON_253 = 253
   ICON_254 = 254
   ICON_255 = 255
+
 
   # Typedef
 
@@ -721,7 +772,7 @@ module Raylib
       # @return [char **]
       [:GuiLoadIcons, :GuiLoadIcons, [:pointer, :bool], :pointer],
 
-      # GuiDrawIcon : 
+      # GuiDrawIcon
       # @param iconId [int]
       # @param posX [int]
       # @param posY [int]

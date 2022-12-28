@@ -315,6 +315,19 @@ class FunctionInfo(object):
     def __repr__(self):
         return str(vars(self))
 
+class EnumConstantInfo(object):
+    """
+    Holds information of enum member.
+    """
+
+    def __init__(self):
+        self.name = ""
+        self.typedef_name = ""
+
+    def __repr__(self):
+        r = "%s::%s" % (self.typedef_name, self.name)
+        return r
+
 class ParseContext(object):
     """
     Holds current parsing context.
@@ -336,6 +349,7 @@ class ParseContext(object):
         self.decl_structs = {}
         self.decl_typedefs = {}
         self.decl_functions = {}
+        self.enum_constants = {}
         self.parse_file = fn
 
     def push(self):
@@ -377,6 +391,9 @@ class ParseContext(object):
 
     def has_decl_function(self, function_name):
         return function_name in self.decl_functions.keys()
+
+    def add_enum_constant_info(self, enum_constant_name, enum_constant_value):
+        self.enum_constants[enum_constant_name] = enum_constant_value
 
 ####################################################################################################
 
@@ -421,6 +438,16 @@ def collect_decl_typedef(ctx, cursor):
     typedef_info.name = cursor.displayname
     typedef_info.type_kind = underlying_type.get_canonical().kind
     typedef_info.element_count = 1
+
+    # collect typedef enum information
+    if typedef_info.type_kind == TypeKind.ENUM:
+        for child in cursor.get_children():
+            for grandchild in child.get_children():
+                if grandchild.kind == CursorKind.ENUM_CONSTANT_DECL:
+                    enum_constant_value = EnumConstantInfo()
+                    enum_constant_value.name = grandchild.displayname
+                    enum_constant_value.typedef_name = cursor.spelling
+                    ctx.add_enum_constant_info(grandchild.displayname, enum_constant_value)
 
     if underlying_type.kind in {TypeKind.CONSTANTARRAY, TypeKind.INCOMPLETEARRAY, TypeKind.VARIABLEARRAY, TypeKind.DEPENDENTSIZEDARRAY}:
         typedef_info.type_kind = underlying_type.get_array_element_type().get_canonical().kind

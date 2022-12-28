@@ -22,8 +22,10 @@ module Raylib
 
   # Enum
 
+  # enum PhysicsShapeType
   PHYSICS_CIRCLE = 0
   PHYSICS_POLYGON = 1
+
 
   # Typedef
 

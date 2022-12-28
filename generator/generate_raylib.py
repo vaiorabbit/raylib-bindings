@@ -8,8 +8,16 @@ RAYLIB_STRUCT_ALIAS = {
     "Camera3D": ["Camera"],
 }
 
-FUNCTION_PREFIX = """  def DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
-    # [TODO] Fix matrix copy
+FUNCTION_PREFIX = """  # DrawModelEx : Draw a model with extended parameters
+  # @param model [Model]
+  # @param position [Vector3]
+  # @param rotationAxis [Vector3]
+  # @param rotationAngle [float]
+  # @param scale [Vector3]
+  # @param tint [Color]
+  # @return [void]
+  def DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    # [NOTE] Fixing unintended matrix modification
     # - In C, DrawModelEx uses the whole copy of `model` on stack, which will never affect the content of original `model`.
     #   But Ruby FFI seems to pass the reference of `model` to DrawModelEx, which results in transform accumulation (e.g.:`model` get rotated by `rotationAngle` around `rotationAxis` every frame).
     #   So here I copy the transform into `mtx_clone` and copy back this to the original after finished calling DrawModelEx.

@@ -85,11 +85,16 @@ module Raylib
 
   # Enum
 
+  # enum rlGlVersion
+  # OpenGL version
   RL_OPENGL_11 = 1 # OpenGL 1.1
   RL_OPENGL_21 = 2 # OpenGL 2.1 (GLSL 120)
   RL_OPENGL_33 = 3 # OpenGL 3.3 (GLSL 330)
   RL_OPENGL_43 = 4 # OpenGL 4.3 (using GLSL 330)
   RL_OPENGL_ES_20 = 5 # OpenGL ES 2.0 (GLSL 100)
+
+  # enum rlTraceLogLevel
+  # Trace log level
   RL_LOG_ALL = 0 # Display all logs
   RL_LOG_TRACE = 1 # Trace logging, intended for internal use only
   RL_LOG_DEBUG = 2 # Debug logging, used for internal debugging, it should be disabled on release builds
@@ -98,6 +103,9 @@ module Raylib
   RL_LOG_ERROR = 5 # Error logging, used on unrecoverable failures
   RL_LOG_FATAL = 6 # Fatal logging, used to abort program: exit(EXIT_FAILURE)
   RL_LOG_NONE = 7 # Disable logging
+
+  # enum rlPixelFormat
+  # Texture pixel formats
   RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1 # 8 bit per pixel (no alpha)
   RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2 # 8*2 bpp (2 channels)
   RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3 # 16 bpp
@@ -119,12 +127,18 @@ module Raylib
   RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19 # 4 bpp
   RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20 # 8 bpp
   RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21 # 2 bpp
+
+  # enum rlTextureFilter
+  # Texture parameters: filter mode
   RL_TEXTURE_FILTER_POINT = 0 # No filter, just pixel approximation
   RL_TEXTURE_FILTER_BILINEAR = 1 # Linear filtering
   RL_TEXTURE_FILTER_TRILINEAR = 2 # Trilinear filtering (linear with mipmaps)
   RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3 # Anisotropic filtering 4x
   RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4 # Anisotropic filtering 8x
   RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5 # Anisotropic filtering 16x
+
+  # enum rlBlendMode
+  # Color blending modes (pre-defined)
   RL_BLEND_ALPHA = 0 # Blend textures considering alpha (default)
   RL_BLEND_ADDITIVE = 1 # Blend textures adding colors
   RL_BLEND_MULTIPLIED = 2 # Blend textures multiplying colors
@@ -133,6 +147,9 @@ module Raylib
   RL_BLEND_ALPHA_PREMULTIPLY = 5 # Blend premultiplied textures considering alpha
   RL_BLEND_CUSTOM = 6 # Blend textures using custom src/dst factors (use rlSetBlendFactors())
   RL_BLEND_CUSTOM_SEPARATE = 7 # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
+
+  # enum rlShaderLocationIndex
+  # Shader location point type
   RL_SHADER_LOC_VERTEX_POSITION = 0 # Shader location: vertex attribute: position
   RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1 # Shader location: vertex attribute: texcoord01
   RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2 # Shader location: vertex attribute: texcoord02
@@ -159,6 +176,9 @@ module Raylib
   RL_SHADER_LOC_MAP_IRRADIANCE = 23 # Shader location: samplerCube texture: irradiance
   RL_SHADER_LOC_MAP_PREFILTER = 24 # Shader location: samplerCube texture: prefilter
   RL_SHADER_LOC_MAP_BRDF = 25 # Shader location: sampler2d texture: brdf
+
+  # enum rlShaderUniformDataType
+  # Shader uniform data type
   RL_SHADER_UNIFORM_FLOAT = 0 # Shader uniform type: float
   RL_SHADER_UNIFORM_VEC2 = 1 # Shader uniform type: vec2 (2 float)
   RL_SHADER_UNIFORM_VEC3 = 2 # Shader uniform type: vec3 (3 float)
@@ -168,10 +188,16 @@ module Raylib
   RL_SHADER_UNIFORM_IVEC3 = 6 # Shader uniform type: ivec3 (3 int)
   RL_SHADER_UNIFORM_IVEC4 = 7 # Shader uniform type: ivec4 (4 int)
   RL_SHADER_UNIFORM_SAMPLER2D = 8 # Shader uniform type: sampler2d
+
+  # enum rlShaderAttributeDataType
+  # Shader attribute data types
   RL_SHADER_ATTRIB_FLOAT = 0 # Shader attribute type: float
   RL_SHADER_ATTRIB_VEC2 = 1 # Shader attribute type: vec2 (2 float)
   RL_SHADER_ATTRIB_VEC3 = 2 # Shader attribute type: vec3 (3 float)
   RL_SHADER_ATTRIB_VEC4 = 3 # Shader attribute type: vec4 (4 float)
+
+  # enum rlFramebufferAttachType
+  # Framebuffer attachment type
   RL_ATTACHMENT_COLOR_CHANNEL0 = 0 # Framebuffer attachmment type: color 0
   RL_ATTACHMENT_COLOR_CHANNEL1 = 1 # Framebuffer attachmment type: color 1
   RL_ATTACHMENT_COLOR_CHANNEL2 = 2 # Framebuffer attachmment type: color 2
@@ -182,6 +208,9 @@ module Raylib
   RL_ATTACHMENT_COLOR_CHANNEL7 = 7 # Framebuffer attachmment type: color 7
   RL_ATTACHMENT_DEPTH = 100 # Framebuffer attachmment type: depth
   RL_ATTACHMENT_STENCIL = 200 # Framebuffer attachmment type: stencil
+
+  # enum rlFramebufferAttachTextureType
+  # Framebuffer texture attachment type
   RL_ATTACHMENT_CUBEMAP_POSITIVE_X = 0 # Framebuffer texture attachment type: cubemap, +X side
   RL_ATTACHMENT_CUBEMAP_NEGATIVE_X = 1 # Framebuffer texture attachment type: cubemap, -X side
   RL_ATTACHMENT_CUBEMAP_POSITIVE_Y = 2 # Framebuffer texture attachment type: cubemap, +Y side
@@ -190,8 +219,12 @@ module Raylib
   RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5 # Framebuffer texture attachment type: cubemap, -Z side
   RL_ATTACHMENT_TEXTURE2D = 100 # Framebuffer texture attachment type: texture2d
   RL_ATTACHMENT_RENDERBUFFER = 200 # Framebuffer texture attachment type: renderbuffer
+
+  # enum rlCullMode
+  # Face culling mode
   RL_CULL_FACE_FRONT = 0
   RL_CULL_FACE_BACK = 1
+
 
   # Typedef
 
@@ -294,7 +327,7 @@ module Raylib
       # @return [void]
       [:rlMultMatrixf, :rlMultMatrixf, [:pointer], :void],
 
-      # rlFrustum : 
+      # rlFrustum
       # @param left [double]
       # @param right [double]
       # @param bottom [double]
@@ -304,7 +337,7 @@ module Raylib
       # @return [void]
       [:rlFrustum, :rlFrustum, [:double, :double, :double, :double, :double, :double], :void],
 
-      # rlOrtho : 
+      # rlOrtho
       # @param left [double]
       # @param right [double]
       # @param bottom [double]
@@ -722,17 +755,17 @@ module Raylib
       # @return [void]
       [:rlUpdateVertexBufferElements, :rlUpdateVertexBufferElements, [:uint, :pointer, :int, :int], :void],
 
-      # rlUnloadVertexArray : 
+      # rlUnloadVertexArray
       # @param vaoId [unsigned int]
       # @return [void]
       [:rlUnloadVertexArray, :rlUnloadVertexArray, [:uint], :void],
 
-      # rlUnloadVertexBuffer : 
+      # rlUnloadVertexBuffer
       # @param vboId [unsigned int]
       # @return [void]
       [:rlUnloadVertexBuffer, :rlUnloadVertexBuffer, [:uint], :void],
 
-      # rlSetVertexAttribute : 
+      # rlSetVertexAttribute
       # @param index [unsigned int]
       # @param compSize [int]
       # @param type [int]
@@ -742,7 +775,7 @@ module Raylib
       # @return [void]
       [:rlSetVertexAttribute, :rlSetVertexAttribute, [:uint, :int, :int, :bool, :int, :pointer], :void],
 
-      # rlSetVertexAttributeDivisor : 
+      # rlSetVertexAttributeDivisor
       # @param index [unsigned int]
       # @param divisor [int]
       # @return [void]
@@ -756,27 +789,27 @@ module Raylib
       # @return [void]
       [:rlSetVertexAttributeDefault, :rlSetVertexAttributeDefault, [:int, :pointer, :int, :int], :void],
 
-      # rlDrawVertexArray : 
+      # rlDrawVertexArray
       # @param offset [int]
       # @param count [int]
       # @return [void]
       [:rlDrawVertexArray, :rlDrawVertexArray, [:int, :int], :void],
 
-      # rlDrawVertexArrayElements : 
+      # rlDrawVertexArrayElements
       # @param offset [int]
       # @param count [int]
       # @param buffer [const void *]
       # @return [void]
       [:rlDrawVertexArrayElements, :rlDrawVertexArrayElements, [:int, :int, :pointer], :void],
 
-      # rlDrawVertexArrayInstanced : 
+      # rlDrawVertexArrayInstanced
       # @param offset [int]
       # @param count [int]
       # @param instances [int]
       # @return [void]
       [:rlDrawVertexArrayInstanced, :rlDrawVertexArrayInstanced, [:int, :int, :int], :void],
 
-      # rlDrawVertexArrayElementsInstanced : 
+      # rlDrawVertexArrayElementsInstanced
       # @param offset [int]
       # @param count [int]
       # @param buffer [const void *]

@@ -105,7 +105,9 @@ def generate_enum(ctx, indent = "", json_schema=None):
     if json_schema:
         json_enums = json_schema['enums']
 
-    for enum_name, enum_value in ctx.decl_enums.items():
+    enum_typedefs = {}
+
+    for enum_value in ctx.decl_enums.values():
         for enum in enum_value:
             json_enum_value = None
             for json_enum in json_enums:
@@ -114,10 +116,28 @@ def generate_enum(ctx, indent = "", json_schema=None):
                 if json_enum_value:
                     break
             enum_value_description = json_enum_value[0]['description'] if json_enum_value != None else ""
-            if enum_value_description != "":
-                print(indent + "%s = %s # %s" % (enum[0], enum[1], enum_value_description.strip()), file = sys.stdout)
+
+            enum_typedef_name = ctx.enum_constants[enum[0]].typedef_name
+            if enum_typedef_name not in enum_typedefs.keys():
+                enum_typedefs[enum_typedef_name] = []
+            enum_typedefs[enum_typedef_name].append([enum[0], enum[1], enum_value_description])
+
+    enum_descriptions = {}
+
+    for json_enum in json_enums:
+        enum_descriptions[json_enum['name']] = json_enum['description']
+
+    for enum_typedef_name, enum_info_array in enum_typedefs.items():
+        print(indent + "# enum " + enum_typedef_name)
+        if enum_typedef_name in enum_descriptions.keys():
+            print(indent + "# " + enum_descriptions[enum_typedef_name])
+        for enum_info in enum_info_array:
+            if enum_info[2] != "":
+                print(indent + "%s = %s # %s" % (enum_info[0], enum_info[1], enum_info[2]), file = sys.stdout)
             else:
-                print(indent + "%s = %s" % (enum[0], enum[1]), file = sys.stdout)
+                print(indent + "%s = %s" % (enum_info[0], enum_info[1]), file = sys.stdout)
+        print("", file = sys.stdout)
+
 
 def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_prefix != "":
@@ -237,7 +257,10 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     for func_entry in func_entries:
         entry_str = f':{func_entry.explicit_name}, :{func_entry.original_name}, [{func_entry.args}], {func_entry.retval}'
         print('', file = sys.stdout)
-        print(indent + f'    # {func_entry.original_name} : {func_entry.description}', file = sys.stdout)
+        if func_entry.description != "":
+            print(indent + f'    # {func_entry.explicit_name} : {func_entry.description}', file = sys.stdout)
+        else:
+            print(indent + f'    # {func_entry.explicit_name}', file = sys.stdout)
         for arg_description in func_entry.arg_descriptions:
             print(indent + f'    # @param {arg_description[1]} [{arg_description[0]}]', file = sys.stdout)
         print(indent + f'    # @return [{func_entry.ret_description}]', file = sys.stdout)
