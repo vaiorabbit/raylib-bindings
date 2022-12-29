@@ -48,53 +48,103 @@ module Raylib
   # Math helper
   #
 
-  def Vector2.create(x = 0, y = 0)
-    instance = Vector2.new
-    instance[:x] = x
-    instance[:y] = y
-    instance
+  class Vector2
+    def self.create(x = 0, y = 0)
+      Vector2.new.set(x, y)
+    end
+
+    def self.copy_from(vec)
+      Vector2.create(vec[:x], vec[:y])
+    end
+
+    def set(x, y)
+      self[:x] = x
+      self[:y] = y
+      self
+    end
+
+    def x() self[:x] end
+    def x=(v) self[:x] = v end
+    def y() self[:y] end
+    def y=(v) self[:y] = v end
   end
 
-  def Vector2.copy_from(vec)
-    Vector2.create(vec[:x], vec[:y])
+  class Vector3
+    def self.create(x = 0, y = 0, z = 0)
+      Vector3.new.set(x, y, z)
+    end
+
+    def self.copy_from(vec)
+      Vector3.create(vec[:x], vec[:y], vec[:z])
+    end
+
+    def set(x, y, z)
+      self[:x] = x
+      self[:y] = y
+      self[:z] = z
+      self
+    end
+
+    def x() self[:x] end
+    def x=(v) self[:x] = v end
+    def y() self[:y] end
+    def y=(v) self[:y] = v end
+    def z() self[:z] end
+    def z=(v) self[:z] = v end
   end
 
-  def Vector3.create(x = 0, y = 0, z = 0)
-    instance = Vector3.new
-    instance[:x] = x
-    instance[:y] = y
-    instance[:z] = z
-    instance
+  class Vector4
+    def self.create(x = 0, y = 0, z = 0, w = 0)
+      Vector4.new.set(x, y, z, w)
+    end
+
+    def self.copy_from(vec)
+      Vector4.create(vec[:x], vec[:y], vec[:z], vec[:w])
+    end
+
+    def set(x, y, z, w)
+      self[:x] = x
+      self[:y] = y
+      self[:z] = z
+      self[:w] = w
+      self
+    end
+
+    def x() self[:x] end
+    def x=(v) self[:x] = v end
+    def y() self[:y] end
+    def y=(v) self[:y] = v end
+    def z() self[:z] end
+    def z=(v) self[:z] = v end
+    def w() self[:w] end
+    def w=(v) self[:w] = v end
   end
 
-  def Vector3.copy_from(vec)
-    Vector3.create(vec[:x], vec[:y], vec[:z])
-  end
+  class Quaternion
+    def self.create(x = 0, y = 0, z = 0, w = 0)
+      Quaternion.new.set(x, y, z, w)
+    end
 
-  def Vector4.create(x = 0, y = 0, z = 0, w = 0)
-    instance = Vector4.new
-    instance[:x] = x
-    instance[:y] = y
-    instance[:z] = z
-    instance[:w] = w
-    instance
-  end
+    def self.copy_from(quat)
+      Quaternion.create(quat[:x], quat[:y], quat[:z], quat[:w])
+    end
 
-  def Vector4.copy_from(vec)
-    Vector4.create(vec[:x], vec[:y], vec[:z], vec[:w])
-  end
+    def set(x, y, z, w)
+      self[:x] = x
+      self[:y] = y
+      self[:z] = z
+      self[:w] = w
+      self
+    end
 
-  def Quaternion.create(x = 0, y = 0, z = 0, w = 0)
-    instance = Quaternion.new
-    instance[:x] = x
-    instance[:y] = y
-    instance[:z] = z
-    instance[:w] = w
-    instance
-  end
-
-  def Quaternion.copy_from(quat)
-    Quaternion.create(quat[:x], quat[:y], quat[:z], quat[:w])
+    def x() self[:x] end
+    def x=(v) self[:x] = v end
+    def y() self[:y] end
+    def y=(v) self[:y] = v end
+    def z() self[:z] end
+    def z=(v) self[:z] = v end
+    def w() self[:w] end
+    def w=(v) self[:w] = v end
   end
 
   def Rectangle.create(x = 0, y = 0, width = 0, height = 0)
@@ -277,4 +327,39 @@ module Raylib
     end
     MemFree(anim_ptrs)
   end
+
+  #
+  # Camera helper
+  #
+
+  class Camera
+    def position
+      self[:position]
+    end
+
+    def target
+      self[:target]
+    end
+
+    def up
+      self[:up]
+    end
+
+    def fovy
+      self[:fovy]
+    end
+
+    def fovy=(v)
+      self[:fovy] = v
+    end
+
+    def projection
+      self[:projection]
+    end
+
+    def projection=(v)
+      self[:projection] = v
+    end
+  end
+
 end
