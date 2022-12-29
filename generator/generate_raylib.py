@@ -44,6 +44,6 @@ if __name__ == "__main__":
     raylib_generator.generate(ctx,
                               module_name = 'raylib',
                               struct_alias = RAYLIB_STRUCT_ALIAS,
-                              function_prefix = FUNCTION_PREFIX,
+                              #function_prefix = FUNCTION_PREFIX,
                               json_schema = api_schema
                               )

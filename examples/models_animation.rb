@@ -18,22 +18,15 @@ if __FILE__ == $PROGRAM_NAME
   model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/iqm/guy.iqm") # Load the animated model mesh and basic data
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/iqm/guytex.png") # Load model texture and set material
 
-  materials_0 = Material.new(model[:materials])
-  SetMaterialTexture(materials_0, MATERIAL_MAP_ALBEDO, texture)
+  SetMaterialTexture(GetModelMaterial(model, 0), MATERIAL_MAP_ALBEDO, texture)
 
-  position = Vector3.create(0, 0, 0)
+  position = Vector3.create
 
   # Load animation data
-  animsCount_buf = FFI::MemoryPointer.new(:int, 1)
-  anim_ptrs = LoadModelAnimations(RAYLIB_MODELS_PATH + "resources/models/iqm/guyanim.iqm", animsCount_buf)
-  animsCount = animsCount_buf.read_int
-  anims = animsCount.times.map do |i|
-    ModelAnimation.new(anim_ptrs + i * ModelAnimation.size)
-  end
+  anims, anim_ptrs = LoadAndAllocateModelAnimations(RAYLIB_MODELS_PATH + "resources/models/iqm/guyanim.iqm")
   animFrameCounter = 0
 
   SetCameraMode(camera, CAMERA_ORBITAL)
-
   SetTargetFPS(60)
 
   framePoses = anims[0][:framePoses] # Transform**
@@ -66,13 +59,7 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   UnloadTexture(texture)
-
-  # Unload model animations data
-  animsCount.times do |i|
-    UnloadModelAnimation(anims[i])
-  end
-  MemFree(anim_ptrs)
-
+  UnloadAndFreeModelAnimations(anims, anim_ptrs)
   UnloadModel(model)
 
   CloseWindow()

@@ -130,4 +130,76 @@ module Raylib
   def MatrixToFloat(mat)
     MatrixToFloatV(mat)[:v].to_a
   end
+
+  #
+  # Model helper
+  #
+
+  # DrawModelEx : Draw a model with extended parameters
+  # @param model [Model]
+  # @param position [Vector3]
+  # @param rotationAxis [Vector3]
+  # @param rotationAngle [float]
+  # @param scale [Vector3]
+  # @param tint [Color]
+  # @return [void]
+  def DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    # [NOTE] Fixing unintended matrix modification
+    # - In C, DrawModelEx uses the whole copy of `model` on stack, which will never affect the content of original `model`.
+    #   But Ruby FFI seems to pass the reference of `model` to DrawModelEx, which results in transform accumulation (e.g.:`model` get rotated by `rotationAngle` around `rotationAxis` every frame).
+    #   So here I copy the transform into `mtx_clone` and copy back this to the original after finished calling DrawModelEx.
+    # - Other DrawXXX members (DrawModel, DrawModelWires, DrawModelWiresEx) are free from this problem.
+    #   - They call DrawModelEx in C layer, which will use the copy of `model` on stack.
+    mtx_clone = model[:transform].clone
+    internalDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+    model[:transform] = mtx_clone
+  end
+
+  class Model
+    def get_material(index)
+      Material.new(self[:materials] + index * Material.size)
+    end
+
+    def get_material_count
+      self[:materialCount]
+    end
+  end
+
+  # GetModelMaterial (ruby raylib original)
+  # @param model [Model]
+  # @param index [int] 0 ~ materialCount
+  # @return [Material]
+  def GetModelMaterial(model, index = 0)
+    model.get_material(index)
+  end
+
+  # GetModelMaterialCount (ruby raylib original)
+  # @param model [Model]
+  # @return [int]
+  def GetModelMaterialCount(model)
+    model.get_material_count
+  end
+
+  # LoadAndAllocateModelAnimations : (ruby raylib original)
+  # @param fileName [const char *]
+  # @return array of ModelAnimation and pointer to loaded memory
+  def LoadAndAllocateModelAnimations(fileName)
+    animsCount_buf = FFI::MemoryPointer.new(:uint, 1)
+    anim_ptrs = LoadModelAnimations(fileName, animsCount_buf)
+    animsCount = animsCount_buf.read_uint
+    anims = animsCount.times.map do |i|
+      ModelAnimation.new(anim_ptrs + i * ModelAnimation.size)
+    end
+    return anims, anim_ptrs
+  end
+
+  # UnloadAndFreeModelAnimations : (ruby raylib original)
+  # @param anims [array of ModelAnimation]
+  # @param anim_ptrs [pointer to loaded memory]
+  def UnloadAndFreeModelAnimations(anims, anim_ptrs)
+    anims.each do |anim|
+      UnloadModelAnimation(anim)
+    end
+    MemFree(anim_ptrs)
+  end
 end

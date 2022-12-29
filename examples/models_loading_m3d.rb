@@ -28,12 +28,8 @@ if __FILE__ == $PROGRAM_NAME
   animPlaying = false # Store anim state, what to draw
 
   # Load animation data
-  animsCount_buf = FFI::MemoryPointer.new(:uint, 1)
-  anim_ptrs = LoadModelAnimations(modelFileName, animsCount_buf)
-  animsCount = animsCount_buf.read_uint
-  anims = animsCount.times.map do |i|
-    ModelAnimation.new(anim_ptrs + i * ModelAnimation.size)
-  end
+  anims, anim_ptrs = LoadAndAllocateModelAnimations(modelFileName)
+  animsCount = anims.length
   animFrameCounter = 0
   animId = 0
 
@@ -119,10 +115,7 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  animsCount.times do |i|
-    UnloadModelAnimation(anims[i])
-  end
-  MemFree(anim_ptrs)
+  UnloadAndFreeModelAnimations(anims, anim_ptrs)
 
   UnloadModel(model)
 
