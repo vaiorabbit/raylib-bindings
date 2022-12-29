@@ -1,6 +1,7 @@
 2022-12-29  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator: Now generates enum descriptions
+	* Fixed several codes according to Rubocop warnings
 
 2022-12-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 

@@ -1,5 +1,7 @@
+archive/
 physac_dll/build
 raygui_dll/build
 raylib_dll/build
 generator/build
+generator/backup
 __pycache__
