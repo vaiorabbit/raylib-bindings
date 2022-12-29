@@ -1104,6 +1104,4 @@ module Raylib
       warn "[Warning] Failed to import #{entry[0]} (#{e})."
     end
   end
-
 end
-

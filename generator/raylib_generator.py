@@ -11,9 +11,7 @@ PREFIX = """# Yet another raylib wrapper for Ruby
 require 'ffi'
 """
 
-POSTFIX = """
-end
-"""
+POSTFIX = 'end'
 
 ####################################################################################################
 
@@ -272,7 +270,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
       attach_function entry[0], entry[1], entry[2], entry[3]
     rescue FFI::NotFoundError => e
       warn "[Warning] Failed to import #{s}."
-    end""".format(s="{entry[0]} (#{e})"), file = sys.stdout)
+    end""".format(s="{entry[0]} (#{e})"))
     #print(indent + "  end", file = sys.stdout)
 
     indent = "  "
@@ -320,7 +318,8 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
     if len(ctx.decl_functions) > 0:
         print(indent + "# Function\n", file = sys.stdout)
         generate_function(ctx, indent, module_name, function_prefix, function_postfix, json_schema)
-        print(postfix, file = sys.stdout)
+
+    print(postfix, file = sys.stdout)
 
 if __name__ == "__main__":
     pass
