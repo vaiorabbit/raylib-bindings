@@ -38,7 +38,7 @@ if __FILE__ == $PROGRAM_NAME
   SetTargetFPS(60)
 
   until WindowShouldClose()
-    oldCamPos = Vector3.create(camera[:position][:x], camera[:position][:y], camera[:position][:z])  # Store old camera position # [Ruby-raylib TODO] Effient vector copy
+    oldCamPos = Vector3.copy_from(camera[:position])
 
     UpdateCamera(camera.pointer)
 
@@ -70,7 +70,7 @@ if __FILE__ == $PROGRAM_NAME
         if (pixel[:r] == 255) && # Collision: white pixel, only check R channel
            CheckCollisionCircleRec(playerPos, playerRadius, Rectangle.create(mapPosition[:x] - 0.5 + x*1.0, mapPosition[:z] - 0.5 + y*1.0, 1.0, 1.0))
           # Collision detected, reset camera position
-          camera[:position] = Vector3.create(oldCamPos[:x], oldCamPos[:y], oldCamPos[:z]) # [Ruby-raylib TODO] Effient vector copy
+          camera[:position] = Vector3.copy_from(oldCamPos)
         end
       end
     end
