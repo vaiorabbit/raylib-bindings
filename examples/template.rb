@@ -20,6 +20,8 @@ when /mswin|msys|mingw|cygwin/
   Raylib.load_lib(shared_lib_path + 'libraylib.dll', raygui_libpath: shared_lib_path + 'raygui.dll', physac_libpath: shared_lib_path + 'physac.dll')
 when /darwin/
   Raylib.load_lib(shared_lib_path + 'libraylib.dylib', raygui_libpath: shared_lib_path + 'raygui.dylib', physac_libpath: shared_lib_path + 'physac.dylib')
+when /linux/
+  Raylib.load_lib(shared_lib_path + 'libraylib.so', raygui_libpath: shared_lib_path + 'raygui.so', physac_libpath: shared_lib_path + 'physac.so')
 else
   raise RuntimeError, "Unknown OS: #{RUBY_PLATFORM}"
 end
@@ -37,11 +39,11 @@ if __FILE__ == $PROGRAM_NAME
   # Camera
   camera = Camera.new
   reset_camera = lambda {
-    camera[:position] = Vector3.create(0.0, 10.0, 10.0)
-    camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-    camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-    camera[:fovy] = 45.0
-    camera[:projection] = CAMERA_PERSPECTIVE
+    camera.position.set(0.0, 10.0, 10.0)
+    camera.target.set(0.0, 0.0, 0.0)
+    camera.up.set(0.0, 1.0, 0.0)
+    camera.fovy = 45.0
+    camera.projection = CAMERA_PERSPECTIVE
   }
   reset_camera.call
   SetCameraMode(camera, CAMERA_FREE)
@@ -76,29 +78,29 @@ if __FILE__ == $PROGRAM_NAME
     move[:z] += speed if IsKeyDown(KEY_DOWN)
     move[:z] -= speed if IsKeyDown(KEY_UP)
 
-    to_camera = Vector3Normalize(Vector3.create(camera[:position][:x], 0, camera[:position][:z]))
+    to_camera = Vector3Normalize(Vector3.create(camera.position.x, 0, camera.position.z))
     rotate_y = QuaternionFromVector3ToVector3(Vector3.create(0, 0, 1), to_camera)
     move = Vector3RotateByQuaternion(move, rotate_y)
 
     player_pos = Vector3Add(player_pos, move)
-    player_screen_pos = GetWorldToScreen(Vector3.create(player_pos[:x], player_pos[:y] + 2.5, player_pos[:z]), camera)
+    player_screen_pos = GetWorldToScreen(Vector3.create(player_pos.x, player_pos.y + 2.5, player_pos.z), camera)
 
     # Check collision status
     collision = false
 
-    player_bbox = BoundingBox.create(player_pos[:x] - player_size[:x]/2,
-                                     player_pos[:y] - player_size[:y]/2,
-                                     player_pos[:z] - player_size[:z]/2,
-                                     player_pos[:x] + player_size[:x]/2,
-                                     player_pos[:y] + player_size[:y]/2,
-                                     player_pos[:z] + player_size[:z]/2)
+    player_bbox = BoundingBox.create(player_pos.x - player_size.x/2,
+                                     player_pos.y - player_size.y/2,
+                                     player_pos.z - player_size.z/2,
+                                     player_pos.x + player_size.x/2,
+                                     player_pos.y + player_size.y/2,
+                                     player_pos.z + player_size.z/2)
 
-    obstacle_cube_bbox = BoundingBox.create(obstacle_cube_pos[:x] - obstacle_cube_size[:x]/2,
-                                            obstacle_cube_pos[:y] - obstacle_cube_size[:y]/2,
-                                            obstacle_cube_pos[:z] - obstacle_cube_size[:z]/2,
-                                            obstacle_cube_pos[:x] + obstacle_cube_size[:x]/2,
-                                            obstacle_cube_pos[:y] + obstacle_cube_size[:y]/2,
-                                            obstacle_cube_pos[:z] + obstacle_cube_size[:z]/2)
+    obstacle_cube_bbox = BoundingBox.create(obstacle_cube_pos.x - obstacle_cube_size.x/2,
+                                            obstacle_cube_pos.y - obstacle_cube_size.y/2,
+                                            obstacle_cube_pos.z - obstacle_cube_size.z/2,
+                                            obstacle_cube_pos.x + obstacle_cube_size.x/2,
+                                            obstacle_cube_pos.y + obstacle_cube_size.y/2,
+                                            obstacle_cube_pos.z + obstacle_cube_size.z/2)
 
     # Check collisions player vs obstacle_cube
     collision = true if CheckCollisionBoxes(player_bbox, obstacle_cube_bbox)
@@ -118,8 +120,8 @@ if __FILE__ == $PROGRAM_NAME
         DrawCube(player_pos, 2.0, 2.0, 2.0, collision ? Fade(ruby_red, 0.25) : ruby_red)
         DrawCubeWires(player_pos, 2.0, 2.0, 2.0, MAROON)
         # Obstacle cube
-        DrawCube(obstacle_cube_pos, obstacle_cube_size[:x], obstacle_cube_size[:y], obstacle_cube_size[:z], GRAY)
-        DrawCubeWires(obstacle_cube_pos, obstacle_cube_size[:x], obstacle_cube_size[:y], obstacle_cube_size[:z], DARKGRAY)
+        DrawCube(obstacle_cube_pos, obstacle_cube_size.x, obstacle_cube_size.y, obstacle_cube_size.z, GRAY)
+        DrawCubeWires(obstacle_cube_pos, obstacle_cube_size.x, obstacle_cube_size.y, obstacle_cube_size.z, DARKGRAY)
         # Obstacle sphere
         DrawSphere(obstacle_sphere_pos, obstacle_sphere_size, GRAY)
         DrawSphereWires(obstacle_sphere_pos, obstacle_sphere_size, 16, 16, DARKGRAY)
@@ -129,7 +131,7 @@ if __FILE__ == $PROGRAM_NAME
 
       ## HUD
       # Text over the red cube
-      DrawText("Player HP: 100 / 100", player_screen_pos[:x] - MeasureText("Player HP: 100/100", 20)/2, player_screen_pos[:y], 20, BLACK)
+      DrawText("Player HP: 100 / 100", player_screen_pos.x - MeasureText("Player HP: 100/100", 20)/2, player_screen_pos.y, 20, BLACK)
       # Help message
       DrawRectangle(10, screen_height - 100, 300, 80, Fade(MAROON, 0.25))
       DrawRectangleLines(10, screen_height - 100, 300, 80, ruby_red)

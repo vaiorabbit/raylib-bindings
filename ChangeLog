@@ -2,6 +2,7 @@
 
 	* generator: Now generates enum descriptions
 	* Fixed several codes according to Rubocop warnings
+	* lib/raylib_helper.rb: Added several helper functions/classes
 
 2022-12-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
