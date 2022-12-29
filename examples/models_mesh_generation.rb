@@ -60,10 +60,7 @@ if __FILE__ == $PROGRAM_NAME
 
   # Set checked texture as default diffuse component for all models material
   models.each do |model|
-    # [Ruby-raylib TODO] prepare convenient accessors for Material/Model members
-    materials_0 = Material.new(model[:materials])
-    materialMap = MaterialMap.new(materials_0[:maps])
-    materialMap[:texture] = texture # Set map diffuse texture
+    SetMaterialTexture(model.material(0), MATERIAL_MAP_ALBEDO, texture)
   end
 
   # Define the camera to look into our 3d world

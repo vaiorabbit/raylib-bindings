@@ -23,10 +23,7 @@ if __FILE__ == $PROGRAM_NAME
 
   # NOTE: By default each cube is mapped to one part of texture atlas
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/cubicmap_atlas.png") # Load map texture
-  # [Ruby-raylib TODO] prepare convenient accessors for Material/Model members
-  materials_0 = Material.new(model[:materials])
-  materialMap = MaterialMap.new(materials_0[:maps])
-  materialMap[:texture] = texture # Set map diffuse texture
+  SetMaterialTexture(model.material(0), MATERIAL_MAP_ALBEDO, texture)
 
   mapPosition = Vector3.create(-16.0, 0.0, -8.0) # Set model position
 

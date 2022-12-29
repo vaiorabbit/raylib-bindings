@@ -22,10 +22,7 @@ if __FILE__ == $PROGRAM_NAME
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/obj/turret_diffuse.png")
 
   # Set map diffuse texture
-  # [Ruby-raylib TODO] prepare convenient accessors for Material/Model members
-  materials_0 = Material.new(tower[:materials])
-  materialMap = MaterialMap.new(materials_0[:maps]) # == model.materials.maps[MATERIAL_MAP_DIFFUSE]
-  materialMap[:texture] = texture # Set map diffuse texture
+  SetMaterialTexture(tower.material(0), MATERIAL_MAP_ALBEDO, texture)
 
   towerPos = Vector3.create(0.0, 0.0, 0.0)
   towerBBox = GetMeshBoundingBox(Mesh.new(tower[:meshes]))

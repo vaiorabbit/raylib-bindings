@@ -20,10 +20,7 @@ if __FILE__ == $PROGRAM_NAME
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/obj/plane_diffuse.png")  # Load model texture
 
   # Set map diffuse texture
-  # [Ruby-raylib TODO] prepare convenient accessors for Material/Model members
-  materials_0 = Material.new(model[:materials])
-  materialMap = MaterialMap.new(materials_0[:maps]) # == model.materials.maps[MATERIAL_MAP_DIFFUSE]
-  materialMap[:texture] = texture # Set map diffuse texture
+  SetMaterialTexture(model.material(0), MATERIAL_MAP_ALBEDO, texture)
 
   pitch = 0.0
   roll = 0.0

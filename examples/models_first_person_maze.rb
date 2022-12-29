@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera[:position] = Vector3.create(0.2, 0.4, 0.2)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+  camera.position.set(0.2, 0.4, 0.2)
+  camera.target.set(0.0, 0.0, 0.0)
+  camera.up.set(0.0, 1.0, 0.0)
+  camera.fovy = 45.0
+  camera.projection = CAMERA_PERSPECTIVE
 
   imMap = LoadImage(RAYLIB_MODELS_PATH + "resources/cubicmap.png") # Load cubicmap image (RAM)
   cubicmap = LoadTextureFromImage(imMap)                           # Convert image to texture to display (VRAM)
@@ -22,10 +22,7 @@ if __FILE__ == $PROGRAM_NAME
 
   # NOTE: By default each cube is mapped to one part of texture atlas
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/cubicmap_atlas.png") # Load map texture
-  # [Ruby-raylib TODO] prepare convenient accessors for Material/Model members
-  materials_0 = Material.new(model[:materials])
-  materialMap = MaterialMap.new(materials_0[:maps])
-  materialMap[:texture] = texture # Set map diffuse texture
+  SetMaterialTexture(model.material(0), MATERIAL_MAP_ALBEDO, texture)
 
   # Get map image data to be used for collision detection
   mapPixels = LoadImageColors(imMap)
@@ -38,16 +35,16 @@ if __FILE__ == $PROGRAM_NAME
   SetTargetFPS(60)
 
   until WindowShouldClose()
-    oldCamPos = Vector3.copy_from(camera[:position])
+    oldCamPos = Vector3.copy_from(camera.position)
 
     UpdateCamera(camera.pointer)
 
     # Check player collision (we simplify to 2D collision detection)
-    playerPos = Vector2.create(camera[:position][:x], camera[:position][:z])
+    playerPos = Vector2.create(camera.position.x, camera.position.z)
     playerRadius = 0.1 # Collision radius (player is modelled as a cilinder for collision)
 
-    playerCellX = (playerPos[:x] - mapPosition[:x] + 0.5).to_i
-    playerCellY = (playerPos[:y] - mapPosition[:z] + 0.5).to_i
+    playerCellX = (playerPos.x - mapPosition.x + 0.5).to_i
+    playerCellY = (playerPos.y - mapPosition.z + 0.5).to_i
 
     # Out-of-limits security check
     if playerCellX < 0
@@ -70,7 +67,7 @@ if __FILE__ == $PROGRAM_NAME
         if (pixel[:r] == 255) && # Collision: white pixel, only check R channel
            CheckCollisionCircleRec(playerPos, playerRadius, Rectangle.create(mapPosition[:x] - 0.5 + x*1.0, mapPosition[:z] - 0.5 + y*1.0, 1.0, 1.0))
           # Collision detected, reset camera position
-          camera[:position] = Vector3.copy_from(oldCamPos)
+          camera.position.set(oldCamPos.x, oldCamPos.y, oldCamPos.z)
         end
       end
     end
@@ -90,7 +87,7 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  UnloadImageColors(mapPixels); # Unload color array
+  UnloadImageColors(mapPixels)  # Unload color array
   UnloadTexture(cubicmap)       # Unload cubicmap texture
   UnloadTexture(texture)        # Unload map texture
   UnloadModel(model)            # Unload map model

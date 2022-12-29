@@ -264,9 +264,7 @@ if __FILE__ == $PROGRAM_NAME
     # Set the selected emoji and copy its text to clipboard
     if IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && ($hovered != -1) && ($hovered != $selected)
       $selected = $hovered
-      # TODO Copy vector elements in single operaor
-      selectedPos[:x] = hoveredPos[:x]
-      selectedPos[:y] = hoveredPos[:y]
+      selectedPos.set(hoveredPos.x, hoveredPos.y)
       SetClipboardText($messages[$emoji[$selected].message].text)
     end
 
@@ -290,9 +288,7 @@ if __FILE__ == $PROGRAM_NAME
       else
         DrawTextEx(fontEmoji, txt, pos, fontEmoji[:baseSize].to_f, 1.0, em.color)
         $hovered = i
-        # TODO Copy vector elements in single operaor
-        hoveredPos[:x] = pos[:x]
-        hoveredPos[:y] = pos[:y]
+        hoveredPos.set(pos.x, pos.y)
       end
 
       if (i != 0) && (i%EMOJI_PER_WIDTH == 0)

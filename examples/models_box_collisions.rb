@@ -8,10 +8,10 @@ if __FILE__ == $PROGRAM_NAME
 
   # Initialize the camera
   camera = Camera.new
-  camera[:position] = Vector3.create(0.0, 10.0, 10.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
+  camera.position.set(0.0, 10.0, 10.0)
+  camera.target.set(0.0, 0.0, 0.0)
+  camera.up.set(0.0, 1.0, 0.0)
+  camera.fovy = 45.0
 
   playerPosition = Vector3.create(0.0, 1.0, 2.0)
   playerSize = Vector3.create(1.0, 2.0, 1.0)
@@ -31,30 +31,30 @@ if __FILE__ == $PROGRAM_NAME
 
     # Move player
     if IsKeyDown(KEY_RIGHT)
-      playerPosition[:x] += 0.2
+      playerPosition.x += 0.2
     elsif IsKeyDown(KEY_LEFT)
-      playerPosition[:x] -= 0.2
+      playerPosition.x -= 0.2
     elsif IsKeyDown(KEY_DOWN)
-      playerPosition[:z] += 0.2
+      playerPosition.z += 0.2
     elsif IsKeyDown(KEY_UP)
-      playerPosition[:z] -= 0.2
+      playerPosition.z -= 0.2
     end
 
     collision = false
 
-    playerBox = BoundingBox.create(playerPosition[:x] - playerSize[:x]/2,
-                                   playerPosition[:y] - playerSize[:y]/2,
-                                   playerPosition[:z] - playerSize[:z]/2,
-                                   playerPosition[:x] + playerSize[:x]/2,
-                                   playerPosition[:y] + playerSize[:y]/2,
-                                   playerPosition[:z] + playerSize[:z]/2)
+    playerBox = BoundingBox.create(playerPosition.x - playerSize.x/2,
+                                   playerPosition.y - playerSize.y/2,
+                                   playerPosition.z - playerSize.z/2,
+                                   playerPosition.x + playerSize.x/2,
+                                   playerPosition.y + playerSize.y/2,
+                                   playerPosition.z + playerSize.z/2)
 
-    enemyBox = BoundingBox.create(enemyBoxPos[:x] - enemyBoxSize[:x]/2,
-                                  enemyBoxPos[:y] - enemyBoxSize[:y]/2,
-                                  enemyBoxPos[:z] - enemyBoxSize[:z]/2,
-                                  enemyBoxPos[:x] + enemyBoxSize[:x]/2,
-                                  enemyBoxPos[:y] + enemyBoxSize[:y]/2,
-                                  enemyBoxPos[:z] + enemyBoxSize[:z]/2)
+    enemyBox = BoundingBox.create(enemyBoxPos.x - enemyBoxSize.x/2,
+                                  enemyBoxPos.y - enemyBoxSize.y/2,
+                                  enemyBoxPos.z - enemyBoxSize.z/2,
+                                  enemyBoxPos.x + enemyBoxSize.x/2,
+                                  enemyBoxPos.y + enemyBoxSize.y/2,
+                                  enemyBoxPos.z + enemyBoxSize.z/2)
 
     # Check collisions player vs enemy-box
     collision = true if CheckCollisionBoxes(playerBox, enemyBox)
@@ -68,8 +68,8 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
       BeginMode3D(camera)
         # Draw enemy-box
-        DrawCube(enemyBoxPos, enemyBoxSize[:x], enemyBoxSize[:y], enemyBoxSize[:z], GRAY)
-        DrawCubeWires(enemyBoxPos, enemyBoxSize[:x], enemyBoxSize[:y], enemyBoxSize[:z], DARKGRAY)
+        DrawCube(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, GRAY)
+        DrawCubeWires(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, DARKGRAY)
 
         # Draw enemy-sphere
         DrawSphere(enemySpherePos, enemySphereSize, GRAY)
