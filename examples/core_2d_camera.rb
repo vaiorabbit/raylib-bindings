@@ -14,21 +14,21 @@ if __FILE__ == $PROGRAM_NAME
   spacing = 0
 
   MAX_BUILDINGS.times do |i|
-    buildings[i][:width] = GetRandomValue(50, 200).to_f
-    buildings[i][:height] = GetRandomValue(100, 800).to_f
-    buildings[i][:y] = screenHeight - 130.0 - buildings[i][:height]
-    buildings[i][:x] = -6000.0 + spacing
+    buildings[i].width = GetRandomValue(50, 200).to_f
+    buildings[i].height = GetRandomValue(100, 800).to_f
+    buildings[i].y = screenHeight - 130.0 - buildings[i].height
+    buildings[i].x = -6000.0 + spacing
 
-    spacing += buildings[i][:width].to_i
+    spacing += buildings[i].width.to_i
 
     buildColors[i] = Color.from_u8(GetRandomValue(200, 240), GetRandomValue(200, 240), GetRandomValue(200, 250), 255)
   end
 
   camera = Camera2D.new
-  camera[:target] = Vector2.create(player[:x] + 20.0, player[:y] + 20.0)
-  camera[:offset] = Vector2.create(screenWidth / 2.0, screenHeight / 2.0)
-  camera[:rotation] = 0.0
-  camera[:zoom] = 1.0
+  camera.target.set(player.x + 20.0, player.y + 20.0)
+  camera.offset.set(screenWidth / 2.0, screenHeight / 2.0)
+  camera.rotation = 0.0
+  camera.zoom = 1.0
 
   SetTargetFPS(60)
 
@@ -36,31 +36,30 @@ if __FILE__ == $PROGRAM_NAME
 
     # Player movement
     if IsKeyDown(KEY_RIGHT)
-      player[:x] += 2
+      player.x += 2
     elsif IsKeyDown(KEY_LEFT)
-      player[:x] -= 2
+      player.x -= 2
     end
 
     # Camera target follows player
-    camera[:target][:x] = player[:x] + 20
-    camera[:target][:y] = player[:y] + 20
+    camera.target.set(player.x + 20, player.y + 20)
 
     # Camera rotation controls
     if IsKeyDown(KEY_A)
-      camera[:rotation] -= 1
+      camera.rotation -= 1
     elsif IsKeyDown(KEY_S)
-      camera[:rotation] += 1
+      camera.rotation += 1
     end
 
     # Limit camera rotation to 80 degrees (-40 to 40)
-    camera[:rotation] = camera[:rotation].clamp(-40, 40)
+    camera.rotation = camera.rotation.clamp(-40, 40)
 
     # Camera zoom controls
-    camera[:zoom] += GetMouseWheelMove() * 0.05
-    camera[:zoom] = camera[:zoom].clamp(0.1, 3.0)
+    camera.zoom += GetMouseWheelMove() * 0.05
+    camera.zoom = camera.zoom.clamp(0.1, 3.0)
 
     # Camera reset (zoom and rotation)
-    camera[:zoom], camera[:rotation] = 1.0, 0.0 if IsKeyPressed(KEY_R)
+    camera.zoom, camera.rotation = 1.0, 0.0 if IsKeyPressed(KEY_R)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)
@@ -72,8 +71,8 @@ if __FILE__ == $PROGRAM_NAME
 
         DrawRectangleRec(player, RED)
 
-        DrawLine(camera[:target][:x].to_i, -screenHeight*10, camera[:target][:x].to_i, screenHeight*10, GREEN)
-        DrawLine(-screenWidth*10, camera[:target][:y].to_i, screenWidth*10, camera[:target][:y].to_i, GREEN)
+        DrawLine(camera.target.x.to_i, -screenHeight*10, camera.target.x.to_i, screenHeight*10, GREEN)
+        DrawLine(-screenWidth*10, camera.target.y.to_i, screenWidth*10, camera.target.y.to_i, GREEN)
       EndMode2D()
 
       DrawText("SCREEN AREA", 640, 10, 20, RED)

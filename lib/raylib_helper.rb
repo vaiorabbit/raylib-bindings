@@ -161,13 +161,27 @@ module Raylib
     def w=(v) self[:w] = v end
   end
 
-  def Rectangle.create(x = 0, y = 0, width = 0, height = 0)
-    instance = Rectangle.new
-    instance[:x] = x
-    instance[:y] = y
-    instance[:width] = width
-    instance[:height] = height
-    instance
+  class Rectangle
+    def self.create(x = 0, y = 0, width = 0, height = 0)
+      Rectangle.new.set(x, y, width, height)
+    end
+
+    def set(x, y, width, height)
+      self[:x] = x
+      self[:y] = y
+      self[:width] = width
+      self[:height] = height
+      self
+    end
+
+    def x() self[:x] end
+    def x=(v) self[:x] = v end
+    def y() self[:y] end
+    def y=(v) self[:y] = v end
+    def width() self[:width] end
+    def width=(v) self[:width] = v end
+    def height() self[:height] end
+    def height=(v) self[:height] = v end
   end
 
   def BoundingBox.create(*args)
@@ -373,6 +387,32 @@ module Raylib
 
     def projection=(v)
       self[:projection] = v
+    end
+  end
+
+  class Camera2D
+    def offset
+      self[:offset]
+    end
+
+    def target
+      self[:target]
+    end
+
+    def rotation
+      self[:rotation]
+    end
+
+    def rotation=(v)
+      self[:rotation] = v
+    end
+
+    def zoom
+      self[:zoom]
+    end
+
+    def zoom=(v)
+      self[:zoom] = v
     end
   end
 
