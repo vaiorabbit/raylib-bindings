@@ -105,7 +105,7 @@ module Raylib
 
   # Function
 
-  def self.setup_physac_symbols(output_error = false)
+  def self.setup_physac_symbols
     entries = [
 
       # InitPhysics : Initializes physics system
@@ -214,11 +214,9 @@ module Raylib
       [:GetPhysicsShapeVertex, :GetPhysicsShapeVertex, [:pointer, :int], Vector2.by_value],
     ]
     entries.each do |entry|
-      begin
-        attach_function entry[0], entry[1], entry[2], entry[3]
-      rescue FFI::NotFoundError => error
-        $stderr.puts("[Warning] Failed to import #{entry[0]} (#{error}).") if output_error
-      end
+      attach_function entry[0], entry[1], entry[2], entry[3]
+    rescue FFI::NotFoundError => e
+      warn "[Warning] Failed to import #{entry[0]} (#{e})."
     end
   end
 

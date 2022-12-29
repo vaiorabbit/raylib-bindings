@@ -430,7 +430,7 @@ module Raylib
 
   # Function
 
-  def self.setup_raygui_symbols(output_error = false)
+  def self.setup_raygui_symbols
     entries = [
 
       # GuiEnable : Enable gui controls (global state)
@@ -782,11 +782,9 @@ module Raylib
       [:GuiDrawIcon, :GuiDrawIcon, [:int, :int, :int, :int, Color.by_value], :void],
     ]
     entries.each do |entry|
-      begin
-        attach_function entry[0], entry[1], entry[2], entry[3]
-      rescue FFI::NotFoundError => error
-        $stderr.puts("[Warning] Failed to import #{entry[0]} (#{error}).") if output_error
-      end
+      attach_function entry[0], entry[1], entry[2], entry[3]
+    rescue FFI::NotFoundError => e
+      warn "[Warning] Failed to import #{entry[0]} (#{e})."
     end
   end
 

@@ -45,7 +45,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
-            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin21]
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
 
@@ -72,6 +72,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
+            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin21]
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit

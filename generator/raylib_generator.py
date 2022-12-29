@@ -251,7 +251,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
 
         func_entries.append(func_entry)
 
-    print(indent + "def self.setup_%s_symbols(output_error = false)" % module_name , file = sys.stdout)
+    print(indent + "def self.setup_%s_symbols" % module_name , file = sys.stdout)
     indent = "  "
     print(indent + "  entries = [", file = sys.stdout)
     for func_entry in func_entries:
@@ -269,12 +269,11 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
 
     print(indent +
       """  entries.each do |entry|
-      begin
-        attach_function entry[0], entry[1], entry[2], entry[3]
-      rescue FFI::NotFoundError => error
-        $stderr.puts("[Warning] Failed to import #{s}.") if output_error
-      end""".format(s="{entry[0]} (#{error})"))
-    print(indent + "  end", file = sys.stdout)
+      attach_function entry[0], entry[1], entry[2], entry[3]
+    rescue FFI::NotFoundError => e
+      warn "[Warning] Failed to import #{s}."
+    end""".format(s="{entry[0]} (#{e})"), file = sys.stdout)
+    #print(indent + "  end", file = sys.stdout)
 
     indent = "  "
     print(indent + "end", file = sys.stdout)

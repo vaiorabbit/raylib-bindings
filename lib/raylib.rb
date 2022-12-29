@@ -4,40 +4,32 @@
 
 require 'ffi'
 require 'fileutils'
-require_relative 'raylib_main.rb'
-require_relative 'raymath.rb'
-require_relative 'rlgl.rb'
-require_relative 'raygui.rb'
-require_relative 'physac.rb'
+require_relative 'raylib_main'
+require_relative 'raymath'
+require_relative 'rlgl'
+require_relative 'raygui'
+require_relative 'physac'
 
 module Raylib
-
   extend FFI::Library
 
-  @@raylib_import_done = false
-  def self.load_lib(libpath, output_error = false, raygui_libpath: nil, physac_libpath: nil)
+  def self.load_lib(libpath, raygui_libpath: nil, physac_libpath: nil)
+    lib_paths = [libpath, raygui_libpath, physac_libpath].compact
 
-    unless @@raylib_import_done
-      begin
-        lib_paths = [libpath, raygui_libpath, physac_libpath].compact
+    ffi_lib_flags :now, :global
+    ffi_lib(*lib_paths)
+    setup_symbols
 
-        ffi_lib_flags :now, :global
-        ffi_lib *lib_paths
-        setup_symbols(output_error)
-
-        setup_raygui_symbols(output_error) if raygui_libpath != nil
-        setup_physac_symbols(output_error) if physac_libpath != nil
-      rescue => error
-        puts error
-      end
-    end
-
+    setup_raygui_symbols unless raygui_libpath.nil?
+    setup_physac_symbols unless physac_libpath.nil?
+  rescue LoadError => e
+    warn e
   end
 
-  def self.setup_symbols(output_error)
-    setup_raylib_symbols(output_error)
-    setup_raymath_symbols(output_error)
-    setup_rlgl_symbols(output_error)
+  def self.setup_symbols
+    setup_raylib_symbols
+    setup_raymath_symbols
+    setup_rlgl_symbols
   end
 
   #
@@ -50,7 +42,7 @@ module Raylib
     instance[:g] = g
     instance[:b] = b
     instance[:a] = a
-    return instance
+    instance
   end
 
   LIGHTGRAY  = Color.from_u8(200, 200, 200, 255)
@@ -89,7 +81,7 @@ module Raylib
     instance = Vector2.new
     instance[:x] = x
     instance[:y] = y
-    return instance
+    instance
   end
 
   def Vector3.create(x = 0, y = 0, z = 0)
@@ -97,7 +89,7 @@ module Raylib
     instance[:x] = x
     instance[:y] = y
     instance[:z] = z
-    return instance
+    instance
   end
 
   def Vector4.create(x = 0, y = 0, z = 0, w = 0)
@@ -106,7 +98,7 @@ module Raylib
     instance[:y] = y
     instance[:z] = z
     instance[:w] = w
-    return instance
+    instance
   end
 
   def Quaternion.create(x = 0, y = 0, z = 0, w = 0)
@@ -115,7 +107,7 @@ module Raylib
     instance[:y] = y
     instance[:z] = z
     instance[:w] = w
-    return instance
+    instance
   end
 
   def Rectangle.create(x = 0, y = 0, width = 0, height = 0)
@@ -124,7 +116,7 @@ module Raylib
     instance[:y] = y
     instance[:width] = width
     instance[:height] = height
-    return instance
+    instance
   end
 
   def BoundingBox.create(*args)
@@ -133,23 +125,23 @@ module Raylib
       instance = BoundingBox.new
       instance[:min] = args[0] # min
       instance[:max] = args[1] # max
-      return instance
+      instance
     when 6
       instance = BoundingBox.new
       instance[:min] = Vector3.create(args[0], args[1], args[2]) # min_x, min_y, min_z
       instance[:max] = Vector3.create(args[3], args[4], args[5]) # max_x, max_y, max_z
-      return instance
+      instance
     else
-      raise ArgumentError.new "BoundingBox.create : Number of arguments must be 2 or 6"
+      raise ArgumentError.new 'BoundingBox.create : Number of arguments must be 2 or 6'
     end
   end
 
-  def Vector3ToFloat(v)
-    return Vector3ToFloatV(mat)[:v].to_a
+  def Vector3ToFloat(vec)
+    Vector3ToFloatV(vec)[:v].to_a
   end
 
   def MatrixToFloat(mat)
-    return MatrixToFloatV(mat)[:v].to_a
+    MatrixToFloatV(mat)[:v].to_a
   end
 
   #
@@ -157,22 +149,21 @@ module Raylib
   #
   def self.template
     # Copy template code to user's current directory
-    example_path = Gem::Specification.find_by_name('raylib-bindings').full_gem_path + '/examples'
-    template_code_src = example_path + '/template.rb'
+    example_path = "#{Gem::Specification.find_by_name('raylib-bindings').full_gem_path}/examples"
+    template_code_src = "#{example_path}/template.rb"
     unless File.exist? template_code_src
-      $stderr.puts "[Error] Raylib.template : Template source #{template_code_src} not found"
+      warn "[Error] Raylib.template : Template source #{template_code_src} not found"
       return false
     end
 
-    template_code_dst = Dir.getwd + '/template.rb'
+    template_code_dst = "#{Dir.getwd}/template.rb"
     if File.exist? template_code_dst
-      $stderr.puts "[Error] Raylib.template : Template destination #{template_code_dst} already exists"
+      warn "[Error] Raylib.template : Template destination #{template_code_dst} already exists"
       return false
     end
 
-    $stderr.puts "[Info] Raylib.template : #{template_code_src} => #{template_code_dst}"
+    warn "[Info] Raylib.template : #{template_code_src} => #{template_code_dst}"
     FileUtils.copy template_code_src, template_code_dst
-    $stderr.puts "[Info] Raylib.template : Done"
+    warn '[Info] Raylib.template : Done'
   end
-
 end

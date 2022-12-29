@@ -790,7 +790,7 @@ module Raylib
     model[:transform] = mtx_clone
   end
 
-  def self.setup_raylib_symbols(output_error = false)
+  def self.setup_raylib_symbols
     entries = [
 
       # InitWindow : Initialize window and OpenGL context
@@ -3933,11 +3933,9 @@ module Raylib
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
     ]
     entries.each do |entry|
-      begin
-        attach_function entry[0], entry[1], entry[2], entry[3]
-      rescue FFI::NotFoundError => error
-        $stderr.puts("[Warning] Failed to import #{entry[0]} (#{error}).") if output_error
-      end
+      attach_function entry[0], entry[1], entry[2], entry[3]
+    rescue FFI::NotFoundError => e
+      warn "[Warning] Failed to import #{entry[0]} (#{e})."
     end
   end
 
