@@ -203,7 +203,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
         break if (textOffsetY + font[:baseSize]*scaleFactor) > rec[:height]
 
         # Draw selection background
-        isGlyphSelected = false;
+        isGlyphSelected = false
         if (selectStart >= 0) && (k >= selectStart) && (k < (selectStart + selectLength))
           r = Rectangle.new
           r[:x] = rec[:x] + textOffsetX - 1

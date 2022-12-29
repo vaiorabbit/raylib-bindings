@@ -29,8 +29,8 @@ def DrawTextCodepoint3D(font, codepoint, position, fontSize, backface, tint)
   # Character destination rectangle on screen
   # NOTE: We consider charsPadding on drawing
   glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-  position[:x] += (glyphInfo[:offsetX] - font[:glyphPadding])/font[:baseSize]*scale;
-  position[:z] += (glyphInfo[:offsetY] - font[:glyphPadding])/font[:baseSize]*scale;
+  position[:x] += (glyphInfo[:offsetX] - font[:glyphPadding])/font[:baseSize]*scale
+  position[:z] += (glyphInfo[:offsetY] - font[:glyphPadding])/font[:baseSize]*scale
 
   # Character source rectangle from font texture atlas
   # NOTE: We consider chars padding when drawing, it could be required for outline/glow shader effects
@@ -157,7 +157,7 @@ def MeasureText3D(font, text, fontSize, fontSpacing, lineSpacing)
   vec[:y] = 0.25
   vec[:z] = textHeight
 
-  return vec;
+  return vec
 end
 
 # Draw a 2D text in 3D space and wave the parts that start with `~~` and end with `~~`.
@@ -246,7 +246,7 @@ def MeasureTextWave3D(font, text, fontSize, fontSpacing, lineSpacing)
   vec[:y] = 0.25
   vec[:z] = textHeight
 
-  return vec;
+  return vec
 end
 
 # Generates a nice color with a random hue
@@ -254,7 +254,7 @@ def GenerateRandomColor(s, v)
   # 0.618033988749895 : Golden ratio conjugate
   h = GetRandomValue(0, 360)
   h = (h + h*0.618033988749895).divmod(360.0)[1] # [quotient, remainder]
-  return ColorFromHSV(h, s, v);
+  return ColorFromHSV(h, s, v)
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -337,7 +337,7 @@ if __FILE__ == $PROGRAM_NAME
     $show_text_boundry = !$show_text_boundry if IsKeyPressed(KEY_F2)
     if IsKeyPressed(KEY_F3)
       # Handle camera change
-      spin = !spin;
+      spin = !spin
       # we need to reset the camera when changing modes
       camera[:target] = Vector3.create(0.0, 0.0, 0.0)
       camera[:up] = Vector3.create(0.0, 1.0, 0.0)
@@ -418,7 +418,7 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
 
       BeginMode3D(camera)
-        DrawCubeV(cubePosition, cubeSize, dark);
+        DrawCubeV(cubePosition, cubeSize, dark)
         DrawCubeWires(cubePosition, 2.1, 2.1, 2.1, light)
 
         DrawGrid(10, 2.0)
@@ -427,7 +427,7 @@ if __FILE__ == $PROGRAM_NAME
         # NOTE: more info at https://bedroomcoders.co.uk/raylib-billboards-advanced-use/
         BeginShaderMode(alphaDiscard)
           # Draw the 3D text above the red cube
-          rlPushMatrix();
+          rlPushMatrix()
             rlRotatef(90.0, 1.0, 0.0, 0.0)
             rlRotatef(90.0, 0.0, 0.0, -1.0)
 

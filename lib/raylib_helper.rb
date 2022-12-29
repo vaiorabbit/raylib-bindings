@@ -7,13 +7,27 @@ module Raylib
   # Color helper
   #
 
-  def Color.from_u8(r = 0, g = 0, b = 0, a = 255)
-    instance = Color.new
-    instance[:r] = r
-    instance[:g] = g
-    instance[:b] = b
-    instance[:a] = a
-    instance
+  class Color
+    def self.from_u8(r = 0, g = 0, b = 0, a = 255)
+      Color.new.set(r, g, b, a)
+    end
+
+    def set(r, g, b, a)
+      self[:r] = r
+      self[:g] = g
+      self[:b] = b
+      self[:a] = a
+      self
+    end
+
+    def r() self[:r] end
+    def r=(v) self[:r] = v end
+    def g() self[:g] end
+    def g=(v) self[:g] = v end
+    def b() self[:b] end
+    def b=(v) self[:b] = v end
+    def a() self[:a] end
+    def a=(v) self[:a] = v end
   end
 
   LIGHTGRAY  = Color.from_u8(200, 200, 200, 255)

@@ -96,7 +96,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
         break if (textOffsetY + font[:baseSize]*scaleFactor) > rec[:height]
 
         # Draw selection background
-        isGlyphSelected = false;
+        isGlyphSelected = false
         if (selectStart >= 0) && (k >= selectStart) && (k < (selectStart + selectLength))
           r = Rectangle.create(rec[:x] + textOffsetX - 1, rec[:y] + textOffsetY, glyphWidth, font[:baseSize].to_f * scaleFactor)
           DrawRectangleRec(r, selectBackTint)

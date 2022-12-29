@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world (position, target, up vector)
   camera = Camera.new
-  camera[:position] = Vector3.create(4.0, 2.0, 4.0)
-  camera[:target] = Vector3.create(0.0, 1.8, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 60.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+  camera.position.set(4.0, 2.0, 4.0)
+  camera.target.set(0.0, 1.8, 0.0)
+  camera.up.set(0.0, 1.0, 0.0)
+  camera.fovy = 60.0
+  camera.projection = CAMERA_PERSPECTIVE
 
   # Generates some random columns
   heights = []
@@ -23,10 +23,10 @@ if __FILE__ == $PROGRAM_NAME
   MAX_COLUMNS.times do |i|
     heights << GetRandomValue(1, 12)
     positions << Vector3.create(GetRandomValue(-15, 15).to_f, heights[i]/2.0, GetRandomValue(-15, 15).to_f)
-    colors << Color.from_u8(GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255);
+    colors << Color.from_u8(GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255)
   end
 
-  SetCameraMode(camera, CAMERA_FIRST_PERSON); # Set a first person camera mode
+  SetCameraMode(camera, CAMERA_FIRST_PERSON) # Set a first person camera mode
 
   SetTargetFPS(60) # Set our game to run at 60 frames-per-second
 

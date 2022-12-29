@@ -12,7 +12,7 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - sprite anim")
 
   # NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-  scarfy = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/scarfy.png");
+  scarfy = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/scarfy.png")
 
   position = Vector2.create(350.0, 280.0)
   frameRec = Rectangle.create(0.0, 0.0, scarfy[:width].to_f/6, scarfy[:height].to_f)
@@ -56,7 +56,7 @@ if __FILE__ == $PROGRAM_NAME
       DrawRectangleLines(15, 40, scarfy[:width], scarfy[:height], LIME)
       DrawRectangleLines(15 + frameRec[:x].to_i, 40 + frameRec[:y].to_i, frameRec[:width].to_i, frameRec[:height].to_i, RED)
 
-      DrawText("FRAME SPEED: ", 165, 210, 10, DARKGRAY);
+      DrawText("FRAME SPEED: ", 165, 210, 10, DARKGRAY)
       DrawText(TextFormat("%02i FPS", :int, framesSpeed), 575, 210, 10, DARKGRAY)
       DrawText("PRESS RIGHT/LEFT KEYS to CHANGE SPEED!", 290, 240, 10, DARKGRAY)
 

@@ -16,7 +16,7 @@ if __FILE__ == $PROGRAM_NAME
   # Load all GIF animation frames into a single Image
   # NOTE: GIF data is always loaded as RGBA (32bit) by default
   # NOTE: Frames are just appended one after another in image.data memory
-  imScarfyAnim = LoadImageAnim(RAYLIB_TEXTURE_PATH + "resources/scarfy_run.gif", animFrames_buf);
+  imScarfyAnim = LoadImageAnim(RAYLIB_TEXTURE_PATH + "resources/scarfy_run.gif", animFrames_buf)
 
   animFrames = animFrames_buf.read_int
 
@@ -74,7 +74,7 @@ if __FILE__ == $PROGRAM_NAME
       DrawText(TextFormat("CURRENT FRAME: %02i", :int, currentAnimFrame), 50, 60, 20, GRAY)
       DrawText(TextFormat("CURRENT FRAME IMAGE.DATA OFFSET: %02i", :int, nextFrameDataOffset), 50, 90, 20, GRAY)
 
-      DrawText("FRAME DELAY: ", 100, 305, 10, DARKGRAY);
+      DrawText("FRAME DELAY: ", 100, 305, 10, DARKGRAY)
       DrawText(TextFormat("%02i FPS", :int, frameDelay), 575, 210, 10, DARKGRAY)
       DrawText("PRESS RIGHT/LEFT KEYS to CHANGE SPEED!", 290, 240, 10, DARKGRAY)
 

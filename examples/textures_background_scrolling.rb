@@ -10,9 +10,9 @@ if __FILE__ == $PROGRAM_NAME
 
   # NOTE: Be careful, background width must be equal or bigger than screen width
   # if not, texture should be draw more than two times for scrolling effect
-  background = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_background.png");
-  midground = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_midground.png");
-  foreground = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_foreground.png");
+  background = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_background.png")
+  midground = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_midground.png")
+  foreground = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/cyberpunk_street_foreground.png")
 
   scrollingBack = 0.0
   scrollingMid = 0.0
@@ -47,7 +47,7 @@ if __FILE__ == $PROGRAM_NAME
       DrawTextureEx(foreground, Vector2.create(foreground[:width]*2 + scrollingFore, 70), 0.0, 2.0, WHITE)
 
       DrawText("BACKGROUND SCROLLING & PARALLAX", 10, 10, 20, RED)
-      DrawText("(c) Cyberpunk Street Environment by Luis Zuno (@ansimuz)", screenWidth - 330, screenHeight - 20, 10, RAYWHITE);
+      DrawText("(c) Cyberpunk Street Environment by Luis Zuno (@ansimuz)", screenWidth - 330, screenHeight - 20, 10, RAYWHITE)
     EndDrawing()
   end
 
