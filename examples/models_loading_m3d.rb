@@ -28,8 +28,7 @@ if __FILE__ == $PROGRAM_NAME
   animPlaying = false # Store anim state, what to draw
 
   # Load animation data
-  anims, anim_ptrs = LoadAndAllocateModelAnimations(modelFileName)
-  animsCount = anims.length
+  modelanims = ModelAnimations.new.setup(modelFileName)
   animFrameCounter = 0
   animId = 0
 
@@ -37,26 +36,24 @@ if __FILE__ == $PROGRAM_NAME
 
   SetTargetFPS(60)
 
-  bones = model[:bones] # BoneInfo*
-
   until WindowShouldClose()
 
     UpdateCamera(camera.pointer)
 
-    if animsCount > 0
+    if modelanims.anims_count > 0
       # Play animation when spacebar is held down (or step one frame with N)
       if IsKeyDown(KEY_SPACE) || IsKeyPressed(KEY_N)
         animFrameCounter += 1
-        animFrameCounter = 0 if animFrameCounter >= anims[animId][:frameCount]
-        UpdateModelAnimation(model, anims[animId], animFrameCounter)
+        animFrameCounter = 0 if animFrameCounter >= modelanims.frame_count(animId)
+        UpdateModelAnimation(model, modelanims.anim(animId), animFrameCounter)
         animPlaying = true
       end
       # Select animation by pressing A
       if IsKeyPressed(KEY_A)
         animFrameCounter = 0
         animId += 1
-        animId = 0 if animId >= animsCount
-        UpdateModelAnimation(model, anims[animId], 0)
+        animId = 0 if animId >= modelanims.anims_count
+        UpdateModelAnimation(model, modelanims.anim(animId), 0)
         animPlaying = true
       end
     end
@@ -65,10 +62,6 @@ if __FILE__ == $PROGRAM_NAME
     drawSkeleton = !drawSkeleton if IsKeyPressed(KEY_S)
     # Toggle mesh drawing
     drawMesh = !drawMesh if IsKeyPressed(KEY_M)
-
-    bindPoses = model[:bindPose] # Transform*
-    framePoses = anims[animId][:framePoses] # Transform**
-    framePose = framePoses + animFrameCounter * FFI::NativeType::POINTER.size # Transform*
 
     BeginDrawing()
       ClearBackground(RAYWHITE)
@@ -80,27 +73,27 @@ if __FILE__ == $PROGRAM_NAME
           # Loop to (boneCount - 1) because the last one is a special "no bone" bone, 
           # needed to workaround buggy models
           # without a -1, we would always draw a cube at the origin
-          (model[:boneCount] - 1).times do |i|
-            bone = BoneInfo.new(bones + i * BoneInfo.size) # BoneInfo
+          (model.bone_count - 1).times do |i|
+            bone = model.bone_info(i) # BoneInfo
             # By default the model is loaded in bind-pose by LoadModel(). 
             # But if UpdateModelAnimation() has been called at least once 
             # then the model is already in animation pose, so we need the animated skeleton
-            if !animPlaying || animsCount == 0
+            if !animPlaying || modelanims.anims_count == 0
               # Display the bind-pose skeleton
-              bindPose = Transform.new(bindPoses + i * Transform.size) # Transform
+              bindPose = model.bind_pose_transform(i) # Transform
               DrawCube(bindPose, 0.04, 0.04, 0.04, RED)
-              if bone[:parent] >= 0
-                parentBindPose = Transform.new(bindPoses + bone[:parent] * Transform.size) # Transform
-                DrawLine3D(bindPose[:translation], parentBindPose[:translation], RED)
+              if bone.parent_bone_index >= 0
+                parentBindPose = model.bind_pose_transform(bone.parent_bone_index) # Transform
+                DrawLine3D(bindPose.t, parentBindPose.t, RED)
               end
             else
               # Display the frame-pose skeleton
-              transform = Transform.new(framePose.read_pointer + i * Transform.size)
-              DrawCube(transform[:translation], 0.05, 0.05, 0.05, RED)
-              animBone = BoneInfo.new(anims[animId][:bones] + i * BoneInfo.size)
-              if animBone[:parent] >= 0
-                parentTransform = Transform.new(framePose.read_pointer + animBone[:parent] * Transform.size)
-                DrawLine3D(transform[:translation], parentTransform[:translation], RED)
+              transform = modelanims.bone_transform_of_frame_pose(animId, animFrameCounter, i)
+              DrawCube(transform.t, 0.05, 0.05, 0.05, RED)
+              animBone = modelanims.bone_info(animId, i) # BoneInfo
+              if animBone.parent_bone_index >= 0
+                parentTransform = modelanims.bone_transform_of_frame_pose(animId, animFrameCounter, animBone.parent_bone_index) # Transform
+                DrawLine3D(transform.t, parentTransform.t, RED)
               end
             end
           end
@@ -115,7 +108,7 @@ if __FILE__ == $PROGRAM_NAME
     EndDrawing()
   end
 
-  UnloadAndFreeModelAnimations(anims, anim_ptrs)
+  modelanims.cleanup
 
   UnloadModel(model)
 

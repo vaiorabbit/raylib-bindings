@@ -132,6 +132,16 @@ module Raylib
   end
 
   #
+  # Transform helper
+  #
+
+  class Transform
+    def t = self[:translation]
+    def r = self[:rotation]
+    def s = self[:scale]
+  end
+
+  #
   # Model helper
   #
 
@@ -156,28 +166,93 @@ module Raylib
   end
 
   class Model
-    def get_material(index)
+    # GetModelMaterial (ruby raylib original)
+    # @param index [int] 0 ~ materialCount
+    # @return [Material]
+    def material(index = 0)
       Material.new(self[:materials] + index * Material.size)
     end
 
-    def get_material_count
+    # GetModelMaterialCount (ruby raylib original)
+    # @return [int]
+    def material_count
       self[:materialCount]
+    end
+
+    # GetModelBoneCount (ruby raylib original)
+    # @return [int]
+    def bone_count
+      self[:boneCount]
+    end
+
+    # @return BoneInfo
+    def bone_info(index)
+      BoneInfo.new(self[:bones] + index * BoneInfo.size)
+    end
+
+    # @return Transform
+    def bind_pose_transform(index)
+      Transform.new(self[:bindPose] + index * Transform.size)
     end
   end
 
-  # GetModelMaterial (ruby raylib original)
-  # @param model [Model]
-  # @param index [int] 0 ~ materialCount
-  # @return [Material]
-  def GetModelMaterial(model, index = 0)
-    model.get_material(index)
+  class BoneInfo
+    def parent_bone_index
+      self[:parent]
+    end
   end
 
-  # GetModelMaterialCount (ruby raylib original)
-  # @param model [Model]
-  # @return [int]
-  def GetModelMaterialCount(model)
-    model.get_material_count
+  #
+  # ModelAnimation helper
+  #
+
+  # Manages a set of ModelAnimation (ruby raylib original)
+  class ModelAnimations
+    attr_reader :anims, :anim_ptrs
+
+    def initialize
+      @anims = nil
+      @anim_ptrs = nil
+      @framePoses = nil # array of Transform**
+    end
+
+    def anim(index) = @anims[index]
+    def anims_count = @anims.length
+    def frame_count(index) = @anims[index][:frameCount]
+
+    # @return BoneInfo
+    def bone_info(anim_index, bone_index)
+      BoneInfo.new(@anims[anim_index][:bones] + bone_index * BoneInfo.size)
+    end
+
+    # @return Transform*
+    def frame_pose(index, frame)
+      @framePoses[index] + frame * FFI::NativeType::POINTER.size # Transform*
+    end
+
+    # @return Transform
+    def bone_transform(frame_pose, bone_index)
+      Transform.new(frame_pose.read_pointer + bone_index * Transform.size)
+    end
+
+    # @return Transform
+    def bone_transform_of_frame_pose(anim_index, frame, bone_index)
+      bone_transform(frame_pose(anim_index, frame), bone_index)
+    end
+
+    # @return self
+    def setup(fileName)
+      @anims, @anim_ptrs = LoadAndAllocateModelAnimations(fileName)
+      @framePoses = []
+      @anims.each do |anim|
+        @framePoses << anim[:framePoses]
+      end
+      self
+    end
+
+    def cleanup
+      UnloadAndFreeModelAnimations(@anims, @anim_ptrs)
+    end
   end
 
   # LoadAndAllocateModelAnimations : (ruby raylib original)

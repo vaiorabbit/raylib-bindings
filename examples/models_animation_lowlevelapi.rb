@@ -17,34 +17,45 @@ if __FILE__ == $PROGRAM_NAME
 
   model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/iqm/guy.iqm") # Load the animated model mesh and basic data
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/iqm/guytex.png") # Load model texture and set material
-  SetMaterialTexture(model.material(0), MATERIAL_MAP_ALBEDO, texture)
 
-  position = Vector3.create
+  materials_0 = Material.new(model[:materials])
+  SetMaterialTexture(materials_0, MATERIAL_MAP_ALBEDO, texture)
+
+  position = Vector3.create(0, 0, 0)
 
   # Load animation data
-  modelanims = ModelAnimations.new.setup(RAYLIB_MODELS_PATH + "resources/models/iqm/guyanim.iqm")
+  animsCount_buf = FFI::MemoryPointer.new(:int, 1)
+  anim_ptrs = LoadModelAnimations(RAYLIB_MODELS_PATH + "resources/models/iqm/guyanim.iqm", animsCount_buf)
+  animsCount = animsCount_buf.read_int
+  anims = animsCount.times.map do |i|
+    ModelAnimation.new(anim_ptrs + i * ModelAnimation.size)
+  end
   animFrameCounter = 0
 
   SetCameraMode(camera, CAMERA_ORBITAL)
+
   SetTargetFPS(60)
 
+  framePoses = anims[0][:framePoses] # Transform**
   until WindowShouldClose()
     UpdateCamera(camera.pointer)
 
     # Play animation when spacebar is held down
     if IsKeyDown(KEY_SPACE)
       animFrameCounter += 1
-      UpdateModelAnimation(model, modelanims.anim(0), animFrameCounter)
-      animFrameCounter = 0 if animFrameCounter >= modelanims.frame_count(0)
+      UpdateModelAnimation(model, anims[0], animFrameCounter)
+      animFrameCounter = 0 if animFrameCounter >= anims[0][:frameCount]
     end
+
+    framePose = framePoses + animFrameCounter * FFI::NativeType::POINTER.size # Transform*
 
     BeginDrawing()
       ClearBackground(RAYWHITE)
       BeginMode3D(camera)
         DrawModelEx(model, position, Vector3.create(1.0, 0.0, 0.0), -90.0, Vector3.create(1.0, 1.0, 1.0), WHITE)
-        model.bone_count.times do |bone|
-          transform = modelanims.bone_transform_of_frame_pose(0, animFrameCounter, bone)
-          DrawCube(transform.t, 0.2, 0.2, 0.2, RED)
+        model[:boneCount].times do |i|
+          transform = Transform.new(framePose.read_pointer + i * Transform.size)
+          DrawCube(transform[:translation], 0.2, 0.2, 0.2, RED)
         end
         DrawGrid(10, 1.0)
       EndMode3D()
@@ -55,7 +66,13 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   UnloadTexture(texture)
-  modelanims.cleanup
+
+  # Unload model animations data
+  animsCount.times do |i|
+    UnloadModelAnimation(anims[i])
+  end
+  MemFree(anim_ptrs)
+
   UnloadModel(model)
 
   CloseWindow()
