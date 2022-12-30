@@ -13,13 +13,6 @@ module Raylib
 
   RLGL_VERSION = "4.0"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
-  RL_DEFAULT_BATCH_BUFFERS = 1 # Default number of batch buffers (multi-buffering)
-  RL_DEFAULT_BATCH_DRAWCALLS = 256 # Default number of batch draw calls (by state changes: mode, texture)
-  RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4 # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
-  RL_MAX_MATRIX_STACK_SIZE = 32 # Maximum size of Matrix stack
-  RL_MAX_SHADER_LOCATIONS = 32 # Maximum number of shader locations supported
-  RL_CULL_DISTANCE_NEAR = 0.01 # Default near cull distance
-  RL_CULL_DISTANCE_FAR = 1000.0 # Default far cull distance
   RL_TEXTURE_WRAP_S = 0x2802 # GL_TEXTURE_WRAP_S
   RL_TEXTURE_WRAP_T = 0x2803 # GL_TEXTURE_WRAP_T
   RL_TEXTURE_MAG_FILTER = 0x2800 # GL_TEXTURE_MAG_FILTER
