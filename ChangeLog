@@ -1,3 +1,7 @@
+2022-12-30  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator: Now generates binding code for config.h
+
 2022-12-29  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator: Now generates enum descriptions

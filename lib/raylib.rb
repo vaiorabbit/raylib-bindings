@@ -5,6 +5,7 @@
 require 'ffi'
 require 'fileutils'
 require_relative 'raylib_main'
+require_relative 'config'
 require_relative 'raymath'
 require_relative 'rlgl'
 require_relative 'raygui'

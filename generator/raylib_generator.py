@@ -91,8 +91,10 @@ def generate_macrodefine(ctx, indent = "", json_schema=None):
 
     for macro_name, macro_value in ctx.decl_macros.items():
         if macro_value != None:
-            json_define = [json_define for json_define in json_defines if json_define['name'] == macro_name][0]
-            description = json_define['description']
+            description = ""
+            if json_defines:
+                json_define = [json_define for json_define in json_defines if json_define['name'] == macro_name][0]
+                description = json_define['description']
             if description != "":
                 print(indent + "%s = %s # %s" % (macro_name, macro_value[0], description.strip()), file = sys.stdout)
             else:
