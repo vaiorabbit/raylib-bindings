@@ -1,3 +1,7 @@
+2022-12-31  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/game_of_life_simple.rb: Added
+
 2022-12-30  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator: Now generates binding code for config.h
