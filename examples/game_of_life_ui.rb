@@ -1,3 +1,14 @@
+=begin
+Usage:
+- Mouse Left : Draw
+- Mouse Left + Shift : Erase
+- Space : Run/Pause simulation
+- C : Clear
+- F : Show/Hide FPS counter
+- G : Show/Hide Grid
+- U : Show/Hide controller UI
+=end
+
 require_relative 'util/setup_dll'
 
 class GameOfLife
@@ -16,6 +27,11 @@ class GameOfLife
   def update
     update_grid
     @grid_now, @grid_new = @grid_new, @grid_now
+  end
+
+  def clear_grid
+    @grid_now = Array.new(row_count) { Array.new (col_count) { 0 } }
+    @grid_new = Array.new(row_count) { Array.new (col_count) { 0 } }
   end
 
   def set_grid(row_index, col_index, value)
@@ -81,30 +97,34 @@ if __FILE__ == $PROGRAM_NAME
   exec_update = false
   update_count = interval
 
+  clear_grid = false
+
   show_fps = true
   show_grid = true
   show_ui = true
 
   ui_base_x = 720
-  ui_base_y = 1000
+  ui_base_y = 900
   ui_space_x = 20
   ui_space_y = 20
   ui_line_height = font_size + 10
-  ui_area = Rectangle.create(ui_base_x, ui_base_y, 550, 2 * ui_space_y + 4 * ui_line_height)
+  ui_area = Rectangle.create(ui_base_x, ui_base_y, 550, 2 * ui_space_y + 5 * ui_line_height)
 
   until WindowShouldClose()
     exec_update = !exec_update if IsKeyPressed(KEY_SPACE)
     show_fps = !show_fps if IsKeyPressed(KEY_F)
     show_grid = !show_grid if IsKeyPressed(KEY_G)
     show_ui = !show_ui if IsKeyPressed(KEY_U)
+    clear_grid = true if IsKeyPressed(KEY_C)
 
     if IsMouseButtonDown(MOUSE_BUTTON_LEFT)
       mouse_pos = GetMousePosition()
       on_ui = show_ui && CheckCollisionPointRec(mouse_pos, ui_area)
       unless on_ui
+        erase_mode = (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT))
         col_index = (mouse_pos.x / gol.cell_width).clamp(0, gol.col_count - 1)
         row_index = (mouse_pos.y / gol.cell_height).clamp(0, gol.row_count - 1)
-        gol.set_grid(row_index, col_index, 1)
+        gol.set_grid(row_index, col_index, erase_mode ? 0 : 1)
       end
     end
 
@@ -136,16 +156,24 @@ if __FILE__ == $PROGRAM_NAME
     if show_ui
       DrawRectangleRec(ui_area, Fade(WHITE, 0.9))
 
-      exec_update = GuiCheckBox(Rectangle.create(ui_base_x + ui_space_x, ui_base_y + ui_space_y + ui_line_height * 0, font_size, font_size), "Run (#{exec_update ? 'ON' : 'OFF'})", exec_update)
-      interval = GuiSliderBar(Rectangle.create(  ui_base_x + ui_space_x, ui_base_y + ui_space_y + ui_line_height * 1, 300, font_size), nil, " Interval (#{interval})", interval, 0, 20)
-      show_fps = GuiCheckBox(Rectangle.create(   ui_base_x + ui_space_x, ui_base_y + ui_space_y + ui_line_height * 2, font_size, font_size), "Show FPS(#{show_fps ? 'ON' : 'OFF'})", show_fps)
-      show_grid = GuiCheckBox(Rectangle.create(  ui_base_x + ui_space_x, ui_base_y + ui_space_y + ui_line_height * 3, font_size, font_size), "Show Grid(#{show_grid ? 'ON' : 'OFF'})", show_grid)
+      widget_x = ui_base_x + ui_space_x
+      widget_base_y = ui_base_y + ui_space_y
+      exec_update = GuiCheckBox(Rectangle.create(widget_x, widget_base_y + ui_line_height * 0, font_size, font_size), "Run (#{exec_update ? 'ON' : 'OFF'})", exec_update)
+      interval = GuiSliderBar(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, 300, font_size), nil, " Interval (#{interval})", interval, 0, 20)
+      show_fps = GuiCheckBox(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, font_size, font_size), "Show FPS(#{show_fps ? 'ON' : 'OFF'})", show_fps)
+      show_grid = GuiCheckBox(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 3, font_size, font_size), "Show Grid(#{show_grid ? 'ON' : 'OFF'})", show_grid)
+      clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 4, font_size * 10, font_size), 'Clear Grid')
 
       interval = interval.to_i
     end
     DrawFPS(screen_width - 100, 16) if show_fps
 
     EndDrawing()
+
+    if clear_grid
+      exec_update = false
+      gol.clear_grid
+    end
 
   end
   CloseWindow()
