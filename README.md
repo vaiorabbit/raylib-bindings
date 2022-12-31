@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2022-12-30
+*   Last modified : 2022-12-31
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -47,7 +47,7 @@ D:\> ruby template.rb
         *   [macOS]
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
 
 *   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
     *   CMake https://cmake.org/download/
@@ -63,7 +63,7 @@ D:\> ruby template.rb
 
             *   [Windows] gcc
 
-                    gcc (Rev10, Built by MSYS2 project) 11.2.0
+                    gcc (Rev7, Built by MSYS2 project) 12.2.0
 
 
 <details>
@@ -76,6 +76,7 @@ D:\> ruby template.rb
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
             *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
 
@@ -97,8 +98,17 @@ D:\> ruby template.rb
         *   [Windows] gcc
 
                 gcc (Rev9, Built by MSYS2 project) 11.2.0
+                gcc (Rev10, Built by MSYS2 project) 11.2.0
 
 </details>
+
+## Project ##
+
+See the project below to learn how to use this library:
+
+*   Whac-a-Mole! : Ruby raylib bindings demo
+    *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-whacamole/main/doc/screenshot_00.png" width="300"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-whacamole/main/doc/screenshot_01.png" width="300">
+    *   <https://github.com/vaiorabbit/raylib-bindings-whacamole>
 
 ## Limitation ##
 
@@ -122,7 +132,7 @@ Shared libraries in `lib` directory are built on top of these products and are a
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 
     Ruby-raylib : Yet another raylib wrapper for Ruby
-    Copyright (c) 2021-2022 vaiorabbit <http://twitter.com/vaiorabbit>
+    Copyright (c) 2021-2023 vaiorabbit <http://twitter.com/vaiorabbit>
 
     This software is provided 'as-is', without any express or implied
     warranty. In no event will the authors be held liable for any damages
