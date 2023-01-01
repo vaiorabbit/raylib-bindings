@@ -1,3 +1,7 @@
+2023-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/reversi_board.rb: Added
+
 2022-12-31  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/game_of_life_simple.rb: Added
