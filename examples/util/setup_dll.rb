@@ -33,7 +33,7 @@ else
   when /darwin/
     Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dylib', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dylib', physac_libpath: Dir.pwd + '/../lib/' + 'physac.dylib')
   when /linux/
-    Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.so', raygui_libpath: Dir.pwd + '/../lib/' + 'libraygui.so', physac_libpath: Dir.pwd + '/../lib/' + 'libphysac.so')
+    Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.so', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.so', physac_libpath: Dir.pwd + '/../lib/' + 'physac.so')
   else
     raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
   end
