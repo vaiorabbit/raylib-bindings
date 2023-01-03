@@ -1,3 +1,7 @@
+2023-01-03  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/models_loading_gltf.rb: Added glTF animation playback
+
 2023-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/reversi_board.rb: Added

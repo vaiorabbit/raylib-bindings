@@ -2,65 +2,56 @@ require_relative 'util/setup_dll'
 require_relative 'util/resource_path'
 
 if __FILE__ == $PROGRAM_NAME
-
-  screenWidth = 800
-  screenHeight = 450
-
-  InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - model")
+  InitWindow(800, 450, "Yet Another Ruby-raylib bindings - loading gltf")
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera[:position] = Vector3.create(10.0, 10.0, 10.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+  camera.position.set(5.0, 5.0, 5.0)
+  camera.target.set(0.0, 2.0, 0.0)
+  camera.up.set(0.0, 1.0, 0.0)
+  camera.fovy = 45.0
+  camera.projection = CAMERA_PERSPECTIVE
 
-  MAX_GLTF_MODELS = 1
-  models = [
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/raylib_32x32.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/rigged_figure.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/GearboxAssy.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/BoxAnimated.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedTriangle.gltf"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/AnimatedMorphCube.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/vertex_colored_object.glb"),
-    # LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/girl.glb"),
-    LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/robot.glb"),
-  ]
+  model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/gltf/robot.glb")
 
-  currentModel = 0
+  animIndex = 0
+  animFrameCounter = 0
+  modelanims = ModelAnimations.new.setup(RAYLIB_MODELS_PATH + "resources/models/gltf/robot.glb")
+
   position = Vector3.create(0.0, 0.0, 0.0) # Set model position
 
   SetCameraMode(camera, CAMERA_FREE)
 
+  SetCameraMode(camera, CAMERA_ORBITAL)
   SetTargetFPS(60)
 
   until WindowShouldClose()
+    animIndex = if IsKeyPressed(KEY_UP)
+                  (animIndex + 1) % modelanims.anims_count
+                elsif IsKeyPressed(KEY_DOWN)
+                  (animIndex + modelanims.anims_count - 1) % modelanims.anims_count
+                else
+                  animIndex
+                end
+
+    UpdateModelAnimation(model, modelanims.anim(animIndex), animFrameCounter)
+    animFrameCounter = (animFrameCounter + 1) % modelanims.frame_count(animIndex)
 
     UpdateCamera(camera.pointer)
 
-    if IsKeyReleased(KEY_RIGHT)
-      currentModel += 1
-      currentModel = 0 if currentModel == MAX_GLTF_MODELS
-    end
-    if IsKeyReleased(KEY_LEFT)
-      currentModel -= 1
-      currentModel = MAX_GLTF_MODELS - 1 if currentModel < 0
-    end
-
     BeginDrawing()
-      ClearBackground(SKYBLUE)
+      ClearBackground(WHITE)
       BeginMode3D(camera)
-        DrawModel(models[currentModel], position, 1.0, WHITE)
+        DrawModel(model, position, 1.0, WHITE)
         DrawGrid(10, 1.0)
       EndMode3D()
+
+      DrawText("Use the UP/DOWN arrow keys to switch animation", 10, 10, 20, GRAY)
     EndDrawing()
   end
 
-  models.each do |model|
-    UnloadModel(model)
-  end
+  modelanims.cleanup
+  UnloadModel(model)
 
   CloseWindow()
 end

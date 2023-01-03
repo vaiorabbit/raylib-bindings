@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2023-01-01
+*   Last modified : 2023-01-03
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -56,8 +56,8 @@ D:\> ruby template.rb
             *   [macOS] clang
 
                     $ clang --version
-                    Apple clang version 13.1.6 (clang-1316.0.21.2.5)
-                    Target: arm64-apple-darwin21.5.0
+                    Apple clang version 14.0.0 (clang-1400.0.29.202)
+                    Target: arm64-apple-darwin22.2.0
                     Thread model: posix
                     InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
@@ -83,6 +83,12 @@ D:\> ruby template.rb
 *   Compiler
     *   Tested on:
         *   [macOS] clang
+
+                $ clang --version
+                Apple clang version 13.1.6 (clang-1316.0.21.2.5)
+                Target: arm64-apple-darwin21.5.0
+                Thread model: posix
+                InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
                 $ clang --version
                 Apple clang version 13.1.6 (clang-1316.0.21.2.3)
