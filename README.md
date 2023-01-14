@@ -14,6 +14,8 @@ Provides Ruby bindings for raylib-related libraries including:
 *   [raygui](https://github.com/raysan5/raygui)
 *   [Physac](https://github.com/raysan5/physac)
 
+<img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/bitmap_font_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/game_of_life_simple_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/lissajous_curve_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/procedural_texture_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/reversi_board_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/utf8_font_rb.png" width="125">
+
 ## Features ##
 
 *   Generated semi-automatically
