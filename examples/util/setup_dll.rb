@@ -19,7 +19,8 @@ if raylib_bindings_gem_available?
   when /darwin/
     Raylib.load_lib(shared_lib_path + 'libraylib.dylib', raygui_libpath: shared_lib_path + 'raygui.dylib', physac_libpath: shared_lib_path + 'physac.dylib')
   when /linux/
-    Raylib.load_lib(shared_lib_path + 'libraylib.so', raygui_libpath: shared_lib_path + 'libraygui.so', physac_libpath: shared_lib_path + 'libphysac.so')
+    arch = RUBY_PLATFORM.split('-')[0]
+    Raylib.load_lib(shared_lib_path + 'libraylib.#{arch}.so', raygui_libpath: shared_lib_path + 'libraygui.#{arch}.so', physac_libpath: shared_lib_path + 'libphysac.#{arch}.so')
   else
     raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
   end
@@ -33,7 +34,8 @@ else
   when /darwin/
     Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.dylib', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.dylib', physac_libpath: Dir.pwd + '/../lib/' + 'physac.dylib')
   when /linux/
-    Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.so', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.so', physac_libpath: Dir.pwd + '/../lib/' + 'physac.so')
+    arch = RUBY_PLATFORM.split('-')[0]
+    Raylib.load_lib(Dir.pwd + '/../lib/' + 'libraylib.#{arch}.so', raygui_libpath: Dir.pwd + '/../lib/' + 'raygui.#{arch}.so', physac_libpath: Dir.pwd + '/../lib/' + 'physac.#{arch}.so')
   else
     raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
   end
