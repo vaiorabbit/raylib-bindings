@@ -50,7 +50,7 @@ jobs:
 
     - name: Commit new libraries
       run: |
-        git config user.name "bot
-        git config user.email "bot
+        git config user.name "bot"
+        git config user.email "bot"
         git commit -a -m "commit by bot"
         git push -u origin update

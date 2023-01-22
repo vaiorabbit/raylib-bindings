@@ -15,19 +15,19 @@ if %CMAKE_EXE% == "" (
 )
 
 pushd %~dp0
-cd ..\physac_dll
-if exist build (
-    rmdir /s /q build
-)
-call build_physac_windows.bat %CMAKE_EXE%
-popd
-
-pushd %~dp0
 cd ..\raylib_dll
 if exist build (
     rmdir /s /q build
 )
 call build_raylib_windows.bat %CMAKE_EXE%
+popd
+
+pushd %~dp0
+cd ..\physac_dll
+if exist build (
+    rmdir /s /q build
+)
+call build_physac_windows.bat %CMAKE_EXE%
 popd
 
 pushd %~dp0
