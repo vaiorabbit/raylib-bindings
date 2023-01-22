@@ -1,0 +1,29 @@
+name: Build workflow (Windows)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Update submodules
+      id: update
+      run: git submodule update --remote --recursive
+
+    - name: Run rebuild script
+      shell: cmd
+      run: |
+        cd script
+        rebuild_libs_windows.cmd cmake
