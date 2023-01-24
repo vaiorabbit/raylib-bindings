@@ -8,7 +8,7 @@ include_directories( ${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/raylib/src )
 include_directories( ${CMAKE_CURRENT_LIST_DIR}/physac_dll/physac/src )
 include_directories(.)
 
-link_directories(${CMAKE_SOURCE_DIR}/../lib)
+link_directories(${CMAKE_SOURCE_DIR}/../raylib_dll/build/raylib)
 
 add_definitions("-DPHYSAC_NO_THREADS")
 add_definitions("-DPHYSAC_STANDALONE")
