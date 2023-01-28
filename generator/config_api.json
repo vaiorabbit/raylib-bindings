@@ -1,6 +1,12 @@
 {
   "defines": [
     {
+      "name": "CONFIG_H",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
       "name": "SUPPORT_MODULE_RSHAPES",
       "type": "INT",
       "value": 1,

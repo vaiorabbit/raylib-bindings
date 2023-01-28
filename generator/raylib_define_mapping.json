@@ -1,5 +1,8 @@
 {
       "RAYLIB_H" : null
+    , "RAYLIB_VERSION_MAJOR" : "4"
+    , "RAYLIB_VERSION_MINOR" : "5"
+    , "RAYLIB_VERSION_PATCH" : "0"
     , "RAYLIB_VERSION" : "\"4.5-dev\""
     , "RLAPI" : null
     , "PI" : null
@@ -56,7 +59,7 @@
     , "MatrixToFloat" : null
     , "Vector3ToFloat" : null
     , "RLGL_H" : null
-    , "RLGL_VERSION" : "\"4.0\""
+    , "RLGL_VERSION" : "\"4.2\""
     , "TRACELOG" : null
     , "TRACELOGD" : null
     , "GRAPHICS_API_OPENGL_33" : null
@@ -133,6 +136,7 @@
     , "RL_BLEND_COLOR" : "0x8005"
     , "RL_SHADER_LOC_MAP_DIFFUSE" : null
     , "RL_SHADER_LOC_MAP_SPECULAR" : null
+    , "CONFIG_H" : null
     , "SUPPORT_MODULE_RSHAPES" : "1"
     , "SUPPORT_MODULE_RTEXTURES" : "1"
     , "SUPPORT_MODULE_RTEXT" : "1"

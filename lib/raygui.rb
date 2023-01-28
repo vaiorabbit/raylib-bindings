@@ -780,6 +780,11 @@ module Raylib
       # @param color [Color]
       # @return [void]
       [:GuiDrawIcon, :GuiDrawIcon, [:int, :int, :int, :int, Color.by_value], :void],
+
+      # GuiSetIconScale : Set icon drawing size
+      # @param scale [int]
+      # @return [void]
+      [:GuiSetIconScale, :GuiSetIconScale, [:int], :void],
     ]
     entries.each do |entry|
       attach_function entry[0], entry[1], entry[2], entry[3]

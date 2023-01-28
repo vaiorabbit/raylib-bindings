@@ -1214,52 +1214,52 @@
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL0",
           "value": 0,
-          "description": "Framebuffer attachmment type: color 0"
+          "description": "Framebuffer attachment type: color 0"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL1",
           "value": 1,
-          "description": "Framebuffer attachmment type: color 1"
+          "description": "Framebuffer attachment type: color 1"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL2",
           "value": 2,
-          "description": "Framebuffer attachmment type: color 2"
+          "description": "Framebuffer attachment type: color 2"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL3",
           "value": 3,
-          "description": "Framebuffer attachmment type: color 3"
+          "description": "Framebuffer attachment type: color 3"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL4",
           "value": 4,
-          "description": "Framebuffer attachmment type: color 4"
+          "description": "Framebuffer attachment type: color 4"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL5",
           "value": 5,
-          "description": "Framebuffer attachmment type: color 5"
+          "description": "Framebuffer attachment type: color 5"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL6",
           "value": 6,
-          "description": "Framebuffer attachmment type: color 6"
+          "description": "Framebuffer attachment type: color 6"
         },
         {
           "name": "RL_ATTACHMENT_COLOR_CHANNEL7",
           "value": 7,
-          "description": "Framebuffer attachmment type: color 7"
+          "description": "Framebuffer attachment type: color 7"
         },
         {
           "name": "RL_ATTACHMENT_DEPTH",
           "value": 100,
-          "description": "Framebuffer attachmment type: depth"
+          "description": "Framebuffer attachment type: depth"
         },
         {
           "name": "RL_ATTACHMENT_STENCIL",
           "value": 200,
-          "description": "Framebuffer attachmment type: stencil"
+          "description": "Framebuffer attachment type: stencil"
         }
       ]
     },
@@ -1347,7 +1347,7 @@
     },
     {
       "name": "rlPopMatrix",
-      "description": "Pop lattest inserted matrix from stack",
+      "description": "Pop latest inserted matrix from stack",
       "returnType": "void"
     },
     {
@@ -1835,6 +1835,25 @@
       ]
     },
     {
+      "name": "rlCubemapParameters",
+      "description": "Set cubemap parameters (filter, wrap)",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "unsigned int",
+          "name": "id"
+        },
+        {
+          "type": "int",
+          "name": "param"
+        },
+        {
+          "type": "int",
+          "name": "value"
+        }
+      ]
+    },
+    {
       "name": "rlEnableShader",
       "description": "Enable shader program",
       "returnType": "void",
@@ -2123,7 +2142,7 @@
     },
     {
       "name": "rlglClose",
-      "description": "De-inititialize rlgl (buffers, shaders, textures)",
+      "description": "De-initialize rlgl (buffers, shaders, textures)",
       "returnType": "void"
     },
     {
@@ -2961,7 +2980,7 @@
     },
     {
       "name": "rlComputeShaderDispatch",
-      "description": "Dispatch compute shader (equivalent to *draw* for graphics pilepine)",
+      "description": "Dispatch compute shader (equivalent to *draw* for graphics pipeline)",
       "returnType": "void",
       "params": [
         {

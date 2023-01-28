@@ -11,6 +11,9 @@ module Raylib
 
   # Define/Macro
 
+  RAYLIB_VERSION_MAJOR = 4
+  RAYLIB_VERSION_MINOR = 5
+  RAYLIB_VERSION_PATCH = 0
   RAYLIB_VERSION = "4.5-dev"
   DEG2RAD = Math::PI / 180.0
   RAD2DEG = 180.0 / Math::PI
@@ -1111,6 +1114,11 @@ module Raylib
       # @return [Shader]
       [:LoadShaderFromMemory, :LoadShaderFromMemory, [:pointer, :pointer], Shader.by_value],
 
+      # IsShaderReady : Check if a shader is ready
+      # @param shader [Shader]
+      # @return [bool]
+      [:IsShaderReady, :IsShaderReady, [Shader.by_value], :bool],
+
       # GetShaderLocation : Get shader uniform location
       # @param shader [Shader]
       # @param uniformName [const char *]
@@ -2137,6 +2145,11 @@ module Raylib
       # @return [Image]
       [:LoadImageFromScreen, :LoadImageFromScreen, [], Image.by_value],
 
+      # IsImageReady : Check if an image is ready
+      # @param image [Image]
+      # @return [bool]
+      [:IsImageReady, :IsImageReady, [Image.by_value], :bool],
+
       # UnloadImage : Unload image from CPU memory (RAM)
       # @param image [Image]
       # @return [void]
@@ -2587,10 +2600,20 @@ module Raylib
       # @return [RenderTexture2D]
       [:LoadRenderTexture, :LoadRenderTexture, [:int, :int], RenderTexture2D.by_value],
 
+      # IsTextureReady : Check if a texture is ready
+      # @param texture [Texture2D]
+      # @return [bool]
+      [:IsTextureReady, :IsTextureReady, [Texture2D.by_value], :bool],
+
       # UnloadTexture : Unload texture from GPU memory (VRAM)
       # @param texture [Texture2D]
       # @return [void]
       [:UnloadTexture, :UnloadTexture, [Texture2D.by_value], :void],
+
+      # IsRenderTextureReady : Check if a render texture is ready
+      # @param target [RenderTexture2D]
+      # @return [bool]
+      [:IsRenderTextureReady, :IsRenderTextureReady, [RenderTexture2D.by_value], :bool],
 
       # UnloadRenderTexture : Unload render texture from GPU memory (VRAM)
       # @param target [RenderTexture2D]
@@ -2801,6 +2824,11 @@ module Raylib
       # @param glyphCount [int]
       # @return [Font]
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
+
+      # IsFontReady : Check if a font is ready
+      # @param font [Font]
+      # @return [bool]
+      [:IsFontReady, :IsFontReady, [Font.by_value], :bool],
 
       # LoadFontData : Load font data for further use
       # @param fileData [const unsigned char *]
@@ -3253,6 +3281,11 @@ module Raylib
       # @return [Model]
       [:LoadModelFromMesh, :LoadModelFromMesh, [Mesh.by_value], Model.by_value],
 
+      # IsModelReady : Check if a model is ready
+      # @param model [Model]
+      # @return [bool]
+      [:IsModelReady, :IsModelReady, [Model.by_value], :bool],
+
       # UnloadModel : Unload model (including meshes) from memory (RAM and/or VRAM)
       # @param model [Model]
       # @return [void]
@@ -3480,6 +3513,11 @@ module Raylib
       # @return [Material]
       [:LoadMaterialDefault, :LoadMaterialDefault, [], Material.by_value],
 
+      # IsMaterialReady : Check if a material is ready
+      # @param material [Material]
+      # @return [bool]
+      [:IsMaterialReady, :IsMaterialReady, [Material.by_value], :bool],
+
       # UnloadMaterial : Unload material from GPU memory (VRAM)
       # @param material [Material]
       # @return [void]
@@ -3616,6 +3654,11 @@ module Raylib
       # @return [Wave]
       [:LoadWaveFromMemory, :LoadWaveFromMemory, [:pointer, :pointer, :int], Wave.by_value],
 
+      # IsWaveReady : Checks if wave data is ready
+      # @param wave [Wave]
+      # @return [bool]
+      [:IsWaveReady, :IsWaveReady, [Wave.by_value], :bool],
+
       # LoadSound : Load sound from file
       # @param fileName [const char *]
       # @return [Sound]
@@ -3625,6 +3668,11 @@ module Raylib
       # @param wave [Wave]
       # @return [Sound]
       [:LoadSoundFromWave, :LoadSoundFromWave, [Wave.by_value], Sound.by_value],
+
+      # IsSoundReady : Checks if a sound is ready
+      # @param sound [Sound]
+      # @return [bool]
+      [:IsSoundReady, :IsSoundReady, [Sound.by_value], :bool],
 
       # UpdateSound : Update sound buffer with new data
       # @param sound [Sound]
@@ -3753,6 +3801,11 @@ module Raylib
       # @return [Music]
       [:LoadMusicStreamFromMemory, :LoadMusicStreamFromMemory, [:pointer, :pointer, :int], Music.by_value],
 
+      # IsMusicReady : Checks if a music stream is ready
+      # @param music [Music]
+      # @return [bool]
+      [:IsMusicReady, :IsMusicReady, [Music.by_value], :bool],
+
       # UnloadMusicStream : Unload music stream
       # @param music [Music]
       # @return [void]
@@ -3828,6 +3881,11 @@ module Raylib
       # @param channels [unsigned int]
       # @return [AudioStream]
       [:LoadAudioStream, :LoadAudioStream, [:uint, :uint, :uint], AudioStream.by_value],
+
+      # IsAudioStreamReady : Checks if an audio stream is ready
+      # @param stream [AudioStream]
+      # @return [bool]
+      [:IsAudioStreamReady, :IsAudioStreamReady, [AudioStream.by_value], :bool],
 
       # UnloadAudioStream : Unload audio stream and free memory
       # @param stream [AudioStream]

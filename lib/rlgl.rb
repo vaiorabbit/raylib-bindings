@@ -11,7 +11,7 @@ module Raylib
 
   # Define/Macro
 
-  RLGL_VERSION = "4.0"
+  RLGL_VERSION = "4.2"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
   RL_TEXTURE_WRAP_S = 0x2802 # GL_TEXTURE_WRAP_S
   RL_TEXTURE_WRAP_T = 0x2803 # GL_TEXTURE_WRAP_T
@@ -191,16 +191,16 @@ module Raylib
 
   # enum rlFramebufferAttachType
   # Framebuffer attachment type
-  RL_ATTACHMENT_COLOR_CHANNEL0 = 0 # Framebuffer attachmment type: color 0
-  RL_ATTACHMENT_COLOR_CHANNEL1 = 1 # Framebuffer attachmment type: color 1
-  RL_ATTACHMENT_COLOR_CHANNEL2 = 2 # Framebuffer attachmment type: color 2
-  RL_ATTACHMENT_COLOR_CHANNEL3 = 3 # Framebuffer attachmment type: color 3
-  RL_ATTACHMENT_COLOR_CHANNEL4 = 4 # Framebuffer attachmment type: color 4
-  RL_ATTACHMENT_COLOR_CHANNEL5 = 5 # Framebuffer attachmment type: color 5
-  RL_ATTACHMENT_COLOR_CHANNEL6 = 6 # Framebuffer attachmment type: color 6
-  RL_ATTACHMENT_COLOR_CHANNEL7 = 7 # Framebuffer attachmment type: color 7
-  RL_ATTACHMENT_DEPTH = 100 # Framebuffer attachmment type: depth
-  RL_ATTACHMENT_STENCIL = 200 # Framebuffer attachmment type: stencil
+  RL_ATTACHMENT_COLOR_CHANNEL0 = 0 # Framebuffer attachment type: color 0
+  RL_ATTACHMENT_COLOR_CHANNEL1 = 1 # Framebuffer attachment type: color 1
+  RL_ATTACHMENT_COLOR_CHANNEL2 = 2 # Framebuffer attachment type: color 2
+  RL_ATTACHMENT_COLOR_CHANNEL3 = 3 # Framebuffer attachment type: color 3
+  RL_ATTACHMENT_COLOR_CHANNEL4 = 4 # Framebuffer attachment type: color 4
+  RL_ATTACHMENT_COLOR_CHANNEL5 = 5 # Framebuffer attachment type: color 5
+  RL_ATTACHMENT_COLOR_CHANNEL6 = 6 # Framebuffer attachment type: color 6
+  RL_ATTACHMENT_COLOR_CHANNEL7 = 7 # Framebuffer attachment type: color 7
+  RL_ATTACHMENT_DEPTH = 100 # Framebuffer attachment type: depth
+  RL_ATTACHMENT_STENCIL = 200 # Framebuffer attachment type: stencil
 
   # enum rlFramebufferAttachTextureType
   # Framebuffer texture attachment type
@@ -285,7 +285,7 @@ module Raylib
       # @return [void]
       [:rlPushMatrix, :rlPushMatrix, [], :void],
 
-      # rlPopMatrix : Pop lattest inserted matrix from stack
+      # rlPopMatrix : Pop latest inserted matrix from stack
       # @return [void]
       [:rlPopMatrix, :rlPopMatrix, [], :void],
 
@@ -479,6 +479,13 @@ module Raylib
       # @return [void]
       [:rlTextureParameters, :rlTextureParameters, [:uint, :int, :int], :void],
 
+      # rlCubemapParameters : Set cubemap parameters (filter, wrap)
+      # @param id [unsigned int]
+      # @param param [int]
+      # @param value [int]
+      # @return [void]
+      [:rlCubemapParameters, :rlCubemapParameters, [:uint, :int, :int], :void],
+
       # rlEnableShader : Enable shader program
       # @param id [unsigned int]
       # @return [void]
@@ -636,7 +643,7 @@ module Raylib
       # @return [void]
       [:rlglInit, :rlglInit, [:int, :int], :void],
 
-      # rlglClose : De-inititialize rlgl (buffers, shaders, textures)
+      # rlglClose : De-initialize rlgl (buffers, shaders, textures)
       # @return [void]
       [:rlglClose, :rlglClose, [], :void],
 
@@ -976,7 +983,7 @@ module Raylib
       # @return [unsigned int]
       [:rlLoadComputeShaderProgram, :rlLoadComputeShaderProgram, [:uint], :uint],
 
-      # rlComputeShaderDispatch : Dispatch compute shader (equivalent to *draw* for graphics pilepine)
+      # rlComputeShaderDispatch : Dispatch compute shader (equivalent to *draw* for graphics pipeline)
       # @param groupX [unsigned int]
       # @param groupY [unsigned int]
       # @param groupZ [unsigned int]
