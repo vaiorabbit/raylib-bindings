@@ -42,9 +42,9 @@ jobs:
         fetch-depth: 1
         submodules: recursive
 
-    - name: Update submodules
-      id: update
-      run: git submodule update --remote --recursive
+    # - name: Update submodules
+    #   id: update
+    #   run: git submodule update --remote --recursive
 
     - name: Check before
       continue-on-error: true

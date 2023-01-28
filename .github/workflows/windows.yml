@@ -20,9 +20,9 @@ jobs:
         fetch-depth: 1
         submodules: recursive
 
-    - name: Update submodules
-      id: update
-      run: git submodule update --remote --recursive
+    # - name: Update submodules
+    #   id: update
+    #   run: git submodule update --remote --recursive
 
     - name: Run rebuild script
       shell: cmd
