@@ -2,15 +2,6 @@ name: Build workflow (Linux)
 
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    # inputs:
-    #   name:
-    #     # Friendly description to be shown in the UI instead of 'name'
-    #     description: 'Person to greet'
-    #     # Default value if no value is explicitly provided
-    #     default: 'World'
-    #     # Input has to be provided for the workflow to run
-    #     required: true
 
 jobs:
   build:
@@ -34,7 +25,7 @@ jobs:
       run: git submodule update --remote --recursive
 
     - name: Setup OpenGL
-      run: sudo apt -y install libgl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev
+      run: sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev
 
     - name: Check before
       run: ls -l lib/*
@@ -49,8 +40,10 @@ jobs:
       run: ls -l lib/*
 
     - name: Commit new libraries
+      continue-on-error: true
       run: |
         git config user.name "bot"
         git config user.email "bot"
+        git add lib/*
         git commit -a -m "commit by bot"
-        git push -u origin update
+        git push --force-with-lease -u origin update

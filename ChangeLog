@@ -1,3 +1,8 @@
+2023-01-28  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Added Linux x86_64 binaries
+	* Added GitHub Actions scripts
+
 2023-01-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/util/setup_dll.rb: Fixed
