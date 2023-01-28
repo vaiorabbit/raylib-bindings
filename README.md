@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2023-01-23
+*   Last modified : 2023-01-28
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -19,12 +19,13 @@ Provides Ruby bindings for raylib-related libraries including:
 ## Features ##
 
 *   Generated semi-automatically
-*   Based on Ruby/FFI
-    *   No need to build C extension library
+*   Based on Ruby/FFI ( https://github.com/ffi/ffi )
+*   Pre-built binaries are inside:
+    *   Windows (x86_64)
+    *   macOS (x86_64, ARM64)
+    *   Linux (x86_64 WSL, ARM64 Chromebook)
 
 ## Quick Start ##
-
-For Windows and macOS users:
 
 ```
 D:\> gem install raylib-bindings
@@ -46,10 +47,14 @@ D:\> ruby template.rb
 
 *   Ruby interpreter
     *   Tested on:
-        *   [macOS]
+        *   [macOS] https://rvm.io
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
+        *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
+        *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [aarch64-linux]
 
 *   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
     *   CMake https://cmake.org/download/
@@ -67,6 +72,10 @@ D:\> ruby template.rb
 
                     gcc (Rev7, Built by MSYS2 project) 12.2.0
 
+            *   [Linux] gcc, clang
+
+                    (x86_64) Ubuntu clang version 14.0.0-1ubuntu1
+                    (arm64) aarch64-linux-gnu-g++ ( https://packages.ubuntu.com/focal/g++-aarch64-linux-gnu )
 
 <details>
 <summary>Older versions</summary>
@@ -127,15 +136,15 @@ See the project below to learn how to use this library:
 
 Shared libraries in `lib` directory are built on top of these products and are available under the terms of these licenses:
 
-*   `libraylib.dylib`, `libraylib.dll`
+*   `libraylib.dylib`, `libraylib.dll`, `libraylib.aarch64.so`, `libraylib.x86_64.so`
     *   raylib ( https://github.com/raysan5/raylib )
-        *   https://github.com/raysan5/raylib/blob/master/LICENSE
-*   `raygui.dylib`, `raygui.dll`
+        *   zlib License https://github.com/raysan5/raylib/blob/master/LICENSE
+*   `raygui.dylib`, `raygui.dll`, `raygui.aarch64.so`, `raygui.x86_64.so`
     *   raygui ( https://github.com/raysan5/raygui )
-        *   https://github.com/raysan5/raygui/blob/master/LICENSE
-*   `physac.dylib`, `physac.dll`
+        *   zlib License https://github.com/raysan5/raygui/blob/master/LICENSE
+*   `physac.dylib`, `physac.dll`, `physac.aarch64.so` `physac.x86_64.so`
     *   Physac ( https://github.com/raysan5/physac )
-        *   https://github.com/raysan5/physac/blob/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833/src/physac.h#L51-L68
+        *   LICENSE: zlib/libpng https://github.com/raysan5/physac/blob/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833/src/physac.h#L51-L68
 
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 
