@@ -1,4 +1,4 @@
-name: Build workflow (Linux Cross)
+name: Build (Linux Cross)
 
 on:
   workflow_dispatch:

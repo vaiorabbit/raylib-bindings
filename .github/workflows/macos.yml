@@ -1,4 +1,4 @@
-name: Build (Linux)
+name: Build (macOS)
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ jobs:
   build:
     permissions:
       contents: write
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -20,24 +20,11 @@ jobs:
         fetch-depth: 1
         submodules: recursive
 
-    # - name: Update submodules
-    #   id: update
-    #   run: git submodule update --remote --recursive
-
-    - name: Setup OpenGL
-      run: sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev
-
-    - name: Check before
-      run: ls -l lib/*
-
     - name: Run rebuild script
       run: |
         cd ${GITHUB_WORKSPACE}/script
-        bash ./rebuild_libs_linux.sh
+        bash ./rebuild_libs_macos.sh
         cd ${GITHUB_WORKSPACE}
-
-    - name: Check after
-      run: ls -l lib/*
 
     - name: Commit new libraries
       continue-on-error: true

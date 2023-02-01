@@ -3,15 +3,15 @@
 #
 
 pushd .
-cd ../physac_dll
-rm -r -f build
-./build_physac_macos.sh
-popd
-
-pushd .
 cd ../raylib_dll
 rm -r -f build
 ./build_raylib_macos.sh
+popd
+
+pushd .
+cd ../physac_dll
+rm -r -f build
+./build_physac_macos.sh
 popd
 
 pushd .
