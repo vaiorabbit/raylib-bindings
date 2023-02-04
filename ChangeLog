@@ -1,3 +1,7 @@
+2023-02-04  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/7914332c40ee811ad08a90e4eb7d40c2d1e81f4e ) and raygui ( https://github.com/raysan5/raygui/commit/cec2de3440eac0ad0020d3ce3d546706c0749335 )
+
 2023-01-28  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Added Linux x86_64 binaries

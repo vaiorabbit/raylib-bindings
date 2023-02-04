@@ -146,6 +146,12 @@ module Raylib
       # @return [float]
       [:Vector2Angle, :Vector2Angle, [Vector2.by_value, Vector2.by_value], :float],
 
+      # Vector2LineAngle
+      # @param start [Vector2]
+      # @param end [Vector2]
+      # @return [float]
+      [:Vector2LineAngle, :Vector2LineAngle, [Vector2.by_value, Vector2.by_value], :float],
+
       # Vector2Scale
       # @param v [Vector2]
       # @param scale [float]
