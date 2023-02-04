@@ -25,7 +25,9 @@ jobs:
     #   run: git submodule update --remote --recursive
 
     - name: Setup OpenGL
-      run: sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev
+      run: |
+        sudo apt update
+        sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev
 
     - name: Check before
       run: ls -l lib/*
