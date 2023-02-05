@@ -42,10 +42,6 @@ jobs:
         fetch-depth: 1
         submodules: recursive
 
-    # - name: Update submodules
-    #   id: update
-    #   run: git submodule update --remote --recursive
-
     - name: Check before
       continue-on-error: true
       run: |
@@ -68,8 +64,8 @@ jobs:
     - name: Commit new libraries
       continue-on-error: true
       run: |
-        git config user.name "bot"
-        git config user.email "bot"
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}"
         git add lib/*
-        git commit -a -m "commit by bot"
+        git commit -a -m "commit by ${GITHUB_ACTOR} via GitHub Actions"
         git push --force-with-lease -u origin update
