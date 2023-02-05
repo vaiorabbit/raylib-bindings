@@ -27,6 +27,7 @@ jobs:
         rebuild_libs_windows.cmd cmake
 
     - name: Commit new libraries
+      shell: cmd
       continue-on-error: true
       run: |
         git config user.name "${GITHUB_ACTOR}"
