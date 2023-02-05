@@ -27,11 +27,10 @@ jobs:
         rebuild_libs_windows.cmd cmake
 
     - name: Commit new libraries
-      shell: cmd
       continue-on-error: true
       run: |
-        git config user.name "${GITHUB_ACTOR}"
-        git config user.email "${GITHUB_ACTOR}"
+        git config user.name "$env:GITHUB_ACTOR"
+        git config user.email "$env:GITHUB_ACTOR"
         git add lib/*
-        git commit -a -m "commit by ${GITHUB_ACTOR} via GitHub Actions"
+        git commit -a -m "commit by $env:GITHUB_ACTOR via GitHub Actions"
         git push --force-with-lease -u origin update
