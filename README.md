@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2023-02-04
+*   Last modified : 2023-02-15
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -48,7 +48,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS] https://rvm.io
-            *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
+            *   ruby 3.2.1 (2023-02-08 revision 31819e82c8) [arm64-darwin22]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
@@ -83,6 +83,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin21]
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
