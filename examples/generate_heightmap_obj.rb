@@ -24,7 +24,6 @@ if __FILE__ == $PROGRAM_NAME
   UnloadImage(image)
 
   vertices = mesh[:vertices]
-  normals = mesh[:normals]
   vertexCount = mesh[:vertexCount]
   triangleCount = mesh[:triangleCount]
   raise RuntimeError unless vertexCount == triangleCount * 3
