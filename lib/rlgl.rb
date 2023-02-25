@@ -246,6 +246,20 @@ module Raylib
       :vaoId, :uint,        # OpenGL Vertex Array Object id
       :vboId, [:uint, 4],   # OpenGL Vertex Buffer Objects id (4 types of vertex data)
     )
+    def elementCount = self[:elementCount]
+    def elementCount=(v) self[:elementCount] = v end
+    def vertices = self[:vertices]
+    def vertices=(v) self[:vertices] = v end
+    def texcoords = self[:texcoords]
+    def texcoords=(v) self[:texcoords] = v end
+    def colors = self[:colors]
+    def colors=(v) self[:colors] = v end
+    def indices = self[:indices]
+    def indices=(v) self[:indices] = v end
+    def vaoId = self[:vaoId]
+    def vaoId=(v) self[:vaoId] = v end
+    def vboId = self[:vboId]
+    def vboId=(v) self[:vboId] = v end
   end
 
   # of those state-change happens (this is done in core module)
@@ -256,6 +270,14 @@ module Raylib
       :vertexAlignment, :int, # Number of vertex required for index alignment (LINES, TRIANGLES)
       :textureId, :uint,      # Texture id to be used on the draw -> Use to create new draw call if changes
     )
+    def mode = self[:mode]
+    def mode=(v) self[:mode] = v end
+    def vertexCount = self[:vertexCount]
+    def vertexCount=(v) self[:vertexCount] = v end
+    def vertexAlignment = self[:vertexAlignment]
+    def vertexAlignment=(v) self[:vertexAlignment] = v end
+    def textureId = self[:textureId]
+    def textureId=(v) self[:textureId] = v end
   end
 
   # rlRenderBatch type
@@ -268,6 +290,18 @@ module Raylib
       :drawCounter, :int,      # Draw calls counter
       :currentDepth, :float,   # Current depth value for next draw
     )
+    def bufferCount = self[:bufferCount]
+    def bufferCount=(v) self[:bufferCount] = v end
+    def currentBuffer = self[:currentBuffer]
+    def currentBuffer=(v) self[:currentBuffer] = v end
+    def vertexBuffer = self[:vertexBuffer]
+    def vertexBuffer=(v) self[:vertexBuffer] = v end
+    def draws = self[:draws]
+    def draws=(v) self[:draws] = v end
+    def drawCounter = self[:drawCounter]
+    def drawCounter=(v) self[:drawCounter] = v end
+    def currentDepth = self[:currentDepth]
+    def currentDepth=(v) self[:currentDepth] = v end
   end
 
 

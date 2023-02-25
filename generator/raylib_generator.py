@@ -186,6 +186,7 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
             continue
         json_struct = [j for j in json_structs if j['name'] == struct_name][0]
 
+        # Calculate value for aligned comment
         max_code_string_length = 0
         for field in struct_info.fields:
             json_field = [j for j in json_struct['fields'] if j['name'] == field.element_name]
@@ -196,6 +197,7 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
                 code_string = ":%s, [%s, %s],"  % (field.element_name, field.type_kind, field.element_count)
             max_code_string_length = max(max_code_string_length, len(code_string))
 
+        # Print description of this struct (if available)
         struct_description = json_struct['description']
         if struct_description != "":
             print(indent + "# %s" % (struct_description), file = sys.stdout)
@@ -203,7 +205,10 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
         # Name of struct/class must be start with capital letter
         struct_name = struct_name[0].upper() + struct_name[1:]
 
+        # Print body of struct from here
         print(indent + "class %s < %s" % (struct_name, struct_info.kind), file = sys.stdout)
+
+        # Print definition (list of members)
         print(indent + "  layout(", file = sys.stdout)
         for field in struct_info.fields:
             json_field = [j for j in json_struct['fields'] if j['name'] == field.element_name]
@@ -224,6 +229,13 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
             else:
                 print(indent + "    :%s, [%s, %s],%s%s" % (field.element_name, field.type_kind, field.element_count, spaces, member_description), file = sys.stdout)
         print(indent + "  )", file = sys.stdout)
+
+        # Print accessors
+        for field in struct_info.fields:
+            # Reader
+            print(indent + "  def %s = self[:%s]" % (field.element_name, field.element_name), file = sys.stdout)
+            print(indent + "  def %s=(v) self[:%s] = v end" % (field.element_name, field.element_name), file = sys.stdout)
+
         print(indent + "end\n", file = sys.stdout)
         if struct_alias:
             if struct_name in struct_alias.keys():

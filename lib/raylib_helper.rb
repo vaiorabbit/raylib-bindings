@@ -19,15 +19,6 @@ module Raylib
       self[:a] = a
       self
     end
-
-    def r() self[:r] end
-    def r=(v) self[:r] = v end
-    def g() self[:g] end
-    def g=(v) self[:g] = v end
-    def b() self[:b] end
-    def b=(v) self[:b] = v end
-    def a() self[:a] end
-    def a=(v) self[:a] = v end
   end
 
   LIGHTGRAY  = Color.from_u8(200, 200, 200, 255)
@@ -76,11 +67,6 @@ module Raylib
       self[:y] = y
       self
     end
-
-    def x() self[:x] end
-    def x=(v) self[:x] = v end
-    def y() self[:y] end
-    def y=(v) self[:y] = v end
   end
 
   class Vector3
@@ -98,13 +84,6 @@ module Raylib
       self[:z] = z
       self
     end
-
-    def x() self[:x] end
-    def x=(v) self[:x] = v end
-    def y() self[:y] end
-    def y=(v) self[:y] = v end
-    def z() self[:z] end
-    def z=(v) self[:z] = v end
   end
 
   class Vector4
@@ -123,15 +102,6 @@ module Raylib
       self[:w] = w
       self
     end
-
-    def x() self[:x] end
-    def x=(v) self[:x] = v end
-    def y() self[:y] end
-    def y=(v) self[:y] = v end
-    def z() self[:z] end
-    def z=(v) self[:z] = v end
-    def w() self[:w] end
-    def w=(v) self[:w] = v end
   end
 
   class Quaternion
@@ -150,15 +120,6 @@ module Raylib
       self[:w] = w
       self
     end
-
-    def x() self[:x] end
-    def x=(v) self[:x] = v end
-    def y() self[:y] end
-    def y=(v) self[:y] = v end
-    def z() self[:z] end
-    def z=(v) self[:z] = v end
-    def w() self[:w] end
-    def w=(v) self[:w] = v end
   end
 
   class Rectangle
@@ -173,15 +134,6 @@ module Raylib
       self[:height] = height
       self
     end
-
-    def x() self[:x] end
-    def x=(v) self[:x] = v end
-    def y() self[:y] end
-    def y=(v) self[:y] = v end
-    def width() self[:width] end
-    def width=(v) self[:width] = v end
-    def height() self[:height] end
-    def height=(v) self[:height] = v end
   end
 
   def BoundingBox.create(*args)
@@ -354,66 +306,6 @@ module Raylib
       UnloadModelAnimation(anim)
     end
     MemFree(anim_ptrs)
-  end
-
-  #
-  # Camera helper
-  #
-
-  class Camera
-    def position
-      self[:position]
-    end
-
-    def target
-      self[:target]
-    end
-
-    def up
-      self[:up]
-    end
-
-    def fovy
-      self[:fovy]
-    end
-
-    def fovy=(v)
-      self[:fovy] = v
-    end
-
-    def projection
-      self[:projection]
-    end
-
-    def projection=(v)
-      self[:projection] = v
-    end
-  end
-
-  class Camera2D
-    def offset
-      self[:offset]
-    end
-
-    def target
-      self[:target]
-    end
-
-    def rotation
-      self[:rotation]
-    end
-
-    def rotation=(v)
-      self[:rotation] = v
-    end
-
-    def zoom
-      self[:zoom]
-    end
-
-    def zoom=(v)
-      self[:zoom] = v
-    end
   end
 
 end

@@ -1,3 +1,7 @@
+2023-02-26  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator/raylib_generator.py: Emits accessors for struct members
+
 2023-02-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator/raylib_generator.py: Emits appropriate spaces to align comments

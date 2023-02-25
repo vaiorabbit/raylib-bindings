@@ -416,6 +416,10 @@ module Raylib
       :x, :float, # Vector x component
       :y, :float, # Vector y component
     )
+    def x = self[:x]
+    def x=(v) self[:x] = v end
+    def y = self[:y]
+    def y=(v) self[:y] = v end
   end
 
   # Vector3, 3 components
@@ -425,6 +429,12 @@ module Raylib
       :y, :float, # Vector y component
       :z, :float, # Vector z component
     )
+    def x = self[:x]
+    def x=(v) self[:x] = v end
+    def y = self[:y]
+    def y=(v) self[:y] = v end
+    def z = self[:z]
+    def z=(v) self[:z] = v end
   end
 
   # Vector4, 4 components
@@ -435,6 +445,14 @@ module Raylib
       :z, :float, # Vector z component
       :w, :float, # Vector w component
     )
+    def x = self[:x]
+    def x=(v) self[:x] = v end
+    def y = self[:y]
+    def y=(v) self[:y] = v end
+    def z = self[:z]
+    def z=(v) self[:z] = v end
+    def w = self[:w]
+    def w=(v) self[:w] = v end
   end
 
   Quaternion = Vector4
@@ -459,6 +477,38 @@ module Raylib
       :m11, :float, # Matrix fourth row (4 components)
       :m15, :float, # Matrix fourth row (4 components)
     )
+    def m0 = self[:m0]
+    def m0=(v) self[:m0] = v end
+    def m4 = self[:m4]
+    def m4=(v) self[:m4] = v end
+    def m8 = self[:m8]
+    def m8=(v) self[:m8] = v end
+    def m12 = self[:m12]
+    def m12=(v) self[:m12] = v end
+    def m1 = self[:m1]
+    def m1=(v) self[:m1] = v end
+    def m5 = self[:m5]
+    def m5=(v) self[:m5] = v end
+    def m9 = self[:m9]
+    def m9=(v) self[:m9] = v end
+    def m13 = self[:m13]
+    def m13=(v) self[:m13] = v end
+    def m2 = self[:m2]
+    def m2=(v) self[:m2] = v end
+    def m6 = self[:m6]
+    def m6=(v) self[:m6] = v end
+    def m10 = self[:m10]
+    def m10=(v) self[:m10] = v end
+    def m14 = self[:m14]
+    def m14=(v) self[:m14] = v end
+    def m3 = self[:m3]
+    def m3=(v) self[:m3] = v end
+    def m7 = self[:m7]
+    def m7=(v) self[:m7] = v end
+    def m11 = self[:m11]
+    def m11=(v) self[:m11] = v end
+    def m15 = self[:m15]
+    def m15=(v) self[:m15] = v end
   end
 
   # Color, 4 components, R8G8B8A8 (32bit)
@@ -469,6 +519,14 @@ module Raylib
       :b, :uchar, # Color blue value
       :a, :uchar, # Color alpha value
     )
+    def r = self[:r]
+    def r=(v) self[:r] = v end
+    def g = self[:g]
+    def g=(v) self[:g] = v end
+    def b = self[:b]
+    def b=(v) self[:b] = v end
+    def a = self[:a]
+    def a=(v) self[:a] = v end
   end
 
   # Rectangle, 4 components
@@ -479,6 +537,14 @@ module Raylib
       :width, :float,  # Rectangle width
       :height, :float, # Rectangle height
     )
+    def x = self[:x]
+    def x=(v) self[:x] = v end
+    def y = self[:y]
+    def y=(v) self[:y] = v end
+    def width = self[:width]
+    def width=(v) self[:width] = v end
+    def height = self[:height]
+    def height=(v) self[:height] = v end
   end
 
   # Image, pixel data stored in CPU memory (RAM)
@@ -490,6 +556,16 @@ module Raylib
       :mipmaps, :int,  # Mipmap levels, 1 by default
       :format, :int,   # Data format (PixelFormat type)
     )
+    def data = self[:data]
+    def data=(v) self[:data] = v end
+    def width = self[:width]
+    def width=(v) self[:width] = v end
+    def height = self[:height]
+    def height=(v) self[:height] = v end
+    def mipmaps = self[:mipmaps]
+    def mipmaps=(v) self[:mipmaps] = v end
+    def format = self[:format]
+    def format=(v) self[:format] = v end
   end
 
   # Texture, tex data stored in GPU memory (VRAM)
@@ -501,6 +577,16 @@ module Raylib
       :mipmaps, :int, # Mipmap levels, 1 by default
       :format, :int,  # Data format (PixelFormat type)
     )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def width = self[:width]
+    def width=(v) self[:width] = v end
+    def height = self[:height]
+    def height=(v) self[:height] = v end
+    def mipmaps = self[:mipmaps]
+    def mipmaps=(v) self[:mipmaps] = v end
+    def format = self[:format]
+    def format=(v) self[:format] = v end
   end
 
   Texture2D = Texture
@@ -513,6 +599,12 @@ module Raylib
       :texture, Texture, # Color buffer attachment texture
       :depth, Texture,   # Depth buffer attachment texture
     )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def texture = self[:texture]
+    def texture=(v) self[:texture] = v end
+    def depth = self[:depth]
+    def depth=(v) self[:depth] = v end
   end
 
   RenderTexture2D = RenderTexture
@@ -527,6 +619,18 @@ module Raylib
       :bottom, :int,      # Bottom border offset
       :layout, :int,      # Layout of the n-patch: 3x3, 1x3 or 3x1
     )
+    def source = self[:source]
+    def source=(v) self[:source] = v end
+    def left = self[:left]
+    def left=(v) self[:left] = v end
+    def top = self[:top]
+    def top=(v) self[:top] = v end
+    def right = self[:right]
+    def right=(v) self[:right] = v end
+    def bottom = self[:bottom]
+    def bottom=(v) self[:bottom] = v end
+    def layout = self[:layout]
+    def layout=(v) self[:layout] = v end
   end
 
   # GlyphInfo, font characters glyphs info
@@ -538,6 +642,16 @@ module Raylib
       :advanceX, :int, # Character advance position X
       :image, Image,   # Character image data
     )
+    def value = self[:value]
+    def value=(v) self[:value] = v end
+    def offsetX = self[:offsetX]
+    def offsetX=(v) self[:offsetX] = v end
+    def offsetY = self[:offsetY]
+    def offsetY=(v) self[:offsetY] = v end
+    def advanceX = self[:advanceX]
+    def advanceX=(v) self[:advanceX] = v end
+    def image = self[:image]
+    def image=(v) self[:image] = v end
   end
 
   # Font, font texture and GlyphInfo array data
@@ -550,6 +664,18 @@ module Raylib
       :recs, :pointer,     # Rectangles in texture for the glyphs
       :glyphs, :pointer,   # Glyphs info data
     )
+    def baseSize = self[:baseSize]
+    def baseSize=(v) self[:baseSize] = v end
+    def glyphCount = self[:glyphCount]
+    def glyphCount=(v) self[:glyphCount] = v end
+    def glyphPadding = self[:glyphPadding]
+    def glyphPadding=(v) self[:glyphPadding] = v end
+    def texture = self[:texture]
+    def texture=(v) self[:texture] = v end
+    def recs = self[:recs]
+    def recs=(v) self[:recs] = v end
+    def glyphs = self[:glyphs]
+    def glyphs=(v) self[:glyphs] = v end
   end
 
   # Camera, defines position/orientation in 3d space
@@ -561,6 +687,16 @@ module Raylib
       :fovy, :float,      # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
       :projection, :int,  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
     )
+    def position = self[:position]
+    def position=(v) self[:position] = v end
+    def target = self[:target]
+    def target=(v) self[:target] = v end
+    def up = self[:up]
+    def up=(v) self[:up] = v end
+    def fovy = self[:fovy]
+    def fovy=(v) self[:fovy] = v end
+    def projection = self[:projection]
+    def projection=(v) self[:projection] = v end
   end
 
   Camera = Camera3D
@@ -573,6 +709,14 @@ module Raylib
       :rotation, :float, # Camera rotation in degrees
       :zoom, :float,     # Camera zoom (scaling), should be 1.0f by default
     )
+    def offset = self[:offset]
+    def offset=(v) self[:offset] = v end
+    def target = self[:target]
+    def target=(v) self[:target] = v end
+    def rotation = self[:rotation]
+    def rotation=(v) self[:rotation] = v end
+    def zoom = self[:zoom]
+    def zoom=(v) self[:zoom] = v end
   end
 
   # Mesh, vertex data and vao/vbo
@@ -594,6 +738,36 @@ module Raylib
       :vaoId, :uint,           # OpenGL Vertex Array Object id
       :vboId, :pointer,        # OpenGL Vertex Buffer Objects id (default vertex data)
     )
+    def vertexCount = self[:vertexCount]
+    def vertexCount=(v) self[:vertexCount] = v end
+    def triangleCount = self[:triangleCount]
+    def triangleCount=(v) self[:triangleCount] = v end
+    def vertices = self[:vertices]
+    def vertices=(v) self[:vertices] = v end
+    def texcoords = self[:texcoords]
+    def texcoords=(v) self[:texcoords] = v end
+    def texcoords2 = self[:texcoords2]
+    def texcoords2=(v) self[:texcoords2] = v end
+    def normals = self[:normals]
+    def normals=(v) self[:normals] = v end
+    def tangents = self[:tangents]
+    def tangents=(v) self[:tangents] = v end
+    def colors = self[:colors]
+    def colors=(v) self[:colors] = v end
+    def indices = self[:indices]
+    def indices=(v) self[:indices] = v end
+    def animVertices = self[:animVertices]
+    def animVertices=(v) self[:animVertices] = v end
+    def animNormals = self[:animNormals]
+    def animNormals=(v) self[:animNormals] = v end
+    def boneIds = self[:boneIds]
+    def boneIds=(v) self[:boneIds] = v end
+    def boneWeights = self[:boneWeights]
+    def boneWeights=(v) self[:boneWeights] = v end
+    def vaoId = self[:vaoId]
+    def vaoId=(v) self[:vaoId] = v end
+    def vboId = self[:vboId]
+    def vboId=(v) self[:vboId] = v end
   end
 
   # Shader
@@ -602,6 +776,10 @@ module Raylib
       :id, :uint,      # Shader program id
       :locs, :pointer, # Shader locations array (RL_MAX_SHADER_LOCATIONS)
     )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def locs = self[:locs]
+    def locs=(v) self[:locs] = v end
   end
 
   # MaterialMap
@@ -611,6 +789,12 @@ module Raylib
       :color, Color,       # Material map color
       :value, :float,      # Material map value
     )
+    def texture = self[:texture]
+    def texture=(v) self[:texture] = v end
+    def color = self[:color]
+    def color=(v) self[:color] = v end
+    def value = self[:value]
+    def value=(v) self[:value] = v end
   end
 
   # Material, includes shader and maps
@@ -620,6 +804,12 @@ module Raylib
       :maps, :pointer,      # Material maps array (MAX_MATERIAL_MAPS)
       :params, [:float, 4], # Material generic parameters (if required)
     )
+    def shader = self[:shader]
+    def shader=(v) self[:shader] = v end
+    def maps = self[:maps]
+    def maps=(v) self[:maps] = v end
+    def params = self[:params]
+    def params=(v) self[:params] = v end
   end
 
   # Transform, vertex transformation data
@@ -629,6 +819,12 @@ module Raylib
       :rotation, Quaternion, # Rotation
       :scale, Vector3,       # Scale
     )
+    def translation = self[:translation]
+    def translation=(v) self[:translation] = v end
+    def rotation = self[:rotation]
+    def rotation=(v) self[:rotation] = v end
+    def scale = self[:scale]
+    def scale=(v) self[:scale] = v end
   end
 
   # Bone, skeletal animation bone
@@ -637,6 +833,10 @@ module Raylib
       :name, [:char, 32], # Bone name
       :parent, :int,      # Bone parent
     )
+    def name = self[:name]
+    def name=(v) self[:name] = v end
+    def parent = self[:parent]
+    def parent=(v) self[:parent] = v end
   end
 
   # Model, meshes, materials and animation data
@@ -652,6 +852,24 @@ module Raylib
       :bones, :pointer,        # Bones information (skeleton)
       :bindPose, :pointer,     # Bones base transformation (pose)
     )
+    def transform = self[:transform]
+    def transform=(v) self[:transform] = v end
+    def meshCount = self[:meshCount]
+    def meshCount=(v) self[:meshCount] = v end
+    def materialCount = self[:materialCount]
+    def materialCount=(v) self[:materialCount] = v end
+    def meshes = self[:meshes]
+    def meshes=(v) self[:meshes] = v end
+    def materials = self[:materials]
+    def materials=(v) self[:materials] = v end
+    def meshMaterial = self[:meshMaterial]
+    def meshMaterial=(v) self[:meshMaterial] = v end
+    def boneCount = self[:boneCount]
+    def boneCount=(v) self[:boneCount] = v end
+    def bones = self[:bones]
+    def bones=(v) self[:bones] = v end
+    def bindPose = self[:bindPose]
+    def bindPose=(v) self[:bindPose] = v end
   end
 
   # ModelAnimation
@@ -662,6 +880,14 @@ module Raylib
       :bones, :pointer,      # Bones information (skeleton)
       :framePoses, :pointer, # Poses array by frame
     )
+    def boneCount = self[:boneCount]
+    def boneCount=(v) self[:boneCount] = v end
+    def frameCount = self[:frameCount]
+    def frameCount=(v) self[:frameCount] = v end
+    def bones = self[:bones]
+    def bones=(v) self[:bones] = v end
+    def framePoses = self[:framePoses]
+    def framePoses=(v) self[:framePoses] = v end
   end
 
   # Ray, ray for raycasting
@@ -670,6 +896,10 @@ module Raylib
       :position, Vector3,  # Ray position (origin)
       :direction, Vector3, # Ray direction
     )
+    def position = self[:position]
+    def position=(v) self[:position] = v end
+    def direction = self[:direction]
+    def direction=(v) self[:direction] = v end
   end
 
   # RayCollision, ray hit information
@@ -680,6 +910,14 @@ module Raylib
       :point, Vector3,   # Point of nearest hit
       :normal, Vector3,  # Surface normal of hit
     )
+    def hit = self[:hit]
+    def hit=(v) self[:hit] = v end
+    def distance = self[:distance]
+    def distance=(v) self[:distance] = v end
+    def point = self[:point]
+    def point=(v) self[:point] = v end
+    def normal = self[:normal]
+    def normal=(v) self[:normal] = v end
   end
 
   # BoundingBox
@@ -688,6 +926,10 @@ module Raylib
       :min, Vector3, # Minimum vertex box-corner
       :max, Vector3, # Maximum vertex box-corner
     )
+    def min = self[:min]
+    def min=(v) self[:min] = v end
+    def max = self[:max]
+    def max=(v) self[:max] = v end
   end
 
   # Wave, audio wave data
@@ -699,6 +941,16 @@ module Raylib
       :channels, :uint,   # Number of channels (1-mono, 2-stereo, ...)
       :data, :pointer,    # Buffer data pointer
     )
+    def frameCount = self[:frameCount]
+    def frameCount=(v) self[:frameCount] = v end
+    def sampleRate = self[:sampleRate]
+    def sampleRate=(v) self[:sampleRate] = v end
+    def sampleSize = self[:sampleSize]
+    def sampleSize=(v) self[:sampleSize] = v end
+    def channels = self[:channels]
+    def channels=(v) self[:channels] = v end
+    def data = self[:data]
+    def data=(v) self[:data] = v end
   end
 
   # AudioStream, custom audio stream
@@ -710,6 +962,16 @@ module Raylib
       :sampleSize, :uint,   # Bit depth (bits per sample): 8, 16, 32 (24 not supported)
       :channels, :uint,     # Number of channels (1-mono, 2-stereo, ...)
     )
+    def buffer = self[:buffer]
+    def buffer=(v) self[:buffer] = v end
+    def processor = self[:processor]
+    def processor=(v) self[:processor] = v end
+    def sampleRate = self[:sampleRate]
+    def sampleRate=(v) self[:sampleRate] = v end
+    def sampleSize = self[:sampleSize]
+    def sampleSize=(v) self[:sampleSize] = v end
+    def channels = self[:channels]
+    def channels=(v) self[:channels] = v end
   end
 
   # Sound
@@ -718,6 +980,10 @@ module Raylib
       :stream, AudioStream, # Audio stream
       :frameCount, :uint,   # Total number of frames (considering channels)
     )
+    def stream = self[:stream]
+    def stream=(v) self[:stream] = v end
+    def frameCount = self[:frameCount]
+    def frameCount=(v) self[:frameCount] = v end
   end
 
   # Music, audio stream, anything longer than ~10 seconds should be streamed
@@ -729,6 +995,16 @@ module Raylib
       :ctxType, :int,       # Type of music context (audio filetype)
       :ctxData, :pointer,   # Audio context data, depends on type
     )
+    def stream = self[:stream]
+    def stream=(v) self[:stream] = v end
+    def frameCount = self[:frameCount]
+    def frameCount=(v) self[:frameCount] = v end
+    def looping = self[:looping]
+    def looping=(v) self[:looping] = v end
+    def ctxType = self[:ctxType]
+    def ctxType=(v) self[:ctxType] = v end
+    def ctxData = self[:ctxData]
+    def ctxData=(v) self[:ctxData] = v end
   end
 
   # VrDeviceInfo, Head-Mounted-Display device parameters
@@ -745,6 +1021,26 @@ module Raylib
       :lensDistortionValues, [:float, 4], # Lens distortion constant parameters
       :chromaAbCorrection, [:float, 4],   # Chromatic aberration correction parameters
     )
+    def hResolution = self[:hResolution]
+    def hResolution=(v) self[:hResolution] = v end
+    def vResolution = self[:vResolution]
+    def vResolution=(v) self[:vResolution] = v end
+    def hScreenSize = self[:hScreenSize]
+    def hScreenSize=(v) self[:hScreenSize] = v end
+    def vScreenSize = self[:vScreenSize]
+    def vScreenSize=(v) self[:vScreenSize] = v end
+    def vScreenCenter = self[:vScreenCenter]
+    def vScreenCenter=(v) self[:vScreenCenter] = v end
+    def eyeToScreenDistance = self[:eyeToScreenDistance]
+    def eyeToScreenDistance=(v) self[:eyeToScreenDistance] = v end
+    def lensSeparationDistance = self[:lensSeparationDistance]
+    def lensSeparationDistance=(v) self[:lensSeparationDistance] = v end
+    def interpupillaryDistance = self[:interpupillaryDistance]
+    def interpupillaryDistance=(v) self[:interpupillaryDistance] = v end
+    def lensDistortionValues = self[:lensDistortionValues]
+    def lensDistortionValues=(v) self[:lensDistortionValues] = v end
+    def chromaAbCorrection = self[:chromaAbCorrection]
+    def chromaAbCorrection=(v) self[:chromaAbCorrection] = v end
   end
 
   # VrStereoConfig, VR stereo rendering configuration for simulator
@@ -759,6 +1055,22 @@ module Raylib
       :scale, [:float, 2],             # VR distortion scale
       :scaleIn, [:float, 2],           # VR distortion scale in
     )
+    def projection = self[:projection]
+    def projection=(v) self[:projection] = v end
+    def viewOffset = self[:viewOffset]
+    def viewOffset=(v) self[:viewOffset] = v end
+    def leftLensCenter = self[:leftLensCenter]
+    def leftLensCenter=(v) self[:leftLensCenter] = v end
+    def rightLensCenter = self[:rightLensCenter]
+    def rightLensCenter=(v) self[:rightLensCenter] = v end
+    def leftScreenCenter = self[:leftScreenCenter]
+    def leftScreenCenter=(v) self[:leftScreenCenter] = v end
+    def rightScreenCenter = self[:rightScreenCenter]
+    def rightScreenCenter=(v) self[:rightScreenCenter] = v end
+    def scale = self[:scale]
+    def scale=(v) self[:scale] = v end
+    def scaleIn = self[:scaleIn]
+    def scaleIn=(v) self[:scaleIn] = v end
   end
 
   # File path list
@@ -768,6 +1080,12 @@ module Raylib
       :count, :uint,    # Filepaths entries count
       :paths, :pointer, # Filepaths entries
     )
+    def capacity = self[:capacity]
+    def capacity=(v) self[:capacity] = v end
+    def count = self[:count]
+    def count=(v) self[:count] = v end
+    def paths = self[:paths]
+    def paths=(v) self[:paths] = v end
   end
 
 

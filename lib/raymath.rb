@@ -23,12 +23,16 @@ module Raylib
     layout(
       :v, [:float, 3],
     )
+    def v = self[:v]
+    def v=(v) self[:v] = v end
   end
 
   class Float16 < FFI::Struct
     layout(
       :v, [:float, 16],
     )
+    def v = self[:v]
+    def v=(v) self[:v] = v end
   end
 
 

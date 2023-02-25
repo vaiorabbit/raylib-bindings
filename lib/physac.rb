@@ -43,6 +43,14 @@ module Raylib
       :m10, :float,
       :m11, :float,
     )
+    def m00 = self[:m00]
+    def m00=(v) self[:m00] = v end
+    def m01 = self[:m01]
+    def m01=(v) self[:m01] = v end
+    def m10 = self[:m10]
+    def m10=(v) self[:m10] = v end
+    def m11 = self[:m11]
+    def m11=(v) self[:m11] = v end
   end
 
   class PhysicsVertexData < FFI::Struct
@@ -51,6 +59,12 @@ module Raylib
       :positions, [Vector2, 24], # Vertex positions vectors
       :normals, [Vector2, 24],   # Vertex normals vectors
     )
+    def vertexCount = self[:vertexCount]
+    def vertexCount=(v) self[:vertexCount] = v end
+    def positions = self[:positions]
+    def positions=(v) self[:positions] = v end
+    def normals = self[:normals]
+    def normals=(v) self[:normals] = v end
   end
 
   class PhysicsShape < FFI::Struct
@@ -61,6 +75,16 @@ module Raylib
       :radius, :float,                # Shape radius (used for circle shapes)
       :transform, Matrix2x2,          # Vertices transform matrix 2x2
     )
+    def type = self[:type]
+    def type=(v) self[:type] = v end
+    def body = self[:body]
+    def body=(v) self[:body] = v end
+    def vertexData = self[:vertexData]
+    def vertexData=(v) self[:vertexData] = v end
+    def radius = self[:radius]
+    def radius=(v) self[:radius] = v end
+    def transform = self[:transform]
+    def transform=(v) self[:transform] = v end
   end
 
   class PhysicsBodyData < FFI::Struct
@@ -85,6 +109,44 @@ module Raylib
       :freezeOrient, :bool,     # Physics rotation constraint
       :shape, PhysicsShape,     # Physics body shape information (type, radius, vertices, transform)
     )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def enabled = self[:enabled]
+    def enabled=(v) self[:enabled] = v end
+    def position = self[:position]
+    def position=(v) self[:position] = v end
+    def velocity = self[:velocity]
+    def velocity=(v) self[:velocity] = v end
+    def force = self[:force]
+    def force=(v) self[:force] = v end
+    def angularVelocity = self[:angularVelocity]
+    def angularVelocity=(v) self[:angularVelocity] = v end
+    def torque = self[:torque]
+    def torque=(v) self[:torque] = v end
+    def orient = self[:orient]
+    def orient=(v) self[:orient] = v end
+    def inertia = self[:inertia]
+    def inertia=(v) self[:inertia] = v end
+    def inverseInertia = self[:inverseInertia]
+    def inverseInertia=(v) self[:inverseInertia] = v end
+    def mass = self[:mass]
+    def mass=(v) self[:mass] = v end
+    def inverseMass = self[:inverseMass]
+    def inverseMass=(v) self[:inverseMass] = v end
+    def staticFriction = self[:staticFriction]
+    def staticFriction=(v) self[:staticFriction] = v end
+    def dynamicFriction = self[:dynamicFriction]
+    def dynamicFriction=(v) self[:dynamicFriction] = v end
+    def restitution = self[:restitution]
+    def restitution=(v) self[:restitution] = v end
+    def useGravity = self[:useGravity]
+    def useGravity=(v) self[:useGravity] = v end
+    def isGrounded = self[:isGrounded]
+    def isGrounded=(v) self[:isGrounded] = v end
+    def freezeOrient = self[:freezeOrient]
+    def freezeOrient=(v) self[:freezeOrient] = v end
+    def shape = self[:shape]
+    def shape=(v) self[:shape] = v end
   end
 
   class PhysicsManifoldData < FFI::Struct
@@ -100,6 +162,26 @@ module Raylib
       :dynamicFriction, :float, # Mixed dynamic friction during collision
       :staticFriction, :float,  # Mixed static friction during collision
     )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def bodyA = self[:bodyA]
+    def bodyA=(v) self[:bodyA] = v end
+    def bodyB = self[:bodyB]
+    def bodyB=(v) self[:bodyB] = v end
+    def penetration = self[:penetration]
+    def penetration=(v) self[:penetration] = v end
+    def normal = self[:normal]
+    def normal=(v) self[:normal] = v end
+    def contacts = self[:contacts]
+    def contacts=(v) self[:contacts] = v end
+    def contactsCount = self[:contactsCount]
+    def contactsCount=(v) self[:contactsCount] = v end
+    def restitution = self[:restitution]
+    def restitution=(v) self[:restitution] = v end
+    def dynamicFriction = self[:dynamicFriction]
+    def dynamicFriction=(v) self[:dynamicFriction] = v end
+    def staticFriction = self[:staticFriction]
+    def staticFriction=(v) self[:staticFriction] = v end
   end
 
 

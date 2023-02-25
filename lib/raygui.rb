@@ -425,6 +425,12 @@ module Raylib
       :propertyId, :ushort, 
       :propertyValue, :uint,
     )
+    def controlId = self[:controlId]
+    def controlId=(v) self[:controlId] = v end
+    def propertyId = self[:propertyId]
+    def propertyId=(v) self[:propertyId] = v end
+    def propertyValue = self[:propertyValue]
+    def propertyValue=(v) self[:propertyValue] = v end
   end
 
 
