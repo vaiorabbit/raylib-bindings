@@ -120,13 +120,17 @@ D:\> ruby template.rb
 
 </details>
 
-## Project ##
+## Projects ##
 
-See the project below to learn how to use this library:
+See the projects below to learn how to use this library:
 
 *   Whac-a-Mole! : Ruby raylib bindings demo
     *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-whacamole/main/doc/screenshot_00.png" width="300"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-whacamole/main/doc/screenshot_01.png" width="300">
     *   <https://github.com/vaiorabbit/raylib-bindings-whacamole>
+
+*   1D dot eater : Ruby raylib bindings demo
+    *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-pacone/main/doc/screenshot_00.png" width="600">
+    *   <https://github.com/vaiorabbit/raylib-bindings-pacone>
 
 ## Limitation ##
 
