@@ -89,14 +89,24 @@ def generate_macrodefine(ctx, indent = "", json_schema=None):
     if json_schema:
         json_defines = json_schema['defines']
 
+    max_code_string_length = 0
     for macro_name, macro_value in ctx.decl_macros.items():
         if macro_value != None:
+            code_string = "%s = %s" % (macro_name, macro_value[0])
+            max_code_string_length = max(max_code_string_length, len(code_string))
+
+    for macro_name, macro_value in ctx.decl_macros.items():
+        if macro_value != None:
+            code_string = "%s = %s" % (macro_name, macro_value[0])
+            spaces_for_alignment = max_code_string_length - len(code_string) + 1
+            spaces = " " * spaces_for_alignment
+
             description = ""
             if json_defines:
                 json_define = [json_define for json_define in json_defines if json_define['name'] == macro_name][0]
                 description = json_define['description']
             if description != "":
-                print(indent + "%s = %s # %s" % (macro_name, macro_value[0], description.strip()), file = sys.stdout)
+                print(indent + "%s = %s%s# %s" % (macro_name, macro_value[0], spaces, description.strip()), file = sys.stdout)
             else:
                 print(indent + "%s = %s" % (macro_name, macro_value[0]), file = sys.stdout)
 
@@ -128,12 +138,20 @@ def generate_enum(ctx, indent = "", json_schema=None):
         enum_descriptions[json_enum['name']] = json_enum['description']
 
     for enum_typedef_name, enum_info_array in enum_typedefs.items():
+        max_code_string_length = 0
+        for enum_info in enum_info_array:
+            code_string = "%s = %s" % (enum_info[0], enum_info[1])
+            max_code_string_length = max(max_code_string_length, len(code_string))
+
         print(indent + "# enum " + enum_typedef_name)
         if enum_typedef_name in enum_descriptions.keys():
             print(indent + "# " + enum_descriptions[enum_typedef_name])
         for enum_info in enum_info_array:
             if enum_info[2] != "":
-                print(indent + "%s = %s # %s" % (enum_info[0], enum_info[1], enum_info[2]), file = sys.stdout)
+                code_string = "%s = %s" % (enum_info[0], enum_info[1])
+                spaces_for_alignment = max_code_string_length - len(code_string) + 1
+                spaces = " " * spaces_for_alignment
+                print(indent + "%s = %s%s# %s" % (enum_info[0], enum_info[1], spaces, enum_info[2]), file = sys.stdout)
             else:
                 print(indent + "%s = %s" % (enum_info[0], enum_info[1]), file = sys.stdout)
         print("", file = sys.stdout)
@@ -166,14 +184,25 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
     for struct_name, struct_info in ctx.decl_structs.items():
         if struct_info == None:
             continue
-
         json_struct = [j for j in json_structs if j['name'] == struct_name][0]
-        struct_description = json_struct['description']
 
-        # Name of struct/class must be start with capital letter
+        max_code_string_length = 0
+        for field in struct_info.fields:
+            json_field = [j for j in json_struct['fields'] if j['name'] == field.element_name]
+            code_string = ""
+            if field.element_count <= 1:
+                code_string = ":%s, %s," % (field.element_name, field.type_kind)
+            else:
+                code_string = ":%s, [%s, %s],"  % (field.element_name, field.type_kind, field.element_count)
+            max_code_string_length = max(max_code_string_length, len(code_string))
+
+        struct_description = json_struct['description']
         if struct_description != "":
             print(indent + "# %s" % (struct_description), file = sys.stdout)
+
+        # Name of struct/class must be start with capital letter
         struct_name = struct_name[0].upper() + struct_name[1:]
+
         print(indent + "class %s < %s" % (struct_name, struct_info.kind), file = sys.stdout)
         print(indent + "  layout(", file = sys.stdout)
         for field in struct_info.fields:
@@ -181,10 +210,19 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
             member_description = json_field[0]['description'] if json_field else ""
             if member_description != "":
                 member_description = " # " + member_description
+
+            code_string = ""
             if field.element_count <= 1:
-                print(indent + "    :%s, %s,%s" % (field.element_name, field.type_kind, member_description), file = sys.stdout)
+                code_string = ":%s, %s," % (field.element_name, field.type_kind)
             else:
-                print(indent + "    :%s, [%s, %s],%s" % (field.element_name, field.type_kind, field.element_count, member_description), file = sys.stdout)
+                code_string = ":%s, [%s, %s],"  % (field.element_name, field.type_kind, field.element_count)
+            spaces_for_alignment = max_code_string_length - len(code_string)
+            spaces = " " * spaces_for_alignment
+
+            if field.element_count <= 1:
+                print(indent + "    :%s, %s,%s%s" % (field.element_name, field.type_kind, spaces,  member_description), file = sys.stdout)
+            else:
+                print(indent + "    :%s, [%s, %s],%s%s" % (field.element_name, field.type_kind, field.element_count, spaces, member_description), file = sys.stdout)
         print(indent + "  )", file = sys.stdout)
         print(indent + "end\n", file = sys.stdout)
         if struct_alias:

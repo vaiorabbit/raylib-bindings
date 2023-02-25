@@ -1,3 +1,7 @@
+2023-02-25  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator/raylib_generator.py: Emits appropriate spaces to align comments
+
 2023-02-18  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/generate_heightmap_obj.rb: Added

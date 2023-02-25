@@ -11,9 +11,9 @@ module Raylib
 
   # Define/Macro
 
-  PHYSAC_MAX_BODIES = 64 # Maximum number of physic bodies supported
-  PHYSAC_MAX_MANIFOLDS = 4096 # Maximum number of physic bodies interactions (64x64)
-  PHYSAC_MAX_VERTICES = 24 # Maximum number of vertex for polygons shapes
+  PHYSAC_MAX_BODIES = 64              # Maximum number of physic bodies supported
+  PHYSAC_MAX_MANIFOLDS = 4096         # Maximum number of physic bodies interactions (64x64)
+  PHYSAC_MAX_VERTICES = 24            # Maximum number of vertex for polygons shapes
   PHYSAC_DEFAULT_CIRCLE_VERTICES = 24 # Default number of vertices for circle shapes
   PHYSAC_COLLISION_ITERATIONS = 100
   PHYSAC_PENETRATION_ALLOWANCE = 0.05
@@ -47,58 +47,58 @@ module Raylib
 
   class PhysicsVertexData < FFI::Struct
     layout(
-      :vertexCount, :uint, # Vertex count (positions and normals)
+      :vertexCount, :uint,       # Vertex count (positions and normals)
       :positions, [Vector2, 24], # Vertex positions vectors
-      :normals, [Vector2, 24], # Vertex normals vectors
+      :normals, [Vector2, 24],   # Vertex normals vectors
     )
   end
 
   class PhysicsShape < FFI::Struct
     layout(
-      :type, :int, # Shape type (circle or polygon)
-      :body, :pointer, # Shape physics body data pointer
+      :type, :int,                    # Shape type (circle or polygon)
+      :body, :pointer,                # Shape physics body data pointer
       :vertexData, PhysicsVertexData, # Shape vertices data (used for polygon shapes)
-      :radius, :float, # Shape radius (used for circle shapes)
-      :transform, Matrix2x2, # Vertices transform matrix 2x2
+      :radius, :float,                # Shape radius (used for circle shapes)
+      :transform, Matrix2x2,          # Vertices transform matrix 2x2
     )
   end
 
   class PhysicsBodyData < FFI::Struct
     layout(
-      :id, :uint, # Unique identifier
-      :enabled, :bool, # Enabled dynamics state (collisions are calculated anyway)
-      :position, Vector2, # Physics body shape pivot
-      :velocity, Vector2, # Current linear velocity applied to position
-      :force, Vector2, # Current linear force (reset to 0 every step)
+      :id, :uint,               # Unique identifier
+      :enabled, :bool,          # Enabled dynamics state (collisions are calculated anyway)
+      :position, Vector2,       # Physics body shape pivot
+      :velocity, Vector2,       # Current linear velocity applied to position
+      :force, Vector2,          # Current linear force (reset to 0 every step)
       :angularVelocity, :float, # Current angular velocity applied to orient
-      :torque, :float, # Current angular force (reset to 0 every step)
-      :orient, :float, # Rotation in radians
-      :inertia, :float, # Moment of inertia
-      :inverseInertia, :float, # Inverse value of inertia
-      :mass, :float, # Physics body mass
-      :inverseMass, :float, # Inverse value of mass
-      :staticFriction, :float, # Friction when the body has not movement (0 to 1)
+      :torque, :float,          # Current angular force (reset to 0 every step)
+      :orient, :float,          # Rotation in radians
+      :inertia, :float,         # Moment of inertia
+      :inverseInertia, :float,  # Inverse value of inertia
+      :mass, :float,            # Physics body mass
+      :inverseMass, :float,     # Inverse value of mass
+      :staticFriction, :float,  # Friction when the body has not movement (0 to 1)
       :dynamicFriction, :float, # Friction when the body has movement (0 to 1)
-      :restitution, :float, # Restitution coefficient of the body (0 to 1)
-      :useGravity, :bool, # Apply gravity force to dynamics
-      :isGrounded, :bool, # Physics grounded on other body state
-      :freezeOrient, :bool, # Physics rotation constraint
-      :shape, PhysicsShape, # Physics body shape information (type, radius, vertices, transform)
+      :restitution, :float,     # Restitution coefficient of the body (0 to 1)
+      :useGravity, :bool,       # Apply gravity force to dynamics
+      :isGrounded, :bool,       # Physics grounded on other body state
+      :freezeOrient, :bool,     # Physics rotation constraint
+      :shape, PhysicsShape,     # Physics body shape information (type, radius, vertices, transform)
     )
   end
 
   class PhysicsManifoldData < FFI::Struct
     layout(
-      :id, :uint, # Unique identifier
-      :bodyA, :pointer, # Manifold first physics body reference
-      :bodyB, :pointer, # Manifold second physics body reference
-      :penetration, :float, # Depth of penetration from collision
-      :normal, Vector2, # Normal direction vector from 'a' to 'b'
-      :contacts, [Vector2, 2], # Points of contact during collision
-      :contactsCount, :uint, # Current collision number of contacts
-      :restitution, :float, # Mixed restitution during collision
+      :id, :uint,               # Unique identifier
+      :bodyA, :pointer,         # Manifold first physics body reference
+      :bodyB, :pointer,         # Manifold second physics body reference
+      :penetration, :float,     # Depth of penetration from collision
+      :normal, Vector2,         # Normal direction vector from 'a' to 'b'
+      :contacts, [Vector2, 2],  # Points of contact during collision
+      :contactsCount, :uint,    # Current collision number of contacts
+      :restitution, :float,     # Mixed restitution during collision
       :dynamicFriction, :float, # Mixed dynamic friction during collision
-      :staticFriction, :float, # Mixed static friction during collision
+      :staticFriction, :float,  # Mixed static friction during collision
     )
   end
 

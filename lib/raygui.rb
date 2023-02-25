@@ -33,17 +33,17 @@ module Raylib
   # enum GuiControl
   # Gui controls
   DEFAULT = 0
-  LABEL = 1 # Used also for: LABELBUTTON
+  LABEL = 1        # Used also for: LABELBUTTON
   BUTTON = 2
-  TOGGLE = 3 # Used also for: TOGGLEGROUP
-  SLIDER = 4 # Used also for: SLIDERBAR
+  TOGGLE = 3       # Used also for: TOGGLEGROUP
+  SLIDER = 4       # Used also for: SLIDERBAR
   PROGRESSBAR = 5
   CHECKBOX = 6
   COMBOBOX = 7
   DROPDOWNBOX = 8
-  TEXTBOX = 9 # Used also for: TEXTBOXMULTI
+  TEXTBOX = 9      # Used also for: TEXTBOXMULTI
   VALUEBOX = 10
-  SPINNER = 11 # Uses: BUTTON, VALUEBOX
+  SPINNER = 11     # Uses: BUTTON, VALUEBOX
   LISTVIEW = 12
   COLORPICKER = 13
   SCROLLBAR = 14
@@ -70,9 +70,9 @@ module Raylib
 
   # enum GuiDefaultProperty
   # DEFAULT extended properties
-  TEXT_SIZE = 16 # Text size (glyphs max height)
-  TEXT_SPACING = 17 # Text spacing between glyphs
-  LINE_COLOR = 18 # Line control color
+  TEXT_SIZE = 16        # Text size (glyphs max height)
+  TEXT_SPACING = 17     # Text spacing between glyphs
+  LINE_COLOR = 18       # Line control color
   BACKGROUND_COLOR = 19 # Background color
 
   # enum GuiToggleProperty
@@ -81,7 +81,7 @@ module Raylib
 
   # enum GuiSliderProperty
   # Slider/SliderBar
-  SLIDER_WIDTH = 16 # Slider size of internal bar
+  SLIDER_WIDTH = 16   # Slider size of internal bar
   SLIDER_PADDING = 17 # Slider/SliderBar internal bar padding
 
   # enum GuiProgressBarProperty
@@ -103,12 +103,12 @@ module Raylib
 
   # enum GuiComboBoxProperty
   # ComboBox
-  COMBO_BUTTON_WIDTH = 16 # ComboBox right button width
+  COMBO_BUTTON_WIDTH = 16   # ComboBox right button width
   COMBO_BUTTON_SPACING = 17 # ComboBox button separation
 
   # enum GuiDropdownBoxProperty
   # DropdownBox
-  ARROW_PADDING = 16 # DropdownBox arrow separation from border and items
+  ARROW_PADDING = 16          # DropdownBox arrow separation from border and items
   DROPDOWN_ITEMS_SPACING = 17 # DropdownBox items separation
 
   # enum GuiTextBoxProperty
@@ -118,22 +118,22 @@ module Raylib
 
   # enum GuiSpinnerProperty
   # Spinner
-  SPIN_BUTTON_WIDTH = 16 # Spinner left/right buttons width
+  SPIN_BUTTON_WIDTH = 16   # Spinner left/right buttons width
   SPIN_BUTTON_SPACING = 17 # Spinner buttons separation
 
   # enum GuiListViewProperty
   # ListView
-  LIST_ITEMS_HEIGHT = 16 # ListView items height
+  LIST_ITEMS_HEIGHT = 16  # ListView items height
   LIST_ITEMS_SPACING = 17 # ListView items separation
-  SCROLLBAR_WIDTH = 18 # ListView scrollbar size (usually width)
-  SCROLLBAR_SIDE = 19 # ListView scrollbar side (0-left, 1-right)
+  SCROLLBAR_WIDTH = 18    # ListView scrollbar size (usually width)
+  SCROLLBAR_SIDE = 19     # ListView scrollbar side (0-left, 1-right)
 
   # enum GuiColorPickerProperty
   # ColorPicker
   COLOR_SELECTOR_SIZE = 16
-  HUEBAR_WIDTH = 17 # ColorPicker right hue bar width
-  HUEBAR_PADDING = 18 # ColorPicker right hue bar separation from panel
-  HUEBAR_SELECTOR_HEIGHT = 19 # ColorPicker right hue bar selector height
+  HUEBAR_WIDTH = 17             # ColorPicker right hue bar width
+  HUEBAR_PADDING = 18           # ColorPicker right hue bar separation from panel
+  HUEBAR_SELECTOR_HEIGHT = 19   # ColorPicker right hue bar selector height
   HUEBAR_SELECTOR_OVERFLOW = 20 # ColorPicker right hue bar selector overflow
 
   # enum GuiIconName
@@ -421,8 +421,8 @@ module Raylib
   # Style property
   class GuiStyleProp < FFI::Struct
     layout(
-      :controlId, :ushort,
-      :propertyId, :ushort,
+      :controlId, :ushort,  
+      :propertyId, :ushort, 
       :propertyValue, :uint,
     )
   end

@@ -13,181 +13,181 @@ module Raylib
 
   RLGL_VERSION = "4.2"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
-  RL_TEXTURE_WRAP_S = 0x2802 # GL_TEXTURE_WRAP_S
-  RL_TEXTURE_WRAP_T = 0x2803 # GL_TEXTURE_WRAP_T
-  RL_TEXTURE_MAG_FILTER = 0x2800 # GL_TEXTURE_MAG_FILTER
-  RL_TEXTURE_MIN_FILTER = 0x2801 # GL_TEXTURE_MIN_FILTER
-  RL_TEXTURE_FILTER_NEAREST = 0x2600 # GL_NEAREST
-  RL_TEXTURE_FILTER_LINEAR = 0x2601 # GL_LINEAR
-  RL_TEXTURE_FILTER_MIP_NEAREST = 0x2700 # GL_NEAREST_MIPMAP_NEAREST
+  RL_TEXTURE_WRAP_S = 0x2802                    # GL_TEXTURE_WRAP_S
+  RL_TEXTURE_WRAP_T = 0x2803                    # GL_TEXTURE_WRAP_T
+  RL_TEXTURE_MAG_FILTER = 0x2800                # GL_TEXTURE_MAG_FILTER
+  RL_TEXTURE_MIN_FILTER = 0x2801                # GL_TEXTURE_MIN_FILTER
+  RL_TEXTURE_FILTER_NEAREST = 0x2600            # GL_NEAREST
+  RL_TEXTURE_FILTER_LINEAR = 0x2601             # GL_LINEAR
+  RL_TEXTURE_FILTER_MIP_NEAREST = 0x2700        # GL_NEAREST_MIPMAP_NEAREST
   RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 0x2702 # GL_NEAREST_MIPMAP_LINEAR
   RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 0x2701 # GL_LINEAR_MIPMAP_NEAREST
-  RL_TEXTURE_FILTER_MIP_LINEAR = 0x2703 # GL_LINEAR_MIPMAP_LINEAR
-  RL_TEXTURE_FILTER_ANISOTROPIC = 0x3000 # Anisotropic filter (custom identifier)
-  RL_TEXTURE_MIPMAP_BIAS_RATIO = 0x4000 # Texture mipmap bias, percentage ratio (custom identifier)
-  RL_TEXTURE_WRAP_REPEAT = 0x2901 # GL_REPEAT
-  RL_TEXTURE_WRAP_CLAMP = 0x812F # GL_CLAMP_TO_EDGE
-  RL_TEXTURE_WRAP_MIRROR_REPEAT = 0x8370 # GL_MIRRORED_REPEAT
-  RL_TEXTURE_WRAP_MIRROR_CLAMP = 0x8742 # GL_MIRROR_CLAMP_EXT
-  RL_MODELVIEW = 0x1700 # GL_MODELVIEW
-  RL_PROJECTION = 0x1701 # GL_PROJECTION
-  RL_TEXTURE = 0x1702 # GL_TEXTURE
-  RL_LINES = 0x0001 # GL_LINES
-  RL_TRIANGLES = 0x0004 # GL_TRIANGLES
-  RL_QUADS = 0x0007 # GL_QUADS
-  RL_UNSIGNED_BYTE = 0x1401 # GL_UNSIGNED_BYTE
-  RL_FLOAT = 0x1406 # GL_FLOAT
-  RL_STREAM_DRAW = 0x88E0 # GL_STREAM_DRAW
-  RL_STREAM_READ = 0x88E1 # GL_STREAM_READ
-  RL_STREAM_COPY = 0x88E2 # GL_STREAM_COPY
-  RL_STATIC_DRAW = 0x88E4 # GL_STATIC_DRAW
-  RL_STATIC_READ = 0x88E5 # GL_STATIC_READ
-  RL_STATIC_COPY = 0x88E6 # GL_STATIC_COPY
-  RL_DYNAMIC_DRAW = 0x88E8 # GL_DYNAMIC_DRAW
-  RL_DYNAMIC_READ = 0x88E9 # GL_DYNAMIC_READ
-  RL_DYNAMIC_COPY = 0x88EA # GL_DYNAMIC_COPY
-  RL_FRAGMENT_SHADER = 0x8B30 # GL_FRAGMENT_SHADER
-  RL_VERTEX_SHADER = 0x8B31 # GL_VERTEX_SHADER
-  RL_COMPUTE_SHADER = 0x91B9 # GL_COMPUTE_SHADER
-  RL_ZERO = 0 # GL_ZERO
-  RL_ONE = 1 # GL_ONE
-  RL_SRC_COLOR = 0x0300 # GL_SRC_COLOR
-  RL_ONE_MINUS_SRC_COLOR = 0x0301 # GL_ONE_MINUS_SRC_COLOR
-  RL_SRC_ALPHA = 0x0302 # GL_SRC_ALPHA
-  RL_ONE_MINUS_SRC_ALPHA = 0x0303 # GL_ONE_MINUS_SRC_ALPHA
-  RL_DST_ALPHA = 0x0304 # GL_DST_ALPHA
-  RL_ONE_MINUS_DST_ALPHA = 0x0305 # GL_ONE_MINUS_DST_ALPHA
-  RL_DST_COLOR = 0x0306 # GL_DST_COLOR
-  RL_ONE_MINUS_DST_COLOR = 0x0307 # GL_ONE_MINUS_DST_COLOR
-  RL_SRC_ALPHA_SATURATE = 0x0308 # GL_SRC_ALPHA_SATURATE
-  RL_CONSTANT_COLOR = 0x8001 # GL_CONSTANT_COLOR
-  RL_ONE_MINUS_CONSTANT_COLOR = 0x8002 # GL_ONE_MINUS_CONSTANT_COLOR
-  RL_CONSTANT_ALPHA = 0x8003 # GL_CONSTANT_ALPHA
-  RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004 # GL_ONE_MINUS_CONSTANT_ALPHA
-  RL_FUNC_ADD = 0x8006 # GL_FUNC_ADD
-  RL_FUNC_SUBTRACT = 0x800A # GL_FUNC_SUBTRACT
-  RL_FUNC_REVERSE_SUBTRACT = 0x800B # GL_FUNC_REVERSE_SUBTRACT
-  RL_BLEND_EQUATION = 0x8009 # GL_BLEND_EQUATION
-  RL_BLEND_EQUATION_RGB = 0x8009 # GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
-  RL_BLEND_EQUATION_ALPHA = 0x883D # GL_BLEND_EQUATION_ALPHA
-  RL_BLEND_DST_RGB = 0x80C8 # GL_BLEND_DST_RGB
-  RL_BLEND_SRC_RGB = 0x80C9 # GL_BLEND_SRC_RGB
-  RL_BLEND_DST_ALPHA = 0x80CA # GL_BLEND_DST_ALPHA
-  RL_BLEND_SRC_ALPHA = 0x80CB # GL_BLEND_SRC_ALPHA
-  RL_BLEND_COLOR = 0x8005 # GL_BLEND_COLOR
+  RL_TEXTURE_FILTER_MIP_LINEAR = 0x2703         # GL_LINEAR_MIPMAP_LINEAR
+  RL_TEXTURE_FILTER_ANISOTROPIC = 0x3000        # Anisotropic filter (custom identifier)
+  RL_TEXTURE_MIPMAP_BIAS_RATIO = 0x4000         # Texture mipmap bias, percentage ratio (custom identifier)
+  RL_TEXTURE_WRAP_REPEAT = 0x2901               # GL_REPEAT
+  RL_TEXTURE_WRAP_CLAMP = 0x812F                # GL_CLAMP_TO_EDGE
+  RL_TEXTURE_WRAP_MIRROR_REPEAT = 0x8370        # GL_MIRRORED_REPEAT
+  RL_TEXTURE_WRAP_MIRROR_CLAMP = 0x8742         # GL_MIRROR_CLAMP_EXT
+  RL_MODELVIEW = 0x1700                         # GL_MODELVIEW
+  RL_PROJECTION = 0x1701                        # GL_PROJECTION
+  RL_TEXTURE = 0x1702                           # GL_TEXTURE
+  RL_LINES = 0x0001                             # GL_LINES
+  RL_TRIANGLES = 0x0004                         # GL_TRIANGLES
+  RL_QUADS = 0x0007                             # GL_QUADS
+  RL_UNSIGNED_BYTE = 0x1401                     # GL_UNSIGNED_BYTE
+  RL_FLOAT = 0x1406                             # GL_FLOAT
+  RL_STREAM_DRAW = 0x88E0                       # GL_STREAM_DRAW
+  RL_STREAM_READ = 0x88E1                       # GL_STREAM_READ
+  RL_STREAM_COPY = 0x88E2                       # GL_STREAM_COPY
+  RL_STATIC_DRAW = 0x88E4                       # GL_STATIC_DRAW
+  RL_STATIC_READ = 0x88E5                       # GL_STATIC_READ
+  RL_STATIC_COPY = 0x88E6                       # GL_STATIC_COPY
+  RL_DYNAMIC_DRAW = 0x88E8                      # GL_DYNAMIC_DRAW
+  RL_DYNAMIC_READ = 0x88E9                      # GL_DYNAMIC_READ
+  RL_DYNAMIC_COPY = 0x88EA                      # GL_DYNAMIC_COPY
+  RL_FRAGMENT_SHADER = 0x8B30                   # GL_FRAGMENT_SHADER
+  RL_VERTEX_SHADER = 0x8B31                     # GL_VERTEX_SHADER
+  RL_COMPUTE_SHADER = 0x91B9                    # GL_COMPUTE_SHADER
+  RL_ZERO = 0                                   # GL_ZERO
+  RL_ONE = 1                                    # GL_ONE
+  RL_SRC_COLOR = 0x0300                         # GL_SRC_COLOR
+  RL_ONE_MINUS_SRC_COLOR = 0x0301               # GL_ONE_MINUS_SRC_COLOR
+  RL_SRC_ALPHA = 0x0302                         # GL_SRC_ALPHA
+  RL_ONE_MINUS_SRC_ALPHA = 0x0303               # GL_ONE_MINUS_SRC_ALPHA
+  RL_DST_ALPHA = 0x0304                         # GL_DST_ALPHA
+  RL_ONE_MINUS_DST_ALPHA = 0x0305               # GL_ONE_MINUS_DST_ALPHA
+  RL_DST_COLOR = 0x0306                         # GL_DST_COLOR
+  RL_ONE_MINUS_DST_COLOR = 0x0307               # GL_ONE_MINUS_DST_COLOR
+  RL_SRC_ALPHA_SATURATE = 0x0308                # GL_SRC_ALPHA_SATURATE
+  RL_CONSTANT_COLOR = 0x8001                    # GL_CONSTANT_COLOR
+  RL_ONE_MINUS_CONSTANT_COLOR = 0x8002          # GL_ONE_MINUS_CONSTANT_COLOR
+  RL_CONSTANT_ALPHA = 0x8003                    # GL_CONSTANT_ALPHA
+  RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004          # GL_ONE_MINUS_CONSTANT_ALPHA
+  RL_FUNC_ADD = 0x8006                          # GL_FUNC_ADD
+  RL_FUNC_SUBTRACT = 0x800A                     # GL_FUNC_SUBTRACT
+  RL_FUNC_REVERSE_SUBTRACT = 0x800B             # GL_FUNC_REVERSE_SUBTRACT
+  RL_BLEND_EQUATION = 0x8009                    # GL_BLEND_EQUATION
+  RL_BLEND_EQUATION_RGB = 0x8009                # GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
+  RL_BLEND_EQUATION_ALPHA = 0x883D              # GL_BLEND_EQUATION_ALPHA
+  RL_BLEND_DST_RGB = 0x80C8                     # GL_BLEND_DST_RGB
+  RL_BLEND_SRC_RGB = 0x80C9                     # GL_BLEND_SRC_RGB
+  RL_BLEND_DST_ALPHA = 0x80CA                   # GL_BLEND_DST_ALPHA
+  RL_BLEND_SRC_ALPHA = 0x80CB                   # GL_BLEND_SRC_ALPHA
+  RL_BLEND_COLOR = 0x8005                       # GL_BLEND_COLOR
 
   # Enum
 
   # enum rlGlVersion
   # OpenGL version
-  RL_OPENGL_11 = 1 # OpenGL 1.1
-  RL_OPENGL_21 = 2 # OpenGL 2.1 (GLSL 120)
-  RL_OPENGL_33 = 3 # OpenGL 3.3 (GLSL 330)
-  RL_OPENGL_43 = 4 # OpenGL 4.3 (using GLSL 330)
+  RL_OPENGL_11 = 1    # OpenGL 1.1
+  RL_OPENGL_21 = 2    # OpenGL 2.1 (GLSL 120)
+  RL_OPENGL_33 = 3    # OpenGL 3.3 (GLSL 330)
+  RL_OPENGL_43 = 4    # OpenGL 4.3 (using GLSL 330)
   RL_OPENGL_ES_20 = 5 # OpenGL ES 2.0 (GLSL 100)
 
   # enum rlTraceLogLevel
   # Trace log level
-  RL_LOG_ALL = 0 # Display all logs
-  RL_LOG_TRACE = 1 # Trace logging, intended for internal use only
-  RL_LOG_DEBUG = 2 # Debug logging, used for internal debugging, it should be disabled on release builds
-  RL_LOG_INFO = 3 # Info logging, used for program execution info
+  RL_LOG_ALL = 0     # Display all logs
+  RL_LOG_TRACE = 1   # Trace logging, intended for internal use only
+  RL_LOG_DEBUG = 2   # Debug logging, used for internal debugging, it should be disabled on release builds
+  RL_LOG_INFO = 3    # Info logging, used for program execution info
   RL_LOG_WARNING = 4 # Warning logging, used on recoverable failures
-  RL_LOG_ERROR = 5 # Error logging, used on unrecoverable failures
-  RL_LOG_FATAL = 6 # Fatal logging, used to abort program: exit(EXIT_FAILURE)
-  RL_LOG_NONE = 7 # Disable logging
+  RL_LOG_ERROR = 5   # Error logging, used on unrecoverable failures
+  RL_LOG_FATAL = 6   # Fatal logging, used to abort program: exit(EXIT_FAILURE)
+  RL_LOG_NONE = 7    # Disable logging
 
   # enum rlPixelFormat
   # Texture pixel formats
-  RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1 # 8 bit per pixel (no alpha)
-  RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2 # 8*2 bpp (2 channels)
-  RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3 # 16 bpp
-  RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4 # 24 bpp
-  RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5 # 16 bpp (1 bit alpha)
-  RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6 # 16 bpp (4 bit alpha)
-  RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7 # 32 bpp
-  RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8 # 32 bpp (1 channel - float)
-  RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9 # 32*3 bpp (3 channels - float)
+  RL_PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1     # 8 bit per pixel (no alpha)
+  RL_PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2    # 8*2 bpp (2 channels)
+  RL_PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3        # 16 bpp
+  RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8 = 4        # 24 bpp
+  RL_PIXELFORMAT_UNCOMPRESSED_R5G5B5A1 = 5      # 16 bpp (1 bit alpha)
+  RL_PIXELFORMAT_UNCOMPRESSED_R4G4B4A4 = 6      # 16 bpp (4 bit alpha)
+  RL_PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 = 7      # 32 bpp
+  RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8           # 32 bpp (1 channel - float)
+  RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9     # 32*3 bpp (3 channels - float)
   RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10 # 32*4 bpp (4 channels - float)
-  RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11 # 4 bpp (no alpha)
-  RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12 # 4 bpp (1 bit alpha)
-  RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13 # 8 bpp
-  RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14 # 8 bpp
-  RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15 # 4 bpp
-  RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16 # 4 bpp
-  RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17 # 8 bpp
-  RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18 # 4 bpp
-  RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19 # 4 bpp
-  RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20 # 8 bpp
-  RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21 # 2 bpp
+  RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11       # 4 bpp (no alpha)
+  RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12      # 4 bpp (1 bit alpha)
+  RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13      # 8 bpp
+  RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14      # 8 bpp
+  RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15       # 4 bpp
+  RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16       # 4 bpp
+  RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17  # 8 bpp
+  RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18       # 4 bpp
+  RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19      # 4 bpp
+  RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20  # 8 bpp
+  RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  # 2 bpp
 
   # enum rlTextureFilter
   # Texture parameters: filter mode
-  RL_TEXTURE_FILTER_POINT = 0 # No filter, just pixel approximation
-  RL_TEXTURE_FILTER_BILINEAR = 1 # Linear filtering
-  RL_TEXTURE_FILTER_TRILINEAR = 2 # Trilinear filtering (linear with mipmaps)
-  RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3 # Anisotropic filtering 4x
-  RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4 # Anisotropic filtering 8x
+  RL_TEXTURE_FILTER_POINT = 0           # No filter, just pixel approximation
+  RL_TEXTURE_FILTER_BILINEAR = 1        # Linear filtering
+  RL_TEXTURE_FILTER_TRILINEAR = 2       # Trilinear filtering (linear with mipmaps)
+  RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3  # Anisotropic filtering 4x
+  RL_TEXTURE_FILTER_ANISOTROPIC_8X = 4  # Anisotropic filtering 8x
   RL_TEXTURE_FILTER_ANISOTROPIC_16X = 5 # Anisotropic filtering 16x
 
   # enum rlBlendMode
   # Color blending modes (pre-defined)
-  RL_BLEND_ALPHA = 0 # Blend textures considering alpha (default)
-  RL_BLEND_ADDITIVE = 1 # Blend textures adding colors
-  RL_BLEND_MULTIPLIED = 2 # Blend textures multiplying colors
-  RL_BLEND_ADD_COLORS = 3 # Blend textures adding colors (alternative)
-  RL_BLEND_SUBTRACT_COLORS = 4 # Blend textures subtracting colors (alternative)
+  RL_BLEND_ALPHA = 0             # Blend textures considering alpha (default)
+  RL_BLEND_ADDITIVE = 1          # Blend textures adding colors
+  RL_BLEND_MULTIPLIED = 2        # Blend textures multiplying colors
+  RL_BLEND_ADD_COLORS = 3        # Blend textures adding colors (alternative)
+  RL_BLEND_SUBTRACT_COLORS = 4   # Blend textures subtracting colors (alternative)
   RL_BLEND_ALPHA_PREMULTIPLY = 5 # Blend premultiplied textures considering alpha
-  RL_BLEND_CUSTOM = 6 # Blend textures using custom src/dst factors (use rlSetBlendFactors())
-  RL_BLEND_CUSTOM_SEPARATE = 7 # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
+  RL_BLEND_CUSTOM = 6            # Blend textures using custom src/dst factors (use rlSetBlendFactors())
+  RL_BLEND_CUSTOM_SEPARATE = 7   # Blend textures using custom src/dst factors (use rlSetBlendFactorsSeparate())
 
   # enum rlShaderLocationIndex
   # Shader location point type
-  RL_SHADER_LOC_VERTEX_POSITION = 0 # Shader location: vertex attribute: position
+  RL_SHADER_LOC_VERTEX_POSITION = 0   # Shader location: vertex attribute: position
   RL_SHADER_LOC_VERTEX_TEXCOORD01 = 1 # Shader location: vertex attribute: texcoord01
   RL_SHADER_LOC_VERTEX_TEXCOORD02 = 2 # Shader location: vertex attribute: texcoord02
-  RL_SHADER_LOC_VERTEX_NORMAL = 3 # Shader location: vertex attribute: normal
-  RL_SHADER_LOC_VERTEX_TANGENT = 4 # Shader location: vertex attribute: tangent
-  RL_SHADER_LOC_VERTEX_COLOR = 5 # Shader location: vertex attribute: color
-  RL_SHADER_LOC_MATRIX_MVP = 6 # Shader location: matrix uniform: model-view-projection
-  RL_SHADER_LOC_MATRIX_VIEW = 7 # Shader location: matrix uniform: view (camera transform)
+  RL_SHADER_LOC_VERTEX_NORMAL = 3     # Shader location: vertex attribute: normal
+  RL_SHADER_LOC_VERTEX_TANGENT = 4    # Shader location: vertex attribute: tangent
+  RL_SHADER_LOC_VERTEX_COLOR = 5      # Shader location: vertex attribute: color
+  RL_SHADER_LOC_MATRIX_MVP = 6        # Shader location: matrix uniform: model-view-projection
+  RL_SHADER_LOC_MATRIX_VIEW = 7       # Shader location: matrix uniform: view (camera transform)
   RL_SHADER_LOC_MATRIX_PROJECTION = 8 # Shader location: matrix uniform: projection
-  RL_SHADER_LOC_MATRIX_MODEL = 9 # Shader location: matrix uniform: model (transform)
-  RL_SHADER_LOC_MATRIX_NORMAL = 10 # Shader location: matrix uniform: normal
-  RL_SHADER_LOC_VECTOR_VIEW = 11 # Shader location: vector uniform: view
-  RL_SHADER_LOC_COLOR_DIFFUSE = 12 # Shader location: vector uniform: diffuse color
-  RL_SHADER_LOC_COLOR_SPECULAR = 13 # Shader location: vector uniform: specular color
-  RL_SHADER_LOC_COLOR_AMBIENT = 14 # Shader location: vector uniform: ambient color
-  RL_SHADER_LOC_MAP_ALBEDO = 15 # Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
-  RL_SHADER_LOC_MAP_METALNESS = 16 # Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
-  RL_SHADER_LOC_MAP_NORMAL = 17 # Shader location: sampler2d texture: normal
-  RL_SHADER_LOC_MAP_ROUGHNESS = 18 # Shader location: sampler2d texture: roughness
-  RL_SHADER_LOC_MAP_OCCLUSION = 19 # Shader location: sampler2d texture: occlusion
-  RL_SHADER_LOC_MAP_EMISSION = 20 # Shader location: sampler2d texture: emission
-  RL_SHADER_LOC_MAP_HEIGHT = 21 # Shader location: sampler2d texture: height
-  RL_SHADER_LOC_MAP_CUBEMAP = 22 # Shader location: samplerCube texture: cubemap
-  RL_SHADER_LOC_MAP_IRRADIANCE = 23 # Shader location: samplerCube texture: irradiance
-  RL_SHADER_LOC_MAP_PREFILTER = 24 # Shader location: samplerCube texture: prefilter
-  RL_SHADER_LOC_MAP_BRDF = 25 # Shader location: sampler2d texture: brdf
+  RL_SHADER_LOC_MATRIX_MODEL = 9      # Shader location: matrix uniform: model (transform)
+  RL_SHADER_LOC_MATRIX_NORMAL = 10    # Shader location: matrix uniform: normal
+  RL_SHADER_LOC_VECTOR_VIEW = 11      # Shader location: vector uniform: view
+  RL_SHADER_LOC_COLOR_DIFFUSE = 12    # Shader location: vector uniform: diffuse color
+  RL_SHADER_LOC_COLOR_SPECULAR = 13   # Shader location: vector uniform: specular color
+  RL_SHADER_LOC_COLOR_AMBIENT = 14    # Shader location: vector uniform: ambient color
+  RL_SHADER_LOC_MAP_ALBEDO = 15       # Shader location: sampler2d texture: albedo (same as: RL_SHADER_LOC_MAP_DIFFUSE)
+  RL_SHADER_LOC_MAP_METALNESS = 16    # Shader location: sampler2d texture: metalness (same as: RL_SHADER_LOC_MAP_SPECULAR)
+  RL_SHADER_LOC_MAP_NORMAL = 17       # Shader location: sampler2d texture: normal
+  RL_SHADER_LOC_MAP_ROUGHNESS = 18    # Shader location: sampler2d texture: roughness
+  RL_SHADER_LOC_MAP_OCCLUSION = 19    # Shader location: sampler2d texture: occlusion
+  RL_SHADER_LOC_MAP_EMISSION = 20     # Shader location: sampler2d texture: emission
+  RL_SHADER_LOC_MAP_HEIGHT = 21       # Shader location: sampler2d texture: height
+  RL_SHADER_LOC_MAP_CUBEMAP = 22      # Shader location: samplerCube texture: cubemap
+  RL_SHADER_LOC_MAP_IRRADIANCE = 23   # Shader location: samplerCube texture: irradiance
+  RL_SHADER_LOC_MAP_PREFILTER = 24    # Shader location: samplerCube texture: prefilter
+  RL_SHADER_LOC_MAP_BRDF = 25         # Shader location: sampler2d texture: brdf
 
   # enum rlShaderUniformDataType
   # Shader uniform data type
-  RL_SHADER_UNIFORM_FLOAT = 0 # Shader uniform type: float
-  RL_SHADER_UNIFORM_VEC2 = 1 # Shader uniform type: vec2 (2 float)
-  RL_SHADER_UNIFORM_VEC3 = 2 # Shader uniform type: vec3 (3 float)
-  RL_SHADER_UNIFORM_VEC4 = 3 # Shader uniform type: vec4 (4 float)
-  RL_SHADER_UNIFORM_INT = 4 # Shader uniform type: int
-  RL_SHADER_UNIFORM_IVEC2 = 5 # Shader uniform type: ivec2 (2 int)
-  RL_SHADER_UNIFORM_IVEC3 = 6 # Shader uniform type: ivec3 (3 int)
-  RL_SHADER_UNIFORM_IVEC4 = 7 # Shader uniform type: ivec4 (4 int)
+  RL_SHADER_UNIFORM_FLOAT = 0     # Shader uniform type: float
+  RL_SHADER_UNIFORM_VEC2 = 1      # Shader uniform type: vec2 (2 float)
+  RL_SHADER_UNIFORM_VEC3 = 2      # Shader uniform type: vec3 (3 float)
+  RL_SHADER_UNIFORM_VEC4 = 3      # Shader uniform type: vec4 (4 float)
+  RL_SHADER_UNIFORM_INT = 4       # Shader uniform type: int
+  RL_SHADER_UNIFORM_IVEC2 = 5     # Shader uniform type: ivec2 (2 int)
+  RL_SHADER_UNIFORM_IVEC3 = 6     # Shader uniform type: ivec3 (3 int)
+  RL_SHADER_UNIFORM_IVEC4 = 7     # Shader uniform type: ivec4 (4 int)
   RL_SHADER_UNIFORM_SAMPLER2D = 8 # Shader uniform type: sampler2d
 
   # enum rlShaderAttributeDataType
   # Shader attribute data types
   RL_SHADER_ATTRIB_FLOAT = 0 # Shader attribute type: float
-  RL_SHADER_ATTRIB_VEC2 = 1 # Shader attribute type: vec2 (2 float)
-  RL_SHADER_ATTRIB_VEC3 = 2 # Shader attribute type: vec3 (3 float)
-  RL_SHADER_ATTRIB_VEC4 = 3 # Shader attribute type: vec4 (4 float)
+  RL_SHADER_ATTRIB_VEC2 = 1  # Shader attribute type: vec2 (2 float)
+  RL_SHADER_ATTRIB_VEC3 = 2  # Shader attribute type: vec3 (3 float)
+  RL_SHADER_ATTRIB_VEC4 = 3  # Shader attribute type: vec4 (4 float)
 
   # enum rlFramebufferAttachType
   # Framebuffer attachment type
@@ -199,8 +199,8 @@ module Raylib
   RL_ATTACHMENT_COLOR_CHANNEL5 = 5 # Framebuffer attachment type: color 5
   RL_ATTACHMENT_COLOR_CHANNEL6 = 6 # Framebuffer attachment type: color 6
   RL_ATTACHMENT_COLOR_CHANNEL7 = 7 # Framebuffer attachment type: color 7
-  RL_ATTACHMENT_DEPTH = 100 # Framebuffer attachment type: depth
-  RL_ATTACHMENT_STENCIL = 200 # Framebuffer attachment type: stencil
+  RL_ATTACHMENT_DEPTH = 100        # Framebuffer attachment type: depth
+  RL_ATTACHMENT_STENCIL = 200      # Framebuffer attachment type: stencil
 
   # enum rlFramebufferAttachTextureType
   # Framebuffer texture attachment type
@@ -210,8 +210,8 @@ module Raylib
   RL_ATTACHMENT_CUBEMAP_NEGATIVE_Y = 3 # Framebuffer texture attachment type: cubemap, -Y side
   RL_ATTACHMENT_CUBEMAP_POSITIVE_Z = 4 # Framebuffer texture attachment type: cubemap, +Z side
   RL_ATTACHMENT_CUBEMAP_NEGATIVE_Z = 5 # Framebuffer texture attachment type: cubemap, -Z side
-  RL_ATTACHMENT_TEXTURE2D = 100 # Framebuffer texture attachment type: texture2d
-  RL_ATTACHMENT_RENDERBUFFER = 200 # Framebuffer texture attachment type: renderbuffer
+  RL_ATTACHMENT_TEXTURE2D = 100        # Framebuffer texture attachment type: texture2d
+  RL_ATTACHMENT_RENDERBUFFER = 200     # Framebuffer texture attachment type: renderbuffer
 
   # enum rlCullMode
   # Face culling mode
@@ -238,35 +238,35 @@ module Raylib
   # Dynamic vertex buffers (position + texcoords + colors + indices arrays)
   class RlVertexBuffer < FFI::Struct
     layout(
-      :elementCount, :int, # Number of elements in the buffer (QUADS)
-      :vertices, :pointer, # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+      :elementCount, :int,  # Number of elements in the buffer (QUADS)
+      :vertices, :pointer,  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
       :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
-      :colors, :pointer, # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
-      :indices, :pointer, # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
-      :vaoId, :uint, # OpenGL Vertex Array Object id
-      :vboId, [:uint, 4], # OpenGL Vertex Buffer Objects id (4 types of vertex data)
+      :colors, :pointer,    # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+      :indices, :pointer,   # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
+      :vaoId, :uint,        # OpenGL Vertex Array Object id
+      :vboId, [:uint, 4],   # OpenGL Vertex Buffer Objects id (4 types of vertex data)
     )
   end
 
   # of those state-change happens (this is done in core module)
   class RlDrawCall < FFI::Struct
     layout(
-      :mode, :int, # Drawing mode: LINES, TRIANGLES, QUADS
-      :vertexCount, :int, # Number of vertex of the draw
+      :mode, :int,            # Drawing mode: LINES, TRIANGLES, QUADS
+      :vertexCount, :int,     # Number of vertex of the draw
       :vertexAlignment, :int, # Number of vertex required for index alignment (LINES, TRIANGLES)
-      :textureId, :uint, # Texture id to be used on the draw -> Use to create new draw call if changes
+      :textureId, :uint,      # Texture id to be used on the draw -> Use to create new draw call if changes
     )
   end
 
   # rlRenderBatch type
   class RlRenderBatch < FFI::Struct
     layout(
-      :bufferCount, :int, # Number of vertex buffers (multi-buffering support)
-      :currentBuffer, :int, # Current buffer tracking in case of multi-buffering
+      :bufferCount, :int,      # Number of vertex buffers (multi-buffering support)
+      :currentBuffer, :int,    # Current buffer tracking in case of multi-buffering
       :vertexBuffer, :pointer, # Dynamic buffer(s) for vertex data
-      :draws, :pointer, # Draw calls array, depends on textureId
-      :drawCounter, :int, # Draw calls counter
-      :currentDepth, :float, # Current depth value for next draw
+      :draws, :pointer,        # Draw calls array, depends on textureId
+      :drawCounter, :int,      # Draw calls counter
+      :currentDepth, :float,   # Current depth value for next draw
     )
   end
 
