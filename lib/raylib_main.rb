@@ -183,7 +183,7 @@ module Raylib
   MOUSE_CURSOR_RESIZE_NS = 6     # Vertical resize/move arrow shape
   MOUSE_CURSOR_RESIZE_NWSE = 7   # Top-left to bottom-right diagonal resize/move arrow shape
   MOUSE_CURSOR_RESIZE_NESW = 8   # The top-right to bottom-left diagonal resize/move arrow shape
-  MOUSE_CURSOR_RESIZE_ALL = 9    # The omni-directional resize/move cursor shape
+  MOUSE_CURSOR_RESIZE_ALL = 9    # The omnidirectional resize/move cursor shape
   MOUSE_CURSOR_NOT_ALLOWED = 10  # The operation-not-allowed shape
 
   # enum GamepadButton
@@ -322,10 +322,10 @@ module Raylib
   # Cubemap layouts
   CUBEMAP_LAYOUT_AUTO_DETECT = 0         # Automatically detect layout type
   CUBEMAP_LAYOUT_LINE_VERTICAL = 1       # Layout is defined by a vertical line with faces
-  CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2     # Layout is defined by an horizontal line with faces
+  CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2     # Layout is defined by a horizontal line with faces
   CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3 # Layout is defined by a 3x4 cross with cubemap faces
   CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4 # Layout is defined by a 4x3 cross with cubemap faces
-  CUBEMAP_LAYOUT_PANORAMA = 5            # Layout is defined by a panorama image (equirectangular map)
+  CUBEMAP_LAYOUT_PANORAMA = 5            # Layout is defined by a panorama image (equirrectangular map)
 
   # enum FontType
   # Font type, defines generation method
@@ -457,7 +457,7 @@ module Raylib
 
   Quaternion = Vector4
 
-  # Matrix, 4x4 components, column major, OpenGL style, right handed
+  # Matrix, 4x4 components, column major, OpenGL style, right-handed
   class Matrix < FFI::Struct
     layout(
       :m0, :float,  # Matrix first row (4 components)
@@ -906,8 +906,8 @@ module Raylib
   class RayCollision < FFI::Struct
     layout(
       :hit, :bool,       # Did the ray hit something?
-      :distance, :float, # Distance to nearest hit
-      :point, Vector3,   # Point of nearest hit
+      :distance, :float, # Distance to the nearest hit
+      :point, Vector3,   # Point of the nearest hit
       :normal, Vector3,  # Surface normal of hit
     )
     def hit = self[:hit]
@@ -1168,10 +1168,16 @@ module Raylib
       # @return [void]
       [:RestoreWindow, :RestoreWindow, [], :void],
 
-      # SetWindowIcon : Set icon for window (only PLATFORM_DESKTOP)
+      # SetWindowIcon : Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
       # @param image [Image]
       # @return [void]
       [:SetWindowIcon, :SetWindowIcon, [Image.by_value], :void],
+
+      # SetWindowIcons : Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
+      # @param images [Image *]
+      # @param count [int]
+      # @return [void]
+      [:SetWindowIcons, :SetWindowIcons, [:pointer, :int], :void],
 
       # SetWindowTitle : Set title for window (only PLATFORM_DESKTOP)
       # @param title [const char *]
@@ -2000,41 +2006,11 @@ module Raylib
       # @return [float]
       [:GetGesturePinchAngle, :GetGesturePinchAngle, [], :float],
 
-      # SetCameraMode : Set camera mode (multiple camera modes available)
-      # @param camera [Camera]
-      # @param mode [int]
-      # @return [void]
-      [:SetCameraMode, :SetCameraMode, [Camera.by_value, :int], :void],
-
       # UpdateCamera : Update camera position for selected mode
       # @param camera [Camera *]
+      # @param mode [int]
       # @return [void]
-      [:UpdateCamera, :UpdateCamera, [:pointer], :void],
-
-      # SetCameraPanControl : Set camera pan key to combine with mouse movement (free camera)
-      # @param keyPan [int]
-      # @return [void]
-      [:SetCameraPanControl, :SetCameraPanControl, [:int], :void],
-
-      # SetCameraAltControl : Set camera alt key to combine with mouse movement (free camera)
-      # @param keyAlt [int]
-      # @return [void]
-      [:SetCameraAltControl, :SetCameraAltControl, [:int], :void],
-
-      # SetCameraSmoothZoomControl : Set camera smooth zoom key to combine with mouse (free camera)
-      # @param keySmoothZoom [int]
-      # @return [void]
-      [:SetCameraSmoothZoomControl, :SetCameraSmoothZoomControl, [:int], :void],
-
-      # SetCameraMoveControls : Set camera move controls (1st person and 3rd person cameras)
-      # @param keyFront [int]
-      # @param keyBack [int]
-      # @param keyRight [int]
-      # @param keyLeft [int]
-      # @param keyUp [int]
-      # @param keyDown [int]
-      # @return [void]
-      [:SetCameraMoveControls, :SetCameraMoveControls, [:int, :int, :int, :int, :int, :int], :void],
+      [:UpdateCamera, :UpdateCamera, [:pointer, :int], :void],
 
       # SetShapesTexture : Set texture and rectangle to be used on shapes drawing
       # @param texture [Texture2D]
@@ -4287,6 +4263,16 @@ module Raylib
       # @param processor [AudioCallback]
       # @return [void]
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
+
+      # AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline
+      # @param processor [AudioCallback]
+      # @return [void]
+      [:AttachAudioMixedProcessor, :AttachAudioMixedProcessor, [:AudioCallback], :void],
+
+      # DetachAudioMixedProcessor : Detach audio stream processor from the entire audio pipeline
+      # @param processor [AudioCallback]
+      # @return [void]
+      [:DetachAudioMixedProcessor, :DetachAudioMixedProcessor, [:AudioCallback], :void],
     ]
     entries.each do |entry|
       attach_function entry[0], entry[1], entry[2], entry[3]

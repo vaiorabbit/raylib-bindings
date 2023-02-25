@@ -403,7 +403,7 @@
     },
     {
       "name": "Matrix",
-      "description": "Matrix, 4x4 components, column major, OpenGL style, right handed",
+      "description": "Matrix, 4x4 components, column major, OpenGL style, right-handed",
       "fields": [
         {
           "type": "float",
@@ -1063,12 +1063,12 @@
         {
           "type": "float",
           "name": "distance",
-          "description": "Distance to nearest hit"
+          "description": "Distance to the nearest hit"
         },
         {
           "type": "Vector3",
           "name": "point",
-          "description": "Point of nearest hit"
+          "description": "Point of the nearest hit"
         },
         {
           "type": "Vector3",
@@ -2130,7 +2130,7 @@
         {
           "name": "MOUSE_CURSOR_RESIZE_ALL",
           "value": 9,
-          "description": "The omni-directional resize/move cursor shape"
+          "description": "The omnidirectional resize/move cursor shape"
         },
         {
           "name": "MOUSE_CURSOR_NOT_ALLOWED",
@@ -2735,7 +2735,7 @@
         {
           "name": "CUBEMAP_LAYOUT_LINE_HORIZONTAL",
           "value": 2,
-          "description": "Layout is defined by an horizontal line with faces"
+          "description": "Layout is defined by a horizontal line with faces"
         },
         {
           "name": "CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR",
@@ -2750,7 +2750,7 @@
         {
           "name": "CUBEMAP_LAYOUT_PANORAMA",
           "value": 5,
-          "description": "Layout is defined by a panorama image (equirectangular map)"
+          "description": "Layout is defined by a panorama image (equirrectangular map)"
         }
       ]
     },
@@ -3167,12 +3167,27 @@
     },
     {
       "name": "SetWindowIcon",
-      "description": "Set icon for window (only PLATFORM_DESKTOP)",
+      "description": "Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)",
       "returnType": "void",
       "params": [
         {
           "type": "Image",
           "name": "image"
+        }
+      ]
+    },
+    {
+      "name": "SetWindowIcons",
+      "description": "Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "Image *",
+          "name": "images"
+        },
+        {
+          "type": "int",
+          "name": "count"
         }
       ]
     },
@@ -4892,21 +4907,6 @@
       "returnType": "float"
     },
     {
-      "name": "SetCameraMode",
-      "description": "Set camera mode (multiple camera modes available)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "Camera",
-          "name": "camera"
-        },
-        {
-          "type": "int",
-          "name": "mode"
-        }
-      ]
-    },
-    {
       "name": "UpdateCamera",
       "description": "Update camera position for selected mode",
       "returnType": "void",
@@ -4914,70 +4914,10 @@
         {
           "type": "Camera *",
           "name": "camera"
-        }
-      ]
-    },
-    {
-      "name": "SetCameraPanControl",
-      "description": "Set camera pan key to combine with mouse movement (free camera)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "keyPan"
-        }
-      ]
-    },
-    {
-      "name": "SetCameraAltControl",
-      "description": "Set camera alt key to combine with mouse movement (free camera)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "keyAlt"
-        }
-      ]
-    },
-    {
-      "name": "SetCameraSmoothZoomControl",
-      "description": "Set camera smooth zoom key to combine with mouse (free camera)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "keySmoothZoom"
-        }
-      ]
-    },
-    {
-      "name": "SetCameraMoveControls",
-      "description": "Set camera move controls (1st person and 3rd person cameras)",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "keyFront"
         },
         {
           "type": "int",
-          "name": "keyBack"
-        },
-        {
-          "type": "int",
-          "name": "keyRight"
-        },
-        {
-          "type": "int",
-          "name": "keyLeft"
-        },
-        {
-          "type": "int",
-          "name": "keyUp"
-        },
-        {
-          "type": "int",
-          "name": "keyDown"
+          "name": "mode"
         }
       ]
     },
@@ -10970,6 +10910,28 @@
           "type": "AudioStream",
           "name": "stream"
         },
+        {
+          "type": "AudioCallback",
+          "name": "processor"
+        }
+      ]
+    },
+    {
+      "name": "AttachAudioMixedProcessor",
+      "description": "Attach audio stream processor to the entire audio pipeline",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "AudioCallback",
+          "name": "processor"
+        }
+      ]
+    },
+    {
+      "name": "DetachAudioMixedProcessor",
+      "description": "Detach audio stream processor from the entire audio pipeline",
+      "returnType": "void",
+      "params": [
         {
           "type": "AudioCallback",
           "name": "processor"

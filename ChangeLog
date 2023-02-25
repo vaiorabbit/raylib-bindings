@@ -1,6 +1,7 @@
 2023-02-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator/raylib_generator.py: Emits accessors for struct members
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/7fd2bf1a32c3ed7c932fe7c020858ecadb3b2056 ) and raygui ( https://github.com/raysan5/raygui/commit/c02a5883e0fa0bf78dbd65e70c530080deac5056 )
 
 2023-02-25  vaiorabbit  <http://twitter.com/vaiorabbit>
 
