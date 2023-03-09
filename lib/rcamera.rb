@@ -12,22 +12,6 @@ module Raylib
   # Define/Macro
 
 
-  # Enum
-
-  # enum CameraMode
-  # Camera system modes
-  CAMERA_CUSTOM = 0
-  CAMERA_FREE = 1
-  CAMERA_ORBITAL = 2
-  CAMERA_FIRST_PERSON = 3
-  CAMERA_THIRD_PERSON = 4
-
-  # enum CameraProjection
-  # Camera projection modes
-  CAMERA_PERSPECTIVE = 0
-  CAMERA_ORTHOGRAPHIC = 1
-
-
   # Typedef
 
   typedef :int, :CameraMode

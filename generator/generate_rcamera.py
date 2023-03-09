@@ -14,6 +14,8 @@ if __name__ == "__main__":
     for key in omit_structs:
         ctx.decl_structs.pop(key, None)
 
+    ctx.decl_enums.clear()
+
     api_schema = None
     with open('./rcamera_api.json') as f:
         api_schema = json.load(f)

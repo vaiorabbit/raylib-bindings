@@ -7,6 +7,7 @@ require 'fileutils'
 require_relative 'raylib_main'
 require_relative 'config'
 require_relative 'raymath'
+require_relative 'rcamera'
 require_relative 'rlgl'
 require_relative 'raygui'
 require_relative 'physac'
@@ -31,6 +32,7 @@ module Raylib
   def self.setup_symbols
     setup_raylib_symbols
     setup_raymath_symbols
+    setup_rcamera_symbols
     setup_rlgl_symbols
   end
 
