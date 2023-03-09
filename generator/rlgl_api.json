@@ -427,6 +427,18 @@
       "description": "GL_FUNC_ADD"
     },
     {
+      "name": "RL_MIN",
+      "type": "INT",
+      "value": 32775,
+      "description": "GL_MIN"
+    },
+    {
+      "name": "RL_MAX",
+      "type": "INT",
+      "value": 32776,
+      "description": "GL_MAX"
+    },
+    {
       "name": "RL_FUNC_SUBTRACT",
       "type": "INT",
       "value": 32778,

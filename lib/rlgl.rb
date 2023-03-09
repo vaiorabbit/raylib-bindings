@@ -65,6 +65,8 @@ module Raylib
   RL_CONSTANT_ALPHA = 0x8003                    # GL_CONSTANT_ALPHA
   RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004          # GL_ONE_MINUS_CONSTANT_ALPHA
   RL_FUNC_ADD = 0x8006                          # GL_FUNC_ADD
+  RL_MIN = 0x8007                               # GL_MIN
+  RL_MAX = 0x8008                               # GL_MAX
   RL_FUNC_SUBTRACT = 0x800A                     # GL_FUNC_SUBTRACT
   RL_FUNC_REVERSE_SUBTRACT = 0x800B             # GL_FUNC_REVERSE_SUBTRACT
   RL_BLEND_EQUATION = 0x8009                    # GL_BLEND_EQUATION

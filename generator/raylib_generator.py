@@ -262,6 +262,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     json_functions = None
     if json_schema:
         json_functions = json_schema['functions']
+    json_available = len(json_functions) > 0
 
     if function_prefix != "":
         print(function_prefix, file = sys.stdout)
@@ -273,12 +274,13 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
         func_entry = FunctionEntry(func_info.original_name, func_info.explicit_name)
 
         # Collect documentation from JSON API Schema
-        json_function = [j for j in json_functions if j['name'] == func_info.original_name][0]
-        func_entry.description = json_function['description']
-        func_entry.ret_description = json_function['returnType']
-        if 'params' in json_function:
-            for j in json_function['params']:
-                func_entry.arg_descriptions.append([j['type'], j['name']])
+        if json_functions:
+            json_function = [j for j in json_functions if j['name'] == func_info.original_name][0]
+            func_entry.description = json_function['description']
+            func_entry.ret_description = json_function['returnType']
+            if 'params' in json_function:
+                for j in json_function['params']:
+                    func_entry.arg_descriptions.append([j['type'], j['name']])
 
         # Arguments
         if len(func_info.args) > 0:

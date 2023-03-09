@@ -1,3 +1,7 @@
+2023-03-09  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* generator: Now generates binding code for rcamera.h
+
 2023-02-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator/raylib_generator.py: Emits accessors for struct members

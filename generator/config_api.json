@@ -451,6 +451,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FILEFORMAT_QOA",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_FILEFORMAT_XM",
       "type": "INT",
       "value": 1,

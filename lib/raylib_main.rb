@@ -3585,11 +3585,6 @@ module Raylib
       # @return [void]
       [:UnloadModel, :UnloadModel, [Model.by_value], :void],
 
-      # UnloadModelKeepMeshes : Unload model (but not meshes) from memory (RAM and/or VRAM)
-      # @param model [Model]
-      # @return [void]
-      [:UnloadModelKeepMeshes, :UnloadModelKeepMeshes, [Model.by_value], :void],
-
       # GetModelBoundingBox : Compute model bounding box limits (considers all meshes)
       # @param model [Model]
       # @return [BoundingBox]
@@ -4016,19 +4011,6 @@ module Raylib
       # @param sound [Sound]
       # @return [void]
       [:ResumeSound, :ResumeSound, [Sound.by_value], :void],
-
-      # PlaySoundMulti : Play a sound (using multichannel buffer pool)
-      # @param sound [Sound]
-      # @return [void]
-      [:PlaySoundMulti, :PlaySoundMulti, [Sound.by_value], :void],
-
-      # StopSoundMulti : Stop any sound playing (using multichannel buffer pool)
-      # @return [void]
-      [:StopSoundMulti, :StopSoundMulti, [], :void],
-
-      # GetSoundsPlaying : Get number of sounds playing in the multichannel
-      # @return [int]
-      [:GetSoundsPlaying, :GetSoundsPlaying, [], :int],
 
       # IsSoundPlaying : Check if a sound is currently playing
       # @param sound [Sound]

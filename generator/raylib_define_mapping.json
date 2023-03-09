@@ -58,6 +58,9 @@
     , "EPSILON" : "0.000001"
     , "MatrixToFloat" : null
     , "Vector3ToFloat" : null
+    , "RCAMERA_H" : null
+    , "CAMERA_CULL_DISTANCE_NEAR" : null
+    , "CAMERA_CULL_DISTANCE_FAR" : null
     , "RLGL_H" : null
     , "RLGL_VERSION" : "\"4.2\""
     , "TRACELOG" : null
@@ -124,6 +127,8 @@
     , "RL_CONSTANT_ALPHA" : "0x8003"
     , "RL_ONE_MINUS_CONSTANT_ALPHA" : "0x8004"
     , "RL_FUNC_ADD" : "0x8006"
+    , "RL_MIN" : "0x8007"
+    , "RL_MAX" : "0x8008"
     , "RL_FUNC_SUBTRACT" : "0x800A"
     , "RL_FUNC_REVERSE_SUBTRACT" : "0x800B"
     , "RL_BLEND_EQUATION" : "0x8009"
@@ -147,7 +152,7 @@
     , "SUPPORT_MOUSE_GESTURES" : "1"
     , "SUPPORT_SSH_KEYBOARD_RPI" : "1"
     , "SUPPORT_WINMM_HIGHRES_TIMER" : "1"
-    , "SUPPORT_PARTIALBUSY_WAIT_LOOP" : "1"
+    , "SUPPORT_PARTIALBUSY_WAIT_LOOP" : null
     , "SUPPORT_SCREEN_CAPTURE" : "1"
     , "SUPPORT_GIF_RECORDING" : "1"
     , "SUPPORT_COMPRESSION_API" : "1"
@@ -203,9 +208,10 @@
     , "MAX_MESH_VERTEX_BUFFERS" : "7"
     , "SUPPORT_FILEFORMAT_WAV" : "1"
     , "SUPPORT_FILEFORMAT_OGG" : "1"
+    , "SUPPORT_FILEFORMAT_MP3" : "1"
+    , "SUPPORT_FILEFORMAT_QOA" : "1"
     , "SUPPORT_FILEFORMAT_XM" : "1"
     , "SUPPORT_FILEFORMAT_MOD" : "1"
-    , "SUPPORT_FILEFORMAT_MP3" : "1"
     , "AUDIO_DEVICE_FORMAT" : "\"ma_format_f32\""
     , "AUDIO_DEVICE_CHANNELS" : "2"
     , "AUDIO_DEVICE_SAMPLE_RATE" : "0"
