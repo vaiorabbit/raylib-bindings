@@ -32,13 +32,11 @@ if __FILE__ == $PROGRAM_NAME
   end
   animFrameCounter = 0
 
-  SetCameraMode(camera, CAMERA_ORBITAL)
-
   SetTargetFPS(60)
 
   framePoses = anims[0][:framePoses] # Transform**
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     # Play animation when spacebar is held down
     if IsKeyDown(KEY_SPACE)

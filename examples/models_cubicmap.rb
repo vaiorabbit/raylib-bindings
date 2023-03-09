@@ -29,12 +29,10 @@ if __FILE__ == $PROGRAM_NAME
 
   UnloadImage(image) # Unload cubesmap image from RAM, already uploaded to VRAM
 
-  SetCameraMode(camera, CAMERA_ORBITAL)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

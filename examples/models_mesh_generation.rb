@@ -76,13 +76,11 @@ if __FILE__ == $PROGRAM_NAME
 
   currentModel = 0
 
-  SetCameraMode(camera, CAMERA_ORBITAL)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
 
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     if IsMouseButtonPressed(MOUSE_BUTTON_LEFT)
       currentModel = (currentModel + 1) % NUM_MODELS

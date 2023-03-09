@@ -59,8 +59,6 @@ if __FILE__ == $PROGRAM_NAME
   camera[:fovy] = 45.0
   camera[:projection] = CAMERA_PERSPECTIVE
 
-  SetCameraMode(camera, CAMERA_FREE)
-
   rotationSpeed = 0.2         # General system rotation speed
 
   earthRotation = 0.0         # Rotation of earth around itself (days) in degrees
@@ -71,7 +69,7 @@ if __FILE__ == $PROGRAM_NAME
   SetTargetFPS(60)
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_FREE)
 
     earthRotation += (5.0*rotationSpeed)
     earthOrbitRotation += (365/360.0*(5.0*rotationSpeed)*rotationSpeed)

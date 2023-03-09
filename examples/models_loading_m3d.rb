@@ -32,13 +32,11 @@ if __FILE__ == $PROGRAM_NAME
   animFrameCounter = 0
   animId = 0
 
-  SetCameraMode(camera, CAMERA_FREE)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
 
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_FREE)
 
     if modelanims.anims_count > 0
       # Play animation when spacebar is held down (or step one frame with N)

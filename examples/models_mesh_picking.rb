@@ -44,11 +44,19 @@ if __FILE__ == $PROGRAM_NAME
   sp = Vector3.create(-30.0, 5.0, 5.0)
   sr = 4.0
 
-  SetCameraMode(camera, CAMERA_FREE)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
+
+    UpdateCamera(camera.pointer, CAMERA_FIRST_PERSON) if IsCursorHidden()
+
+    if IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)
+      if IsCursorHidden()
+        EnableCursor()
+      else
+        DisableCursor()
+      end
+    end
 
     # Display information about closest hit
     collision = RayCollision.new

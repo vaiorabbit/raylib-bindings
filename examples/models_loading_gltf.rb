@@ -20,9 +20,6 @@ if __FILE__ == $PROGRAM_NAME
 
   position = Vector3.create(0.0, 0.0, 0.0) # Set model position
 
-  SetCameraMode(camera, CAMERA_FREE)
-
-  SetCameraMode(camera, CAMERA_ORBITAL)
   SetTargetFPS(60)
 
   until WindowShouldClose()
@@ -37,7 +34,7 @@ if __FILE__ == $PROGRAM_NAME
     UpdateModelAnimation(model, modelanims.anim(animIndex), animFrameCounter)
     animFrameCounter = (animFrameCounter + 1) % modelanims.frame_count(animIndex)
 
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     BeginDrawing()
       ClearBackground(WHITE)

@@ -18,8 +18,6 @@ if __FILE__ == $PROGRAM_NAME
   camera[:up] = Vector3.create(0.0, 1.0, 0.0)
   camera[:fovy] = 65.0
 
-  SetCameraMode(camera, CAMERA_FREE)
-
   # Load raymarching shader
   # NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader
   shader = LoadShader(nil, RAYLIB_SHADERS_PATH + "resources/shaders/glsl#{GLSL_VERSION}/raymarching.fs")
@@ -39,7 +37,7 @@ if __FILE__ == $PROGRAM_NAME
 
   until WindowShouldClose()
 
-    UpdateCamera(camera)
+    UpdateCamera(camera.pointer, CAMERA_FREE)
 
     cameraPos = [camera[:position][:x], camera[:position][:y], camera[:position][:z]]
     cameraTarget = [camera[:target][:x], camera[:target][:y], camera[:target][:z]]

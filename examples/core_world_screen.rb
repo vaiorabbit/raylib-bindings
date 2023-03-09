@@ -18,14 +18,12 @@ if __FILE__ == $PROGRAM_NAME
   cubePosition = Vector3.create(0.0, 0.0, 0.0)
   cubeScreenPosition = Vector2.create(0.0, 0.0)
 
-  SetCameraMode(camera, CAMERA_FREE)
-
   SetTargetFPS(60)
 
   speed = 0.25 # [Ruby raylib]
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_FREE)
 
     # [Ruby raylib] Move cube position
     move = Vector3.create(0, 0, 0) # [Ruby raylib]

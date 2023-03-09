@@ -30,14 +30,12 @@ if __FILE__ == $PROGRAM_NAME
 
   mapPosition = Vector3.create(-16.0, 0.0, -8.0) # Set model position
 
-  SetCameraMode(camera, CAMERA_FIRST_PERSON)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
     oldCamPos = Vector3.copy_from(camera.position)
 
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_FIRST_PERSON)
 
     # Check player collision (we simplify to 2D collision detection)
     playerPos = Vector2.create(camera.position.x, camera.position.z)

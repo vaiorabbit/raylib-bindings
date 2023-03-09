@@ -18,12 +18,10 @@ if __FILE__ == $PROGRAM_NAME
   bill = LoadTexture(RAYLIB_MODELS_PATH + "resources/billboard.png") # Our texture billboard
   billPosition = Vector3.create(0.0, 2.0, 0.0)                       # Position where draw billboard
 
-  SetCameraMode(camera, CAMERA_ORBITAL)
-
   SetTargetFPS(60)
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

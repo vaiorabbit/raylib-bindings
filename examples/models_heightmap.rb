@@ -25,12 +25,10 @@ if __FILE__ == $PROGRAM_NAME
 
   UnloadImage(image)                    # Unload heightmap image from RAM, already uploaded to VRAM
 
-  SetCameraMode(camera, CAMERA_ORBITAL) # Set an orbital camera mode
-
   SetTargetFPS(60)                      # Set our game to run at 60 frames-per-second
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

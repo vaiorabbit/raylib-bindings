@@ -275,7 +275,7 @@ if __FILE__ == $PROGRAM_NAME
   camera[:fovy] = 45.0
   camera[:projection] = CAMERA_PERSPECTIVE
 
-  SetCameraMode(camera, CAMERA_ORBITAL)
+  camera_mode = CAMERA_ORBITAL
 
   cubePosition = Vector3.create(0.0, 1.0, 0.0)
   cubeSize = Vector3.create(2.0, 2.0, 2.0)
@@ -345,10 +345,10 @@ if __FILE__ == $PROGRAM_NAME
       camera[:projection] = CAMERA_PERSPECTIVE
       if spin
         camera[:position] = Vector3.create(-10.0, 15.0, -10.0)
-        SetCameraMode(camera, CAMERA_ORBITAL)
+        camera_mode = CAMERA_ORBITAL
       else
         camera[:position] = Vector3.create(-10.0, 10.0, -10.0)
-        SetCameraMode(camera, CAMERA_FREE)
+        camera_mode = CAMERA_FREE
       end
     end
 
@@ -410,7 +410,7 @@ if __FILE__ == $PROGRAM_NAME
     # Measure 3D text so we can center it
     tbox = MeasureTextWave3D(font, text, fontSize, fontSpacing, lineSpacing)
 
-    UpdateCamera(camera)
+    UpdateCamera(camera.pointer, camera_mode)
     quads = 0
     time += GetFrameTime()
 

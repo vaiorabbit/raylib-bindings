@@ -26,12 +26,10 @@ if __FILE__ == $PROGRAM_NAME
     colors << Color.from_u8(GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255)
   end
 
-  SetCameraMode(camera, CAMERA_FIRST_PERSON) # Set a first person camera mode
-
   SetTargetFPS(60) # Set our game to run at 60 frames-per-second
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer)
+    UpdateCamera(camera.pointer, CAMERA_FIRST_PERSON)
     BeginDrawing()
       ClearBackground(RAYWHITE)
       BeginMode3D(camera)
