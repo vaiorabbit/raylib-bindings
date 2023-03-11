@@ -7,7 +7,7 @@ jobs:
   steps:
   - name: Build Linux
     uses: ./.github/workflows/linux.yml
-  - name: Build Linux(Cross):
+  - name: Build Linux(Cross)
     uses: ./.github/workflows/linux_cross.yml
   - name: Build macOS:
     uses: ./.github/workflows/macos.yml
