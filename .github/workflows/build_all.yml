@@ -9,7 +9,7 @@ jobs:
     uses: ./.github/workflows/linux.yml
   - name: Build Linux(Cross)
     uses: ./.github/workflows/linux_cross.yml
-  - name: Build macOS:
+  - name: Build macOS
     uses: ./.github/workflows/macos.yml
-  - name: Build Windows:
+  - name: Build Windows
     uses: ./.github/workflows/windows.yml
