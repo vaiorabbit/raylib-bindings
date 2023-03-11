@@ -4,13 +4,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  strategy:
-    max-parallel: 1
   call-build-linux:
     uses: ./.github/workflows/linux.yml
   call-build-linux-cross:
+    needs: call-build-linux
     uses: ./.github/workflows/linux_cross.yml
   call-build-macos:
+    needs: call-build-linux-cross
     uses: ./.github/workflows/macos.yml
   call-build-windows:
+    needs: call-build-macos
     uses: ./.github/workflows/windows.yml
