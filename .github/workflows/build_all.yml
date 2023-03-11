@@ -4,20 +4,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      max-parallel: 1
-
-    steps:
-    - name: Build Linux
-      uses: ./.github/workflows/linux.yml
-    - name: Build Linux(Cross)
-      uses: ./.github/workflows/linux_cross.yml
-    - name: Build macOS
-      uses: ./.github/workflows/macos.yml
-    - name: Build Windows
-      uses: ./.github/workflows/windows.yml
+  strategy:
+    max-parallel: 1
+  call-build-linux:
+    uses: ./.github/workflows/linux.yml
+  call-build-linux-cross:
+    uses: ./.github/workflows/linux_cross.yml
+  call-build-macos:
+    uses: ./.github/workflows/macos.yml
+  call-build-windows:
+    uses: ./.github/workflows/windows.yml
