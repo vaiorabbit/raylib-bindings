@@ -4,11 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-build-linux:
+  steps:
+  - name: Build Linux
     uses: ./.github/workflows/linux.yml
-  call-build-linux-cross:
+  - name: Build Linux(Cross):
     uses: ./.github/workflows/linux_cross.yml
-  call-build-macos:
+  - name: Build macOS:
     uses: ./.github/workflows/macos.yml
-  call-build-windows:
+  - name: Build Windows:
     uses: ./.github/workflows/windows.yml
