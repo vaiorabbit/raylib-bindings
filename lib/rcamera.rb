@@ -14,8 +14,8 @@ module Raylib
 
   # Typedef
 
-  typedef :int, :CameraMode
   typedef :int, :CameraProjection
+  typedef :int, :CameraMode
 
   # Function
 
@@ -23,51 +23,77 @@ module Raylib
     entries = [
 
       # GetCameraForward
-      # @return []
+      # @param camera [Camera *]
+      # @return [Vector3]
       [:GetCameraForward, :GetCameraForward, [:pointer], Vector3.by_value],
 
       # GetCameraUp
-      # @return []
+      # @param camera [Camera *]
+      # @return [Vector3]
       [:GetCameraUp, :GetCameraUp, [:pointer], Vector3.by_value],
 
       # GetCameraRight
-      # @return []
+      # @param camera [Camera *]
+      # @return [Vector3]
       [:GetCameraRight, :GetCameraRight, [:pointer], Vector3.by_value],
 
       # CameraMoveForward
-      # @return []
+      # @param camera [Camera *]
+      # @param distance [float]
+      # @param moveInWorldPlane [bool]
+      # @return [void]
       [:CameraMoveForward, :CameraMoveForward, [:pointer, :float, :bool], :void],
 
       # CameraMoveUp
-      # @return []
+      # @param camera [Camera *]
+      # @param distance [float]
+      # @return [void]
       [:CameraMoveUp, :CameraMoveUp, [:pointer, :float], :void],
 
       # CameraMoveRight
-      # @return []
+      # @param camera [Camera *]
+      # @param distance [float]
+      # @param moveInWorldPlane [bool]
+      # @return [void]
       [:CameraMoveRight, :CameraMoveRight, [:pointer, :float, :bool], :void],
 
       # CameraMoveToTarget
-      # @return []
+      # @param camera [Camera *]
+      # @param delta [float]
+      # @return [void]
       [:CameraMoveToTarget, :CameraMoveToTarget, [:pointer, :float], :void],
 
       # CameraYaw
-      # @return []
+      # @param camera [Camera *]
+      # @param angle [float]
+      # @param rotateAroundTarget [bool]
+      # @return [void]
       [:CameraYaw, :CameraYaw, [:pointer, :float, :bool], :void],
 
       # CameraPitch
-      # @return []
+      # @param camera [Camera *]
+      # @param angle [float]
+      # @param lockView [bool]
+      # @param rotateAroundTarget [bool]
+      # @param rotateUp [bool]
+      # @return [void]
       [:CameraPitch, :CameraPitch, [:pointer, :float, :bool, :bool, :bool], :void],
 
       # CameraRoll
-      # @return []
+      # @param camera [Camera *]
+      # @param angle [float]
+      # @return [void]
       [:CameraRoll, :CameraRoll, [:pointer, :float], :void],
 
       # GetCameraViewMatrix
-      # @return []
+      # @param camera [Camera *]
+      # @return [Matrix]
       [:GetCameraViewMatrix, :GetCameraViewMatrix, [:pointer], :int],
 
       # GetCameraProjectionMatrix
-      # @return []
+      # @param camera [Camera*]
+      # @param aspect [float]
+      # @return [Matrix]
       [:GetCameraProjectionMatrix, :GetCameraProjectionMatrix, [:pointer, :float], :int],
     ]
     entries.each do |entry|

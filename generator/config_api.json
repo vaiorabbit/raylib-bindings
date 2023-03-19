@@ -507,7 +507,7 @@
     {
       "name": "MAX_TRACELOG_MSG_LENGTH",
       "type": "INT",
-      "value": 128,
+      "value": 256,
       "description": "Max length of one trace-log message"
     }
   ],

@@ -1,3 +1,7 @@
+2023-03-19  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/2e02474b7aac2e6e3fe680a3aa996973585eeaad ) and raygui ( https://github.com/raysan5/raygui/commit/5d1de95ba2d16c44c4e777873a0e39f75dab8ffd )
+
 2023-03-09  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* generator: Now generates binding code for rcamera.h

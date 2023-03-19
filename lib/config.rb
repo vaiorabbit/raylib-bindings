@@ -93,6 +93,6 @@ module Raylib
   MAX_AUDIO_BUFFER_POOL_CHANNELS = 16                         # Maximum number of audio pool channels
   SUPPORT_STANDARD_FILEIO = 1
   SUPPORT_TRACELOG = 1
-  MAX_TRACELOG_MSG_LENGTH = 128                               # Max length of one trace-log message
+  MAX_TRACELOG_MSG_LENGTH = 256                               # Max length of one trace-log message
 
 end

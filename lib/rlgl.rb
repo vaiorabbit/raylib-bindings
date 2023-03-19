@@ -11,7 +11,7 @@ module Raylib
 
   # Define/Macro
 
-  RLGL_VERSION = "4.2"
+  RLGL_VERSION = "4.5"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
   RL_TEXTURE_WRAP_S = 0x2802                    # GL_TEXTURE_WRAP_S
   RL_TEXTURE_WRAP_T = 0x2803                    # GL_TEXTURE_WRAP_T

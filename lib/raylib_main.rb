@@ -14,7 +14,7 @@ module Raylib
   RAYLIB_VERSION_MAJOR = 4
   RAYLIB_VERSION_MINOR = 5
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "4.5-dev"
+  RAYLIB_VERSION = "4.5"
   DEG2RAD = Math::PI / 180.0
   RAD2DEG = 180.0 / Math::PI
 
@@ -2011,6 +2011,14 @@ module Raylib
       # @param mode [int]
       # @return [void]
       [:UpdateCamera, :UpdateCamera, [:pointer, :int], :void],
+
+      # UpdateCameraPro : Update camera movement/rotation
+      # @param camera [Camera *]
+      # @param movement [Vector3]
+      # @param rotation [Vector3]
+      # @param zoom [float]
+      # @return [void]
+      [:UpdateCameraPro, :UpdateCameraPro, [:pointer, Vector3.by_value, Vector3.by_value, :float], :void],
 
       # SetShapesTexture : Set texture and rectangle to be used on shapes drawing
       # @param texture [Texture2D]

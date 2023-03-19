@@ -3,7 +3,7 @@
     , "RAYLIB_VERSION_MAJOR" : "4"
     , "RAYLIB_VERSION_MINOR" : "5"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : "\"4.5-dev\""
+    , "RAYLIB_VERSION" : "\"4.5\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
@@ -62,7 +62,7 @@
     , "CAMERA_CULL_DISTANCE_NEAR" : null
     , "CAMERA_CULL_DISTANCE_FAR" : null
     , "RLGL_H" : null
-    , "RLGL_VERSION" : "\"4.2\""
+    , "RLGL_VERSION" : "\"4.5\""
     , "TRACELOG" : null
     , "TRACELOGD" : null
     , "GRAPHICS_API_OPENGL_33" : null
@@ -218,7 +218,7 @@
     , "MAX_AUDIO_BUFFER_POOL_CHANNELS" : "16"
     , "SUPPORT_STANDARD_FILEIO" : "1"
     , "SUPPORT_TRACELOG" : "1"
-    , "MAX_TRACELOG_MSG_LENGTH" : "128"
+    , "MAX_TRACELOG_MSG_LENGTH" : "256"
     , "RAYGUI_H" : null
     , "RAYGUI_VERSION" : "\"3.2\""
     , "RAYGUIAPI" : null
