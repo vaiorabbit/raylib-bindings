@@ -1,5 +1,5 @@
-Project(physac C)
 cmake_minimum_required(VERSION 3.0)
+project(physac C)
 
 set(PROJECT_VERSION 3.0)
 set(API_VERSION 300)

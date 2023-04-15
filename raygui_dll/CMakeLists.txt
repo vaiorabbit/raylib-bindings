@@ -1,5 +1,5 @@
-Project(raygui C)
 cmake_minimum_required(VERSION 3.0)
+project(raygui C)
 
 set(PROJECT_VERSION 3.0)
 set(API_VERSION 300)
