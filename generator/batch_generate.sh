@@ -1,5 +1,5 @@
 #!/usr/local/bin/zsh
-export PYTHONPATH=/opt/homebrew/opt/llvm/lib/python3.10/site-packages
+export PYTHONPATH=/opt/homebrew/opt/llvm/lib/python3.11/site-packages
 /opt/homebrew/bin/python3 generate_config.py > ../lib/config.rb
 /opt/homebrew/bin/python3 generate_raylib.py > ../lib/raylib_main.rb
 /opt/homebrew/bin/python3 generate_raymath.py > ../lib/raymath.rb

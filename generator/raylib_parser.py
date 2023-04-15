@@ -593,7 +593,7 @@ def collect_decl_function(ctx, cursor):
 
     retval_info = RetvalInfo()
     retval_info.type_name = cursor.result_type.spelling
-    retval_info.type_kind = cursor.result_type.kind
+    retval_info.type_kind = cursor.result_type.get_canonical().kind
 
     func_info.retval = retval_info
 

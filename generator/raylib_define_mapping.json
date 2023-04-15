@@ -1,9 +1,9 @@
 {
       "RAYLIB_H" : null
     , "RAYLIB_VERSION_MAJOR" : "4"
-    , "RAYLIB_VERSION_MINOR" : "5"
+    , "RAYLIB_VERSION_MINOR" : "6"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : "\"4.5\""
+    , "RAYLIB_VERSION" : "\"4.6-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : "Math::PI / 180.0"
