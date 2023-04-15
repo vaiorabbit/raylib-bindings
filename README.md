@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2023-03-19
+*   Last modified : 2023-04-15
 
 Provides Ruby bindings for raylib-related libraries including:
 
