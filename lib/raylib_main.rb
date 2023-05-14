@@ -879,6 +879,7 @@ module Raylib
       :frameCount, :int,     # Number of animation frames
       :bones, :pointer,      # Bones information (skeleton)
       :framePoses, :pointer, # Poses array by frame
+      :name, [:char, 32],    # Animation name
     )
     def boneCount = self[:boneCount]
     def boneCount=(v) self[:boneCount] = v end
@@ -888,6 +889,8 @@ module Raylib
     def bones=(v) self[:bones] = v end
     def framePoses = self[:framePoses]
     def framePoses=(v) self[:framePoses] = v end
+    def name = self[:name]
+    def name=(v) self[:name] = v end
   end
 
   # Ray, ray for raycasting
@@ -1094,3174 +1097,3691 @@ module Raylib
   def self.setup_raylib_symbols
     entries = [
 
-      # InitWindow : Initialize window and OpenGL context
-      # @param width [int]
-      # @param height [int]
-      # @param title [const char *]
-      # @return [void]
+      # @!method InitWindow(width, height, title)
+      #   InitWindow : Initialize window and OpenGL context
+      #   @param width [int]
+      #   @param height [int]
+      #   @param title [const char *]
+      #   @return [void]
       [:InitWindow, :InitWindow, [:int, :int, :pointer], :void],
 
-      # WindowShouldClose : Check if KEY_ESCAPE pressed or Close icon pressed
-      # @return [bool]
+      # @!method WindowShouldClose()
+      #   WindowShouldClose : Check if KEY_ESCAPE pressed or Close icon pressed
+      #   @return [bool]
       [:WindowShouldClose, :WindowShouldClose, [], :bool],
 
-      # CloseWindow : Close window and unload OpenGL context
-      # @return [void]
+      # @!method CloseWindow()
+      #   CloseWindow : Close window and unload OpenGL context
+      #   @return [void]
       [:CloseWindow, :CloseWindow, [], :void],
 
-      # IsWindowReady : Check if window has been initialized successfully
-      # @return [bool]
+      # @!method IsWindowReady()
+      #   IsWindowReady : Check if window has been initialized successfully
+      #   @return [bool]
       [:IsWindowReady, :IsWindowReady, [], :bool],
 
-      # IsWindowFullscreen : Check if window is currently fullscreen
-      # @return [bool]
+      # @!method IsWindowFullscreen()
+      #   IsWindowFullscreen : Check if window is currently fullscreen
+      #   @return [bool]
       [:IsWindowFullscreen, :IsWindowFullscreen, [], :bool],
 
-      # IsWindowHidden : Check if window is currently hidden (only PLATFORM_DESKTOP)
-      # @return [bool]
+      # @!method IsWindowHidden()
+      #   IsWindowHidden : Check if window is currently hidden (only PLATFORM_DESKTOP)
+      #   @return [bool]
       [:IsWindowHidden, :IsWindowHidden, [], :bool],
 
-      # IsWindowMinimized : Check if window is currently minimized (only PLATFORM_DESKTOP)
-      # @return [bool]
+      # @!method IsWindowMinimized()
+      #   IsWindowMinimized : Check if window is currently minimized (only PLATFORM_DESKTOP)
+      #   @return [bool]
       [:IsWindowMinimized, :IsWindowMinimized, [], :bool],
 
-      # IsWindowMaximized : Check if window is currently maximized (only PLATFORM_DESKTOP)
-      # @return [bool]
+      # @!method IsWindowMaximized()
+      #   IsWindowMaximized : Check if window is currently maximized (only PLATFORM_DESKTOP)
+      #   @return [bool]
       [:IsWindowMaximized, :IsWindowMaximized, [], :bool],
 
-      # IsWindowFocused : Check if window is currently focused (only PLATFORM_DESKTOP)
-      # @return [bool]
+      # @!method IsWindowFocused()
+      #   IsWindowFocused : Check if window is currently focused (only PLATFORM_DESKTOP)
+      #   @return [bool]
       [:IsWindowFocused, :IsWindowFocused, [], :bool],
 
-      # IsWindowResized : Check if window has been resized last frame
-      # @return [bool]
+      # @!method IsWindowResized()
+      #   IsWindowResized : Check if window has been resized last frame
+      #   @return [bool]
       [:IsWindowResized, :IsWindowResized, [], :bool],
 
-      # IsWindowState : Check if one specific window flag is enabled
-      # @param flag [unsigned int]
-      # @return [bool]
+      # @!method IsWindowState(flag)
+      #   IsWindowState : Check if one specific window flag is enabled
+      #   @param flag [unsigned int]
+      #   @return [bool]
       [:IsWindowState, :IsWindowState, [:uint], :bool],
 
-      # SetWindowState : Set window configuration state using flags (only PLATFORM_DESKTOP)
-      # @param flags [unsigned int]
-      # @return [void]
+      # @!method SetWindowState(flags)
+      #   SetWindowState : Set window configuration state using flags (only PLATFORM_DESKTOP)
+      #   @param flags [unsigned int]
+      #   @return [void]
       [:SetWindowState, :SetWindowState, [:uint], :void],
 
-      # ClearWindowState : Clear window configuration state flags
-      # @param flags [unsigned int]
-      # @return [void]
+      # @!method ClearWindowState(flags)
+      #   ClearWindowState : Clear window configuration state flags
+      #   @param flags [unsigned int]
+      #   @return [void]
       [:ClearWindowState, :ClearWindowState, [:uint], :void],
 
-      # ToggleFullscreen : Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
-      # @return [void]
+      # @!method ToggleFullscreen()
+      #   ToggleFullscreen : Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
+      #   @return [void]
       [:ToggleFullscreen, :ToggleFullscreen, [], :void],
 
-      # MaximizeWindow : Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
-      # @return [void]
+      # @!method MaximizeWindow()
+      #   MaximizeWindow : Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
+      #   @return [void]
       [:MaximizeWindow, :MaximizeWindow, [], :void],
 
-      # MinimizeWindow : Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
-      # @return [void]
+      # @!method MinimizeWindow()
+      #   MinimizeWindow : Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
+      #   @return [void]
       [:MinimizeWindow, :MinimizeWindow, [], :void],
 
-      # RestoreWindow : Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
-      # @return [void]
+      # @!method RestoreWindow()
+      #   RestoreWindow : Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+      #   @return [void]
       [:RestoreWindow, :RestoreWindow, [], :void],
 
-      # SetWindowIcon : Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
-      # @param image [Image]
-      # @return [void]
+      # @!method SetWindowIcon(image)
+      #   SetWindowIcon : Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
+      #   @param image [Image]
+      #   @return [void]
       [:SetWindowIcon, :SetWindowIcon, [Image.by_value], :void],
 
-      # SetWindowIcons : Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
-      # @param images [Image *]
-      # @param count [int]
-      # @return [void]
+      # @!method SetWindowIcons(images, count)
+      #   SetWindowIcons : Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
+      #   @param images [Image *]
+      #   @param count [int]
+      #   @return [void]
       [:SetWindowIcons, :SetWindowIcons, [:pointer, :int], :void],
 
-      # SetWindowTitle : Set title for window (only PLATFORM_DESKTOP)
-      # @param title [const char *]
-      # @return [void]
+      # @!method SetWindowTitle(title)
+      #   SetWindowTitle : Set title for window (only PLATFORM_DESKTOP)
+      #   @param title [const char *]
+      #   @return [void]
       [:SetWindowTitle, :SetWindowTitle, [:pointer], :void],
 
-      # SetWindowPosition : Set window position on screen (only PLATFORM_DESKTOP)
-      # @param x [int]
-      # @param y [int]
-      # @return [void]
+      # @!method SetWindowPosition(x, y)
+      #   SetWindowPosition : Set window position on screen (only PLATFORM_DESKTOP)
+      #   @param x [int]
+      #   @param y [int]
+      #   @return [void]
       [:SetWindowPosition, :SetWindowPosition, [:int, :int], :void],
 
-      # SetWindowMonitor : Set monitor for the current window (fullscreen mode)
-      # @param monitor [int]
-      # @return [void]
+      # @!method SetWindowMonitor(monitor)
+      #   SetWindowMonitor : Set monitor for the current window (fullscreen mode)
+      #   @param monitor [int]
+      #   @return [void]
       [:SetWindowMonitor, :SetWindowMonitor, [:int], :void],
 
-      # SetWindowMinSize : Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method SetWindowMinSize(width, height)
+      #   SetWindowMinSize : Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:SetWindowMinSize, :SetWindowMinSize, [:int, :int], :void],
 
-      # SetWindowSize : Set window dimensions
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method SetWindowSize(width, height)
+      #   SetWindowSize : Set window dimensions
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:SetWindowSize, :SetWindowSize, [:int, :int], :void],
 
-      # SetWindowOpacity : Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
-      # @param opacity [float]
-      # @return [void]
+      # @!method SetWindowOpacity(opacity)
+      #   SetWindowOpacity : Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
+      #   @param opacity [float]
+      #   @return [void]
       [:SetWindowOpacity, :SetWindowOpacity, [:float], :void],
 
-      # GetWindowHandle : Get native window handle
-      # @return [void *]
+      # @!method GetWindowHandle()
+      #   GetWindowHandle : Get native window handle
+      #   @return [void *]
       [:GetWindowHandle, :GetWindowHandle, [], :pointer],
 
-      # GetScreenWidth : Get current screen width
-      # @return [int]
+      # @!method GetScreenWidth()
+      #   GetScreenWidth : Get current screen width
+      #   @return [int]
       [:GetScreenWidth, :GetScreenWidth, [], :int],
 
-      # GetScreenHeight : Get current screen height
-      # @return [int]
+      # @!method GetScreenHeight()
+      #   GetScreenHeight : Get current screen height
+      #   @return [int]
       [:GetScreenHeight, :GetScreenHeight, [], :int],
 
-      # GetRenderWidth : Get current render width (it considers HiDPI)
-      # @return [int]
+      # @!method GetRenderWidth()
+      #   GetRenderWidth : Get current render width (it considers HiDPI)
+      #   @return [int]
       [:GetRenderWidth, :GetRenderWidth, [], :int],
 
-      # GetRenderHeight : Get current render height (it considers HiDPI)
-      # @return [int]
+      # @!method GetRenderHeight()
+      #   GetRenderHeight : Get current render height (it considers HiDPI)
+      #   @return [int]
       [:GetRenderHeight, :GetRenderHeight, [], :int],
 
-      # GetMonitorCount : Get number of connected monitors
-      # @return [int]
+      # @!method GetMonitorCount()
+      #   GetMonitorCount : Get number of connected monitors
+      #   @return [int]
       [:GetMonitorCount, :GetMonitorCount, [], :int],
 
-      # GetCurrentMonitor : Get current connected monitor
-      # @return [int]
+      # @!method GetCurrentMonitor()
+      #   GetCurrentMonitor : Get current connected monitor
+      #   @return [int]
       [:GetCurrentMonitor, :GetCurrentMonitor, [], :int],
 
-      # GetMonitorPosition : Get specified monitor position
-      # @param monitor [int]
-      # @return [Vector2]
+      # @!method GetMonitorPosition(monitor)
+      #   GetMonitorPosition : Get specified monitor position
+      #   @param monitor [int]
+      #   @return [Vector2]
       [:GetMonitorPosition, :GetMonitorPosition, [:int], Vector2.by_value],
 
-      # GetMonitorWidth : Get specified monitor width (current video mode used by monitor)
-      # @param monitor [int]
-      # @return [int]
+      # @!method GetMonitorWidth(monitor)
+      #   GetMonitorWidth : Get specified monitor width (current video mode used by monitor)
+      #   @param monitor [int]
+      #   @return [int]
       [:GetMonitorWidth, :GetMonitorWidth, [:int], :int],
 
-      # GetMonitorHeight : Get specified monitor height (current video mode used by monitor)
-      # @param monitor [int]
-      # @return [int]
+      # @!method GetMonitorHeight(monitor)
+      #   GetMonitorHeight : Get specified monitor height (current video mode used by monitor)
+      #   @param monitor [int]
+      #   @return [int]
       [:GetMonitorHeight, :GetMonitorHeight, [:int], :int],
 
-      # GetMonitorPhysicalWidth : Get specified monitor physical width in millimetres
-      # @param monitor [int]
-      # @return [int]
+      # @!method GetMonitorPhysicalWidth(monitor)
+      #   GetMonitorPhysicalWidth : Get specified monitor physical width in millimetres
+      #   @param monitor [int]
+      #   @return [int]
       [:GetMonitorPhysicalWidth, :GetMonitorPhysicalWidth, [:int], :int],
 
-      # GetMonitorPhysicalHeight : Get specified monitor physical height in millimetres
-      # @param monitor [int]
-      # @return [int]
+      # @!method GetMonitorPhysicalHeight(monitor)
+      #   GetMonitorPhysicalHeight : Get specified monitor physical height in millimetres
+      #   @param monitor [int]
+      #   @return [int]
       [:GetMonitorPhysicalHeight, :GetMonitorPhysicalHeight, [:int], :int],
 
-      # GetMonitorRefreshRate : Get specified monitor refresh rate
-      # @param monitor [int]
-      # @return [int]
+      # @!method GetMonitorRefreshRate(monitor)
+      #   GetMonitorRefreshRate : Get specified monitor refresh rate
+      #   @param monitor [int]
+      #   @return [int]
       [:GetMonitorRefreshRate, :GetMonitorRefreshRate, [:int], :int],
 
-      # GetWindowPosition : Get window position XY on monitor
-      # @return [Vector2]
+      # @!method GetWindowPosition()
+      #   GetWindowPosition : Get window position XY on monitor
+      #   @return [Vector2]
       [:GetWindowPosition, :GetWindowPosition, [], Vector2.by_value],
 
-      # GetWindowScaleDPI : Get window scale DPI factor
-      # @return [Vector2]
+      # @!method GetWindowScaleDPI()
+      #   GetWindowScaleDPI : Get window scale DPI factor
+      #   @return [Vector2]
       [:GetWindowScaleDPI, :GetWindowScaleDPI, [], Vector2.by_value],
 
-      # GetMonitorName : Get the human-readable, UTF-8 encoded name of the primary monitor
-      # @param monitor [int]
-      # @return [const char *]
+      # @!method GetMonitorName(monitor)
+      #   GetMonitorName : Get the human-readable, UTF-8 encoded name of the primary monitor
+      #   @param monitor [int]
+      #   @return [const char *]
       [:GetMonitorName, :GetMonitorName, [:int], :pointer],
 
-      # SetClipboardText : Set clipboard text content
-      # @param text [const char *]
-      # @return [void]
+      # @!method SetClipboardText(text)
+      #   SetClipboardText : Set clipboard text content
+      #   @param text [const char *]
+      #   @return [void]
       [:SetClipboardText, :SetClipboardText, [:pointer], :void],
 
-      # GetClipboardText : Get clipboard text content
-      # @return [const char *]
+      # @!method GetClipboardText()
+      #   GetClipboardText : Get clipboard text content
+      #   @return [const char *]
       [:GetClipboardText, :GetClipboardText, [], :pointer],
 
-      # EnableEventWaiting : Enable waiting for events on EndDrawing(), no automatic event polling
-      # @return [void]
+      # @!method EnableEventWaiting()
+      #   EnableEventWaiting : Enable waiting for events on EndDrawing(), no automatic event polling
+      #   @return [void]
       [:EnableEventWaiting, :EnableEventWaiting, [], :void],
 
-      # DisableEventWaiting : Disable waiting for events on EndDrawing(), automatic events polling
-      # @return [void]
+      # @!method DisableEventWaiting()
+      #   DisableEventWaiting : Disable waiting for events on EndDrawing(), automatic events polling
+      #   @return [void]
       [:DisableEventWaiting, :DisableEventWaiting, [], :void],
 
-      # SwapScreenBuffer : Swap back buffer with front buffer (screen drawing)
-      # @return [void]
+      # @!method SwapScreenBuffer()
+      #   SwapScreenBuffer : Swap back buffer with front buffer (screen drawing)
+      #   @return [void]
       [:SwapScreenBuffer, :SwapScreenBuffer, [], :void],
 
-      # PollInputEvents : Register all input events
-      # @return [void]
+      # @!method PollInputEvents()
+      #   PollInputEvents : Register all input events
+      #   @return [void]
       [:PollInputEvents, :PollInputEvents, [], :void],
 
-      # WaitTime : Wait for some time (halt program execution)
-      # @param seconds [double]
-      # @return [void]
+      # @!method WaitTime(seconds)
+      #   WaitTime : Wait for some time (halt program execution)
+      #   @param seconds [double]
+      #   @return [void]
       [:WaitTime, :WaitTime, [:double], :void],
 
-      # ShowCursor : Shows cursor
-      # @return [void]
+      # @!method ShowCursor()
+      #   ShowCursor : Shows cursor
+      #   @return [void]
       [:ShowCursor, :ShowCursor, [], :void],
 
-      # HideCursor : Hides cursor
-      # @return [void]
+      # @!method HideCursor()
+      #   HideCursor : Hides cursor
+      #   @return [void]
       [:HideCursor, :HideCursor, [], :void],
 
-      # IsCursorHidden : Check if cursor is not visible
-      # @return [bool]
+      # @!method IsCursorHidden()
+      #   IsCursorHidden : Check if cursor is not visible
+      #   @return [bool]
       [:IsCursorHidden, :IsCursorHidden, [], :bool],
 
-      # EnableCursor : Enables cursor (unlock cursor)
-      # @return [void]
+      # @!method EnableCursor()
+      #   EnableCursor : Enables cursor (unlock cursor)
+      #   @return [void]
       [:EnableCursor, :EnableCursor, [], :void],
 
-      # DisableCursor : Disables cursor (lock cursor)
-      # @return [void]
+      # @!method DisableCursor()
+      #   DisableCursor : Disables cursor (lock cursor)
+      #   @return [void]
       [:DisableCursor, :DisableCursor, [], :void],
 
-      # IsCursorOnScreen : Check if cursor is on the screen
-      # @return [bool]
+      # @!method IsCursorOnScreen()
+      #   IsCursorOnScreen : Check if cursor is on the screen
+      #   @return [bool]
       [:IsCursorOnScreen, :IsCursorOnScreen, [], :bool],
 
-      # ClearBackground : Set background color (framebuffer clear color)
-      # @param color [Color]
-      # @return [void]
+      # @!method ClearBackground(color)
+      #   ClearBackground : Set background color (framebuffer clear color)
+      #   @param color [Color]
+      #   @return [void]
       [:ClearBackground, :ClearBackground, [Color.by_value], :void],
 
-      # BeginDrawing : Setup canvas (framebuffer) to start drawing
-      # @return [void]
+      # @!method BeginDrawing()
+      #   BeginDrawing : Setup canvas (framebuffer) to start drawing
+      #   @return [void]
       [:BeginDrawing, :BeginDrawing, [], :void],
 
-      # EndDrawing : End canvas drawing and swap buffers (double buffering)
-      # @return [void]
+      # @!method EndDrawing()
+      #   EndDrawing : End canvas drawing and swap buffers (double buffering)
+      #   @return [void]
       [:EndDrawing, :EndDrawing, [], :void],
 
-      # BeginMode2D : Begin 2D mode with custom camera (2D)
-      # @param camera [Camera2D]
-      # @return [void]
+      # @!method BeginMode2D(camera)
+      #   BeginMode2D : Begin 2D mode with custom camera (2D)
+      #   @param camera [Camera2D]
+      #   @return [void]
       [:BeginMode2D, :BeginMode2D, [Camera2D.by_value], :void],
 
-      # EndMode2D : Ends 2D mode with custom camera
-      # @return [void]
+      # @!method EndMode2D()
+      #   EndMode2D : Ends 2D mode with custom camera
+      #   @return [void]
       [:EndMode2D, :EndMode2D, [], :void],
 
-      # BeginMode3D : Begin 3D mode with custom camera (3D)
-      # @param camera [Camera3D]
-      # @return [void]
+      # @!method BeginMode3D(camera)
+      #   BeginMode3D : Begin 3D mode with custom camera (3D)
+      #   @param camera [Camera3D]
+      #   @return [void]
       [:BeginMode3D, :BeginMode3D, [Camera3D.by_value], :void],
 
-      # EndMode3D : Ends 3D mode and returns to default 2D orthographic mode
-      # @return [void]
+      # @!method EndMode3D()
+      #   EndMode3D : Ends 3D mode and returns to default 2D orthographic mode
+      #   @return [void]
       [:EndMode3D, :EndMode3D, [], :void],
 
-      # BeginTextureMode : Begin drawing to render texture
-      # @param target [RenderTexture2D]
-      # @return [void]
+      # @!method BeginTextureMode(target)
+      #   BeginTextureMode : Begin drawing to render texture
+      #   @param target [RenderTexture2D]
+      #   @return [void]
       [:BeginTextureMode, :BeginTextureMode, [RenderTexture2D.by_value], :void],
 
-      # EndTextureMode : Ends drawing to render texture
-      # @return [void]
+      # @!method EndTextureMode()
+      #   EndTextureMode : Ends drawing to render texture
+      #   @return [void]
       [:EndTextureMode, :EndTextureMode, [], :void],
 
-      # BeginShaderMode : Begin custom shader drawing
-      # @param shader [Shader]
-      # @return [void]
+      # @!method BeginShaderMode(shader)
+      #   BeginShaderMode : Begin custom shader drawing
+      #   @param shader [Shader]
+      #   @return [void]
       [:BeginShaderMode, :BeginShaderMode, [Shader.by_value], :void],
 
-      # EndShaderMode : End custom shader drawing (use default shader)
-      # @return [void]
+      # @!method EndShaderMode()
+      #   EndShaderMode : End custom shader drawing (use default shader)
+      #   @return [void]
       [:EndShaderMode, :EndShaderMode, [], :void],
 
-      # BeginBlendMode : Begin blending mode (alpha, additive, multiplied, subtract, custom)
-      # @param mode [int]
-      # @return [void]
+      # @!method BeginBlendMode(mode)
+      #   BeginBlendMode : Begin blending mode (alpha, additive, multiplied, subtract, custom)
+      #   @param mode [int]
+      #   @return [void]
       [:BeginBlendMode, :BeginBlendMode, [:int], :void],
 
-      # EndBlendMode : End blending mode (reset to default: alpha blending)
-      # @return [void]
+      # @!method EndBlendMode()
+      #   EndBlendMode : End blending mode (reset to default: alpha blending)
+      #   @return [void]
       [:EndBlendMode, :EndBlendMode, [], :void],
 
-      # BeginScissorMode : Begin scissor mode (define screen area for following drawing)
-      # @param x [int]
-      # @param y [int]
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method BeginScissorMode(x, y, width, height)
+      #   BeginScissorMode : Begin scissor mode (define screen area for following drawing)
+      #   @param x [int]
+      #   @param y [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:BeginScissorMode, :BeginScissorMode, [:int, :int, :int, :int], :void],
 
-      # EndScissorMode : End scissor mode
-      # @return [void]
+      # @!method EndScissorMode()
+      #   EndScissorMode : End scissor mode
+      #   @return [void]
       [:EndScissorMode, :EndScissorMode, [], :void],
 
-      # BeginVrStereoMode : Begin stereo rendering (requires VR simulator)
-      # @param config [VrStereoConfig]
-      # @return [void]
+      # @!method BeginVrStereoMode(config)
+      #   BeginVrStereoMode : Begin stereo rendering (requires VR simulator)
+      #   @param config [VrStereoConfig]
+      #   @return [void]
       [:BeginVrStereoMode, :BeginVrStereoMode, [VrStereoConfig.by_value], :void],
 
-      # EndVrStereoMode : End stereo rendering (requires VR simulator)
-      # @return [void]
+      # @!method EndVrStereoMode()
+      #   EndVrStereoMode : End stereo rendering (requires VR simulator)
+      #   @return [void]
       [:EndVrStereoMode, :EndVrStereoMode, [], :void],
 
-      # LoadVrStereoConfig : Load VR stereo config for VR simulator device parameters
-      # @param device [VrDeviceInfo]
-      # @return [VrStereoConfig]
+      # @!method LoadVrStereoConfig(device)
+      #   LoadVrStereoConfig : Load VR stereo config for VR simulator device parameters
+      #   @param device [VrDeviceInfo]
+      #   @return [VrStereoConfig]
       [:LoadVrStereoConfig, :LoadVrStereoConfig, [VrDeviceInfo.by_value], VrStereoConfig.by_value],
 
-      # UnloadVrStereoConfig : Unload VR stereo config
-      # @param config [VrStereoConfig]
-      # @return [void]
+      # @!method UnloadVrStereoConfig(config)
+      #   UnloadVrStereoConfig : Unload VR stereo config
+      #   @param config [VrStereoConfig]
+      #   @return [void]
       [:UnloadVrStereoConfig, :UnloadVrStereoConfig, [VrStereoConfig.by_value], :void],
 
-      # LoadShader : Load shader from files and bind default locations
-      # @param vsFileName [const char *]
-      # @param fsFileName [const char *]
-      # @return [Shader]
+      # @!method LoadShader(vsFileName, fsFileName)
+      #   LoadShader : Load shader from files and bind default locations
+      #   @param vsFileName [const char *]
+      #   @param fsFileName [const char *]
+      #   @return [Shader]
       [:LoadShader, :LoadShader, [:pointer, :pointer], Shader.by_value],
 
-      # LoadShaderFromMemory : Load shader from code strings and bind default locations
-      # @param vsCode [const char *]
-      # @param fsCode [const char *]
-      # @return [Shader]
+      # @!method LoadShaderFromMemory(vsCode, fsCode)
+      #   LoadShaderFromMemory : Load shader from code strings and bind default locations
+      #   @param vsCode [const char *]
+      #   @param fsCode [const char *]
+      #   @return [Shader]
       [:LoadShaderFromMemory, :LoadShaderFromMemory, [:pointer, :pointer], Shader.by_value],
 
-      # IsShaderReady : Check if a shader is ready
-      # @param shader [Shader]
-      # @return [bool]
+      # @!method IsShaderReady(shader)
+      #   IsShaderReady : Check if a shader is ready
+      #   @param shader [Shader]
+      #   @return [bool]
       [:IsShaderReady, :IsShaderReady, [Shader.by_value], :bool],
 
-      # GetShaderLocation : Get shader uniform location
-      # @param shader [Shader]
-      # @param uniformName [const char *]
-      # @return [int]
+      # @!method GetShaderLocation(shader, uniformName)
+      #   GetShaderLocation : Get shader uniform location
+      #   @param shader [Shader]
+      #   @param uniformName [const char *]
+      #   @return [int]
       [:GetShaderLocation, :GetShaderLocation, [Shader.by_value, :pointer], :int],
 
-      # GetShaderLocationAttrib : Get shader attribute location
-      # @param shader [Shader]
-      # @param attribName [const char *]
-      # @return [int]
+      # @!method GetShaderLocationAttrib(shader, attribName)
+      #   GetShaderLocationAttrib : Get shader attribute location
+      #   @param shader [Shader]
+      #   @param attribName [const char *]
+      #   @return [int]
       [:GetShaderLocationAttrib, :GetShaderLocationAttrib, [Shader.by_value, :pointer], :int],
 
-      # SetShaderValue : Set shader uniform value
-      # @param shader [Shader]
-      # @param locIndex [int]
-      # @param value [const void *]
-      # @param uniformType [int]
-      # @return [void]
+      # @!method SetShaderValue(shader, locIndex, value, uniformType)
+      #   SetShaderValue : Set shader uniform value
+      #   @param shader [Shader]
+      #   @param locIndex [int]
+      #   @param value [const void *]
+      #   @param uniformType [int]
+      #   @return [void]
       [:SetShaderValue, :SetShaderValue, [Shader.by_value, :int, :pointer, :int], :void],
 
-      # SetShaderValueV : Set shader uniform value vector
-      # @param shader [Shader]
-      # @param locIndex [int]
-      # @param value [const void *]
-      # @param uniformType [int]
-      # @param count [int]
-      # @return [void]
+      # @!method SetShaderValueV(shader, locIndex, value, uniformType, count)
+      #   SetShaderValueV : Set shader uniform value vector
+      #   @param shader [Shader]
+      #   @param locIndex [int]
+      #   @param value [const void *]
+      #   @param uniformType [int]
+      #   @param count [int]
+      #   @return [void]
       [:SetShaderValueV, :SetShaderValueV, [Shader.by_value, :int, :pointer, :int, :int], :void],
 
-      # SetShaderValueMatrix : Set shader uniform value (matrix 4x4)
-      # @param shader [Shader]
-      # @param locIndex [int]
-      # @param mat [Matrix]
-      # @return [void]
+      # @!method SetShaderValueMatrix(shader, locIndex, mat)
+      #   SetShaderValueMatrix : Set shader uniform value (matrix 4x4)
+      #   @param shader [Shader]
+      #   @param locIndex [int]
+      #   @param mat [Matrix]
+      #   @return [void]
       [:SetShaderValueMatrix, :SetShaderValueMatrix, [Shader.by_value, :int, Matrix.by_value], :void],
 
-      # SetShaderValueTexture : Set shader uniform value for texture (sampler2d)
-      # @param shader [Shader]
-      # @param locIndex [int]
-      # @param texture [Texture2D]
-      # @return [void]
+      # @!method SetShaderValueTexture(shader, locIndex, texture)
+      #   SetShaderValueTexture : Set shader uniform value for texture (sampler2d)
+      #   @param shader [Shader]
+      #   @param locIndex [int]
+      #   @param texture [Texture2D]
+      #   @return [void]
       [:SetShaderValueTexture, :SetShaderValueTexture, [Shader.by_value, :int, Texture2D.by_value], :void],
 
-      # UnloadShader : Unload shader from GPU memory (VRAM)
-      # @param shader [Shader]
-      # @return [void]
+      # @!method UnloadShader(shader)
+      #   UnloadShader : Unload shader from GPU memory (VRAM)
+      #   @param shader [Shader]
+      #   @return [void]
       [:UnloadShader, :UnloadShader, [Shader.by_value], :void],
 
-      # GetMouseRay : Get a ray trace from mouse position
-      # @param mousePosition [Vector2]
-      # @param camera [Camera]
-      # @return [Ray]
+      # @!method GetMouseRay(mousePosition, camera)
+      #   GetMouseRay : Get a ray trace from mouse position
+      #   @param mousePosition [Vector2]
+      #   @param camera [Camera]
+      #   @return [Ray]
       [:GetMouseRay, :GetMouseRay, [Vector2.by_value, Camera.by_value], Ray.by_value],
 
-      # GetCameraMatrix : Get camera transform matrix (view matrix)
-      # @param camera [Camera]
-      # @return [Matrix]
+      # @!method GetCameraMatrix(camera)
+      #   GetCameraMatrix : Get camera transform matrix (view matrix)
+      #   @param camera [Camera]
+      #   @return [Matrix]
       [:GetCameraMatrix, :GetCameraMatrix, [Camera.by_value], Matrix.by_value],
 
-      # GetCameraMatrix2D : Get camera 2d transform matrix
-      # @param camera [Camera2D]
-      # @return [Matrix]
+      # @!method GetCameraMatrix2D(camera)
+      #   GetCameraMatrix2D : Get camera 2d transform matrix
+      #   @param camera [Camera2D]
+      #   @return [Matrix]
       [:GetCameraMatrix2D, :GetCameraMatrix2D, [Camera2D.by_value], Matrix.by_value],
 
-      # GetWorldToScreen : Get the screen space position for a 3d world space position
-      # @param position [Vector3]
-      # @param camera [Camera]
-      # @return [Vector2]
+      # @!method GetWorldToScreen(position, camera)
+      #   GetWorldToScreen : Get the screen space position for a 3d world space position
+      #   @param position [Vector3]
+      #   @param camera [Camera]
+      #   @return [Vector2]
       [:GetWorldToScreen, :GetWorldToScreen, [Vector3.by_value, Camera.by_value], Vector2.by_value],
 
-      # GetScreenToWorld2D : Get the world space position for a 2d camera screen space position
-      # @param position [Vector2]
-      # @param camera [Camera2D]
-      # @return [Vector2]
+      # @!method GetScreenToWorld2D(position, camera)
+      #   GetScreenToWorld2D : Get the world space position for a 2d camera screen space position
+      #   @param position [Vector2]
+      #   @param camera [Camera2D]
+      #   @return [Vector2]
       [:GetScreenToWorld2D, :GetScreenToWorld2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
 
-      # GetWorldToScreenEx : Get size position for a 3d world space position
-      # @param position [Vector3]
-      # @param camera [Camera]
-      # @param width [int]
-      # @param height [int]
-      # @return [Vector2]
+      # @!method GetWorldToScreenEx(position, camera, width, height)
+      #   GetWorldToScreenEx : Get size position for a 3d world space position
+      #   @param position [Vector3]
+      #   @param camera [Camera]
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [Vector2]
       [:GetWorldToScreenEx, :GetWorldToScreenEx, [Vector3.by_value, Camera.by_value, :int, :int], Vector2.by_value],
 
-      # GetWorldToScreen2D : Get the screen space position for a 2d camera world space position
-      # @param position [Vector2]
-      # @param camera [Camera2D]
-      # @return [Vector2]
+      # @!method GetWorldToScreen2D(position, camera)
+      #   GetWorldToScreen2D : Get the screen space position for a 2d camera world space position
+      #   @param position [Vector2]
+      #   @param camera [Camera2D]
+      #   @return [Vector2]
       [:GetWorldToScreen2D, :GetWorldToScreen2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
 
-      # SetTargetFPS : Set target FPS (maximum)
-      # @param fps [int]
-      # @return [void]
+      # @!method SetTargetFPS(fps)
+      #   SetTargetFPS : Set target FPS (maximum)
+      #   @param fps [int]
+      #   @return [void]
       [:SetTargetFPS, :SetTargetFPS, [:int], :void],
 
-      # GetFPS : Get current FPS
-      # @return [int]
+      # @!method GetFPS()
+      #   GetFPS : Get current FPS
+      #   @return [int]
       [:GetFPS, :GetFPS, [], :int],
 
-      # GetFrameTime : Get time in seconds for last frame drawn (delta time)
-      # @return [float]
+      # @!method GetFrameTime()
+      #   GetFrameTime : Get time in seconds for last frame drawn (delta time)
+      #   @return [float]
       [:GetFrameTime, :GetFrameTime, [], :float],
 
-      # GetTime : Get elapsed time in seconds since InitWindow()
-      # @return [double]
+      # @!method GetTime()
+      #   GetTime : Get elapsed time in seconds since InitWindow()
+      #   @return [double]
       [:GetTime, :GetTime, [], :double],
 
-      # GetRandomValue : Get a random value between min and max (both included)
-      # @param min [int]
-      # @param max [int]
-      # @return [int]
+      # @!method GetRandomValue(min, max)
+      #   GetRandomValue : Get a random value between min and max (both included)
+      #   @param min [int]
+      #   @param max [int]
+      #   @return [int]
       [:GetRandomValue, :GetRandomValue, [:int, :int], :int],
 
-      # SetRandomSeed : Set the seed for the random number generator
-      # @param seed [unsigned int]
-      # @return [void]
+      # @!method SetRandomSeed(seed)
+      #   SetRandomSeed : Set the seed for the random number generator
+      #   @param seed [unsigned int]
+      #   @return [void]
       [:SetRandomSeed, :SetRandomSeed, [:uint], :void],
 
-      # TakeScreenshot : Takes a screenshot of current screen (filename extension defines format)
-      # @param fileName [const char *]
-      # @return [void]
+      # @!method TakeScreenshot(fileName)
+      #   TakeScreenshot : Takes a screenshot of current screen (filename extension defines format)
+      #   @param fileName [const char *]
+      #   @return [void]
       [:TakeScreenshot, :TakeScreenshot, [:pointer], :void],
 
-      # SetConfigFlags : Setup init configuration flags (view FLAGS)
-      # @param flags [unsigned int]
-      # @return [void]
+      # @!method SetConfigFlags(flags)
+      #   SetConfigFlags : Setup init configuration flags (view FLAGS)
+      #   @param flags [unsigned int]
+      #   @return [void]
       [:SetConfigFlags, :SetConfigFlags, [:uint], :void],
 
-      # TraceLog : Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...)
-      # @param logLevel [int]
-      # @param text [const char *]
-      # @param args [...]
-      # @return [void]
+      # @!method TraceLog(logLevel, text, ...)
+      #   TraceLog : Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...)
+      #   @param logLevel [int]
+      #   @param text [const char *]
+      #   @param args [...]
+      #   @return [void]
       [:TraceLog, :TraceLog, [:int, :pointer, :varargs], :void],
 
-      # SetTraceLogLevel : Set the current threshold (minimum) log level
-      # @param logLevel [int]
-      # @return [void]
+      # @!method SetTraceLogLevel(logLevel)
+      #   SetTraceLogLevel : Set the current threshold (minimum) log level
+      #   @param logLevel [int]
+      #   @return [void]
       [:SetTraceLogLevel, :SetTraceLogLevel, [:int], :void],
 
-      # MemAlloc : Internal memory allocator
-      # @param size [unsigned int]
-      # @return [void *]
+      # @!method MemAlloc(size)
+      #   MemAlloc : Internal memory allocator
+      #   @param size [unsigned int]
+      #   @return [void *]
       [:MemAlloc, :MemAlloc, [:uint], :pointer],
 
-      # MemRealloc : Internal memory reallocator
-      # @param ptr [void *]
-      # @param size [unsigned int]
-      # @return [void *]
+      # @!method MemRealloc(ptr, size)
+      #   MemRealloc : Internal memory reallocator
+      #   @param ptr [void *]
+      #   @param size [unsigned int]
+      #   @return [void *]
       [:MemRealloc, :MemRealloc, [:pointer, :uint], :pointer],
 
-      # MemFree : Internal memory free
-      # @param ptr [void *]
-      # @return [void]
+      # @!method MemFree(ptr)
+      #   MemFree : Internal memory free
+      #   @param ptr [void *]
+      #   @return [void]
       [:MemFree, :MemFree, [:pointer], :void],
 
-      # OpenURL : Open URL with default system browser (if available)
-      # @param url [const char *]
-      # @return [void]
+      # @!method OpenURL(url)
+      #   OpenURL : Open URL with default system browser (if available)
+      #   @param url [const char *]
+      #   @return [void]
       [:OpenURL, :OpenURL, [:pointer], :void],
 
-      # SetTraceLogCallback : Set custom trace log
-      # @param callback [TraceLogCallback]
-      # @return [void]
+      # @!method SetTraceLogCallback(callback)
+      #   SetTraceLogCallback : Set custom trace log
+      #   @param callback [TraceLogCallback]
+      #   @return [void]
       [:SetTraceLogCallback, :SetTraceLogCallback, [:TraceLogCallback], :void],
 
-      # SetLoadFileDataCallback : Set custom file binary data loader
-      # @param callback [LoadFileDataCallback]
-      # @return [void]
+      # @!method SetLoadFileDataCallback(callback)
+      #   SetLoadFileDataCallback : Set custom file binary data loader
+      #   @param callback [LoadFileDataCallback]
+      #   @return [void]
       [:SetLoadFileDataCallback, :SetLoadFileDataCallback, [:LoadFileDataCallback], :void],
 
-      # SetSaveFileDataCallback : Set custom file binary data saver
-      # @param callback [SaveFileDataCallback]
-      # @return [void]
+      # @!method SetSaveFileDataCallback(callback)
+      #   SetSaveFileDataCallback : Set custom file binary data saver
+      #   @param callback [SaveFileDataCallback]
+      #   @return [void]
       [:SetSaveFileDataCallback, :SetSaveFileDataCallback, [:SaveFileDataCallback], :void],
 
-      # SetLoadFileTextCallback : Set custom file text data loader
-      # @param callback [LoadFileTextCallback]
-      # @return [void]
+      # @!method SetLoadFileTextCallback(callback)
+      #   SetLoadFileTextCallback : Set custom file text data loader
+      #   @param callback [LoadFileTextCallback]
+      #   @return [void]
       [:SetLoadFileTextCallback, :SetLoadFileTextCallback, [:LoadFileTextCallback], :void],
 
-      # SetSaveFileTextCallback : Set custom file text data saver
-      # @param callback [SaveFileTextCallback]
-      # @return [void]
+      # @!method SetSaveFileTextCallback(callback)
+      #   SetSaveFileTextCallback : Set custom file text data saver
+      #   @param callback [SaveFileTextCallback]
+      #   @return [void]
       [:SetSaveFileTextCallback, :SetSaveFileTextCallback, [:SaveFileTextCallback], :void],
 
-      # LoadFileData : Load file data as byte array (read)
-      # @param fileName [const char *]
-      # @param bytesRead [unsigned int *]
-      # @return [unsigned char *]
+      # @!method LoadFileData(fileName, bytesRead)
+      #   LoadFileData : Load file data as byte array (read)
+      #   @param fileName [const char *]
+      #   @param bytesRead [unsigned int *]
+      #   @return [unsigned char *]
       [:LoadFileData, :LoadFileData, [:pointer, :pointer], :pointer],
 
-      # UnloadFileData : Unload file data allocated by LoadFileData()
-      # @param data [unsigned char *]
-      # @return [void]
+      # @!method UnloadFileData(data)
+      #   UnloadFileData : Unload file data allocated by LoadFileData()
+      #   @param data [unsigned char *]
+      #   @return [void]
       [:UnloadFileData, :UnloadFileData, [:pointer], :void],
 
-      # SaveFileData : Save data to file from byte array (write), returns true on success
-      # @param fileName [const char *]
-      # @param data [void *]
-      # @param bytesToWrite [unsigned int]
-      # @return [bool]
+      # @!method SaveFileData(fileName, data, bytesToWrite)
+      #   SaveFileData : Save data to file from byte array (write), returns true on success
+      #   @param fileName [const char *]
+      #   @param data [void *]
+      #   @param bytesToWrite [unsigned int]
+      #   @return [bool]
       [:SaveFileData, :SaveFileData, [:pointer, :pointer, :uint], :bool],
 
-      # ExportDataAsCode : Export data to code (.h), returns true on success
-      # @param data [const unsigned char *]
-      # @param size [unsigned int]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportDataAsCode(data, size, fileName)
+      #   ExportDataAsCode : Export data to code (.h), returns true on success
+      #   @param data [const unsigned char *]
+      #   @param size [unsigned int]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportDataAsCode, :ExportDataAsCode, [:pointer, :uint, :pointer], :bool],
 
-      # LoadFileText : Load text data from file (read), returns a '\0' terminated string
-      # @param fileName [const char *]
-      # @return [char *]
+      # @!method LoadFileText(fileName)
+      #   LoadFileText : Load text data from file (read), returns a '\0' terminated string
+      #   @param fileName [const char *]
+      #   @return [char *]
       [:LoadFileText, :LoadFileText, [:pointer], :pointer],
 
-      # UnloadFileText : Unload file text data allocated by LoadFileText()
-      # @param text [char *]
-      # @return [void]
+      # @!method UnloadFileText(text)
+      #   UnloadFileText : Unload file text data allocated by LoadFileText()
+      #   @param text [char *]
+      #   @return [void]
       [:UnloadFileText, :UnloadFileText, [:pointer], :void],
 
-      # SaveFileText : Save text data to file (write), string must be '\0' terminated, returns true on success
-      # @param fileName [const char *]
-      # @param text [char *]
-      # @return [bool]
+      # @!method SaveFileText(fileName, text)
+      #   SaveFileText : Save text data to file (write), string must be '\0' terminated, returns true on success
+      #   @param fileName [const char *]
+      #   @param text [char *]
+      #   @return [bool]
       [:SaveFileText, :SaveFileText, [:pointer, :pointer], :bool],
 
-      # FileExists : Check if file exists
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method FileExists(fileName)
+      #   FileExists : Check if file exists
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:FileExists, :FileExists, [:pointer], :bool],
 
-      # DirectoryExists : Check if a directory path exists
-      # @param dirPath [const char *]
-      # @return [bool]
+      # @!method DirectoryExists(dirPath)
+      #   DirectoryExists : Check if a directory path exists
+      #   @param dirPath [const char *]
+      #   @return [bool]
       [:DirectoryExists, :DirectoryExists, [:pointer], :bool],
 
-      # IsFileExtension : Check file extension (including point: .png, .wav)
-      # @param fileName [const char *]
-      # @param ext [const char *]
-      # @return [bool]
+      # @!method IsFileExtension(fileName, ext)
+      #   IsFileExtension : Check file extension (including point: .png, .wav)
+      #   @param fileName [const char *]
+      #   @param ext [const char *]
+      #   @return [bool]
       [:IsFileExtension, :IsFileExtension, [:pointer, :pointer], :bool],
 
-      # GetFileLength : Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
-      # @param fileName [const char *]
-      # @return [int]
+      # @!method GetFileLength(fileName)
+      #   GetFileLength : Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
+      #   @param fileName [const char *]
+      #   @return [int]
       [:GetFileLength, :GetFileLength, [:pointer], :int],
 
-      # GetFileExtension : Get pointer to extension for a filename string (includes dot: '.png')
-      # @param fileName [const char *]
-      # @return [const char *]
+      # @!method GetFileExtension(fileName)
+      #   GetFileExtension : Get pointer to extension for a filename string (includes dot: '.png')
+      #   @param fileName [const char *]
+      #   @return [const char *]
       [:GetFileExtension, :GetFileExtension, [:pointer], :pointer],
 
-      # GetFileName : Get pointer to filename for a path string
-      # @param filePath [const char *]
-      # @return [const char *]
+      # @!method GetFileName(filePath)
+      #   GetFileName : Get pointer to filename for a path string
+      #   @param filePath [const char *]
+      #   @return [const char *]
       [:GetFileName, :GetFileName, [:pointer], :pointer],
 
-      # GetFileNameWithoutExt : Get filename string without extension (uses static string)
-      # @param filePath [const char *]
-      # @return [const char *]
+      # @!method GetFileNameWithoutExt(filePath)
+      #   GetFileNameWithoutExt : Get filename string without extension (uses static string)
+      #   @param filePath [const char *]
+      #   @return [const char *]
       [:GetFileNameWithoutExt, :GetFileNameWithoutExt, [:pointer], :pointer],
 
-      # GetDirectoryPath : Get full path for a given fileName with path (uses static string)
-      # @param filePath [const char *]
-      # @return [const char *]
+      # @!method GetDirectoryPath(filePath)
+      #   GetDirectoryPath : Get full path for a given fileName with path (uses static string)
+      #   @param filePath [const char *]
+      #   @return [const char *]
       [:GetDirectoryPath, :GetDirectoryPath, [:pointer], :pointer],
 
-      # GetPrevDirectoryPath : Get previous directory path for a given path (uses static string)
-      # @param dirPath [const char *]
-      # @return [const char *]
+      # @!method GetPrevDirectoryPath(dirPath)
+      #   GetPrevDirectoryPath : Get previous directory path for a given path (uses static string)
+      #   @param dirPath [const char *]
+      #   @return [const char *]
       [:GetPrevDirectoryPath, :GetPrevDirectoryPath, [:pointer], :pointer],
 
-      # GetWorkingDirectory : Get current working directory (uses static string)
-      # @return [const char *]
+      # @!method GetWorkingDirectory()
+      #   GetWorkingDirectory : Get current working directory (uses static string)
+      #   @return [const char *]
       [:GetWorkingDirectory, :GetWorkingDirectory, [], :pointer],
 
-      # GetApplicationDirectory : Get the directory if the running application (uses static string)
-      # @return [const char *]
+      # @!method GetApplicationDirectory()
+      #   GetApplicationDirectory : Get the directory if the running application (uses static string)
+      #   @return [const char *]
       [:GetApplicationDirectory, :GetApplicationDirectory, [], :pointer],
 
-      # ChangeDirectory : Change working directory, return true on success
-      # @param dir [const char *]
-      # @return [bool]
+      # @!method ChangeDirectory(dir)
+      #   ChangeDirectory : Change working directory, return true on success
+      #   @param dir [const char *]
+      #   @return [bool]
       [:ChangeDirectory, :ChangeDirectory, [:pointer], :bool],
 
-      # IsPathFile : Check if a given path is a file or a directory
-      # @param path [const char *]
-      # @return [bool]
+      # @!method IsPathFile(path)
+      #   IsPathFile : Check if a given path is a file or a directory
+      #   @param path [const char *]
+      #   @return [bool]
       [:IsPathFile, :IsPathFile, [:pointer], :bool],
 
-      # LoadDirectoryFiles : Load directory filepaths
-      # @param dirPath [const char *]
-      # @return [FilePathList]
+      # @!method LoadDirectoryFiles(dirPath)
+      #   LoadDirectoryFiles : Load directory filepaths
+      #   @param dirPath [const char *]
+      #   @return [FilePathList]
       [:LoadDirectoryFiles, :LoadDirectoryFiles, [:pointer], FilePathList.by_value],
 
-      # LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan
-      # @param basePath [const char *]
-      # @param filter [const char *]
-      # @param scanSubdirs [bool]
-      # @return [FilePathList]
+      # @!method LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
+      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan
+      #   @param basePath [const char *]
+      #   @param filter [const char *]
+      #   @param scanSubdirs [bool]
+      #   @return [FilePathList]
       [:LoadDirectoryFilesEx, :LoadDirectoryFilesEx, [:pointer, :pointer, :bool], FilePathList.by_value],
 
-      # UnloadDirectoryFiles : Unload filepaths
-      # @param files [FilePathList]
-      # @return [void]
+      # @!method UnloadDirectoryFiles(files)
+      #   UnloadDirectoryFiles : Unload filepaths
+      #   @param files [FilePathList]
+      #   @return [void]
       [:UnloadDirectoryFiles, :UnloadDirectoryFiles, [FilePathList.by_value], :void],
 
-      # IsFileDropped : Check if a file has been dropped into window
-      # @return [bool]
+      # @!method IsFileDropped()
+      #   IsFileDropped : Check if a file has been dropped into window
+      #   @return [bool]
       [:IsFileDropped, :IsFileDropped, [], :bool],
 
-      # LoadDroppedFiles : Load dropped filepaths
-      # @return [FilePathList]
+      # @!method LoadDroppedFiles()
+      #   LoadDroppedFiles : Load dropped filepaths
+      #   @return [FilePathList]
       [:LoadDroppedFiles, :LoadDroppedFiles, [], FilePathList.by_value],
 
-      # UnloadDroppedFiles : Unload dropped filepaths
-      # @param files [FilePathList]
-      # @return [void]
+      # @!method UnloadDroppedFiles(files)
+      #   UnloadDroppedFiles : Unload dropped filepaths
+      #   @param files [FilePathList]
+      #   @return [void]
       [:UnloadDroppedFiles, :UnloadDroppedFiles, [FilePathList.by_value], :void],
 
-      # GetFileModTime : Get file modification time (last write time)
-      # @param fileName [const char *]
-      # @return [long]
+      # @!method GetFileModTime(fileName)
+      #   GetFileModTime : Get file modification time (last write time)
+      #   @param fileName [const char *]
+      #   @return [long]
       [:GetFileModTime, :GetFileModTime, [:pointer], :long],
 
-      # CompressData : Compress data (DEFLATE algorithm), memory must be MemFree()
-      # @param data [const unsigned char *]
-      # @param dataSize [int]
-      # @param compDataSize [int *]
-      # @return [unsigned char *]
+      # @!method CompressData(data, dataSize, compDataSize)
+      #   CompressData : Compress data (DEFLATE algorithm), memory must be MemFree()
+      #   @param data [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param compDataSize [int *]
+      #   @return [unsigned char *]
       [:CompressData, :CompressData, [:pointer, :int, :pointer], :pointer],
 
-      # DecompressData : Decompress data (DEFLATE algorithm), memory must be MemFree()
-      # @param compData [const unsigned char *]
-      # @param compDataSize [int]
-      # @param dataSize [int *]
-      # @return [unsigned char *]
+      # @!method DecompressData(compData, compDataSize, dataSize)
+      #   DecompressData : Decompress data (DEFLATE algorithm), memory must be MemFree()
+      #   @param compData [const unsigned char *]
+      #   @param compDataSize [int]
+      #   @param dataSize [int *]
+      #   @return [unsigned char *]
       [:DecompressData, :DecompressData, [:pointer, :int, :pointer], :pointer],
 
-      # EncodeDataBase64 : Encode data to Base64 string, memory must be MemFree()
-      # @param data [const unsigned char *]
-      # @param dataSize [int]
-      # @param outputSize [int *]
-      # @return [char *]
+      # @!method EncodeDataBase64(data, dataSize, outputSize)
+      #   EncodeDataBase64 : Encode data to Base64 string, memory must be MemFree()
+      #   @param data [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param outputSize [int *]
+      #   @return [char *]
       [:EncodeDataBase64, :EncodeDataBase64, [:pointer, :int, :pointer], :pointer],
 
-      # DecodeDataBase64 : Decode Base64 string data, memory must be MemFree()
-      # @param data [const unsigned char *]
-      # @param outputSize [int *]
-      # @return [unsigned char *]
+      # @!method DecodeDataBase64(data, outputSize)
+      #   DecodeDataBase64 : Decode Base64 string data, memory must be MemFree()
+      #   @param data [const unsigned char *]
+      #   @param outputSize [int *]
+      #   @return [unsigned char *]
       [:DecodeDataBase64, :DecodeDataBase64, [:pointer, :pointer], :pointer],
 
-      # IsKeyPressed : Check if a key has been pressed once
-      # @param key [int]
-      # @return [bool]
+      # @!method IsKeyPressed(key)
+      #   IsKeyPressed : Check if a key has been pressed once
+      #   @param key [int]
+      #   @return [bool]
       [:IsKeyPressed, :IsKeyPressed, [:int], :bool],
 
-      # IsKeyDown : Check if a key is being pressed
-      # @param key [int]
-      # @return [bool]
+      # @!method IsKeyDown(key)
+      #   IsKeyDown : Check if a key is being pressed
+      #   @param key [int]
+      #   @return [bool]
       [:IsKeyDown, :IsKeyDown, [:int], :bool],
 
-      # IsKeyReleased : Check if a key has been released once
-      # @param key [int]
-      # @return [bool]
+      # @!method IsKeyReleased(key)
+      #   IsKeyReleased : Check if a key has been released once
+      #   @param key [int]
+      #   @return [bool]
       [:IsKeyReleased, :IsKeyReleased, [:int], :bool],
 
-      # IsKeyUp : Check if a key is NOT being pressed
-      # @param key [int]
-      # @return [bool]
+      # @!method IsKeyUp(key)
+      #   IsKeyUp : Check if a key is NOT being pressed
+      #   @param key [int]
+      #   @return [bool]
       [:IsKeyUp, :IsKeyUp, [:int], :bool],
 
-      # SetExitKey : Set a custom key to exit program (default is ESC)
-      # @param key [int]
-      # @return [void]
+      # @!method SetExitKey(key)
+      #   SetExitKey : Set a custom key to exit program (default is ESC)
+      #   @param key [int]
+      #   @return [void]
       [:SetExitKey, :SetExitKey, [:int], :void],
 
-      # GetKeyPressed : Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
-      # @return [int]
+      # @!method GetKeyPressed()
+      #   GetKeyPressed : Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
+      #   @return [int]
       [:GetKeyPressed, :GetKeyPressed, [], :int],
 
-      # GetCharPressed : Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
-      # @return [int]
+      # @!method GetCharPressed()
+      #   GetCharPressed : Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
+      #   @return [int]
       [:GetCharPressed, :GetCharPressed, [], :int],
 
-      # IsGamepadAvailable : Check if a gamepad is available
-      # @param gamepad [int]
-      # @return [bool]
+      # @!method IsGamepadAvailable(gamepad)
+      #   IsGamepadAvailable : Check if a gamepad is available
+      #   @param gamepad [int]
+      #   @return [bool]
       [:IsGamepadAvailable, :IsGamepadAvailable, [:int], :bool],
 
-      # GetGamepadName : Get gamepad internal name id
-      # @param gamepad [int]
-      # @return [const char *]
+      # @!method GetGamepadName(gamepad)
+      #   GetGamepadName : Get gamepad internal name id
+      #   @param gamepad [int]
+      #   @return [const char *]
       [:GetGamepadName, :GetGamepadName, [:int], :pointer],
 
-      # IsGamepadButtonPressed : Check if a gamepad button has been pressed once
-      # @param gamepad [int]
-      # @param button [int]
-      # @return [bool]
+      # @!method IsGamepadButtonPressed(gamepad, button)
+      #   IsGamepadButtonPressed : Check if a gamepad button has been pressed once
+      #   @param gamepad [int]
+      #   @param button [int]
+      #   @return [bool]
       [:IsGamepadButtonPressed, :IsGamepadButtonPressed, [:int, :int], :bool],
 
-      # IsGamepadButtonDown : Check if a gamepad button is being pressed
-      # @param gamepad [int]
-      # @param button [int]
-      # @return [bool]
+      # @!method IsGamepadButtonDown(gamepad, button)
+      #   IsGamepadButtonDown : Check if a gamepad button is being pressed
+      #   @param gamepad [int]
+      #   @param button [int]
+      #   @return [bool]
       [:IsGamepadButtonDown, :IsGamepadButtonDown, [:int, :int], :bool],
 
-      # IsGamepadButtonReleased : Check if a gamepad button has been released once
-      # @param gamepad [int]
-      # @param button [int]
-      # @return [bool]
+      # @!method IsGamepadButtonReleased(gamepad, button)
+      #   IsGamepadButtonReleased : Check if a gamepad button has been released once
+      #   @param gamepad [int]
+      #   @param button [int]
+      #   @return [bool]
       [:IsGamepadButtonReleased, :IsGamepadButtonReleased, [:int, :int], :bool],
 
-      # IsGamepadButtonUp : Check if a gamepad button is NOT being pressed
-      # @param gamepad [int]
-      # @param button [int]
-      # @return [bool]
+      # @!method IsGamepadButtonUp(gamepad, button)
+      #   IsGamepadButtonUp : Check if a gamepad button is NOT being pressed
+      #   @param gamepad [int]
+      #   @param button [int]
+      #   @return [bool]
       [:IsGamepadButtonUp, :IsGamepadButtonUp, [:int, :int], :bool],
 
-      # GetGamepadButtonPressed : Get the last gamepad button pressed
-      # @return [int]
+      # @!method GetGamepadButtonPressed()
+      #   GetGamepadButtonPressed : Get the last gamepad button pressed
+      #   @return [int]
       [:GetGamepadButtonPressed, :GetGamepadButtonPressed, [], :int],
 
-      # GetGamepadAxisCount : Get gamepad axis count for a gamepad
-      # @param gamepad [int]
-      # @return [int]
+      # @!method GetGamepadAxisCount(gamepad)
+      #   GetGamepadAxisCount : Get gamepad axis count for a gamepad
+      #   @param gamepad [int]
+      #   @return [int]
       [:GetGamepadAxisCount, :GetGamepadAxisCount, [:int], :int],
 
-      # GetGamepadAxisMovement : Get axis movement value for a gamepad axis
-      # @param gamepad [int]
-      # @param axis [int]
-      # @return [float]
+      # @!method GetGamepadAxisMovement(gamepad, axis)
+      #   GetGamepadAxisMovement : Get axis movement value for a gamepad axis
+      #   @param gamepad [int]
+      #   @param axis [int]
+      #   @return [float]
       [:GetGamepadAxisMovement, :GetGamepadAxisMovement, [:int, :int], :float],
 
-      # SetGamepadMappings : Set internal gamepad mappings (SDL_GameControllerDB)
-      # @param mappings [const char *]
-      # @return [int]
+      # @!method SetGamepadMappings(mappings)
+      #   SetGamepadMappings : Set internal gamepad mappings (SDL_GameControllerDB)
+      #   @param mappings [const char *]
+      #   @return [int]
       [:SetGamepadMappings, :SetGamepadMappings, [:pointer], :int],
 
-      # IsMouseButtonPressed : Check if a mouse button has been pressed once
-      # @param button [int]
-      # @return [bool]
+      # @!method IsMouseButtonPressed(button)
+      #   IsMouseButtonPressed : Check if a mouse button has been pressed once
+      #   @param button [int]
+      #   @return [bool]
       [:IsMouseButtonPressed, :IsMouseButtonPressed, [:int], :bool],
 
-      # IsMouseButtonDown : Check if a mouse button is being pressed
-      # @param button [int]
-      # @return [bool]
+      # @!method IsMouseButtonDown(button)
+      #   IsMouseButtonDown : Check if a mouse button is being pressed
+      #   @param button [int]
+      #   @return [bool]
       [:IsMouseButtonDown, :IsMouseButtonDown, [:int], :bool],
 
-      # IsMouseButtonReleased : Check if a mouse button has been released once
-      # @param button [int]
-      # @return [bool]
+      # @!method IsMouseButtonReleased(button)
+      #   IsMouseButtonReleased : Check if a mouse button has been released once
+      #   @param button [int]
+      #   @return [bool]
       [:IsMouseButtonReleased, :IsMouseButtonReleased, [:int], :bool],
 
-      # IsMouseButtonUp : Check if a mouse button is NOT being pressed
-      # @param button [int]
-      # @return [bool]
+      # @!method IsMouseButtonUp(button)
+      #   IsMouseButtonUp : Check if a mouse button is NOT being pressed
+      #   @param button [int]
+      #   @return [bool]
       [:IsMouseButtonUp, :IsMouseButtonUp, [:int], :bool],
 
-      # GetMouseX : Get mouse position X
-      # @return [int]
+      # @!method GetMouseX()
+      #   GetMouseX : Get mouse position X
+      #   @return [int]
       [:GetMouseX, :GetMouseX, [], :int],
 
-      # GetMouseY : Get mouse position Y
-      # @return [int]
+      # @!method GetMouseY()
+      #   GetMouseY : Get mouse position Y
+      #   @return [int]
       [:GetMouseY, :GetMouseY, [], :int],
 
-      # GetMousePosition : Get mouse position XY
-      # @return [Vector2]
+      # @!method GetMousePosition()
+      #   GetMousePosition : Get mouse position XY
+      #   @return [Vector2]
       [:GetMousePosition, :GetMousePosition, [], Vector2.by_value],
 
-      # GetMouseDelta : Get mouse delta between frames
-      # @return [Vector2]
+      # @!method GetMouseDelta()
+      #   GetMouseDelta : Get mouse delta between frames
+      #   @return [Vector2]
       [:GetMouseDelta, :GetMouseDelta, [], Vector2.by_value],
 
-      # SetMousePosition : Set mouse position XY
-      # @param x [int]
-      # @param y [int]
-      # @return [void]
+      # @!method SetMousePosition(x, y)
+      #   SetMousePosition : Set mouse position XY
+      #   @param x [int]
+      #   @param y [int]
+      #   @return [void]
       [:SetMousePosition, :SetMousePosition, [:int, :int], :void],
 
-      # SetMouseOffset : Set mouse offset
-      # @param offsetX [int]
-      # @param offsetY [int]
-      # @return [void]
+      # @!method SetMouseOffset(offsetX, offsetY)
+      #   SetMouseOffset : Set mouse offset
+      #   @param offsetX [int]
+      #   @param offsetY [int]
+      #   @return [void]
       [:SetMouseOffset, :SetMouseOffset, [:int, :int], :void],
 
-      # SetMouseScale : Set mouse scaling
-      # @param scaleX [float]
-      # @param scaleY [float]
-      # @return [void]
+      # @!method SetMouseScale(scaleX, scaleY)
+      #   SetMouseScale : Set mouse scaling
+      #   @param scaleX [float]
+      #   @param scaleY [float]
+      #   @return [void]
       [:SetMouseScale, :SetMouseScale, [:float, :float], :void],
 
-      # GetMouseWheelMove : Get mouse wheel movement for X or Y, whichever is larger
-      # @return [float]
+      # @!method GetMouseWheelMove()
+      #   GetMouseWheelMove : Get mouse wheel movement for X or Y, whichever is larger
+      #   @return [float]
       [:GetMouseWheelMove, :GetMouseWheelMove, [], :float],
 
-      # GetMouseWheelMoveV : Get mouse wheel movement for both X and Y
-      # @return [Vector2]
+      # @!method GetMouseWheelMoveV()
+      #   GetMouseWheelMoveV : Get mouse wheel movement for both X and Y
+      #   @return [Vector2]
       [:GetMouseWheelMoveV, :GetMouseWheelMoveV, [], Vector2.by_value],
 
-      # SetMouseCursor : Set mouse cursor
-      # @param cursor [int]
-      # @return [void]
+      # @!method SetMouseCursor(cursor)
+      #   SetMouseCursor : Set mouse cursor
+      #   @param cursor [int]
+      #   @return [void]
       [:SetMouseCursor, :SetMouseCursor, [:int], :void],
 
-      # GetTouchX : Get touch position X for touch point 0 (relative to screen size)
-      # @return [int]
+      # @!method GetTouchX()
+      #   GetTouchX : Get touch position X for touch point 0 (relative to screen size)
+      #   @return [int]
       [:GetTouchX, :GetTouchX, [], :int],
 
-      # GetTouchY : Get touch position Y for touch point 0 (relative to screen size)
-      # @return [int]
+      # @!method GetTouchY()
+      #   GetTouchY : Get touch position Y for touch point 0 (relative to screen size)
+      #   @return [int]
       [:GetTouchY, :GetTouchY, [], :int],
 
-      # GetTouchPosition : Get touch position XY for a touch point index (relative to screen size)
-      # @param index [int]
-      # @return [Vector2]
+      # @!method GetTouchPosition(index)
+      #   GetTouchPosition : Get touch position XY for a touch point index (relative to screen size)
+      #   @param index [int]
+      #   @return [Vector2]
       [:GetTouchPosition, :GetTouchPosition, [:int], Vector2.by_value],
 
-      # GetTouchPointId : Get touch point identifier for given index
-      # @param index [int]
-      # @return [int]
+      # @!method GetTouchPointId(index)
+      #   GetTouchPointId : Get touch point identifier for given index
+      #   @param index [int]
+      #   @return [int]
       [:GetTouchPointId, :GetTouchPointId, [:int], :int],
 
-      # GetTouchPointCount : Get number of touch points
-      # @return [int]
+      # @!method GetTouchPointCount()
+      #   GetTouchPointCount : Get number of touch points
+      #   @return [int]
       [:GetTouchPointCount, :GetTouchPointCount, [], :int],
 
-      # SetGesturesEnabled : Enable a set of gestures using flags
-      # @param flags [unsigned int]
-      # @return [void]
+      # @!method SetGesturesEnabled(flags)
+      #   SetGesturesEnabled : Enable a set of gestures using flags
+      #   @param flags [unsigned int]
+      #   @return [void]
       [:SetGesturesEnabled, :SetGesturesEnabled, [:uint], :void],
 
-      # IsGestureDetected : Check if a gesture have been detected
-      # @param gesture [int]
-      # @return [bool]
+      # @!method IsGestureDetected(gesture)
+      #   IsGestureDetected : Check if a gesture have been detected
+      #   @param gesture [int]
+      #   @return [bool]
       [:IsGestureDetected, :IsGestureDetected, [:int], :bool],
 
-      # GetGestureDetected : Get latest detected gesture
-      # @return [int]
+      # @!method GetGestureDetected()
+      #   GetGestureDetected : Get latest detected gesture
+      #   @return [int]
       [:GetGestureDetected, :GetGestureDetected, [], :int],
 
-      # GetGestureHoldDuration : Get gesture hold time in milliseconds
-      # @return [float]
+      # @!method GetGestureHoldDuration()
+      #   GetGestureHoldDuration : Get gesture hold time in milliseconds
+      #   @return [float]
       [:GetGestureHoldDuration, :GetGestureHoldDuration, [], :float],
 
-      # GetGestureDragVector : Get gesture drag vector
-      # @return [Vector2]
+      # @!method GetGestureDragVector()
+      #   GetGestureDragVector : Get gesture drag vector
+      #   @return [Vector2]
       [:GetGestureDragVector, :GetGestureDragVector, [], Vector2.by_value],
 
-      # GetGestureDragAngle : Get gesture drag angle
-      # @return [float]
+      # @!method GetGestureDragAngle()
+      #   GetGestureDragAngle : Get gesture drag angle
+      #   @return [float]
       [:GetGestureDragAngle, :GetGestureDragAngle, [], :float],
 
-      # GetGesturePinchVector : Get gesture pinch delta
-      # @return [Vector2]
+      # @!method GetGesturePinchVector()
+      #   GetGesturePinchVector : Get gesture pinch delta
+      #   @return [Vector2]
       [:GetGesturePinchVector, :GetGesturePinchVector, [], Vector2.by_value],
 
-      # GetGesturePinchAngle : Get gesture pinch angle
-      # @return [float]
+      # @!method GetGesturePinchAngle()
+      #   GetGesturePinchAngle : Get gesture pinch angle
+      #   @return [float]
       [:GetGesturePinchAngle, :GetGesturePinchAngle, [], :float],
 
-      # UpdateCamera : Update camera position for selected mode
-      # @param camera [Camera *]
-      # @param mode [int]
-      # @return [void]
+      # @!method UpdateCamera(camera, mode)
+      #   UpdateCamera : Update camera position for selected mode
+      #   @param camera [Camera *]
+      #   @param mode [int]
+      #   @return [void]
       [:UpdateCamera, :UpdateCamera, [:pointer, :int], :void],
 
-      # UpdateCameraPro : Update camera movement/rotation
-      # @param camera [Camera *]
-      # @param movement [Vector3]
-      # @param rotation [Vector3]
-      # @param zoom [float]
-      # @return [void]
+      # @!method UpdateCameraPro(camera, movement, rotation, zoom)
+      #   UpdateCameraPro : Update camera movement/rotation
+      #   @param camera [Camera *]
+      #   @param movement [Vector3]
+      #   @param rotation [Vector3]
+      #   @param zoom [float]
+      #   @return [void]
       [:UpdateCameraPro, :UpdateCameraPro, [:pointer, Vector3.by_value, Vector3.by_value, :float], :void],
 
-      # SetShapesTexture : Set texture and rectangle to be used on shapes drawing
-      # @param texture [Texture2D]
-      # @param source [Rectangle]
-      # @return [void]
+      # @!method SetShapesTexture(texture, source)
+      #   SetShapesTexture : Set texture and rectangle to be used on shapes drawing
+      #   @param texture [Texture2D]
+      #   @param source [Rectangle]
+      #   @return [void]
       [:SetShapesTexture, :SetShapesTexture, [Texture2D.by_value, Rectangle.by_value], :void],
 
-      # DrawPixel : Draw a pixel
-      # @param posX [int]
-      # @param posY [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPixel(posX, posY, color)
+      #   DrawPixel : Draw a pixel
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPixel, :DrawPixel, [:int, :int, Color.by_value], :void],
 
-      # DrawPixelV : Draw a pixel (Vector version)
-      # @param position [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPixelV(position, color)
+      #   DrawPixelV : Draw a pixel (Vector version)
+      #   @param position [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPixelV, :DrawPixelV, [Vector2.by_value, Color.by_value], :void],
 
-      # DrawLine : Draw a line
-      # @param startPosX [int]
-      # @param startPosY [int]
-      # @param endPosX [int]
-      # @param endPosY [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLine(startPosX, startPosY, endPosX, endPosY, color)
+      #   DrawLine : Draw a line
+      #   @param startPosX [int]
+      #   @param startPosY [int]
+      #   @param endPosX [int]
+      #   @param endPosY [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLine, :DrawLine, [:int, :int, :int, :int, Color.by_value], :void],
 
-      # DrawLineV : Draw a line (Vector version)
-      # @param startPos [Vector2]
-      # @param endPos [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineV(startPos, endPos, color)
+      #   DrawLineV : Draw a line (Vector version)
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineV, :DrawLineV, [Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawLineEx : Draw a line defining thickness
-      # @param startPos [Vector2]
-      # @param endPos [Vector2]
-      # @param thick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineEx(startPos, endPos, thick, color)
+      #   DrawLineEx : Draw a line defining thickness
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineEx, :DrawLineEx, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawLineBezier : Draw a line using cubic-bezier curves in-out
-      # @param startPos [Vector2]
-      # @param endPos [Vector2]
-      # @param thick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineBezier(startPos, endPos, thick, color)
+      #   DrawLineBezier : Draw a line using cubic-bezier curves in-out
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineBezier, :DrawLineBezier, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawLineBezierQuad : Draw line using quadratic bezier curves with a control point
-      # @param startPos [Vector2]
-      # @param endPos [Vector2]
-      # @param controlPos [Vector2]
-      # @param thick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)
+      #   DrawLineBezierQuad : Draw line using quadratic bezier curves with a control point
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param controlPos [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineBezierQuad, :DrawLineBezierQuad, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawLineBezierCubic : Draw line using cubic bezier curves with 2 control points
-      # @param startPos [Vector2]
-      # @param endPos [Vector2]
-      # @param startControlPos [Vector2]
-      # @param endControlPos [Vector2]
-      # @param thick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)
+      #   DrawLineBezierCubic : Draw line using cubic bezier curves with 2 control points
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param startControlPos [Vector2]
+      #   @param endControlPos [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineBezierCubic, :DrawLineBezierCubic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawLineStrip : Draw lines sequence
-      # @param points [Vector2 *]
-      # @param pointCount [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLineStrip(points, pointCount, color)
+      #   DrawLineStrip : Draw lines sequence
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLineStrip, :DrawLineStrip, [:pointer, :int, Color.by_value], :void],
 
-      # DrawCircle : Draw a color-filled circle
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radius [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircle(centerX, centerY, radius, color)
+      #   DrawCircle : Draw a color-filled circle
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircle, :DrawCircle, [:int, :int, :float, Color.by_value], :void],
 
-      # DrawCircleSector : Draw a piece of a circle
-      # @param center [Vector2]
-      # @param radius [float]
-      # @param startAngle [float]
-      # @param endAngle [float]
-      # @param segments [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircleSector(center, radius, startAngle, endAngle, segments, color)
+      #   DrawCircleSector : Draw a piece of a circle
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircleSector, :DrawCircleSector, [Vector2.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCircleSectorLines : Draw circle sector outline
-      # @param center [Vector2]
-      # @param radius [float]
-      # @param startAngle [float]
-      # @param endAngle [float]
-      # @param segments [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color)
+      #   DrawCircleSectorLines : Draw circle sector outline
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircleSectorLines, :DrawCircleSectorLines, [Vector2.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCircleGradient : Draw a gradient-filled circle
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radius [float]
-      # @param color1 [Color]
-      # @param color2 [Color]
-      # @return [void]
+      # @!method DrawCircleGradient(centerX, centerY, radius, color1, color2)
+      #   DrawCircleGradient : Draw a gradient-filled circle
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [float]
+      #   @param color1 [Color]
+      #   @param color2 [Color]
+      #   @return [void]
       [:DrawCircleGradient, :DrawCircleGradient, [:int, :int, :float, Color.by_value, Color.by_value], :void],
 
-      # DrawCircleV : Draw a color-filled circle (Vector version)
-      # @param center [Vector2]
-      # @param radius [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircleV(center, radius, color)
+      #   DrawCircleV : Draw a color-filled circle (Vector version)
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircleV, :DrawCircleV, [Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawCircleLines : Draw circle outline
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radius [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircleLines(centerX, centerY, radius, color)
+      #   DrawCircleLines : Draw circle outline
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircleLines, :DrawCircleLines, [:int, :int, :float, Color.by_value], :void],
 
-      # DrawEllipse : Draw ellipse
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radiusH [float]
-      # @param radiusV [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawEllipse(centerX, centerY, radiusH, radiusV, color)
+      #   DrawEllipse : Draw ellipse
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radiusH [float]
+      #   @param radiusV [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawEllipse, :DrawEllipse, [:int, :int, :float, :float, Color.by_value], :void],
 
-      # DrawEllipseLines : Draw ellipse outline
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radiusH [float]
-      # @param radiusV [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)
+      #   DrawEllipseLines : Draw ellipse outline
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radiusH [float]
+      #   @param radiusV [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawEllipseLines, :DrawEllipseLines, [:int, :int, :float, :float, Color.by_value], :void],
 
-      # DrawRing : Draw ring
-      # @param center [Vector2]
-      # @param innerRadius [float]
-      # @param outerRadius [float]
-      # @param startAngle [float]
-      # @param endAngle [float]
-      # @param segments [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+      #   DrawRing : Draw ring
+      #   @param center [Vector2]
+      #   @param innerRadius [float]
+      #   @param outerRadius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRing, :DrawRing, [Vector2.by_value, :float, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawRingLines : Draw ring outline
-      # @param center [Vector2]
-      # @param innerRadius [float]
-      # @param outerRadius [float]
-      # @param startAngle [float]
-      # @param endAngle [float]
-      # @param segments [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
+      #   DrawRingLines : Draw ring outline
+      #   @param center [Vector2]
+      #   @param innerRadius [float]
+      #   @param outerRadius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRingLines, :DrawRingLines, [Vector2.by_value, :float, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawRectangle : Draw a color-filled rectangle
-      # @param posX [int]
-      # @param posY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangle(posX, posY, width, height, color)
+      #   DrawRectangle : Draw a color-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangle, :DrawRectangle, [:int, :int, :int, :int, Color.by_value], :void],
 
-      # DrawRectangleV : Draw a color-filled rectangle (Vector version)
-      # @param position [Vector2]
-      # @param size [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleV(position, size, color)
+      #   DrawRectangleV : Draw a color-filled rectangle (Vector version)
+      #   @param position [Vector2]
+      #   @param size [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleV, :DrawRectangleV, [Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawRectangleRec : Draw a color-filled rectangle
-      # @param rec [Rectangle]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleRec(rec, color)
+      #   DrawRectangleRec : Draw a color-filled rectangle
+      #   @param rec [Rectangle]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleRec, :DrawRectangleRec, [Rectangle.by_value, Color.by_value], :void],
 
-      # DrawRectanglePro : Draw a color-filled rectangle with pro parameters
-      # @param rec [Rectangle]
-      # @param origin [Vector2]
-      # @param rotation [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectanglePro(rec, origin, rotation, color)
+      #   DrawRectanglePro : Draw a color-filled rectangle with pro parameters
+      #   @param rec [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectanglePro, :DrawRectanglePro, [Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawRectangleGradientV : Draw a vertical-gradient-filled rectangle
-      # @param posX [int]
-      # @param posY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param color1 [Color]
-      # @param color2 [Color]
-      # @return [void]
+      # @!method DrawRectangleGradientV(posX, posY, width, height, color1, color2)
+      #   DrawRectangleGradientV : Draw a vertical-gradient-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color1 [Color]
+      #   @param color2 [Color]
+      #   @return [void]
       [:DrawRectangleGradientV, :DrawRectangleGradientV, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
 
-      # DrawRectangleGradientH : Draw a horizontal-gradient-filled rectangle
-      # @param posX [int]
-      # @param posY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param color1 [Color]
-      # @param color2 [Color]
-      # @return [void]
+      # @!method DrawRectangleGradientH(posX, posY, width, height, color1, color2)
+      #   DrawRectangleGradientH : Draw a horizontal-gradient-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color1 [Color]
+      #   @param color2 [Color]
+      #   @return [void]
       [:DrawRectangleGradientH, :DrawRectangleGradientH, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
 
-      # DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors
-      # @param rec [Rectangle]
-      # @param col1 [Color]
-      # @param col2 [Color]
-      # @param col3 [Color]
-      # @param col4 [Color]
-      # @return [void]
+      # @!method DrawRectangleGradientEx(rec, col1, col2, col3, col4)
+      #   DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors
+      #   @param rec [Rectangle]
+      #   @param col1 [Color]
+      #   @param col2 [Color]
+      #   @param col3 [Color]
+      #   @param col4 [Color]
+      #   @return [void]
       [:DrawRectangleGradientEx, :DrawRectangleGradientEx, [Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
 
-      # DrawRectangleLines : Draw rectangle outline
-      # @param posX [int]
-      # @param posY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleLines(posX, posY, width, height, color)
+      #   DrawRectangleLines : Draw rectangle outline
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleLines, :DrawRectangleLines, [:int, :int, :int, :int, Color.by_value], :void],
 
-      # DrawRectangleLinesEx : Draw rectangle outline with extended parameters
-      # @param rec [Rectangle]
-      # @param lineThick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleLinesEx(rec, lineThick, color)
+      #   DrawRectangleLinesEx : Draw rectangle outline with extended parameters
+      #   @param rec [Rectangle]
+      #   @param lineThick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleLinesEx, :DrawRectangleLinesEx, [Rectangle.by_value, :float, Color.by_value], :void],
 
-      # DrawRectangleRounded : Draw rectangle with rounded edges
-      # @param rec [Rectangle]
-      # @param roundness [float]
-      # @param segments [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleRounded(rec, roundness, segments, color)
+      #   DrawRectangleRounded : Draw rectangle with rounded edges
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleRounded, :DrawRectangleRounded, [Rectangle.by_value, :float, :int, Color.by_value], :void],
 
-      # DrawRectangleRoundedLines : Draw rectangle with rounded edges outline
-      # @param rec [Rectangle]
-      # @param roundness [float]
-      # @param segments [int]
-      # @param lineThick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)
+      #   DrawRectangleRoundedLines : Draw rectangle with rounded edges outline
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param lineThick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, :float, Color.by_value], :void],
 
-      # DrawTriangle : Draw a color-filled triangle (vertex in counter-clockwise order!)
-      # @param v1 [Vector2]
-      # @param v2 [Vector2]
-      # @param v3 [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangle(v1, v2, v3, color)
+      #   DrawTriangle : Draw a color-filled triangle (vertex in counter-clockwise order!)
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangle, :DrawTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawTriangleLines : Draw triangle outline (vertex in counter-clockwise order!)
-      # @param v1 [Vector2]
-      # @param v2 [Vector2]
-      # @param v3 [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangleLines(v1, v2, v3, color)
+      #   DrawTriangleLines : Draw triangle outline (vertex in counter-clockwise order!)
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangleLines, :DrawTriangleLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
-      # @param points [Vector2 *]
-      # @param pointCount [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangleFan(points, pointCount, color)
+      #   DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangleFan, :DrawTriangleFan, [:pointer, :int, Color.by_value], :void],
 
-      # DrawTriangleStrip : Draw a triangle strip defined by points
-      # @param points [Vector2 *]
-      # @param pointCount [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangleStrip(points, pointCount, color)
+      #   DrawTriangleStrip : Draw a triangle strip defined by points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangleStrip, :DrawTriangleStrip, [:pointer, :int, Color.by_value], :void],
 
-      # DrawPoly : Draw a regular polygon (Vector version)
-      # @param center [Vector2]
-      # @param sides [int]
-      # @param radius [float]
-      # @param rotation [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPoly(center, sides, radius, rotation, color)
+      #   DrawPoly : Draw a regular polygon (Vector version)
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPoly, :DrawPoly, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
 
-      # DrawPolyLines : Draw a polygon outline of n sides
-      # @param center [Vector2]
-      # @param sides [int]
-      # @param radius [float]
-      # @param rotation [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPolyLines(center, sides, radius, rotation, color)
+      #   DrawPolyLines : Draw a polygon outline of n sides
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPolyLines, :DrawPolyLines, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
 
-      # DrawPolyLinesEx : Draw a polygon outline of n sides with extended parameters
-      # @param center [Vector2]
-      # @param sides [int]
-      # @param radius [float]
-      # @param rotation [float]
-      # @param lineThick [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)
+      #   DrawPolyLinesEx : Draw a polygon outline of n sides with extended parameters
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param lineThick [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPolyLinesEx, :DrawPolyLinesEx, [Vector2.by_value, :int, :float, :float, :float, Color.by_value], :void],
 
-      # CheckCollisionRecs : Check collision between two rectangles
-      # @param rec1 [Rectangle]
-      # @param rec2 [Rectangle]
-      # @return [bool]
+      # @!method CheckCollisionRecs(rec1, rec2)
+      #   CheckCollisionRecs : Check collision between two rectangles
+      #   @param rec1 [Rectangle]
+      #   @param rec2 [Rectangle]
+      #   @return [bool]
       [:CheckCollisionRecs, :CheckCollisionRecs, [Rectangle.by_value, Rectangle.by_value], :bool],
 
-      # CheckCollisionCircles : Check collision between two circles
-      # @param center1 [Vector2]
-      # @param radius1 [float]
-      # @param center2 [Vector2]
-      # @param radius2 [float]
-      # @return [bool]
+      # @!method CheckCollisionCircles(center1, radius1, center2, radius2)
+      #   CheckCollisionCircles : Check collision between two circles
+      #   @param center1 [Vector2]
+      #   @param radius1 [float]
+      #   @param center2 [Vector2]
+      #   @param radius2 [float]
+      #   @return [bool]
       [:CheckCollisionCircles, :CheckCollisionCircles, [Vector2.by_value, :float, Vector2.by_value, :float], :bool],
 
-      # CheckCollisionCircleRec : Check collision between circle and rectangle
-      # @param center [Vector2]
-      # @param radius [float]
-      # @param rec [Rectangle]
-      # @return [bool]
+      # @!method CheckCollisionCircleRec(center, radius, rec)
+      #   CheckCollisionCircleRec : Check collision between circle and rectangle
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param rec [Rectangle]
+      #   @return [bool]
       [:CheckCollisionCircleRec, :CheckCollisionCircleRec, [Vector2.by_value, :float, Rectangle.by_value], :bool],
 
-      # CheckCollisionPointRec : Check if point is inside rectangle
-      # @param point [Vector2]
-      # @param rec [Rectangle]
-      # @return [bool]
+      # @!method CheckCollisionPointRec(point, rec)
+      #   CheckCollisionPointRec : Check if point is inside rectangle
+      #   @param point [Vector2]
+      #   @param rec [Rectangle]
+      #   @return [bool]
       [:CheckCollisionPointRec, :CheckCollisionPointRec, [Vector2.by_value, Rectangle.by_value], :bool],
 
-      # CheckCollisionPointCircle : Check if point is inside circle
-      # @param point [Vector2]
-      # @param center [Vector2]
-      # @param radius [float]
-      # @return [bool]
+      # @!method CheckCollisionPointCircle(point, center, radius)
+      #   CheckCollisionPointCircle : Check if point is inside circle
+      #   @param point [Vector2]
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @return [bool]
       [:CheckCollisionPointCircle, :CheckCollisionPointCircle, [Vector2.by_value, Vector2.by_value, :float], :bool],
 
-      # CheckCollisionPointTriangle : Check if point is inside a triangle
-      # @param point [Vector2]
-      # @param p1 [Vector2]
-      # @param p2 [Vector2]
-      # @param p3 [Vector2]
-      # @return [bool]
+      # @!method CheckCollisionPointTriangle(point, p1, p2, p3)
+      #   CheckCollisionPointTriangle : Check if point is inside a triangle
+      #   @param point [Vector2]
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @return [bool]
       [:CheckCollisionPointTriangle, :CheckCollisionPointTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value], :bool],
 
-      # CheckCollisionPointPoly : Check if point is within a polygon described by array of vertices
-      # @param point [Vector2]
-      # @param points [Vector2 *]
-      # @param pointCount [int]
-      # @return [bool]
+      # @!method CheckCollisionPointPoly(point, points, pointCount)
+      #   CheckCollisionPointPoly : Check if point is within a polygon described by array of vertices
+      #   @param point [Vector2]
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @return [bool]
       [:CheckCollisionPointPoly, :CheckCollisionPointPoly, [Vector2.by_value, :pointer, :int], :bool],
 
-      # CheckCollisionLines : Check the collision between two lines defined by two points each, returns collision point by reference
-      # @param startPos1 [Vector2]
-      # @param endPos1 [Vector2]
-      # @param startPos2 [Vector2]
-      # @param endPos2 [Vector2]
-      # @param collisionPoint [Vector2 *]
-      # @return [bool]
+      # @!method CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint)
+      #   CheckCollisionLines : Check the collision between two lines defined by two points each, returns collision point by reference
+      #   @param startPos1 [Vector2]
+      #   @param endPos1 [Vector2]
+      #   @param startPos2 [Vector2]
+      #   @param endPos2 [Vector2]
+      #   @param collisionPoint [Vector2 *]
+      #   @return [bool]
       [:CheckCollisionLines, :CheckCollisionLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :pointer], :bool],
 
-      # CheckCollisionPointLine : Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
-      # @param point [Vector2]
-      # @param p1 [Vector2]
-      # @param p2 [Vector2]
-      # @param threshold [int]
-      # @return [bool]
+      # @!method CheckCollisionPointLine(point, p1, p2, threshold)
+      #   CheckCollisionPointLine : Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
+      #   @param point [Vector2]
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param threshold [int]
+      #   @return [bool]
       [:CheckCollisionPointLine, :CheckCollisionPointLine, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :int], :bool],
 
-      # GetCollisionRec : Get collision rectangle for two rectangles collision
-      # @param rec1 [Rectangle]
-      # @param rec2 [Rectangle]
-      # @return [Rectangle]
+      # @!method GetCollisionRec(rec1, rec2)
+      #   GetCollisionRec : Get collision rectangle for two rectangles collision
+      #   @param rec1 [Rectangle]
+      #   @param rec2 [Rectangle]
+      #   @return [Rectangle]
       [:GetCollisionRec, :GetCollisionRec, [Rectangle.by_value, Rectangle.by_value], Rectangle.by_value],
 
-      # LoadImage : Load image from file into CPU memory (RAM)
-      # @param fileName [const char *]
-      # @return [Image]
+      # @!method LoadImage(fileName)
+      #   LoadImage : Load image from file into CPU memory (RAM)
+      #   @param fileName [const char *]
+      #   @return [Image]
       [:LoadImage, :LoadImage, [:pointer], Image.by_value],
 
-      # LoadImageRaw : Load image from RAW file data
-      # @param fileName [const char *]
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @param headerSize [int]
-      # @return [Image]
+      # @!method LoadImageRaw(fileName, width, height, format, headerSize)
+      #   LoadImageRaw : Load image from RAW file data
+      #   @param fileName [const char *]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @param headerSize [int]
+      #   @return [Image]
       [:LoadImageRaw, :LoadImageRaw, [:pointer, :int, :int, :int, :int], Image.by_value],
 
-      # LoadImageAnim : Load image sequence from file (frames appended to image.data)
-      # @param fileName [const char *]
-      # @param frames [int *]
-      # @return [Image]
+      # @!method LoadImageAnim(fileName, frames)
+      #   LoadImageAnim : Load image sequence from file (frames appended to image.data)
+      #   @param fileName [const char *]
+      #   @param frames [int *]
+      #   @return [Image]
       [:LoadImageAnim, :LoadImageAnim, [:pointer, :pointer], Image.by_value],
 
-      # LoadImageFromMemory : Load image from memory buffer, fileType refers to extension: i.e. '.png'
-      # @param fileType [const char *]
-      # @param fileData [const unsigned char *]
-      # @param dataSize [int]
-      # @return [Image]
+      # @!method LoadImageFromMemory(fileType, fileData, dataSize)
+      #   LoadImageFromMemory : Load image from memory buffer, fileType refers to extension: i.e. '.png'
+      #   @param fileType [const char *]
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @return [Image]
       [:LoadImageFromMemory, :LoadImageFromMemory, [:pointer, :pointer, :int], Image.by_value],
 
-      # LoadImageFromTexture : Load image from GPU texture data
-      # @param texture [Texture2D]
-      # @return [Image]
+      # @!method LoadImageFromTexture(texture)
+      #   LoadImageFromTexture : Load image from GPU texture data
+      #   @param texture [Texture2D]
+      #   @return [Image]
       [:LoadImageFromTexture, :LoadImageFromTexture, [Texture2D.by_value], Image.by_value],
 
-      # LoadImageFromScreen : Load image from screen buffer and (screenshot)
-      # @return [Image]
+      # @!method LoadImageFromScreen()
+      #   LoadImageFromScreen : Load image from screen buffer and (screenshot)
+      #   @return [Image]
       [:LoadImageFromScreen, :LoadImageFromScreen, [], Image.by_value],
 
-      # IsImageReady : Check if an image is ready
-      # @param image [Image]
-      # @return [bool]
+      # @!method IsImageReady(image)
+      #   IsImageReady : Check if an image is ready
+      #   @param image [Image]
+      #   @return [bool]
       [:IsImageReady, :IsImageReady, [Image.by_value], :bool],
 
-      # UnloadImage : Unload image from CPU memory (RAM)
-      # @param image [Image]
-      # @return [void]
+      # @!method UnloadImage(image)
+      #   UnloadImage : Unload image from CPU memory (RAM)
+      #   @param image [Image]
+      #   @return [void]
       [:UnloadImage, :UnloadImage, [Image.by_value], :void],
 
-      # ExportImage : Export image data to file, returns true on success
-      # @param image [Image]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportImage(image, fileName)
+      #   ExportImage : Export image data to file, returns true on success
+      #   @param image [Image]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportImage, :ExportImage, [Image.by_value, :pointer], :bool],
 
-      # ExportImageAsCode : Export image as code file defining an array of bytes, returns true on success
-      # @param image [Image]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportImageAsCode(image, fileName)
+      #   ExportImageAsCode : Export image as code file defining an array of bytes, returns true on success
+      #   @param image [Image]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportImageAsCode, :ExportImageAsCode, [Image.by_value, :pointer], :bool],
 
-      # GenImageColor : Generate image: plain color
-      # @param width [int]
-      # @param height [int]
-      # @param color [Color]
-      # @return [Image]
+      # @!method GenImageColor(width, height, color)
+      #   GenImageColor : Generate image: plain color
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [Image]
       [:GenImageColor, :GenImageColor, [:int, :int, Color.by_value], Image.by_value],
 
-      # GenImageGradientV : Generate image: vertical gradient
-      # @param width [int]
-      # @param height [int]
-      # @param top [Color]
-      # @param bottom [Color]
-      # @return [Image]
+      # @!method GenImageGradientV(width, height, top, bottom)
+      #   GenImageGradientV : Generate image: vertical gradient
+      #   @param width [int]
+      #   @param height [int]
+      #   @param top [Color]
+      #   @param bottom [Color]
+      #   @return [Image]
       [:GenImageGradientV, :GenImageGradientV, [:int, :int, Color.by_value, Color.by_value], Image.by_value],
 
-      # GenImageGradientH : Generate image: horizontal gradient
-      # @param width [int]
-      # @param height [int]
-      # @param left [Color]
-      # @param right [Color]
-      # @return [Image]
+      # @!method GenImageGradientH(width, height, left, right)
+      #   GenImageGradientH : Generate image: horizontal gradient
+      #   @param width [int]
+      #   @param height [int]
+      #   @param left [Color]
+      #   @param right [Color]
+      #   @return [Image]
       [:GenImageGradientH, :GenImageGradientH, [:int, :int, Color.by_value, Color.by_value], Image.by_value],
 
-      # GenImageGradientRadial : Generate image: radial gradient
-      # @param width [int]
-      # @param height [int]
-      # @param density [float]
-      # @param inner [Color]
-      # @param outer [Color]
-      # @return [Image]
+      # @!method GenImageGradientRadial(width, height, density, inner, outer)
+      #   GenImageGradientRadial : Generate image: radial gradient
+      #   @param width [int]
+      #   @param height [int]
+      #   @param density [float]
+      #   @param inner [Color]
+      #   @param outer [Color]
+      #   @return [Image]
       [:GenImageGradientRadial, :GenImageGradientRadial, [:int, :int, :float, Color.by_value, Color.by_value], Image.by_value],
 
-      # GenImageChecked : Generate image: checked
-      # @param width [int]
-      # @param height [int]
-      # @param checksX [int]
-      # @param checksY [int]
-      # @param col1 [Color]
-      # @param col2 [Color]
-      # @return [Image]
+      # @!method GenImageChecked(width, height, checksX, checksY, col1, col2)
+      #   GenImageChecked : Generate image: checked
+      #   @param width [int]
+      #   @param height [int]
+      #   @param checksX [int]
+      #   @param checksY [int]
+      #   @param col1 [Color]
+      #   @param col2 [Color]
+      #   @return [Image]
       [:GenImageChecked, :GenImageChecked, [:int, :int, :int, :int, Color.by_value, Color.by_value], Image.by_value],
 
-      # GenImageWhiteNoise : Generate image: white noise
-      # @param width [int]
-      # @param height [int]
-      # @param factor [float]
-      # @return [Image]
+      # @!method GenImageWhiteNoise(width, height, factor)
+      #   GenImageWhiteNoise : Generate image: white noise
+      #   @param width [int]
+      #   @param height [int]
+      #   @param factor [float]
+      #   @return [Image]
       [:GenImageWhiteNoise, :GenImageWhiteNoise, [:int, :int, :float], Image.by_value],
 
-      # GenImagePerlinNoise : Generate image: perlin noise
-      # @param width [int]
-      # @param height [int]
-      # @param offsetX [int]
-      # @param offsetY [int]
-      # @param scale [float]
-      # @return [Image]
+      # @!method GenImagePerlinNoise(width, height, offsetX, offsetY, scale)
+      #   GenImagePerlinNoise : Generate image: perlin noise
+      #   @param width [int]
+      #   @param height [int]
+      #   @param offsetX [int]
+      #   @param offsetY [int]
+      #   @param scale [float]
+      #   @return [Image]
       [:GenImagePerlinNoise, :GenImagePerlinNoise, [:int, :int, :int, :int, :float], Image.by_value],
 
-      # GenImageCellular : Generate image: cellular algorithm, bigger tileSize means bigger cells
-      # @param width [int]
-      # @param height [int]
-      # @param tileSize [int]
-      # @return [Image]
+      # @!method GenImageCellular(width, height, tileSize)
+      #   GenImageCellular : Generate image: cellular algorithm, bigger tileSize means bigger cells
+      #   @param width [int]
+      #   @param height [int]
+      #   @param tileSize [int]
+      #   @return [Image]
       [:GenImageCellular, :GenImageCellular, [:int, :int, :int], Image.by_value],
 
-      # GenImageText : Generate image: grayscale image from text data
-      # @param width [int]
-      # @param height [int]
-      # @param text [const char *]
-      # @return [Image]
+      # @!method GenImageText(width, height, text)
+      #   GenImageText : Generate image: grayscale image from text data
+      #   @param width [int]
+      #   @param height [int]
+      #   @param text [const char *]
+      #   @return [Image]
       [:GenImageText, :GenImageText, [:int, :int, :pointer], Image.by_value],
 
-      # ImageCopy : Create an image duplicate (useful for transformations)
-      # @param image [Image]
-      # @return [Image]
+      # @!method ImageCopy(image)
+      #   ImageCopy : Create an image duplicate (useful for transformations)
+      #   @param image [Image]
+      #   @return [Image]
       [:ImageCopy, :ImageCopy, [Image.by_value], Image.by_value],
 
-      # ImageFromImage : Create an image from another image piece
-      # @param image [Image]
-      # @param rec [Rectangle]
-      # @return [Image]
+      # @!method ImageFromImage(image, rec)
+      #   ImageFromImage : Create an image from another image piece
+      #   @param image [Image]
+      #   @param rec [Rectangle]
+      #   @return [Image]
       [:ImageFromImage, :ImageFromImage, [Image.by_value, Rectangle.by_value], Image.by_value],
 
-      # ImageText : Create an image from text (default font)
-      # @param text [const char *]
-      # @param fontSize [int]
-      # @param color [Color]
-      # @return [Image]
+      # @!method ImageText(text, fontSize, color)
+      #   ImageText : Create an image from text (default font)
+      #   @param text [const char *]
+      #   @param fontSize [int]
+      #   @param color [Color]
+      #   @return [Image]
       [:ImageText, :ImageText, [:pointer, :int, Color.by_value], Image.by_value],
 
-      # ImageTextEx : Create an image from text (custom sprite font)
-      # @param font [Font]
-      # @param text [const char *]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @param tint [Color]
-      # @return [Image]
+      # @!method ImageTextEx(font, text, fontSize, spacing, tint)
+      #   ImageTextEx : Create an image from text (custom sprite font)
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [Image]
       [:ImageTextEx, :ImageTextEx, [Font.by_value, :pointer, :float, :float, Color.by_value], Image.by_value],
 
-      # ImageFormat : Convert image data to desired format
-      # @param image [Image *]
-      # @param newFormat [int]
-      # @return [void]
+      # @!method ImageFormat(image, newFormat)
+      #   ImageFormat : Convert image data to desired format
+      #   @param image [Image *]
+      #   @param newFormat [int]
+      #   @return [void]
       [:ImageFormat, :ImageFormat, [:pointer, :int], :void],
 
-      # ImageToPOT : Convert image to POT (power-of-two)
-      # @param image [Image *]
-      # @param fill [Color]
-      # @return [void]
+      # @!method ImageToPOT(image, fill)
+      #   ImageToPOT : Convert image to POT (power-of-two)
+      #   @param image [Image *]
+      #   @param fill [Color]
+      #   @return [void]
       [:ImageToPOT, :ImageToPOT, [:pointer, Color.by_value], :void],
 
-      # ImageCrop : Crop an image to a defined rectangle
-      # @param image [Image *]
-      # @param crop [Rectangle]
-      # @return [void]
+      # @!method ImageCrop(image, crop)
+      #   ImageCrop : Crop an image to a defined rectangle
+      #   @param image [Image *]
+      #   @param crop [Rectangle]
+      #   @return [void]
       [:ImageCrop, :ImageCrop, [:pointer, Rectangle.by_value], :void],
 
-      # ImageAlphaCrop : Crop image depending on alpha value
-      # @param image [Image *]
-      # @param threshold [float]
-      # @return [void]
+      # @!method ImageAlphaCrop(image, threshold)
+      #   ImageAlphaCrop : Crop image depending on alpha value
+      #   @param image [Image *]
+      #   @param threshold [float]
+      #   @return [void]
       [:ImageAlphaCrop, :ImageAlphaCrop, [:pointer, :float], :void],
 
-      # ImageAlphaClear : Clear alpha channel to desired color
-      # @param image [Image *]
-      # @param color [Color]
-      # @param threshold [float]
-      # @return [void]
+      # @!method ImageAlphaClear(image, color, threshold)
+      #   ImageAlphaClear : Clear alpha channel to desired color
+      #   @param image [Image *]
+      #   @param color [Color]
+      #   @param threshold [float]
+      #   @return [void]
       [:ImageAlphaClear, :ImageAlphaClear, [:pointer, Color.by_value, :float], :void],
 
-      # ImageAlphaMask : Apply alpha mask to image
-      # @param image [Image *]
-      # @param alphaMask [Image]
-      # @return [void]
+      # @!method ImageAlphaMask(image, alphaMask)
+      #   ImageAlphaMask : Apply alpha mask to image
+      #   @param image [Image *]
+      #   @param alphaMask [Image]
+      #   @return [void]
       [:ImageAlphaMask, :ImageAlphaMask, [:pointer, Image.by_value], :void],
 
-      # ImageAlphaPremultiply : Premultiply alpha channel
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageAlphaPremultiply(image)
+      #   ImageAlphaPremultiply : Premultiply alpha channel
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageAlphaPremultiply, :ImageAlphaPremultiply, [:pointer], :void],
 
-      # ImageBlurGaussian : Apply Gaussian blur using a box blur approximation
-      # @param image [Image *]
-      # @param blurSize [int]
-      # @return [void]
+      # @!method ImageBlurGaussian(image, blurSize)
+      #   ImageBlurGaussian : Apply Gaussian blur using a box blur approximation
+      #   @param image [Image *]
+      #   @param blurSize [int]
+      #   @return [void]
       [:ImageBlurGaussian, :ImageBlurGaussian, [:pointer, :int], :void],
 
-      # ImageResize : Resize image (Bicubic scaling algorithm)
-      # @param image [Image *]
-      # @param newWidth [int]
-      # @param newHeight [int]
-      # @return [void]
+      # @!method ImageResize(image, newWidth, newHeight)
+      #   ImageResize : Resize image (Bicubic scaling algorithm)
+      #   @param image [Image *]
+      #   @param newWidth [int]
+      #   @param newHeight [int]
+      #   @return [void]
       [:ImageResize, :ImageResize, [:pointer, :int, :int], :void],
 
-      # ImageResizeNN : Resize image (Nearest-Neighbor scaling algorithm)
-      # @param image [Image *]
-      # @param newWidth [int]
-      # @param newHeight [int]
-      # @return [void]
+      # @!method ImageResizeNN(image, newWidth, newHeight)
+      #   ImageResizeNN : Resize image (Nearest-Neighbor scaling algorithm)
+      #   @param image [Image *]
+      #   @param newWidth [int]
+      #   @param newHeight [int]
+      #   @return [void]
       [:ImageResizeNN, :ImageResizeNN, [:pointer, :int, :int], :void],
 
-      # ImageResizeCanvas : Resize canvas and fill with color
-      # @param image [Image *]
-      # @param newWidth [int]
-      # @param newHeight [int]
-      # @param offsetX [int]
-      # @param offsetY [int]
-      # @param fill [Color]
-      # @return [void]
+      # @!method ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill)
+      #   ImageResizeCanvas : Resize canvas and fill with color
+      #   @param image [Image *]
+      #   @param newWidth [int]
+      #   @param newHeight [int]
+      #   @param offsetX [int]
+      #   @param offsetY [int]
+      #   @param fill [Color]
+      #   @return [void]
       [:ImageResizeCanvas, :ImageResizeCanvas, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
 
-      # ImageMipmaps : Compute all mipmap levels for a provided image
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageMipmaps(image)
+      #   ImageMipmaps : Compute all mipmap levels for a provided image
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageMipmaps, :ImageMipmaps, [:pointer], :void],
 
-      # ImageDither : Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
-      # @param image [Image *]
-      # @param rBpp [int]
-      # @param gBpp [int]
-      # @param bBpp [int]
-      # @param aBpp [int]
-      # @return [void]
+      # @!method ImageDither(image, rBpp, gBpp, bBpp, aBpp)
+      #   ImageDither : Dither image data to 16bpp or lower (Floyd-Steinberg dithering)
+      #   @param image [Image *]
+      #   @param rBpp [int]
+      #   @param gBpp [int]
+      #   @param bBpp [int]
+      #   @param aBpp [int]
+      #   @return [void]
       [:ImageDither, :ImageDither, [:pointer, :int, :int, :int, :int], :void],
 
-      # ImageFlipVertical : Flip image vertically
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageFlipVertical(image)
+      #   ImageFlipVertical : Flip image vertically
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageFlipVertical, :ImageFlipVertical, [:pointer], :void],
 
-      # ImageFlipHorizontal : Flip image horizontally
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageFlipHorizontal(image)
+      #   ImageFlipHorizontal : Flip image horizontally
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageFlipHorizontal, :ImageFlipHorizontal, [:pointer], :void],
 
-      # ImageRotateCW : Rotate image clockwise 90deg
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageRotateCW(image)
+      #   ImageRotateCW : Rotate image clockwise 90deg
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageRotateCW, :ImageRotateCW, [:pointer], :void],
 
-      # ImageRotateCCW : Rotate image counter-clockwise 90deg
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageRotateCCW(image)
+      #   ImageRotateCCW : Rotate image counter-clockwise 90deg
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageRotateCCW, :ImageRotateCCW, [:pointer], :void],
 
-      # ImageColorTint : Modify image color: tint
-      # @param image [Image *]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageColorTint(image, color)
+      #   ImageColorTint : Modify image color: tint
+      #   @param image [Image *]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageColorTint, :ImageColorTint, [:pointer, Color.by_value], :void],
 
-      # ImageColorInvert : Modify image color: invert
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageColorInvert(image)
+      #   ImageColorInvert : Modify image color: invert
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageColorInvert, :ImageColorInvert, [:pointer], :void],
 
-      # ImageColorGrayscale : Modify image color: grayscale
-      # @param image [Image *]
-      # @return [void]
+      # @!method ImageColorGrayscale(image)
+      #   ImageColorGrayscale : Modify image color: grayscale
+      #   @param image [Image *]
+      #   @return [void]
       [:ImageColorGrayscale, :ImageColorGrayscale, [:pointer], :void],
 
-      # ImageColorContrast : Modify image color: contrast (-100 to 100)
-      # @param image [Image *]
-      # @param contrast [float]
-      # @return [void]
+      # @!method ImageColorContrast(image, contrast)
+      #   ImageColorContrast : Modify image color: contrast (-100 to 100)
+      #   @param image [Image *]
+      #   @param contrast [float]
+      #   @return [void]
       [:ImageColorContrast, :ImageColorContrast, [:pointer, :float], :void],
 
-      # ImageColorBrightness : Modify image color: brightness (-255 to 255)
-      # @param image [Image *]
-      # @param brightness [int]
-      # @return [void]
+      # @!method ImageColorBrightness(image, brightness)
+      #   ImageColorBrightness : Modify image color: brightness (-255 to 255)
+      #   @param image [Image *]
+      #   @param brightness [int]
+      #   @return [void]
       [:ImageColorBrightness, :ImageColorBrightness, [:pointer, :int], :void],
 
-      # ImageColorReplace : Modify image color: replace color
-      # @param image [Image *]
-      # @param color [Color]
-      # @param replace [Color]
-      # @return [void]
+      # @!method ImageColorReplace(image, color, replace)
+      #   ImageColorReplace : Modify image color: replace color
+      #   @param image [Image *]
+      #   @param color [Color]
+      #   @param replace [Color]
+      #   @return [void]
       [:ImageColorReplace, :ImageColorReplace, [:pointer, Color.by_value, Color.by_value], :void],
 
-      # LoadImageColors : Load color data from image as a Color array (RGBA - 32bit)
-      # @param image [Image]
-      # @return [Color *]
+      # @!method LoadImageColors(image)
+      #   LoadImageColors : Load color data from image as a Color array (RGBA - 32bit)
+      #   @param image [Image]
+      #   @return [Color *]
       [:LoadImageColors, :LoadImageColors, [Image.by_value], :pointer],
 
-      # LoadImagePalette : Load colors palette from image as a Color array (RGBA - 32bit)
-      # @param image [Image]
-      # @param maxPaletteSize [int]
-      # @param colorCount [int *]
-      # @return [Color *]
+      # @!method LoadImagePalette(image, maxPaletteSize, colorCount)
+      #   LoadImagePalette : Load colors palette from image as a Color array (RGBA - 32bit)
+      #   @param image [Image]
+      #   @param maxPaletteSize [int]
+      #   @param colorCount [int *]
+      #   @return [Color *]
       [:LoadImagePalette, :LoadImagePalette, [Image.by_value, :int, :pointer], :pointer],
 
-      # UnloadImageColors : Unload color data loaded with LoadImageColors()
-      # @param colors [Color *]
-      # @return [void]
+      # @!method UnloadImageColors(colors)
+      #   UnloadImageColors : Unload color data loaded with LoadImageColors()
+      #   @param colors [Color *]
+      #   @return [void]
       [:UnloadImageColors, :UnloadImageColors, [:pointer], :void],
 
-      # UnloadImagePalette : Unload colors palette loaded with LoadImagePalette()
-      # @param colors [Color *]
-      # @return [void]
+      # @!method UnloadImagePalette(colors)
+      #   UnloadImagePalette : Unload colors palette loaded with LoadImagePalette()
+      #   @param colors [Color *]
+      #   @return [void]
       [:UnloadImagePalette, :UnloadImagePalette, [:pointer], :void],
 
-      # GetImageAlphaBorder : Get image alpha border rectangle
-      # @param image [Image]
-      # @param threshold [float]
-      # @return [Rectangle]
+      # @!method GetImageAlphaBorder(image, threshold)
+      #   GetImageAlphaBorder : Get image alpha border rectangle
+      #   @param image [Image]
+      #   @param threshold [float]
+      #   @return [Rectangle]
       [:GetImageAlphaBorder, :GetImageAlphaBorder, [Image.by_value, :float], Rectangle.by_value],
 
-      # GetImageColor : Get image pixel color at (x, y) position
-      # @param image [Image]
-      # @param x [int]
-      # @param y [int]
-      # @return [Color]
+      # @!method GetImageColor(image, x, y)
+      #   GetImageColor : Get image pixel color at (x, y) position
+      #   @param image [Image]
+      #   @param x [int]
+      #   @param y [int]
+      #   @return [Color]
       [:GetImageColor, :GetImageColor, [Image.by_value, :int, :int], Color.by_value],
 
-      # ImageClearBackground : Clear image background with given color
-      # @param dst [Image *]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageClearBackground(dst, color)
+      #   ImageClearBackground : Clear image background with given color
+      #   @param dst [Image *]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageClearBackground, :ImageClearBackground, [:pointer, Color.by_value], :void],
 
-      # ImageDrawPixel : Draw pixel within an image
-      # @param dst [Image *]
-      # @param posX [int]
-      # @param posY [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawPixel(dst, posX, posY, color)
+      #   ImageDrawPixel : Draw pixel within an image
+      #   @param dst [Image *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawPixel, :ImageDrawPixel, [:pointer, :int, :int, Color.by_value], :void],
 
-      # ImageDrawPixelV : Draw pixel within an image (Vector version)
-      # @param dst [Image *]
-      # @param position [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawPixelV(dst, position, color)
+      #   ImageDrawPixelV : Draw pixel within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param position [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawPixelV, :ImageDrawPixelV, [:pointer, Vector2.by_value, Color.by_value], :void],
 
-      # ImageDrawLine : Draw line within an image
-      # @param dst [Image *]
-      # @param startPosX [int]
-      # @param startPosY [int]
-      # @param endPosX [int]
-      # @param endPosY [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color)
+      #   ImageDrawLine : Draw line within an image
+      #   @param dst [Image *]
+      #   @param startPosX [int]
+      #   @param startPosY [int]
+      #   @param endPosX [int]
+      #   @param endPosY [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawLine, :ImageDrawLine, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
 
-      # ImageDrawLineV : Draw line within an image (Vector version)
-      # @param dst [Image *]
-      # @param start [Vector2]
-      # @param end [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawLineV(dst, start, end, color)
+      #   ImageDrawLineV : Draw line within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param start [Vector2]
+      #   @param end [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawLineV, :ImageDrawLineV, [:pointer, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # ImageDrawCircle : Draw a filled circle within an image
-      # @param dst [Image *]
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radius [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawCircle(dst, centerX, centerY, radius, color)
+      #   ImageDrawCircle : Draw a filled circle within an image
+      #   @param dst [Image *]
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawCircle, :ImageDrawCircle, [:pointer, :int, :int, :int, Color.by_value], :void],
 
-      # ImageDrawCircleV : Draw a filled circle within an image (Vector version)
-      # @param dst [Image *]
-      # @param center [Vector2]
-      # @param radius [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawCircleV(dst, center, radius, color)
+      #   ImageDrawCircleV : Draw a filled circle within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param center [Vector2]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawCircleV, :ImageDrawCircleV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
 
-      # ImageDrawCircleLines : Draw circle outline within an image
-      # @param dst [Image *]
-      # @param centerX [int]
-      # @param centerY [int]
-      # @param radius [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawCircleLines(dst, centerX, centerY, radius, color)
+      #   ImageDrawCircleLines : Draw circle outline within an image
+      #   @param dst [Image *]
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawCircleLines, :ImageDrawCircleLines, [:pointer, :int, :int, :int, Color.by_value], :void],
 
-      # ImageDrawCircleLinesV : Draw circle outline within an image (Vector version)
-      # @param dst [Image *]
-      # @param center [Vector2]
-      # @param radius [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawCircleLinesV(dst, center, radius, color)
+      #   ImageDrawCircleLinesV : Draw circle outline within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param center [Vector2]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawCircleLinesV, :ImageDrawCircleLinesV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
 
-      # ImageDrawRectangle : Draw rectangle within an image
-      # @param dst [Image *]
-      # @param posX [int]
-      # @param posY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawRectangle(dst, posX, posY, width, height, color)
+      #   ImageDrawRectangle : Draw rectangle within an image
+      #   @param dst [Image *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawRectangle, :ImageDrawRectangle, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
 
-      # ImageDrawRectangleV : Draw rectangle within an image (Vector version)
-      # @param dst [Image *]
-      # @param position [Vector2]
-      # @param size [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawRectangleV(dst, position, size, color)
+      #   ImageDrawRectangleV : Draw rectangle within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param position [Vector2]
+      #   @param size [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawRectangleV, :ImageDrawRectangleV, [:pointer, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # ImageDrawRectangleRec : Draw rectangle within an image
-      # @param dst [Image *]
-      # @param rec [Rectangle]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawRectangleRec(dst, rec, color)
+      #   ImageDrawRectangleRec : Draw rectangle within an image
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawRectangleRec, :ImageDrawRectangleRec, [:pointer, Rectangle.by_value, Color.by_value], :void],
 
-      # ImageDrawRectangleLines : Draw rectangle lines within an image
-      # @param dst [Image *]
-      # @param rec [Rectangle]
-      # @param thick [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawRectangleLines(dst, rec, thick, color)
+      #   ImageDrawRectangleLines : Draw rectangle lines within an image
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param thick [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
 
-      # ImageDraw : Draw a source image within a destination image (tint applied to source)
-      # @param dst [Image *]
-      # @param src [Image]
-      # @param srcRec [Rectangle]
-      # @param dstRec [Rectangle]
-      # @param tint [Color]
-      # @return [void]
+      # @!method ImageDraw(dst, src, srcRec, dstRec, tint)
+      #   ImageDraw : Draw a source image within a destination image (tint applied to source)
+      #   @param dst [Image *]
+      #   @param src [Image]
+      #   @param srcRec [Rectangle]
+      #   @param dstRec [Rectangle]
+      #   @param tint [Color]
+      #   @return [void]
       [:ImageDraw, :ImageDraw, [:pointer, Image.by_value, Rectangle.by_value, Rectangle.by_value, Color.by_value], :void],
 
-      # ImageDrawText : Draw text (using default font) within an image (destination)
-      # @param dst [Image *]
-      # @param text [const char *]
-      # @param posX [int]
-      # @param posY [int]
-      # @param fontSize [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method ImageDrawText(dst, text, posX, posY, fontSize, color)
+      #   ImageDrawText : Draw text (using default font) within an image (destination)
+      #   @param dst [Image *]
+      #   @param text [const char *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param fontSize [int]
+      #   @param color [Color]
+      #   @return [void]
       [:ImageDrawText, :ImageDrawText, [:pointer, :pointer, :int, :int, :int, Color.by_value], :void],
 
-      # ImageDrawTextEx : Draw text (custom sprite font) within an image (destination)
-      # @param dst [Image *]
-      # @param font [Font]
-      # @param text [const char *]
-      # @param position [Vector2]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint)
+      #   ImageDrawTextEx : Draw text (custom sprite font) within an image (destination)
+      #   @param dst [Image *]
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param position [Vector2]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:ImageDrawTextEx, :ImageDrawTextEx, [:pointer, Font.by_value, :pointer, Vector2.by_value, :float, :float, Color.by_value], :void],
 
-      # LoadTexture : Load texture from file into GPU memory (VRAM)
-      # @param fileName [const char *]
-      # @return [Texture2D]
+      # @!method LoadTexture(fileName)
+      #   LoadTexture : Load texture from file into GPU memory (VRAM)
+      #   @param fileName [const char *]
+      #   @return [Texture2D]
       [:LoadTexture, :LoadTexture, [:pointer], Texture2D.by_value],
 
-      # LoadTextureFromImage : Load texture from image data
-      # @param image [Image]
-      # @return [Texture2D]
+      # @!method LoadTextureFromImage(image)
+      #   LoadTextureFromImage : Load texture from image data
+      #   @param image [Image]
+      #   @return [Texture2D]
       [:LoadTextureFromImage, :LoadTextureFromImage, [Image.by_value], Texture2D.by_value],
 
-      # LoadTextureCubemap : Load cubemap from image, multiple image cubemap layouts supported
-      # @param image [Image]
-      # @param layout [int]
-      # @return [TextureCubemap]
+      # @!method LoadTextureCubemap(image, layout)
+      #   LoadTextureCubemap : Load cubemap from image, multiple image cubemap layouts supported
+      #   @param image [Image]
+      #   @param layout [int]
+      #   @return [TextureCubemap]
       [:LoadTextureCubemap, :LoadTextureCubemap, [Image.by_value, :int], TextureCubemap.by_value],
 
-      # LoadRenderTexture : Load texture for rendering (framebuffer)
-      # @param width [int]
-      # @param height [int]
-      # @return [RenderTexture2D]
+      # @!method LoadRenderTexture(width, height)
+      #   LoadRenderTexture : Load texture for rendering (framebuffer)
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [RenderTexture2D]
       [:LoadRenderTexture, :LoadRenderTexture, [:int, :int], RenderTexture2D.by_value],
 
-      # IsTextureReady : Check if a texture is ready
-      # @param texture [Texture2D]
-      # @return [bool]
+      # @!method IsTextureReady(texture)
+      #   IsTextureReady : Check if a texture is ready
+      #   @param texture [Texture2D]
+      #   @return [bool]
       [:IsTextureReady, :IsTextureReady, [Texture2D.by_value], :bool],
 
-      # UnloadTexture : Unload texture from GPU memory (VRAM)
-      # @param texture [Texture2D]
-      # @return [void]
+      # @!method UnloadTexture(texture)
+      #   UnloadTexture : Unload texture from GPU memory (VRAM)
+      #   @param texture [Texture2D]
+      #   @return [void]
       [:UnloadTexture, :UnloadTexture, [Texture2D.by_value], :void],
 
-      # IsRenderTextureReady : Check if a render texture is ready
-      # @param target [RenderTexture2D]
-      # @return [bool]
+      # @!method IsRenderTextureReady(target)
+      #   IsRenderTextureReady : Check if a render texture is ready
+      #   @param target [RenderTexture2D]
+      #   @return [bool]
       [:IsRenderTextureReady, :IsRenderTextureReady, [RenderTexture2D.by_value], :bool],
 
-      # UnloadRenderTexture : Unload render texture from GPU memory (VRAM)
-      # @param target [RenderTexture2D]
-      # @return [void]
+      # @!method UnloadRenderTexture(target)
+      #   UnloadRenderTexture : Unload render texture from GPU memory (VRAM)
+      #   @param target [RenderTexture2D]
+      #   @return [void]
       [:UnloadRenderTexture, :UnloadRenderTexture, [RenderTexture2D.by_value], :void],
 
-      # UpdateTexture : Update GPU texture with new data
-      # @param texture [Texture2D]
-      # @param pixels [const void *]
-      # @return [void]
+      # @!method UpdateTexture(texture, pixels)
+      #   UpdateTexture : Update GPU texture with new data
+      #   @param texture [Texture2D]
+      #   @param pixels [const void *]
+      #   @return [void]
       [:UpdateTexture, :UpdateTexture, [Texture2D.by_value, :pointer], :void],
 
-      # UpdateTextureRec : Update GPU texture rectangle with new data
-      # @param texture [Texture2D]
-      # @param rec [Rectangle]
-      # @param pixels [const void *]
-      # @return [void]
+      # @!method UpdateTextureRec(texture, rec, pixels)
+      #   UpdateTextureRec : Update GPU texture rectangle with new data
+      #   @param texture [Texture2D]
+      #   @param rec [Rectangle]
+      #   @param pixels [const void *]
+      #   @return [void]
       [:UpdateTextureRec, :UpdateTextureRec, [Texture2D.by_value, Rectangle.by_value, :pointer], :void],
 
-      # GenTextureMipmaps : Generate GPU mipmaps for a texture
-      # @param texture [Texture2D *]
-      # @return [void]
+      # @!method GenTextureMipmaps(texture)
+      #   GenTextureMipmaps : Generate GPU mipmaps for a texture
+      #   @param texture [Texture2D *]
+      #   @return [void]
       [:GenTextureMipmaps, :GenTextureMipmaps, [:pointer], :void],
 
-      # SetTextureFilter : Set texture scaling filter mode
-      # @param texture [Texture2D]
-      # @param filter [int]
-      # @return [void]
+      # @!method SetTextureFilter(texture, filter)
+      #   SetTextureFilter : Set texture scaling filter mode
+      #   @param texture [Texture2D]
+      #   @param filter [int]
+      #   @return [void]
       [:SetTextureFilter, :SetTextureFilter, [Texture2D.by_value, :int], :void],
 
-      # SetTextureWrap : Set texture wrapping mode
-      # @param texture [Texture2D]
-      # @param wrap [int]
-      # @return [void]
+      # @!method SetTextureWrap(texture, wrap)
+      #   SetTextureWrap : Set texture wrapping mode
+      #   @param texture [Texture2D]
+      #   @param wrap [int]
+      #   @return [void]
       [:SetTextureWrap, :SetTextureWrap, [Texture2D.by_value, :int], :void],
 
-      # DrawTexture : Draw a Texture2D
-      # @param texture [Texture2D]
-      # @param posX [int]
-      # @param posY [int]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTexture(texture, posX, posY, tint)
+      #   DrawTexture : Draw a Texture2D
+      #   @param texture [Texture2D]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTexture, :DrawTexture, [Texture2D.by_value, :int, :int, Color.by_value], :void],
 
-      # DrawTextureV : Draw a Texture2D with position defined as Vector2
-      # @param texture [Texture2D]
-      # @param position [Vector2]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextureV(texture, position, tint)
+      #   DrawTextureV : Draw a Texture2D with position defined as Vector2
+      #   @param texture [Texture2D]
+      #   @param position [Vector2]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextureV, :DrawTextureV, [Texture2D.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawTextureEx : Draw a Texture2D with extended parameters
-      # @param texture [Texture2D]
-      # @param position [Vector2]
-      # @param rotation [float]
-      # @param scale [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextureEx(texture, position, rotation, scale, tint)
+      #   DrawTextureEx : Draw a Texture2D with extended parameters
+      #   @param texture [Texture2D]
+      #   @param position [Vector2]
+      #   @param rotation [float]
+      #   @param scale [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextureEx, :DrawTextureEx, [Texture2D.by_value, Vector2.by_value, :float, :float, Color.by_value], :void],
 
-      # DrawTextureRec : Draw a part of a texture defined by a rectangle
-      # @param texture [Texture2D]
-      # @param source [Rectangle]
-      # @param position [Vector2]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextureRec(texture, source, position, tint)
+      #   DrawTextureRec : Draw a part of a texture defined by a rectangle
+      #   @param texture [Texture2D]
+      #   @param source [Rectangle]
+      #   @param position [Vector2]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextureRec, :DrawTextureRec, [Texture2D.by_value, Rectangle.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawTexturePro : Draw a part of a texture defined by a rectangle with 'pro' parameters
-      # @param texture [Texture2D]
-      # @param source [Rectangle]
-      # @param dest [Rectangle]
-      # @param origin [Vector2]
-      # @param rotation [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTexturePro(texture, source, dest, origin, rotation, tint)
+      #   DrawTexturePro : Draw a part of a texture defined by a rectangle with 'pro' parameters
+      #   @param texture [Texture2D]
+      #   @param source [Rectangle]
+      #   @param dest [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTexturePro, :DrawTexturePro, [Texture2D.by_value, Rectangle.by_value, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawTextureNPatch : Draws a texture (or part of it) that stretches or shrinks nicely
-      # @param texture [Texture2D]
-      # @param nPatchInfo [NPatchInfo]
-      # @param dest [Rectangle]
-      # @param origin [Vector2]
-      # @param rotation [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)
+      #   DrawTextureNPatch : Draws a texture (or part of it) that stretches or shrinks nicely
+      #   @param texture [Texture2D]
+      #   @param nPatchInfo [NPatchInfo]
+      #   @param dest [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextureNPatch, :DrawTextureNPatch, [Texture2D.by_value, NPatchInfo.by_value, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # Fade : Get color with alpha applied, alpha goes from 0.0f to 1.0f
-      # @param color [Color]
-      # @param alpha [float]
-      # @return [Color]
+      # @!method Fade(color, alpha)
+      #   Fade : Get color with alpha applied, alpha goes from 0.0f to 1.0f
+      #   @param color [Color]
+      #   @param alpha [float]
+      #   @return [Color]
       [:Fade, :Fade, [Color.by_value, :float], Color.by_value],
 
-      # ColorToInt : Get hexadecimal value for a Color
-      # @param color [Color]
-      # @return [int]
+      # @!method ColorToInt(color)
+      #   ColorToInt : Get hexadecimal value for a Color
+      #   @param color [Color]
+      #   @return [int]
       [:ColorToInt, :ColorToInt, [Color.by_value], :int],
 
-      # ColorNormalize : Get Color normalized as float [0..1]
-      # @param color [Color]
-      # @return [Vector4]
+      # @!method ColorNormalize(color)
+      #   ColorNormalize : Get Color normalized as float [0..1]
+      #   @param color [Color]
+      #   @return [Vector4]
       [:ColorNormalize, :ColorNormalize, [Color.by_value], Vector4.by_value],
 
-      # ColorFromNormalized : Get Color from normalized values [0..1]
-      # @param normalized [Vector4]
-      # @return [Color]
+      # @!method ColorFromNormalized(normalized)
+      #   ColorFromNormalized : Get Color from normalized values [0..1]
+      #   @param normalized [Vector4]
+      #   @return [Color]
       [:ColorFromNormalized, :ColorFromNormalized, [Vector4.by_value], Color.by_value],
 
-      # ColorToHSV : Get HSV values for a Color, hue [0..360], saturation/value [0..1]
-      # @param color [Color]
-      # @return [Vector3]
+      # @!method ColorToHSV(color)
+      #   ColorToHSV : Get HSV values for a Color, hue [0..360], saturation/value [0..1]
+      #   @param color [Color]
+      #   @return [Vector3]
       [:ColorToHSV, :ColorToHSV, [Color.by_value], Vector3.by_value],
 
-      # ColorFromHSV : Get a Color from HSV values, hue [0..360], saturation/value [0..1]
-      # @param hue [float]
-      # @param saturation [float]
-      # @param value [float]
-      # @return [Color]
+      # @!method ColorFromHSV(hue, saturation, value)
+      #   ColorFromHSV : Get a Color from HSV values, hue [0..360], saturation/value [0..1]
+      #   @param hue [float]
+      #   @param saturation [float]
+      #   @param value [float]
+      #   @return [Color]
       [:ColorFromHSV, :ColorFromHSV, [:float, :float, :float], Color.by_value],
 
-      # ColorTint : Get color multiplied with another color
-      # @param color [Color]
-      # @param tint [Color]
-      # @return [Color]
+      # @!method ColorTint(color, tint)
+      #   ColorTint : Get color multiplied with another color
+      #   @param color [Color]
+      #   @param tint [Color]
+      #   @return [Color]
       [:ColorTint, :ColorTint, [Color.by_value, Color.by_value], Color.by_value],
 
-      # ColorBrightness : Get color with brightness correction, brightness factor goes from -1.0f to 1.0f
-      # @param color [Color]
-      # @param factor [float]
-      # @return [Color]
+      # @!method ColorBrightness(color, factor)
+      #   ColorBrightness : Get color with brightness correction, brightness factor goes from -1.0f to 1.0f
+      #   @param color [Color]
+      #   @param factor [float]
+      #   @return [Color]
       [:ColorBrightness, :ColorBrightness, [Color.by_value, :float], Color.by_value],
 
-      # ColorContrast : Get color with contrast correction, contrast values between -1.0f and 1.0f
-      # @param color [Color]
-      # @param contrast [float]
-      # @return [Color]
+      # @!method ColorContrast(color, contrast)
+      #   ColorContrast : Get color with contrast correction, contrast values between -1.0f and 1.0f
+      #   @param color [Color]
+      #   @param contrast [float]
+      #   @return [Color]
       [:ColorContrast, :ColorContrast, [Color.by_value, :float], Color.by_value],
 
-      # ColorAlpha : Get color with alpha applied, alpha goes from 0.0f to 1.0f
-      # @param color [Color]
-      # @param alpha [float]
-      # @return [Color]
+      # @!method ColorAlpha(color, alpha)
+      #   ColorAlpha : Get color with alpha applied, alpha goes from 0.0f to 1.0f
+      #   @param color [Color]
+      #   @param alpha [float]
+      #   @return [Color]
       [:ColorAlpha, :ColorAlpha, [Color.by_value, :float], Color.by_value],
 
-      # ColorAlphaBlend : Get src alpha-blended into dst color with tint
-      # @param dst [Color]
-      # @param src [Color]
-      # @param tint [Color]
-      # @return [Color]
+      # @!method ColorAlphaBlend(dst, src, tint)
+      #   ColorAlphaBlend : Get src alpha-blended into dst color with tint
+      #   @param dst [Color]
+      #   @param src [Color]
+      #   @param tint [Color]
+      #   @return [Color]
       [:ColorAlphaBlend, :ColorAlphaBlend, [Color.by_value, Color.by_value, Color.by_value], Color.by_value],
 
-      # GetColor : Get Color structure from hexadecimal value
-      # @param hexValue [unsigned int]
-      # @return [Color]
+      # @!method GetColor(hexValue)
+      #   GetColor : Get Color structure from hexadecimal value
+      #   @param hexValue [unsigned int]
+      #   @return [Color]
       [:GetColor, :GetColor, [:uint], Color.by_value],
 
-      # GetPixelColor : Get Color from a source pixel pointer of certain format
-      # @param srcPtr [void *]
-      # @param format [int]
-      # @return [Color]
+      # @!method GetPixelColor(srcPtr, format)
+      #   GetPixelColor : Get Color from a source pixel pointer of certain format
+      #   @param srcPtr [void *]
+      #   @param format [int]
+      #   @return [Color]
       [:GetPixelColor, :GetPixelColor, [:pointer, :int], Color.by_value],
 
-      # SetPixelColor : Set color formatted into destination pixel pointer
-      # @param dstPtr [void *]
-      # @param color [Color]
-      # @param format [int]
-      # @return [void]
+      # @!method SetPixelColor(dstPtr, color, format)
+      #   SetPixelColor : Set color formatted into destination pixel pointer
+      #   @param dstPtr [void *]
+      #   @param color [Color]
+      #   @param format [int]
+      #   @return [void]
       [:SetPixelColor, :SetPixelColor, [:pointer, Color.by_value, :int], :void],
 
-      # GetPixelDataSize : Get pixel data size in bytes for certain format
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @return [int]
+      # @!method GetPixelDataSize(width, height, format)
+      #   GetPixelDataSize : Get pixel data size in bytes for certain format
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @return [int]
       [:GetPixelDataSize, :GetPixelDataSize, [:int, :int, :int], :int],
 
-      # GetFontDefault : Get the default Font
-      # @return [Font]
+      # @!method GetFontDefault()
+      #   GetFontDefault : Get the default Font
+      #   @return [Font]
       [:GetFontDefault, :GetFontDefault, [], Font.by_value],
 
-      # LoadFont : Load font from file into GPU memory (VRAM)
-      # @param fileName [const char *]
-      # @return [Font]
+      # @!method LoadFont(fileName)
+      #   LoadFont : Load font from file into GPU memory (VRAM)
+      #   @param fileName [const char *]
+      #   @return [Font]
       [:LoadFont, :LoadFont, [:pointer], Font.by_value],
 
-      # LoadFontEx : Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
-      # @param fileName [const char *]
-      # @param fontSize [int]
-      # @param fontChars [int *]
-      # @param glyphCount [int]
-      # @return [Font]
+      # @!method LoadFontEx(fileName, fontSize, fontChars, glyphCount)
+      #   LoadFontEx : Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+      #   @param fileName [const char *]
+      #   @param fontSize [int]
+      #   @param fontChars [int *]
+      #   @param glyphCount [int]
+      #   @return [Font]
       [:LoadFontEx, :LoadFontEx, [:pointer, :int, :pointer, :int], Font.by_value],
 
-      # LoadFontFromImage : Load font from Image (XNA style)
-      # @param image [Image]
-      # @param key [Color]
-      # @param firstChar [int]
-      # @return [Font]
+      # @!method LoadFontFromImage(image, key, firstChar)
+      #   LoadFontFromImage : Load font from Image (XNA style)
+      #   @param image [Image]
+      #   @param key [Color]
+      #   @param firstChar [int]
+      #   @return [Font]
       [:LoadFontFromImage, :LoadFontFromImage, [Image.by_value, Color.by_value, :int], Font.by_value],
 
-      # LoadFontFromMemory : Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
-      # @param fileType [const char *]
-      # @param fileData [const unsigned char *]
-      # @param dataSize [int]
-      # @param fontSize [int]
-      # @param fontChars [int *]
-      # @param glyphCount [int]
-      # @return [Font]
+      # @!method LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount)
+      #   LoadFontFromMemory : Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
+      #   @param fileType [const char *]
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param fontSize [int]
+      #   @param fontChars [int *]
+      #   @param glyphCount [int]
+      #   @return [Font]
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
 
-      # IsFontReady : Check if a font is ready
-      # @param font [Font]
-      # @return [bool]
+      # @!method IsFontReady(font)
+      #   IsFontReady : Check if a font is ready
+      #   @param font [Font]
+      #   @return [bool]
       [:IsFontReady, :IsFontReady, [Font.by_value], :bool],
 
-      # LoadFontData : Load font data for further use
-      # @param fileData [const unsigned char *]
-      # @param dataSize [int]
-      # @param fontSize [int]
-      # @param fontChars [int *]
-      # @param glyphCount [int]
-      # @param type [int]
-      # @return [GlyphInfo *]
+      # @!method LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type)
+      #   LoadFontData : Load font data for further use
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param fontSize [int]
+      #   @param fontChars [int *]
+      #   @param glyphCount [int]
+      #   @param type [int]
+      #   @return [GlyphInfo *]
       [:LoadFontData, :LoadFontData, [:pointer, :int, :int, :pointer, :int, :int], :pointer],
 
-      # GenImageFontAtlas : Generate image font atlas using chars info
-      # @param chars [const GlyphInfo *]
-      # @param recs [Rectangle **]
-      # @param glyphCount [int]
-      # @param fontSize [int]
-      # @param padding [int]
-      # @param packMethod [int]
-      # @return [Image]
+      # @!method GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod)
+      #   GenImageFontAtlas : Generate image font atlas using chars info
+      #   @param chars [const GlyphInfo *]
+      #   @param recs [Rectangle **]
+      #   @param glyphCount [int]
+      #   @param fontSize [int]
+      #   @param padding [int]
+      #   @param packMethod [int]
+      #   @return [Image]
       [:GenImageFontAtlas, :GenImageFontAtlas, [:pointer, :pointer, :int, :int, :int, :int], Image.by_value],
 
-      # UnloadFontData : Unload font chars info data (RAM)
-      # @param chars [GlyphInfo *]
-      # @param glyphCount [int]
-      # @return [void]
+      # @!method UnloadFontData(chars, glyphCount)
+      #   UnloadFontData : Unload font chars info data (RAM)
+      #   @param chars [GlyphInfo *]
+      #   @param glyphCount [int]
+      #   @return [void]
       [:UnloadFontData, :UnloadFontData, [:pointer, :int], :void],
 
-      # UnloadFont : Unload font from GPU memory (VRAM)
-      # @param font [Font]
-      # @return [void]
+      # @!method UnloadFont(font)
+      #   UnloadFont : Unload font from GPU memory (VRAM)
+      #   @param font [Font]
+      #   @return [void]
       [:UnloadFont, :UnloadFont, [Font.by_value], :void],
 
-      # ExportFontAsCode : Export font as code file, returns true on success
-      # @param font [Font]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportFontAsCode(font, fileName)
+      #   ExportFontAsCode : Export font as code file, returns true on success
+      #   @param font [Font]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportFontAsCode, :ExportFontAsCode, [Font.by_value, :pointer], :bool],
 
-      # DrawFPS : Draw current FPS
-      # @param posX [int]
-      # @param posY [int]
-      # @return [void]
+      # @!method DrawFPS(posX, posY)
+      #   DrawFPS : Draw current FPS
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @return [void]
       [:DrawFPS, :DrawFPS, [:int, :int], :void],
 
-      # DrawText : Draw text (using default font)
-      # @param text [const char *]
-      # @param posX [int]
-      # @param posY [int]
-      # @param fontSize [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawText(text, posX, posY, fontSize, color)
+      #   DrawText : Draw text (using default font)
+      #   @param text [const char *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param fontSize [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawText, :DrawText, [:pointer, :int, :int, :int, Color.by_value], :void],
 
-      # DrawTextEx : Draw text using font and additional parameters
-      # @param font [Font]
-      # @param text [const char *]
-      # @param position [Vector2]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextEx(font, text, position, fontSize, spacing, tint)
+      #   DrawTextEx : Draw text using font and additional parameters
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param position [Vector2]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextEx, :DrawTextEx, [Font.by_value, :pointer, Vector2.by_value, :float, :float, Color.by_value], :void],
 
-      # DrawTextPro : Draw text using Font and pro parameters (rotation)
-      # @param font [Font]
-      # @param text [const char *]
-      # @param position [Vector2]
-      # @param origin [Vector2]
-      # @param rotation [float]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint)
+      #   DrawTextPro : Draw text using Font and pro parameters (rotation)
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param position [Vector2]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextPro, :DrawTextPro, [Font.by_value, :pointer, Vector2.by_value, Vector2.by_value, :float, :float, :float, Color.by_value], :void],
 
-      # DrawTextCodepoint : Draw one character (codepoint)
-      # @param font [Font]
-      # @param codepoint [int]
-      # @param position [Vector2]
-      # @param fontSize [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextCodepoint(font, codepoint, position, fontSize, tint)
+      #   DrawTextCodepoint : Draw one character (codepoint)
+      #   @param font [Font]
+      #   @param codepoint [int]
+      #   @param position [Vector2]
+      #   @param fontSize [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextCodepoint, :DrawTextCodepoint, [Font.by_value, :int, Vector2.by_value, :float, Color.by_value], :void],
 
-      # DrawTextCodepoints : Draw multiple character (codepoint)
-      # @param font [Font]
-      # @param codepoints [const int *]
-      # @param count [int]
-      # @param position [Vector2]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint)
+      #   DrawTextCodepoints : Draw multiple character (codepoint)
+      #   @param font [Font]
+      #   @param codepoints [const int *]
+      #   @param count [int]
+      #   @param position [Vector2]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawTextCodepoints, :DrawTextCodepoints, [Font.by_value, :pointer, :int, Vector2.by_value, :float, :float, Color.by_value], :void],
 
-      # MeasureText : Measure string width for default font
-      # @param text [const char *]
-      # @param fontSize [int]
-      # @return [int]
+      # @!method MeasureText(text, fontSize)
+      #   MeasureText : Measure string width for default font
+      #   @param text [const char *]
+      #   @param fontSize [int]
+      #   @return [int]
       [:MeasureText, :MeasureText, [:pointer, :int], :int],
 
-      # MeasureTextEx : Measure string size for Font
-      # @param font [Font]
-      # @param text [const char *]
-      # @param fontSize [float]
-      # @param spacing [float]
-      # @return [Vector2]
+      # @!method MeasureTextEx(font, text, fontSize, spacing)
+      #   MeasureTextEx : Measure string size for Font
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @return [Vector2]
       [:MeasureTextEx, :MeasureTextEx, [Font.by_value, :pointer, :float, :float], Vector2.by_value],
 
-      # GetGlyphIndex : Get glyph index position in font for a codepoint (unicode character), fallback to '?' if not found
-      # @param font [Font]
-      # @param codepoint [int]
-      # @return [int]
+      # @!method GetGlyphIndex(font, codepoint)
+      #   GetGlyphIndex : Get glyph index position in font for a codepoint (unicode character), fallback to '?' if not found
+      #   @param font [Font]
+      #   @param codepoint [int]
+      #   @return [int]
       [:GetGlyphIndex, :GetGlyphIndex, [Font.by_value, :int], :int],
 
-      # GetGlyphInfo : Get glyph font info data for a codepoint (unicode character), fallback to '?' if not found
-      # @param font [Font]
-      # @param codepoint [int]
-      # @return [GlyphInfo]
+      # @!method GetGlyphInfo(font, codepoint)
+      #   GetGlyphInfo : Get glyph font info data for a codepoint (unicode character), fallback to '?' if not found
+      #   @param font [Font]
+      #   @param codepoint [int]
+      #   @return [GlyphInfo]
       [:GetGlyphInfo, :GetGlyphInfo, [Font.by_value, :int], GlyphInfo.by_value],
 
-      # GetGlyphAtlasRec : Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to '?' if not found
-      # @param font [Font]
-      # @param codepoint [int]
-      # @return [Rectangle]
+      # @!method GetGlyphAtlasRec(font, codepoint)
+      #   GetGlyphAtlasRec : Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to '?' if not found
+      #   @param font [Font]
+      #   @param codepoint [int]
+      #   @return [Rectangle]
       [:GetGlyphAtlasRec, :GetGlyphAtlasRec, [Font.by_value, :int], Rectangle.by_value],
 
-      # LoadUTF8 : Load UTF-8 text encoded from codepoints array
-      # @param codepoints [const int *]
-      # @param length [int]
-      # @return [char *]
+      # @!method LoadUTF8(codepoints, length)
+      #   LoadUTF8 : Load UTF-8 text encoded from codepoints array
+      #   @param codepoints [const int *]
+      #   @param length [int]
+      #   @return [char *]
       [:LoadUTF8, :LoadUTF8, [:pointer, :int], :pointer],
 
-      # UnloadUTF8 : Unload UTF-8 text encoded from codepoints array
-      # @param text [char *]
-      # @return [void]
+      # @!method UnloadUTF8(text)
+      #   UnloadUTF8 : Unload UTF-8 text encoded from codepoints array
+      #   @param text [char *]
+      #   @return [void]
       [:UnloadUTF8, :UnloadUTF8, [:pointer], :void],
 
-      # LoadCodepoints : Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
-      # @param text [const char *]
-      # @param count [int *]
-      # @return [int *]
+      # @!method LoadCodepoints(text, count)
+      #   LoadCodepoints : Load all codepoints from a UTF-8 text string, codepoints count returned by parameter
+      #   @param text [const char *]
+      #   @param count [int *]
+      #   @return [int *]
       [:LoadCodepoints, :LoadCodepoints, [:pointer, :pointer], :pointer],
 
-      # UnloadCodepoints : Unload codepoints data from memory
-      # @param codepoints [int *]
-      # @return [void]
+      # @!method UnloadCodepoints(codepoints)
+      #   UnloadCodepoints : Unload codepoints data from memory
+      #   @param codepoints [int *]
+      #   @return [void]
       [:UnloadCodepoints, :UnloadCodepoints, [:pointer], :void],
 
-      # GetCodepointCount : Get total number of codepoints in a UTF-8 encoded string
-      # @param text [const char *]
-      # @return [int]
+      # @!method GetCodepointCount(text)
+      #   GetCodepointCount : Get total number of codepoints in a UTF-8 encoded string
+      #   @param text [const char *]
+      #   @return [int]
       [:GetCodepointCount, :GetCodepointCount, [:pointer], :int],
 
-      # GetCodepoint : Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-      # @param text [const char *]
-      # @param codepointSize [int *]
-      # @return [int]
+      # @!method GetCodepoint(text, codepointSize)
+      #   GetCodepoint : Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+      #   @param text [const char *]
+      #   @param codepointSize [int *]
+      #   @return [int]
       [:GetCodepoint, :GetCodepoint, [:pointer, :pointer], :int],
 
-      # GetCodepointNext : Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-      # @param text [const char *]
-      # @param codepointSize [int *]
-      # @return [int]
+      # @!method GetCodepointNext(text, codepointSize)
+      #   GetCodepointNext : Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+      #   @param text [const char *]
+      #   @param codepointSize [int *]
+      #   @return [int]
       [:GetCodepointNext, :GetCodepointNext, [:pointer, :pointer], :int],
 
-      # GetCodepointPrevious : Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
-      # @param text [const char *]
-      # @param codepointSize [int *]
-      # @return [int]
+      # @!method GetCodepointPrevious(text, codepointSize)
+      #   GetCodepointPrevious : Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure
+      #   @param text [const char *]
+      #   @param codepointSize [int *]
+      #   @return [int]
       [:GetCodepointPrevious, :GetCodepointPrevious, [:pointer, :pointer], :int],
 
-      # CodepointToUTF8 : Encode one codepoint into UTF-8 byte array (array length returned as parameter)
-      # @param codepoint [int]
-      # @param utf8Size [int *]
-      # @return [const char *]
+      # @!method CodepointToUTF8(codepoint, utf8Size)
+      #   CodepointToUTF8 : Encode one codepoint into UTF-8 byte array (array length returned as parameter)
+      #   @param codepoint [int]
+      #   @param utf8Size [int *]
+      #   @return [const char *]
       [:CodepointToUTF8, :CodepointToUTF8, [:int, :pointer], :pointer],
 
-      # TextCopy : Copy one string to another, returns bytes copied
-      # @param dst [char *]
-      # @param src [const char *]
-      # @return [int]
+      # @!method TextCopy(dst, src)
+      #   TextCopy : Copy one string to another, returns bytes copied
+      #   @param dst [char *]
+      #   @param src [const char *]
+      #   @return [int]
       [:TextCopy, :TextCopy, [:pointer, :pointer], :int],
 
-      # TextIsEqual : Check if two text string are equal
-      # @param text1 [const char *]
-      # @param text2 [const char *]
-      # @return [bool]
+      # @!method TextIsEqual(text1, text2)
+      #   TextIsEqual : Check if two text string are equal
+      #   @param text1 [const char *]
+      #   @param text2 [const char *]
+      #   @return [bool]
       [:TextIsEqual, :TextIsEqual, [:pointer, :pointer], :bool],
 
-      # TextLength : Get text length, checks for '\0' ending
-      # @param text [const char *]
-      # @return [unsigned int]
+      # @!method TextLength(text)
+      #   TextLength : Get text length, checks for '\0' ending
+      #   @param text [const char *]
+      #   @return [unsigned int]
       [:TextLength, :TextLength, [:pointer], :uint],
 
-      # TextFormat : Text formatting with variables (sprintf() style)
-      # @param text [const char *]
-      # @param args [...]
-      # @return [const char *]
+      # @!method TextFormat(text, ...)
+      #   TextFormat : Text formatting with variables (sprintf() style)
+      #   @param text [const char *]
+      #   @param args [...]
+      #   @return [const char *]
       [:TextFormat, :TextFormat, [:pointer, :varargs], :pointer],
 
-      # TextSubtext : Get a piece of a text string
-      # @param text [const char *]
-      # @param position [int]
-      # @param length [int]
-      # @return [const char *]
+      # @!method TextSubtext(text, position, length)
+      #   TextSubtext : Get a piece of a text string
+      #   @param text [const char *]
+      #   @param position [int]
+      #   @param length [int]
+      #   @return [const char *]
       [:TextSubtext, :TextSubtext, [:pointer, :int, :int], :pointer],
 
-      # TextReplace : Replace text string (WARNING: memory must be freed!)
-      # @param text [char *]
-      # @param replace [const char *]
-      # @param by [const char *]
-      # @return [char *]
+      # @!method TextReplace(text, replace, by)
+      #   TextReplace : Replace text string (WARNING: memory must be freed!)
+      #   @param text [char *]
+      #   @param replace [const char *]
+      #   @param by [const char *]
+      #   @return [char *]
       [:TextReplace, :TextReplace, [:pointer, :pointer, :pointer], :pointer],
 
-      # TextInsert : Insert text in a position (WARNING: memory must be freed!)
-      # @param text [const char *]
-      # @param insert [const char *]
-      # @param position [int]
-      # @return [char *]
+      # @!method TextInsert(text, insert, position)
+      #   TextInsert : Insert text in a position (WARNING: memory must be freed!)
+      #   @param text [const char *]
+      #   @param insert [const char *]
+      #   @param position [int]
+      #   @return [char *]
       [:TextInsert, :TextInsert, [:pointer, :pointer, :int], :pointer],
 
-      # TextJoin : Join text strings with delimiter
-      # @param textList [const char **]
-      # @param count [int]
-      # @param delimiter [const char *]
-      # @return [const char *]
+      # @!method TextJoin(textList, count, delimiter)
+      #   TextJoin : Join text strings with delimiter
+      #   @param textList [const char **]
+      #   @param count [int]
+      #   @param delimiter [const char *]
+      #   @return [const char *]
       [:TextJoin, :TextJoin, [:pointer, :int, :pointer], :pointer],
 
-      # TextSplit : Split text into multiple strings
-      # @param text [const char *]
-      # @param delimiter [char]
-      # @param count [int *]
-      # @return [const char **]
+      # @!method TextSplit(text, delimiter, count)
+      #   TextSplit : Split text into multiple strings
+      #   @param text [const char *]
+      #   @param delimiter [char]
+      #   @param count [int *]
+      #   @return [const char **]
       [:TextSplit, :TextSplit, [:pointer, :char, :pointer], :pointer],
 
-      # TextAppend : Append text at specific position and move cursor!
-      # @param text [char *]
-      # @param append [const char *]
-      # @param position [int *]
-      # @return [void]
+      # @!method TextAppend(text, append, position)
+      #   TextAppend : Append text at specific position and move cursor!
+      #   @param text [char *]
+      #   @param append [const char *]
+      #   @param position [int *]
+      #   @return [void]
       [:TextAppend, :TextAppend, [:pointer, :pointer, :pointer], :void],
 
-      # TextFindIndex : Find first text occurrence within a string
-      # @param text [const char *]
-      # @param find [const char *]
-      # @return [int]
+      # @!method TextFindIndex(text, find)
+      #   TextFindIndex : Find first text occurrence within a string
+      #   @param text [const char *]
+      #   @param find [const char *]
+      #   @return [int]
       [:TextFindIndex, :TextFindIndex, [:pointer, :pointer], :int],
 
-      # TextToUpper : Get upper case version of provided string
-      # @param text [const char *]
-      # @return [const char *]
+      # @!method TextToUpper(text)
+      #   TextToUpper : Get upper case version of provided string
+      #   @param text [const char *]
+      #   @return [const char *]
       [:TextToUpper, :TextToUpper, [:pointer], :pointer],
 
-      # TextToLower : Get lower case version of provided string
-      # @param text [const char *]
-      # @return [const char *]
+      # @!method TextToLower(text)
+      #   TextToLower : Get lower case version of provided string
+      #   @param text [const char *]
+      #   @return [const char *]
       [:TextToLower, :TextToLower, [:pointer], :pointer],
 
-      # TextToPascal : Get Pascal case notation version of provided string
-      # @param text [const char *]
-      # @return [const char *]
+      # @!method TextToPascal(text)
+      #   TextToPascal : Get Pascal case notation version of provided string
+      #   @param text [const char *]
+      #   @return [const char *]
       [:TextToPascal, :TextToPascal, [:pointer], :pointer],
 
-      # TextToInteger : Get integer value from text (negative values not supported)
-      # @param text [const char *]
-      # @return [int]
+      # @!method TextToInteger(text)
+      #   TextToInteger : Get integer value from text (negative values not supported)
+      #   @param text [const char *]
+      #   @return [int]
       [:TextToInteger, :TextToInteger, [:pointer], :int],
 
-      # DrawLine3D : Draw a line in 3D world space
-      # @param startPos [Vector3]
-      # @param endPos [Vector3]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawLine3D(startPos, endPos, color)
+      #   DrawLine3D : Draw a line in 3D world space
+      #   @param startPos [Vector3]
+      #   @param endPos [Vector3]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawLine3D, :DrawLine3D, [Vector3.by_value, Vector3.by_value, Color.by_value], :void],
 
-      # DrawPoint3D : Draw a point in 3D space, actually a small line
-      # @param position [Vector3]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPoint3D(position, color)
+      #   DrawPoint3D : Draw a point in 3D space, actually a small line
+      #   @param position [Vector3]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPoint3D, :DrawPoint3D, [Vector3.by_value, Color.by_value], :void],
 
-      # DrawCircle3D : Draw a circle in 3D world space
-      # @param center [Vector3]
-      # @param radius [float]
-      # @param rotationAxis [Vector3]
-      # @param rotationAngle [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCircle3D(center, radius, rotationAxis, rotationAngle, color)
+      #   DrawCircle3D : Draw a circle in 3D world space
+      #   @param center [Vector3]
+      #   @param radius [float]
+      #   @param rotationAxis [Vector3]
+      #   @param rotationAngle [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCircle3D, :DrawCircle3D, [Vector3.by_value, :float, Vector3.by_value, :float, Color.by_value], :void],
 
-      # DrawTriangle3D : Draw a color-filled triangle (vertex in counter-clockwise order!)
-      # @param v1 [Vector3]
-      # @param v2 [Vector3]
-      # @param v3 [Vector3]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangle3D(v1, v2, v3, color)
+      #   DrawTriangle3D : Draw a color-filled triangle (vertex in counter-clockwise order!)
+      #   @param v1 [Vector3]
+      #   @param v2 [Vector3]
+      #   @param v3 [Vector3]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangle3D, :DrawTriangle3D, [Vector3.by_value, Vector3.by_value, Vector3.by_value, Color.by_value], :void],
 
-      # DrawTriangleStrip3D : Draw a triangle strip defined by points
-      # @param points [Vector3 *]
-      # @param pointCount [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawTriangleStrip3D(points, pointCount, color)
+      #   DrawTriangleStrip3D : Draw a triangle strip defined by points
+      #   @param points [Vector3 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawTriangleStrip3D, :DrawTriangleStrip3D, [:pointer, :int, Color.by_value], :void],
 
-      # DrawCube : Draw cube
-      # @param position [Vector3]
-      # @param width [float]
-      # @param height [float]
-      # @param length [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCube(position, width, height, length, color)
+      #   DrawCube : Draw cube
+      #   @param position [Vector3]
+      #   @param width [float]
+      #   @param height [float]
+      #   @param length [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCube, :DrawCube, [Vector3.by_value, :float, :float, :float, Color.by_value], :void],
 
-      # DrawCubeV : Draw cube (Vector version)
-      # @param position [Vector3]
-      # @param size [Vector3]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCubeV(position, size, color)
+      #   DrawCubeV : Draw cube (Vector version)
+      #   @param position [Vector3]
+      #   @param size [Vector3]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCubeV, :DrawCubeV, [Vector3.by_value, Vector3.by_value, Color.by_value], :void],
 
-      # DrawCubeWires : Draw cube wires
-      # @param position [Vector3]
-      # @param width [float]
-      # @param height [float]
-      # @param length [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCubeWires(position, width, height, length, color)
+      #   DrawCubeWires : Draw cube wires
+      #   @param position [Vector3]
+      #   @param width [float]
+      #   @param height [float]
+      #   @param length [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCubeWires, :DrawCubeWires, [Vector3.by_value, :float, :float, :float, Color.by_value], :void],
 
-      # DrawCubeWiresV : Draw cube wires (Vector version)
-      # @param position [Vector3]
-      # @param size [Vector3]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCubeWiresV(position, size, color)
+      #   DrawCubeWiresV : Draw cube wires (Vector version)
+      #   @param position [Vector3]
+      #   @param size [Vector3]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCubeWiresV, :DrawCubeWiresV, [Vector3.by_value, Vector3.by_value, Color.by_value], :void],
 
-      # DrawSphere : Draw sphere
-      # @param centerPos [Vector3]
-      # @param radius [float]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawSphere(centerPos, radius, color)
+      #   DrawSphere : Draw sphere
+      #   @param centerPos [Vector3]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawSphere, :DrawSphere, [Vector3.by_value, :float, Color.by_value], :void],
 
-      # DrawSphereEx : Draw sphere with extended parameters
-      # @param centerPos [Vector3]
-      # @param radius [float]
-      # @param rings [int]
-      # @param slices [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawSphereEx(centerPos, radius, rings, slices, color)
+      #   DrawSphereEx : Draw sphere with extended parameters
+      #   @param centerPos [Vector3]
+      #   @param radius [float]
+      #   @param rings [int]
+      #   @param slices [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawSphereEx, :DrawSphereEx, [Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # DrawSphereWires : Draw sphere wires
-      # @param centerPos [Vector3]
-      # @param radius [float]
-      # @param rings [int]
-      # @param slices [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawSphereWires(centerPos, radius, rings, slices, color)
+      #   DrawSphereWires : Draw sphere wires
+      #   @param centerPos [Vector3]
+      #   @param radius [float]
+      #   @param rings [int]
+      #   @param slices [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawSphereWires, :DrawSphereWires, [Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # DrawCylinder : Draw a cylinder/cone
-      # @param position [Vector3]
-      # @param radiusTop [float]
-      # @param radiusBottom [float]
-      # @param height [float]
-      # @param slices [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)
+      #   DrawCylinder : Draw a cylinder/cone
+      #   @param position [Vector3]
+      #   @param radiusTop [float]
+      #   @param radiusBottom [float]
+      #   @param height [float]
+      #   @param slices [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCylinder, :DrawCylinder, [Vector3.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCylinderEx : Draw a cylinder with base at startPos and top at endPos
-      # @param startPos [Vector3]
-      # @param endPos [Vector3]
-      # @param startRadius [float]
-      # @param endRadius [float]
-      # @param sides [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color)
+      #   DrawCylinderEx : Draw a cylinder with base at startPos and top at endPos
+      #   @param startPos [Vector3]
+      #   @param endPos [Vector3]
+      #   @param startRadius [float]
+      #   @param endRadius [float]
+      #   @param sides [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCylinderEx, :DrawCylinderEx, [Vector3.by_value, Vector3.by_value, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCylinderWires : Draw a cylinder/cone wires
-      # @param position [Vector3]
-      # @param radiusTop [float]
-      # @param radiusBottom [float]
-      # @param height [float]
-      # @param slices [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)
+      #   DrawCylinderWires : Draw a cylinder/cone wires
+      #   @param position [Vector3]
+      #   @param radiusTop [float]
+      #   @param radiusBottom [float]
+      #   @param height [float]
+      #   @param slices [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCylinderWires, :DrawCylinderWires, [Vector3.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCylinderWiresEx : Draw a cylinder wires with base at startPos and top at endPos
-      # @param startPos [Vector3]
-      # @param endPos [Vector3]
-      # @param startRadius [float]
-      # @param endRadius [float]
-      # @param sides [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color)
+      #   DrawCylinderWiresEx : Draw a cylinder wires with base at startPos and top at endPos
+      #   @param startPos [Vector3]
+      #   @param endPos [Vector3]
+      #   @param startRadius [float]
+      #   @param endRadius [float]
+      #   @param sides [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCylinderWiresEx, :DrawCylinderWiresEx, [Vector3.by_value, Vector3.by_value, :float, :float, :int, Color.by_value], :void],
 
-      # DrawCapsule : Draw a capsule with the center of its sphere caps at startPos and endPos
-      # @param startPos [Vector3]
-      # @param endPos [Vector3]
-      # @param radius [float]
-      # @param slices [int]
-      # @param rings [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCapsule(startPos, endPos, radius, slices, rings, color)
+      #   DrawCapsule : Draw a capsule with the center of its sphere caps at startPos and endPos
+      #   @param startPos [Vector3]
+      #   @param endPos [Vector3]
+      #   @param radius [float]
+      #   @param slices [int]
+      #   @param rings [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCapsule, :DrawCapsule, [Vector3.by_value, Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # DrawCapsuleWires : Draw capsule wireframe with the center of its sphere caps at startPos and endPos
-      # @param startPos [Vector3]
-      # @param endPos [Vector3]
-      # @param radius [float]
-      # @param slices [int]
-      # @param rings [int]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawCapsuleWires(startPos, endPos, radius, slices, rings, color)
+      #   DrawCapsuleWires : Draw capsule wireframe with the center of its sphere caps at startPos and endPos
+      #   @param startPos [Vector3]
+      #   @param endPos [Vector3]
+      #   @param radius [float]
+      #   @param slices [int]
+      #   @param rings [int]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawCapsuleWires, :DrawCapsuleWires, [Vector3.by_value, Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # DrawPlane : Draw a plane XZ
-      # @param centerPos [Vector3]
-      # @param size [Vector2]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawPlane(centerPos, size, color)
+      #   DrawPlane : Draw a plane XZ
+      #   @param centerPos [Vector3]
+      #   @param size [Vector2]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawPlane, :DrawPlane, [Vector3.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawRay : Draw a ray line
-      # @param ray [Ray]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawRay(ray, color)
+      #   DrawRay : Draw a ray line
+      #   @param ray [Ray]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawRay, :DrawRay, [Ray.by_value, Color.by_value], :void],
 
-      # DrawGrid : Draw a grid (centered at (0, 0, 0))
-      # @param slices [int]
-      # @param spacing [float]
-      # @return [void]
+      # @!method DrawGrid(slices, spacing)
+      #   DrawGrid : Draw a grid (centered at (0, 0, 0))
+      #   @param slices [int]
+      #   @param spacing [float]
+      #   @return [void]
       [:DrawGrid, :DrawGrid, [:int, :float], :void],
 
-      # LoadModel : Load model from files (meshes and materials)
-      # @param fileName [const char *]
-      # @return [Model]
+      # @!method LoadModel(fileName)
+      #   LoadModel : Load model from files (meshes and materials)
+      #   @param fileName [const char *]
+      #   @return [Model]
       [:LoadModel, :LoadModel, [:pointer], Model.by_value],
 
-      # LoadModelFromMesh : Load model from generated mesh (default material)
-      # @param mesh [Mesh]
-      # @return [Model]
+      # @!method LoadModelFromMesh(mesh)
+      #   LoadModelFromMesh : Load model from generated mesh (default material)
+      #   @param mesh [Mesh]
+      #   @return [Model]
       [:LoadModelFromMesh, :LoadModelFromMesh, [Mesh.by_value], Model.by_value],
 
-      # IsModelReady : Check if a model is ready
-      # @param model [Model]
-      # @return [bool]
+      # @!method IsModelReady(model)
+      #   IsModelReady : Check if a model is ready
+      #   @param model [Model]
+      #   @return [bool]
       [:IsModelReady, :IsModelReady, [Model.by_value], :bool],
 
-      # UnloadModel : Unload model (including meshes) from memory (RAM and/or VRAM)
-      # @param model [Model]
-      # @return [void]
+      # @!method UnloadModel(model)
+      #   UnloadModel : Unload model (including meshes) from memory (RAM and/or VRAM)
+      #   @param model [Model]
+      #   @return [void]
       [:UnloadModel, :UnloadModel, [Model.by_value], :void],
 
-      # GetModelBoundingBox : Compute model bounding box limits (considers all meshes)
-      # @param model [Model]
-      # @return [BoundingBox]
+      # @!method GetModelBoundingBox(model)
+      #   GetModelBoundingBox : Compute model bounding box limits (considers all meshes)
+      #   @param model [Model]
+      #   @return [BoundingBox]
       [:GetModelBoundingBox, :GetModelBoundingBox, [Model.by_value], BoundingBox.by_value],
 
-      # DrawModel : Draw a model (with texture if set)
-      # @param model [Model]
-      # @param position [Vector3]
-      # @param scale [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawModel(model, position, scale, tint)
+      #   DrawModel : Draw a model (with texture if set)
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param scale [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawModel, :DrawModel, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
-      # internalDrawModelEx : Draw a model with extended parameters
-      # @param model [Model]
-      # @param position [Vector3]
-      # @param rotationAxis [Vector3]
-      # @param rotationAngle [float]
-      # @param scale [Vector3]
-      # @param tint [Color]
-      # @return [void]
+      # @!method internalDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
+      #   internalDrawModelEx : Draw a model with extended parameters
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param rotationAxis [Vector3]
+      #   @param rotationAngle [float]
+      #   @param scale [Vector3]
+      #   @param tint [Color]
+      #   @return [void]
       [:internalDrawModelEx, :DrawModelEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
 
-      # DrawModelWires : Draw a model wires (with texture if set)
-      # @param model [Model]
-      # @param position [Vector3]
-      # @param scale [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawModelWires(model, position, scale, tint)
+      #   DrawModelWires : Draw a model wires (with texture if set)
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param scale [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawModelWires, :DrawModelWires, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
-      # DrawModelWiresEx : Draw a model wires (with texture if set) with extended parameters
-      # @param model [Model]
-      # @param position [Vector3]
-      # @param rotationAxis [Vector3]
-      # @param rotationAngle [float]
-      # @param scale [Vector3]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
+      #   DrawModelWiresEx : Draw a model wires (with texture if set) with extended parameters
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param rotationAxis [Vector3]
+      #   @param rotationAngle [float]
+      #   @param scale [Vector3]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawModelWiresEx, :DrawModelWiresEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
 
-      # DrawBoundingBox : Draw bounding box (wires)
-      # @param box [BoundingBox]
-      # @param color [Color]
-      # @return [void]
+      # @!method DrawBoundingBox(box, color)
+      #   DrawBoundingBox : Draw bounding box (wires)
+      #   @param box [BoundingBox]
+      #   @param color [Color]
+      #   @return [void]
       [:DrawBoundingBox, :DrawBoundingBox, [BoundingBox.by_value, Color.by_value], :void],
 
-      # DrawBillboard : Draw a billboard texture
-      # @param camera [Camera]
-      # @param texture [Texture2D]
-      # @param position [Vector3]
-      # @param size [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawBillboard(camera, texture, position, size, tint)
+      #   DrawBillboard : Draw a billboard texture
+      #   @param camera [Camera]
+      #   @param texture [Texture2D]
+      #   @param position [Vector3]
+      #   @param size [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawBillboard, :DrawBillboard, [Camera.by_value, Texture2D.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
-      # DrawBillboardRec : Draw a billboard texture defined by source
-      # @param camera [Camera]
-      # @param texture [Texture2D]
-      # @param source [Rectangle]
-      # @param position [Vector3]
-      # @param size [Vector2]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawBillboardRec(camera, texture, source, position, size, tint)
+      #   DrawBillboardRec : Draw a billboard texture defined by source
+      #   @param camera [Camera]
+      #   @param texture [Texture2D]
+      #   @param source [Rectangle]
+      #   @param position [Vector3]
+      #   @param size [Vector2]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawBillboardRec, :DrawBillboardRec, [Camera.by_value, Texture2D.by_value, Rectangle.by_value, Vector3.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # DrawBillboardPro : Draw a billboard texture defined by source and rotation
-      # @param camera [Camera]
-      # @param texture [Texture2D]
-      # @param source [Rectangle]
-      # @param position [Vector3]
-      # @param up [Vector3]
-      # @param size [Vector2]
-      # @param origin [Vector2]
-      # @param rotation [float]
-      # @param tint [Color]
-      # @return [void]
+      # @!method DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)
+      #   DrawBillboardPro : Draw a billboard texture defined by source and rotation
+      #   @param camera [Camera]
+      #   @param texture [Texture2D]
+      #   @param source [Rectangle]
+      #   @param position [Vector3]
+      #   @param up [Vector3]
+      #   @param size [Vector2]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param tint [Color]
+      #   @return [void]
       [:DrawBillboardPro, :DrawBillboardPro, [Camera.by_value, Texture2D.by_value, Rectangle.by_value, Vector3.by_value, Vector3.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # UploadMesh : Upload mesh vertex data in GPU and provide VAO/VBO ids
-      # @param mesh [Mesh *]
-      # @param dynamic [bool]
-      # @return [void]
+      # @!method UploadMesh(mesh, dynamic)
+      #   UploadMesh : Upload mesh vertex data in GPU and provide VAO/VBO ids
+      #   @param mesh [Mesh *]
+      #   @param dynamic [bool]
+      #   @return [void]
       [:UploadMesh, :UploadMesh, [:pointer, :bool], :void],
 
-      # UpdateMeshBuffer : Update mesh vertex data in GPU for a specific buffer index
-      # @param mesh [Mesh]
-      # @param index [int]
-      # @param data [const void *]
-      # @param dataSize [int]
-      # @param offset [int]
-      # @return [void]
+      # @!method UpdateMeshBuffer(mesh, index, data, dataSize, offset)
+      #   UpdateMeshBuffer : Update mesh vertex data in GPU for a specific buffer index
+      #   @param mesh [Mesh]
+      #   @param index [int]
+      #   @param data [const void *]
+      #   @param dataSize [int]
+      #   @param offset [int]
+      #   @return [void]
       [:UpdateMeshBuffer, :UpdateMeshBuffer, [Mesh.by_value, :int, :pointer, :int, :int], :void],
 
-      # UnloadMesh : Unload mesh data from CPU and GPU
-      # @param mesh [Mesh]
-      # @return [void]
+      # @!method UnloadMesh(mesh)
+      #   UnloadMesh : Unload mesh data from CPU and GPU
+      #   @param mesh [Mesh]
+      #   @return [void]
       [:UnloadMesh, :UnloadMesh, [Mesh.by_value], :void],
 
-      # DrawMesh : Draw a 3d mesh with material and transform
-      # @param mesh [Mesh]
-      # @param material [Material]
-      # @param transform [Matrix]
-      # @return [void]
+      # @!method DrawMesh(mesh, material, transform)
+      #   DrawMesh : Draw a 3d mesh with material and transform
+      #   @param mesh [Mesh]
+      #   @param material [Material]
+      #   @param transform [Matrix]
+      #   @return [void]
       [:DrawMesh, :DrawMesh, [Mesh.by_value, Material.by_value, Matrix.by_value], :void],
 
-      # DrawMeshInstanced : Draw multiple mesh instances with material and different transforms
-      # @param mesh [Mesh]
-      # @param material [Material]
-      # @param transforms [const Matrix *]
-      # @param instances [int]
-      # @return [void]
+      # @!method DrawMeshInstanced(mesh, material, transforms, instances)
+      #   DrawMeshInstanced : Draw multiple mesh instances with material and different transforms
+      #   @param mesh [Mesh]
+      #   @param material [Material]
+      #   @param transforms [const Matrix *]
+      #   @param instances [int]
+      #   @return [void]
       [:DrawMeshInstanced, :DrawMeshInstanced, [Mesh.by_value, Material.by_value, :pointer, :int], :void],
 
-      # ExportMesh : Export mesh data to file, returns true on success
-      # @param mesh [Mesh]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportMesh(mesh, fileName)
+      #   ExportMesh : Export mesh data to file, returns true on success
+      #   @param mesh [Mesh]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportMesh, :ExportMesh, [Mesh.by_value, :pointer], :bool],
 
-      # GetMeshBoundingBox : Compute mesh bounding box limits
-      # @param mesh [Mesh]
-      # @return [BoundingBox]
+      # @!method GetMeshBoundingBox(mesh)
+      #   GetMeshBoundingBox : Compute mesh bounding box limits
+      #   @param mesh [Mesh]
+      #   @return [BoundingBox]
       [:GetMeshBoundingBox, :GetMeshBoundingBox, [Mesh.by_value], BoundingBox.by_value],
 
-      # GenMeshTangents : Compute mesh tangents
-      # @param mesh [Mesh *]
-      # @return [void]
+      # @!method GenMeshTangents(mesh)
+      #   GenMeshTangents : Compute mesh tangents
+      #   @param mesh [Mesh *]
+      #   @return [void]
       [:GenMeshTangents, :GenMeshTangents, [:pointer], :void],
 
-      # GenMeshPoly : Generate polygonal mesh
-      # @param sides [int]
-      # @param radius [float]
-      # @return [Mesh]
+      # @!method GenMeshPoly(sides, radius)
+      #   GenMeshPoly : Generate polygonal mesh
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @return [Mesh]
       [:GenMeshPoly, :GenMeshPoly, [:int, :float], Mesh.by_value],
 
-      # GenMeshPlane : Generate plane mesh (with subdivisions)
-      # @param width [float]
-      # @param length [float]
-      # @param resX [int]
-      # @param resZ [int]
-      # @return [Mesh]
+      # @!method GenMeshPlane(width, length, resX, resZ)
+      #   GenMeshPlane : Generate plane mesh (with subdivisions)
+      #   @param width [float]
+      #   @param length [float]
+      #   @param resX [int]
+      #   @param resZ [int]
+      #   @return [Mesh]
       [:GenMeshPlane, :GenMeshPlane, [:float, :float, :int, :int], Mesh.by_value],
 
-      # GenMeshCube : Generate cuboid mesh
-      # @param width [float]
-      # @param height [float]
-      # @param length [float]
-      # @return [Mesh]
+      # @!method GenMeshCube(width, height, length)
+      #   GenMeshCube : Generate cuboid mesh
+      #   @param width [float]
+      #   @param height [float]
+      #   @param length [float]
+      #   @return [Mesh]
       [:GenMeshCube, :GenMeshCube, [:float, :float, :float], Mesh.by_value],
 
-      # GenMeshSphere : Generate sphere mesh (standard sphere)
-      # @param radius [float]
-      # @param rings [int]
-      # @param slices [int]
-      # @return [Mesh]
+      # @!method GenMeshSphere(radius, rings, slices)
+      #   GenMeshSphere : Generate sphere mesh (standard sphere)
+      #   @param radius [float]
+      #   @param rings [int]
+      #   @param slices [int]
+      #   @return [Mesh]
       [:GenMeshSphere, :GenMeshSphere, [:float, :int, :int], Mesh.by_value],
 
-      # GenMeshHemiSphere : Generate half-sphere mesh (no bottom cap)
-      # @param radius [float]
-      # @param rings [int]
-      # @param slices [int]
-      # @return [Mesh]
+      # @!method GenMeshHemiSphere(radius, rings, slices)
+      #   GenMeshHemiSphere : Generate half-sphere mesh (no bottom cap)
+      #   @param radius [float]
+      #   @param rings [int]
+      #   @param slices [int]
+      #   @return [Mesh]
       [:GenMeshHemiSphere, :GenMeshHemiSphere, [:float, :int, :int], Mesh.by_value],
 
-      # GenMeshCylinder : Generate cylinder mesh
-      # @param radius [float]
-      # @param height [float]
-      # @param slices [int]
-      # @return [Mesh]
+      # @!method GenMeshCylinder(radius, height, slices)
+      #   GenMeshCylinder : Generate cylinder mesh
+      #   @param radius [float]
+      #   @param height [float]
+      #   @param slices [int]
+      #   @return [Mesh]
       [:GenMeshCylinder, :GenMeshCylinder, [:float, :float, :int], Mesh.by_value],
 
-      # GenMeshCone : Generate cone/pyramid mesh
-      # @param radius [float]
-      # @param height [float]
-      # @param slices [int]
-      # @return [Mesh]
+      # @!method GenMeshCone(radius, height, slices)
+      #   GenMeshCone : Generate cone/pyramid mesh
+      #   @param radius [float]
+      #   @param height [float]
+      #   @param slices [int]
+      #   @return [Mesh]
       [:GenMeshCone, :GenMeshCone, [:float, :float, :int], Mesh.by_value],
 
-      # GenMeshTorus : Generate torus mesh
-      # @param radius [float]
-      # @param size [float]
-      # @param radSeg [int]
-      # @param sides [int]
-      # @return [Mesh]
+      # @!method GenMeshTorus(radius, size, radSeg, sides)
+      #   GenMeshTorus : Generate torus mesh
+      #   @param radius [float]
+      #   @param size [float]
+      #   @param radSeg [int]
+      #   @param sides [int]
+      #   @return [Mesh]
       [:GenMeshTorus, :GenMeshTorus, [:float, :float, :int, :int], Mesh.by_value],
 
-      # GenMeshKnot : Generate trefoil knot mesh
-      # @param radius [float]
-      # @param size [float]
-      # @param radSeg [int]
-      # @param sides [int]
-      # @return [Mesh]
+      # @!method GenMeshKnot(radius, size, radSeg, sides)
+      #   GenMeshKnot : Generate trefoil knot mesh
+      #   @param radius [float]
+      #   @param size [float]
+      #   @param radSeg [int]
+      #   @param sides [int]
+      #   @return [Mesh]
       [:GenMeshKnot, :GenMeshKnot, [:float, :float, :int, :int], Mesh.by_value],
 
-      # GenMeshHeightmap : Generate heightmap mesh from image data
-      # @param heightmap [Image]
-      # @param size [Vector3]
-      # @return [Mesh]
+      # @!method GenMeshHeightmap(heightmap, size)
+      #   GenMeshHeightmap : Generate heightmap mesh from image data
+      #   @param heightmap [Image]
+      #   @param size [Vector3]
+      #   @return [Mesh]
       [:GenMeshHeightmap, :GenMeshHeightmap, [Image.by_value, Vector3.by_value], Mesh.by_value],
 
-      # GenMeshCubicmap : Generate cubes-based map mesh from image data
-      # @param cubicmap [Image]
-      # @param cubeSize [Vector3]
-      # @return [Mesh]
+      # @!method GenMeshCubicmap(cubicmap, cubeSize)
+      #   GenMeshCubicmap : Generate cubes-based map mesh from image data
+      #   @param cubicmap [Image]
+      #   @param cubeSize [Vector3]
+      #   @return [Mesh]
       [:GenMeshCubicmap, :GenMeshCubicmap, [Image.by_value, Vector3.by_value], Mesh.by_value],
 
-      # LoadMaterials : Load materials from model file
-      # @param fileName [const char *]
-      # @param materialCount [int *]
-      # @return [Material *]
+      # @!method LoadMaterials(fileName, materialCount)
+      #   LoadMaterials : Load materials from model file
+      #   @param fileName [const char *]
+      #   @param materialCount [int *]
+      #   @return [Material *]
       [:LoadMaterials, :LoadMaterials, [:pointer, :pointer], :pointer],
 
-      # LoadMaterialDefault : Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
-      # @return [Material]
+      # @!method LoadMaterialDefault()
+      #   LoadMaterialDefault : Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps)
+      #   @return [Material]
       [:LoadMaterialDefault, :LoadMaterialDefault, [], Material.by_value],
 
-      # IsMaterialReady : Check if a material is ready
-      # @param material [Material]
-      # @return [bool]
+      # @!method IsMaterialReady(material)
+      #   IsMaterialReady : Check if a material is ready
+      #   @param material [Material]
+      #   @return [bool]
       [:IsMaterialReady, :IsMaterialReady, [Material.by_value], :bool],
 
-      # UnloadMaterial : Unload material from GPU memory (VRAM)
-      # @param material [Material]
-      # @return [void]
+      # @!method UnloadMaterial(material)
+      #   UnloadMaterial : Unload material from GPU memory (VRAM)
+      #   @param material [Material]
+      #   @return [void]
       [:UnloadMaterial, :UnloadMaterial, [Material.by_value], :void],
 
-      # SetMaterialTexture : Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
-      # @param material [Material *]
-      # @param mapType [int]
-      # @param texture [Texture2D]
-      # @return [void]
+      # @!method SetMaterialTexture(material, mapType, texture)
+      #   SetMaterialTexture : Set texture for a material map type (MATERIAL_MAP_DIFFUSE, MATERIAL_MAP_SPECULAR...)
+      #   @param material [Material *]
+      #   @param mapType [int]
+      #   @param texture [Texture2D]
+      #   @return [void]
       [:SetMaterialTexture, :SetMaterialTexture, [:pointer, :int, Texture2D.by_value], :void],
 
-      # SetModelMeshMaterial : Set material for a mesh
-      # @param model [Model *]
-      # @param meshId [int]
-      # @param materialId [int]
-      # @return [void]
+      # @!method SetModelMeshMaterial(model, meshId, materialId)
+      #   SetModelMeshMaterial : Set material for a mesh
+      #   @param model [Model *]
+      #   @param meshId [int]
+      #   @param materialId [int]
+      #   @return [void]
       [:SetModelMeshMaterial, :SetModelMeshMaterial, [:pointer, :int, :int], :void],
 
-      # LoadModelAnimations : Load model animations from file
-      # @param fileName [const char *]
-      # @param animCount [unsigned int *]
-      # @return [ModelAnimation *]
+      # @!method LoadModelAnimations(fileName, animCount)
+      #   LoadModelAnimations : Load model animations from file
+      #   @param fileName [const char *]
+      #   @param animCount [unsigned int *]
+      #   @return [ModelAnimation *]
       [:LoadModelAnimations, :LoadModelAnimations, [:pointer, :pointer], :pointer],
 
-      # UpdateModelAnimation : Update model animation pose
-      # @param model [Model]
-      # @param anim [ModelAnimation]
-      # @param frame [int]
-      # @return [void]
+      # @!method UpdateModelAnimation(model, anim, frame)
+      #   UpdateModelAnimation : Update model animation pose
+      #   @param model [Model]
+      #   @param anim [ModelAnimation]
+      #   @param frame [int]
+      #   @return [void]
       [:UpdateModelAnimation, :UpdateModelAnimation, [Model.by_value, ModelAnimation.by_value, :int], :void],
 
-      # UnloadModelAnimation : Unload animation data
-      # @param anim [ModelAnimation]
-      # @return [void]
+      # @!method UnloadModelAnimation(anim)
+      #   UnloadModelAnimation : Unload animation data
+      #   @param anim [ModelAnimation]
+      #   @return [void]
       [:UnloadModelAnimation, :UnloadModelAnimation, [ModelAnimation.by_value], :void],
 
-      # UnloadModelAnimations : Unload animation array data
-      # @param animations [ModelAnimation *]
-      # @param count [unsigned int]
-      # @return [void]
+      # @!method UnloadModelAnimations(animations, count)
+      #   UnloadModelAnimations : Unload animation array data
+      #   @param animations [ModelAnimation *]
+      #   @param count [unsigned int]
+      #   @return [void]
       [:UnloadModelAnimations, :UnloadModelAnimations, [:pointer, :uint], :void],
 
-      # IsModelAnimationValid : Check model animation skeleton match
-      # @param model [Model]
-      # @param anim [ModelAnimation]
-      # @return [bool]
+      # @!method IsModelAnimationValid(model, anim)
+      #   IsModelAnimationValid : Check model animation skeleton match
+      #   @param model [Model]
+      #   @param anim [ModelAnimation]
+      #   @return [bool]
       [:IsModelAnimationValid, :IsModelAnimationValid, [Model.by_value, ModelAnimation.by_value], :bool],
 
-      # CheckCollisionSpheres : Check collision between two spheres
-      # @param center1 [Vector3]
-      # @param radius1 [float]
-      # @param center2 [Vector3]
-      # @param radius2 [float]
-      # @return [bool]
+      # @!method CheckCollisionSpheres(center1, radius1, center2, radius2)
+      #   CheckCollisionSpheres : Check collision between two spheres
+      #   @param center1 [Vector3]
+      #   @param radius1 [float]
+      #   @param center2 [Vector3]
+      #   @param radius2 [float]
+      #   @return [bool]
       [:CheckCollisionSpheres, :CheckCollisionSpheres, [Vector3.by_value, :float, Vector3.by_value, :float], :bool],
 
-      # CheckCollisionBoxes : Check collision between two bounding boxes
-      # @param box1 [BoundingBox]
-      # @param box2 [BoundingBox]
-      # @return [bool]
+      # @!method CheckCollisionBoxes(box1, box2)
+      #   CheckCollisionBoxes : Check collision between two bounding boxes
+      #   @param box1 [BoundingBox]
+      #   @param box2 [BoundingBox]
+      #   @return [bool]
       [:CheckCollisionBoxes, :CheckCollisionBoxes, [BoundingBox.by_value, BoundingBox.by_value], :bool],
 
-      # CheckCollisionBoxSphere : Check collision between box and sphere
-      # @param box [BoundingBox]
-      # @param center [Vector3]
-      # @param radius [float]
-      # @return [bool]
+      # @!method CheckCollisionBoxSphere(box, center, radius)
+      #   CheckCollisionBoxSphere : Check collision between box and sphere
+      #   @param box [BoundingBox]
+      #   @param center [Vector3]
+      #   @param radius [float]
+      #   @return [bool]
       [:CheckCollisionBoxSphere, :CheckCollisionBoxSphere, [BoundingBox.by_value, Vector3.by_value, :float], :bool],
 
-      # GetRayCollisionSphere : Get collision info between ray and sphere
-      # @param ray [Ray]
-      # @param center [Vector3]
-      # @param radius [float]
-      # @return [RayCollision]
+      # @!method GetRayCollisionSphere(ray, center, radius)
+      #   GetRayCollisionSphere : Get collision info between ray and sphere
+      #   @param ray [Ray]
+      #   @param center [Vector3]
+      #   @param radius [float]
+      #   @return [RayCollision]
       [:GetRayCollisionSphere, :GetRayCollisionSphere, [Ray.by_value, Vector3.by_value, :float], RayCollision.by_value],
 
-      # GetRayCollisionBox : Get collision info between ray and box
-      # @param ray [Ray]
-      # @param box [BoundingBox]
-      # @return [RayCollision]
+      # @!method GetRayCollisionBox(ray, box)
+      #   GetRayCollisionBox : Get collision info between ray and box
+      #   @param ray [Ray]
+      #   @param box [BoundingBox]
+      #   @return [RayCollision]
       [:GetRayCollisionBox, :GetRayCollisionBox, [Ray.by_value, BoundingBox.by_value], RayCollision.by_value],
 
-      # GetRayCollisionMesh : Get collision info between ray and mesh
-      # @param ray [Ray]
-      # @param mesh [Mesh]
-      # @param transform [Matrix]
-      # @return [RayCollision]
+      # @!method GetRayCollisionMesh(ray, mesh, transform)
+      #   GetRayCollisionMesh : Get collision info between ray and mesh
+      #   @param ray [Ray]
+      #   @param mesh [Mesh]
+      #   @param transform [Matrix]
+      #   @return [RayCollision]
       [:GetRayCollisionMesh, :GetRayCollisionMesh, [Ray.by_value, Mesh.by_value, Matrix.by_value], RayCollision.by_value],
 
-      # GetRayCollisionTriangle : Get collision info between ray and triangle
-      # @param ray [Ray]
-      # @param p1 [Vector3]
-      # @param p2 [Vector3]
-      # @param p3 [Vector3]
-      # @return [RayCollision]
+      # @!method GetRayCollisionTriangle(ray, p1, p2, p3)
+      #   GetRayCollisionTriangle : Get collision info between ray and triangle
+      #   @param ray [Ray]
+      #   @param p1 [Vector3]
+      #   @param p2 [Vector3]
+      #   @param p3 [Vector3]
+      #   @return [RayCollision]
       [:GetRayCollisionTriangle, :GetRayCollisionTriangle, [Ray.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value], RayCollision.by_value],
 
-      # GetRayCollisionQuad : Get collision info between ray and quad
-      # @param ray [Ray]
-      # @param p1 [Vector3]
-      # @param p2 [Vector3]
-      # @param p3 [Vector3]
-      # @param p4 [Vector3]
-      # @return [RayCollision]
+      # @!method GetRayCollisionQuad(ray, p1, p2, p3, p4)
+      #   GetRayCollisionQuad : Get collision info between ray and quad
+      #   @param ray [Ray]
+      #   @param p1 [Vector3]
+      #   @param p2 [Vector3]
+      #   @param p3 [Vector3]
+      #   @param p4 [Vector3]
+      #   @return [RayCollision]
       [:GetRayCollisionQuad, :GetRayCollisionQuad, [Ray.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value], RayCollision.by_value],
 
-      # InitAudioDevice : Initialize audio device and context
-      # @return [void]
+      # @!method InitAudioDevice()
+      #   InitAudioDevice : Initialize audio device and context
+      #   @return [void]
       [:InitAudioDevice, :InitAudioDevice, [], :void],
 
-      # CloseAudioDevice : Close the audio device and context
-      # @return [void]
+      # @!method CloseAudioDevice()
+      #   CloseAudioDevice : Close the audio device and context
+      #   @return [void]
       [:CloseAudioDevice, :CloseAudioDevice, [], :void],
 
-      # IsAudioDeviceReady : Check if audio device has been initialized successfully
-      # @return [bool]
+      # @!method IsAudioDeviceReady()
+      #   IsAudioDeviceReady : Check if audio device has been initialized successfully
+      #   @return [bool]
       [:IsAudioDeviceReady, :IsAudioDeviceReady, [], :bool],
 
-      # SetMasterVolume : Set master volume (listener)
-      # @param volume [float]
-      # @return [void]
+      # @!method SetMasterVolume(volume)
+      #   SetMasterVolume : Set master volume (listener)
+      #   @param volume [float]
+      #   @return [void]
       [:SetMasterVolume, :SetMasterVolume, [:float], :void],
 
-      # LoadWave : Load wave data from file
-      # @param fileName [const char *]
-      # @return [Wave]
+      # @!method LoadWave(fileName)
+      #   LoadWave : Load wave data from file
+      #   @param fileName [const char *]
+      #   @return [Wave]
       [:LoadWave, :LoadWave, [:pointer], Wave.by_value],
 
-      # LoadWaveFromMemory : Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
-      # @param fileType [const char *]
-      # @param fileData [const unsigned char *]
-      # @param dataSize [int]
-      # @return [Wave]
+      # @!method LoadWaveFromMemory(fileType, fileData, dataSize)
+      #   LoadWaveFromMemory : Load wave from memory buffer, fileType refers to extension: i.e. '.wav'
+      #   @param fileType [const char *]
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @return [Wave]
       [:LoadWaveFromMemory, :LoadWaveFromMemory, [:pointer, :pointer, :int], Wave.by_value],
 
-      # IsWaveReady : Checks if wave data is ready
-      # @param wave [Wave]
-      # @return [bool]
+      # @!method IsWaveReady(wave)
+      #   IsWaveReady : Checks if wave data is ready
+      #   @param wave [Wave]
+      #   @return [bool]
       [:IsWaveReady, :IsWaveReady, [Wave.by_value], :bool],
 
-      # LoadSound : Load sound from file
-      # @param fileName [const char *]
-      # @return [Sound]
+      # @!method LoadSound(fileName)
+      #   LoadSound : Load sound from file
+      #   @param fileName [const char *]
+      #   @return [Sound]
       [:LoadSound, :LoadSound, [:pointer], Sound.by_value],
 
-      # LoadSoundFromWave : Load sound from wave data
-      # @param wave [Wave]
-      # @return [Sound]
+      # @!method LoadSoundFromWave(wave)
+      #   LoadSoundFromWave : Load sound from wave data
+      #   @param wave [Wave]
+      #   @return [Sound]
       [:LoadSoundFromWave, :LoadSoundFromWave, [Wave.by_value], Sound.by_value],
 
-      # IsSoundReady : Checks if a sound is ready
-      # @param sound [Sound]
-      # @return [bool]
+      # @!method IsSoundReady(sound)
+      #   IsSoundReady : Checks if a sound is ready
+      #   @param sound [Sound]
+      #   @return [bool]
       [:IsSoundReady, :IsSoundReady, [Sound.by_value], :bool],
 
-      # UpdateSound : Update sound buffer with new data
-      # @param sound [Sound]
-      # @param data [const void *]
-      # @param sampleCount [int]
-      # @return [void]
+      # @!method UpdateSound(sound, data, sampleCount)
+      #   UpdateSound : Update sound buffer with new data
+      #   @param sound [Sound]
+      #   @param data [const void *]
+      #   @param sampleCount [int]
+      #   @return [void]
       [:UpdateSound, :UpdateSound, [Sound.by_value, :pointer, :int], :void],
 
-      # UnloadWave : Unload wave data
-      # @param wave [Wave]
-      # @return [void]
+      # @!method UnloadWave(wave)
+      #   UnloadWave : Unload wave data
+      #   @param wave [Wave]
+      #   @return [void]
       [:UnloadWave, :UnloadWave, [Wave.by_value], :void],
 
-      # UnloadSound : Unload sound
-      # @param sound [Sound]
-      # @return [void]
+      # @!method UnloadSound(sound)
+      #   UnloadSound : Unload sound
+      #   @param sound [Sound]
+      #   @return [void]
       [:UnloadSound, :UnloadSound, [Sound.by_value], :void],
 
-      # ExportWave : Export wave data to file, returns true on success
-      # @param wave [Wave]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportWave(wave, fileName)
+      #   ExportWave : Export wave data to file, returns true on success
+      #   @param wave [Wave]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportWave, :ExportWave, [Wave.by_value, :pointer], :bool],
 
-      # ExportWaveAsCode : Export wave sample data to code (.h), returns true on success
-      # @param wave [Wave]
-      # @param fileName [const char *]
-      # @return [bool]
+      # @!method ExportWaveAsCode(wave, fileName)
+      #   ExportWaveAsCode : Export wave sample data to code (.h), returns true on success
+      #   @param wave [Wave]
+      #   @param fileName [const char *]
+      #   @return [bool]
       [:ExportWaveAsCode, :ExportWaveAsCode, [Wave.by_value, :pointer], :bool],
 
-      # PlaySound : Play a sound
-      # @param sound [Sound]
-      # @return [void]
+      # @!method PlaySound(sound)
+      #   PlaySound : Play a sound
+      #   @param sound [Sound]
+      #   @return [void]
       [:PlaySound, :PlaySound, [Sound.by_value], :void],
 
-      # StopSound : Stop playing a sound
-      # @param sound [Sound]
-      # @return [void]
+      # @!method StopSound(sound)
+      #   StopSound : Stop playing a sound
+      #   @param sound [Sound]
+      #   @return [void]
       [:StopSound, :StopSound, [Sound.by_value], :void],
 
-      # PauseSound : Pause a sound
-      # @param sound [Sound]
-      # @return [void]
+      # @!method PauseSound(sound)
+      #   PauseSound : Pause a sound
+      #   @param sound [Sound]
+      #   @return [void]
       [:PauseSound, :PauseSound, [Sound.by_value], :void],
 
-      # ResumeSound : Resume a paused sound
-      # @param sound [Sound]
-      # @return [void]
+      # @!method ResumeSound(sound)
+      #   ResumeSound : Resume a paused sound
+      #   @param sound [Sound]
+      #   @return [void]
       [:ResumeSound, :ResumeSound, [Sound.by_value], :void],
 
-      # IsSoundPlaying : Check if a sound is currently playing
-      # @param sound [Sound]
-      # @return [bool]
+      # @!method IsSoundPlaying(sound)
+      #   IsSoundPlaying : Check if a sound is currently playing
+      #   @param sound [Sound]
+      #   @return [bool]
       [:IsSoundPlaying, :IsSoundPlaying, [Sound.by_value], :bool],
 
-      # SetSoundVolume : Set volume for a sound (1.0 is max level)
-      # @param sound [Sound]
-      # @param volume [float]
-      # @return [void]
+      # @!method SetSoundVolume(sound, volume)
+      #   SetSoundVolume : Set volume for a sound (1.0 is max level)
+      #   @param sound [Sound]
+      #   @param volume [float]
+      #   @return [void]
       [:SetSoundVolume, :SetSoundVolume, [Sound.by_value, :float], :void],
 
-      # SetSoundPitch : Set pitch for a sound (1.0 is base level)
-      # @param sound [Sound]
-      # @param pitch [float]
-      # @return [void]
+      # @!method SetSoundPitch(sound, pitch)
+      #   SetSoundPitch : Set pitch for a sound (1.0 is base level)
+      #   @param sound [Sound]
+      #   @param pitch [float]
+      #   @return [void]
       [:SetSoundPitch, :SetSoundPitch, [Sound.by_value, :float], :void],
 
-      # SetSoundPan : Set pan for a sound (0.5 is center)
-      # @param sound [Sound]
-      # @param pan [float]
-      # @return [void]
+      # @!method SetSoundPan(sound, pan)
+      #   SetSoundPan : Set pan for a sound (0.5 is center)
+      #   @param sound [Sound]
+      #   @param pan [float]
+      #   @return [void]
       [:SetSoundPan, :SetSoundPan, [Sound.by_value, :float], :void],
 
-      # WaveCopy : Copy a wave to a new wave
-      # @param wave [Wave]
-      # @return [Wave]
+      # @!method WaveCopy(wave)
+      #   WaveCopy : Copy a wave to a new wave
+      #   @param wave [Wave]
+      #   @return [Wave]
       [:WaveCopy, :WaveCopy, [Wave.by_value], Wave.by_value],
 
-      # WaveCrop : Crop a wave to defined samples range
-      # @param wave [Wave *]
-      # @param initSample [int]
-      # @param finalSample [int]
-      # @return [void]
+      # @!method WaveCrop(wave, initSample, finalSample)
+      #   WaveCrop : Crop a wave to defined samples range
+      #   @param wave [Wave *]
+      #   @param initSample [int]
+      #   @param finalSample [int]
+      #   @return [void]
       [:WaveCrop, :WaveCrop, [:pointer, :int, :int], :void],
 
-      # WaveFormat : Convert wave data to desired format
-      # @param wave [Wave *]
-      # @param sampleRate [int]
-      # @param sampleSize [int]
-      # @param channels [int]
-      # @return [void]
+      # @!method WaveFormat(wave, sampleRate, sampleSize, channels)
+      #   WaveFormat : Convert wave data to desired format
+      #   @param wave [Wave *]
+      #   @param sampleRate [int]
+      #   @param sampleSize [int]
+      #   @param channels [int]
+      #   @return [void]
       [:WaveFormat, :WaveFormat, [:pointer, :int, :int, :int], :void],
 
-      # LoadWaveSamples : Load samples data from wave as a 32bit float data array
-      # @param wave [Wave]
-      # @return [float *]
+      # @!method LoadWaveSamples(wave)
+      #   LoadWaveSamples : Load samples data from wave as a 32bit float data array
+      #   @param wave [Wave]
+      #   @return [float *]
       [:LoadWaveSamples, :LoadWaveSamples, [Wave.by_value], :pointer],
 
-      # UnloadWaveSamples : Unload samples data loaded with LoadWaveSamples()
-      # @param samples [float *]
-      # @return [void]
+      # @!method UnloadWaveSamples(samples)
+      #   UnloadWaveSamples : Unload samples data loaded with LoadWaveSamples()
+      #   @param samples [float *]
+      #   @return [void]
       [:UnloadWaveSamples, :UnloadWaveSamples, [:pointer], :void],
 
-      # LoadMusicStream : Load music stream from file
-      # @param fileName [const char *]
-      # @return [Music]
+      # @!method LoadMusicStream(fileName)
+      #   LoadMusicStream : Load music stream from file
+      #   @param fileName [const char *]
+      #   @return [Music]
       [:LoadMusicStream, :LoadMusicStream, [:pointer], Music.by_value],
 
-      # LoadMusicStreamFromMemory : Load music stream from data
-      # @param fileType [const char *]
-      # @param data [const unsigned char *]
-      # @param dataSize [int]
-      # @return [Music]
+      # @!method LoadMusicStreamFromMemory(fileType, data, dataSize)
+      #   LoadMusicStreamFromMemory : Load music stream from data
+      #   @param fileType [const char *]
+      #   @param data [const unsigned char *]
+      #   @param dataSize [int]
+      #   @return [Music]
       [:LoadMusicStreamFromMemory, :LoadMusicStreamFromMemory, [:pointer, :pointer, :int], Music.by_value],
 
-      # IsMusicReady : Checks if a music stream is ready
-      # @param music [Music]
-      # @return [bool]
+      # @!method IsMusicReady(music)
+      #   IsMusicReady : Checks if a music stream is ready
+      #   @param music [Music]
+      #   @return [bool]
       [:IsMusicReady, :IsMusicReady, [Music.by_value], :bool],
 
-      # UnloadMusicStream : Unload music stream
-      # @param music [Music]
-      # @return [void]
+      # @!method UnloadMusicStream(music)
+      #   UnloadMusicStream : Unload music stream
+      #   @param music [Music]
+      #   @return [void]
       [:UnloadMusicStream, :UnloadMusicStream, [Music.by_value], :void],
 
-      # PlayMusicStream : Start music playing
-      # @param music [Music]
-      # @return [void]
+      # @!method PlayMusicStream(music)
+      #   PlayMusicStream : Start music playing
+      #   @param music [Music]
+      #   @return [void]
       [:PlayMusicStream, :PlayMusicStream, [Music.by_value], :void],
 
-      # IsMusicStreamPlaying : Check if music is playing
-      # @param music [Music]
-      # @return [bool]
+      # @!method IsMusicStreamPlaying(music)
+      #   IsMusicStreamPlaying : Check if music is playing
+      #   @param music [Music]
+      #   @return [bool]
       [:IsMusicStreamPlaying, :IsMusicStreamPlaying, [Music.by_value], :bool],
 
-      # UpdateMusicStream : Updates buffers for music streaming
-      # @param music [Music]
-      # @return [void]
+      # @!method UpdateMusicStream(music)
+      #   UpdateMusicStream : Updates buffers for music streaming
+      #   @param music [Music]
+      #   @return [void]
       [:UpdateMusicStream, :UpdateMusicStream, [Music.by_value], :void],
 
-      # StopMusicStream : Stop music playing
-      # @param music [Music]
-      # @return [void]
+      # @!method StopMusicStream(music)
+      #   StopMusicStream : Stop music playing
+      #   @param music [Music]
+      #   @return [void]
       [:StopMusicStream, :StopMusicStream, [Music.by_value], :void],
 
-      # PauseMusicStream : Pause music playing
-      # @param music [Music]
-      # @return [void]
+      # @!method PauseMusicStream(music)
+      #   PauseMusicStream : Pause music playing
+      #   @param music [Music]
+      #   @return [void]
       [:PauseMusicStream, :PauseMusicStream, [Music.by_value], :void],
 
-      # ResumeMusicStream : Resume playing paused music
-      # @param music [Music]
-      # @return [void]
+      # @!method ResumeMusicStream(music)
+      #   ResumeMusicStream : Resume playing paused music
+      #   @param music [Music]
+      #   @return [void]
       [:ResumeMusicStream, :ResumeMusicStream, [Music.by_value], :void],
 
-      # SeekMusicStream : Seek music to a position (in seconds)
-      # @param music [Music]
-      # @param position [float]
-      # @return [void]
+      # @!method SeekMusicStream(music, position)
+      #   SeekMusicStream : Seek music to a position (in seconds)
+      #   @param music [Music]
+      #   @param position [float]
+      #   @return [void]
       [:SeekMusicStream, :SeekMusicStream, [Music.by_value, :float], :void],
 
-      # SetMusicVolume : Set volume for music (1.0 is max level)
-      # @param music [Music]
-      # @param volume [float]
-      # @return [void]
+      # @!method SetMusicVolume(music, volume)
+      #   SetMusicVolume : Set volume for music (1.0 is max level)
+      #   @param music [Music]
+      #   @param volume [float]
+      #   @return [void]
       [:SetMusicVolume, :SetMusicVolume, [Music.by_value, :float], :void],
 
-      # SetMusicPitch : Set pitch for a music (1.0 is base level)
-      # @param music [Music]
-      # @param pitch [float]
-      # @return [void]
+      # @!method SetMusicPitch(music, pitch)
+      #   SetMusicPitch : Set pitch for a music (1.0 is base level)
+      #   @param music [Music]
+      #   @param pitch [float]
+      #   @return [void]
       [:SetMusicPitch, :SetMusicPitch, [Music.by_value, :float], :void],
 
-      # SetMusicPan : Set pan for a music (0.5 is center)
-      # @param music [Music]
-      # @param pan [float]
-      # @return [void]
+      # @!method SetMusicPan(music, pan)
+      #   SetMusicPan : Set pan for a music (0.5 is center)
+      #   @param music [Music]
+      #   @param pan [float]
+      #   @return [void]
       [:SetMusicPan, :SetMusicPan, [Music.by_value, :float], :void],
 
-      # GetMusicTimeLength : Get music time length (in seconds)
-      # @param music [Music]
-      # @return [float]
+      # @!method GetMusicTimeLength(music)
+      #   GetMusicTimeLength : Get music time length (in seconds)
+      #   @param music [Music]
+      #   @return [float]
       [:GetMusicTimeLength, :GetMusicTimeLength, [Music.by_value], :float],
 
-      # GetMusicTimePlayed : Get current music time played (in seconds)
-      # @param music [Music]
-      # @return [float]
+      # @!method GetMusicTimePlayed(music)
+      #   GetMusicTimePlayed : Get current music time played (in seconds)
+      #   @param music [Music]
+      #   @return [float]
       [:GetMusicTimePlayed, :GetMusicTimePlayed, [Music.by_value], :float],
 
-      # LoadAudioStream : Load audio stream (to stream raw audio pcm data)
-      # @param sampleRate [unsigned int]
-      # @param sampleSize [unsigned int]
-      # @param channels [unsigned int]
-      # @return [AudioStream]
+      # @!method LoadAudioStream(sampleRate, sampleSize, channels)
+      #   LoadAudioStream : Load audio stream (to stream raw audio pcm data)
+      #   @param sampleRate [unsigned int]
+      #   @param sampleSize [unsigned int]
+      #   @param channels [unsigned int]
+      #   @return [AudioStream]
       [:LoadAudioStream, :LoadAudioStream, [:uint, :uint, :uint], AudioStream.by_value],
 
-      # IsAudioStreamReady : Checks if an audio stream is ready
-      # @param stream [AudioStream]
-      # @return [bool]
+      # @!method IsAudioStreamReady(stream)
+      #   IsAudioStreamReady : Checks if an audio stream is ready
+      #   @param stream [AudioStream]
+      #   @return [bool]
       [:IsAudioStreamReady, :IsAudioStreamReady, [AudioStream.by_value], :bool],
 
-      # UnloadAudioStream : Unload audio stream and free memory
-      # @param stream [AudioStream]
-      # @return [void]
+      # @!method UnloadAudioStream(stream)
+      #   UnloadAudioStream : Unload audio stream and free memory
+      #   @param stream [AudioStream]
+      #   @return [void]
       [:UnloadAudioStream, :UnloadAudioStream, [AudioStream.by_value], :void],
 
-      # UpdateAudioStream : Update audio stream buffers with data
-      # @param stream [AudioStream]
-      # @param data [const void *]
-      # @param frameCount [int]
-      # @return [void]
+      # @!method UpdateAudioStream(stream, data, frameCount)
+      #   UpdateAudioStream : Update audio stream buffers with data
+      #   @param stream [AudioStream]
+      #   @param data [const void *]
+      #   @param frameCount [int]
+      #   @return [void]
       [:UpdateAudioStream, :UpdateAudioStream, [AudioStream.by_value, :pointer, :int], :void],
 
-      # IsAudioStreamProcessed : Check if any audio stream buffers requires refill
-      # @param stream [AudioStream]
-      # @return [bool]
+      # @!method IsAudioStreamProcessed(stream)
+      #   IsAudioStreamProcessed : Check if any audio stream buffers requires refill
+      #   @param stream [AudioStream]
+      #   @return [bool]
       [:IsAudioStreamProcessed, :IsAudioStreamProcessed, [AudioStream.by_value], :bool],
 
-      # PlayAudioStream : Play audio stream
-      # @param stream [AudioStream]
-      # @return [void]
+      # @!method PlayAudioStream(stream)
+      #   PlayAudioStream : Play audio stream
+      #   @param stream [AudioStream]
+      #   @return [void]
       [:PlayAudioStream, :PlayAudioStream, [AudioStream.by_value], :void],
 
-      # PauseAudioStream : Pause audio stream
-      # @param stream [AudioStream]
-      # @return [void]
+      # @!method PauseAudioStream(stream)
+      #   PauseAudioStream : Pause audio stream
+      #   @param stream [AudioStream]
+      #   @return [void]
       [:PauseAudioStream, :PauseAudioStream, [AudioStream.by_value], :void],
 
-      # ResumeAudioStream : Resume audio stream
-      # @param stream [AudioStream]
-      # @return [void]
+      # @!method ResumeAudioStream(stream)
+      #   ResumeAudioStream : Resume audio stream
+      #   @param stream [AudioStream]
+      #   @return [void]
       [:ResumeAudioStream, :ResumeAudioStream, [AudioStream.by_value], :void],
 
-      # IsAudioStreamPlaying : Check if audio stream is playing
-      # @param stream [AudioStream]
-      # @return [bool]
+      # @!method IsAudioStreamPlaying(stream)
+      #   IsAudioStreamPlaying : Check if audio stream is playing
+      #   @param stream [AudioStream]
+      #   @return [bool]
       [:IsAudioStreamPlaying, :IsAudioStreamPlaying, [AudioStream.by_value], :bool],
 
-      # StopAudioStream : Stop audio stream
-      # @param stream [AudioStream]
-      # @return [void]
+      # @!method StopAudioStream(stream)
+      #   StopAudioStream : Stop audio stream
+      #   @param stream [AudioStream]
+      #   @return [void]
       [:StopAudioStream, :StopAudioStream, [AudioStream.by_value], :void],
 
-      # SetAudioStreamVolume : Set volume for audio stream (1.0 is max level)
-      # @param stream [AudioStream]
-      # @param volume [float]
-      # @return [void]
+      # @!method SetAudioStreamVolume(stream, volume)
+      #   SetAudioStreamVolume : Set volume for audio stream (1.0 is max level)
+      #   @param stream [AudioStream]
+      #   @param volume [float]
+      #   @return [void]
       [:SetAudioStreamVolume, :SetAudioStreamVolume, [AudioStream.by_value, :float], :void],
 
-      # SetAudioStreamPitch : Set pitch for audio stream (1.0 is base level)
-      # @param stream [AudioStream]
-      # @param pitch [float]
-      # @return [void]
+      # @!method SetAudioStreamPitch(stream, pitch)
+      #   SetAudioStreamPitch : Set pitch for audio stream (1.0 is base level)
+      #   @param stream [AudioStream]
+      #   @param pitch [float]
+      #   @return [void]
       [:SetAudioStreamPitch, :SetAudioStreamPitch, [AudioStream.by_value, :float], :void],
 
-      # SetAudioStreamPan : Set pan for audio stream (0.5 is centered)
-      # @param stream [AudioStream]
-      # @param pan [float]
-      # @return [void]
+      # @!method SetAudioStreamPan(stream, pan)
+      #   SetAudioStreamPan : Set pan for audio stream (0.5 is centered)
+      #   @param stream [AudioStream]
+      #   @param pan [float]
+      #   @return [void]
       [:SetAudioStreamPan, :SetAudioStreamPan, [AudioStream.by_value, :float], :void],
 
-      # SetAudioStreamBufferSizeDefault : Default size for new audio streams
-      # @param size [int]
-      # @return [void]
+      # @!method SetAudioStreamBufferSizeDefault(size)
+      #   SetAudioStreamBufferSizeDefault : Default size for new audio streams
+      #   @param size [int]
+      #   @return [void]
       [:SetAudioStreamBufferSizeDefault, :SetAudioStreamBufferSizeDefault, [:int], :void],
 
-      # SetAudioStreamCallback : Audio thread callback to request new data
-      # @param stream [AudioStream]
-      # @param callback [AudioCallback]
-      # @return [void]
+      # @!method SetAudioStreamCallback(stream, callback)
+      #   SetAudioStreamCallback : Audio thread callback to request new data
+      #   @param stream [AudioStream]
+      #   @param callback [AudioCallback]
+      #   @return [void]
       [:SetAudioStreamCallback, :SetAudioStreamCallback, [AudioStream.by_value, :AudioCallback], :void],
 
-      # AttachAudioStreamProcessor : Attach audio stream processor to stream
-      # @param stream [AudioStream]
-      # @param processor [AudioCallback]
-      # @return [void]
+      # @!method AttachAudioStreamProcessor(stream, processor)
+      #   AttachAudioStreamProcessor : Attach audio stream processor to stream
+      #   @param stream [AudioStream]
+      #   @param processor [AudioCallback]
+      #   @return [void]
       [:AttachAudioStreamProcessor, :AttachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
 
-      # DetachAudioStreamProcessor : Detach audio stream processor from stream
-      # @param stream [AudioStream]
-      # @param processor [AudioCallback]
-      # @return [void]
+      # @!method DetachAudioStreamProcessor(stream, processor)
+      #   DetachAudioStreamProcessor : Detach audio stream processor from stream
+      #   @param stream [AudioStream]
+      #   @param processor [AudioCallback]
+      #   @return [void]
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
 
-      # AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline
-      # @param processor [AudioCallback]
-      # @return [void]
+      # @!method AttachAudioMixedProcessor(processor)
+      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline
+      #   @param processor [AudioCallback]
+      #   @return [void]
       [:AttachAudioMixedProcessor, :AttachAudioMixedProcessor, [:AudioCallback], :void],
 
-      # DetachAudioMixedProcessor : Detach audio stream processor from the entire audio pipeline
-      # @param processor [AudioCallback]
-      # @return [void]
+      # @!method DetachAudioMixedProcessor(processor)
+      #   DetachAudioMixedProcessor : Detach audio stream processor from the entire audio pipeline
+      #   @param processor [AudioCallback]
+      #   @return [void]
       [:DetachAudioMixedProcessor, :DetachAudioMixedProcessor, [:AudioCallback], :void],
     ]
     entries.each do |entry|

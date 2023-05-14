@@ -7,9 +7,27 @@
       "description": ""
     },
     {
+      "name": "RAYGUI_VERSION_MAJOR",
+      "type": "INT",
+      "value": 3,
+      "description": ""
+    },
+    {
+      "name": "RAYGUI_VERSION_MINOR",
+      "type": "INT",
+      "value": 6,
+      "description": ""
+    },
+    {
+      "name": "RAYGUI_VERSION_PATCH",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "3.2",
+      "value": "3.6",
       "description": ""
     },
     {
@@ -680,6 +698,21 @@
           "name": "TEXT_LINES_SPACING",
           "value": 17,
           "description": "TextBoxMulti lines separation"
+        },
+        {
+          "name": "TEXT_ALIGNMENT_VERTICAL",
+          "value": 18,
+          "description": "TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN"
+        },
+        {
+          "name": "TEXT_MULTILINE",
+          "value": 19,
+          "description": "TextBox supports multiple lines"
+        },
+        {
+          "name": "TEXT_WRAP_MODE",
+          "value": 20,
+          "description": "TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP"
         }
       ]
     },
@@ -1856,7 +1889,7 @@
           "description": ""
         },
         {
-          "name": "ICON_219",
+          "name": "ICON_SAND_TIMER",
           "value": 219,
           "description": ""
         },
@@ -2484,29 +2517,6 @@
       ]
     },
     {
-      "name": "GuiTextBoxMulti",
-      "description": "Text Box control with multiple lines",
-      "returnType": "bool",
-      "params": [
-        {
-          "type": "Rectangle",
-          "name": "bounds"
-        },
-        {
-          "type": "char *",
-          "name": "text"
-        },
-        {
-          "type": "int",
-          "name": "textSize"
-        },
-        {
-          "type": "bool",
-          "name": "editMode"
-        }
-      ]
-    },
-    {
       "name": "GuiSlider",
       "description": "Slider control, returns selected value",
       "returnType": "float",
@@ -2893,6 +2903,17 @@
       ]
     },
     {
+      "name": "GuiSetIconScale",
+      "description": "Set default icon drawing size",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "scale"
+        }
+      ]
+    },
+    {
       "name": "GuiGetIcons",
       "description": "Get raygui icons data pointer",
       "returnType": "unsigned int *"
@@ -2914,7 +2935,7 @@
     },
     {
       "name": "GuiDrawIcon",
-      "description": "",
+      "description": "Draw icon using pixel size at specified position",
       "returnType": "void",
       "params": [
         {
@@ -2936,17 +2957,6 @@
         {
           "type": "Color",
           "name": "color"
-        }
-      ]
-    },
-    {
-      "name": "GuiSetIconScale",
-      "description": "Set icon drawing size",
-      "returnType": "void",
-      "params": [
-        {
-          "type": "int",
-          "name": "scale"
         }
       ]
     }

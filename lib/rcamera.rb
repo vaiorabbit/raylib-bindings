@@ -22,78 +22,90 @@ module Raylib
   def self.setup_rcamera_symbols
     entries = [
 
-      # GetCameraForward
-      # @param camera [Camera *]
-      # @return [Vector3]
+      # @!method GetCameraForward(camera)
+      #   GetCameraForward
+      #   @param camera [Camera *]
+      #   @return [Vector3]
       [:GetCameraForward, :GetCameraForward, [:pointer], Vector3.by_value],
 
-      # GetCameraUp
-      # @param camera [Camera *]
-      # @return [Vector3]
+      # @!method GetCameraUp(camera)
+      #   GetCameraUp
+      #   @param camera [Camera *]
+      #   @return [Vector3]
       [:GetCameraUp, :GetCameraUp, [:pointer], Vector3.by_value],
 
-      # GetCameraRight
-      # @param camera [Camera *]
-      # @return [Vector3]
+      # @!method GetCameraRight(camera)
+      #   GetCameraRight
+      #   @param camera [Camera *]
+      #   @return [Vector3]
       [:GetCameraRight, :GetCameraRight, [:pointer], Vector3.by_value],
 
-      # CameraMoveForward
-      # @param camera [Camera *]
-      # @param distance [float]
-      # @param moveInWorldPlane [bool]
-      # @return [void]
+      # @!method CameraMoveForward(camera, distance, moveInWorldPlane)
+      #   CameraMoveForward
+      #   @param camera [Camera *]
+      #   @param distance [float]
+      #   @param moveInWorldPlane [bool]
+      #   @return [void]
       [:CameraMoveForward, :CameraMoveForward, [:pointer, :float, :bool], :void],
 
-      # CameraMoveUp
-      # @param camera [Camera *]
-      # @param distance [float]
-      # @return [void]
+      # @!method CameraMoveUp(camera, distance)
+      #   CameraMoveUp
+      #   @param camera [Camera *]
+      #   @param distance [float]
+      #   @return [void]
       [:CameraMoveUp, :CameraMoveUp, [:pointer, :float], :void],
 
-      # CameraMoveRight
-      # @param camera [Camera *]
-      # @param distance [float]
-      # @param moveInWorldPlane [bool]
-      # @return [void]
+      # @!method CameraMoveRight(camera, distance, moveInWorldPlane)
+      #   CameraMoveRight
+      #   @param camera [Camera *]
+      #   @param distance [float]
+      #   @param moveInWorldPlane [bool]
+      #   @return [void]
       [:CameraMoveRight, :CameraMoveRight, [:pointer, :float, :bool], :void],
 
-      # CameraMoveToTarget
-      # @param camera [Camera *]
-      # @param delta [float]
-      # @return [void]
+      # @!method CameraMoveToTarget(camera, delta)
+      #   CameraMoveToTarget
+      #   @param camera [Camera *]
+      #   @param delta [float]
+      #   @return [void]
       [:CameraMoveToTarget, :CameraMoveToTarget, [:pointer, :float], :void],
 
-      # CameraYaw
-      # @param camera [Camera *]
-      # @param angle [float]
-      # @param rotateAroundTarget [bool]
-      # @return [void]
+      # @!method CameraYaw(camera, angle, rotateAroundTarget)
+      #   CameraYaw
+      #   @param camera [Camera *]
+      #   @param angle [float]
+      #   @param rotateAroundTarget [bool]
+      #   @return [void]
       [:CameraYaw, :CameraYaw, [:pointer, :float, :bool], :void],
 
-      # CameraPitch
-      # @param camera [Camera *]
-      # @param angle [float]
-      # @param lockView [bool]
-      # @param rotateAroundTarget [bool]
-      # @param rotateUp [bool]
-      # @return [void]
+      # @!method CameraPitch(camera, angle, lockView, rotateAroundTarget, rotateUp)
+      #   CameraPitch
+      #   @param camera [Camera *]
+      #   @param angle [float]
+      #   @param lockView [bool]
+      #   @param rotateAroundTarget [bool]
+      #   @param rotateUp [bool]
+      #   @return [void]
       [:CameraPitch, :CameraPitch, [:pointer, :float, :bool, :bool, :bool], :void],
 
-      # CameraRoll
-      # @param camera [Camera *]
-      # @param angle [float]
-      # @return [void]
+      # @!method CameraRoll(camera, angle)
+      #   CameraRoll
+      #   @param camera [Camera *]
+      #   @param angle [float]
+      #   @return [void]
       [:CameraRoll, :CameraRoll, [:pointer, :float], :void],
 
-      # GetCameraViewMatrix
-      # @param camera [Camera *]
-      # @return [Matrix]
+      # @!method GetCameraViewMatrix(camera)
+      #   GetCameraViewMatrix
+      #   @param camera [Camera *]
+      #   @return [Matrix]
       [:GetCameraViewMatrix, :GetCameraViewMatrix, [:pointer], :int],
 
-      # GetCameraProjectionMatrix
-      # @param camera [Camera*]
-      # @param aspect [float]
-      # @return [Matrix]
+      # @!method GetCameraProjectionMatrix(camera, aspect)
+      #   GetCameraProjectionMatrix
+      #   @param camera [Camera*]
+      #   @param aspect [float]
+      #   @return [Matrix]
       [:GetCameraProjectionMatrix, :GetCameraProjectionMatrix, [:pointer, :float], :int],
     ]
     entries.each do |entry|

@@ -253,7 +253,8 @@ class FunctionEntry:
         self.original_name = original_name
         self.explicit_name = explicit_name
         self.retval = None
-        self.args = ""
+        self.arg_types = ""
+        self.arg_names = ""
         self.description = ""
         self.ret_description = ""
         self.arg_descriptions = []
@@ -290,8 +291,11 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
             # Capitalize and add ".by_value" to struct arguments (e.g.: Color -> Color.by_value)
             arg_is_record = lambda arg: raylib_parser.query_raylib_cindex_mapping_entry_exists(arg) and raylib_parser.get_raylib_cindex_mapping_value(arg) == "TypeKind.RECORD"
             args_ctype_list = list(map((lambda arg: arg[0].upper() + arg[1:] + ".by_value" if arg_is_record(arg) else arg), args_ctype_list))
+            func_entry.arg_types = ', '.join(args_ctype_list)
 
-            func_entry.args = ', '.join(args_ctype_list)
+            # List of argument names
+            args_name_list = list(map((lambda t: str(t.name)), func_info.args))
+            func_entry.arg_names = ', '.join(args_name_list)
 
         # Return value
         # Capitalize and add ".by_value" to struct return value (e.g.: Color -> Color.by_value, float3 -> Float3.by_value)
@@ -307,15 +311,16 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     indent = "  "
     print(indent + "  entries = [", file = sys.stdout)
     for func_entry in func_entries:
-        entry_str = f':{func_entry.explicit_name}, :{func_entry.original_name}, [{func_entry.args}], {func_entry.retval}'
+        entry_str = f':{func_entry.explicit_name}, :{func_entry.original_name}, [{func_entry.arg_types}], {func_entry.retval}'
         print('', file = sys.stdout)
+        print(indent + f'    # @!method {func_entry.explicit_name}({func_entry.arg_names})', file = sys.stdout)
         if func_entry.description != "":
-            print(indent + f'    # {func_entry.explicit_name} : {func_entry.description}', file = sys.stdout)
+            print(indent + f'    #   {func_entry.explicit_name} : {func_entry.description}', file = sys.stdout)
         else:
-            print(indent + f'    # {func_entry.explicit_name}', file = sys.stdout)
+            print(indent + f'    #   {func_entry.explicit_name}', file = sys.stdout)
         for arg_description in func_entry.arg_descriptions:
-            print(indent + f'    # @param {arg_description[1]} [{arg_description[0]}]', file = sys.stdout)
-        print(indent + f'    # @return [{func_entry.ret_description}]', file = sys.stdout)
+            print(indent + f'    #   @param {arg_description[1]} [{arg_description[0]}]', file = sys.stdout)
+        print(indent + f'    #   @return [{func_entry.ret_description}]', file = sys.stdout)
         print(indent + f'    [{entry_str}],', file = sys.stdout)
     print(indent + "  ]", file = sys.stdout)
 

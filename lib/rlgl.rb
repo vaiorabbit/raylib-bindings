@@ -312,826 +312,971 @@ module Raylib
   def self.setup_rlgl_symbols
     entries = [
 
-      # rlMatrixMode : Choose the current matrix to be transformed
-      # @param mode [int]
-      # @return [void]
+      # @!method rlMatrixMode(mode)
+      #   rlMatrixMode : Choose the current matrix to be transformed
+      #   @param mode [int]
+      #   @return [void]
       [:rlMatrixMode, :rlMatrixMode, [:int], :void],
 
-      # rlPushMatrix : Push the current matrix to stack
-      # @return [void]
+      # @!method rlPushMatrix()
+      #   rlPushMatrix : Push the current matrix to stack
+      #   @return [void]
       [:rlPushMatrix, :rlPushMatrix, [], :void],
 
-      # rlPopMatrix : Pop latest inserted matrix from stack
-      # @return [void]
+      # @!method rlPopMatrix()
+      #   rlPopMatrix : Pop latest inserted matrix from stack
+      #   @return [void]
       [:rlPopMatrix, :rlPopMatrix, [], :void],
 
-      # rlLoadIdentity : Reset current matrix to identity matrix
-      # @return [void]
+      # @!method rlLoadIdentity()
+      #   rlLoadIdentity : Reset current matrix to identity matrix
+      #   @return [void]
       [:rlLoadIdentity, :rlLoadIdentity, [], :void],
 
-      # rlTranslatef : Multiply the current matrix by a translation matrix
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlTranslatef(x, y, z)
+      #   rlTranslatef : Multiply the current matrix by a translation matrix
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlTranslatef, :rlTranslatef, [:float, :float, :float], :void],
 
-      # rlRotatef : Multiply the current matrix by a rotation matrix
-      # @param angle [float]
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlRotatef(angle, x, y, z)
+      #   rlRotatef : Multiply the current matrix by a rotation matrix
+      #   @param angle [float]
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlRotatef, :rlRotatef, [:float, :float, :float, :float], :void],
 
-      # rlScalef : Multiply the current matrix by a scaling matrix
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlScalef(x, y, z)
+      #   rlScalef : Multiply the current matrix by a scaling matrix
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlScalef, :rlScalef, [:float, :float, :float], :void],
 
-      # rlMultMatrixf : Multiply the current matrix by another matrix
-      # @param matf [const float *]
-      # @return [void]
+      # @!method rlMultMatrixf(matf)
+      #   rlMultMatrixf : Multiply the current matrix by another matrix
+      #   @param matf [const float *]
+      #   @return [void]
       [:rlMultMatrixf, :rlMultMatrixf, [:pointer], :void],
 
-      # rlFrustum
-      # @param left [double]
-      # @param right [double]
-      # @param bottom [double]
-      # @param top [double]
-      # @param znear [double]
-      # @param zfar [double]
-      # @return [void]
+      # @!method rlFrustum(left, right, bottom, top, znear, zfar)
+      #   rlFrustum
+      #   @param left [double]
+      #   @param right [double]
+      #   @param bottom [double]
+      #   @param top [double]
+      #   @param znear [double]
+      #   @param zfar [double]
+      #   @return [void]
       [:rlFrustum, :rlFrustum, [:double, :double, :double, :double, :double, :double], :void],
 
-      # rlOrtho
-      # @param left [double]
-      # @param right [double]
-      # @param bottom [double]
-      # @param top [double]
-      # @param znear [double]
-      # @param zfar [double]
-      # @return [void]
+      # @!method rlOrtho(left, right, bottom, top, znear, zfar)
+      #   rlOrtho
+      #   @param left [double]
+      #   @param right [double]
+      #   @param bottom [double]
+      #   @param top [double]
+      #   @param znear [double]
+      #   @param zfar [double]
+      #   @return [void]
       [:rlOrtho, :rlOrtho, [:double, :double, :double, :double, :double, :double], :void],
 
-      # rlViewport : Set the viewport area
-      # @param x [int]
-      # @param y [int]
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method rlViewport(x, y, width, height)
+      #   rlViewport : Set the viewport area
+      #   @param x [int]
+      #   @param y [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:rlViewport, :rlViewport, [:int, :int, :int, :int], :void],
 
-      # rlBegin : Initialize drawing mode (how to organize vertex)
-      # @param mode [int]
-      # @return [void]
+      # @!method rlBegin(mode)
+      #   rlBegin : Initialize drawing mode (how to organize vertex)
+      #   @param mode [int]
+      #   @return [void]
       [:rlBegin, :rlBegin, [:int], :void],
 
-      # rlEnd : Finish vertex providing
-      # @return [void]
+      # @!method rlEnd()
+      #   rlEnd : Finish vertex providing
+      #   @return [void]
       [:rlEnd, :rlEnd, [], :void],
 
-      # rlVertex2i : Define one vertex (position) - 2 int
-      # @param x [int]
-      # @param y [int]
-      # @return [void]
+      # @!method rlVertex2i(x, y)
+      #   rlVertex2i : Define one vertex (position) - 2 int
+      #   @param x [int]
+      #   @param y [int]
+      #   @return [void]
       [:rlVertex2i, :rlVertex2i, [:int, :int], :void],
 
-      # rlVertex2f : Define one vertex (position) - 2 float
-      # @param x [float]
-      # @param y [float]
-      # @return [void]
+      # @!method rlVertex2f(x, y)
+      #   rlVertex2f : Define one vertex (position) - 2 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @return [void]
       [:rlVertex2f, :rlVertex2f, [:float, :float], :void],
 
-      # rlVertex3f : Define one vertex (position) - 3 float
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlVertex3f(x, y, z)
+      #   rlVertex3f : Define one vertex (position) - 3 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlVertex3f, :rlVertex3f, [:float, :float, :float], :void],
 
-      # rlTexCoord2f : Define one vertex (texture coordinate) - 2 float
-      # @param x [float]
-      # @param y [float]
-      # @return [void]
+      # @!method rlTexCoord2f(x, y)
+      #   rlTexCoord2f : Define one vertex (texture coordinate) - 2 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @return [void]
       [:rlTexCoord2f, :rlTexCoord2f, [:float, :float], :void],
 
-      # rlNormal3f : Define one vertex (normal) - 3 float
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlNormal3f(x, y, z)
+      #   rlNormal3f : Define one vertex (normal) - 3 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlNormal3f, :rlNormal3f, [:float, :float, :float], :void],
 
-      # rlColor4ub : Define one vertex (color) - 4 byte
-      # @param r [unsigned char]
-      # @param g [unsigned char]
-      # @param b [unsigned char]
-      # @param a [unsigned char]
-      # @return [void]
+      # @!method rlColor4ub(r, g, b, a)
+      #   rlColor4ub : Define one vertex (color) - 4 byte
+      #   @param r [unsigned char]
+      #   @param g [unsigned char]
+      #   @param b [unsigned char]
+      #   @param a [unsigned char]
+      #   @return [void]
       [:rlColor4ub, :rlColor4ub, [:uchar, :uchar, :uchar, :uchar], :void],
 
-      # rlColor3f : Define one vertex (color) - 3 float
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @return [void]
+      # @!method rlColor3f(x, y, z)
+      #   rlColor3f : Define one vertex (color) - 3 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @return [void]
       [:rlColor3f, :rlColor3f, [:float, :float, :float], :void],
 
-      # rlColor4f : Define one vertex (color) - 4 float
-      # @param x [float]
-      # @param y [float]
-      # @param z [float]
-      # @param w [float]
-      # @return [void]
+      # @!method rlColor4f(x, y, z, w)
+      #   rlColor4f : Define one vertex (color) - 4 float
+      #   @param x [float]
+      #   @param y [float]
+      #   @param z [float]
+      #   @param w [float]
+      #   @return [void]
       [:rlColor4f, :rlColor4f, [:float, :float, :float, :float], :void],
 
-      # rlEnableVertexArray : Enable vertex array (VAO, if supported)
-      # @param vaoId [unsigned int]
-      # @return [bool]
+      # @!method rlEnableVertexArray(vaoId)
+      #   rlEnableVertexArray : Enable vertex array (VAO, if supported)
+      #   @param vaoId [unsigned int]
+      #   @return [bool]
       [:rlEnableVertexArray, :rlEnableVertexArray, [:uint], :bool],
 
-      # rlDisableVertexArray : Disable vertex array (VAO, if supported)
-      # @return [void]
+      # @!method rlDisableVertexArray()
+      #   rlDisableVertexArray : Disable vertex array (VAO, if supported)
+      #   @return [void]
       [:rlDisableVertexArray, :rlDisableVertexArray, [], :void],
 
-      # rlEnableVertexBuffer : Enable vertex buffer (VBO)
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableVertexBuffer(id)
+      #   rlEnableVertexBuffer : Enable vertex buffer (VBO)
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableVertexBuffer, :rlEnableVertexBuffer, [:uint], :void],
 
-      # rlDisableVertexBuffer : Disable vertex buffer (VBO)
-      # @return [void]
+      # @!method rlDisableVertexBuffer()
+      #   rlDisableVertexBuffer : Disable vertex buffer (VBO)
+      #   @return [void]
       [:rlDisableVertexBuffer, :rlDisableVertexBuffer, [], :void],
 
-      # rlEnableVertexBufferElement : Enable vertex buffer element (VBO element)
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableVertexBufferElement(id)
+      #   rlEnableVertexBufferElement : Enable vertex buffer element (VBO element)
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableVertexBufferElement, :rlEnableVertexBufferElement, [:uint], :void],
 
-      # rlDisableVertexBufferElement : Disable vertex buffer element (VBO element)
-      # @return [void]
+      # @!method rlDisableVertexBufferElement()
+      #   rlDisableVertexBufferElement : Disable vertex buffer element (VBO element)
+      #   @return [void]
       [:rlDisableVertexBufferElement, :rlDisableVertexBufferElement, [], :void],
 
-      # rlEnableVertexAttribute : Enable vertex attribute index
-      # @param index [unsigned int]
-      # @return [void]
+      # @!method rlEnableVertexAttribute(index)
+      #   rlEnableVertexAttribute : Enable vertex attribute index
+      #   @param index [unsigned int]
+      #   @return [void]
       [:rlEnableVertexAttribute, :rlEnableVertexAttribute, [:uint], :void],
 
-      # rlDisableVertexAttribute : Disable vertex attribute index
-      # @param index [unsigned int]
-      # @return [void]
+      # @!method rlDisableVertexAttribute(index)
+      #   rlDisableVertexAttribute : Disable vertex attribute index
+      #   @param index [unsigned int]
+      #   @return [void]
       [:rlDisableVertexAttribute, :rlDisableVertexAttribute, [:uint], :void],
 
-      # rlActiveTextureSlot : Select and active a texture slot
-      # @param slot [int]
-      # @return [void]
+      # @!method rlActiveTextureSlot(slot)
+      #   rlActiveTextureSlot : Select and active a texture slot
+      #   @param slot [int]
+      #   @return [void]
       [:rlActiveTextureSlot, :rlActiveTextureSlot, [:int], :void],
 
-      # rlEnableTexture : Enable texture
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableTexture(id)
+      #   rlEnableTexture : Enable texture
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableTexture, :rlEnableTexture, [:uint], :void],
 
-      # rlDisableTexture : Disable texture
-      # @return [void]
+      # @!method rlDisableTexture()
+      #   rlDisableTexture : Disable texture
+      #   @return [void]
       [:rlDisableTexture, :rlDisableTexture, [], :void],
 
-      # rlEnableTextureCubemap : Enable texture cubemap
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableTextureCubemap(id)
+      #   rlEnableTextureCubemap : Enable texture cubemap
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableTextureCubemap, :rlEnableTextureCubemap, [:uint], :void],
 
-      # rlDisableTextureCubemap : Disable texture cubemap
-      # @return [void]
+      # @!method rlDisableTextureCubemap()
+      #   rlDisableTextureCubemap : Disable texture cubemap
+      #   @return [void]
       [:rlDisableTextureCubemap, :rlDisableTextureCubemap, [], :void],
 
-      # rlTextureParameters : Set texture parameters (filter, wrap)
-      # @param id [unsigned int]
-      # @param param [int]
-      # @param value [int]
-      # @return [void]
+      # @!method rlTextureParameters(id, param, value)
+      #   rlTextureParameters : Set texture parameters (filter, wrap)
+      #   @param id [unsigned int]
+      #   @param param [int]
+      #   @param value [int]
+      #   @return [void]
       [:rlTextureParameters, :rlTextureParameters, [:uint, :int, :int], :void],
 
-      # rlCubemapParameters : Set cubemap parameters (filter, wrap)
-      # @param id [unsigned int]
-      # @param param [int]
-      # @param value [int]
-      # @return [void]
+      # @!method rlCubemapParameters(id, param, value)
+      #   rlCubemapParameters : Set cubemap parameters (filter, wrap)
+      #   @param id [unsigned int]
+      #   @param param [int]
+      #   @param value [int]
+      #   @return [void]
       [:rlCubemapParameters, :rlCubemapParameters, [:uint, :int, :int], :void],
 
-      # rlEnableShader : Enable shader program
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableShader(id)
+      #   rlEnableShader : Enable shader program
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableShader, :rlEnableShader, [:uint], :void],
 
-      # rlDisableShader : Disable shader program
-      # @return [void]
+      # @!method rlDisableShader()
+      #   rlDisableShader : Disable shader program
+      #   @return [void]
       [:rlDisableShader, :rlDisableShader, [], :void],
 
-      # rlEnableFramebuffer : Enable render texture (fbo)
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlEnableFramebuffer(id)
+      #   rlEnableFramebuffer : Enable render texture (fbo)
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlEnableFramebuffer, :rlEnableFramebuffer, [:uint], :void],
 
-      # rlDisableFramebuffer : Disable render texture (fbo), return to default framebuffer
-      # @return [void]
+      # @!method rlDisableFramebuffer()
+      #   rlDisableFramebuffer : Disable render texture (fbo), return to default framebuffer
+      #   @return [void]
       [:rlDisableFramebuffer, :rlDisableFramebuffer, [], :void],
 
-      # rlActiveDrawBuffers : Activate multiple draw color buffers
-      # @param count [int]
-      # @return [void]
+      # @!method rlActiveDrawBuffers(count)
+      #   rlActiveDrawBuffers : Activate multiple draw color buffers
+      #   @param count [int]
+      #   @return [void]
       [:rlActiveDrawBuffers, :rlActiveDrawBuffers, [:int], :void],
 
-      # rlEnableColorBlend : Enable color blending
-      # @return [void]
+      # @!method rlEnableColorBlend()
+      #   rlEnableColorBlend : Enable color blending
+      #   @return [void]
       [:rlEnableColorBlend, :rlEnableColorBlend, [], :void],
 
-      # rlDisableColorBlend : Disable color blending
-      # @return [void]
+      # @!method rlDisableColorBlend()
+      #   rlDisableColorBlend : Disable color blending
+      #   @return [void]
       [:rlDisableColorBlend, :rlDisableColorBlend, [], :void],
 
-      # rlEnableDepthTest : Enable depth test
-      # @return [void]
+      # @!method rlEnableDepthTest()
+      #   rlEnableDepthTest : Enable depth test
+      #   @return [void]
       [:rlEnableDepthTest, :rlEnableDepthTest, [], :void],
 
-      # rlDisableDepthTest : Disable depth test
-      # @return [void]
+      # @!method rlDisableDepthTest()
+      #   rlDisableDepthTest : Disable depth test
+      #   @return [void]
       [:rlDisableDepthTest, :rlDisableDepthTest, [], :void],
 
-      # rlEnableDepthMask : Enable depth write
-      # @return [void]
+      # @!method rlEnableDepthMask()
+      #   rlEnableDepthMask : Enable depth write
+      #   @return [void]
       [:rlEnableDepthMask, :rlEnableDepthMask, [], :void],
 
-      # rlDisableDepthMask : Disable depth write
-      # @return [void]
+      # @!method rlDisableDepthMask()
+      #   rlDisableDepthMask : Disable depth write
+      #   @return [void]
       [:rlDisableDepthMask, :rlDisableDepthMask, [], :void],
 
-      # rlEnableBackfaceCulling : Enable backface culling
-      # @return [void]
+      # @!method rlEnableBackfaceCulling()
+      #   rlEnableBackfaceCulling : Enable backface culling
+      #   @return [void]
       [:rlEnableBackfaceCulling, :rlEnableBackfaceCulling, [], :void],
 
-      # rlDisableBackfaceCulling : Disable backface culling
-      # @return [void]
+      # @!method rlDisableBackfaceCulling()
+      #   rlDisableBackfaceCulling : Disable backface culling
+      #   @return [void]
       [:rlDisableBackfaceCulling, :rlDisableBackfaceCulling, [], :void],
 
-      # rlSetCullFace : Set face culling mode
-      # @param mode [int]
-      # @return [void]
+      # @!method rlSetCullFace(mode)
+      #   rlSetCullFace : Set face culling mode
+      #   @param mode [int]
+      #   @return [void]
       [:rlSetCullFace, :rlSetCullFace, [:int], :void],
 
-      # rlEnableScissorTest : Enable scissor test
-      # @return [void]
+      # @!method rlEnableScissorTest()
+      #   rlEnableScissorTest : Enable scissor test
+      #   @return [void]
       [:rlEnableScissorTest, :rlEnableScissorTest, [], :void],
 
-      # rlDisableScissorTest : Disable scissor test
-      # @return [void]
+      # @!method rlDisableScissorTest()
+      #   rlDisableScissorTest : Disable scissor test
+      #   @return [void]
       [:rlDisableScissorTest, :rlDisableScissorTest, [], :void],
 
-      # rlScissor : Scissor test
-      # @param x [int]
-      # @param y [int]
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method rlScissor(x, y, width, height)
+      #   rlScissor : Scissor test
+      #   @param x [int]
+      #   @param y [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:rlScissor, :rlScissor, [:int, :int, :int, :int], :void],
 
-      # rlEnableWireMode : Enable wire mode
-      # @return [void]
+      # @!method rlEnableWireMode()
+      #   rlEnableWireMode : Enable wire mode
+      #   @return [void]
       [:rlEnableWireMode, :rlEnableWireMode, [], :void],
 
-      # rlDisableWireMode : Disable wire mode
-      # @return [void]
+      # @!method rlDisableWireMode()
+      #   rlDisableWireMode : Disable wire mode
+      #   @return [void]
       [:rlDisableWireMode, :rlDisableWireMode, [], :void],
 
-      # rlSetLineWidth : Set the line drawing width
-      # @param width [float]
-      # @return [void]
+      # @!method rlSetLineWidth(width)
+      #   rlSetLineWidth : Set the line drawing width
+      #   @param width [float]
+      #   @return [void]
       [:rlSetLineWidth, :rlSetLineWidth, [:float], :void],
 
-      # rlGetLineWidth : Get the line drawing width
-      # @return [float]
+      # @!method rlGetLineWidth()
+      #   rlGetLineWidth : Get the line drawing width
+      #   @return [float]
       [:rlGetLineWidth, :rlGetLineWidth, [], :float],
 
-      # rlEnableSmoothLines : Enable line aliasing
-      # @return [void]
+      # @!method rlEnableSmoothLines()
+      #   rlEnableSmoothLines : Enable line aliasing
+      #   @return [void]
       [:rlEnableSmoothLines, :rlEnableSmoothLines, [], :void],
 
-      # rlDisableSmoothLines : Disable line aliasing
-      # @return [void]
+      # @!method rlDisableSmoothLines()
+      #   rlDisableSmoothLines : Disable line aliasing
+      #   @return [void]
       [:rlDisableSmoothLines, :rlDisableSmoothLines, [], :void],
 
-      # rlEnableStereoRender : Enable stereo rendering
-      # @return [void]
+      # @!method rlEnableStereoRender()
+      #   rlEnableStereoRender : Enable stereo rendering
+      #   @return [void]
       [:rlEnableStereoRender, :rlEnableStereoRender, [], :void],
 
-      # rlDisableStereoRender : Disable stereo rendering
-      # @return [void]
+      # @!method rlDisableStereoRender()
+      #   rlDisableStereoRender : Disable stereo rendering
+      #   @return [void]
       [:rlDisableStereoRender, :rlDisableStereoRender, [], :void],
 
-      # rlIsStereoRenderEnabled : Check if stereo render is enabled
-      # @return [bool]
+      # @!method rlIsStereoRenderEnabled()
+      #   rlIsStereoRenderEnabled : Check if stereo render is enabled
+      #   @return [bool]
       [:rlIsStereoRenderEnabled, :rlIsStereoRenderEnabled, [], :bool],
 
-      # rlClearColor : Clear color buffer with color
-      # @param r [unsigned char]
-      # @param g [unsigned char]
-      # @param b [unsigned char]
-      # @param a [unsigned char]
-      # @return [void]
+      # @!method rlClearColor(r, g, b, a)
+      #   rlClearColor : Clear color buffer with color
+      #   @param r [unsigned char]
+      #   @param g [unsigned char]
+      #   @param b [unsigned char]
+      #   @param a [unsigned char]
+      #   @return [void]
       [:rlClearColor, :rlClearColor, [:uchar, :uchar, :uchar, :uchar], :void],
 
-      # rlClearScreenBuffers : Clear used screen buffers (color and depth)
-      # @return [void]
+      # @!method rlClearScreenBuffers()
+      #   rlClearScreenBuffers : Clear used screen buffers (color and depth)
+      #   @return [void]
       [:rlClearScreenBuffers, :rlClearScreenBuffers, [], :void],
 
-      # rlCheckErrors : Check and log OpenGL error codes
-      # @return [void]
+      # @!method rlCheckErrors()
+      #   rlCheckErrors : Check and log OpenGL error codes
+      #   @return [void]
       [:rlCheckErrors, :rlCheckErrors, [], :void],
 
-      # rlSetBlendMode : Set blending mode
-      # @param mode [int]
-      # @return [void]
+      # @!method rlSetBlendMode(mode)
+      #   rlSetBlendMode : Set blending mode
+      #   @param mode [int]
+      #   @return [void]
       [:rlSetBlendMode, :rlSetBlendMode, [:int], :void],
 
-      # rlSetBlendFactors : Set blending mode factor and equation (using OpenGL factors)
-      # @param glSrcFactor [int]
-      # @param glDstFactor [int]
-      # @param glEquation [int]
-      # @return [void]
+      # @!method rlSetBlendFactors(glSrcFactor, glDstFactor, glEquation)
+      #   rlSetBlendFactors : Set blending mode factor and equation (using OpenGL factors)
+      #   @param glSrcFactor [int]
+      #   @param glDstFactor [int]
+      #   @param glEquation [int]
+      #   @return [void]
       [:rlSetBlendFactors, :rlSetBlendFactors, [:int, :int, :int], :void],
 
-      # rlSetBlendFactorsSeparate : Set blending mode factors and equations separately (using OpenGL factors)
-      # @param glSrcRGB [int]
-      # @param glDstRGB [int]
-      # @param glSrcAlpha [int]
-      # @param glDstAlpha [int]
-      # @param glEqRGB [int]
-      # @param glEqAlpha [int]
-      # @return [void]
+      # @!method rlSetBlendFactorsSeparate(glSrcRGB, glDstRGB, glSrcAlpha, glDstAlpha, glEqRGB, glEqAlpha)
+      #   rlSetBlendFactorsSeparate : Set blending mode factors and equations separately (using OpenGL factors)
+      #   @param glSrcRGB [int]
+      #   @param glDstRGB [int]
+      #   @param glSrcAlpha [int]
+      #   @param glDstAlpha [int]
+      #   @param glEqRGB [int]
+      #   @param glEqAlpha [int]
+      #   @return [void]
       [:rlSetBlendFactorsSeparate, :rlSetBlendFactorsSeparate, [:int, :int, :int, :int, :int, :int], :void],
 
-      # rlglInit : Initialize rlgl (buffers, shaders, textures, states)
-      # @param width [int]
-      # @param height [int]
-      # @return [void]
+      # @!method rlglInit(width, height)
+      #   rlglInit : Initialize rlgl (buffers, shaders, textures, states)
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
       [:rlglInit, :rlglInit, [:int, :int], :void],
 
-      # rlglClose : De-initialize rlgl (buffers, shaders, textures)
-      # @return [void]
+      # @!method rlglClose()
+      #   rlglClose : De-initialize rlgl (buffers, shaders, textures)
+      #   @return [void]
       [:rlglClose, :rlglClose, [], :void],
 
-      # rlLoadExtensions : Load OpenGL extensions (loader function required)
-      # @param loader [void *]
-      # @return [void]
+      # @!method rlLoadExtensions(loader)
+      #   rlLoadExtensions : Load OpenGL extensions (loader function required)
+      #   @param loader [void *]
+      #   @return [void]
       [:rlLoadExtensions, :rlLoadExtensions, [:pointer], :void],
 
-      # rlGetVersion : Get current OpenGL version
-      # @return [int]
+      # @!method rlGetVersion()
+      #   rlGetVersion : Get current OpenGL version
+      #   @return [int]
       [:rlGetVersion, :rlGetVersion, [], :int],
 
-      # rlSetFramebufferWidth : Set current framebuffer width
-      # @param width [int]
-      # @return [void]
+      # @!method rlSetFramebufferWidth(width)
+      #   rlSetFramebufferWidth : Set current framebuffer width
+      #   @param width [int]
+      #   @return [void]
       [:rlSetFramebufferWidth, :rlSetFramebufferWidth, [:int], :void],
 
-      # rlGetFramebufferWidth : Get default framebuffer width
-      # @return [int]
+      # @!method rlGetFramebufferWidth()
+      #   rlGetFramebufferWidth : Get default framebuffer width
+      #   @return [int]
       [:rlGetFramebufferWidth, :rlGetFramebufferWidth, [], :int],
 
-      # rlSetFramebufferHeight : Set current framebuffer height
-      # @param height [int]
-      # @return [void]
+      # @!method rlSetFramebufferHeight(height)
+      #   rlSetFramebufferHeight : Set current framebuffer height
+      #   @param height [int]
+      #   @return [void]
       [:rlSetFramebufferHeight, :rlSetFramebufferHeight, [:int], :void],
 
-      # rlGetFramebufferHeight : Get default framebuffer height
-      # @return [int]
+      # @!method rlGetFramebufferHeight()
+      #   rlGetFramebufferHeight : Get default framebuffer height
+      #   @return [int]
       [:rlGetFramebufferHeight, :rlGetFramebufferHeight, [], :int],
 
-      # rlGetTextureIdDefault : Get default texture id
-      # @return [unsigned int]
+      # @!method rlGetTextureIdDefault()
+      #   rlGetTextureIdDefault : Get default texture id
+      #   @return [unsigned int]
       [:rlGetTextureIdDefault, :rlGetTextureIdDefault, [], :uint],
 
-      # rlGetShaderIdDefault : Get default shader id
-      # @return [unsigned int]
+      # @!method rlGetShaderIdDefault()
+      #   rlGetShaderIdDefault : Get default shader id
+      #   @return [unsigned int]
       [:rlGetShaderIdDefault, :rlGetShaderIdDefault, [], :uint],
 
-      # rlGetShaderLocsDefault : Get default shader locations
-      # @return [int *]
+      # @!method rlGetShaderLocsDefault()
+      #   rlGetShaderLocsDefault : Get default shader locations
+      #   @return [int *]
       [:rlGetShaderLocsDefault, :rlGetShaderLocsDefault, [], :pointer],
 
-      # rlLoadRenderBatch : Load a render batch system
-      # @param numBuffers [int]
-      # @param bufferElements [int]
-      # @return [rlRenderBatch]
+      # @!method rlLoadRenderBatch(numBuffers, bufferElements)
+      #   rlLoadRenderBatch : Load a render batch system
+      #   @param numBuffers [int]
+      #   @param bufferElements [int]
+      #   @return [rlRenderBatch]
       [:rlLoadRenderBatch, :rlLoadRenderBatch, [:int, :int], RlRenderBatch.by_value],
 
-      # rlUnloadRenderBatch : Unload render batch system
-      # @param batch [rlRenderBatch]
-      # @return [void]
+      # @!method rlUnloadRenderBatch(batch)
+      #   rlUnloadRenderBatch : Unload render batch system
+      #   @param batch [rlRenderBatch]
+      #   @return [void]
       [:rlUnloadRenderBatch, :rlUnloadRenderBatch, [RlRenderBatch.by_value], :void],
 
-      # rlDrawRenderBatch : Draw render batch data (Update->Draw->Reset)
-      # @param batch [rlRenderBatch *]
-      # @return [void]
+      # @!method rlDrawRenderBatch(batch)
+      #   rlDrawRenderBatch : Draw render batch data (Update->Draw->Reset)
+      #   @param batch [rlRenderBatch *]
+      #   @return [void]
       [:rlDrawRenderBatch, :rlDrawRenderBatch, [:pointer], :void],
 
-      # rlSetRenderBatchActive : Set the active render batch for rlgl (NULL for default internal)
-      # @param batch [rlRenderBatch *]
-      # @return [void]
+      # @!method rlSetRenderBatchActive(batch)
+      #   rlSetRenderBatchActive : Set the active render batch for rlgl (NULL for default internal)
+      #   @param batch [rlRenderBatch *]
+      #   @return [void]
       [:rlSetRenderBatchActive, :rlSetRenderBatchActive, [:pointer], :void],
 
-      # rlDrawRenderBatchActive : Update and draw internal render batch
-      # @return [void]
+      # @!method rlDrawRenderBatchActive()
+      #   rlDrawRenderBatchActive : Update and draw internal render batch
+      #   @return [void]
       [:rlDrawRenderBatchActive, :rlDrawRenderBatchActive, [], :void],
 
-      # rlCheckRenderBatchLimit : Check internal buffer overflow for a given number of vertex
-      # @param vCount [int]
-      # @return [bool]
+      # @!method rlCheckRenderBatchLimit(vCount)
+      #   rlCheckRenderBatchLimit : Check internal buffer overflow for a given number of vertex
+      #   @param vCount [int]
+      #   @return [bool]
       [:rlCheckRenderBatchLimit, :rlCheckRenderBatchLimit, [:int], :bool],
 
-      # rlSetTexture : Set current texture for render batch and check buffers limits
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlSetTexture(id)
+      #   rlSetTexture : Set current texture for render batch and check buffers limits
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlSetTexture, :rlSetTexture, [:uint], :void],
 
-      # rlLoadVertexArray : Load vertex array (vao) if supported
-      # @return [unsigned int]
+      # @!method rlLoadVertexArray()
+      #   rlLoadVertexArray : Load vertex array (vao) if supported
+      #   @return [unsigned int]
       [:rlLoadVertexArray, :rlLoadVertexArray, [], :uint],
 
-      # rlLoadVertexBuffer : Load a vertex buffer attribute
-      # @param buffer [const void *]
-      # @param size [int]
-      # @param dynamic [bool]
-      # @return [unsigned int]
+      # @!method rlLoadVertexBuffer(buffer, size, dynamic)
+      #   rlLoadVertexBuffer : Load a vertex buffer attribute
+      #   @param buffer [const void *]
+      #   @param size [int]
+      #   @param dynamic [bool]
+      #   @return [unsigned int]
       [:rlLoadVertexBuffer, :rlLoadVertexBuffer, [:pointer, :int, :bool], :uint],
 
-      # rlLoadVertexBufferElement : Load a new attributes element buffer
-      # @param buffer [const void *]
-      # @param size [int]
-      # @param dynamic [bool]
-      # @return [unsigned int]
+      # @!method rlLoadVertexBufferElement(buffer, size, dynamic)
+      #   rlLoadVertexBufferElement : Load a new attributes element buffer
+      #   @param buffer [const void *]
+      #   @param size [int]
+      #   @param dynamic [bool]
+      #   @return [unsigned int]
       [:rlLoadVertexBufferElement, :rlLoadVertexBufferElement, [:pointer, :int, :bool], :uint],
 
-      # rlUpdateVertexBuffer : Update GPU buffer with new data
-      # @param bufferId [unsigned int]
-      # @param data [const void *]
-      # @param dataSize [int]
-      # @param offset [int]
-      # @return [void]
+      # @!method rlUpdateVertexBuffer(bufferId, data, dataSize, offset)
+      #   rlUpdateVertexBuffer : Update GPU buffer with new data
+      #   @param bufferId [unsigned int]
+      #   @param data [const void *]
+      #   @param dataSize [int]
+      #   @param offset [int]
+      #   @return [void]
       [:rlUpdateVertexBuffer, :rlUpdateVertexBuffer, [:uint, :pointer, :int, :int], :void],
 
-      # rlUpdateVertexBufferElements : Update vertex buffer elements with new data
-      # @param id [unsigned int]
-      # @param data [const void *]
-      # @param dataSize [int]
-      # @param offset [int]
-      # @return [void]
+      # @!method rlUpdateVertexBufferElements(id, data, dataSize, offset)
+      #   rlUpdateVertexBufferElements : Update vertex buffer elements with new data
+      #   @param id [unsigned int]
+      #   @param data [const void *]
+      #   @param dataSize [int]
+      #   @param offset [int]
+      #   @return [void]
       [:rlUpdateVertexBufferElements, :rlUpdateVertexBufferElements, [:uint, :pointer, :int, :int], :void],
 
-      # rlUnloadVertexArray
-      # @param vaoId [unsigned int]
-      # @return [void]
+      # @!method rlUnloadVertexArray(vaoId)
+      #   rlUnloadVertexArray
+      #   @param vaoId [unsigned int]
+      #   @return [void]
       [:rlUnloadVertexArray, :rlUnloadVertexArray, [:uint], :void],
 
-      # rlUnloadVertexBuffer
-      # @param vboId [unsigned int]
-      # @return [void]
+      # @!method rlUnloadVertexBuffer(vboId)
+      #   rlUnloadVertexBuffer
+      #   @param vboId [unsigned int]
+      #   @return [void]
       [:rlUnloadVertexBuffer, :rlUnloadVertexBuffer, [:uint], :void],
 
-      # rlSetVertexAttribute
-      # @param index [unsigned int]
-      # @param compSize [int]
-      # @param type [int]
-      # @param normalized [bool]
-      # @param stride [int]
-      # @param pointer [const void *]
-      # @return [void]
+      # @!method rlSetVertexAttribute(index, compSize, type, normalized, stride, pointer)
+      #   rlSetVertexAttribute
+      #   @param index [unsigned int]
+      #   @param compSize [int]
+      #   @param type [int]
+      #   @param normalized [bool]
+      #   @param stride [int]
+      #   @param pointer [const void *]
+      #   @return [void]
       [:rlSetVertexAttribute, :rlSetVertexAttribute, [:uint, :int, :int, :bool, :int, :pointer], :void],
 
-      # rlSetVertexAttributeDivisor
-      # @param index [unsigned int]
-      # @param divisor [int]
-      # @return [void]
+      # @!method rlSetVertexAttributeDivisor(index, divisor)
+      #   rlSetVertexAttributeDivisor
+      #   @param index [unsigned int]
+      #   @param divisor [int]
+      #   @return [void]
       [:rlSetVertexAttributeDivisor, :rlSetVertexAttributeDivisor, [:uint, :int], :void],
 
-      # rlSetVertexAttributeDefault : Set vertex attribute default value
-      # @param locIndex [int]
-      # @param value [const void *]
-      # @param attribType [int]
-      # @param count [int]
-      # @return [void]
+      # @!method rlSetVertexAttributeDefault(locIndex, value, attribType, count)
+      #   rlSetVertexAttributeDefault : Set vertex attribute default value
+      #   @param locIndex [int]
+      #   @param value [const void *]
+      #   @param attribType [int]
+      #   @param count [int]
+      #   @return [void]
       [:rlSetVertexAttributeDefault, :rlSetVertexAttributeDefault, [:int, :pointer, :int, :int], :void],
 
-      # rlDrawVertexArray
-      # @param offset [int]
-      # @param count [int]
-      # @return [void]
+      # @!method rlDrawVertexArray(offset, count)
+      #   rlDrawVertexArray
+      #   @param offset [int]
+      #   @param count [int]
+      #   @return [void]
       [:rlDrawVertexArray, :rlDrawVertexArray, [:int, :int], :void],
 
-      # rlDrawVertexArrayElements
-      # @param offset [int]
-      # @param count [int]
-      # @param buffer [const void *]
-      # @return [void]
+      # @!method rlDrawVertexArrayElements(offset, count, buffer)
+      #   rlDrawVertexArrayElements
+      #   @param offset [int]
+      #   @param count [int]
+      #   @param buffer [const void *]
+      #   @return [void]
       [:rlDrawVertexArrayElements, :rlDrawVertexArrayElements, [:int, :int, :pointer], :void],
 
-      # rlDrawVertexArrayInstanced
-      # @param offset [int]
-      # @param count [int]
-      # @param instances [int]
-      # @return [void]
+      # @!method rlDrawVertexArrayInstanced(offset, count, instances)
+      #   rlDrawVertexArrayInstanced
+      #   @param offset [int]
+      #   @param count [int]
+      #   @param instances [int]
+      #   @return [void]
       [:rlDrawVertexArrayInstanced, :rlDrawVertexArrayInstanced, [:int, :int, :int], :void],
 
-      # rlDrawVertexArrayElementsInstanced
-      # @param offset [int]
-      # @param count [int]
-      # @param buffer [const void *]
-      # @param instances [int]
-      # @return [void]
+      # @!method rlDrawVertexArrayElementsInstanced(offset, count, buffer, instances)
+      #   rlDrawVertexArrayElementsInstanced
+      #   @param offset [int]
+      #   @param count [int]
+      #   @param buffer [const void *]
+      #   @param instances [int]
+      #   @return [void]
       [:rlDrawVertexArrayElementsInstanced, :rlDrawVertexArrayElementsInstanced, [:int, :int, :pointer, :int], :void],
 
-      # rlLoadTexture : Load texture in GPU
-      # @param data [const void *]
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @param mipmapCount [int]
-      # @return [unsigned int]
+      # @!method rlLoadTexture(data, width, height, format, mipmapCount)
+      #   rlLoadTexture : Load texture in GPU
+      #   @param data [const void *]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @param mipmapCount [int]
+      #   @return [unsigned int]
       [:rlLoadTexture, :rlLoadTexture, [:pointer, :int, :int, :int, :int], :uint],
 
-      # rlLoadTextureDepth : Load depth texture/renderbuffer (to be attached to fbo)
-      # @param width [int]
-      # @param height [int]
-      # @param useRenderBuffer [bool]
-      # @return [unsigned int]
+      # @!method rlLoadTextureDepth(width, height, useRenderBuffer)
+      #   rlLoadTextureDepth : Load depth texture/renderbuffer (to be attached to fbo)
+      #   @param width [int]
+      #   @param height [int]
+      #   @param useRenderBuffer [bool]
+      #   @return [unsigned int]
       [:rlLoadTextureDepth, :rlLoadTextureDepth, [:int, :int, :bool], :uint],
 
-      # rlLoadTextureCubemap : Load texture cubemap
-      # @param data [const void *]
-      # @param size [int]
-      # @param format [int]
-      # @return [unsigned int]
+      # @!method rlLoadTextureCubemap(data, size, format)
+      #   rlLoadTextureCubemap : Load texture cubemap
+      #   @param data [const void *]
+      #   @param size [int]
+      #   @param format [int]
+      #   @return [unsigned int]
       [:rlLoadTextureCubemap, :rlLoadTextureCubemap, [:pointer, :int, :int], :uint],
 
-      # rlUpdateTexture : Update GPU texture with new data
-      # @param id [unsigned int]
-      # @param offsetX [int]
-      # @param offsetY [int]
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @param data [const void *]
-      # @return [void]
+      # @!method rlUpdateTexture(id, offsetX, offsetY, width, height, format, data)
+      #   rlUpdateTexture : Update GPU texture with new data
+      #   @param id [unsigned int]
+      #   @param offsetX [int]
+      #   @param offsetY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @param data [const void *]
+      #   @return [void]
       [:rlUpdateTexture, :rlUpdateTexture, [:uint, :int, :int, :int, :int, :int, :pointer], :void],
 
-      # rlGetGlTextureFormats : Get OpenGL internal formats
-      # @param format [int]
-      # @param glInternalFormat [unsigned int *]
-      # @param glFormat [unsigned int *]
-      # @param glType [unsigned int *]
-      # @return [void]
+      # @!method rlGetGlTextureFormats(format, glInternalFormat, glFormat, glType)
+      #   rlGetGlTextureFormats : Get OpenGL internal formats
+      #   @param format [int]
+      #   @param glInternalFormat [unsigned int *]
+      #   @param glFormat [unsigned int *]
+      #   @param glType [unsigned int *]
+      #   @return [void]
       [:rlGetGlTextureFormats, :rlGetGlTextureFormats, [:int, :pointer, :pointer, :pointer], :void],
 
-      # rlGetPixelFormatName : Get name string for pixel format
-      # @param format [unsigned int]
-      # @return [const char *]
+      # @!method rlGetPixelFormatName(format)
+      #   rlGetPixelFormatName : Get name string for pixel format
+      #   @param format [unsigned int]
+      #   @return [const char *]
       [:rlGetPixelFormatName, :rlGetPixelFormatName, [:uint], :pointer],
 
-      # rlUnloadTexture : Unload texture from GPU memory
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlUnloadTexture(id)
+      #   rlUnloadTexture : Unload texture from GPU memory
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlUnloadTexture, :rlUnloadTexture, [:uint], :void],
 
-      # rlGenTextureMipmaps : Generate mipmap data for selected texture
-      # @param id [unsigned int]
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @param mipmaps [int *]
-      # @return [void]
+      # @!method rlGenTextureMipmaps(id, width, height, format, mipmaps)
+      #   rlGenTextureMipmaps : Generate mipmap data for selected texture
+      #   @param id [unsigned int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @param mipmaps [int *]
+      #   @return [void]
       [:rlGenTextureMipmaps, :rlGenTextureMipmaps, [:uint, :int, :int, :int, :pointer], :void],
 
-      # rlReadTexturePixels : Read texture pixel data
-      # @param id [unsigned int]
-      # @param width [int]
-      # @param height [int]
-      # @param format [int]
-      # @return [void *]
+      # @!method rlReadTexturePixels(id, width, height, format)
+      #   rlReadTexturePixels : Read texture pixel data
+      #   @param id [unsigned int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @return [void *]
       [:rlReadTexturePixels, :rlReadTexturePixels, [:uint, :int, :int, :int], :pointer],
 
-      # rlReadScreenPixels : Read screen pixel data (color buffer)
-      # @param width [int]
-      # @param height [int]
-      # @return [unsigned char *]
+      # @!method rlReadScreenPixels(width, height)
+      #   rlReadScreenPixels : Read screen pixel data (color buffer)
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [unsigned char *]
       [:rlReadScreenPixels, :rlReadScreenPixels, [:int, :int], :pointer],
 
-      # rlLoadFramebuffer : Load an empty framebuffer
-      # @param width [int]
-      # @param height [int]
-      # @return [unsigned int]
+      # @!method rlLoadFramebuffer(width, height)
+      #   rlLoadFramebuffer : Load an empty framebuffer
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [unsigned int]
       [:rlLoadFramebuffer, :rlLoadFramebuffer, [:int, :int], :uint],
 
-      # rlFramebufferAttach : Attach texture/renderbuffer to a framebuffer
-      # @param fboId [unsigned int]
-      # @param texId [unsigned int]
-      # @param attachType [int]
-      # @param texType [int]
-      # @param mipLevel [int]
-      # @return [void]
+      # @!method rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel)
+      #   rlFramebufferAttach : Attach texture/renderbuffer to a framebuffer
+      #   @param fboId [unsigned int]
+      #   @param texId [unsigned int]
+      #   @param attachType [int]
+      #   @param texType [int]
+      #   @param mipLevel [int]
+      #   @return [void]
       [:rlFramebufferAttach, :rlFramebufferAttach, [:uint, :uint, :int, :int, :int], :void],
 
-      # rlFramebufferComplete : Verify framebuffer is complete
-      # @param id [unsigned int]
-      # @return [bool]
+      # @!method rlFramebufferComplete(id)
+      #   rlFramebufferComplete : Verify framebuffer is complete
+      #   @param id [unsigned int]
+      #   @return [bool]
       [:rlFramebufferComplete, :rlFramebufferComplete, [:uint], :bool],
 
-      # rlUnloadFramebuffer : Delete framebuffer from GPU
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlUnloadFramebuffer(id)
+      #   rlUnloadFramebuffer : Delete framebuffer from GPU
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlUnloadFramebuffer, :rlUnloadFramebuffer, [:uint], :void],
 
-      # rlLoadShaderCode : Load shader from code strings
-      # @param vsCode [const char *]
-      # @param fsCode [const char *]
-      # @return [unsigned int]
+      # @!method rlLoadShaderCode(vsCode, fsCode)
+      #   rlLoadShaderCode : Load shader from code strings
+      #   @param vsCode [const char *]
+      #   @param fsCode [const char *]
+      #   @return [unsigned int]
       [:rlLoadShaderCode, :rlLoadShaderCode, [:pointer, :pointer], :uint],
 
-      # rlCompileShader : Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
-      # @param shaderCode [const char *]
-      # @param type [int]
-      # @return [unsigned int]
+      # @!method rlCompileShader(shaderCode, type)
+      #   rlCompileShader : Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
+      #   @param shaderCode [const char *]
+      #   @param type [int]
+      #   @return [unsigned int]
       [:rlCompileShader, :rlCompileShader, [:pointer, :int], :uint],
 
-      # rlLoadShaderProgram : Load custom shader program
-      # @param vShaderId [unsigned int]
-      # @param fShaderId [unsigned int]
-      # @return [unsigned int]
+      # @!method rlLoadShaderProgram(vShaderId, fShaderId)
+      #   rlLoadShaderProgram : Load custom shader program
+      #   @param vShaderId [unsigned int]
+      #   @param fShaderId [unsigned int]
+      #   @return [unsigned int]
       [:rlLoadShaderProgram, :rlLoadShaderProgram, [:uint, :uint], :uint],
 
-      # rlUnloadShaderProgram : Unload shader program
-      # @param id [unsigned int]
-      # @return [void]
+      # @!method rlUnloadShaderProgram(id)
+      #   rlUnloadShaderProgram : Unload shader program
+      #   @param id [unsigned int]
+      #   @return [void]
       [:rlUnloadShaderProgram, :rlUnloadShaderProgram, [:uint], :void],
 
-      # rlGetLocationUniform : Get shader location uniform
-      # @param shaderId [unsigned int]
-      # @param uniformName [const char *]
-      # @return [int]
+      # @!method rlGetLocationUniform(shaderId, uniformName)
+      #   rlGetLocationUniform : Get shader location uniform
+      #   @param shaderId [unsigned int]
+      #   @param uniformName [const char *]
+      #   @return [int]
       [:rlGetLocationUniform, :rlGetLocationUniform, [:uint, :pointer], :int],
 
-      # rlGetLocationAttrib : Get shader location attribute
-      # @param shaderId [unsigned int]
-      # @param attribName [const char *]
-      # @return [int]
+      # @!method rlGetLocationAttrib(shaderId, attribName)
+      #   rlGetLocationAttrib : Get shader location attribute
+      #   @param shaderId [unsigned int]
+      #   @param attribName [const char *]
+      #   @return [int]
       [:rlGetLocationAttrib, :rlGetLocationAttrib, [:uint, :pointer], :int],
 
-      # rlSetUniform : Set shader value uniform
-      # @param locIndex [int]
-      # @param value [const void *]
-      # @param uniformType [int]
-      # @param count [int]
-      # @return [void]
+      # @!method rlSetUniform(locIndex, value, uniformType, count)
+      #   rlSetUniform : Set shader value uniform
+      #   @param locIndex [int]
+      #   @param value [const void *]
+      #   @param uniformType [int]
+      #   @param count [int]
+      #   @return [void]
       [:rlSetUniform, :rlSetUniform, [:int, :pointer, :int, :int], :void],
 
-      # rlSetUniformMatrix : Set shader value matrix
-      # @param locIndex [int]
-      # @param mat [Matrix]
-      # @return [void]
+      # @!method rlSetUniformMatrix(locIndex, mat)
+      #   rlSetUniformMatrix : Set shader value matrix
+      #   @param locIndex [int]
+      #   @param mat [Matrix]
+      #   @return [void]
       [:rlSetUniformMatrix, :rlSetUniformMatrix, [:int, Matrix.by_value], :void],
 
-      # rlSetUniformSampler : Set shader value sampler
-      # @param locIndex [int]
-      # @param textureId [unsigned int]
-      # @return [void]
+      # @!method rlSetUniformSampler(locIndex, textureId)
+      #   rlSetUniformSampler : Set shader value sampler
+      #   @param locIndex [int]
+      #   @param textureId [unsigned int]
+      #   @return [void]
       [:rlSetUniformSampler, :rlSetUniformSampler, [:int, :uint], :void],
 
-      # rlSetShader : Set shader currently active (id and locations)
-      # @param id [unsigned int]
-      # @param locs [int *]
-      # @return [void]
+      # @!method rlSetShader(id, locs)
+      #   rlSetShader : Set shader currently active (id and locations)
+      #   @param id [unsigned int]
+      #   @param locs [int *]
+      #   @return [void]
       [:rlSetShader, :rlSetShader, [:uint, :pointer], :void],
 
-      # rlLoadComputeShaderProgram : Load compute shader program
-      # @param shaderId [unsigned int]
-      # @return [unsigned int]
+      # @!method rlLoadComputeShaderProgram(shaderId)
+      #   rlLoadComputeShaderProgram : Load compute shader program
+      #   @param shaderId [unsigned int]
+      #   @return [unsigned int]
       [:rlLoadComputeShaderProgram, :rlLoadComputeShaderProgram, [:uint], :uint],
 
-      # rlComputeShaderDispatch : Dispatch compute shader (equivalent to *draw* for graphics pipeline)
-      # @param groupX [unsigned int]
-      # @param groupY [unsigned int]
-      # @param groupZ [unsigned int]
-      # @return [void]
+      # @!method rlComputeShaderDispatch(groupX, groupY, groupZ)
+      #   rlComputeShaderDispatch : Dispatch compute shader (equivalent to *draw* for graphics pipeline)
+      #   @param groupX [unsigned int]
+      #   @param groupY [unsigned int]
+      #   @param groupZ [unsigned int]
+      #   @return [void]
       [:rlComputeShaderDispatch, :rlComputeShaderDispatch, [:uint, :uint, :uint], :void],
 
-      # rlLoadShaderBuffer : Load shader storage buffer object (SSBO)
-      # @param size [unsigned int]
-      # @param data [const void *]
-      # @param usageHint [int]
-      # @return [unsigned int]
+      # @!method rlLoadShaderBuffer(size, data, usageHint)
+      #   rlLoadShaderBuffer : Load shader storage buffer object (SSBO)
+      #   @param size [unsigned int]
+      #   @param data [const void *]
+      #   @param usageHint [int]
+      #   @return [unsigned int]
       [:rlLoadShaderBuffer, :rlLoadShaderBuffer, [:uint, :pointer, :int], :uint],
 
-      # rlUnloadShaderBuffer : Unload shader storage buffer object (SSBO)
-      # @param ssboId [unsigned int]
-      # @return [void]
+      # @!method rlUnloadShaderBuffer(ssboId)
+      #   rlUnloadShaderBuffer : Unload shader storage buffer object (SSBO)
+      #   @param ssboId [unsigned int]
+      #   @return [void]
       [:rlUnloadShaderBuffer, :rlUnloadShaderBuffer, [:uint], :void],
 
-      # rlUpdateShaderBuffer : Update SSBO buffer data
-      # @param id [unsigned int]
-      # @param data [const void *]
-      # @param dataSize [unsigned int]
-      # @param offset [unsigned int]
-      # @return [void]
+      # @!method rlUpdateShaderBuffer(id, data, dataSize, offset)
+      #   rlUpdateShaderBuffer : Update SSBO buffer data
+      #   @param id [unsigned int]
+      #   @param data [const void *]
+      #   @param dataSize [unsigned int]
+      #   @param offset [unsigned int]
+      #   @return [void]
       [:rlUpdateShaderBuffer, :rlUpdateShaderBuffer, [:uint, :pointer, :uint, :uint], :void],
 
-      # rlBindShaderBuffer : Bind SSBO buffer
-      # @param id [unsigned int]
-      # @param index [unsigned int]
-      # @return [void]
+      # @!method rlBindShaderBuffer(id, index)
+      #   rlBindShaderBuffer : Bind SSBO buffer
+      #   @param id [unsigned int]
+      #   @param index [unsigned int]
+      #   @return [void]
       [:rlBindShaderBuffer, :rlBindShaderBuffer, [:uint, :uint], :void],
 
-      # rlReadShaderBuffer : Read SSBO buffer data (GPU->CPU)
-      # @param id [unsigned int]
-      # @param dest [void *]
-      # @param count [unsigned int]
-      # @param offset [unsigned int]
-      # @return [void]
+      # @!method rlReadShaderBuffer(id, dest, count, offset)
+      #   rlReadShaderBuffer : Read SSBO buffer data (GPU->CPU)
+      #   @param id [unsigned int]
+      #   @param dest [void *]
+      #   @param count [unsigned int]
+      #   @param offset [unsigned int]
+      #   @return [void]
       [:rlReadShaderBuffer, :rlReadShaderBuffer, [:uint, :pointer, :uint, :uint], :void],
 
-      # rlCopyShaderBuffer : Copy SSBO data between buffers
-      # @param destId [unsigned int]
-      # @param srcId [unsigned int]
-      # @param destOffset [unsigned int]
-      # @param srcOffset [unsigned int]
-      # @param count [unsigned int]
-      # @return [void]
+      # @!method rlCopyShaderBuffer(destId, srcId, destOffset, srcOffset, count)
+      #   rlCopyShaderBuffer : Copy SSBO data between buffers
+      #   @param destId [unsigned int]
+      #   @param srcId [unsigned int]
+      #   @param destOffset [unsigned int]
+      #   @param srcOffset [unsigned int]
+      #   @param count [unsigned int]
+      #   @return [void]
       [:rlCopyShaderBuffer, :rlCopyShaderBuffer, [:uint, :uint, :uint, :uint, :uint], :void],
 
-      # rlGetShaderBufferSize : Get SSBO buffer size
-      # @param id [unsigned int]
-      # @return [unsigned int]
+      # @!method rlGetShaderBufferSize(id)
+      #   rlGetShaderBufferSize : Get SSBO buffer size
+      #   @param id [unsigned int]
+      #   @return [unsigned int]
       [:rlGetShaderBufferSize, :rlGetShaderBufferSize, [:uint], :uint],
 
-      # rlBindImageTexture : Bind image texture
-      # @param id [unsigned int]
-      # @param index [unsigned int]
-      # @param format [int]
-      # @param readonly [bool]
-      # @return [void]
+      # @!method rlBindImageTexture(id, index, format, readonly)
+      #   rlBindImageTexture : Bind image texture
+      #   @param id [unsigned int]
+      #   @param index [unsigned int]
+      #   @param format [int]
+      #   @param readonly [bool]
+      #   @return [void]
       [:rlBindImageTexture, :rlBindImageTexture, [:uint, :uint, :int, :bool], :void],
 
-      # rlGetMatrixModelview : Get internal modelview matrix
-      # @return [Matrix]
+      # @!method rlGetMatrixModelview()
+      #   rlGetMatrixModelview : Get internal modelview matrix
+      #   @return [Matrix]
       [:rlGetMatrixModelview, :rlGetMatrixModelview, [], Matrix.by_value],
 
-      # rlGetMatrixProjection : Get internal projection matrix
-      # @return [Matrix]
+      # @!method rlGetMatrixProjection()
+      #   rlGetMatrixProjection : Get internal projection matrix
+      #   @return [Matrix]
       [:rlGetMatrixProjection, :rlGetMatrixProjection, [], Matrix.by_value],
 
-      # rlGetMatrixTransform : Get internal accumulated transform matrix
-      # @return [Matrix]
+      # @!method rlGetMatrixTransform()
+      #   rlGetMatrixTransform : Get internal accumulated transform matrix
+      #   @return [Matrix]
       [:rlGetMatrixTransform, :rlGetMatrixTransform, [], Matrix.by_value],
 
-      # rlGetMatrixProjectionStereo : Get internal projection matrix for stereo render (selected eye)
-      # @param eye [int]
-      # @return [Matrix]
+      # @!method rlGetMatrixProjectionStereo(eye)
+      #   rlGetMatrixProjectionStereo : Get internal projection matrix for stereo render (selected eye)
+      #   @param eye [int]
+      #   @return [Matrix]
       [:rlGetMatrixProjectionStereo, :rlGetMatrixProjectionStereo, [:int], Matrix.by_value],
 
-      # rlGetMatrixViewOffsetStereo : Get internal view offset matrix for stereo render (selected eye)
-      # @param eye [int]
-      # @return [Matrix]
+      # @!method rlGetMatrixViewOffsetStereo(eye)
+      #   rlGetMatrixViewOffsetStereo : Get internal view offset matrix for stereo render (selected eye)
+      #   @param eye [int]
+      #   @return [Matrix]
       [:rlGetMatrixViewOffsetStereo, :rlGetMatrixViewOffsetStereo, [:int], Matrix.by_value],
 
-      # rlSetMatrixProjection : Set a custom projection matrix (replaces internal projection matrix)
-      # @param proj [Matrix]
-      # @return [void]
+      # @!method rlSetMatrixProjection(proj)
+      #   rlSetMatrixProjection : Set a custom projection matrix (replaces internal projection matrix)
+      #   @param proj [Matrix]
+      #   @return [void]
       [:rlSetMatrixProjection, :rlSetMatrixProjection, [Matrix.by_value], :void],
 
-      # rlSetMatrixModelview : Set a custom modelview matrix (replaces internal modelview matrix)
-      # @param view [Matrix]
-      # @return [void]
+      # @!method rlSetMatrixModelview(view)
+      #   rlSetMatrixModelview : Set a custom modelview matrix (replaces internal modelview matrix)
+      #   @param view [Matrix]
+      #   @return [void]
       [:rlSetMatrixModelview, :rlSetMatrixModelview, [Matrix.by_value], :void],
 
-      # rlSetMatrixProjectionStereo : Set eyes projection matrices for stereo rendering
-      # @param right [Matrix]
-      # @param left [Matrix]
-      # @return [void]
+      # @!method rlSetMatrixProjectionStereo(right, left)
+      #   rlSetMatrixProjectionStereo : Set eyes projection matrices for stereo rendering
+      #   @param right [Matrix]
+      #   @param left [Matrix]
+      #   @return [void]
       [:rlSetMatrixProjectionStereo, :rlSetMatrixProjectionStereo, [Matrix.by_value, Matrix.by_value], :void],
 
-      # rlSetMatrixViewOffsetStereo : Set eyes view offsets matrices for stereo rendering
-      # @param right [Matrix]
-      # @param left [Matrix]
-      # @return [void]
+      # @!method rlSetMatrixViewOffsetStereo(right, left)
+      #   rlSetMatrixViewOffsetStereo : Set eyes view offsets matrices for stereo rendering
+      #   @param right [Matrix]
+      #   @param left [Matrix]
+      #   @return [void]
       [:rlSetMatrixViewOffsetStereo, :rlSetMatrixViewOffsetStereo, [Matrix.by_value, Matrix.by_value], :void],
 
-      # rlLoadDrawCube : Load and draw a cube
-      # @return [void]
+      # @!method rlLoadDrawCube()
+      #   rlLoadDrawCube : Load and draw a cube
+      #   @return [void]
       [:rlLoadDrawCube, :rlLoadDrawCube, [], :void],
 
-      # rlLoadDrawQuad : Load and draw a quad
-      # @return [void]
+      # @!method rlLoadDrawQuad()
+      #   rlLoadDrawQuad : Load and draw a quad
+      #   @return [void]
       [:rlLoadDrawQuad, :rlLoadDrawQuad, [], :void],
     ]
     entries.each do |entry|

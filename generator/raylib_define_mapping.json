@@ -220,7 +220,10 @@
     , "SUPPORT_TRACELOG" : "1"
     , "MAX_TRACELOG_MSG_LENGTH" : "256"
     , "RAYGUI_H" : null
-    , "RAYGUI_VERSION" : "\"3.2\""
+    , "RAYGUI_VERSION_MAJOR" : "3"
+    , "RAYGUI_VERSION_MINOR" : "6"
+    , "RAYGUI_VERSION_PATCH" : "0"
+    , "RAYGUI_VERSION" : "\"3.6\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null
