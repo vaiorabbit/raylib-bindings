@@ -1,3 +1,8 @@
+2023-05-22  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/textures_image_generation.rb: Added
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/a4a6d4da8a26d131bc3f3e643f6fe51de281d15f ) and raygui ( https://github.com/raysan5/raygui/commit/135718ee04d57493039fd7b8fb1d73b49f3ec1ea )
+
 2023-05-14  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/5978358e5877b0033584334c5bf6ec7d8cf22ae8 ) and raygui ( https://github.com/raysan5/raygui/commit/aa81c167f10707ea173ea1190eda18e57d841b8f )

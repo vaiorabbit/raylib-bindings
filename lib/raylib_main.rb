@@ -2724,23 +2724,15 @@ module Raylib
       #   @return [Image]
       [:GenImageColor, :GenImageColor, [:int, :int, Color.by_value], Image.by_value],
 
-      # @!method GenImageGradientV(width, height, top, bottom)
-      #   GenImageGradientV : Generate image: vertical gradient
+      # @!method GenImageGradientLinear(width, height, direction, start, end)
+      #   GenImageGradientLinear : Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient
       #   @param width [int]
       #   @param height [int]
-      #   @param top [Color]
-      #   @param bottom [Color]
+      #   @param direction [int]
+      #   @param start [Color]
+      #   @param end [Color]
       #   @return [Image]
-      [:GenImageGradientV, :GenImageGradientV, [:int, :int, Color.by_value, Color.by_value], Image.by_value],
-
-      # @!method GenImageGradientH(width, height, left, right)
-      #   GenImageGradientH : Generate image: horizontal gradient
-      #   @param width [int]
-      #   @param height [int]
-      #   @param left [Color]
-      #   @param right [Color]
-      #   @return [Image]
-      [:GenImageGradientH, :GenImageGradientH, [:int, :int, Color.by_value, Color.by_value], Image.by_value],
+      [:GenImageGradientLinear, :GenImageGradientLinear, [:int, :int, :int, Color.by_value, Color.by_value], Image.by_value],
 
       # @!method GenImageGradientRadial(width, height, density, inner, outer)
       #   GenImageGradientRadial : Generate image: radial gradient
@@ -2751,6 +2743,16 @@ module Raylib
       #   @param outer [Color]
       #   @return [Image]
       [:GenImageGradientRadial, :GenImageGradientRadial, [:int, :int, :float, Color.by_value, Color.by_value], Image.by_value],
+
+      # @!method GenImageGradientSquare(width, height, density, inner, outer)
+      #   GenImageGradientSquare : Generate image: square gradient
+      #   @param width [int]
+      #   @param height [int]
+      #   @param density [float]
+      #   @param inner [Color]
+      #   @param outer [Color]
+      #   @return [Image]
+      [:GenImageGradientSquare, :GenImageGradientSquare, [:int, :int, :float, Color.by_value, Color.by_value], Image.by_value],
 
       # @!method GenImageChecked(width, height, checksX, checksY, col1, col2)
       #   GenImageChecked : Generate image: checked
