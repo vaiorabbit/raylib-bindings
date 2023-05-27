@@ -2941,6 +2941,13 @@ module Raylib
       #   @return [void]
       [:ImageFlipHorizontal, :ImageFlipHorizontal, [:pointer], :void],
 
+      # @!method ImageRotate(image, degrees)
+      #   ImageRotate : Rotate image by input angle in degrees (-359 to 359) 
+      #   @param image [Image *]
+      #   @param degrees [int]
+      #   @return [void]
+      [:ImageRotate, :ImageRotate, [:pointer, :int], :void],
+
       # @!method ImageRotateCW(image)
       #   ImageRotateCW : Rotate image clockwise 90deg
       #   @param image [Image *]
