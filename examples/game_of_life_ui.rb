@@ -158,11 +158,11 @@ if __FILE__ == $PROGRAM_NAME
 
       widget_x = ui_base_x + ui_space_x
       widget_base_y = ui_base_y + ui_space_y
-      exec_update = GuiCheckBox(Rectangle.create(widget_x, widget_base_y + ui_line_height * 0, font_size, font_size), "Run (#{exec_update ? 'ON' : 'OFF'})", exec_update)
-      interval = GuiSliderBar(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, 300, font_size), nil, " Interval (#{interval})", interval, 0, 20)
-      show_fps = GuiCheckBox(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, font_size, font_size), "Show FPS(#{show_fps ? 'ON' : 'OFF'})", show_fps)
-      show_grid = GuiCheckBox(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 3, font_size, font_size), "Show Grid(#{show_grid ? 'ON' : 'OFF'})", show_grid)
-      clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 4, font_size * 10, font_size), 'Clear Grid')
+      exec_update = RGuiCheckBox(Rectangle.create(widget_x, widget_base_y + ui_line_height * 0, font_size, font_size), "Run (#{exec_update ? 'ON' : 'OFF'})", exec_update)
+      interval = RGuiSliderBar(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, 300, font_size), nil, " Interval (#{interval})", interval, 0, 20)
+      show_fps = RGuiCheckBox(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, font_size, font_size), "Show FPS(#{show_fps ? 'ON' : 'OFF'})", show_fps)
+      show_grid = RGuiCheckBox(  Rectangle.create(widget_x, widget_base_y + ui_line_height * 3, font_size, font_size), "Show Grid(#{show_grid ? 'ON' : 'OFF'})", show_grid)
+      clear_grid = RGuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 4, font_size * 10, font_size), 'Clear Grid')
 
       interval = interval.to_i
     end

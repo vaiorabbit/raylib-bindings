@@ -9,9 +9,10 @@ require_relative 'config'
 require_relative 'raymath'
 require_relative 'rcamera'
 require_relative 'rlgl'
-require_relative 'raygui'
+require_relative 'raygui_main'
 require_relative 'physac'
 require_relative 'raylib_helper'
+require_relative 'raygui_helper'
 
 module Raylib
   extend FFI::Library

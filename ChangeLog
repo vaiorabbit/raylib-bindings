@@ -1,3 +1,8 @@
+2023-06-10  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* lib/raygui_main.rb: Renamed from 'raygui.rb'
+	* lib/raygui_helper.rb: Minimal raygui wrapper to cope with raygui-4.0 API changes
+
 2023-05-27  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/aad51d47048f9eb5c13bbbd65dc5cd4d37aa68e5 ) and raygui ( https://github.com/raysan5/raygui/commit/ce358972efcc9c3c85f9806104f525210da08787 )
