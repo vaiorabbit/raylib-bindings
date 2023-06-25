@@ -565,6 +565,11 @@
           "name": "BACKGROUND_COLOR",
           "value": 19,
           "description": "Background color"
+        },
+        {
+          "name": "TEXT_LINE_SPACING",
+          "value": 20,
+          "description": "Text spacing between lines"
         }
       ]
     },
@@ -2965,6 +2970,44 @@
         {
           "type": "float *",
           "name": "value"
+        }
+      ]
+    },
+    {
+      "name": "GuiColorPickerHSV",
+      "description": "Color Picker control that avoids conversion to RGB on each call (multiple color controls)",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char *",
+          "name": "text"
+        },
+        {
+          "type": "Vector3 *",
+          "name": "colorHsv"
+        }
+      ]
+    },
+    {
+      "name": "GuiColorPanelHSV",
+      "description": "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char *",
+          "name": "text"
+        },
+        {
+          "type": "Vector3 *",
+          "name": "colorHsv"
         }
       ]
     }

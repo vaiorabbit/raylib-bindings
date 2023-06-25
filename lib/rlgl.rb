@@ -87,6 +87,7 @@ module Raylib
   RL_OPENGL_33 = 3    # OpenGL 3.3 (GLSL 330)
   RL_OPENGL_43 = 4    # OpenGL 4.3 (using GLSL 330)
   RL_OPENGL_ES_20 = 5 # OpenGL ES 2.0 (GLSL 100)
+  RL_OPENGL_ES_30 = 6 # OpenGL ES 3.0 (GLSL 300 es)
 
   # enum rlTraceLogLevel
   # Trace log level

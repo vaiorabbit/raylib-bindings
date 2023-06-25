@@ -6207,6 +6207,25 @@
       ]
     },
     {
+      "name": "ExportImageToMemory",
+      "description": "Export image to memory buffer",
+      "returnType": "unsigned char *",
+      "params": [
+        {
+          "type": "Image",
+          "name": "image"
+        },
+        {
+          "type": "const char *",
+          "name": "fileType"
+        },
+        {
+          "type": "int *",
+          "name": "fileSize"
+        }
+      ]
+    },
+    {
       "name": "ExportImageAsCode",
       "description": "Export image as code file defining an array of bytes, returns true on success",
       "returnType": "bool",
@@ -6759,7 +6778,7 @@
     },
     {
       "name": "ImageRotate",
-      "description": "Rotate image by input angle in degrees (-359 to 359) ",
+      "description": "Rotate image by input angle in degrees (-359 to 359)",
       "returnType": "void",
       "params": [
         {

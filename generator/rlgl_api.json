@@ -61,6 +61,12 @@
       "description": ""
     },
     {
+      "name": "GRAPHICS_API_OPENGL_ES2",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
       "name": "RLGL_RENDER_TEXTURES_HINT",
       "type": "GUARD",
       "value": "",
@@ -764,6 +770,11 @@
           "name": "RL_OPENGL_ES_20",
           "value": 5,
           "description": "OpenGL ES 2.0 (GLSL 100)"
+        },
+        {
+          "name": "RL_OPENGL_ES_30",
+          "value": 6,
+          "description": "OpenGL ES 3.0 (GLSL 300 es)"
         }
       ]
     },

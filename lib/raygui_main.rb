@@ -73,10 +73,11 @@ module Raylib
 
   # enum GuiDefaultProperty
   # DEFAULT extended properties
-  TEXT_SIZE = 16        # Text size (glyphs max height)
-  TEXT_SPACING = 17     # Text spacing between glyphs
-  LINE_COLOR = 18       # Line control color
-  BACKGROUND_COLOR = 19 # Background color
+  TEXT_SIZE = 16         # Text size (glyphs max height)
+  TEXT_SPACING = 17      # Text spacing between glyphs
+  LINE_COLOR = 18        # Line control color
+  BACKGROUND_COLOR = 19  # Background color
+  TEXT_LINE_SPACING = 20 # Text spacing between lines
 
   # enum GuiToggleProperty
   # Toggle/ToggleGroup
@@ -844,6 +845,22 @@ module Raylib
       #   @param value [float *]
       #   @return [int]
       [:GuiColorBarHue, :GuiColorBarHue, [Rectangle.by_value, :pointer, :pointer], :int],
+
+      # @!method GuiColorPickerHSV(bounds, text, colorHsv)
+      #   GuiColorPickerHSV : Color Picker control that avoids conversion to RGB on each call (multiple color controls)
+      #   @param bounds [Rectangle]
+      #   @param text [const char *]
+      #   @param colorHsv [Vector3 *]
+      #   @return [int]
+      [:GuiColorPickerHSV, :GuiColorPickerHSV, [Rectangle.by_value, :pointer, :pointer], :int],
+
+      # @!method GuiColorPanelHSV(bounds, text, colorHsv)
+      #   GuiColorPanelHSV : Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+      #   @param bounds [Rectangle]
+      #   @param text [const char *]
+      #   @param colorHsv [Vector3 *]
+      #   @return [int]
+      [:GuiColorPanelHSV, :GuiColorPanelHSV, [Rectangle.by_value, :pointer, :pointer], :int],
     ]
     entries.each do |entry|
       attach_function entry[0], entry[1], entry[2], entry[3]

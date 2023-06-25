@@ -2709,6 +2709,14 @@ module Raylib
       #   @return [bool]
       [:ExportImage, :ExportImage, [Image.by_value, :pointer], :bool],
 
+      # @!method ExportImageToMemory(image, fileType, fileSize)
+      #   ExportImageToMemory : Export image to memory buffer
+      #   @param image [Image]
+      #   @param fileType [const char *]
+      #   @param fileSize [int *]
+      #   @return [unsigned char *]
+      [:ExportImageToMemory, :ExportImageToMemory, [Image.by_value, :pointer, :pointer], :pointer],
+
       # @!method ExportImageAsCode(image, fileName)
       #   ExportImageAsCode : Export image as code file defining an array of bytes, returns true on success
       #   @param image [Image]
@@ -2942,7 +2950,7 @@ module Raylib
       [:ImageFlipHorizontal, :ImageFlipHorizontal, [:pointer], :void],
 
       # @!method ImageRotate(image, degrees)
-      #   ImageRotate : Rotate image by input angle in degrees (-359 to 359) 
+      #   ImageRotate : Rotate image by input angle in degrees (-359 to 359)
       #   @param image [Image *]
       #   @param degrees [int]
       #   @return [void]
