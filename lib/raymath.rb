@@ -630,23 +630,23 @@ module Raylib
       #   @return [Matrix]
       [:MatrixFrustum, :MatrixFrustum, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
 
-      # @!method MatrixPerspective(fovy, aspect, near, far)
+      # @!method MatrixPerspective(fovY, aspect, nearPlane, farPlane)
       #   MatrixPerspective
-      #   @param fovy [double]
+      #   @param fovY [double]
       #   @param aspect [double]
-      #   @param near [double]
-      #   @param far [double]
+      #   @param nearPlane [double]
+      #   @param farPlane [double]
       #   @return [Matrix]
       [:MatrixPerspective, :MatrixPerspective, [:double, :double, :double, :double], Matrix.by_value],
 
-      # @!method MatrixOrtho(left, right, bottom, top, near, far)
+      # @!method MatrixOrtho(left, right, bottom, top, nearPlane, farPlane)
       #   MatrixOrtho
       #   @param left [double]
       #   @param right [double]
       #   @param bottom [double]
       #   @param top [double]
-      #   @param near [double]
-      #   @param far [double]
+      #   @param nearPlane [double]
+      #   @param farPlane [double]
       #   @return [Matrix]
       [:MatrixOrtho, :MatrixOrtho, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
 

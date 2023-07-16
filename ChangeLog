@@ -1,3 +1,8 @@
+2023-07-16  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/textures_image_rotate.rb: Added
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/22895ba14fab982ca74ec1526b48b924d1174e60 ) and raygui ( https://github.com/raysan5/raygui/commit/848569ce3399a8f6fe00091f968808f3ab042c4b )
+
 2023-06-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/0c126af7171e51fff9f94c4f2e498f43f60d617b ) and raygui ( https://github.com/raysan5/raygui/commit/fa1c93cdcc6df2cd45f5a1d9249291465a24cd8c )

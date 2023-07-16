@@ -4,12 +4,13 @@ import raylib_parser, raylib_generator
 if __name__ == "__main__":
 
     ctx = raylib_parser.ParseContext('../raylib_dll/raylib/src/rcamera.h')
-    raylib_parser.execute(ctx, ["-DCAMERA_STANDALONE"])
+    raylib_parser.execute(ctx, ["-DRCAMERA_STANDALONE"])
 
     omit_structs = [
         'Vector2',
         'Vector3',
         'Camera3D',
+        'Matrix',
     ]
     for key in omit_structs:
         ctx.decl_structs.pop(key, None)

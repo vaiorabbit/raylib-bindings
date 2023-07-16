@@ -1240,6 +1240,11 @@ module Raylib
       #   @return [void]
       [:SetWindowOpacity, :SetWindowOpacity, [:float], :void],
 
+      # @!method SetWindowFocused()
+      #   SetWindowFocused : Set window focused (only PLATFORM_DESKTOP)
+      #   @return [void]
+      [:SetWindowFocused, :SetWindowFocused, [], :void],
+
       # @!method GetWindowHandle()
       #   GetWindowHandle : Get native window handle
       #   @return [void *]
@@ -3598,6 +3603,12 @@ module Raylib
       #   @param tint [Color]
       #   @return [void]
       [:DrawTextCodepoints, :DrawTextCodepoints, [Font.by_value, :pointer, :int, Vector2.by_value, :float, :float, Color.by_value], :void],
+
+      # @!method SetTextLineSpacing(spacing)
+      #   SetTextLineSpacing : Set vertical line spacing when drawing with line-breaks
+      #   @param spacing [int]
+      #   @return [void]
+      [:SetTextLineSpacing, :SetTextLineSpacing, [:int], :void],
 
       # @!method MeasureText(text, fontSize)
       #   MeasureText : Measure string width for default font

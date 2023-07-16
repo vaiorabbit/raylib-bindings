@@ -99,14 +99,14 @@ module Raylib
       #   GetCameraViewMatrix
       #   @param camera [Camera *]
       #   @return [Matrix]
-      [:GetCameraViewMatrix, :GetCameraViewMatrix, [:pointer], :int],
+      [:GetCameraViewMatrix, :GetCameraViewMatrix, [:pointer], Matrix.by_value],
 
       # @!method GetCameraProjectionMatrix(camera, aspect)
       #   GetCameraProjectionMatrix
       #   @param camera [Camera*]
       #   @param aspect [float]
       #   @return [Matrix]
-      [:GetCameraProjectionMatrix, :GetCameraProjectionMatrix, [:pointer, :float], :int],
+      [:GetCameraProjectionMatrix, :GetCameraProjectionMatrix, [:pointer, :float], Matrix.by_value],
     ]
     entries.each do |entry|
       attach_function entry[0], entry[1], entry[2], entry[3]
