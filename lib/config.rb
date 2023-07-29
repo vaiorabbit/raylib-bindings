@@ -70,6 +70,7 @@ module Raylib
   SUPPORT_FILEFORMAT_FNT = 1
   SUPPORT_FILEFORMAT_TTF = 1
   SUPPORT_TEXT_MANIPULATION = 1
+  SUPPORT_FONT_ATLAS_WHITE_REC = 1
   MAX_TEXT_BUFFER_LENGTH = 1024                               # Size of internal static buffers used on some functions:
   MAX_TEXTSPLIT_COUNT = 128                                   # Maximum number of substrings to split: TextSplit()
   SUPPORT_FILEFORMAT_OBJ = 1

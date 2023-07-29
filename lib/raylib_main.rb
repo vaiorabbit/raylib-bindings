@@ -1215,7 +1215,7 @@ module Raylib
       [:SetWindowPosition, :SetWindowPosition, [:int, :int], :void],
 
       # @!method SetWindowMonitor(monitor)
-      #   SetWindowMonitor : Set monitor for the current window (fullscreen mode)
+      #   SetWindowMonitor : Set monitor for the current window
       #   @param monitor [int]
       #   @return [void]
       [:SetWindowMonitor, :SetWindowMonitor, [:int], :void],
@@ -1327,7 +1327,7 @@ module Raylib
       [:GetWindowScaleDPI, :GetWindowScaleDPI, [], Vector2.by_value],
 
       # @!method GetMonitorName(monitor)
-      #   GetMonitorName : Get the human-readable, UTF-8 encoded name of the primary monitor
+      #   GetMonitorName : Get the human-readable, UTF-8 encoded name of the specified monitor
       #   @param monitor [int]
       #   @return [const char *]
       [:GetMonitorName, :GetMonitorName, [:int], :pointer],
@@ -4787,7 +4787,7 @@ module Raylib
       [:SetAudioStreamCallback, :SetAudioStreamCallback, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioStreamProcessor(stream, processor)
-      #   AttachAudioStreamProcessor : Attach audio stream processor to stream
+      #   AttachAudioStreamProcessor : Attach audio stream processor to stream, receives the samples as <float>s
       #   @param stream [AudioStream]
       #   @param processor [AudioCallback]
       #   @return [void]
@@ -4801,7 +4801,7 @@ module Raylib
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioMixedProcessor(processor)
-      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline
+      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline, receives the samples as <float>s
       #   @param processor [AudioCallback]
       #   @return [void]
       [:AttachAudioMixedProcessor, :AttachAudioMixedProcessor, [:AudioCallback], :void],

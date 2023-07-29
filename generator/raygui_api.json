@@ -718,6 +718,11 @@
           "name": "TEXT_WRAP_MODE",
           "value": 20,
           "description": "TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP"
+        },
+        {
+          "name": "TEXT_READONLY",
+          "value": 21,
+          "description": "TextBox is readonly, no editable"
         }
       ]
     },
@@ -2110,7 +2115,7 @@
       "returnType": "bool"
     },
     {
-      "name": "GuiFade",
+      "name": "GuiSetAlpha",
       "description": "Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f",
       "returnType": "void",
       "params": [

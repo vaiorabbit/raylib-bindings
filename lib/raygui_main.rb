@@ -122,6 +122,7 @@ module Raylib
   TEXT_ALIGNMENT_VERTICAL = 18 # TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN
   TEXT_MULTILINE = 19          # TextBox supports multiple lines
   TEXT_WRAP_MODE = 20          # TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP
+  TEXT_READONLY = 21           # TextBox is readonly, no editable
 
   # enum GuiSpinnerProperty
   # Spinner
@@ -471,11 +472,11 @@ module Raylib
       #   @return [bool]
       [:GuiIsLocked, :GuiIsLocked, [], :bool],
 
-      # @!method GuiFade(alpha)
-      #   GuiFade : Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
+      # @!method GuiSetAlpha(alpha)
+      #   GuiSetAlpha : Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f
       #   @param alpha [float]
       #   @return [void]
-      [:GuiFade, :GuiFade, [:float], :void],
+      [:GuiSetAlpha, :GuiSetAlpha, [:float], :void],
 
       # @!method GuiSetState(state)
       #   GuiSetState : Set gui state (global state)

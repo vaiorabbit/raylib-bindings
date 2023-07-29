@@ -367,6 +367,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FONT_ATLAS_WHITE_REC",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "MAX_TEXT_BUFFER_LENGTH",
       "type": "INT",
       "value": 1024,
