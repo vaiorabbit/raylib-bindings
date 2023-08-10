@@ -13,10 +13,10 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - raymarching shapes")
 
   camera = Camera.new
-  camera[:position] = Vector3.create(2.5, 2.5, 3.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.7)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 65.0
+             .with_position(2.5, 2.5, 3.0)
+             .with_target(0.0, 0.0, 0.7)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(65.0)
 
   # Load raymarching shader
   # NOTE: Defining 0 (NULL) for vertex shader forces usage of internal default vertex shader

@@ -89,19 +89,13 @@ if __FILE__ == $PROGRAM_NAME
     # Check collision status
     collision = false
 
-    player_bbox = BoundingBox.create(player_pos.x - player_size.x/2,
-                                     player_pos.y - player_size.y/2,
-                                     player_pos.z - player_size.z/2,
-                                     player_pos.x + player_size.x/2,
-                                     player_pos.y + player_size.y/2,
-                                     player_pos.z + player_size.z/2)
+    player_bbox = BoundingBox.new
+                    .with_min(player_pos.x - player_size.x/2, player_pos.y - player_size.y/2, player_pos.z - player_size.z/2)
+                    .with_max(player_pos.x + player_size.x/2, player_pos.y + player_size.y/2, player_pos.z + player_size.z/2)
 
-    obstacle_cube_bbox = BoundingBox.create(obstacle_cube_pos.x - obstacle_cube_size.x/2,
-                                            obstacle_cube_pos.y - obstacle_cube_size.y/2,
-                                            obstacle_cube_pos.z - obstacle_cube_size.z/2,
-                                            obstacle_cube_pos.x + obstacle_cube_size.x/2,
-                                            obstacle_cube_pos.y + obstacle_cube_size.y/2,
-                                            obstacle_cube_pos.z + obstacle_cube_size.z/2)
+    obstacle_cube_bbox = BoundingBox.new
+                           .with_min(obstacle_cube_pos.x - obstacle_cube_size.x/2, obstacle_cube_pos.y - obstacle_cube_size.y/2, obstacle_cube_pos.z - obstacle_cube_size.z/2)
+                           .with_max(obstacle_cube_pos.x + obstacle_cube_size.x/2, obstacle_cube_pos.y + obstacle_cube_size.y/2, obstacle_cube_pos.z + obstacle_cube_size.z/2)
 
     # Check collisions player vs obstacle_cube
     collision = true if CheckCollisionBoxes(player_bbox, obstacle_cube_bbox)

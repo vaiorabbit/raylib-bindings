@@ -10,11 +10,11 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - mesh picking")
 
   camera = Camera.new
-  camera[:position] = Vector3.create(20.0, 20.0, 20.0)
-  camera[:target] = Vector3.create(0.0, 8.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.6, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(20.0, 20.0, 20.0)
+             .with_target(0.0, 8.0, 0.0)
+             .with_up(0.0, 1.6, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   ray = Ray.new
 

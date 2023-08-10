@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera[:position] = Vector3.create(10.0, 10.0, 10.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(10.0, 10.0, 10.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   cubePosition = Vector3.create(0.0, 0.0, 0.0)
   cubeScreenPosition = Vector2.create(0.0, 0.0)
@@ -23,8 +23,8 @@ if __FILE__ == $PROGRAM_NAME
   speed = 0.25 # [Ruby raylib]
 
   until WindowShouldClose()
-    UpdateCamera(camera.pointer, CAMERA_FREE)
-
+    UpdateCamera(camera.pointer, CAMERA_CUSTOM)
+=begin
     # [Ruby raylib] Move cube position
     move = Vector3.create(0, 0, 0) # [Ruby raylib]
     move[:x] += speed if IsKeyDown(KEY_RIGHT)
@@ -37,9 +37,9 @@ if __FILE__ == $PROGRAM_NAME
     move = Vector3RotateByQuaternion(move, rotate_y)
 
     cubePosition = Vector3Add(cubePosition, move)
-
+=end
     # Calculate cube screen space position (with a little offset to be in top)
-    cubeScreenPosition = GetWorldToScreen(Vector3.create(cubePosition[:x], cubePosition[:y] + 2.5, cubePosition[:z]), camera)
+    cubeScreenPosition = GetWorldToScreen(Vector3.create(cubePosition.x, cubePosition.y + 2.5, cubePosition.z), camera)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

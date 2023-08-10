@@ -8,10 +8,10 @@ if __FILE__ == $PROGRAM_NAME
 
   # Initialize the camera
   camera = Camera.new
-  camera.position.set(0.0, 10.0, 10.0)
-  camera.target.set(0.0, 0.0, 0.0)
-  camera.up.set(0.0, 1.0, 0.0)
-  camera.fovy = 45.0
+             .with_position(0.0, 10.0, 10.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
 
   playerPosition = Vector3.create(0.0, 1.0, 2.0)
   playerSize = Vector3.create(1.0, 2.0, 1.0)
@@ -42,19 +42,13 @@ if __FILE__ == $PROGRAM_NAME
 
     collision = false
 
-    playerBox = BoundingBox.create(playerPosition.x - playerSize.x/2,
-                                   playerPosition.y - playerSize.y/2,
-                                   playerPosition.z - playerSize.z/2,
-                                   playerPosition.x + playerSize.x/2,
-                                   playerPosition.y + playerSize.y/2,
-                                   playerPosition.z + playerSize.z/2)
+    playerBox = BoundingBox.new
+                  .with_min(playerPosition.x - playerSize.x/2, playerPosition.y - playerSize.y/2, playerPosition.z - playerSize.z/2)
+                  .with_max(playerPosition.x + playerSize.x/2, playerPosition.y + playerSize.y/2, playerPosition.z + playerSize.z/2)
 
-    enemyBox = BoundingBox.create(enemyBoxPos.x - enemyBoxSize.x/2,
-                                  enemyBoxPos.y - enemyBoxSize.y/2,
-                                  enemyBoxPos.z - enemyBoxSize.z/2,
-                                  enemyBoxPos.x + enemyBoxSize.x/2,
-                                  enemyBoxPos.y + enemyBoxSize.y/2,
-                                  enemyBoxPos.z + enemyBoxSize.z/2)
+    enemyBox = BoundingBox.new
+                 .with_min(enemyBoxPos.x - enemyBoxSize.x/2, enemyBoxPos.y - enemyBoxSize.y/2, enemyBoxPos.z - enemyBoxSize.z/2)
+                 .with_max(enemyBoxPos.x + enemyBoxSize.x/2, enemyBoxPos.y + enemyBoxSize.y/2, enemyBoxPos.z + enemyBoxSize.z/2)
 
     # Check collisions player vs enemy-box
     collision = true if CheckCollisionBoxes(playerBox, enemyBox)

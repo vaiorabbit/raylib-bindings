@@ -16,14 +16,14 @@ def DrawScene()
 
   range_x.step(spacing) do |x|
     range_z.step(spacing) do |z|
-      DrawCubeTexture($textureGrid, Vector3.create(x, 1.5, z), 1, 1, 1, GREEN)
-      DrawCubeTexture($textureGrid, Vector3.create(x, 0.5, z), 0.25, 1, 0.25, BROWN)
+      DrawCube(Vector3.create(x, 1.5, z), 1, 1, 1, LIME)
+      DrawCube(Vector3.create(x, 0.5, z), 0.25, 1, 0.25, BROWN)
     end
   end
 
   # Draw a cube at each player's position
-  DrawCube($cameraPlayer1[:position], 1, 1, 1, RED)
-  DrawCube($cameraPlayer2[:position], 1, 1, 1, BLUE)
+  DrawCube($cameraPlayer1.position, 1, 1, 1, RED)
+  DrawCube($cameraPlayer2.position, 1, 1, 1, BLUE)
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -32,31 +32,24 @@ if __FILE__ == $PROGRAM_NAME
   screenHeight = 450
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - split screen")
 
-  # Generate a simple texture to use for trees
-  img = GenImageChecked(256, 256, 32, 32, DARKGRAY, WHITE)
-  $textureGrid = LoadTextureFromImage(img)
-  UnloadImage(img)
-  SetTextureFilter($textureGrid, TEXTURE_FILTER_ANISOTROPIC_16X)
-  SetTextureWrap($textureGrid, TEXTURE_WRAP_CLAMP)
-
   # Setup player 1 camera and screen
   $cameraPlayer1 = Camera.new
-  $cameraPlayer1[:fovy] = 45.0
-  $cameraPlayer1[:up] = Vector3.create(0.0, 1.0, 0.0)
-  $cameraPlayer1[:target] = Vector3.create(0.0, 1.0, 0.0)
-  $cameraPlayer1[:position] = Vector3.create(-3.0, 1.0, 0.0)
-  $cameraPlayer1[:projection] = CAMERA_PERSPECTIVE
+                     .with_fovy(45.0)
+                     .with_up(0.0, 1.0, 0.0)
+                     .with_target(0.0, 1.0, 0.0)
+                     .with_position(-3.0, 1.0, 0.0)
+                     .with_projection(CAMERA_PERSPECTIVE)
 
   screenPlayer1 = LoadRenderTexture(screenWidth/2, screenHeight)
 
   # Setup player two camera and screen
 
   $cameraPlayer2 = Camera.new
-  $cameraPlayer2[:fovy] = 45.0
-  $cameraPlayer2[:up] = Vector3.create(0.0, 1.0, 0.0)
-  $cameraPlayer2[:target] = Vector3.create(0.0, 3.0, 0.0)
-  $cameraPlayer2[:position] = Vector3.create(-3.0, 3.0, 0.0)
-  $cameraPlayer2[:projection] = CAMERA_PERSPECTIVE
+                     .with_fovy(45.0)
+                     .with_up(0.0, 1.0, 0.0)
+                     .with_target(0.0, 3.0, 0.0)
+                     .with_position(-3.0, 3.0, 0.0)
+                     .with_projection(CAMERA_PERSPECTIVE)
 
   screenPlayer2 = LoadRenderTexture(screenWidth/2, screenHeight)
 
@@ -74,20 +67,20 @@ if __FILE__ == $PROGRAM_NAME
 
     # Move Player1 forward and backwards (no turning)
     if IsKeyDown(KEY_W)
-      $cameraPlayer1[:position][:z] += offsetThisFrame
-      $cameraPlayer1[:target][:z] += offsetThisFrame
+      $cameraPlayer1.position.z += offsetThisFrame
+      $cameraPlayer1.target.z += offsetThisFrame
     elsif IsKeyDown(KEY_S)
-      $cameraPlayer1[:position][:z] -= offsetThisFrame
-      $cameraPlayer1[:target][:z] -= offsetThisFrame
+      $cameraPlayer1.position.z -= offsetThisFrame
+      $cameraPlayer1.target.z -= offsetThisFrame
     end
 
     # Move Player2 forward and backwards (no turning)
     if IsKeyDown(KEY_UP)
-      $cameraPlayer2[:position][:x] += offsetThisFrame
-      $cameraPlayer2[:target][:x] += offsetThisFrame
+      $cameraPlayer2.position.x += offsetThisFrame
+      $cameraPlayer2.target.x += offsetThisFrame
     elsif IsKeyDown(KEY_DOWN)
-      $cameraPlayer2[:position][:x] -= offsetThisFrame
-      $cameraPlayer2[:target][:x] -= offsetThisFrame
+      $cameraPlayer2.position.x -= offsetThisFrame
+      $cameraPlayer2.target.x -= offsetThisFrame
     end
 
     #----------------------------------------------------------------------------------
@@ -122,7 +115,6 @@ if __FILE__ == $PROGRAM_NAME
 
   UnloadRenderTexture(screenPlayer1)
   UnloadRenderTexture(screenPlayer2)
-  UnloadTexture($textureGrid)
 
   CloseWindow()
 end

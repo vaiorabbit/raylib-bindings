@@ -53,11 +53,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera[:position] = Vector3.create(16.0, 16.0, 16.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(16.0, 16.0, 16.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   rotationSpeed = 0.2         # General system rotation speed
 

@@ -8,10 +8,10 @@ if __FILE__ == $PROGRAM_NAME
 
   # Initialize the camera
   camera = Camera.new
-  camera[:position] = Vector3.create(0.0, 10.0, 10.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
+             .with_position(0.0, 10.0, 10.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
 
   SetTargetFPS(60)
 

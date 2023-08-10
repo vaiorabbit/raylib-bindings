@@ -25,10 +25,10 @@ if __FILE__ == $PROGRAM_NAME
   end
 
   camera = Camera2D.new
-  camera.target.set(player.x + 20.0, player.y + 20.0)
-  camera.offset.set(screenWidth / 2.0, screenHeight / 2.0)
-  camera.rotation = 0.0
-  camera.zoom = 1.0
+             .with_target(player.x + 20.0, player.y + 20.0)
+             .with_offset(screenWidth / 2.0, screenHeight / 2.0)
+             .with_rotation(0.0)
+             .with_zoom(1.0)
 
   SetTargetFPS(60)
 

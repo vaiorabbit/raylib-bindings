@@ -10,11 +10,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera.position.set(1.5, 1.5, 1.5)
-  camera.target.set(0.0, 0.4, 0.0)
-  camera.up.set(0.0, 1.0, 0.0)
-  camera.fovy = 45.0
-  camera.projection = CAMERA_PERSPECTIVE
+             .with_position(1.5, 1.5, 1.5)
+             .with_target(0.0, 0.4, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   modelFileName = RAYLIB_MODELS_PATH + "resources/models/m3d/CesiumMan.m3d"
 

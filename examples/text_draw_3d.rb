@@ -269,11 +269,11 @@ if __FILE__ == $PROGRAM_NAME
   multicolor = false # Multicolor mode
 
   camera = Camera.new
-  camera[:position] = Vector3.create(-10.0, 15.0, -10.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(-10.0, 15.0, -10.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   camera_mode = CAMERA_ORBITAL
 
@@ -357,8 +357,9 @@ if __FILE__ == $PROGRAM_NAME
       ray = GetMouseRay(GetMousePosition(), camera)
 
       # Check collision between ray and box
-      collision = GetRayCollisionBox(ray, BoundingBox.create(cubePosition[:x] - cubeSize[:x]/2, cubePosition[:y] - cubeSize[:y]/2, cubePosition[:z] - cubeSize[:z]/2,
-                                                             cubePosition[:x] + cubeSize[:x]/2, cubePosition[:y] + cubeSize[:y]/2, cubePosition[:z] + cubeSize[:z]/2))
+      collision = GetRayCollisionBox(ray, BoundingBox.new
+                                            .with_min(cubePosition[:x] - cubeSize[:x]/2, cubePosition[:y] - cubeSize[:y]/2, cubePosition[:z] - cubeSize[:z]/2)
+                                            .with_max(cubePosition[:x] + cubeSize[:x]/2, cubePosition[:y] + cubeSize[:y]/2, cubePosition[:z] + cubeSize[:z]/2))
 
       if collision[:hit]
         # Generate new random colors

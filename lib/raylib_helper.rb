@@ -136,20 +136,32 @@ module Raylib
     end
   end
 
-  def BoundingBox.create(*args)
-    case args.size
-    when 2
-      instance = BoundingBox.new
-      instance[:min] = args[0] # min
-      instance[:max] = args[1] # max
-      instance
-    when 6
-      instance = BoundingBox.new
-      instance[:min] = Vector3.create(args[0], args[1], args[2]) # min_x, min_y, min_z
-      instance[:max] = Vector3.create(args[3], args[4], args[5]) # max_x, max_y, max_z
-      instance
-    else
-      raise ArgumentError.new 'BoundingBox.create : Number of arguments must be 2 or 6'
+  class BoundingBox
+    def self.create(*args)
+      case args.size
+      when 2
+        instance = BoundingBox.new
+        instance[:min] = args[0] # min
+        instance[:max] = args[1] # max
+        instance
+      when 6
+        instance = BoundingBox.new
+        instance[:min] = Vector3.create(args[0], args[1], args[2]) # min_x, min_y, min_z
+        instance[:max] = Vector3.create(args[3], args[4], args[5]) # max_x, max_y, max_z
+        instance
+      else
+        raise ArgumentError.new 'BoundingBox.create : Number of arguments must be 2 or 6'
+      end
+    end
+
+    def with_min(x, y, z)
+      self[:min].set(x, y, z)
+      self
+    end
+
+    def with_max(x, y, z)
+      self[:max].set(x, y, z)
+      self
     end
   end
 
@@ -159,6 +171,59 @@ module Raylib
 
   def MatrixToFloat(mat)
     MatrixToFloatV(mat)[:v].to_a
+  end
+
+  #
+  # Camera helper
+  #
+
+  class Camera3D
+    def with_position(x, y, z)
+      self[:position].set(x, y, z)
+      self
+    end
+
+    def with_target(x, y, z)
+      self[:target].set(x, y, z)
+      self
+    end
+
+    def with_up(x, y, z)
+      self[:up].set(x, y, z)
+      self
+    end
+
+    def with_fovy(fovy)
+      self[:fovy] = fovy
+      self
+    end
+
+    def with_projection(projection)
+      self[:projection] = projection
+      self
+    end
+  end
+
+  class Camera2D
+    def with_offset(x, y)
+      self[:offset].set(x, y)
+      self
+    end
+
+    def with_target(x, y)
+      self[:target].set(x, y)
+      self
+    end
+
+    def with_rotation(rotation)
+      self[:rotation] = rotation
+      self
+    end
+
+    def with_zoom(zoom)
+      self[:zoom] = zoom
+      self
+    end
   end
 
   #

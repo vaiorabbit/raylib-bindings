@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Initialize the camera
   camera = Camera.new
-  camera[:position] = Vector3.create(30.0, 20.0, 30.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 70.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(30.0, 20.0, 30.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(70.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   # Specify the amount of blocks in each direction
   numBlocks = 15

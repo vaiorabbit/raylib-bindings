@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world
   camera = Camera.new
-  camera[:position] = Vector3.create(10.0, 10.0, 10.0)
-  camera[:target] = Vector3.create(0.0, 5.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 45.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(10.0, 10.0, 10.0)
+             .with_target(0.0, 5.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(45.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/iqm/guy.iqm") # Load the animated model mesh and basic data
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/iqm/guytex.png") # Load model texture and set material

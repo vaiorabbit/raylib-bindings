@@ -9,11 +9,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Define the camera to look into our 3d world (position, target, up vector)
   camera = Camera.new
-  camera.position.set(4.0, 2.0, 4.0)
-  camera.target.set(0.0, 1.8, 0.0)
-  camera.up.set(0.0, 1.0, 0.0)
-  camera.fovy = 60.0
-  camera.projection = CAMERA_PERSPECTIVE
+             .with_position(4.0, 2.0, 4.0)
+             .with_target(0.0, 1.8, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(60.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   # Generates some random columns
   heights = []

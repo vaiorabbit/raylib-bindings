@@ -10,11 +10,11 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - plane rotations (yaw, pitch, roll)")
 
   camera = Camera.new
-  camera[:position] = Vector3.create(0.0, 50.0, -120.0)
-  camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-  camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-  camera[:fovy] = 30.0
-  camera[:projection] = CAMERA_PERSPECTIVE
+             .with_position(0.0, 50.0, -120.0)
+             .with_target(0.0, 0.0, 0.0)
+             .with_up(0.0, 1.0, 0.0)
+             .with_fovy(30.0)
+             .with_projection(CAMERA_PERSPECTIVE)
 
   model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/obj/plane.obj")                  # Load model
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/obj/plane_diffuse.png")  # Load model texture
