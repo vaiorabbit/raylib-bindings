@@ -219,8 +219,8 @@ if __FILE__ == $PROGRAM_NAME
 
   SetTargetFPS(60)
 
-  StepX = $block_texture[:width]
-  StepY = $block_texture[:height]
+  StepX = $block_texture.width
+  StepY = $block_texture.height
   BlockStepX = StepX * 4.2
   base_origin = Vector2.create(StepX * 1, 0)
   pattern_origin = Vector2.create(0.0, StepY * 1.5)
@@ -242,12 +242,12 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
       BeginBlendMode(BLEND_ALPHA)
         TypeID_Max.times do |type|
-          pattern_origin[:x] = BlockStepX * type
+          pattern_origin.x = BlockStepX * type
           pattern = patterns[type][rotation]
           pattern.each_with_index do |row, r|
             row.each_with_index do |block, c|
-              x = base_origin[:x] + pattern_origin[:x] + StepX * c
-              y = base_origin[:y] + pattern_origin[:y] + StepY * r
+              x = base_origin.x + pattern_origin.x + StepX * c
+              y = base_origin.y + pattern_origin.y + StepY * r
               DrawRectangleLines(x, y, StepX - 1, StepY - 1, LIGHTGRAY)
               next if block != '*'
               DrawTexture($block_texture, x, y, colors[type])

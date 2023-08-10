@@ -93,7 +93,7 @@ if __FILE__ == $PROGRAM_NAME
       # NOTE: To avoid discontinuous circles, we could store
       # previous-next mouse points and just draw a line using brush size
       BeginTextureMode(target)
-      DrawCircle(mousePos[:x].to_i, mousePos[:y].to_i, brushSize, colors[colorSelected]) if mousePos[:y] > 50
+      DrawCircle(mousePos.x.to_i, mousePos.y.to_i, brushSize, colors[colorSelected]) if mousePos.y > 50
       EndTextureMode()
     end
 
@@ -107,7 +107,7 @@ if __FILE__ == $PROGRAM_NAME
 
       # Erase circle from render texture
       BeginTextureMode(target)
-      DrawCircle(mousePos[:x].to_i, mousePos[:y].to_i, brushSize, colors[0]) if mousePos[:y] > 50
+      DrawCircle(mousePos.x.to_i, mousePos.y.to_i, brushSize, colors[0]) if mousePos.y > 50
       EndTextureMode()
     elsif IsMouseButtonReleased(MOUSE_BUTTON_RIGHT) && mouseWasPressed
       colorSelected = colorSelectedPrev
@@ -120,7 +120,7 @@ if __FILE__ == $PROGRAM_NAME
     # Image saving logic
     # NOTE: Saving painted texture to a default named image
     if (btnSaveMouseHover && IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) || IsKeyPressed(KEY_S)
-      image = LoadImageFromTexture(target[:texture])
+      image = LoadImageFromTexture(target.texture)
       ImageFlipVertical(image.pointer)
       ExportImage(image, "my_amazing_texture_painting.png")
       UnloadImage(image)
@@ -140,12 +140,12 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
 
       # NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
-      DrawTextureRec(target[:texture], Rectangle.create(0, 0, target[:texture][:width].to_f, -target[:texture][:height].to_f), Vector2.create(0, 0), WHITE)
+      DrawTextureRec(target.texture, Rectangle.create(0, 0, target.texture.width.to_f, -target.texture.height.to_f), Vector2.create(0, 0), WHITE)
 
       # Draw drawing circle for reference
-      if mousePos[:y] > 50
+      if mousePos.y > 50
         if IsMouseButtonDown(MOUSE_BUTTON_RIGHT)
-          DrawCircleLines(mousePos[:x].to_i, mousePos[:y].to_i, brushSize, GRAY)
+          DrawCircleLines(mousePos.x.to_i, mousePos.y.to_i, brushSize, GRAY)
         else
           DrawCircle(GetMouseX(), GetMouseY(), brushSize, colors[colorSelected])
         end
@@ -163,8 +163,8 @@ if __FILE__ == $PROGRAM_NAME
 
       DrawRectangleRec(colorsRecs[colorMouseHover], Fade(WHITE, 0.6)) if colorMouseHover >= 0
 
-      DrawRectangleLinesEx(Rectangle.create(colorsRecs[colorSelected][:x] - 2, colorsRecs[colorSelected][:y] - 2,
-                                            colorsRecs[colorSelected][:width] + 4, colorsRecs[colorSelected][:height] + 4),
+      DrawRectangleLinesEx(Rectangle.create(colorsRecs[colorSelected].x - 2, colorsRecs[colorSelected].y - 2,
+                                            colorsRecs[colorSelected].width + 4, colorsRecs[colorSelected].height + 4),
                            2, BLACK)
 
       # Draw save image button

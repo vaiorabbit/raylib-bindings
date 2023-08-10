@@ -45,11 +45,11 @@ if __FILE__ == $PROGRAM_NAME
       currentAnimFrame = 0 if currentAnimFrame >= animFrames
 
       # Get memory offset position for next frame data in image.data
-      nextFrameDataOffset = imScarfyAnim[:width] * imScarfyAnim[:height] * 4 * currentAnimFrame
+      nextFrameDataOffset = imScarfyAnim.width * imScarfyAnim.height * 4 * currentAnimFrame
 
       # Update GPU texture data with next frame image data
       # WARNING: Data size (frame size) and pixel format must match already created texture
-      UpdateTexture(texScarfyAnim, imScarfyAnim[:data] + nextFrameDataOffset)
+      UpdateTexture(texScarfyAnim, imScarfyAnim.data + nextFrameDataOffset)
 
       frameCounter = 0
     end
@@ -83,7 +83,7 @@ if __FILE__ == $PROGRAM_NAME
         DrawRectangleLines(190 + 21*i, 300, 20, 20, MAROON)
       end
 
-      DrawTexture(texScarfyAnim, GetScreenWidth() / 2 - texScarfyAnim[:width] / 2, 140, WHITE)
+      DrawTexture(texScarfyAnim, GetScreenWidth() / 2 - texScarfyAnim.width / 2, 140, WHITE)
       DrawText("(c) Scarfy sprite by Eiden Marsal", screenWidth - 200, screenHeight - 20, 10, GRAY)
 
     EndDrawing()

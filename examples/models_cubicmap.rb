@@ -40,8 +40,8 @@ if __FILE__ == $PROGRAM_NAME
         DrawModel(model, mapPosition, 1.0, WHITE)
       EndMode3D()
 
-      DrawTextureEx(cubicmap, Vector2.create(screenWidth - cubicmap[:width]*4.0 - 20, 20.0), 0.0, 4.0, WHITE)
-      DrawRectangleLines(screenWidth - cubicmap[:width]*4 - 20, 20, cubicmap[:width]*4, cubicmap[:height]*4, GREEN)
+      DrawTextureEx(cubicmap, Vector2.create(screenWidth - cubicmap.width*4.0 - 20, 20.0), 0.0, 4.0, WHITE)
+      DrawRectangleLines(screenWidth - cubicmap.width*4 - 20, 20, cubicmap.width*4, cubicmap.height*4, GREEN)
 
       DrawText("cubicmap image used to", 658, 90, 10, GRAY)
       DrawText("generate map 3d model", 658, 104, 10, GRAY)

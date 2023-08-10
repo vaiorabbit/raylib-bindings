@@ -16,7 +16,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
   textOffsetY = 0 # Offset between lines (on line break '\n')
   textOffsetX = 0 # Offset X to next character to draw
 
-  scaleFactor = fontSize / font[:baseSize].to_f # Character rectangle scaling factor
+  scaleFactor = fontSize / font.baseSize.to_f # Character rectangle scaling factor
 
   # Word/character wrapping mechanism variables
   state = wordWrap ? MEASURE_STATE : DRAW_STATE
@@ -40,12 +40,12 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
     # but we need to draw all of the bad bytes using the '?' symbol moving one byte
     glyphWidth = 0
     if char != "\n"
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-      glyphWidth = if glyphInfo[:advanceX] == 0
-                     rect = Rectangle.new(font[:recs] + index * Rectangle.size)
-                     glyphWidth = rect[:width]*scaleFactor
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+      glyphWidth = if glyphInfo.advanceX == 0
+                     rect = Rectangle.new(font.recs + index * Rectangle.size)
+                     glyphWidth = rect.width*scaleFactor
                    else
-                     glyphWidth = glyphInfo[:advanceX]*scaleFactor
+                     glyphWidth = glyphInfo.advanceX*scaleFactor
                    end
       glyphWidth += spacing if idx + 1 < text.length
     end
@@ -59,7 +59,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
       # TODO: There are multiple types of spaces in UNICODE, maybe it's a good idea to add support for more
       # Ref: http://jkorpela.fi/chars/spaces.html
       endLine = idx if char == " " || char == "\t" || char == "\n"
-      if (textOffsetX + glyphWidth) > rec[:width]
+      if (textOffsetX + glyphWidth) > rec.width
         endLine = (endLine < 1) ? idx : endLine
         endLine -= 1 if idx == endLine
         endLine = (idx - 1) if (startLine + 1) == endLine
@@ -83,34 +83,34 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
     else
       if char == "\n"
         if !wordWrap
-          textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+          textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
           textOffsetX = 0
         end
       else
-        if !wordWrap && ((textOffsetX + glyphWidth) > rec[:width])
-          textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+        if !wordWrap && ((textOffsetX + glyphWidth) > rec.width)
+          textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
           textOffsetX = 0
         end
 
         # When text overflows rectangle height limit, just stop drawing
-        break if (textOffsetY + font[:baseSize]*scaleFactor) > rec[:height]
+        break if (textOffsetY + font.baseSize*scaleFactor) > rec.height
 
         # Draw selection background
         isGlyphSelected = false
         if (selectStart >= 0) && (k >= selectStart) && (k < (selectStart + selectLength))
-          r = Rectangle.create(rec[:x] + textOffsetX - 1, rec[:y] + textOffsetY, glyphWidth, font[:baseSize].to_f * scaleFactor)
+          r = Rectangle.create(rec.x + textOffsetX - 1, rec.y + textOffsetY, glyphWidth, font.baseSize.to_f * scaleFactor)
           DrawRectangleRec(r, selectBackTint)
           isGlyphSelected = true
         end
         # Draw current character glyph
         if (char != " ") && (char != "\t")
-          v = Vector2.create(rec[:x] + textOffsetX, rec[:y] + textOffsetY)
+          v = Vector2.create(rec.x + textOffsetX, rec.y + textOffsetY)
           DrawTextCodepoint(font, char.ord, v, fontSize, isGlyphSelected ? selectTint : tint)
         end
       end
 
       if wordWrap && (idx == endLine)
-        textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+        textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
         textOffsetX = 0
         startLine = endLine
         endLine = -1
@@ -140,7 +140,7 @@ if __FILE__ == $PROGRAM_NAME
   wordWrap = true
 
   container = Rectangle.create(25.0, 25.0, screenWidth - 50.0, screenHeight - 250.0)
-  resizer = Rectangle.create(container[:x] + container[:width] - 17, container[:y] + container[:height] - 17, 14, 14)
+  resizer = Rectangle.create(container.x + container.width - 17, container.y + container.height - 17, 14, 14)
 
   # Minimum width and heigh for the container rectangle
   minWidth = 60
@@ -152,7 +152,7 @@ if __FILE__ == $PROGRAM_NAME
   borderColor = MAROON                 # Container border color
   font = GetFontDefault()
   # font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", 16, nil, 65535) # For Japanese text
-  # SetTextureFilter(font[:texture], TEXTURE_FILTER_POINT)             # For Japanese text
+  # SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)             # For Japanese text
 
   SetTargetFPS(60)
 
@@ -173,19 +173,19 @@ if __FILE__ == $PROGRAM_NAME
     if resizing
       resizing = false if IsMouseButtonReleased(MOUSE_BUTTON_LEFT)
 
-      width = container[:width] + (mouse[:x] - lastMouse[:x])
-      container[:width] = (width > minWidth) ? ((width < maxWidth) ? width : maxWidth) : minWidth
+      width = container.width + (mouse.x - lastMouse.x)
+      container.width = (width > minWidth) ? ((width < maxWidth) ? width : maxWidth) : minWidth
 
-      height = container[:height] + (mouse[:y] - lastMouse[:y])
-      container[:height] = (height > minHeight) ? ((height < maxHeight) ? height : maxHeight) : minHeight
+      height = container.height + (mouse.y - lastMouse.y)
+      container.height = (height > minHeight) ? ((height < maxHeight) ? height : maxHeight) : minHeight
     else
       # Check if we're resizing
       resizing = (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(mouse, resizer))
     end
 
     # Move resizer rectangle properly
-    resizer[:x] = container[:x] + container[:width] - 17
-    resizer[:y] = container[:y] + container[:height] - 17
+    resizer.x = container.x + container.width - 17
+    resizer.y = container.y + container.height - 17
 
     lastMouse = mouse # Update mouse
 
@@ -194,7 +194,7 @@ if __FILE__ == $PROGRAM_NAME
       DrawRectangleLinesEx(container, 3, borderColor) # Draw container border
 
       # Draw text in container (add some padding)
-      DrawTextBoxed(font, text, Rectangle.create(container[:x] + 4, container[:y] + 4, container[:width] - 4, container[:height] - 4), 20.0, 2.0, wordWrap, GRAY)
+      DrawTextBoxed(font, text, Rectangle.create(container.x + 4, container.y + 4, container.width - 4, container.height - 4), 20.0, 2.0, wordWrap, GRAY)
 
       DrawRectangleRec(resizer, borderColor) # Draw the resize box
 

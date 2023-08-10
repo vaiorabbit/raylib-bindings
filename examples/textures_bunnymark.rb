@@ -35,15 +35,15 @@ if __FILE__ == $PROGRAM_NAME
 
     # Update bunnies
     bunnies.each do |bunny|
-      bunny.position[:x] += bunny.speed[:x]
-      bunny.position[:y] += bunny.speed[:y]
+      bunny.position.x += bunny.speed.x
+      bunny.position.y += bunny.speed.y
 
-      if ((bunny.position[:x] + texBunny[:width]/2) > GetScreenWidth()) || ((bunny.position[:x] + texBunny[:width]/2) < 0)
-        bunny.speed[:x] *= -1
+      if ((bunny.position.x + texBunny.width/2) > GetScreenWidth()) || ((bunny.position.x + texBunny.width/2) < 0)
+        bunny.speed.x *= -1
       end
 
-      if ((bunny.position[:y] + texBunny[:height]/2) > GetScreenHeight()) || ((bunny.position[:y] + texBunny[:height]/2 - 40) < 0)
-        bunny.speed[:y] *= -1
+      if ((bunny.position.y + texBunny.height/2) > GetScreenHeight()) || ((bunny.position.y + texBunny.height/2 - 40) < 0)
+        bunny.speed.y *= -1
       end
     end
 
@@ -56,7 +56,7 @@ if __FILE__ == $PROGRAM_NAME
         # Process of sending data is costly and it could happen that GPU data has not been completely
         # processed for drawing while new data is tried to be sent (updating current in-use buffers)
         # it could generates a stall and consequently a frame drop, limiting the number of drawn bunnies
-        DrawTexture(texBunny, bunny.position[:x], bunny.position[:y], bunny.color)
+        DrawTexture(texBunny, bunny.position.x, bunny.position.y, bunny.color)
       end
 
       DrawRectangle(0, 0, screenWidth, 40, BLACK)

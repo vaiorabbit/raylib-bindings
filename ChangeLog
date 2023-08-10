@@ -2,7 +2,7 @@
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/0959f6ebf69f44d5bb0225cc94fd187ebedf8be5 ) and raygui ( https://github.com/raysan5/raygui/commit/41417db52d951bb08273c892d3e3db3723f1083a )
 	* lib/raylib_helper.rb: Added several initialization helper for Camera3D, Camera2D and BoundingBox
-	* examples: Fixed broken examples / Adoped new initialization helper APIs
+	* examples: Fixed broken examples / Adoped new initialization helper APIs / Use accessor helpers for better readability
 
 2023-07-29  vaiorabbit  <http://twitter.com/vaiorabbit>
 

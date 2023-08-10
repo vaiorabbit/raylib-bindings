@@ -26,10 +26,10 @@ if __FILE__ == $PROGRAM_NAME
     "マルモニカ",
   ]
 
-  SetTextureFilter(fonts[0][:texture], TEXTURE_FILTER_BILINEAR) # 源真ゴシック
-  SetTextureFilter(fonts[1][:texture], TEXTURE_FILTER_POINT)    # マルモニカ
+  SetTextureFilter(fonts[0].texture, TEXTURE_FILTER_BILINEAR) # 源真ゴシック
+  SetTextureFilter(fonts[1].texture, TEXTURE_FILTER_POINT)    # マルモニカ
 
-  # fonts.each { |font| GenTextureMipmaps(font[:texture].pointer) }
+  # fonts.each { |font| GenTextureMipmaps(font.texture.pointer) }
 
   NUM_FONTS = fonts.length
   current_font = 0
@@ -44,7 +44,7 @@ if __FILE__ == $PROGRAM_NAME
         current_font -= 1
         current_font = NUM_FONTS - 1 if current_font < 0
       end
-      DrawTextEx(fonts[current_font], msg.join, Vector2.create(20.0, 50.0), fonts[current_font][:baseSize].to_f, 1.2, DARKGREEN)
+      DrawTextEx(fonts[current_font], msg.join, Vector2.create(20.0, 50.0), fonts[current_font].baseSize.to_f, 1.2, DARKGREEN)
 
       DrawRectangle(650, 400, 125, 25, Fade(SKYBLUE, 0.5))
       DrawRectangleLines(650, 400, 125, 25, Fade(DARKBLUE, 0.5))

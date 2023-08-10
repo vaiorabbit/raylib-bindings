@@ -61,7 +61,7 @@ if __FILE__ == $PROGRAM_NAME
     GL.BindBuffer(GL::ARRAY_BUFFER, vbo)
     GL.BufferData(GL::ARRAY_BUFFER, MAX_PARTICLES * Sample::Particle.size, particles, GL::STATIC_DRAW)
     ## Note: LoadShader() automatically fetches the attribute index of "vertexPosition" and saves it in shader.locs[SHADER_LOC_VERTEX_POSITION]
-    location_pos_ffi_ptr = shader[:locs] + (FFI::NativeType::INT32.size * SHADER_LOC_VERTEX_POSITION)
+    location_pos_ffi_ptr = shader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_VERTEX_POSITION)
     location_pos = location_pos_ffi_ptr.read_uint
     GL.VertexAttribPointer(location_pos, 3, GL::FLOAT, GL::FALSE, 0, 0)
     GL.EnableVertexAttribArray(0)
@@ -84,7 +84,7 @@ if __FILE__ == $PROGRAM_NAME
       rlDrawRenderBatchActive() # Draw iternal buffers data (previous draw calls)
 
       # Switch to plain OpenGL
-      GL.UseProgram(shader[:id])
+      GL.UseProgram(shader.id)
         GL.Uniform1f(currentTimeLoc, GetTime())
 
         color = ColorNormalize(Color.from_u8(255, 0, 0, 128))
@@ -93,7 +93,7 @@ if __FILE__ == $PROGRAM_NAME
         # Get the current modelview and projection matrix so the particle system is displayed and transformed
         modelViewProjection = MatrixMultiply(rlGetMatrixModelview(), rlGetMatrixProjection())
 
-        location_mtx_ffi_ptr = shader[:locs] + (FFI::NativeType::INT32.size * SHADER_LOC_MATRIX_MVP)
+        location_mtx_ffi_ptr = shader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MATRIX_MVP)
         location_mtx = location_mtx_ffi_ptr.read_uint
         GL.UniformMatrix4fv(location_mtx, 1, GL::FALSE, MatrixToFloat(modelViewProjection).pack('F16'))
 

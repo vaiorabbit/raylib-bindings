@@ -74,10 +74,10 @@ if __FILE__ == $PROGRAM_NAME
 
     # Calculate move direction
     move = Vector3.create(0, 0, 0)
-    move[:x] += speed if IsKeyDown(KEY_RIGHT)
-    move[:x] -= speed if IsKeyDown(KEY_LEFT)
-    move[:z] += speed if IsKeyDown(KEY_DOWN)
-    move[:z] -= speed if IsKeyDown(KEY_UP)
+    move.x += speed if IsKeyDown(KEY_RIGHT)
+    move.x -= speed if IsKeyDown(KEY_LEFT)
+    move.z += speed if IsKeyDown(KEY_DOWN)
+    move.z -= speed if IsKeyDown(KEY_UP)
 
     to_camera = Vector3Normalize(Vector3.create(camera.position.x, 0, camera.position.z))
     rotate_y = QuaternionFromVector3ToVector3(Vector3.create(0, 0, 1), to_camera)

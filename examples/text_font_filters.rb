@@ -18,14 +18,14 @@ if __FILE__ == $PROGRAM_NAME
 
   # Generate mipmap levels to use trilinear filtering
   # NOTE: On 2D drawing it won't be noticeable, it looks like FILTER_BILINEAR
-  GenTextureMipmaps(font[:texture].pointer)
+  GenTextureMipmaps(font.texture.pointer)
 
-  fontSize = font[:baseSize].to_f
+  fontSize = font.baseSize.to_f
   fontPosition = Vector2.create(40.0, screenHeight/2.0 - 80.0)
   textSize = Vector2.create(0.0, 0.0)
 
   # Setup texture scaling filter
-  SetTextureFilter(font[:texture], TEXTURE_FILTER_POINT)
+  SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
   currentFontFilter = 0 # TEXTURE_FILTER_POINT
 
   SetTargetFPS(60)
@@ -36,23 +36,23 @@ if __FILE__ == $PROGRAM_NAME
 
     # Choose font texture filter method
     if IsKeyPressed(KEY_ONE)
-      SetTextureFilter(font[:texture], TEXTURE_FILTER_POINT)
+      SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
       currentFontFilter = 0
     elsif IsKeyPressed(KEY_TWO)
-      SetTextureFilter(font[:texture], TEXTURE_FILTER_BILINEAR)
+      SetTextureFilter(font.texture, TEXTURE_FILTER_BILINEAR)
       currentFontFilter = 1
     elsif IsKeyPressed(KEY_THREE)
       # NOTE: Trilinear filter won't be noticed on 2D drawing
-      SetTextureFilter(font[:texture], TEXTURE_FILTER_TRILINEAR)
+      SetTextureFilter(font.texture, TEXTURE_FILTER_TRILINEAR)
       currentFontFilter = 2
     end
 
     textSize = MeasureTextEx(font, msg, fontSize, 0)
 
     if IsKeyDown(KEY_LEFT)
-      fontPosition[:x] -= 10
+      fontPosition.x -= 10
     elsif IsKeyDown(KEY_RIGHT)
-      fontPosition[:x] += 10
+      fontPosition.x += 10
     end
 
     # Load a dropped TTF file dynamically (at current fontSize)
@@ -84,7 +84,7 @@ if __FILE__ == $PROGRAM_NAME
 
       DrawRectangle(0, screenHeight - 80, screenWidth, 80, LIGHTGRAY)
       DrawText(TextFormat("Font size: %02.02f", :float, fontSize), 20, screenHeight - 50, 10, DARKGRAY)
-      DrawText(TextFormat("Text size: [%02.02f, %02.02f]", :float, textSize[:x], :float, textSize[:y]), 20, screenHeight - 30, 10, DARKGRAY)
+      DrawText(TextFormat("Text size: [%02.02f, %02.02f]", :float, textSize.x, :float, textSize.y), 20, screenHeight - 30, 10, DARKGRAY)
       DrawText("CURRENT TEXTURE FILTER:", 250, 400, 20, GRAY)
 
       if currentFontFilter == 0

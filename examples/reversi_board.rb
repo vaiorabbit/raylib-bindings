@@ -191,7 +191,7 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screen_width, screen_height, "Ruby-raylib bindings - Reversi")
 
   font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", font_size, nil, 65535)
-  SetTextureFilter(font[:texture], TEXTURE_FILTER_POINT)
+  SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
   GuiSetFont(font)
 
   SetTargetFPS(60)

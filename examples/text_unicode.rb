@@ -122,7 +122,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
   textOffsetY = 0 # Offset between lines (on line break '\n')
   textOffsetX = 0 # Offset X to next character to draw
 
-  scaleFactor = fontSize / font[:baseSize].to_f # Character rectangle scaling factor
+  scaleFactor = fontSize / font.baseSize.to_f # Character rectangle scaling factor
 
   # Word/character wrapping mechanism variables
   state = wordWrap ? MEASURE_STATE : DRAW_STATE
@@ -146,13 +146,13 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
     # but we need to draw all of the bad bytes using the '?' symbol moving one byte
     glyphWidth = 0
     if char != "\n"
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
       glyphWidth = 0
-      if glyphInfo[:advanceX] == 0
-        rect = Rectangle.new(font[:recs] + index * Rectangle.size)
-        glyphWidth = rect[:width]*scaleFactor
+      if glyphInfo.advanceX == 0
+        rect = Rectangle.new(font.recs + index * Rectangle.size)
+        glyphWidth = rect.width*scaleFactor
       else
-        glyphWidth = glyphInfo[:advanceX]*scaleFactor
+        glyphWidth = glyphInfo.advanceX*scaleFactor
       end
       glyphWidth = glyphWidth + spacing if idx + 1 < text.length
     end
@@ -166,7 +166,7 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
       # TODO: There are multiple types of spaces in UNICODE, maybe it's a good idea to add support for more
       # Ref: http://jkorpela.fi/chars/spaces.html
       endLine = idx if char == " " || char == "\t" || char == "\n"
-      if (textOffsetX + glyphWidth) > rec[:width]
+      if (textOffsetX + glyphWidth) > rec.width
         endLine = (endLine < 1) ? idx : endLine
         endLine -= 1 if idx == endLine
         endLine = (idx - 1) if (startLine + 1) == endLine
@@ -190,40 +190,40 @@ def DrawTextBoxedSelectable(font, text, rec, fontSize, spacing, wordWrap, tint, 
     else
       if char == "\n"
         if !wordWrap
-          textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+          textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
           textOffsetX = 0
         end
       else
-        if !wordWrap && ((textOffsetX + glyphWidth) > rec[:width])
-          textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+        if !wordWrap && ((textOffsetX + glyphWidth) > rec.width)
+          textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
           textOffsetX = 0
         end
 
         # When text overflows rectangle height limit, just stop drawing
-        break if (textOffsetY + font[:baseSize]*scaleFactor) > rec[:height]
+        break if (textOffsetY + font.baseSize*scaleFactor) > rec.height
 
         # Draw selection background
         isGlyphSelected = false
         if (selectStart >= 0) && (k >= selectStart) && (k < (selectStart + selectLength))
           r = Rectangle.new
-          r[:x] = rec[:x] + textOffsetX - 1
-          r[:y] = rec[:y] + textOffsetY
-          r[:width] = glyphWidth
-          r[:height] = font[:baseSize].to_f * scaleFactor
+          r.x = rec.x + textOffsetX - 1
+          r.y = rec.y + textOffsetY
+          r.width = glyphWidth
+          r.height = font.baseSize.to_f * scaleFactor
           DrawRectangleRec(r, selectBackTint)
           isGlyphSelected = true
         end
         # Draw current character glyph
         if (char != " ") && (char != "\t")
           v = Vector2.new
-          v[:x] = rec[:x] + textOffsetX
-          v[:y] = rec[:y] + textOffsetY
+          v.x = rec.x + textOffsetX
+          v.y = rec.y + textOffsetY
           DrawTextCodepoint(font, char.ord, v, fontSize, isGlyphSelected ? selectTint : tint)
         end
       end
 
       if wordWrap && (idx == endLine)
-        textOffsetY += (font[:baseSize] + font[:baseSize]/2)*scaleFactor
+        textOffsetY += (font.baseSize + font.baseSize/2)*scaleFactor
         textOffsetX = 0
         startLine = endLine
         endLine = -1
@@ -279,23 +279,23 @@ if __FILE__ == $PROGRAM_NAME
     $emoji.each_with_index do |em, i|
       txt = $emojiCodepoints[em.index]
       emojiRect = Rectangle.new
-      emojiRect[:x] = pos[:x]
-      emojiRect[:y] = pos[:y]
-      emojiRect[:width] = fontEmoji[:baseSize]
-      emojiRect[:height] = fontEmoji[:baseSize]
+      emojiRect.x = pos.x
+      emojiRect.y = pos.y
+      emojiRect.width = fontEmoji.baseSize
+      emojiRect.height = fontEmoji.baseSize
       if !CheckCollisionPointRec(mouse, emojiRect)
-        DrawTextEx(fontEmoji, txt, pos, fontEmoji[:baseSize].to_f, 1.0, $selected == i ? em.color : Fade(LIGHTGRAY, 0.4))
+        DrawTextEx(fontEmoji, txt, pos, fontEmoji.baseSize.to_f, 1.0, $selected == i ? em.color : Fade(LIGHTGRAY, 0.4))
       else
-        DrawTextEx(fontEmoji, txt, pos, fontEmoji[:baseSize].to_f, 1.0, em.color)
+        DrawTextEx(fontEmoji, txt, pos, fontEmoji.baseSize.to_f, 1.0, em.color)
         $hovered = i
         hoveredPos.set(pos.x, pos.y)
       end
 
       if (i != 0) && (i%EMOJI_PER_WIDTH == 0)
-        pos[:y] += (fontEmoji[:baseSize] + 24.25)
-        pos[:x] = 28.8
+        pos.y += (fontEmoji.baseSize + 24.25)
+        pos.x = 28.8
       else
-        pos[:x] += (fontEmoji[:baseSize] + 28.8)
+        pos.x += (fontEmoji.baseSize + 28.8)
       end
     end
 
@@ -310,39 +310,39 @@ if __FILE__ == $PROGRAM_NAME
       font = fontAsian if TextIsEqual($messages[message].language, "Chinese") || TextIsEqual($messages[message].language, "Korean") || TextIsEqual($messages[message].language, "Japanese")
 
       # Calculate size for the message box (approximate the height and width)
-      sz = MeasureTextEx(font, $messages[message].text, font[:baseSize], 1.0)
-      if sz[:x] > 300
-        sz[:y] *= sz[:x] / 300
-        sz[:x] = 300
-      elsif sz[:x] < 160
-        sz[:x] = 160
+      sz = MeasureTextEx(font, $messages[message].text, font.baseSize, 1.0)
+      if sz.x > 300
+        sz.y *= sz.x / 300
+        sz.x = 300
+      elsif sz.x < 160
+        sz.x = 160
       end
 
       msgRect = Rectangle.new
-      msgRect[:x] = selectedPos[:x] - 38.8
-      msgRect[:y] = selectedPos[:y]
-      msgRect[:width] = 2 * horizontalPadding + sz[:x]
-      msgRect[:height] = 2 * verticalPadding + sz[:y]
+      msgRect.x = selectedPos.x - 38.8
+      msgRect.y = selectedPos.y
+      msgRect.width = 2 * horizontalPadding + sz.x
+      msgRect.height = 2 * verticalPadding + sz.y
 
-      msgRect[:y] -= msgRect[:height]
+      msgRect.y -= msgRect.height
 
       # Coordinates for the chat bubble triangle
-      a = Vector2.create(selectedPos[:x], msgRect[:y] + msgRect[:height])
-      b = Vector2.create(a[:x] + 8, a[:y] + 10)
-      c = Vector2.create(a[:x] + 10, a[:y])
+      a = Vector2.create(selectedPos.x, msgRect.y + msgRect.height)
+      b = Vector2.create(a.x + 8, a.y + 10)
+      c = Vector2.create(a.x + 10, a.y)
 
       # Don't go outside the screen
-      msgRect[:x] += 28 if msgRect[:x] < 10
-      if msgRect[:y] < 10
-        msgRect[:y] = selectedPos[:y] + 84
-        a[:y] = msgRect[:y]
-        c[:y] = a[:y]
-        b[:y] = a[:y] - 10
+      msgRect.x += 28 if msgRect.x < 10
+      if msgRect.y < 10
+        msgRect.y = selectedPos.y + 84
+        a.y = msgRect.y
+        c.y = a.y
+        b.y = a.y - 10
         # Swap values so we can actually render the triangle :(
         a, b = b, a
       end
-      if msgRect[:x] + msgRect[:width] > screenWidth
-        msgRect[:x] -= (msgRect[:x] + msgRect[:width]) - screenWidth + 10
+      if msgRect.x + msgRect.width > screenWidth
+        msgRect.x -= (msgRect.x + msgRect.width) - screenWidth + 10
       end
 
       # Draw chat bubble
@@ -351,20 +351,20 @@ if __FILE__ == $PROGRAM_NAME
 
       # Draw the main text message
       textRect = Rectangle.new
-      textRect[:x] = msgRect[:x] + horizontalPadding/2
-      textRect[:y] = msgRect[:y] + verticalPadding/2
-      textRect[:width] = msgRect[:width] - horizontalPadding
-      textRect[:height] = msgRect[:height]
+      textRect.x = msgRect.x + horizontalPadding/2
+      textRect.y = msgRect.y + verticalPadding/2
+      textRect.width = msgRect.width - horizontalPadding
+      textRect.height = msgRect.height
       wordWrap = true
-      DrawTextBoxed(font, $messages[message].text, textRect, font[:baseSize].to_f, 1.0, wordWrap, WHITE)
+      DrawTextBoxed(font, $messages[message].text, textRect, font.baseSize.to_f, 1.0, wordWrap, WHITE)
 
       # Draw the info text below the main message
       # int size = (int)strlen(messages[message].text);
       # int length = GetCodepointCount(messages[message].text);
       info = TextFormat("%s %u characters %i bytes", :string, $messages[message].language, :uint, $messages[message].text.length, :int, $messages[message].text.bytesize)
       sz = MeasureTextEx(GetFontDefault(), info, 10, 1.0)
-      pos = Vector2.create(textRect[:x] + textRect[:width] - sz[:x],  msgRect[:y] + msgRect[:height] - sz[:y] - 2)
-      DrawText(info, pos[:x], pos[:y], 10, RAYWHITE)
+      pos = Vector2.create(textRect.x + textRect.width - sz.x,  msgRect.y + msgRect.height - sz.y - 2)
+      DrawText(info, pos.x, pos.y, 10, RAYWHITE)
     end
 
     # Draw the info text

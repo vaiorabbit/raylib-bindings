@@ -47,23 +47,23 @@ if __FILE__ == $PROGRAM_NAME
     # Out-of-limits security check
     if playerCellX < 0
       playerCellX = 0
-    elsif playerCellX >= cubicmap[:width]
-      playerCellX = cubicmap[:width] - 1
+    elsif playerCellX >= cubicmap.width
+      playerCellX = cubicmap.width - 1
     end
 
     if playerCellY < 0
       playerCellY = 0
-    elsif playerCellY >= cubicmap[:height]
-      playerCellY = cubicmap[:height] - 1
+    elsif playerCellY >= cubicmap.height
+      playerCellY = cubicmap.height - 1
     end
 
     # Check map collisions using image data and player position
     # TODO: Improvement: Just check player surrounding cells for collision
-    cubicmap[:height].times do |y|
-      cubicmap[:width].times do |x|
-        pixel = Color.new(mapPixels + Color.size * (y*cubicmap[:width] + x))
-        if (pixel[:r] == 255) && # Collision: white pixel, only check R channel
-           CheckCollisionCircleRec(playerPos, playerRadius, Rectangle.create(mapPosition[:x] - 0.5 + x*1.0, mapPosition[:z] - 0.5 + y*1.0, 1.0, 1.0))
+    cubicmap.height.times do |y|
+      cubicmap.width.times do |x|
+        pixel = Color.new(mapPixels + Color.size * (y*cubicmap.width + x))
+        if (pixel.r == 255) && # Collision: white pixel, only check R channel
+           CheckCollisionCircleRec(playerPos, playerRadius, Rectangle.create(mapPosition.x - 0.5 + x*1.0, mapPosition.z - 0.5 + y*1.0, 1.0, 1.0))
           # Collision detected, reset camera position
           camera.position.set(oldCamPos.x, oldCamPos.y, oldCamPos.z)
         end
@@ -76,11 +76,11 @@ if __FILE__ == $PROGRAM_NAME
         DrawModel(model, mapPosition, 1.0, WHITE)
       EndMode3D()
 
-      DrawTextureEx(cubicmap, Vector2.create(screenWidth - cubicmap[:width]*4.0 - 20, 20.0), 0.0, 4.0, WHITE)
-      DrawRectangleLines(screenWidth - cubicmap[:width]*4 - 20, 20, cubicmap[:width]*4, cubicmap[:height]*4, GREEN)
+      DrawTextureEx(cubicmap, Vector2.create(screenWidth - cubicmap.width*4.0 - 20, 20.0), 0.0, 4.0, WHITE)
+      DrawRectangleLines(screenWidth - cubicmap.width*4 - 20, 20, cubicmap.width*4, cubicmap.height*4, GREEN)
 
       # Draw player position radar
-      DrawRectangle(GetScreenWidth() - cubicmap[:width]*4 - 20 + playerCellX*4, 20 + playerCellY*4, 4, 4, RED)
+      DrawRectangle(GetScreenWidth() - cubicmap.width*4 - 20 + playerCellX*4, 20 + playerCellY*4, 4, 4, RED)
       DrawFPS(10, 10)
     EndDrawing()
   end

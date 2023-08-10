@@ -70,7 +70,7 @@ if __FILE__ == $PROGRAM_NAME
     end
 
     # Tranformation matrix for rotations
-    model[:transform] = MatrixRotateXYZ(Vector3.create(DEG2RAD*pitch, DEG2RAD*yaw, DEG2RAD*roll))
+    model.transform = MatrixRotateXYZ(Vector3.create(DEG2RAD*pitch, DEG2RAD*yaw, DEG2RAD*roll))
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

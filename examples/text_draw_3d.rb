@@ -24,45 +24,45 @@ def DrawTextCodepoint3D(font, codepoint, position, fontSize, backface, tint)
   # Character index position in sprite font
   # NOTE: In case a codepoint is not available in the font, index returned points to '?'
   index = GetGlyphIndex(font, codepoint)
-  scale = fontSize/font[:baseSize].to_f
+  scale = fontSize/font.baseSize.to_f
 
   # Character destination rectangle on screen
   # NOTE: We consider charsPadding on drawing
-  glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-  position[:x] += (glyphInfo[:offsetX] - font[:glyphPadding])/font[:baseSize]*scale
-  position[:z] += (glyphInfo[:offsetY] - font[:glyphPadding])/font[:baseSize]*scale
+  glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+  position.x += (glyphInfo.offsetX - font.glyphPadding)/font.baseSize*scale
+  position.z += (glyphInfo.offsetY - font.glyphPadding)/font.baseSize*scale
 
   # Character source rectangle from font texture atlas
   # NOTE: We consider chars padding when drawing, it could be required for outline/glow shader effects
-  font_rec = Rectangle.new(font[:recs] + index * Rectangle.size)
-  srcRec = Rectangle.create(font_rec[:x] - font[:glyphPadding], font_rec[:y] - font[:glyphPadding].to_f,
-                            font_rec[:width] + 2.0*font[:glyphPadding], font_rec[:height] + 2.0*font[:glyphPadding])
+  font_rec = Rectangle.new(font.recs + index * Rectangle.size)
+  srcRec = Rectangle.create(font_rec.x - font.glyphPadding, font_rec.y - font.glyphPadding.to_f,
+                            font_rec.width + 2.0*font.glyphPadding, font_rec.height + 2.0*font.glyphPadding)
 
-  width = (font_rec[:width] + 2.0*font[:glyphPadding]) / font[:baseSize]*scale
-  height = (font_rec[:height] + 2.0*font[:glyphPadding]) / font[:baseSize]*scale
+  width = (font_rec.width + 2.0*font.glyphPadding) / font.baseSize*scale
+  height = (font_rec.height + 2.0*font.glyphPadding) / font.baseSize*scale
 
-  if font[:texture][:id] > 0
+  if font.texture.id > 0
     x = 0.0
     y = 0.0
     z = 0.0
 
     # normalized texture coordinates of the glyph inside the font texture (0.0f -> 1.0f)
-    tx = srcRec[:x]/font[:texture][:width]
-    ty = srcRec[:y]/font[:texture][:height]
-    tw = (srcRec[:x]+srcRec[:width])/font[:texture][:width]
-    th = (srcRec[:y]+srcRec[:height])/font[:texture][:height]
+    tx = srcRec.x/font.texture.width
+    ty = srcRec.y/font.texture.height
+    tw = (srcRec.x+srcRec.width)/font.texture.width
+    th = (srcRec.y+srcRec.height)/font.texture.height
 
     if $show_letter_boundry
-      DrawCubeWiresV(Vector3.create(position[:x] + width/2, position[:y], position[:z] + height/2), Vector3.create(width, LETTER_BOUNDRY_SIZE, height), LETTER_BOUNDRY_COLOR)
+      DrawCubeWiresV(Vector3.create(position.x + width/2, position.y, position.z + height/2), Vector3.create(width, LETTER_BOUNDRY_SIZE, height), LETTER_BOUNDRY_COLOR)
     end
 
     rlCheckRenderBatchLimit(4 + (backface ? 4 : 0))
-    rlSetTexture(font[:texture][:id])
+    rlSetTexture(font.texture.id)
 
     rlPushMatrix()
-      rlTranslatef(position[:x], position[:y], position[:z])
+      rlTranslatef(position.x, position.y, position.z)
       rlBegin(RL_QUADS)
-        rlColor4ub(tint[:r], tint[:g], tint[:b], tint[:a])
+        rlColor4ub(tint.r, tint.g, tint.b, tint.a)
         # Front Face
         rlNormal3f(0.0, 1.0, 0.0)                                    # Normal Pointing Up
         rlTexCoord2f(tx, ty); rlVertex3f(x,         y, z)            # Top Left Of The Texture and Quad
@@ -91,7 +91,7 @@ def DrawText3D(font, text, position, fontSize, fontSpacing, lineSpacing, backfac
   textOffsetY = 0.0 # Offset between lines (on line break '\n')
   textOffsetX = 0.0 # Offset X to next character to draw
 
-  scale = fontSize/font[:baseSize].to_f
+  scale = fontSize/font.baseSize.to_f
 
   text.each_codepoint do |codepoint|
     index = GetGlyphIndex(font, codepoint)
@@ -99,19 +99,19 @@ def DrawText3D(font, text, position, fontSize, fontSpacing, lineSpacing, backfac
     if codepoint == "\n".ord
       # NOTE: Fixed line spacing of 1.5 line-height
       # TODO: Support custom line spacing defined by user
-      textOffsetY += scale + lineSpacing/font[:baseSize]*scale
+      textOffsetY += scale + lineSpacing/font.baseSize*scale
       textOffsetX = 0.0
     else
       if (codepoint != ' '.ord) && (codepoint != "\t".ord)
-        DrawTextCodepoint3D(font, codepoint, Vector3.create(position[:x] + textOffsetX, position[:y], position[:z] + textOffsetY), fontSize, backface, tint)
+        DrawTextCodepoint3D(font, codepoint, Vector3.create(position.x + textOffsetX, position.y, position.z + textOffsetY), fontSize, backface, tint)
       end
 
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-      if glyphInfo[:advanceX] == 0
-        font_rec = Rectangle.new(font[:recs] + index * Rectangle.size)
-        textOffsetX += (font_rec[:width] + fontSpacing)/font[:baseSize]*scale
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+      if glyphInfo.advanceX == 0
+        font_rec = Rectangle.new(font.recs + index * Rectangle.size)
+        textOffsetX += (font_rec.width + fontSpacing)/font.baseSize*scale
       else
-        textOffsetX += (glyphInfo[:advanceX] + fontSpacing)/font[:baseSize]*scale
+        textOffsetX += (glyphInfo.advanceX + fontSpacing)/font.baseSize*scale
       end
     end
   end
@@ -124,7 +124,7 @@ def MeasureText3D(font, text, fontSize, fontSpacing, lineSpacing)
 
   tempTextWidth = 0.0 # Used to count longer text line width
 
-  scale = fontSize/font[:baseSize]
+  scale = fontSize/font.baseSize
   textHeight = scale
   textWidth = 0.0
 
@@ -133,18 +133,18 @@ def MeasureText3D(font, text, fontSize, fontSpacing, lineSpacing)
     index = GetGlyphIndex(font, codepoint)
 
     if codepoint != "\n".ord
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-      if glyphInfo[:advanceX] != 0
-        textWidth += (glyphInfo[:advanceX]+fontSpacing)/font[:baseSize]*scale
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+      if glyphInfo.advanceX != 0
+        textWidth += (glyphInfo.advanceX+fontSpacing)/font.baseSize*scale
       else
-        font_rec = Rectangle.new(font[:recs] + index * Rectangle.size)
-        textWidth += (font_rec[:width] + glyphInfo[:offsetX])/font[:baseSize]*scale
+        font_rec = Rectangle.new(font.recs + index * Rectangle.size)
+        textWidth += (font_rec.width + glyphInfo.offsetX)/font.baseSize*scale
       end
     else
       tempTextWidth = textWidth if tempTextWidth < textWidth
       lenCounter = 0
       textWidth = 0.0
-      textHeight += scale + lineSpacing/font[:baseSize]*scale
+      textHeight += scale + lineSpacing/font.baseSize*scale
     end
 
     tempLen = lenCounter if tempLen < lenCounter
@@ -153,9 +153,9 @@ def MeasureText3D(font, text, fontSize, fontSpacing, lineSpacing)
   tempTextWidth = textWidth if tempTextWidth < textWidth
 
   vec = Vector3.new
-  vec[:x] = tempTextWidth + ((tempLen - 1).to_f*fontSpacing/font[:baseSize]*scale) # Adds chars spacing to measure
-  vec[:y] = 0.25
-  vec[:z] = textHeight
+  vec.x = tempTextWidth + ((tempLen - 1).to_f*fontSpacing/font.baseSize*scale) # Adds chars spacing to measure
+  vec.y = 0.25
+  vec.z = textHeight
 
   return vec
 end
@@ -166,7 +166,7 @@ def DrawTextWave3D(font, text, position, fontSize, fontSpacing, lineSpacing, bac
   textOffsetY = 0.0               # Offset between lines (on line break '\n')
   textOffsetX = 0.0               # Offset X to next character to draw
 
-  scale = fontSize/font[:baseSize].to_f
+  scale = fontSize/font.baseSize.to_f
 
   wave = false
   k = 0
@@ -176,28 +176,28 @@ def DrawTextWave3D(font, text, position, fontSize, fontSpacing, lineSpacing, bac
     if codepoint == "\n".ord
       # NOTE: Fixed line spacing of 1.5 line-height
       # TODO: Support custom line spacing defined by user
-      textOffsetY += scale + lineSpacing/font[:baseSize]*scale
+      textOffsetY += scale + lineSpacing/font.baseSize*scale
       textOffsetX = 0.0
       k = 0
     elsif codepoint == '~'.ord
       wave = !wave if text[i + 1] == '~'
     else
       if (codepoint != ' '.ord) && (codepoint != "\t".ord)
-        pos = Vector3.create(position[:x], position[:y], position[:z])
+        pos = Vector3.create(position.x, position.y, position.z)
         if wave
-          pos[:x] += Math.sin(time * config.waveSpeed[:x] - k * config.waveOffset[:x]) * config.waveRange[:x]
-          pos[:y] += Math.sin(time * config.waveSpeed[:y] - k * config.waveOffset[:y]) * config.waveRange[:y]
-          pos[:z] += Math.sin(time * config.waveSpeed[:z] - k * config.waveOffset[:z]) * config.waveRange[:z]
+          pos.x += Math.sin(time * config.waveSpeed.x - k * config.waveOffset.x) * config.waveRange.x
+          pos.y += Math.sin(time * config.waveSpeed.y - k * config.waveOffset.y) * config.waveRange.y
+          pos.z += Math.sin(time * config.waveSpeed.z - k * config.waveOffset.z) * config.waveRange.z
         end
-        DrawTextCodepoint3D(font, codepoint, Vector3.create(pos[:x] + textOffsetX, pos[:y], pos[:z] + textOffsetY), fontSize, backface, tint)
+        DrawTextCodepoint3D(font, codepoint, Vector3.create(pos.x + textOffsetX, pos.y, pos.z + textOffsetY), fontSize, backface, tint)
       end
 
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-      if glyphInfo[:advanceX] == 0
-        font_rec = Rectangle.new(font[:recs] + index * Rectangle.size)
-        textOffsetX += (font_rec[:width] + fontSpacing)/font[:baseSize]*scale
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+      if glyphInfo.advanceX == 0
+        font_rec = Rectangle.new(font.recs + index * Rectangle.size)
+        textOffsetX += (font_rec.width + fontSpacing)/font.baseSize*scale
       else
-        textOffsetX += (glyphInfo[:advanceX] + fontSpacing)/font[:baseSize]*scale
+        textOffsetX += (glyphInfo.advanceX + fontSpacing)/font.baseSize*scale
       end
     end
     k += 1
@@ -211,7 +211,7 @@ def MeasureTextWave3D(font, text, fontSize, fontSpacing, lineSpacing)
 
   tempTextWidth = 0.0     # Used to count longer text line width
 
-  scale = fontSize/font[:baseSize]
+  scale = fontSize/font.baseSize
   textHeight = scale
   textWidth = 0.0
 
@@ -222,18 +222,18 @@ def MeasureTextWave3D(font, text, fontSize, fontSpacing, lineSpacing)
     index = GetGlyphIndex(font, codepoint)
 
     if codepoint != "\n".ord
-      glyphInfo = GlyphInfo.new(font[:glyphs] + index * GlyphInfo.size)
-      if glyphInfo[:advanceX] != 0
-        textWidth += (glyphInfo[:advanceX]+fontSpacing)/font[:baseSize]*scale
+      glyphInfo = GlyphInfo.new(font.glyphs + index * GlyphInfo.size)
+      if glyphInfo.advanceX != 0
+        textWidth += (glyphInfo.advanceX+fontSpacing)/font.baseSize*scale
       else
-        font_rec = Rectangle.new(font[:recs] + index * Rectangle.size)
-        textWidth += (font_rec[:width] + glyphInfo[:offsetX])/font[:baseSize]*scale
+        font_rec = Rectangle.new(font.recs + index * Rectangle.size)
+        textWidth += (font_rec.width + glyphInfo.offsetX)/font.baseSize*scale
       end
     else
       tempTextWidth = textWidth if tempTextWidth < textWidth
       lenCounter = 0
       textWidth = 0.0
-      textHeight += scale + lineSpacing/font[:baseSize]*scale
+      textHeight += scale + lineSpacing/font.baseSize*scale
     end
 
     tempLen = lenCounter if tempLen < lenCounter
@@ -242,9 +242,9 @@ def MeasureTextWave3D(font, text, fontSize, fontSpacing, lineSpacing)
   tempTextWidth = textWidth if tempTextWidth < textWidth
 
   vec = Vector3.new
-  vec[:x] = tempTextWidth + ((tempLen - 1).to_f*fontSpacing/font[:baseSize]*scale) # Adds chars spacing to measure
-  vec[:y] = 0.25
-  vec[:z] = textHeight
+  vec.x = tempTextWidth + ((tempLen - 1).to_f*fontSpacing/font.baseSize*scale) # Adds chars spacing to measure
+  vec.y = 0.25
+  vec.z = textHeight
 
   return vec
 end
@@ -296,9 +296,9 @@ if __FILE__ == $PROGRAM_NAME
   layerDistance = 0.01
 
   wcfg = WaveTextConfig.new
-  wcfg.waveSpeed[:x] = wcfg.waveSpeed[:y] = 3.0; wcfg.waveSpeed[:z] = 0.5
-  wcfg.waveOffset[:x] = wcfg.waveOffset[:y] = wcfg.waveOffset[:z] = 0.35
-  wcfg.waveRange[:x] = wcfg.waveRange[:y] = wcfg.waveRange[:z] = 0.45
+  wcfg.waveSpeed.x = wcfg.waveSpeed.y = 3.0; wcfg.waveSpeed.z = 0.5
+  wcfg.waveOffset.x = wcfg.waveOffset.y = wcfg.waveOffset.z = 0.35
+  wcfg.waveRange.x = wcfg.waveRange.y = wcfg.waveRange.z = 0.45
 
   time = 0.0
 
@@ -327,7 +327,7 @@ if __FILE__ == $PROGRAM_NAME
       elsif IsFileExtension(file_path, ".fnt")
         UnloadFont(font)
         font = LoadFont(file_path)
-        fontSize = font[:baseSize]
+        fontSize = font.baseSize
       end
       UnloadDroppedFiles()
     end
@@ -339,15 +339,15 @@ if __FILE__ == $PROGRAM_NAME
       # Handle camera change
       spin = !spin
       # we need to reset the camera when changing modes
-      camera[:target] = Vector3.create(0.0, 0.0, 0.0)
-      camera[:up] = Vector3.create(0.0, 1.0, 0.0)
-      camera[:fovy] = 45.0
-      camera[:projection] = CAMERA_PERSPECTIVE
+      camera.target = Vector3.create(0.0, 0.0, 0.0)
+      camera.up = Vector3.create(0.0, 1.0, 0.0)
+      camera.fovy = 45.0
+      camera.projection = CAMERA_PERSPECTIVE
       if spin
-        camera[:position] = Vector3.create(-10.0, 15.0, -10.0)
+        camera.position = Vector3.create(-10.0, 15.0, -10.0)
         camera_mode = CAMERA_ORBITAL
       else
-        camera[:position] = Vector3.create(-10.0, 10.0, -10.0)
+        camera.position = Vector3.create(-10.0, 10.0, -10.0)
         camera_mode = CAMERA_FREE
       end
     end
@@ -358,10 +358,10 @@ if __FILE__ == $PROGRAM_NAME
 
       # Check collision between ray and box
       collision = GetRayCollisionBox(ray, BoundingBox.new
-                                            .with_min(cubePosition[:x] - cubeSize[:x]/2, cubePosition[:y] - cubeSize[:y]/2, cubePosition[:z] - cubeSize[:z]/2)
-                                            .with_max(cubePosition[:x] + cubeSize[:x]/2, cubePosition[:y] + cubeSize[:y]/2, cubePosition[:z] + cubeSize[:z]/2))
+                                            .with_min(cubePosition.x - cubeSize.x/2, cubePosition.y - cubeSize.y/2, cubePosition.z - cubeSize.z/2)
+                                            .with_max(cubePosition.x + cubeSize.x/2, cubePosition.y + cubeSize.y/2, cubePosition.z + cubeSize.z/2))
 
-      if collision[:hit]
+      if collision.hit
         # Generate new random colors
         light = GenerateRandomColor(0.5, 0.78)
         dark = GenerateRandomColor(0.4, 0.58)
@@ -390,7 +390,7 @@ if __FILE__ == $PROGRAM_NAME
         # Fill color array with random colors
         TEXT_MAX_LAYERS.times do |i|
           multi[i] = GenerateRandomColor(0.5, 0.8)
-          multi[i][:a] = GetRandomValue(0, 255)
+          multi[i].a = GetRandomValue(0, 255)
         end
       end
     end
@@ -434,12 +434,12 @@ if __FILE__ == $PROGRAM_NAME
 
             layers.times do |i|
               clr = if multicolor then multi[i] else light end
-              DrawTextWave3D(font, text, Vector3.create(-tbox[:x]/2.0, layerDistance*i, -4.5), fontSize, fontSpacing, lineSpacing, true, wcfg, time, clr)
+              DrawTextWave3D(font, text, Vector3.create(-tbox.x/2.0, layerDistance*i, -4.5), fontSize, fontSpacing, lineSpacing, true, wcfg, time, clr)
             end
 
             # Draw the text boundry if set
             if $show_text_boundry
-              DrawCubeWiresV(Vector3.create(0.0, 0.0, -4.5 + tbox[:z]/2), tbox, dark)
+              DrawCubeWiresV(Vector3.create(0.0, 0.0, -4.5 + tbox.z/2), tbox, dark)
             end
           rlPopMatrix()
 
@@ -454,42 +454,42 @@ if __FILE__ == $PROGRAM_NAME
             opt = TextFormat("< SIZE: %2.1f >", :float, fontSize).read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos = Vector3.create(-m[:x]/2.0, 0.01, 2.0)
+            pos = Vector3.create(-m.x/2.0, 0.01, 2.0)
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, BLUE)
-            pos[:z] += 0.5 + m[:z]
+            pos.z += 0.5 + m.z
 
             opt = TextFormat("< SPACING: %2.1f >", :float, fontSpacing).read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos[:x] = -m[:x]/2.0
+            pos.x = -m.x/2.0
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, BLUE)
-            pos[:z] += 0.5 + m[:z]
+            pos.z += 0.5 + m.z
 
             opt = TextFormat("< LINE: %2.1f >", :float, lineSpacing).read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos[:x] = -m[:x]/2.0
+            pos.x = -m.x/2.0
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, BLUE)
-            pos[:z] += 1.0 + m[:z]
+            pos.z += 1.0 + m.z
 
             opt = TextFormat("< LBOX: %3s >", :string, slb ? "ON" : "OFF").read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos[:x] = -m[:x]/2.0
+            pos.x = -m.x/2.0
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, RED)
-            pos[:z] += 0.5 + m[:z]
+            pos.z += 0.5 + m.z
 
             opt = TextFormat("< TBOX: %3s >", :string, $show_text_boundry ? "ON" : "OFF").read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos[:x] = -m[:x]/2.0
+            pos.x = -m.x/2.0
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, RED)
-            pos[:z] += 0.5 + m[:z]
+            pos.z += 0.5 + m.z
 
             opt = TextFormat("< LAYER DISTANCE: %.3f >", :float, layerDistance).read_string
             quads += TextLength(opt)
             m = MeasureText3D(GetFontDefault(), opt, 8.0, 1.0, 0.0)
-            pos[:x] = -m[:x]/2.0
+            pos.x = -m.x/2.0
             DrawText3D(GetFontDefault(), opt, pos, 8.0, 1.0, 0.0, false, DARKPURPLE)
           rlPopMatrix()
           #-------------------------------------------------------------------------
@@ -499,42 +499,42 @@ if __FILE__ == $PROGRAM_NAME
           opt = "All the text displayed here is in 3D"
           quads += 36
           m = MeasureText3D(GetFontDefault(), opt, 10.0, 0.5, 0.0)
-          pos = Vector3.create(-m[:x]/2.0, 0.01, 2.0)
+          pos = Vector3.create(-m.x/2.0, 0.01, 2.0)
           DrawText3D(GetFontDefault(), opt, pos, 10.0, 0.5, 0.0, false, DARKBLUE)
-          pos[:z] += 1.5 + m[:z]
+          pos.z += 1.5 + m.z
 
           opt = "press [Left]/[Right] to change the font size"
           quads += 44
           m = MeasureText3D(GetFontDefault(), opt, 6.0, 0.5, 0.0)
-          pos[:x] = -m[:x]/2.0
+          pos.x = -m.x/2.0
           DrawText3D(GetFontDefault(), opt, pos, 6.0, 0.5, 0.0, false, DARKBLUE)
-          pos[:z] += 0.5 + m[:z]
+          pos.z += 0.5 + m.z
 
           opt = "press [Up]/[Down] to change the font spacing"
           quads += 44
           m = MeasureText3D(GetFontDefault(), opt, 6.0, 0.5, 0.0)
-          pos[:x] = -m[:x]/2.0
+          pos.x = -m.x/2.0
           DrawText3D(GetFontDefault(), opt, pos, 6.0, 0.5, 0.0, false, DARKBLUE)
-          pos[:z] += 0.5 + m[:z]
+          pos.z += 0.5 + m.z
 
           opt = "press [PgUp]/[PgDown] to change the line spacing"
           quads += 48
           m = MeasureText3D(GetFontDefault(), opt, 6.0, 0.5, 0.0)
-          pos[:x] = -m[:x]/2.0
+          pos.x = -m.x/2.0
           DrawText3D(GetFontDefault(), opt, pos, 6.0, 0.5, 0.0, false, DARKBLUE)
-          pos[:z] += 0.5 + m[:z]
+          pos.z += 0.5 + m.z
 
           opt = "press [F1] to toggle the letter boundry"
           quads += 39
           m = MeasureText3D(GetFontDefault(), opt, 6.0, 0.5, 0.0)
-          pos[:x] = -m[:x]/2.0
+          pos.x = -m.x/2.0
           DrawText3D(GetFontDefault(), opt, pos, 6.0, 0.5, 0.0, false, DARKBLUE)
-          pos[:z] += 0.5 + m[:z]
+          pos.z += 0.5 + m.z
 
           opt = "press [F2] to toggle the text boundry"
           quads += 37
           m = MeasureText3D(GetFontDefault(), opt, 6.0, 0.5, 0.0)
-          pos[:x] = -m[:x]/2.0
+          pos.x = -m.x/2.0
           DrawText3D(GetFontDefault(), opt, pos, 6.0, 0.5, 0.0, false, DARKBLUE)
           #-------------------------------------------------------------------------
 

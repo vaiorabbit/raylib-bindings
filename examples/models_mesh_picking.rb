@@ -25,7 +25,7 @@ if __FILE__ == $PROGRAM_NAME
   SetMaterialTexture(tower.material(0), MATERIAL_MAP_ALBEDO, texture)
 
   towerPos = Vector3.create(0.0, 0.0, 0.0)
-  towerBBox = GetMeshBoundingBox(Mesh.new(tower[:meshes]))
+  towerBBox = GetMeshBoundingBox(Mesh.new(tower.meshes))
 
   # Ground quad
   g0 = Vector3.create(-50.0, 0.0, -50.0)
@@ -61,8 +61,8 @@ if __FILE__ == $PROGRAM_NAME
     # Display information about closest hit
     collision = RayCollision.new
     hitObjectName = "None"
-    collision[:distance] = Float::MAX
-    collision[:hit] = false
+    collision.distance = Float::MAX
+    collision.hit = false
     cursorColor = WHITE
 
     # Get ray and test against objects
@@ -70,7 +70,7 @@ if __FILE__ == $PROGRAM_NAME
 
     # Check ray collision against ground quad
     groundHitInfo = GetRayCollisionQuad(ray, g0, g1, g2, g3)
-    if groundHitInfo[:hit] && (groundHitInfo[:distance] < collision[:distance])
+    if groundHitInfo.hit && (groundHitInfo.distance < collision.distance)
       collision = groundHitInfo
       cursorColor = GREEN
       hitObjectName = "Ground"
@@ -78,16 +78,16 @@ if __FILE__ == $PROGRAM_NAME
 
     # Check ray collision against test triangle
     triHitInfo = GetRayCollisionTriangle(ray, ta, tb, tc)
-    if (triHitInfo[:hit]) && (triHitInfo[:distance] < collision[:distance])
+    if (triHitInfo.hit) && (triHitInfo.distance < collision.distance)
       collision = triHitInfo
       cursorColor = PURPLE
       hitObjectName = "Triangle"
-      bary = Vector3Barycenter(collision[:point], ta, tb, tc)
+      bary = Vector3Barycenter(collision.point, ta, tb, tc)
     end
 
     # Check ray collision against test sphere
     sphereHitInfo = GetRayCollisionSphere(ray, sp, sr)
-    if (sphereHitInfo[:hit]) && (sphereHitInfo[:distance] < collision[:distance])
+    if (sphereHitInfo.hit) && (sphereHitInfo.distance < collision.distance)
       collision = sphereHitInfo
       cursorColor = ORANGE
       hitObjectName = "Sphere"
@@ -95,22 +95,22 @@ if __FILE__ == $PROGRAM_NAME
 
     # Check ray collision against bounding box first, before trying the full ray-mesh test
     boxHitInfo = GetRayCollisionBox(ray, towerBBox)
-    if (boxHitInfo[:hit]) && (boxHitInfo[:distance] < collision[:distance])
+    if (boxHitInfo.hit) && (boxHitInfo.distance < collision.distance)
       collision = boxHitInfo
       cursorColor = ORANGE
       hitObjectName = "Box"
 
       # Check ray collision against model
       meshHitInfo = nil
-      tower[:meshCount].times do |m|
+      tower.meshCount.times do |m|
         # NOTE: We consider the model.transform for the collision check but 
         # it can be checked against any transform Matrix, used when checking against same
         # model drawn multiple times with multiple transforms
-        mesh = Mesh.new(tower[:meshes] + m * FFI::NativeType::POINTER.size)
-        meshHitInfo = GetRayCollisionMesh(ray, mesh, tower[:transform])
+        mesh = Mesh.new(tower.meshes + m * FFI::NativeType::POINTER.size)
+        meshHitInfo = GetRayCollisionMesh(ray, mesh, tower.transform)
       end
 
-      if meshHitInfo && meshHitInfo[:hit]
+      if meshHitInfo && meshHitInfo.hit
         collision = meshHitInfo
         cursorColor = ORANGE
         hitObjectName = "Mesh"
@@ -135,17 +135,17 @@ if __FILE__ == $PROGRAM_NAME
         DrawSphereWires(sp, sr, 8, 8, PURPLE)
 
         # Draw the mesh bbox if we hit it
-        DrawBoundingBox(towerBBox, LIME) if boxHitInfo[:hit]
+        DrawBoundingBox(towerBBox, LIME) if boxHitInfo.hit
 
         # If we hit something, draw the cursor at the hit point
-        if collision[:hit]
-          DrawCube(collision[:point], 0.3, 0.3, 0.3, cursorColor)
-          DrawCubeWires(collision[:point], 0.3, 0.3, 0.3, RED)
+        if collision.hit
+          DrawCube(collision.point, 0.3, 0.3, 0.3, cursorColor)
+          DrawCubeWires(collision.point, 0.3, 0.3, 0.3, RED)
           normalEnd = Vector3.new
-          normalEnd[:x] = collision[:point][:x] + collision[:normal][:x]
-          normalEnd[:y] = collision[:point][:y] + collision[:normal][:y]
-          normalEnd[:z] = collision[:point][:z] + collision[:normal][:z]
-          DrawLine3D(collision[:point], normalEnd, RED)
+          normalEnd.x = collision.point.x + collision.normal.x
+          normalEnd.y = collision.point.y + collision.normal.y
+          normalEnd.z = collision.point.z + collision.normal.z
+          DrawLine3D(collision.point, normalEnd, RED)
         end
         DrawRay(ray, MAROON)
         DrawGrid(10, 10.0)
@@ -153,19 +153,19 @@ if __FILE__ == $PROGRAM_NAME
 
       # Draw some debug GUI text
       DrawText(TextFormat("Hit Object: %s", :string, hitObjectName), 10, 50, 10, BLACK)
-      if collision[:hit]
+      if collision.hit
         ypos = 70
-        DrawText(TextFormat("Distance: %3.2f", :float, collision[:distance]), 10, ypos, 10, BLACK)
+        DrawText(TextFormat("Distance: %3.2f", :float, collision.distance), 10, ypos, 10, BLACK)
         DrawText(TextFormat("Hit Pos: %3.2f %3.2f %3.2f",
-                              :float, collision[:point][:x],
-                              :float, collision[:point][:y],
-                              :float, collision[:point][:z]), 10, ypos + 15, 10, BLACK)
+                              :float, collision.point.x,
+                              :float, collision.point.y,
+                              :float, collision.point.z), 10, ypos + 15, 10, BLACK)
           DrawText(TextFormat("Hit Norm: %3.2f %3.2f %3.2f",
-                              :float, collision[:normal][:x],
-                              :float, collision[:normal][:y],
-                              :float, collision[:normal][:z]), 10, ypos + 30, 10, BLACK)
-          if triHitInfo[:hit] && TextIsEqual(hitObjectName, "Triangle")
-            DrawText(TextFormat("Barycenter: %3.2f %3.2f %3.2f", :float, bary[:x], :float, bary[:y], :float, bary[:z]), 10, ypos + 45, 10, BLACK)
+                              :float, collision.normal.x,
+                              :float, collision.normal.y,
+                              :float, collision.normal.z), 10, ypos + 30, 10, BLACK)
+          if triHitInfo.hit && TextIsEqual(hitObjectName, "Triangle")
+            DrawText(TextFormat("Barycenter: %3.2f %3.2f %3.2f", :float, bary.x, :float, bary.y, :float, bary.z), 10, ypos + 45, 10, BLACK)
           end
       end
 

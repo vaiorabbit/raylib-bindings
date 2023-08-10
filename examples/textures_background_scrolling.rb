@@ -27,24 +27,24 @@ if __FILE__ == $PROGRAM_NAME
     scrollingFore -= 1.0
 
     # NOTE: Texture is scaled twice its size, so it sould be considered on scrolling
-    scrollingBack = 0 if scrollingBack <= -background[:width]*2
-    scrollingMid = 0 if scrollingMid <= -midground[:width]*2
-    scrollingFore = 0 if scrollingFore <= -foreground[:width]*2
+    scrollingBack = 0 if scrollingBack <= -background.width*2
+    scrollingMid = 0 if scrollingMid <= -midground.width*2
+    scrollingFore = 0 if scrollingFore <= -foreground.width*2
 
     BeginDrawing()
       ClearBackground(GetColor(0x052c46ff))
       # Draw background image twice
       # NOTE: Texture is scaled twice its size
       DrawTextureEx(background, Vector2.create(scrollingBack, 20), 0.0, 2.0, WHITE)
-      DrawTextureEx(background, Vector2.create(background[:width]*2 + scrollingBack, 20), 0.0, 2.0, WHITE)
+      DrawTextureEx(background, Vector2.create(background.width*2 + scrollingBack, 20), 0.0, 2.0, WHITE)
 
       # Draw midground image twice
       DrawTextureEx(midground, Vector2.create(scrollingMid, 20), 0.0, 2.0, WHITE)
-      DrawTextureEx(midground, Vector2.create(midground[:width]*2 + scrollingMid, 20), 0.0, 2.0, WHITE)
+      DrawTextureEx(midground, Vector2.create(midground.width*2 + scrollingMid, 20), 0.0, 2.0, WHITE)
 
       # Draw foreground image twice
       DrawTextureEx(foreground, Vector2.create(scrollingFore, 70), 0.0, 2.0, WHITE)
-      DrawTextureEx(foreground, Vector2.create(foreground[:width]*2 + scrollingFore, 70), 0.0, 2.0, WHITE)
+      DrawTextureEx(foreground, Vector2.create(foreground.width*2 + scrollingFore, 70), 0.0, 2.0, WHITE)
 
       DrawText("BACKGROUND SCROLLING & PARALLAX", 10, 10, 20, RED)
       DrawText("(c) Cyberpunk Street Environment by Luis Zuno (@ansimuz)", screenWidth - 330, screenHeight - 20, 10, RAYWHITE)

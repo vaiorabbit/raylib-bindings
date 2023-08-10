@@ -28,8 +28,8 @@ if __FILE__ == $PROGRAM_NAME
 
     # Move camera around the scene
     cameraTime = time * 0.3
-    camera[:position][:x] = Math.cos(cameraTime) * 40.0
-    camera[:position][:z] = Math.sin(cameraTime) * 40.0
+    camera.position.x = Math.cos(cameraTime) * 40.0
+    camera.position.z = Math.sin(cameraTime) * 40.0
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

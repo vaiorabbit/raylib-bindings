@@ -36,8 +36,8 @@ if __FILE__ == $PROGRAM_NAME
         DrawModel(model, mapPosition, 1.0, RED)
       EndMode3D()
 
-      DrawTexture(texture, screenWidth - texture[:width] - 20, 20.0, WHITE)
-      DrawRectangleLines(screenWidth - texture[:width] - 20, 20, texture[:width], texture[:height], GREEN)
+      DrawTexture(texture, screenWidth - texture.width - 20, 20.0, WHITE)
+      DrawRectangleLines(screenWidth - texture.width - 20, 20, texture.width, texture.height, GREEN)
 
       DrawFPS(10, 10)
     EndDrawing()

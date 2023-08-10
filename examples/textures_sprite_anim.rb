@@ -15,7 +15,7 @@ if __FILE__ == $PROGRAM_NAME
   scarfy = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/scarfy.png")
 
   position = Vector2.create(350.0, 280.0)
-  frameRec = Rectangle.create(0.0, 0.0, scarfy[:width].to_f/6, scarfy[:height].to_f)
+  frameRec = Rectangle.create(0.0, 0.0, scarfy.width.to_f/6, scarfy.height.to_f)
   currentFrame = 0
 
   framesCounter = 0
@@ -33,7 +33,7 @@ if __FILE__ == $PROGRAM_NAME
 
       currentFrame = 0 if currentFrame > 5
 
-      frameRec[:x] = currentFrame.to_f * scarfy[:width].to_f / 6
+      frameRec.x = currentFrame.to_f * scarfy.width.to_f / 6
     end
 
     # Control frames speed
@@ -53,8 +53,8 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
 
       DrawTexture(scarfy, 15, 40, WHITE)
-      DrawRectangleLines(15, 40, scarfy[:width], scarfy[:height], LIME)
-      DrawRectangleLines(15 + frameRec[:x].to_i, 40 + frameRec[:y].to_i, frameRec[:width].to_i, frameRec[:height].to_i, RED)
+      DrawRectangleLines(15, 40, scarfy.width, scarfy.height, LIME)
+      DrawRectangleLines(15 + frameRec.x.to_i, 40 + frameRec.y.to_i, frameRec.width.to_i, frameRec.height.to_i, RED)
 
       DrawText("FRAME SPEED: ", 165, 210, 10, DARKGRAY)
       DrawText(TextFormat("%02i FPS", :int, framesSpeed), 575, 210, 10, DARKGRAY)

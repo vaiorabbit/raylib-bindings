@@ -27,12 +27,12 @@ if __FILE__ == $PROGRAM_NAME
 =begin
     # [Ruby raylib] Move cube position
     move = Vector3.create(0, 0, 0) # [Ruby raylib]
-    move[:x] += speed if IsKeyDown(KEY_RIGHT)
-    move[:x] -= speed if IsKeyDown(KEY_LEFT)
-    move[:z] += speed if IsKeyDown(KEY_DOWN)
-    move[:z] -= speed if IsKeyDown(KEY_UP)
+    move.x += speed if IsKeyDown(KEY_RIGHT)
+    move.x -= speed if IsKeyDown(KEY_LEFT)
+    move.z += speed if IsKeyDown(KEY_DOWN)
+    move.z -= speed if IsKeyDown(KEY_UP)
 
-    to_camera = Vector3Normalize(Vector3.create(camera[:position][:x], 0, camera[:position][:z]))
+    to_camera = Vector3Normalize(Vector3.create(camera.position.x, 0, camera.position.z))
     rotate_y = QuaternionFromVector3ToVector3(Vector3.create(0, 0, 1), to_camera)
     move = Vector3RotateByQuaternion(move, rotate_y)
 
@@ -49,7 +49,7 @@ if __FILE__ == $PROGRAM_NAME
         DrawGrid(10, 1.0)
       EndMode3D()
 
-      DrawText("Enemy: 100 / 100", cubeScreenPosition[:x] - MeasureText("Enemy: 100/100", 20)/2, cubeScreenPosition[:y], 20, BLACK)
+      DrawText("Enemy: 100 / 100", cubeScreenPosition.x - MeasureText("Enemy: 100/100", 20)/2, cubeScreenPosition.y, 20, BLACK)
       DrawText("Text is always on top of the cube", (screenWidth - MeasureText("Text is always on top of the cube", 20))/2, 25, 20, GRAY)
     EndDrawing()
   end

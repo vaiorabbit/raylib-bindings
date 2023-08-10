@@ -59,7 +59,7 @@ if __FILE__ == $PROGRAM_NAME
   ssboB = rlLoadShaderBuffer(GOL_WIDTH*GOL_WIDTH*FFI::type_size(:uint), nil, RL_DYNAMIC_COPY)
 
   transfertBuffer = GolUpdateSSBO.new
-  transfertBuffer[:count] = 0
+  transfertBuffer.count = 0
 
   transfertSSBO = rlLoadShaderBuffer(GolUpdateSSBO.size, nil, RL_DYNAMIC_COPY)
 
@@ -73,14 +73,14 @@ if __FILE__ == $PROGRAM_NAME
 
     brushSize += GetMouseWheelMove().to_f
 
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) && (transfertBuffer[:count] < MAX_BUFFERED_TRANSFERTS)
+    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) && (transfertBuffer.count < MAX_BUFFERED_TRANSFERTS)
       # Buffer a new command
-      transfertBuffer[:commands][transfertBuffer[:count]][:x] = GetMouseX() - brushSize/2
-      transfertBuffer[:commands][transfertBuffer[:count]][:y] = GetMouseY() - brushSize/2
-      transfertBuffer[:commands][transfertBuffer[:count]][:w] = brushSize
-      transfertBuffer[:commands][transfertBuffer[:count]][:enabled] = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0
-      transfertBuffer[:count] += 1
-    elsif transfertBuffer[:count] > 0
+      transfertBuffer.commands[transfertBuffer.count].x = GetMouseX() - brushSize/2
+      transfertBuffer.commands[transfertBuffer.count].y = GetMouseY() - brushSize/2
+      transfertBuffer.commands[transfertBuffer.count].w = brushSize
+      transfertBuffer.commands[transfertBuffer.count].enabled = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0
+      transfertBuffer.count += 1
+    elsif transfertBuffer.count > 0
       # Process transfert buffer
 
       # Send SSBO buffer to GPU
@@ -90,10 +90,10 @@ if __FILE__ == $PROGRAM_NAME
       rlEnableShader(golTransfertProgram)
       rlBindShaderBuffer(ssboA, 1)
       rlBindShaderBuffer(transfertSSBO, 3)
-      rlComputeShaderDispatch(transfertBuffer[:count], 1, 1) # each GPU unit will process a command
+      rlComputeShaderDispatch(transfertBuffer.count, 1, 1) # each GPU unit will process a command
       rlDisableShader()
 
-      transfertBuffer[:count] = 0
+      transfertBuffer.count = 0
     else # elsif IsKeyDown(KEY_SPACE)
       # Process game of life logic
       rlEnableShader(golLogicProgram)

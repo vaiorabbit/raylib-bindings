@@ -18,11 +18,11 @@ if __FILE__ == $PROGRAM_NAME
 
   # Create floor rectangle physics body
   floor = PhysicsBodyData.new(CreatePhysicsBodyRectangle(Vector2.create(screenWidth/2.0, screenHeight.to_f), 500, 100, 10))
-  floor[:enabled] = false # Disable body state to convert it to static (no dynamics, but collisions)
+  floor.enabled = false # Disable body state to convert it to static (no dynamics, but collisions)
 
   # Create obstacle circle physics body
   circle = PhysicsBodyData.new(CreatePhysicsBodyCircle(Vector2.create(screenWidth/2.0, screenHeight/2.0), 45, 10))
-  circle[:enabled] = false # Disable body state to convert it to static (no dynamics, but collisions)
+  circle.enabled = false # Disable body state to convert it to static (no dynamics, but collisions)
 
   SetTargetFPS(60)
 
@@ -37,10 +37,10 @@ if __FILE__ == $PROGRAM_NAME
       physics_bodies.clear
 
       floor = PhysicsBodyData.new(CreatePhysicsBodyRectangle(Vector2.create(screenWidth/2.0, screenHeight.to_f), 500, 100, 10))
-      floor[:enabled] = false
+      floor.enabled = false
 
       circle = PhysicsBodyData.new(CreatePhysicsBodyCircle(Vector2.create(screenWidth/2.0, screenHeight/2.0), 45, 10))
-      circle[:enabled] = false
+      circle.enabled = false
     end
 
     # Physics body creation inputs
@@ -55,7 +55,7 @@ if __FILE__ == $PROGRAM_NAME
     (bodiesCount - 1).downto(0) do |i|
       body_ptr = GetPhysicsBody(i)
       body = PhysicsBodyData.new(body_ptr)
-      if body_ptr != nil && (body[:position][:y] > screenHeight*2)
+      if body_ptr != nil && (body.position.y > screenHeight*2)
         physics_bodies.delete(body_ptr)
         DestroyPhysicsBody(body)
       end

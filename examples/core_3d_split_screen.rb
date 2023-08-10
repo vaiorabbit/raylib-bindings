@@ -54,7 +54,7 @@ if __FILE__ == $PROGRAM_NAME
   screenPlayer2 = LoadRenderTexture(screenWidth/2, screenHeight)
 
   # Build a flipped rectangle the size of the split view to use for drawing later
-  splitScreenRect = Rectangle.create(0.0, 0.0, screenPlayer1[:texture][:width].to_f, -screenPlayer1[:texture][:height].to_f)
+  splitScreenRect = Rectangle.create(0.0, 0.0, screenPlayer1.texture.width.to_f, -screenPlayer1.texture.height.to_f)
 
   SetTargetFPS(60) # Set our game to run at 60 frames-per-second
 
@@ -108,8 +108,8 @@ if __FILE__ == $PROGRAM_NAME
     # Draw both views render textures to the screen side by side
     BeginDrawing()
       ClearBackground(BLACK)
-      DrawTextureRec(screenPlayer1[:texture], splitScreenRect, Vector2.create(0, 0), WHITE)
-      DrawTextureRec(screenPlayer2[:texture], splitScreenRect, Vector2.create(screenWidth/2.0, 0), WHITE)
+      DrawTextureRec(screenPlayer1.texture, splitScreenRect, Vector2.create(0, 0), WHITE)
+      DrawTextureRec(screenPlayer2.texture, splitScreenRect, Vector2.create(screenWidth/2.0, 0), WHITE)
     EndDrawing()
   end
 

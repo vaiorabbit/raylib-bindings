@@ -18,7 +18,7 @@ if __FILE__ == $PROGRAM_NAME
   model = LoadModel(RAYLIB_MODELS_PATH + "resources/models/iqm/guy.iqm") # Load the animated model mesh and basic data
   texture = LoadTexture(RAYLIB_MODELS_PATH + "resources/models/iqm/guytex.png") # Load model texture and set material
 
-  materials_0 = Material.new(model[:materials])
+  materials_0 = Material.new(model.materials)
   SetMaterialTexture(materials_0, MATERIAL_MAP_ALBEDO, texture)
 
   position = Vector3.create(0, 0, 0)
@@ -34,7 +34,7 @@ if __FILE__ == $PROGRAM_NAME
 
   SetTargetFPS(60)
 
-  framePoses = anims[0][:framePoses] # Transform**
+  framePoses = anims[0].framePoses # Transform**
   until WindowShouldClose()
     UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
@@ -42,7 +42,7 @@ if __FILE__ == $PROGRAM_NAME
     if IsKeyDown(KEY_SPACE)
       animFrameCounter += 1
       UpdateModelAnimation(model, anims[0], animFrameCounter)
-      animFrameCounter = 0 if animFrameCounter >= anims[0][:frameCount]
+      animFrameCounter = 0 if animFrameCounter >= anims[0].frameCount
     end
 
     framePose = framePoses + animFrameCounter * FFI::NativeType::POINTER.size # Transform*
@@ -51,9 +51,9 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(RAYWHITE)
       BeginMode3D(camera)
         DrawModelEx(model, position, Vector3.create(1.0, 0.0, 0.0), -90.0, Vector3.create(1.0, 1.0, 1.0), WHITE)
-        model[:boneCount].times do |i|
+        model.boneCount.times do |i|
           transform = Transform.new(framePose.read_pointer + i * Transform.size)
-          DrawCube(transform[:translation], 0.2, 0.2, 0.2, RED)
+          DrawCube(transform.translation, 0.2, 0.2, 0.2, RED)
         end
         DrawGrid(10, 1.0)
       EndMode3D()

@@ -50,10 +50,10 @@ if __FILE__ == $PROGRAM_NAME
     mousePosition = GetMousePosition()
 
     if IsMouseButtonDown(MOUSE_BUTTON_LEFT)
-      fp = mousePosition[:y].to_f
+      fp = mousePosition.y.to_f
       frequency = 40.0 + fp
 
-      pan = mousePosition[:x] / screenWidth.to_f
+      pan = mousePosition.x / screenWidth.to_f
       SetAudioStreamPan(stream, pan)
     end
 
@@ -112,8 +112,8 @@ if __FILE__ == $PROGRAM_NAME
 
       # Draw the current buffer state proportionate to the screen
       screenWidth.times do |i|
-        position[:x] = i.to_f
-        position[:y] = 250 + 50 * data.get_int16((i * MAX_SAMPLES / screenWidth.to_f).to_i * FFI::NativeType::INT16.size) / 32000.0
+        position.x = i.to_f
+        position.y = 250 + 50 * data.get_int16((i * MAX_SAMPLES / screenWidth.to_f).to_i * FFI::NativeType::INT16.size) / 32000.0
         DrawPixelV(position, RED)
       end
     EndDrawing()

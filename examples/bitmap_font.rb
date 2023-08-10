@@ -9,7 +9,7 @@ if __FILE__ == $PROGRAM_NAME
   SetTargetFPS(60)
 
   font = LoadFont("font/VP16Font_XNA.png")
-  FS = font[:baseSize].to_f # Font Size
+  FS = font.baseSize.to_f # Font Size
 
   colBG = Color.from_u8(0x00, 0x20, 0x60, 0xff)
   colHeader = Color.from_u8(0xff, 0x00, 0x00, 0xff)

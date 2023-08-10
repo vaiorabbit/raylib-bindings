@@ -83,7 +83,7 @@ if __FILE__ == $PROGRAM_NAME
 
   font_size = 48
   font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", font_size, nil, 65535)
-  SetTextureFilter(font[:texture], TEXTURE_FILTER_POINT)
+  SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
   GuiSetFont(font)
 
   cell_width = 18

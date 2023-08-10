@@ -39,8 +39,8 @@ if __FILE__ == $PROGRAM_NAME
 
     UpdateCamera(camera.pointer, CAMERA_FREE)
 
-    cameraPos = [camera[:position][:x], camera[:position][:y], camera[:position][:z]]
-    cameraTarget = [camera[:target][:x], camera[:target][:y], camera[:target][:z]]
+    cameraPos = [camera.position.x, camera.position.y, camera.position.z]
+    cameraTarget = [camera.target.x, camera.target.y, camera.target.z]
 
     deltaTime = GetFrameTime()
     runTime += deltaTime

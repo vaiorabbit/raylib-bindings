@@ -4,28 +4,28 @@ require_relative 'util/resource_path'
 # generate a simple triangle mesh from code
 def GenMeshCustom()
   mesh = Mesh.new
-  mesh[:triangleCount] = 1
-  mesh[:vertexCount] = mesh[:triangleCount] * 3
+  mesh.triangleCount = 1
+  mesh.vertexCount = mesh.triangleCount * 3
 
   sizeof_float = FFI.type_size(:float)
-  mesh[:vertices] = MemAlloc(mesh[:vertexCount] * 3 * sizeof_float)
-  mesh[:texcoords] = MemAlloc(mesh[:vertexCount] * 2 * sizeof_float)
-  mesh[:normals] = MemAlloc(mesh[:vertexCount] * 3 * sizeof_float)
+  mesh.vertices = MemAlloc(mesh.vertexCount * 3 * sizeof_float)
+  mesh.texcoords = MemAlloc(mesh.vertexCount * 2 * sizeof_float)
+  mesh.normals = MemAlloc(mesh.vertexCount * 3 * sizeof_float)
 
   # vertex at (0, 0, 0)
-  mesh[:vertices].put_array_of_float32(0, [0, 0, 0])
-  mesh[:normals].put_array_of_float32(0, [0, 1, 0])
-  mesh[:texcoords].put_array_of_float32(0, [0, 0])
+  mesh.vertices.put_array_of_float32(0, [0, 0, 0])
+  mesh.normals.put_array_of_float32(0, [0, 1, 0])
+  mesh.texcoords.put_array_of_float32(0, [0, 0])
 
   # vertex at (1, 0, 2)
-  mesh[:vertices].put_array_of_float32(3 * sizeof_float, [1, 0, 2])
-  mesh[:normals].put_array_of_float32(3 * sizeof_float, [0, 1, 0])
-  mesh[:texcoords].put_array_of_float32(2 * sizeof_float, [0.5, 1.0])
+  mesh.vertices.put_array_of_float32(3 * sizeof_float, [1, 0, 2])
+  mesh.normals.put_array_of_float32(3 * sizeof_float, [0, 1, 0])
+  mesh.texcoords.put_array_of_float32(2 * sizeof_float, [0.5, 1.0])
 
   # vertex at (2, 0, 0)
-  mesh[:vertices].put_array_of_float32(6 * sizeof_float, [2, 0, 0])
-  mesh[:normals].put_array_of_float32(6 * sizeof_float, [0, 1, 0])
-  mesh[:texcoords].put_array_of_float32(4 * sizeof_float, [1, 0])
+  mesh.vertices.put_array_of_float32(6 * sizeof_float, [2, 0, 0])
+  mesh.normals.put_array_of_float32(6 * sizeof_float, [0, 1, 0])
+  mesh.texcoords.put_array_of_float32(4 * sizeof_float, [1, 0])
 
   # Upload mesh data from CPU (RAM) to GPU (VRAM) memory
   UploadMesh(mesh, false)

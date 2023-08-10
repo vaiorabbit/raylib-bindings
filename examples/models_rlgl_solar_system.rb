@@ -11,7 +11,7 @@ def DrawSphereBasic(color)
   rlCheckRenderBatchLimit((rings + 2)*slices*6)
 
   rlBegin(RL_TRIANGLES)
-    rlColor4ub(color[:r], color[:g], color[:b], color[:a])
+    rlColor4ub(color.r, color.g, color.b, color.a)
 
     (rings + 2).times do |i|
       slices.times do |j|
