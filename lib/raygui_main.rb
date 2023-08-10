@@ -661,6 +661,14 @@ module Raylib
       #   @return [int]
       [:GuiToggleGroup, :GuiToggleGroup, [Rectangle.by_value, :pointer, :pointer], :int],
 
+      # @!method GuiToggleSlider(bounds, text, active)
+      #   GuiToggleSlider : Toggle Slider control, returns true when clicked
+      #   @param bounds [Rectangle]
+      #   @param text [const char *]
+      #   @param active [int *]
+      #   @return [int]
+      [:GuiToggleSlider, :GuiToggleSlider, [Rectangle.by_value, :pointer, :pointer], :int],
+
       # @!method GuiCheckBox(bounds, text, checked)
       #   GuiCheckBox : Check Box control, returns true when active
       #   @param bounds [Rectangle]

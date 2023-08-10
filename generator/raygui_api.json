@@ -2495,6 +2495,25 @@
       ]
     },
     {
+      "name": "GuiToggleSlider",
+      "description": "Toggle Slider control, returns true when clicked",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char *",
+          "name": "text"
+        },
+        {
+          "type": "int *",
+          "name": "active"
+        }
+      ]
+    },
+    {
       "name": "GuiCheckBox",
       "description": "Check Box control, returns true when active",
       "returnType": "int",

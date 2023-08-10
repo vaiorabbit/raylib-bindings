@@ -35,6 +35,7 @@ module Raylib
   FLAG_WINDOW_TRANSPARENT = 16          # Set to allow transparent framebuffer
   FLAG_WINDOW_HIGHDPI = 8192            # Set to support HighDPI
   FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384 # Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+  FLAG_BORDERLESS_WINDOWED_MODE = 32768 # Set to run program in borderless windowed mode
   FLAG_MSAA_4X_HINT = 32                # Set to try enabling MSAA 4X
   FLAG_INTERLACED_HINT = 65536          # Set to try enabling interlaced video format (for V3D)
 
@@ -290,17 +291,20 @@ module Raylib
   PIXELFORMAT_UNCOMPRESSED_R32 = 8           # 32 bpp (1 channel - float)
   PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9     # 32*3 bpp (3 channels - float)
   PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10 # 32*4 bpp (4 channels - float)
-  PIXELFORMAT_COMPRESSED_DXT1_RGB = 11       # 4 bpp (no alpha)
-  PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12      # 4 bpp (1 bit alpha)
-  PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13      # 8 bpp
-  PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14      # 8 bpp
-  PIXELFORMAT_COMPRESSED_ETC1_RGB = 15       # 4 bpp
-  PIXELFORMAT_COMPRESSED_ETC2_RGB = 16       # 4 bpp
-  PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17  # 8 bpp
-  PIXELFORMAT_COMPRESSED_PVRT_RGB = 18       # 4 bpp
-  PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19      # 4 bpp
-  PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20  # 8 bpp
-  PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21  # 2 bpp
+  PIXELFORMAT_UNCOMPRESSED_R16 = 11          # 16 bpp (1 channel - half float)
+  PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12    # 16*3 bpp (3 channels - half float)
+  PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13 # 16*4 bpp (4 channels - half float)
+  PIXELFORMAT_COMPRESSED_DXT1_RGB = 14       # 4 bpp (no alpha)
+  PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15      # 4 bpp (1 bit alpha)
+  PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16      # 8 bpp
+  PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17      # 8 bpp
+  PIXELFORMAT_COMPRESSED_ETC1_RGB = 18       # 4 bpp
+  PIXELFORMAT_COMPRESSED_ETC2_RGB = 19       # 4 bpp
+  PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20  # 8 bpp
+  PIXELFORMAT_COMPRESSED_PVRT_RGB = 21       # 4 bpp
+  PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22      # 4 bpp
+  PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23  # 8 bpp
+  PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24  # 2 bpp
 
   # enum TextureFilter
   # Texture parameters: filter mode
@@ -1173,6 +1177,11 @@ module Raylib
       #   @return [void]
       [:ToggleFullscreen, :ToggleFullscreen, [], :void],
 
+      # @!method ToggleBorderlessWindowed()
+      #   ToggleBorderlessWindowed : Toggle window state: borderless windowed (only PLATFORM_DESKTOP)
+      #   @return [void]
+      [:ToggleBorderlessWindowed, :ToggleBorderlessWindowed, [], :void],
+
       # @!method MaximizeWindow()
       #   MaximizeWindow : Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
       #   @return [void]
@@ -1202,7 +1211,7 @@ module Raylib
       [:SetWindowIcons, :SetWindowIcons, [:pointer, :int], :void],
 
       # @!method SetWindowTitle(title)
-      #   SetWindowTitle : Set title for window (only PLATFORM_DESKTOP)
+      #   SetWindowTitle : Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)
       #   @param title [const char *]
       #   @return [void]
       [:SetWindowTitle, :SetWindowTitle, [:pointer], :void],
@@ -4460,6 +4469,12 @@ module Raylib
       #   @return [Sound]
       [:LoadSoundFromWave, :LoadSoundFromWave, [Wave.by_value], Sound.by_value],
 
+      # @!method LoadSoundAlias(source)
+      #   LoadSoundAlias : Create a new sound that shares the same sample data as the source sound, does not own the sound data
+      #   @param source [Sound]
+      #   @return [Sound]
+      [:LoadSoundAlias, :LoadSoundAlias, [Sound.by_value], Sound.by_value],
+
       # @!method IsSoundReady(sound)
       #   IsSoundReady : Checks if a sound is ready
       #   @param sound [Sound]
@@ -4485,6 +4500,12 @@ module Raylib
       #   @param sound [Sound]
       #   @return [void]
       [:UnloadSound, :UnloadSound, [Sound.by_value], :void],
+
+      # @!method UnloadSoundAlias(alias)
+      #   UnloadSoundAlias : Unload a sound alias (does not deallocate sample data)
+      #   @param alias [Sound]
+      #   @return [void]
+      [:UnloadSoundAlias, :UnloadSoundAlias, [Sound.by_value], :void],
 
       # @!method ExportWave(wave, fileName)
       #   ExportWave : Export wave data to file, returns true on success
