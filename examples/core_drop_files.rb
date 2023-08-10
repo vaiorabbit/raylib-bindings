@@ -18,7 +18,7 @@ if __FILE__ == $PROGRAM_NAME
       droppedFiles = LoadDroppedFiles()
       filePaths = droppedFiles.paths.get_array_of_string(0, droppedFiles.count)
       # Is some files have been previously loaded, unload them
-      UnloadDroppedFiles(droppedFiles) #if droppedFiles.count > 0
+      UnloadDroppedFiles(droppedFiles)
     end
 
     BeginDrawing()
