@@ -1,6 +1,7 @@
 2023-09-02  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/ec6d3bb688ae8c137152eca7cdef9885badd9bee ) and raygui ( https://github.com/raysan5/raygui/commit/12fc56e5e1fe0888a4c73b98890914ca3806a8b4 )
+	* Linux (Cross): changed host OS (Ubuntu 22.04 LTS) and cross compiler version
 
 2023-08-10  vaiorabbit  <http://twitter.com/vaiorabbit>
 
