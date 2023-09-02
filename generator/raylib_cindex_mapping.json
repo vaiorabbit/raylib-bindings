@@ -84,6 +84,8 @@
     , "GuiStyleProp" : "TypeKind.RECORD"
     , "GuiState" : "TypeKind.ENUM"
     , "GuiTextAlignment" : "TypeKind.ENUM"
+    , "GuiTextAlignmentVertical" : "TypeKind.ENUM"
+    , "GuiTextWrapMode" : "TypeKind.ENUM"
     , "GuiControl" : "TypeKind.ENUM"
     , "GuiControlProperty" : "TypeKind.ENUM"
     , "GuiDefaultProperty" : "TypeKind.ENUM"

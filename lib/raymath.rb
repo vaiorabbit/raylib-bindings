@@ -398,6 +398,20 @@ module Raylib
       #   @return [Vector3]
       [:Vector3Normalize, :Vector3Normalize, [Vector3.by_value], Vector3.by_value],
 
+      # @!method Vector3Project(v1, v2)
+      #   Vector3Project
+      #   @param v1 [Vector3]
+      #   @param v2 [Vector3]
+      #   @return [Vector3]
+      [:Vector3Project, :Vector3Project, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
+      # @!method Vector3Reject(v1, v2)
+      #   Vector3Reject
+      #   @param v1 [Vector3]
+      #   @param v2 [Vector3]
+      #   @return [Vector3]
+      [:Vector3Reject, :Vector3Reject, [Vector3.by_value, Vector3.by_value], Vector3.by_value],
+
       # @!method Vector3OrthoNormalize(v1, v2)
       #   Vector3OrthoNormalize
       #   @param v1 [Vector3 *]

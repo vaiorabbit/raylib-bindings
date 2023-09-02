@@ -125,7 +125,8 @@ def generate_enum(ctx, indent = "", json_schema=None):
                 json_enum_value = [j for j in json_enum_values if j['name'] == enum[0]]
                 if json_enum_value:
                     break
-            enum_value_description = json_enum_value[0]['description'] if json_enum_value != None else ""
+
+            enum_value_description = json_enum_value[0]['description'] if (json_enum_value != None and len(json_enum_value) > 0) else ""
 
             enum_typedef_name = ctx.enum_constants[enum[0]].typedef_name
             if enum_typedef_name not in enum_typedefs.keys():

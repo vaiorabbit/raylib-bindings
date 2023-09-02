@@ -33,6 +33,18 @@ module Raylib
   TEXT_ALIGN_CENTER = 1
   TEXT_ALIGN_RIGHT = 2
 
+  # enum GuiTextAlignmentVertical
+  # Gui control text alignment vertical
+  TEXT_ALIGN_TOP = 0
+  TEXT_ALIGN_MIDDLE = 1
+  TEXT_ALIGN_BOTTOM = 2
+
+  # enum GuiTextWrapMode
+  # Gui control text wrap mode
+  TEXT_WRAP_NONE = 0
+  TEXT_WRAP_CHAR = 1
+  TEXT_WRAP_WORD = 2
+
   # enum GuiControl
   # Gui controls
   DEFAULT = 0
@@ -54,30 +66,31 @@ module Raylib
 
   # enum GuiControlProperty
   # Gui base properties for every control
-  BORDER_COLOR_NORMAL = 0
-  BASE_COLOR_NORMAL = 1
-  TEXT_COLOR_NORMAL = 2
-  BORDER_COLOR_FOCUSED = 3
-  BASE_COLOR_FOCUSED = 4
-  TEXT_COLOR_FOCUSED = 5
-  BORDER_COLOR_PRESSED = 6
-  BASE_COLOR_PRESSED = 7
-  TEXT_COLOR_PRESSED = 8
-  BORDER_COLOR_DISABLED = 9
-  BASE_COLOR_DISABLED = 10
-  TEXT_COLOR_DISABLED = 11
-  BORDER_WIDTH = 12
-  TEXT_PADDING = 13
-  TEXT_ALIGNMENT = 14
-  RESERVED = 15
+  BORDER_COLOR_NORMAL = 0   # Control border color in STATE_NORMAL
+  BASE_COLOR_NORMAL = 1     # Control base color in STATE_NORMAL
+  TEXT_COLOR_NORMAL = 2     # Control text color in STATE_NORMAL
+  BORDER_COLOR_FOCUSED = 3  # Control border color in STATE_FOCUSED
+  BASE_COLOR_FOCUSED = 4    # Control base color in STATE_FOCUSED
+  TEXT_COLOR_FOCUSED = 5    # Control text color in STATE_FOCUSED
+  BORDER_COLOR_PRESSED = 6  # Control border color in STATE_PRESSED
+  BASE_COLOR_PRESSED = 7    # Control base color in STATE_PRESSED
+  TEXT_COLOR_PRESSED = 8    # Control text color in STATE_PRESSED
+  BORDER_COLOR_DISABLED = 9 # Control border color in STATE_DISABLED
+  BASE_COLOR_DISABLED = 10  # Control base color in STATE_DISABLED
+  TEXT_COLOR_DISABLED = 11  # Control text color in STATE_DISABLED
+  BORDER_WIDTH = 12         # Control border size, 0 for no border
+  TEXT_PADDING = 13         # Control text padding, not considering border
+  TEXT_ALIGNMENT = 14       # Control text horizontal alignment inside control text bound (after border and padding)
 
   # enum GuiDefaultProperty
   # DEFAULT extended properties
-  TEXT_SIZE = 16         # Text size (glyphs max height)
-  TEXT_SPACING = 17      # Text spacing between glyphs
-  LINE_COLOR = 18        # Line control color
-  BACKGROUND_COLOR = 19  # Background color
-  TEXT_LINE_SPACING = 20 # Text spacing between lines
+  TEXT_SIZE = 16               # Text size (glyphs max height)
+  TEXT_SPACING = 17            # Text spacing between glyphs
+  LINE_COLOR = 18              # Line control color
+  BACKGROUND_COLOR = 19        # Background color
+  TEXT_LINE_SPACING = 20       # Text spacing between lines
+  TEXT_ALIGNMENT_VERTICAL = 21 # Text vertical alignment inside text bounds (after border and padding)
+  TEXT_WRAP_MODE = 22          # Text wrap-mode inside text bounds
 
   # enum GuiToggleProperty
   # Toggle/ToggleGroup
@@ -117,12 +130,7 @@ module Raylib
 
   # enum GuiTextBoxProperty
   # TextBox/TextBoxMulti/ValueBox/Spinner
-  TEXT_INNER_PADDING = 16      # TextBox/TextBoxMulti/ValueBox/Spinner inner text padding
-  TEXT_LINES_SPACING = 17      # TextBoxMulti lines separation
-  TEXT_ALIGNMENT_VERTICAL = 18 # TextBoxMulti vertical alignment: 0-CENTERED, 1-UP, 2-DOWN
-  TEXT_MULTILINE = 19          # TextBox supports multiple lines
-  TEXT_WRAP_MODE = 20          # TextBox wrap mode for multiline: 0-NO_WRAP, 1-CHAR_WRAP, 2-WORD_WRAP
-  TEXT_READONLY = 21           # TextBox is readonly, no editable
+  TEXT_READONLY = 16 # TextBox in read-only mode: 0-text editable, 1-text no-editable
 
   # enum GuiSpinnerProperty
   # Spinner
@@ -408,6 +416,8 @@ module Raylib
 
   typedef :int, :GuiState
   typedef :int, :GuiTextAlignment
+  typedef :int, :GuiTextAlignmentVertical
+  typedef :int, :GuiTextWrapMode
   typedef :int, :GuiControl
   typedef :int, :GuiControlProperty
   typedef :int, :GuiDefaultProperty
@@ -426,12 +436,12 @@ module Raylib
 
   # Struct
 
-  # Style property
+  # NOTE: Used when exporting style as code for convenience
   class GuiStyleProp < FFI::Struct
     layout(
-      :controlId, :ushort,  
-      :propertyId, :ushort, 
-      :propertyValue, :uint,
+      :controlId, :ushort,  # Control identifier
+      :propertyId, :ushort, # Property identifier
+      :propertyValue, :int, # Property value
     )
     def controlId = self[:controlId]
     def controlId=(v) self[:controlId] = v end

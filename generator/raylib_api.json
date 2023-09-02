@@ -4545,6 +4545,17 @@
       ]
     },
     {
+      "name": "IsKeyPressedRepeat",
+      "description": "Check if a key has been pressed again (Only PLATFORM_DESKTOP)",
+      "returnType": "bool",
+      "params": [
+        {
+          "type": "int",
+          "name": "key"
+        }
+      ]
+    },
+    {
       "name": "IsKeyDown",
       "description": "Check if a key is being pressed",
       "returnType": "bool",
@@ -5167,6 +5178,52 @@
         {
           "type": "Vector2",
           "name": "endControlPos"
+        },
+        {
+          "type": "float",
+          "name": "thick"
+        },
+        {
+          "type": "Color",
+          "name": "color"
+        }
+      ]
+    },
+    {
+      "name": "DrawLineBSpline",
+      "description": "Draw a B-Spline line, minimum 4 points",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "Vector2 *",
+          "name": "points"
+        },
+        {
+          "type": "int",
+          "name": "pointCount"
+        },
+        {
+          "type": "float",
+          "name": "thick"
+        },
+        {
+          "type": "Color",
+          "name": "color"
+        }
+      ]
+    },
+    {
+      "name": "DrawLineCatmullRom",
+      "description": "Draw a Catmull Rom spline line, minimum 4 points",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "Vector2 *",
+          "name": "points"
+        },
+        {
+          "type": "int",
+          "name": "pointCount"
         },
         {
           "type": "float",
@@ -7979,7 +8036,7 @@
     },
     {
       "name": "LoadFontEx",
-      "description": "Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set",
+      "description": "Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont",
       "returnType": "Font",
       "params": [
         {
@@ -7992,11 +8049,11 @@
         },
         {
           "type": "int *",
-          "name": "fontChars"
+          "name": "codepoints"
         },
         {
           "type": "int",
-          "name": "glyphCount"
+          "name": "codepointCount"
         }
       ]
     },
@@ -8042,11 +8099,11 @@
         },
         {
           "type": "int *",
-          "name": "fontChars"
+          "name": "codepoints"
         },
         {
           "type": "int",
-          "name": "glyphCount"
+          "name": "codepointCount"
         }
       ]
     },
@@ -8080,11 +8137,11 @@
         },
         {
           "type": "int *",
-          "name": "fontChars"
+          "name": "codepoints"
         },
         {
           "type": "int",
-          "name": "glyphCount"
+          "name": "codepointCount"
         },
         {
           "type": "int",
@@ -8099,11 +8156,11 @@
       "params": [
         {
           "type": "const GlyphInfo *",
-          "name": "chars"
+          "name": "glyphs"
         },
         {
           "type": "Rectangle **",
-          "name": "recs"
+          "name": "glyphRecs"
         },
         {
           "type": "int",
@@ -8130,7 +8187,7 @@
       "params": [
         {
           "type": "GlyphInfo *",
-          "name": "chars"
+          "name": "glyphs"
         },
         {
           "type": "int",
@@ -8318,7 +8375,7 @@
         },
         {
           "type": "int",
-          "name": "count"
+          "name": "codepointCount"
         },
         {
           "type": "Vector2",

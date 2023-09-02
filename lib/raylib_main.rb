@@ -1959,6 +1959,12 @@ module Raylib
       #   @return [bool]
       [:IsKeyPressed, :IsKeyPressed, [:int], :bool],
 
+      # @!method IsKeyPressedRepeat(key)
+      #   IsKeyPressedRepeat : Check if a key has been pressed again (Only PLATFORM_DESKTOP)
+      #   @param key [int]
+      #   @return [bool]
+      [:IsKeyPressedRepeat, :IsKeyPressedRepeat, [:int], :bool],
+
       # @!method IsKeyDown(key)
       #   IsKeyDown : Check if a key is being pressed
       #   @param key [int]
@@ -2301,6 +2307,24 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawLineBezierCubic, :DrawLineBezierCubic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawLineBSpline(points, pointCount, thick, color)
+      #   DrawLineBSpline : Draw a B-Spline line, minimum 4 points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawLineBSpline, :DrawLineBSpline, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawLineCatmullRom(points, pointCount, thick, color)
+      #   DrawLineCatmullRom : Draw a Catmull Rom spline line, minimum 4 points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawLineCatmullRom, :DrawLineCatmullRom, [:pointer, :int, :float, Color.by_value], :void],
 
       # @!method DrawLineStrip(points, pointCount, color)
       #   DrawLineStrip : Draw lines sequence
@@ -3474,12 +3498,12 @@ module Raylib
       #   @return [Font]
       [:LoadFont, :LoadFont, [:pointer], Font.by_value],
 
-      # @!method LoadFontEx(fileName, fontSize, fontChars, glyphCount)
-      #   LoadFontEx : Load font from file with extended parameters, use NULL for fontChars and 0 for glyphCount to load the default character set
+      # @!method LoadFontEx(fileName, fontSize, codepoints, codepointCount)
+      #   LoadFontEx : Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
       #   @param fileName [const char *]
       #   @param fontSize [int]
-      #   @param fontChars [int *]
-      #   @param glyphCount [int]
+      #   @param codepoints [int *]
+      #   @param codepointCount [int]
       #   @return [Font]
       [:LoadFontEx, :LoadFontEx, [:pointer, :int, :pointer, :int], Font.by_value],
 
@@ -3491,14 +3515,14 @@ module Raylib
       #   @return [Font]
       [:LoadFontFromImage, :LoadFontFromImage, [Image.by_value, Color.by_value, :int], Font.by_value],
 
-      # @!method LoadFontFromMemory(fileType, fileData, dataSize, fontSize, fontChars, glyphCount)
+      # @!method LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount)
       #   LoadFontFromMemory : Load font from memory buffer, fileType refers to extension: i.e. '.ttf'
       #   @param fileType [const char *]
       #   @param fileData [const unsigned char *]
       #   @param dataSize [int]
       #   @param fontSize [int]
-      #   @param fontChars [int *]
-      #   @param glyphCount [int]
+      #   @param codepoints [int *]
+      #   @param codepointCount [int]
       #   @return [Font]
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
 
@@ -3508,21 +3532,21 @@ module Raylib
       #   @return [bool]
       [:IsFontReady, :IsFontReady, [Font.by_value], :bool],
 
-      # @!method LoadFontData(fileData, dataSize, fontSize, fontChars, glyphCount, type)
+      # @!method LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type)
       #   LoadFontData : Load font data for further use
       #   @param fileData [const unsigned char *]
       #   @param dataSize [int]
       #   @param fontSize [int]
-      #   @param fontChars [int *]
-      #   @param glyphCount [int]
+      #   @param codepoints [int *]
+      #   @param codepointCount [int]
       #   @param type [int]
       #   @return [GlyphInfo *]
       [:LoadFontData, :LoadFontData, [:pointer, :int, :int, :pointer, :int, :int], :pointer],
 
-      # @!method GenImageFontAtlas(chars, recs, glyphCount, fontSize, padding, packMethod)
+      # @!method GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod)
       #   GenImageFontAtlas : Generate image font atlas using chars info
-      #   @param chars [const GlyphInfo *]
-      #   @param recs [Rectangle **]
+      #   @param glyphs [const GlyphInfo *]
+      #   @param glyphRecs [Rectangle **]
       #   @param glyphCount [int]
       #   @param fontSize [int]
       #   @param padding [int]
@@ -3530,9 +3554,9 @@ module Raylib
       #   @return [Image]
       [:GenImageFontAtlas, :GenImageFontAtlas, [:pointer, :pointer, :int, :int, :int, :int], Image.by_value],
 
-      # @!method UnloadFontData(chars, glyphCount)
+      # @!method UnloadFontData(glyphs, glyphCount)
       #   UnloadFontData : Unload font chars info data (RAM)
-      #   @param chars [GlyphInfo *]
+      #   @param glyphs [GlyphInfo *]
       #   @param glyphCount [int]
       #   @return [void]
       [:UnloadFontData, :UnloadFontData, [:pointer, :int], :void],
@@ -3601,11 +3625,11 @@ module Raylib
       #   @return [void]
       [:DrawTextCodepoint, :DrawTextCodepoint, [Font.by_value, :int, Vector2.by_value, :float, Color.by_value], :void],
 
-      # @!method DrawTextCodepoints(font, codepoints, count, position, fontSize, spacing, tint)
+      # @!method DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint)
       #   DrawTextCodepoints : Draw multiple character (codepoint)
       #   @param font [Font]
       #   @param codepoints [const int *]
-      #   @param count [int]
+      #   @param codepointCount [int]
       #   @param position [Vector2]
       #   @param fontSize [float]
       #   @param spacing [float]

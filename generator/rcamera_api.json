@@ -37,6 +37,12 @@
       "description": ""
     },
     {
+      "name": "CAMERA_PAN_SPEED",
+      "type": "FLOAT",
+      "value": 0.2,
+      "description": ""
+    },
+    {
       "name": "CAMERA_MOUSE_MOVE_SENSITIVITY",
       "type": "FLOAT",
       "value": 0.003,
