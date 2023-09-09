@@ -47,7 +47,7 @@ if __FILE__ == $PROGRAM_NAME
     camera.projection = CAMERA_PERSPECTIVE
   }
   reset_camera.call
-  camera_mode = CAMERA_FREE
+  camera_mode = CAMERA_CUSTOM
   auto_rotate = false
 
   # Player (red cube) settings
@@ -68,9 +68,9 @@ if __FILE__ == $PROGRAM_NAME
     if IsKeyPressed(KEY_F1)
       auto_rotate = !auto_rotate
       reset_camera.call
-      camera_mode = auto_rotate ? CAMERA_ORBITAL : CAMERA_FREE
+      camera_mode = auto_rotate ? CAMERA_ORBITAL : CAMERA_CUSTOM
     end
-    UpdateCamera(camera.pointer, camera_mode)
+    UpdateCamera(camera.pointer, camera_mode) if auto_rotate
 
     # Calculate move direction
     move = Vector3.create(0, 0, 0)
