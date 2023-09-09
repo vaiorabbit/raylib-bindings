@@ -14,7 +14,7 @@ module Raylib
   RAYGUI_VERSION_MAJOR = 4
   RAYGUI_VERSION_MINOR = 0
   RAYGUI_VERSION_PATCH = 0
-  RAYGUI_VERSION = "4.0-dev"
+  RAYGUI_VERSION = "4.0"
   SCROLLBAR_LEFT_SIDE = 0
   SCROLLBAR_RIGHT_SIDE = 1
 
@@ -107,12 +107,12 @@ module Raylib
 
   # enum GuiScrollBarProperty
   # ScrollBar
-  ARROWS_SIZE = 16
-  ARROWS_VISIBLE = 17
-  SCROLL_SLIDER_PADDING = 18 # (SLIDERBAR, SLIDER_PADDING)
-  SCROLL_SLIDER_SIZE = 19
-  SCROLL_PADDING = 20
-  SCROLL_SPEED = 21
+  ARROWS_SIZE = 16           # ScrollBar arrows size
+  ARROWS_VISIBLE = 17        # ScrollBar arrows visible
+  SCROLL_SLIDER_PADDING = 18 # ScrollBar slider internal padding
+  SCROLL_SLIDER_SIZE = 19    # ScrollBar slider size
+  SCROLL_PADDING = 20        # ScrollBar scroll padding from arrows
+  SCROLL_SPEED = 21          # ScrollBar scrolling speed
 
   # enum GuiCheckBoxProperty
   # CheckBox
@@ -142,7 +142,7 @@ module Raylib
   LIST_ITEMS_HEIGHT = 16  # ListView items height
   LIST_ITEMS_SPACING = 17 # ListView items separation
   SCROLLBAR_WIDTH = 18    # ListView scrollbar size (usually width)
-  SCROLLBAR_SIDE = 19     # ListView scrollbar side (0-left, 1-right)
+  SCROLLBAR_SIDE = 19     # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
 
   # enum GuiColorPickerProperty
   # ColorPicker

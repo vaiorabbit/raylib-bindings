@@ -4162,8 +4162,8 @@
           "name": "fileName"
         },
         {
-          "type": "unsigned int *",
-          "name": "bytesRead"
+          "type": "int *",
+          "name": "dataSize"
         }
       ]
     },
@@ -4192,8 +4192,8 @@
           "name": "data"
         },
         {
-          "type": "unsigned int",
-          "name": "bytesToWrite"
+          "type": "int",
+          "name": "dataSize"
         }
       ]
     },
@@ -4207,8 +4207,8 @@
           "name": "data"
         },
         {
-          "type": "unsigned int",
-          "name": "size"
+          "type": "int",
+          "name": "dataSize"
         },
         {
           "type": "const char *",
@@ -6203,6 +6203,25 @@
         {
           "type": "int",
           "name": "headerSize"
+        }
+      ]
+    },
+    {
+      "name": "LoadImageSvg",
+      "description": "Load image from SVG file data or string with specified size",
+      "returnType": "Image",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "fileNameOrString"
+        },
+        {
+          "type": "int",
+          "name": "width"
+        },
+        {
+          "type": "int",
+          "name": "height"
         }
       ]
     },
@@ -10054,7 +10073,7 @@
           "name": "fileName"
         },
         {
-          "type": "unsigned int *",
+          "type": "int *",
           "name": "animCount"
         }
       ]
@@ -10099,8 +10118,8 @@
           "name": "animations"
         },
         {
-          "type": "unsigned int",
-          "name": "count"
+          "type": "int",
+          "name": "animCount"
         }
       ]
     },

@@ -1755,10 +1755,10 @@ module Raylib
       #   @return [void]
       [:SetSaveFileTextCallback, :SetSaveFileTextCallback, [:SaveFileTextCallback], :void],
 
-      # @!method LoadFileData(fileName, bytesRead)
+      # @!method LoadFileData(fileName, dataSize)
       #   LoadFileData : Load file data as byte array (read)
       #   @param fileName [const char *]
-      #   @param bytesRead [unsigned int *]
+      #   @param dataSize [int *]
       #   @return [unsigned char *]
       [:LoadFileData, :LoadFileData, [:pointer, :pointer], :pointer],
 
@@ -1768,21 +1768,21 @@ module Raylib
       #   @return [void]
       [:UnloadFileData, :UnloadFileData, [:pointer], :void],
 
-      # @!method SaveFileData(fileName, data, bytesToWrite)
+      # @!method SaveFileData(fileName, data, dataSize)
       #   SaveFileData : Save data to file from byte array (write), returns true on success
       #   @param fileName [const char *]
       #   @param data [void *]
-      #   @param bytesToWrite [unsigned int]
+      #   @param dataSize [int]
       #   @return [bool]
-      [:SaveFileData, :SaveFileData, [:pointer, :pointer, :uint], :bool],
+      [:SaveFileData, :SaveFileData, [:pointer, :pointer, :int], :bool],
 
-      # @!method ExportDataAsCode(data, size, fileName)
+      # @!method ExportDataAsCode(data, dataSize, fileName)
       #   ExportDataAsCode : Export data to code (.h), returns true on success
       #   @param data [const unsigned char *]
-      #   @param size [unsigned int]
+      #   @param dataSize [int]
       #   @param fileName [const char *]
       #   @return [bool]
-      [:ExportDataAsCode, :ExportDataAsCode, [:pointer, :uint, :pointer], :bool],
+      [:ExportDataAsCode, :ExportDataAsCode, [:pointer, :int, :pointer], :bool],
 
       # @!method LoadFileText(fileName)
       #   LoadFileText : Load text data from file (read), returns a '\0' terminated string
@@ -2701,6 +2701,14 @@ module Raylib
       #   @param headerSize [int]
       #   @return [Image]
       [:LoadImageRaw, :LoadImageRaw, [:pointer, :int, :int, :int, :int], Image.by_value],
+
+      # @!method LoadImageSvg(fileNameOrString, width, height)
+      #   LoadImageSvg : Load image from SVG file data or string with specified size
+      #   @param fileNameOrString [const char *]
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [Image]
+      [:LoadImageSvg, :LoadImageSvg, [:pointer, :int, :int], Image.by_value],
 
       # @!method LoadImageAnim(fileName, frames)
       #   LoadImageAnim : Load image sequence from file (frames appended to image.data)
@@ -4342,7 +4350,7 @@ module Raylib
       # @!method LoadModelAnimations(fileName, animCount)
       #   LoadModelAnimations : Load model animations from file
       #   @param fileName [const char *]
-      #   @param animCount [unsigned int *]
+      #   @param animCount [int *]
       #   @return [ModelAnimation *]
       [:LoadModelAnimations, :LoadModelAnimations, [:pointer, :pointer], :pointer],
 
@@ -4360,12 +4368,12 @@ module Raylib
       #   @return [void]
       [:UnloadModelAnimation, :UnloadModelAnimation, [ModelAnimation.by_value], :void],
 
-      # @!method UnloadModelAnimations(animations, count)
+      # @!method UnloadModelAnimations(animations, animCount)
       #   UnloadModelAnimations : Unload animation array data
       #   @param animations [ModelAnimation *]
-      #   @param count [unsigned int]
+      #   @param animCount [int]
       #   @return [void]
-      [:UnloadModelAnimations, :UnloadModelAnimations, [:pointer, :uint], :void],
+      [:UnloadModelAnimations, :UnloadModelAnimations, [:pointer, :int], :void],
 
       # @!method IsModelAnimationValid(model, anim)
       #   IsModelAnimationValid : Check model animation skeleton match

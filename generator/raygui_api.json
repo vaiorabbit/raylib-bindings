@@ -27,7 +27,7 @@
     {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "4.0-dev",
+      "value": "4.0",
       "description": ""
     },
     {
@@ -701,32 +701,32 @@
         {
           "name": "ARROWS_SIZE",
           "value": 16,
-          "description": ""
+          "description": "ScrollBar arrows size"
         },
         {
           "name": "ARROWS_VISIBLE",
           "value": 17,
-          "description": ""
+          "description": "ScrollBar arrows visible"
         },
         {
           "name": "SCROLL_SLIDER_PADDING",
           "value": 18,
-          "description": "(SLIDERBAR, SLIDER_PADDING)"
+          "description": "ScrollBar slider internal padding"
         },
         {
           "name": "SCROLL_SLIDER_SIZE",
           "value": 19,
-          "description": ""
+          "description": "ScrollBar slider size"
         },
         {
           "name": "SCROLL_PADDING",
           "value": 20,
-          "description": ""
+          "description": "ScrollBar scroll padding from arrows"
         },
         {
           "name": "SCROLL_SPEED",
           "value": 21,
-          "description": ""
+          "description": "ScrollBar scrolling speed"
         }
       ]
     },
@@ -822,7 +822,7 @@
         {
           "name": "SCROLLBAR_SIDE",
           "value": 19,
-          "description": "ListView scrollbar side (0-left, 1-right)"
+          "description": "ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)"
         }
       ]
     },

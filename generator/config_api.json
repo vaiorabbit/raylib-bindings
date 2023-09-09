@@ -319,12 +319,6 @@
       "description": ""
     },
     {
-      "name": "SUPPORT_FILEFORMAT_HDR",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
       "name": "SUPPORT_IMAGE_EXPORT",
       "type": "INT",
       "value": 1,

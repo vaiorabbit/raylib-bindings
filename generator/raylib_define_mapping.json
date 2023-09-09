@@ -187,7 +187,6 @@
     , "SUPPORT_FILEFORMAT_GIF" : "1"
     , "SUPPORT_FILEFORMAT_QOI" : "1"
     , "SUPPORT_FILEFORMAT_DDS" : "1"
-    , "SUPPORT_FILEFORMAT_HDR" : "1"
     , "SUPPORT_IMAGE_EXPORT" : "1"
     , "SUPPORT_IMAGE_GENERATION" : "1"
     , "SUPPORT_IMAGE_MANIPULATION" : "1"
@@ -224,7 +223,7 @@
     , "RAYGUI_VERSION_MAJOR" : "4"
     , "RAYGUI_VERSION_MINOR" : "0"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"4.0-dev\""
+    , "RAYGUI_VERSION" : "\"4.0\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null
