@@ -475,7 +475,7 @@
         {
           "name": "SLIDER",
           "value": 4,
-          "description": "Used also for: SLIDERBAR"
+          "description": "Used also for: SLIDERBAR, TOGGLESLIDER"
         },
         {
           "name": "PROGRESSBAR",

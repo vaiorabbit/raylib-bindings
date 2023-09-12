@@ -51,7 +51,7 @@ module Raylib
   LABEL = 1        # Used also for: LABELBUTTON
   BUTTON = 2
   TOGGLE = 3       # Used also for: TOGGLEGROUP
-  SLIDER = 4       # Used also for: SLIDERBAR
+  SLIDER = 4       # Used also for: SLIDERBAR, TOGGLESLIDER
   PROGRESSBAR = 5
   CHECKBOX = 6
   COMBOBOX = 7
