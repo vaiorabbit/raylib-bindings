@@ -26,11 +26,11 @@ if __FILE__ == $PROGRAM_NAME
 
       # Draw GUI controls
       #------------------------------------------------------------------------------
-      startAngle = RGuiSliderBar(Rectangle.create(600, 40, 120, 20), "StartAngle", nil, startAngle, 0, 720)
-      endAngle = RGuiSliderBar(Rectangle.create(600, 70, 120, 20), "EndAngle", nil, endAngle, 0, 720)
+      startAngle, result = RGuiSliderBar(Rectangle.create(600, 40, 120, 20), "StartAngle", nil, startAngle, 0, 720)
+      endAngle, result = RGuiSliderBar(Rectangle.create(600, 70, 120, 20), "EndAngle", nil, endAngle, 0, 720)
 
-      outerRadius = RGuiSliderBar(Rectangle.create(600, 140, 120, 20), "Radius", nil, outerRadius, 0, 200)
-      segments = RGuiSliderBar(Rectangle.create(600, 170, 120, 20), "Segments", nil, segments, 0, 100)
+      outerRadius, result = RGuiSliderBar(Rectangle.create(600, 140, 120, 20), "Radius", nil, outerRadius, 0, 200)
+      segments, result = RGuiSliderBar(Rectangle.create(600, 170, 120, 20), "Segments", nil, segments, 0, 100)
       #------------------------------------------------------------------------------
 
       minSegments = ((endAngle - startAngle) / 90).ceil.to_i
