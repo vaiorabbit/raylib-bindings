@@ -48,4 +48,38 @@ module Raylib
     return active_buf.get(:int, 0), result
   end
 
+  def RGuiListView(bounds, text, scrollIndex, active)
+    scrollIndex_buf = FFI::MemoryPointer.new(:int, 1)
+    scrollIndex_buf.put(:int, 0, scrollIndex)
+    active_buf = FFI::MemoryPointer.new(:int, 1)
+    active_buf.put(:int, 0, active)
+    result = GuiListView(bounds, text, scrollIndex_buf, active_buf)
+    return scrollIndex_buf.get(:int, 0), active_buf.get(:int, 0), result
+  end
+
+  def RGuiListViewEx(bounds, text, count, scrollIndex, active, focus)
+    scrollIndex_buf = FFI::MemoryPointer.new(:int, 1)
+    scrollIndex_buf.put(:int, 0, scrollIndex)
+    active_buf = FFI::MemoryPointer.new(:int, 1)
+    active_buf.put(:int, 0, active)
+    focus_buf = FFI::MemoryPointer.new(:int, 1)
+    focus_buf.put(:int, 0, focus)
+    result = GuiListViewEx(bounds, text, count, scrollIndex_buf, active_buf, focus_buf)
+    return scrollIndex_buf.get(:int, 0), active_buf.get(:int, 0), focus_buf.get(:int, 0), result
+  end
+
+  def RGuiToggleGroup(bounds, text, active)
+    active_buf = FFI::MemoryPointer.new(:int, 1)
+    active_buf.put(:int, 0, active)
+    result = GuiToggleGroup(bounds, text, active_buf)
+    return active_buf.get(:int, 0), result
+  end
+
+  def RGuiToggleSlider(bounds, text, active)
+    active_buf = FFI::MemoryPointer.new(:int, 1)
+    active_buf.put(:int, 0, active)
+    result = GuiToggleSlider(bounds, text, active_buf)
+    return active_buf.get(:int, 0), result
+  end
+
 end

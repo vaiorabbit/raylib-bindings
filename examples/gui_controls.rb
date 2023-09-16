@@ -22,10 +22,21 @@ if __FILE__ == $PROGRAM_NAME
   textBoxText = "Text box"
   textBoxEditMode = false
 
+  listViewScrollIndex = 0
+  listViewActive = -1
+
+  listViewExScrollIndex = 0
+  listViewExActive = 2
+  listViewExFocus = -1
+  listViewExList = ["This", "is", "a", "list view", "with", "disable", "elements", "amazing!"].pack("p*")
+
   forceSquaredChecked = false
 
   visualStyleActive = 0
   prevVisualStyleActive = 0
+
+  toggleGroupActive = 0
+  toggleSliderActive = 0
 
   #----------------------------------------------------------------------------------
 
@@ -112,6 +123,15 @@ if __FILE__ == $PROGRAM_NAME
       dropDown000EditMode = !dropDown000EditMode if result != 0
 
       # Second GUI column
+
+      listViewScrollIndex, listViewActive, result = RGuiListView(Rectangle.create(165, 25, 140, 124), "Charmander;Bulbasaur;#18#Squirtel;Pikachu;Eevee;Pidgey", listViewScrollIndex, listViewActive)
+      listViewExScrollIndex, listViewExActive, listViewExFocus, result = RGuiListViewEx(Rectangle.create(165, 162, 140, 184), listViewExList, 8, listViewExScrollIndex, listViewExActive, listViewExFocus)
+
+      toggleGroupActive, result = RGuiToggleGroup(Rectangle.create(165, 360, 140, 24), "#1#ONE\n#3#TWO\n#8#THREE\n#23#", toggleGroupActive)
+      GuiSetStyle(SLIDER, SLIDER_PADDING, 2)
+      toggleSliderActive, result = RGuiToggleSlider(Rectangle.create(165, 480, 140, 30), "ON;OFF", toggleSliderActive)
+      GuiSetStyle(SLIDER, SLIDER_PADDING, 0)
+
 
       # Third GUI column
 
