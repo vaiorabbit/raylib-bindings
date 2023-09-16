@@ -2,6 +2,7 @@
 
 	* lib/raygui_helper.rb: Added more APIs
 	* example/gui_controls.rb: Added
+	* example/shaders_basic_lighting.rb: Added
 
 2023-09-12  vaiorabbit  <http://twitter.com/vaiorabbit>
 
