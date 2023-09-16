@@ -6,10 +6,24 @@ require 'ffi'
 
 module Raylib
 
+  def RGuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)
+    value_buf = FFI::MemoryPointer.new(:float, 1)
+    value_buf.put_float(0, value)
+    result = GuiSlider(bounds, textLeft, textRight, value_buf, minValue, maxValue)
+    return value_buf.read_float, result
+  end
+
   def RGuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)
     value_buf = FFI::MemoryPointer.new(:float, 1)
     value_buf.put_float(0, value)
     result = GuiSliderBar(bounds, textLeft, textRight, value_buf, minValue, maxValue)
+    return value_buf.read_float, result
+  end
+
+  def RGuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)
+    value_buf = FFI::MemoryPointer.new(:float, 1)
+    value_buf.put_float(0, value)
+    result = GuiProgressBar(bounds, textLeft, textRight, value_buf, minValue, maxValue)
     return value_buf.read_float, result
   end
 
@@ -80,6 +94,20 @@ module Raylib
     active_buf.put(:int, 0, active)
     result = GuiToggleSlider(bounds, text, active_buf)
     return active_buf.get(:int, 0), result
+  end
+
+  def RGuiColorBarAlpha(bounds, text, alpha)
+    alpha_buf = FFI::MemoryPointer.new(:float, 1)
+    alpha_buf.put_float(0, alpha)
+    result = GuiColorBarAlpha(bounds, text, alpha_buf)
+    return alpha_buf.read_float, result
+  end
+
+  def RGuiColorBarHue(bounds, text, value)
+    value_buf = FFI::MemoryPointer.new(:float, 1)
+    value_buf.put_float(0, value)
+    result = GuiColorBarHue(bounds, text, value_buf)
+    return value_buf.read_float, result
   end
 
 end

@@ -19,6 +19,14 @@ module Raylib
       self[:a] = a
       self
     end
+
+    def copy(other)
+      self[:r] = other.r
+      self[:g] = other.g
+      self[:b] = other.b
+      self[:a] = other.a
+      self
+    end
   end
 
   LIGHTGRAY  = Color.from_u8(200, 200, 200, 255)

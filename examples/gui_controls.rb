@@ -19,8 +19,13 @@ if __FILE__ == $PROGRAM_NAME
   valueBox002Value = 0
   valueBoxEditMode = false
 
-  textBoxText = "Text box"
+  textBoxText = FFI::MemoryPointer.new(:char, 64)
+  textBoxText.write_string("Text box")
   textBoxEditMode = false
+
+  textBoxMultiText = FFI::MemoryPointer.new(:char, 1024)
+  textBoxMultiText.write_string("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+  textBoxMultiEditMode = false
 
   listViewScrollIndex = 0
   listViewActive = -1
@@ -30,7 +35,15 @@ if __FILE__ == $PROGRAM_NAME
   listViewExFocus = -1
   listViewExList = ["This", "is", "a", "list view", "with", "disable", "elements", "amazing!"].pack("p*")
 
+  colorPickerValue = Color.new.copy(RED)
+
+  sliderValue = 50.0
+  sliderBarValue = 60
+  progressValue = 0.1
+
   forceSquaredChecked = false
+
+  alphaValue = 0.5
 
   visualStyleActive = 0
   prevVisualStyleActive = 0
@@ -38,14 +51,18 @@ if __FILE__ == $PROGRAM_NAME
   toggleGroupActive = 0
   toggleSliderActive = 0
 
+  viewScroll = Vector2.new
+
   #----------------------------------------------------------------------------------
 
   exitWindow = false
   showMessageBox = false
 
-  textInput = " " * 256
-  textInputFileName = " " * 256
+  textInput = FFI::MemoryPointer.new(:char, 256)
+  textInputFileName = FFI::MemoryPointer.new(:char, 256)
   showTextInputBox = false
+
+  alpha = 1.0
 
   SetTargetFPS(60)
 
@@ -56,6 +73,22 @@ if __FILE__ == $PROGRAM_NAME
     exitWindow = WindowShouldClose()
 
     showMessageBox = !showMessageBox if IsKeyPressed(KEY_ESCAPE)
+
+    showTextInputBox = true if (IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_LEFT_SUPER)) && IsKeyPressed(KEY_S)
+
+=begin
+    alpha -= 0.002
+    alpha = 0.0 if alpha < 0.0
+    alpha = 1.0 if IsKeyPressed(KEY_SPACE)
+    GuiSetAlpha(alpha)
+=end
+
+    if IsKeyPressed(KEY_LEFT)
+      progressValue -= 0.1
+    elsif IsKeyPressed(KEY_RIGHT)
+      progressValue += 0.1
+    end
+    progressValue.clamp(0.0, 1.0)
 
     if visualStyleActive != prevVisualStyleActive
       GuiLoadStyleDefault()
@@ -93,11 +126,12 @@ if __FILE__ == $PROGRAM_NAME
       valueBoxEditMode = !valueBoxEditMode if result != 0
 
       GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, TEXT_ALIGN_LEFT)
-      textBoxEditMode != textBoxEditMode if GuiTextBox(Rectangle.create(25, 215, 125, 30), textBoxText, 64, textBoxEditMode) != 0
+      result = GuiTextBox(Rectangle.create(25, 215, 125, 30), textBoxText, textBoxText.size, textBoxEditMode)
+      textBoxEditMode = !textBoxEditMode if result != 0
 
-      GuiSetStyle(TEXTBOX, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER)
+      GuiSetStyle(BUTTON, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER);
 
-      showTextInputBox = true if GuiButton(Rectangle.create(25, 255, 125, 30), GuiIconText(ICON_FILE_SAVE, "Save File"))
+      showTextInputBox = true if GuiButton(Rectangle.create(25, 255, 125, 30), GuiIconText(ICON_FILE_SAVE, "Save File")) != 0
 
       GuiGroupBox(Rectangle.create(25, 310, 125, 150), "STATES")
       GuiSetState(STATE_NORMAL)
@@ -132,8 +166,35 @@ if __FILE__ == $PROGRAM_NAME
       toggleSliderActive, result = RGuiToggleSlider(Rectangle.create(165, 480, 140, 30), "ON;OFF", toggleSliderActive)
       GuiSetStyle(SLIDER, SLIDER_PADDING, 0)
 
-
       # Third GUI column
+      GuiPanel(Rectangle.create(320, 25, 225, 140), "Panel Info")
+      GuiColorPicker(Rectangle.create(320, 185, 196, 192), nil, colorPickerValue)
+
+      sliderValue, result = RGuiSlider(Rectangle.create(355, 400, 165, 20), "TEST", TextFormat("%2.2f", :float, sliderValue), sliderValue, -50, 100)
+      sliderBarValue, result = RGuiSliderBar(Rectangle.create(320, 430, 200, 20), nil, TextFormat("%i", :int, sliderBarValue.to_i), sliderBarValue, 0, 100)
+
+      progressValue, result =  RGuiProgressBar(Rectangle.create(320, 460, 200, 20), nil, TextFormat("%i%%", :int, (progressValue*100).to_i), progressValue, 0.0, 1.0)
+      GuiEnable()
+
+      view = Rectangle.new
+      GuiScrollPanel(Rectangle.create(560, 25, 102, 354), nil, Rectangle.create(560, 25, 300, 1200), viewScroll, view)
+
+      mouseCell = Vector2.new
+      GuiGrid(Rectangle.create(560, 25 + 180 + 195, 100, 120), nil, 20, 3, mouseCell)
+
+      alphaValue, result = RGuiColorBarAlpha(Rectangle.create(320, 490, 200, 30), nil, alphaValue)
+
+      GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_TOP)
+      GuiSetStyle(DEFAULT, TEXT_WRAP_MODE, TEXT_WRAP_WORD)
+      result = GuiTextBox(Rectangle.create(678, 25, 258, 492), textBoxMultiText, textBoxMultiText.size, textBoxMultiEditMode)
+      textBoxMultiEditMode = !textBoxMultiEditMode if result != 0
+
+      GuiSetStyle(DEFAULT, TEXT_WRAP_MODE, TEXT_WRAP_NONE)
+      GuiSetStyle(DEFAULT, TEXT_ALIGNMENT_VERTICAL, TEXT_ALIGN_MIDDLE)
+
+      GuiSetStyle(DEFAULT, TEXT_ALIGNMENT, TEXT_ALIGN_LEFT)
+      GuiStatusBar(Rectangle.create(0, GetScreenHeight().to_f - 20, GetScreenWidth().to_f, 20), "This is a status bar")
+      GuiSetStyle(DEFAULT, TEXT_ALIGNMENT, TEXT_ALIGN_CENTER)
 
       if showMessageBox
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8))
@@ -142,7 +203,20 @@ if __FILE__ == $PROGRAM_NAME
         if (result == 0) || (result == 2)
           showMessageBox = false
         elsif (result == 1)
-          exitWindow = true;
+          exitWindow = true
+        end
+      end
+
+      if showTextInputBox
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.8))
+        result = GuiTextInputBox(Rectangle.create(GetScreenWidth().to_f/2 - 120, GetScreenHeight().to_f/2 - 60, 240, 140), GuiIconText(ICON_FILE_SAVE, "Save file as..."), "Introduce output file name:", "Ok;Cancel", textInput, 255, nil)
+
+        if result == 1
+          textInputFileName.write_string(textInput.read_string)
+        end
+        if (result == 0) || (result == 1) || (result == 2)
+          showTextInputBox = false
+          textInput.clear
         end
       end
 
