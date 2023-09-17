@@ -3,69 +3,62 @@ require_relative 'util/resource_path'
 
 MAX_LIGHTS = 4
 
-class Light < FFI::Struct
-  layout(
-    :type, :int,
-    :enabled, :bool,
-    :position, Vector3,
-    :target, Vector3,
-    :color, Color,
-    :attenuation, :float,
-
-    # Shader locations
-    :enabledLoc, :int,
-    :typeLoc, :int,
-    :positionLoc, :int,
-    :targetLoc, :int,
-    :colorLoc, :int,
-    :attenuationLoc, :int,
-  )
-end
-
 # enum LightTYpe
 LIGHT_DIRECTIONAL = 0
 LIGHT_POINT = 1
 
 $lightsCount = 0
 
+class Light
+  attr_accessor :enabled, :type, :position, :target, :color
+  attr_accessor :enabledLoc, :typeLoc, :positionLoc, :targetLoc, :colorLoc
+  attr_accessor :enabled_buf, :type_buf
+
+  def initialize(type, position, target, color, shader)
+    @enabled = true
+    @type = type
+    @position = position
+    @target = target
+    @color = color
+
+    # Shader locations
+    @enabledLoc = GetShaderLocation(shader, "lights[#{$lightsCount}].enabled")
+    @typeLoc = GetShaderLocation(shader, "lights[#{$lightsCount}].type")
+    @positionLoc = GetShaderLocation(shader, "lights[#{$lightsCount}].position")
+    @targetLoc = GetShaderLocation(shader, "lights[#{$lightsCount}].target")
+    @colorLoc = GetShaderLocation(shader, "lights[#{$lightsCount}].color")
+
+    # Buffers for pointer handling
+    @enabled_buf = FFI::MemoryPointer.new(:bool, 1)
+    @type_buf = FFI::MemoryPointer.new(:int, 1)
+  end
+end
+
 def UpdateLightValues(shader, light)
   # Send to shader light enabled state and type
-  light_enabled_buf = FFI::MemoryPointer.new(:bool, 1)
-  light_enabled_buf.write(:bool, light[:enabled])
-  SetShaderValue(shader, light[:enabledLoc], light_enabled_buf, SHADER_UNIFORM_INT)
-  light_type_buf = FFI::MemoryPointer.new(:int, 1)
-  light_type_buf.write(:int, light[:type])
-  SetShaderValue(shader, light[:typeLoc], light_type_buf, SHADER_UNIFORM_INT)
+  light.enabled_buf.write(:bool, light.enabled)
+  SetShaderValue(shader, light.enabledLoc, light.enabled_buf, SHADER_UNIFORM_INT)
+  light.type_buf.write(:int, light.type)
+  SetShaderValue(shader, light.typeLoc, light.type_buf, SHADER_UNIFORM_INT)
 
   # Send to shader light position values
-  position = [light[:position].x, light[:position].y, light[:position].z].pack('f3')
-  SetShaderValue(shader, light[:positionLoc], position, SHADER_UNIFORM_VEC3)
+  position = [light.position.x, light.position.y, light.position.z].pack('f3')
+  SetShaderValue(shader, light.positionLoc, position, SHADER_UNIFORM_VEC3)
 
   # Send to shader light target position values
-  target = [light[:target].x, light[:target].y, light[:target].z].pack('f3')
-  SetShaderValue(shader, light[:targetLoc], target, SHADER_UNIFORM_VEC3)
+  target = [light.target.x, light.target.y, light.target.z].pack('f3')
+  SetShaderValue(shader, light.targetLoc, target, SHADER_UNIFORM_VEC3)
 
   # Send to shader light color values
-  color = [light[:color].r/255.0, light[:color].g/255.0, light[:color].b/255.0, light[:color].a/255.0].pack('f4')
-  SetShaderValue(shader, light[:colorLoc], color, SHADER_UNIFORM_VEC4)
+  color = [light.color.r/255.0, light.color.g/255.0, light.color.b/255.0, light.color.a/255.0].pack('f4')
+  SetShaderValue(shader, light.colorLoc, color, SHADER_UNIFORM_VEC4)
 end
 
 def CreateLight(type, position, target, color, shader)
-  light = Light.new
+  light = nil
 
   if $lightsCount < MAX_LIGHTS
-    light[:enabled] = true
-    light[:type] = type
-    light[:position] = position
-    light[:target] = target
-    light[:color] = color
-
-    light[:enabledLoc] = GetShaderLocation(shader, "lights[#{$lightsCount}].enabled")
-    light[:typeLoc] = GetShaderLocation(shader, "lights[#{$lightsCount}].type")
-    light[:positionLoc] = GetShaderLocation(shader, "lights[#{$lightsCount}].position")
-    light[:targetLoc] = GetShaderLocation(shader, "lights[#{$lightsCount}].target")
-    light[:colorLoc] = GetShaderLocation(shader, "lights[#{$lightsCount}].color")
-
+    light = Light.new(type, position, target, color, shader)
     UpdateLightValues(shader, light)
     $lightsCount += 1
   end
@@ -131,10 +124,10 @@ if __FILE__ == $PROGRAM_NAME
     UpdateCamera(camera.pointer, CAMERA_ORBITAL)
 
     # Check key inputs to enable/disable lights
-    lights[0][:enabled] = !lights[0][:enabled] if IsKeyPressed(KEY_Y)
-    lights[1][:enabled] = !lights[1][:enabled] if IsKeyPressed(KEY_R)
-    lights[2][:enabled] = !lights[2][:enabled] if IsKeyPressed(KEY_G)
-    lights[3][:enabled] = !lights[3][:enabled] if IsKeyPressed(KEY_B)
+    lights[0].enabled = !lights[0].enabled if IsKeyPressed(KEY_Y)
+    lights[1].enabled = !lights[1].enabled if IsKeyPressed(KEY_R)
+    lights[2].enabled = !lights[2].enabled if IsKeyPressed(KEY_G)
+    lights[3].enabled = !lights[3].enabled if IsKeyPressed(KEY_B)
 
     lights.each do |light|
       UpdateLightValues(shader, light)
@@ -146,10 +139,10 @@ if __FILE__ == $PROGRAM_NAME
         DrawModel(model, Vector3Zero(), 1.0, WHITE)
         DrawModel(cube, Vector3Zero(), 1.0, WHITE)
         lights.each do |light|
-          if light[:enabled]
-            DrawSphereEx(light[:position], 0.2, 8, 8, light[:color])
+          if light.enabled
+            DrawSphereEx(light.position, 0.2, 8, 8, light.color)
           else
-            DrawSphereWires(light[:position], 0.2, 8, 8, ColorAlpha(light[:color], 0.3))
+            DrawSphereWires(light.position, 0.2, 8, 8, ColorAlpha(light.color, 0.3))
           end
         end
       EndMode3D()
