@@ -1,3 +1,7 @@
+2023-09-30  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Use Ruby-FFI 1.16 ( https://github.com/ffi/ffi )
+
 2023-09-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* example/raylib_with_imgui.rb : Added
