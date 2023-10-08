@@ -7,10 +7,16 @@
       "description": ""
     },
     {
+      "name": "__declspec(x)",
+      "type": "MACRO",
+      "value": "__attribute__((x))",
+      "description": ""
+    },
+    {
       "name": "RLAPI",
-      "type": "GUARD",
-      "value": "",
-      "description": "Functions defined as 'extern' by default (implicit specifiers)"
+      "type": "UNKNOWN",
+      "value": "__declspec(dllexport)",
+      "description": "We are building the library as a Win32 shared library (.dll)"
     },
     {
       "name": "CAMERA_CULL_DISTANCE_NEAR",

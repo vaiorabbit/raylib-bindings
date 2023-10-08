@@ -407,7 +407,7 @@ module Raylib
   typedef :int, :NPatchLayout
   callback :TraceLogCallback, [:int, :pointer, :int], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
-  callback :SaveFileDataCallback, [:pointer, :pointer, :uint], :bool
+  callback :SaveFileDataCallback, [:pointer, :pointer, :int], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
   callback :SaveFileTextCallback, [:pointer, :pointer], :bool
   callback :AudioCallback, [:pointer, :uint], :void
@@ -1236,6 +1236,13 @@ module Raylib
       #   @return [void]
       [:SetWindowMinSize, :SetWindowMinSize, [:int, :int], :void],
 
+      # @!method SetWindowMaxSize(width, height)
+      #   SetWindowMaxSize : Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
+      [:SetWindowMaxSize, :SetWindowMaxSize, [:int, :int], :void],
+
       # @!method SetWindowSize(width, height)
       #   SetWindowSize : Set window dimensions
       #   @param width [int]
@@ -1864,7 +1871,7 @@ module Raylib
       [:GetWorkingDirectory, :GetWorkingDirectory, [], :pointer],
 
       # @!method GetApplicationDirectory()
-      #   GetApplicationDirectory : Get the directory if the running application (uses static string)
+      #   GetApplicationDirectory : Get the directory of the running application (uses static string)
       #   @return [const char *]
       [:GetApplicationDirectory, :GetApplicationDirectory, [], :pointer],
 
@@ -2179,9 +2186,9 @@ module Raylib
 
       # @!method IsGestureDetected(gesture)
       #   IsGestureDetected : Check if a gesture have been detected
-      #   @param gesture [int]
+      #   @param gesture [unsigned int]
       #   @return [bool]
-      [:IsGestureDetected, :IsGestureDetected, [:int], :bool],
+      [:IsGestureDetected, :IsGestureDetected, [:uint], :bool],
 
       # @!method GetGestureDetected()
       #   GetGestureDetected : Get latest detected gesture
