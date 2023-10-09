@@ -1,0 +1,14 @@
+name: Build Linux/macOS/Windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-build-linux:
+    uses: ./.github/workflows/linux.yml
+  call-build-macos:
+    needs: call-build-linux
+    uses: ./.github/workflows/macos.yml
+  call-build-windows:
+    needs: call-build-macos
+    uses: ./.github/workflows/windows.yml
