@@ -110,6 +110,20 @@ def generate_macrodefine(ctx, indent = "", json_schema=None):
             else:
                 print(indent + "%s = %s" % (macro_name, macro_value[0]), file = sys.stdout)
 
+def generate_macrodefine_mruby(ctx, indent = "", json_schema=None):
+    for macro_name, macro_value in ctx.decl_macros.items():
+        if macro_value != None:
+            mrbval = ""
+            if "\"" in macro_value[0]:
+                mrbval = "mrb_str_new_cstr_frozen"
+            elif "\." in macro_value[0]:
+                mrbval = "mrb_float_value"
+            elif any(elem in macro_value[0] for elem in r"\:\/"): # Math::PI / 180.0, etc.
+                continue
+            else:
+                mrbval = "mrb_int_value"
+            print(indent + "mrb_define_const(mrb, mRaylib, \"%s\", %s(mrb, %s));" % (macro_name, mrbval, macro_value[0]), file = sys.stdout)
+
 def generate_enum(ctx, indent = "", json_schema=None):
     json_enums = None
     if json_schema:
@@ -340,7 +354,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
         print(function_postfix, file = sys.stdout)
 
 def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
-
+    """
     print(prefix, file = sys.stdout)
 
     print("module Raylib")
@@ -380,6 +394,37 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
         generate_function(ctx, indent, module_name, function_prefix, function_postfix, json_schema)
 
     print(postfix, file = sys.stdout)
+    """
+    indent = "    "
+
+    print("""#include <mruby.h>
+/*
+    $ clang -c -I`brew --prefix mruby`/include -I../raylib_dll/raylib/src mrb_raylib.c `brew --prefix mruby`/lib/libmruby.a ../lib/libraylib.a -lm -framework IOKit -framework Cocoa -framework OpenGL -o mrb_raylib.o
+    $ ar rc libmrb_raylib.a mrb_raylib.o
+*/
+#include <mruby/class.h>
+#include <mruby/compile.h>
+#include <mruby/data.h>
+#include <mruby/string.h>
+
+#include <raylib.h>
+
+struct RClass* mRaylib;
+
+""", file = sys.stdout)
+
+    print(f'void mrb_{module_name}_module_module_init(mrb_state* mrb)', file = sys.stdout)
+    print('{', file = sys.stdout)
+
+    # macro
+    if len(ctx.decl_macros) > 0:
+        print("", file = sys.stdout)
+        print(indent + "// Define/Macro\n", file = sys.stdout)
+        generate_macrodefine_mruby(ctx, indent, json_schema)
+        print("", file = sys.stdout)
+
+    print('}', file = sys.stdout)
+
 
 if __name__ == "__main__":
     pass
