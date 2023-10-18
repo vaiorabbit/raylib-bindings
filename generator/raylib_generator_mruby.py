@@ -172,6 +172,23 @@ def generate_enum(ctx, indent = "", json_schema=None):
         print("", file = sys.stdout)
 
 
+def generate_enum_mruby(ctx, indent = "", json_schema=None):
+    enum_typedefs = {}
+
+    for enum_value in ctx.decl_enums.values():
+        for enum in enum_value:
+            enum_typedef_name = ctx.enum_constants[enum[0]].typedef_name
+            if enum_typedef_name not in enum_typedefs.keys():
+                enum_typedefs[enum_typedef_name] = []
+            enum_typedefs[enum_typedef_name].append([enum[0], enum[1]])
+
+    for enum_typedef_name, enum_info_array in enum_typedefs.items():
+        print(indent + "// enum " + enum_typedef_name)
+        for enum_info in enum_info_array:
+            print(indent + "mrb_define_const(mrb, mRaylib, \"%s\", mrb_int_value(mrb, %s));" % (enum_info[0], enum_info[1]), file = sys.stdout)
+        print("", file = sys.stdout)
+
+
 def generate_typedef(ctx, indent = "", typedef_prefix="", typedef_postfix=""):
     if typedef_prefix != "":
         print(typedef_prefix, file = sys.stdout)
@@ -397,11 +414,12 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
     """
     indent = "    "
 
-    print("""#include <mruby.h>
-/*
+    print("""/*
     $ clang -c -I`brew --prefix mruby`/include -I../raylib_dll/raylib/src mrb_raylib.c `brew --prefix mruby`/lib/libmruby.a ../lib/libraylib.a -lm -framework IOKit -framework Cocoa -framework OpenGL -o mrb_raylib.o
     $ ar rc libmrb_raylib.a mrb_raylib.o
 */
+
+#include <mruby.h>
 #include <mruby/class.h>
 #include <mruby/compile.h>
 #include <mruby/data.h>
@@ -415,12 +433,19 @@ struct RClass* mRaylib;
 
     print(f'void mrb_{module_name}_module_module_init(mrb_state* mrb)', file = sys.stdout)
     print('{', file = sys.stdout)
+    print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
 
     # macro
     if len(ctx.decl_macros) > 0:
         print("", file = sys.stdout)
         print(indent + "// Define/Macro\n", file = sys.stdout)
         generate_macrodefine_mruby(ctx, indent, json_schema)
+        print("", file = sys.stdout)
+
+    # enum
+    if len(ctx.decl_enums) > 0:
+        print(indent + "// Enum\n", file = sys.stdout)
+        generate_enum_mruby(ctx, indent, json_schema)
         print("", file = sys.stdout)
 
     print('}', file = sys.stdout)
