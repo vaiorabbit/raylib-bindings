@@ -234,7 +234,7 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
         if struct_description != "":
             print(indent + "# %s" % (struct_description), file = sys.stdout)
 
-        # Name of struct/class must be start with capital letter
+        # Name of struct/class must start with capital letter
         struct_name = struct_name[0].upper() + struct_name[1:]
 
         # Print body of struct from here
@@ -276,6 +276,52 @@ def generate_structunion(ctx, indent = "", struct_prefix="", struct_postfix="", 
                     print(indent + name + ' = ' + struct_name, file = sys.stdout)
                 print("", file = sys.stdout)
             pass
+    if struct_postfix != "":
+        print(struct_postfix, file = sys.stdout)
+
+
+def generate_structunion_rclass_datatype(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    if struct_prefix != "":
+        print(struct_prefix, file = sys.stdout)
+    for struct_name, struct_info in ctx.decl_structs.items():
+        if struct_info == None:
+            continue
+
+        # Name of struct/class must be start with capital letter
+        struct_name = struct_name[0].upper() + struct_name[1:]
+
+        # Print body of struct from here
+        print(indent + f'struct RClass* cRaylib{struct_name};', file = sys.stdout)
+
+        print(indent + f'static const struct mrb_data_type mrb_raylib_struct_{struct_name} = {{', file = sys.stdout)
+        print(indent + f'    "{struct_name}", mrb_free', file = sys.stdout)
+        print(indent + '};', file = sys.stdout)
+        print("", file = sys.stdout)
+
+    if struct_postfix != "":
+        print(struct_postfix, file = sys.stdout)
+
+
+def generate_structunion_methods(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    if struct_prefix != "":
+        print(struct_prefix, file = sys.stdout)
+    for struct_name, struct_info in ctx.decl_structs.items():
+        if struct_info == None:
+            continue
+
+        # Name of struct/class must be start with capital letter
+        struct_name = struct_name[0].upper() + struct_name[1:]
+
+        # Initializer
+        print(indent + f'static mrb_value mrb_raylib_{struct_name}_initialize(mrb_state* mrb, mrb_value self)', file = sys.stdout)
+        print(indent + '{', file = sys.stdout)
+        print(indent + f'    {struct_name}* instance = ({struct_name}*)mrb_malloc(mrb, sizeof({struct_name}));', file = sys.stdout)
+        print(indent + f'    // TODO per-member initialization', file = sys.stdout)
+        print(indent + f'    mrb_data_init(self, instance, &mrb_raylib_struct_{struct_name});', file = sys.stdout)
+        print(indent + '    return self;', file = sys.stdout)
+        print(indent + '};', file = sys.stdout)
+        print("", file = sys.stdout)
+
     if struct_postfix != "":
         print(struct_postfix, file = sys.stdout)
 
@@ -431,6 +477,20 @@ struct RClass* mRaylib;
 
 """, file = sys.stdout)
 
+    # struct/union : RClass and mrb_data_type
+
+    # struct/union
+    if len(ctx.decl_structs) > 0:
+        print("// Struct\n", file = sys.stdout)
+        generate_structunion_rclass_datatype(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
+        print("", file = sys.stdout)
+
+    # struct/union methods
+    if len(ctx.decl_structs) > 0:
+        print("// Struct\n", file = sys.stdout)
+        generate_structunion_methods(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
+        print("", file = sys.stdout)
+
     print(f'void mrb_{module_name}_module_module_init(mrb_state* mrb)', file = sys.stdout)
     print('{', file = sys.stdout)
     print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
@@ -447,6 +507,8 @@ struct RClass* mRaylib;
         print(indent + "// Enum\n", file = sys.stdout)
         generate_enum_mruby(ctx, indent, json_schema)
         print("", file = sys.stdout)
+
+    # struct/union define class and methods
 
     print('}', file = sys.stdout)
 
