@@ -326,6 +326,26 @@ def generate_structunion_methods(ctx, indent = "", struct_prefix="", struct_post
         print(struct_postfix, file = sys.stdout)
 
 
+def generate_structunion_define_class(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    if struct_prefix != "":
+        print(struct_prefix, file = sys.stdout)
+    for struct_name, struct_info in ctx.decl_structs.items():
+        if struct_info == None:
+            continue
+
+        # Name of struct/class must be start with capital letter
+        struct_name = struct_name[0].upper() + struct_name[1:]
+
+        # Initializer
+        print(indent + f'    cRaylib{struct_name} = mrb_define_class_under(mrb, mRaylib, "{struct_name}", mrb->object_class);', file = sys.stdout)
+        print(indent + f'    MRB_SET_INSTANCE_TT(cRaylib{struct_name}, MRB_TT_DATA);', file = sys.stdout)
+        print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "initialize", mrb_raylib_{struct_name}_initialize, MRB_ARGS_OPT(1));', file = sys.stdout)
+        print("", file = sys.stdout)
+
+    if struct_postfix != "":
+        print(struct_postfix, file = sys.stdout)
+
+
 class FunctionEntry:
     def __init__(self, original_name, explicit_name):
         self.original_name = original_name
@@ -508,7 +528,11 @@ struct RClass* mRaylib;
         generate_enum_mruby(ctx, indent, json_schema)
         print("", file = sys.stdout)
 
-    # struct/union define class and methods
+    # struct/union define class
+    if len(ctx.decl_structs) > 0:
+        print(indent + "// Struct\n", file = sys.stdout)
+        generate_structunion_define_class(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
+        print("", file = sys.stdout)
 
     print('}', file = sys.stdout)
 

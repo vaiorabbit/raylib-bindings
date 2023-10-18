@@ -791,4 +791,135 @@ void mrb_raylib_module_module_init(mrb_state* mrb)
     mrb_define_const(mrb, mRaylib, "NPATCH_THREE_PATCH_HORIZONTAL", mrb_int_value(mrb, 2));
 
 
+    // Struct
+
+    cRaylibVector2 = mrb_define_class_under(mrb, mRaylib, "Vector2", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibVector2, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibVector2, "initialize", mrb_raylib_Vector2_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibVector3 = mrb_define_class_under(mrb, mRaylib, "Vector3", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibVector3, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibVector3, "initialize", mrb_raylib_Vector3_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibVector4 = mrb_define_class_under(mrb, mRaylib, "Vector4", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibVector4, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibVector4, "initialize", mrb_raylib_Vector4_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibMatrix = mrb_define_class_under(mrb, mRaylib, "Matrix", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMatrix, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibMatrix, "initialize", mrb_raylib_Matrix_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibColor = mrb_define_class_under(mrb, mRaylib, "Color", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibColor, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibColor, "initialize", mrb_raylib_Color_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibRectangle = mrb_define_class_under(mrb, mRaylib, "Rectangle", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibRectangle, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibRectangle, "initialize", mrb_raylib_Rectangle_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibImage = mrb_define_class_under(mrb, mRaylib, "Image", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibImage, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibImage, "initialize", mrb_raylib_Image_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibTexture = mrb_define_class_under(mrb, mRaylib, "Texture", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibTexture, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibTexture, "initialize", mrb_raylib_Texture_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibRenderTexture = mrb_define_class_under(mrb, mRaylib, "RenderTexture", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibRenderTexture, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibRenderTexture, "initialize", mrb_raylib_RenderTexture_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibNPatchInfo = mrb_define_class_under(mrb, mRaylib, "NPatchInfo", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibNPatchInfo, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibNPatchInfo, "initialize", mrb_raylib_NPatchInfo_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibGlyphInfo = mrb_define_class_under(mrb, mRaylib, "GlyphInfo", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibGlyphInfo, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibGlyphInfo, "initialize", mrb_raylib_GlyphInfo_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibFont = mrb_define_class_under(mrb, mRaylib, "Font", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibFont, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibFont, "initialize", mrb_raylib_Font_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibCamera3D = mrb_define_class_under(mrb, mRaylib, "Camera3D", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibCamera3D, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibCamera3D, "initialize", mrb_raylib_Camera3D_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibCamera2D = mrb_define_class_under(mrb, mRaylib, "Camera2D", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibCamera2D, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibCamera2D, "initialize", mrb_raylib_Camera2D_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibMesh = mrb_define_class_under(mrb, mRaylib, "Mesh", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMesh, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibMesh, "initialize", mrb_raylib_Mesh_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibShader = mrb_define_class_under(mrb, mRaylib, "Shader", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibShader, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibShader, "initialize", mrb_raylib_Shader_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibMaterialMap = mrb_define_class_under(mrb, mRaylib, "MaterialMap", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMaterialMap, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibMaterialMap, "initialize", mrb_raylib_MaterialMap_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibMaterial = mrb_define_class_under(mrb, mRaylib, "Material", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMaterial, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibMaterial, "initialize", mrb_raylib_Material_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibTransform = mrb_define_class_under(mrb, mRaylib, "Transform", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibTransform, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibTransform, "initialize", mrb_raylib_Transform_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibBoneInfo = mrb_define_class_under(mrb, mRaylib, "BoneInfo", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibBoneInfo, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibBoneInfo, "initialize", mrb_raylib_BoneInfo_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibModel = mrb_define_class_under(mrb, mRaylib, "Model", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibModel, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibModel, "initialize", mrb_raylib_Model_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibModelAnimation = mrb_define_class_under(mrb, mRaylib, "ModelAnimation", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibModelAnimation, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibModelAnimation, "initialize", mrb_raylib_ModelAnimation_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibRay = mrb_define_class_under(mrb, mRaylib, "Ray", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibRay, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibRay, "initialize", mrb_raylib_Ray_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibRayCollision = mrb_define_class_under(mrb, mRaylib, "RayCollision", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibRayCollision, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibRayCollision, "initialize", mrb_raylib_RayCollision_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibBoundingBox = mrb_define_class_under(mrb, mRaylib, "BoundingBox", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibBoundingBox, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibBoundingBox, "initialize", mrb_raylib_BoundingBox_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibWave = mrb_define_class_under(mrb, mRaylib, "Wave", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibWave, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibWave, "initialize", mrb_raylib_Wave_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibAudioStream = mrb_define_class_under(mrb, mRaylib, "AudioStream", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibAudioStream, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibAudioStream, "initialize", mrb_raylib_AudioStream_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibSound = mrb_define_class_under(mrb, mRaylib, "Sound", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibSound, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibSound, "initialize", mrb_raylib_Sound_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibMusic = mrb_define_class_under(mrb, mRaylib, "Music", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMusic, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibMusic, "initialize", mrb_raylib_Music_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibVrDeviceInfo = mrb_define_class_under(mrb, mRaylib, "VrDeviceInfo", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibVrDeviceInfo, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "initialize", mrb_raylib_VrDeviceInfo_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibVrStereoConfig = mrb_define_class_under(mrb, mRaylib, "VrStereoConfig", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibVrStereoConfig, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "initialize", mrb_raylib_VrStereoConfig_initialize, MRB_ARGS_OPT(1));
+
+    cRaylibFilePathList = mrb_define_class_under(mrb, mRaylib, "FilePathList", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibFilePathList, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibFilePathList, "initialize", mrb_raylib_FilePathList_initialize, MRB_ARGS_OPT(1));
+
+
 }
