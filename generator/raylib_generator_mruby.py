@@ -511,7 +511,7 @@ struct RClass* mRaylib;
         generate_structunion_methods(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
         print("", file = sys.stdout)
 
-    print(f'void mrb_{module_name}_module_module_init(mrb_state* mrb)', file = sys.stdout)
+    print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
     print('{', file = sys.stdout)
     print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
 

@@ -436,7 +436,7 @@ static mrb_value mrb_raylib_FilePathList_initialize(mrb_state* mrb, mrb_value se
 };
 
 
-void mrb_raylib_module_module_init(mrb_state* mrb)
+void mrb_raylib_module_init(mrb_state* mrb)
 {
     mRaylib = mrb_define_module(mrb, "Raylib");
 
