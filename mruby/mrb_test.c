@@ -13,6 +13,7 @@ int main(void)
     mrb_raylib_module_init(mrb);
 
     char ruby_code[] =
+        "p Raylib::RAYLIB_VERSION\n"
         "color = Raylib::Color.new\n"
         "p color\n"
         ;

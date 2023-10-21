@@ -5,3 +5,4 @@ raylib_dll/build
 generator/build
 generator/backup
 __pycache__
+mruby/build
