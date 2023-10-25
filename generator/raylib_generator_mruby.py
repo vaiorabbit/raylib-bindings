@@ -380,7 +380,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
 
         if any(ch.isupper() for ch in field.type_name):
             print(indent + f'    return mrb_obj_value(&instance->{field.element_name});', file = sys.stdout);
-        elif "char" in field.type_name:
+        elif "char" in field.type_name and field.element_count > 1:
             print(indent + f'    return mrb_str_new_cstr(mrb, (const char*)&instance->{field.element_name});', file = sys.stdout);
         elif "float" in field.type_name:
             print(indent + f'    return mrb_float_value(mrb, instance->{field.element_name});', file = sys.stdout)
@@ -411,7 +411,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         print(indent + '    return self;', file = sys.stdout)
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
-        pass
+
 
 def generate_structunion_methods(ctx, indent = "", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
     if struct_prefix != "":
@@ -544,6 +544,48 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     if function_postfix != "":
         print(function_postfix, file = sys.stdout)
 
+def generate_function_mruby(ctx, indent = "", module_name = ""):
+    for func_name, func_info in ctx.decl_functions.items():
+        if func_info == None:
+            continue
+        print(f'static mrb_value mrb_raylib_{func_name}(mrb_state* mrb, mrb_value self) // {func_info.retval}', file = sys.stdout)
+        print('{', file = sys.stdout)
+        have_args = len(func_info.args) > 0
+        have_retval = "void" not in func_info.retval.type_name
+        # Get arguments
+        if have_args:
+            len_args = len(func_info.args)
+            print(indent + f'mrb_value argv[{len_args}];', file = sys.stdout)
+            argv_ptrs = "{ "
+            for i in range(len_args):
+                argv_ptrs += f'&argv[{i}], '
+            argv_ptrs += "}"
+            print(indent + f'void* ptrs[{len_args}] = {argv_ptrs};', file = sys.stdout)
+            format_string = "o" * len_args
+            print(indent + f'mrb_get_args_a(mrb, "{format_string}", ptrs);', file = sys.stdout)
+
+        # Call API
+        # Return value
+        if have_retval:
+            print(indent + f'return self;', file = sys.stdout)
+        else:
+            print(indent + f'return mrb_nil_value();', file = sys.stdout)
+        print('}', file = sys.stdout)
+        print("", file = sys.stdout)
+
+
+def generate_function_entry(ctx, indent = "", module_name = ""):
+    for func_name, func_info in ctx.decl_functions.items():
+        if func_info == None:
+            continue
+        retval_str = ""
+        if len(func_info.args) > 0:
+            retval_str = f'MRB_ARGS_REQ({len(func_info.args)})'
+        else:
+            retval_str = "MRB_ARGS_NONE()"
+        print(indent + f'mrb_define_module_function(mrb, mRaylib, "{func_name}", mrb_raylib_{func_name}, {retval_str});', file = sys.stdout)
+
+
 def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
     """
     print(prefix, file = sys.stdout)
@@ -621,6 +663,11 @@ struct RClass* mRaylib;
         generate_structunion_methods(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
         print("", file = sys.stdout)
 
+    # function
+    if len(ctx.decl_functions) > 0:
+        print("// Function\n", file = sys.stdout)
+        generate_function_mruby(ctx, indent, module_name)
+
     print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
     print('{', file = sys.stdout)
     print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
@@ -643,6 +690,11 @@ struct RClass* mRaylib;
         print(indent + "// Struct\n", file = sys.stdout)
         generate_structunion_define_class(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
         print("", file = sys.stdout)
+
+    # function
+    if len(ctx.decl_functions) > 0:
+        print(indent + "// Function\n", file = sys.stdout)
+        generate_function_entry(ctx, indent, module_name)
 
     print('}', file = sys.stdout)
 
