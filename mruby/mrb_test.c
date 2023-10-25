@@ -16,6 +16,9 @@ int main(void)
         "p Raylib::RAYLIB_VERSION\n"
         "color = Raylib::Color.new(255, 255, 255, 255)\n"
         "p color\n"
+        "p color.r\n"
+        "color.r = 128\n"
+        "p color.r\n"
         "vx = Raylib::Vector3.new(1.0, 0.0, 0.0)\n"
         "vy = Raylib::Vector3.new(0.0, 1.0, 0.0)\n"
         "p vx, vy\n"
@@ -23,6 +26,9 @@ int main(void)
         "p rc\n"
         "bi = Raylib::BoneInfo.new('Hi There!', 123)\n"
         "p bi\n"
+        "p bi.name\n"
+        "bi.name = 'Hello everyone!'\n"
+        "p bi.name\n"
         ;
 
     mrb_load_string(mrb, ruby_code);

@@ -184,7 +184,6 @@ static const struct mrb_data_type mrb_raylib_struct_FilePathList = {
 static mrb_value mrb_raylib_Vector2_initialize(mrb_state* mrb, mrb_value self)
 {
     Vector2* instance = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -206,10 +205,39 @@ static mrb_value mrb_raylib_Vector2_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Vector2_x_get(mrb_state* mrb, mrb_value self)
+{
+    Vector2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector2, Vector2);
+    return mrb_float_value(mrb, instance->x);
+}
+
+static mrb_value mrb_raylib_Vector2_x_set(mrb_state* mrb, mrb_value self)
+{
+    Vector2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector2, Vector2);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->x = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector2_y_get(mrb_state* mrb, mrb_value self)
+{
+    Vector2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector2, Vector2);
+    return mrb_float_value(mrb, instance->y);
+}
+
+static mrb_value mrb_raylib_Vector2_y_set(mrb_state* mrb, mrb_value self)
+{
+    Vector2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector2, Vector2);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->y = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Vector3_initialize(mrb_state* mrb, mrb_value self)
 {
     Vector3* instance = (Vector3*)mrb_malloc(mrb, sizeof(Vector3));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -232,10 +260,54 @@ static mrb_value mrb_raylib_Vector3_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Vector3_x_get(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    return mrb_float_value(mrb, instance->x);
+}
+
+static mrb_value mrb_raylib_Vector3_x_set(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->x = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector3_y_get(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    return mrb_float_value(mrb, instance->y);
+}
+
+static mrb_value mrb_raylib_Vector3_y_set(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->y = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector3_z_get(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    return mrb_float_value(mrb, instance->z);
+}
+
+static mrb_value mrb_raylib_Vector3_z_set(mrb_state* mrb, mrb_value self)
+{
+    Vector3* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector3, Vector3);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->z = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Vector4_initialize(mrb_state* mrb, mrb_value self)
 {
     Vector4* instance = (Vector4*)mrb_malloc(mrb, sizeof(Vector4));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -259,10 +331,69 @@ static mrb_value mrb_raylib_Vector4_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Vector4_x_get(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    return mrb_float_value(mrb, instance->x);
+}
+
+static mrb_value mrb_raylib_Vector4_x_set(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->x = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector4_y_get(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    return mrb_float_value(mrb, instance->y);
+}
+
+static mrb_value mrb_raylib_Vector4_y_set(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->y = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector4_z_get(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    return mrb_float_value(mrb, instance->z);
+}
+
+static mrb_value mrb_raylib_Vector4_z_set(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->z = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Vector4_w_get(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    return mrb_float_value(mrb, instance->w);
+}
+
+static mrb_value mrb_raylib_Vector4_w_set(mrb_state* mrb, mrb_value self)
+{
+    Vector4* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector4, Vector4);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->w = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Matrix_initialize(mrb_state* mrb, mrb_value self)
 {
     Matrix* instance = (Matrix*)mrb_malloc(mrb, sizeof(Matrix));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -298,10 +429,249 @@ static mrb_value mrb_raylib_Matrix_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Matrix_m0_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m0);
+}
+
+static mrb_value mrb_raylib_Matrix_m0_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m0 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m4_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m4);
+}
+
+static mrb_value mrb_raylib_Matrix_m4_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m4 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m8_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m8);
+}
+
+static mrb_value mrb_raylib_Matrix_m8_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m8 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m12_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m12);
+}
+
+static mrb_value mrb_raylib_Matrix_m12_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m12 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m1_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m1);
+}
+
+static mrb_value mrb_raylib_Matrix_m1_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m1 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m5_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m5);
+}
+
+static mrb_value mrb_raylib_Matrix_m5_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m5 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m9_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m9);
+}
+
+static mrb_value mrb_raylib_Matrix_m9_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m9 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m13_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m13);
+}
+
+static mrb_value mrb_raylib_Matrix_m13_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m13 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m2_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m2);
+}
+
+static mrb_value mrb_raylib_Matrix_m2_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m2 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m6_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m6);
+}
+
+static mrb_value mrb_raylib_Matrix_m6_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m6 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m10_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m10);
+}
+
+static mrb_value mrb_raylib_Matrix_m10_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m10 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m14_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m14);
+}
+
+static mrb_value mrb_raylib_Matrix_m14_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m14 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m3_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m3);
+}
+
+static mrb_value mrb_raylib_Matrix_m3_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m3 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m7_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m7);
+}
+
+static mrb_value mrb_raylib_Matrix_m7_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m7 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m11_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m11);
+}
+
+static mrb_value mrb_raylib_Matrix_m11_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m11 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix_m15_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_float_value(mrb, instance->m15);
+}
+
+static mrb_value mrb_raylib_Matrix_m15_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix, Matrix);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m15 = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Color_initialize(mrb_state* mrb, mrb_value self)
 {
     Color* instance = (Color*)mrb_malloc(mrb, sizeof(Color));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -325,10 +695,69 @@ static mrb_value mrb_raylib_Color_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Color_r_get(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->r);
+}
+
+static mrb_value mrb_raylib_Color_r_set(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->r = mrb_as_int(mrb, argv); // :uchar unsigned char 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Color_g_get(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->g);
+}
+
+static mrb_value mrb_raylib_Color_g_set(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->g = mrb_as_int(mrb, argv); // :uchar unsigned char 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Color_b_get(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->b);
+}
+
+static mrb_value mrb_raylib_Color_b_set(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->b = mrb_as_int(mrb, argv); // :uchar unsigned char 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Color_a_get(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->a);
+}
+
+static mrb_value mrb_raylib_Color_a_set(mrb_state* mrb, mrb_value self)
+{
+    Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->a = mrb_as_int(mrb, argv); // :uchar unsigned char 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Rectangle_initialize(mrb_state* mrb, mrb_value self)
 {
     Rectangle* instance = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -352,10 +781,69 @@ static mrb_value mrb_raylib_Rectangle_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Rectangle_x_get(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    return mrb_float_value(mrb, instance->x);
+}
+
+static mrb_value mrb_raylib_Rectangle_x_set(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->x = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Rectangle_y_get(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    return mrb_float_value(mrb, instance->y);
+}
+
+static mrb_value mrb_raylib_Rectangle_y_set(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->y = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Rectangle_width_get(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    return mrb_float_value(mrb, instance->width);
+}
+
+static mrb_value mrb_raylib_Rectangle_width_set(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->width = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Rectangle_height_get(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    return mrb_float_value(mrb, instance->height);
+}
+
+static mrb_value mrb_raylib_Rectangle_height_set(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Rectangle, Rectangle);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->height = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Image_initialize(mrb_state* mrb, mrb_value self)
 {
     Image* instance = (Image*)mrb_malloc(mrb, sizeof(Image));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -380,10 +868,69 @@ static mrb_value mrb_raylib_Image_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Image_width_get(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    return mrb_int_value(mrb, instance->width);
+}
+
+static mrb_value mrb_raylib_Image_width_set(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->width = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Image_height_get(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    return mrb_int_value(mrb, instance->height);
+}
+
+static mrb_value mrb_raylib_Image_height_set(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->height = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Image_mipmaps_get(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    return mrb_int_value(mrb, instance->mipmaps);
+}
+
+static mrb_value mrb_raylib_Image_mipmaps_set(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->mipmaps = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Image_format_get(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    return mrb_int_value(mrb, instance->format);
+}
+
+static mrb_value mrb_raylib_Image_format_set(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->format = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Texture_initialize(mrb_state* mrb, mrb_value self)
 {
     Texture* instance = (Texture*)mrb_malloc(mrb, sizeof(Texture));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -408,10 +955,84 @@ static mrb_value mrb_raylib_Texture_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Texture_id_get(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    return mrb_int_value(mrb, instance->id);
+}
+
+static mrb_value mrb_raylib_Texture_id_set(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->id = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Texture_width_get(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    return mrb_int_value(mrb, instance->width);
+}
+
+static mrb_value mrb_raylib_Texture_width_set(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->width = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Texture_height_get(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    return mrb_int_value(mrb, instance->height);
+}
+
+static mrb_value mrb_raylib_Texture_height_set(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->height = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Texture_mipmaps_get(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    return mrb_int_value(mrb, instance->mipmaps);
+}
+
+static mrb_value mrb_raylib_Texture_mipmaps_set(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->mipmaps = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Texture_format_get(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    return mrb_int_value(mrb, instance->format);
+}
+
+static mrb_value mrb_raylib_Texture_format_set(mrb_state* mrb, mrb_value self)
+{
+    Texture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Texture, Texture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->format = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_RenderTexture_initialize(mrb_state* mrb, mrb_value self)
 {
     RenderTexture* instance = (RenderTexture*)mrb_malloc(mrb, sizeof(RenderTexture));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -434,10 +1055,54 @@ static mrb_value mrb_raylib_RenderTexture_initialize(mrb_state* mrb, mrb_value s
     return self;
 }
 
+static mrb_value mrb_raylib_RenderTexture_id_get(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    return mrb_int_value(mrb, instance->id);
+}
+
+static mrb_value mrb_raylib_RenderTexture_id_set(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->id = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_RenderTexture_texture_get(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    return mrb_obj_value(&instance->texture);
+}
+
+static mrb_value mrb_raylib_RenderTexture_texture_set(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->texture = *(Texture*)DATA_PTR(argv); // Texture Texture 1
+    return self;
+}
+
+static mrb_value mrb_raylib_RenderTexture_depth_get(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    return mrb_obj_value(&instance->depth);
+}
+
+static mrb_value mrb_raylib_RenderTexture_depth_set(mrb_state* mrb, mrb_value self)
+{
+    RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->depth = *(Texture*)DATA_PTR(argv); // Texture Texture 1
+    return self;
+}
+
 static mrb_value mrb_raylib_NPatchInfo_initialize(mrb_state* mrb, mrb_value self)
 {
     NPatchInfo* instance = (NPatchInfo*)mrb_malloc(mrb, sizeof(NPatchInfo));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -463,10 +1128,99 @@ static mrb_value mrb_raylib_NPatchInfo_initialize(mrb_state* mrb, mrb_value self
     return self;
 }
 
+static mrb_value mrb_raylib_NPatchInfo_source_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_obj_value(&instance->source);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_source_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->source = *(Rectangle*)DATA_PTR(argv); // Rectangle Rectangle 1
+    return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_left_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_int_value(mrb, instance->left);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_left_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->left = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_top_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_int_value(mrb, instance->top);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_top_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->top = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_right_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_int_value(mrb, instance->right);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_right_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->right = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_bottom_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_int_value(mrb, instance->bottom);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_bottom_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bottom = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_layout_get(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    return mrb_int_value(mrb, instance->layout);
+}
+
+static mrb_value mrb_raylib_NPatchInfo_layout_set(mrb_state* mrb, mrb_value self)
+{
+    NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->layout = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_GlyphInfo_initialize(mrb_state* mrb, mrb_value self)
 {
     GlyphInfo* instance = (GlyphInfo*)mrb_malloc(mrb, sizeof(GlyphInfo));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -491,10 +1245,84 @@ static mrb_value mrb_raylib_GlyphInfo_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_GlyphInfo_value_get(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    return mrb_int_value(mrb, instance->value);
+}
+
+static mrb_value mrb_raylib_GlyphInfo_value_set(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->value = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_GlyphInfo_offsetX_get(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    return mrb_int_value(mrb, instance->offsetX);
+}
+
+static mrb_value mrb_raylib_GlyphInfo_offsetX_set(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->offsetX = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_GlyphInfo_offsetY_get(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    return mrb_int_value(mrb, instance->offsetY);
+}
+
+static mrb_value mrb_raylib_GlyphInfo_offsetY_set(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->offsetY = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_GlyphInfo_advanceX_get(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    return mrb_int_value(mrb, instance->advanceX);
+}
+
+static mrb_value mrb_raylib_GlyphInfo_advanceX_set(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->advanceX = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_GlyphInfo_image_get(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    return mrb_obj_value(&instance->image);
+}
+
+static mrb_value mrb_raylib_GlyphInfo_image_set(mrb_state* mrb, mrb_value self)
+{
+    GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->image = *(Image*)DATA_PTR(argv); // Image Image 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Font_initialize(mrb_state* mrb, mrb_value self)
 {
     Font* instance = (Font*)mrb_malloc(mrb, sizeof(Font));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -520,10 +1348,69 @@ static mrb_value mrb_raylib_Font_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Font_baseSize_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_int_value(mrb, instance->baseSize);
+}
+
+static mrb_value mrb_raylib_Font_baseSize_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->baseSize = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Font_glyphCount_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_int_value(mrb, instance->glyphCount);
+}
+
+static mrb_value mrb_raylib_Font_glyphCount_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->glyphCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Font_glyphPadding_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_int_value(mrb, instance->glyphPadding);
+}
+
+static mrb_value mrb_raylib_Font_glyphPadding_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->glyphPadding = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Font_texture_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_obj_value(&instance->texture);
+}
+
+static mrb_value mrb_raylib_Font_texture_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->texture = *(Texture2D*)DATA_PTR(argv); // Texture2D Texture2D 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Camera3D_initialize(mrb_state* mrb, mrb_value self)
 {
     Camera3D* instance = (Camera3D*)mrb_malloc(mrb, sizeof(Camera3D));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -548,10 +1435,84 @@ static mrb_value mrb_raylib_Camera3D_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Camera3D_position_get(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    return mrb_obj_value(&instance->position);
+}
+
+static mrb_value mrb_raylib_Camera3D_position_set(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->position = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera3D_target_get(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    return mrb_obj_value(&instance->target);
+}
+
+static mrb_value mrb_raylib_Camera3D_target_set(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->target = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera3D_up_get(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    return mrb_obj_value(&instance->up);
+}
+
+static mrb_value mrb_raylib_Camera3D_up_set(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->up = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera3D_fovy_get(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    return mrb_float_value(mrb, instance->fovy);
+}
+
+static mrb_value mrb_raylib_Camera3D_fovy_set(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->fovy = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera3D_projection_get(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    return mrb_int_value(mrb, instance->projection);
+}
+
+static mrb_value mrb_raylib_Camera3D_projection_set(mrb_state* mrb, mrb_value self)
+{
+    Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->projection = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Camera2D_initialize(mrb_state* mrb, mrb_value self)
 {
     Camera2D* instance = (Camera2D*)mrb_malloc(mrb, sizeof(Camera2D));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -575,10 +1536,69 @@ static mrb_value mrb_raylib_Camera2D_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Camera2D_offset_get(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    return mrb_obj_value(&instance->offset);
+}
+
+static mrb_value mrb_raylib_Camera2D_offset_set(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->offset = *(Vector2*)DATA_PTR(argv); // Vector2 Vector2 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera2D_target_get(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    return mrb_obj_value(&instance->target);
+}
+
+static mrb_value mrb_raylib_Camera2D_target_set(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->target = *(Vector2*)DATA_PTR(argv); // Vector2 Vector2 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera2D_rotation_get(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    return mrb_float_value(mrb, instance->rotation);
+}
+
+static mrb_value mrb_raylib_Camera2D_rotation_set(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->rotation = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Camera2D_zoom_get(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    return mrb_float_value(mrb, instance->zoom);
+}
+
+static mrb_value mrb_raylib_Camera2D_zoom_set(mrb_state* mrb, mrb_value self)
+{
+    Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->zoom = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Mesh_initialize(mrb_state* mrb, mrb_value self)
 {
     Mesh* instance = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -613,10 +1633,54 @@ static mrb_value mrb_raylib_Mesh_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Mesh_vertexCount_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_int_value(mrb, instance->vertexCount);
+}
+
+static mrb_value mrb_raylib_Mesh_vertexCount_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vertexCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_triangleCount_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_int_value(mrb, instance->triangleCount);
+}
+
+static mrb_value mrb_raylib_Mesh_triangleCount_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->triangleCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_vaoId_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_int_value(mrb, instance->vaoId);
+}
+
+static mrb_value mrb_raylib_Mesh_vaoId_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vaoId = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Shader_initialize(mrb_state* mrb, mrb_value self)
 {
     Shader* instance = (Shader*)mrb_malloc(mrb, sizeof(Shader));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -638,10 +1702,24 @@ static mrb_value mrb_raylib_Shader_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Shader_id_get(mrb_state* mrb, mrb_value self)
+{
+    Shader* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Shader, Shader);
+    return mrb_int_value(mrb, instance->id);
+}
+
+static mrb_value mrb_raylib_Shader_id_set(mrb_state* mrb, mrb_value self)
+{
+    Shader* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Shader, Shader);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->id = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_MaterialMap_initialize(mrb_state* mrb, mrb_value self)
 {
     MaterialMap* instance = (MaterialMap*)mrb_malloc(mrb, sizeof(MaterialMap));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -664,10 +1742,54 @@ static mrb_value mrb_raylib_MaterialMap_initialize(mrb_state* mrb, mrb_value sel
     return self;
 }
 
+static mrb_value mrb_raylib_MaterialMap_texture_get(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    return mrb_obj_value(&instance->texture);
+}
+
+static mrb_value mrb_raylib_MaterialMap_texture_set(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->texture = *(Texture2D*)DATA_PTR(argv); // Texture2D Texture2D 1
+    return self;
+}
+
+static mrb_value mrb_raylib_MaterialMap_color_get(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    return mrb_obj_value(&instance->color);
+}
+
+static mrb_value mrb_raylib_MaterialMap_color_set(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->color = *(Color*)DATA_PTR(argv); // Color Color 1
+    return self;
+}
+
+static mrb_value mrb_raylib_MaterialMap_value_get(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    return mrb_float_value(mrb, instance->value);
+}
+
+static mrb_value mrb_raylib_MaterialMap_value_set(mrb_state* mrb, mrb_value self)
+{
+    MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->value = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Material_initialize(mrb_state* mrb, mrb_value self)
 {
     Material* instance = (Material*)mrb_malloc(mrb, sizeof(Material));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -690,10 +1812,24 @@ static mrb_value mrb_raylib_Material_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Material_shader_get(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    return mrb_obj_value(&instance->shader);
+}
+
+static mrb_value mrb_raylib_Material_shader_set(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->shader = *(Shader*)DATA_PTR(argv); // Shader Shader 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Transform_initialize(mrb_state* mrb, mrb_value self)
 {
     Transform* instance = (Transform*)mrb_malloc(mrb, sizeof(Transform));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -716,10 +1852,54 @@ static mrb_value mrb_raylib_Transform_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Transform_translation_get(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    return mrb_obj_value(&instance->translation);
+}
+
+static mrb_value mrb_raylib_Transform_translation_set(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->translation = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Transform_rotation_get(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    return mrb_obj_value(&instance->rotation);
+}
+
+static mrb_value mrb_raylib_Transform_rotation_set(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->rotation = *(Quaternion*)DATA_PTR(argv); // Quaternion Quaternion 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Transform_scale_get(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    return mrb_obj_value(&instance->scale);
+}
+
+static mrb_value mrb_raylib_Transform_scale_set(mrb_state* mrb, mrb_value self)
+{
+    Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->scale = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
 static mrb_value mrb_raylib_BoneInfo_initialize(mrb_state* mrb, mrb_value self)
 {
     BoneInfo* instance = (BoneInfo*)mrb_malloc(mrb, sizeof(BoneInfo));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -741,10 +1921,39 @@ static mrb_value mrb_raylib_BoneInfo_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_BoneInfo_name_get(mrb_state* mrb, mrb_value self)
+{
+    BoneInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoneInfo, BoneInfo);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->name);
+}
+
+static mrb_value mrb_raylib_BoneInfo_name_set(mrb_state* mrb, mrb_value self)
+{
+    BoneInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoneInfo, BoneInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    strncpy(instance->name, mrb_string_cstr(mrb, argv), sizeof(char) * 32); // :char char 32
+    return self;
+}
+
+static mrb_value mrb_raylib_BoneInfo_parent_get(mrb_state* mrb, mrb_value self)
+{
+    BoneInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoneInfo, BoneInfo);
+    return mrb_int_value(mrb, instance->parent);
+}
+
+static mrb_value mrb_raylib_BoneInfo_parent_set(mrb_state* mrb, mrb_value self)
+{
+    BoneInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoneInfo, BoneInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->parent = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Model_initialize(mrb_state* mrb, mrb_value self)
 {
     Model* instance = (Model*)mrb_malloc(mrb, sizeof(Model));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -773,10 +1982,69 @@ static mrb_value mrb_raylib_Model_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Model_transform_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_obj_value(&instance->transform);
+}
+
+static mrb_value mrb_raylib_Model_transform_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->transform = *(Matrix*)DATA_PTR(argv); // Matrix Matrix 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Model_meshCount_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_int_value(mrb, instance->meshCount);
+}
+
+static mrb_value mrb_raylib_Model_meshCount_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->meshCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Model_materialCount_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_int_value(mrb, instance->materialCount);
+}
+
+static mrb_value mrb_raylib_Model_materialCount_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->materialCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Model_boneCount_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_int_value(mrb, instance->boneCount);
+}
+
+static mrb_value mrb_raylib_Model_boneCount_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->boneCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_ModelAnimation_initialize(mrb_state* mrb, mrb_value self)
 {
     ModelAnimation* instance = (ModelAnimation*)mrb_malloc(mrb, sizeof(ModelAnimation));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -801,10 +2069,54 @@ static mrb_value mrb_raylib_ModelAnimation_initialize(mrb_state* mrb, mrb_value 
     return self;
 }
 
+static mrb_value mrb_raylib_ModelAnimation_boneCount_get(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    return mrb_int_value(mrb, instance->boneCount);
+}
+
+static mrb_value mrb_raylib_ModelAnimation_boneCount_set(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->boneCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_ModelAnimation_frameCount_get(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    return mrb_int_value(mrb, instance->frameCount);
+}
+
+static mrb_value mrb_raylib_ModelAnimation_frameCount_set(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->frameCount = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_ModelAnimation_name_get(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    return mrb_str_new_cstr(mrb, (const char*)&instance->name);
+}
+
+static mrb_value mrb_raylib_ModelAnimation_name_set(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    strncpy(instance->name, mrb_string_cstr(mrb, argv), sizeof(char) * 32); // :char char 32
+    return self;
+}
+
 static mrb_value mrb_raylib_Ray_initialize(mrb_state* mrb, mrb_value self)
 {
     Ray* instance = (Ray*)mrb_malloc(mrb, sizeof(Ray));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -826,10 +2138,39 @@ static mrb_value mrb_raylib_Ray_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Ray_position_get(mrb_state* mrb, mrb_value self)
+{
+    Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
+    return mrb_obj_value(&instance->position);
+}
+
+static mrb_value mrb_raylib_Ray_position_set(mrb_state* mrb, mrb_value self)
+{
+    Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->position = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Ray_direction_get(mrb_state* mrb, mrb_value self)
+{
+    Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
+    return mrb_obj_value(&instance->direction);
+}
+
+static mrb_value mrb_raylib_Ray_direction_set(mrb_state* mrb, mrb_value self)
+{
+    Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->direction = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
 static mrb_value mrb_raylib_RayCollision_initialize(mrb_state* mrb, mrb_value self)
 {
     RayCollision* instance = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -853,10 +2194,69 @@ static mrb_value mrb_raylib_RayCollision_initialize(mrb_state* mrb, mrb_value se
     return self;
 }
 
+static mrb_value mrb_raylib_RayCollision_hit_get(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    return mrb_int_value(mrb, instance->hit);
+}
+
+static mrb_value mrb_raylib_RayCollision_hit_set(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->hit = mrb_as_int(mrb, argv); // :bool bool 1
+    return self;
+}
+
+static mrb_value mrb_raylib_RayCollision_distance_get(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    return mrb_float_value(mrb, instance->distance);
+}
+
+static mrb_value mrb_raylib_RayCollision_distance_set(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->distance = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_RayCollision_point_get(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    return mrb_obj_value(&instance->point);
+}
+
+static mrb_value mrb_raylib_RayCollision_point_set(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->point = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_RayCollision_normal_get(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    return mrb_obj_value(&instance->normal);
+}
+
+static mrb_value mrb_raylib_RayCollision_normal_set(mrb_state* mrb, mrb_value self)
+{
+    RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->normal = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
 static mrb_value mrb_raylib_BoundingBox_initialize(mrb_state* mrb, mrb_value self)
 {
     BoundingBox* instance = (BoundingBox*)mrb_malloc(mrb, sizeof(BoundingBox));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -878,10 +2278,39 @@ static mrb_value mrb_raylib_BoundingBox_initialize(mrb_state* mrb, mrb_value sel
     return self;
 }
 
+static mrb_value mrb_raylib_BoundingBox_min_get(mrb_state* mrb, mrb_value self)
+{
+    BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
+    return mrb_obj_value(&instance->min);
+}
+
+static mrb_value mrb_raylib_BoundingBox_min_set(mrb_state* mrb, mrb_value self)
+{
+    BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->min = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
+static mrb_value mrb_raylib_BoundingBox_max_get(mrb_state* mrb, mrb_value self)
+{
+    BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
+    return mrb_obj_value(&instance->max);
+}
+
+static mrb_value mrb_raylib_BoundingBox_max_set(mrb_state* mrb, mrb_value self)
+{
+    BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->max = *(Vector3*)DATA_PTR(argv); // Vector3 Vector3 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Wave_initialize(mrb_state* mrb, mrb_value self)
 {
     Wave* instance = (Wave*)mrb_malloc(mrb, sizeof(Wave));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -906,10 +2335,69 @@ static mrb_value mrb_raylib_Wave_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Wave_frameCount_get(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    return mrb_int_value(mrb, instance->frameCount);
+}
+
+static mrb_value mrb_raylib_Wave_frameCount_set(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->frameCount = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Wave_sampleRate_get(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    return mrb_int_value(mrb, instance->sampleRate);
+}
+
+static mrb_value mrb_raylib_Wave_sampleRate_set(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->sampleRate = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Wave_sampleSize_get(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    return mrb_int_value(mrb, instance->sampleSize);
+}
+
+static mrb_value mrb_raylib_Wave_sampleSize_set(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->sampleSize = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Wave_channels_get(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    return mrb_int_value(mrb, instance->channels);
+}
+
+static mrb_value mrb_raylib_Wave_channels_set(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->channels = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_AudioStream_initialize(mrb_state* mrb, mrb_value self)
 {
     AudioStream* instance = (AudioStream*)mrb_malloc(mrb, sizeof(AudioStream));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -934,10 +2422,54 @@ static mrb_value mrb_raylib_AudioStream_initialize(mrb_state* mrb, mrb_value sel
     return self;
 }
 
+static mrb_value mrb_raylib_AudioStream_sampleRate_get(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    return mrb_int_value(mrb, instance->sampleRate);
+}
+
+static mrb_value mrb_raylib_AudioStream_sampleRate_set(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->sampleRate = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_AudioStream_sampleSize_get(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    return mrb_int_value(mrb, instance->sampleSize);
+}
+
+static mrb_value mrb_raylib_AudioStream_sampleSize_set(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->sampleSize = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_AudioStream_channels_get(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    return mrb_int_value(mrb, instance->channels);
+}
+
+static mrb_value mrb_raylib_AudioStream_channels_set(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->channels = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Sound_initialize(mrb_state* mrb, mrb_value self)
 {
     Sound* instance = (Sound*)mrb_malloc(mrb, sizeof(Sound));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -959,10 +2491,39 @@ static mrb_value mrb_raylib_Sound_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Sound_stream_get(mrb_state* mrb, mrb_value self)
+{
+    Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
+    return mrb_obj_value(&instance->stream);
+}
+
+static mrb_value mrb_raylib_Sound_stream_set(mrb_state* mrb, mrb_value self)
+{
+    Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->stream = *(AudioStream*)DATA_PTR(argv); // AudioStream AudioStream 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Sound_frameCount_get(mrb_state* mrb, mrb_value self)
+{
+    Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
+    return mrb_int_value(mrb, instance->frameCount);
+}
+
+static mrb_value mrb_raylib_Sound_frameCount_set(mrb_state* mrb, mrb_value self)
+{
+    Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->frameCount = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_Music_initialize(mrb_state* mrb, mrb_value self)
 {
     Music* instance = (Music*)mrb_malloc(mrb, sizeof(Music));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -987,10 +2548,69 @@ static mrb_value mrb_raylib_Music_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Music_stream_get(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    return mrb_obj_value(&instance->stream);
+}
+
+static mrb_value mrb_raylib_Music_stream_set(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->stream = *(AudioStream*)DATA_PTR(argv); // AudioStream AudioStream 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Music_frameCount_get(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    return mrb_int_value(mrb, instance->frameCount);
+}
+
+static mrb_value mrb_raylib_Music_frameCount_set(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->frameCount = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Music_looping_get(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    return mrb_int_value(mrb, instance->looping);
+}
+
+static mrb_value mrb_raylib_Music_looping_set(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->looping = mrb_as_int(mrb, argv); // :bool bool 1
+    return self;
+}
+
+static mrb_value mrb_raylib_Music_ctxType_get(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    return mrb_int_value(mrb, instance->ctxType);
+}
+
+static mrb_value mrb_raylib_Music_ctxType_set(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->ctxType = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
 static mrb_value mrb_raylib_VrDeviceInfo_initialize(mrb_state* mrb, mrb_value self)
 {
     VrDeviceInfo* instance = (VrDeviceInfo*)mrb_malloc(mrb, sizeof(VrDeviceInfo));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -1020,10 +2640,129 @@ static mrb_value mrb_raylib_VrDeviceInfo_initialize(mrb_state* mrb, mrb_value se
     return self;
 }
 
+static mrb_value mrb_raylib_VrDeviceInfo_hResolution_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_int_value(mrb, instance->hResolution);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_hResolution_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->hResolution = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vResolution_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_int_value(mrb, instance->vResolution);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vResolution_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vResolution = mrb_as_int(mrb, argv); // :int int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_hScreenSize_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->hScreenSize);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_hScreenSize_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->hScreenSize = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vScreenSize_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->vScreenSize);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vScreenSize_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vScreenSize = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vScreenCenter_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->vScreenCenter);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_vScreenCenter_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vScreenCenter = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_eyeToScreenDistance_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->eyeToScreenDistance);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_eyeToScreenDistance_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->eyeToScreenDistance = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_lensSeparationDistance_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->lensSeparationDistance);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_lensSeparationDistance_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->lensSeparationDistance = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_interpupillaryDistance_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    return mrb_float_value(mrb, instance->interpupillaryDistance);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_interpupillaryDistance_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->interpupillaryDistance = mrb_as_float(mrb, argv); // :float float 1
+    return self;
+}
+
 static mrb_value mrb_raylib_VrStereoConfig_initialize(mrb_state* mrb, mrb_value self)
 {
     VrStereoConfig* instance = (VrStereoConfig*)mrb_malloc(mrb, sizeof(VrStereoConfig));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -1054,7 +2793,6 @@ static mrb_value mrb_raylib_VrStereoConfig_initialize(mrb_state* mrb, mrb_value 
 static mrb_value mrb_raylib_FilePathList_initialize(mrb_state* mrb, mrb_value self)
 {
     FilePathList* instance = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
-    // TODO per-member initialization
     mrb_int argc = mrb_get_argc(mrb);
     switch (argc) {
     case 0:
@@ -1074,6 +2812,36 @@ static mrb_value mrb_raylib_FilePathList_initialize(mrb_state* mrb, mrb_value se
     break;
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_FilePathList);
+    return self;
+}
+
+static mrb_value mrb_raylib_FilePathList_capacity_get(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    return mrb_int_value(mrb, instance->capacity);
+}
+
+static mrb_value mrb_raylib_FilePathList_capacity_set(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->capacity = mrb_as_int(mrb, argv); // :uint unsigned int 1
+    return self;
+}
+
+static mrb_value mrb_raylib_FilePathList_count_get(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    return mrb_int_value(mrb, instance->count);
+}
+
+static mrb_value mrb_raylib_FilePathList_count_set(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->count = mrb_as_int(mrb, argv); // :uint unsigned int 1
     return self;
 }
 
@@ -1438,122 +3206,358 @@ void mrb_raylib_module_init(mrb_state* mrb)
     cRaylibVector2 = mrb_define_class_under(mrb, mRaylib, "Vector2", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector2, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibVector2, "initialize", mrb_raylib_Vector2_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibVector2, "x", mrb_raylib_Vector2_x_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector2, "x=", mrb_raylib_Vector2_x_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector2, "y", mrb_raylib_Vector2_y_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector2, "y=", mrb_raylib_Vector2_y_set, MRB_ARGS_REQ(1));
 
     cRaylibVector3 = mrb_define_class_under(mrb, mRaylib, "Vector3", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector3, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibVector3, "initialize", mrb_raylib_Vector3_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibVector3, "x", mrb_raylib_Vector3_x_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector3, "x=", mrb_raylib_Vector3_x_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector3, "y", mrb_raylib_Vector3_y_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector3, "y=", mrb_raylib_Vector3_y_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector3, "z", mrb_raylib_Vector3_z_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector3, "z=", mrb_raylib_Vector3_z_set, MRB_ARGS_REQ(1));
 
     cRaylibVector4 = mrb_define_class_under(mrb, mRaylib, "Vector4", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector4, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibVector4, "initialize", mrb_raylib_Vector4_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibVector4, "x", mrb_raylib_Vector4_x_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector4, "x=", mrb_raylib_Vector4_x_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector4, "y", mrb_raylib_Vector4_y_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector4, "y=", mrb_raylib_Vector4_y_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector4, "z", mrb_raylib_Vector4_z_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector4, "z=", mrb_raylib_Vector4_z_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVector4, "w", mrb_raylib_Vector4_w_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVector4, "w=", mrb_raylib_Vector4_w_set, MRB_ARGS_REQ(1));
 
     cRaylibMatrix = mrb_define_class_under(mrb, mRaylib, "Matrix", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMatrix, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibMatrix, "initialize", mrb_raylib_Matrix_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m0", mrb_raylib_Matrix_m0_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m0=", mrb_raylib_Matrix_m0_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m4", mrb_raylib_Matrix_m4_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m4=", mrb_raylib_Matrix_m4_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m8", mrb_raylib_Matrix_m8_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m8=", mrb_raylib_Matrix_m8_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m12", mrb_raylib_Matrix_m12_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m12=", mrb_raylib_Matrix_m12_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m1", mrb_raylib_Matrix_m1_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m1=", mrb_raylib_Matrix_m1_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m5", mrb_raylib_Matrix_m5_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m5=", mrb_raylib_Matrix_m5_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m9", mrb_raylib_Matrix_m9_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m9=", mrb_raylib_Matrix_m9_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m13", mrb_raylib_Matrix_m13_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m13=", mrb_raylib_Matrix_m13_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m2", mrb_raylib_Matrix_m2_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m2=", mrb_raylib_Matrix_m2_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m6", mrb_raylib_Matrix_m6_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m6=", mrb_raylib_Matrix_m6_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m10", mrb_raylib_Matrix_m10_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m10=", mrb_raylib_Matrix_m10_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m14", mrb_raylib_Matrix_m14_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m14=", mrb_raylib_Matrix_m14_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m3", mrb_raylib_Matrix_m3_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m3=", mrb_raylib_Matrix_m3_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m7", mrb_raylib_Matrix_m7_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m7=", mrb_raylib_Matrix_m7_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m11", mrb_raylib_Matrix_m11_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m11=", mrb_raylib_Matrix_m11_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix, "m15", mrb_raylib_Matrix_m15_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix, "m15=", mrb_raylib_Matrix_m15_set, MRB_ARGS_REQ(1));
 
     cRaylibColor = mrb_define_class_under(mrb, mRaylib, "Color", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibColor, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibColor, "initialize", mrb_raylib_Color_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibColor, "r", mrb_raylib_Color_r_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibColor, "r=", mrb_raylib_Color_r_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibColor, "g", mrb_raylib_Color_g_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibColor, "g=", mrb_raylib_Color_g_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibColor, "b", mrb_raylib_Color_b_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibColor, "b=", mrb_raylib_Color_b_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibColor, "a", mrb_raylib_Color_a_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibColor, "a=", mrb_raylib_Color_a_set, MRB_ARGS_REQ(1));
 
     cRaylibRectangle = mrb_define_class_under(mrb, mRaylib, "Rectangle", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRectangle, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibRectangle, "initialize", mrb_raylib_Rectangle_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibRectangle, "x", mrb_raylib_Rectangle_x_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRectangle, "x=", mrb_raylib_Rectangle_x_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRectangle, "y", mrb_raylib_Rectangle_y_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRectangle, "y=", mrb_raylib_Rectangle_y_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRectangle, "width", mrb_raylib_Rectangle_width_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRectangle, "width=", mrb_raylib_Rectangle_width_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRectangle, "height", mrb_raylib_Rectangle_height_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRectangle, "height=", mrb_raylib_Rectangle_height_set, MRB_ARGS_REQ(1));
 
     cRaylibImage = mrb_define_class_under(mrb, mRaylib, "Image", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibImage, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibImage, "initialize", mrb_raylib_Image_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibImage, "width", mrb_raylib_Image_width_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibImage, "width=", mrb_raylib_Image_width_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibImage, "height", mrb_raylib_Image_height_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibImage, "height=", mrb_raylib_Image_height_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibImage, "mipmaps", mrb_raylib_Image_mipmaps_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibImage, "mipmaps=", mrb_raylib_Image_mipmaps_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibImage, "format", mrb_raylib_Image_format_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibImage, "format=", mrb_raylib_Image_format_set, MRB_ARGS_REQ(1));
 
     cRaylibTexture = mrb_define_class_under(mrb, mRaylib, "Texture", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibTexture, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibTexture, "initialize", mrb_raylib_Texture_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibTexture, "id", mrb_raylib_Texture_id_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTexture, "id=", mrb_raylib_Texture_id_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTexture, "width", mrb_raylib_Texture_width_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTexture, "width=", mrb_raylib_Texture_width_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTexture, "height", mrb_raylib_Texture_height_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTexture, "height=", mrb_raylib_Texture_height_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTexture, "mipmaps", mrb_raylib_Texture_mipmaps_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTexture, "mipmaps=", mrb_raylib_Texture_mipmaps_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTexture, "format", mrb_raylib_Texture_format_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTexture, "format=", mrb_raylib_Texture_format_set, MRB_ARGS_REQ(1));
 
     cRaylibRenderTexture = mrb_define_class_under(mrb, mRaylib, "RenderTexture", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRenderTexture, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibRenderTexture, "initialize", mrb_raylib_RenderTexture_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibRenderTexture, "id", mrb_raylib_RenderTexture_id_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRenderTexture, "id=", mrb_raylib_RenderTexture_id_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRenderTexture, "texture", mrb_raylib_RenderTexture_texture_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRenderTexture, "texture=", mrb_raylib_RenderTexture_texture_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRenderTexture, "depth", mrb_raylib_RenderTexture_depth_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRenderTexture, "depth=", mrb_raylib_RenderTexture_depth_set, MRB_ARGS_REQ(1));
 
     cRaylibNPatchInfo = mrb_define_class_under(mrb, mRaylib, "NPatchInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibNPatchInfo, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibNPatchInfo, "initialize", mrb_raylib_NPatchInfo_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "source", mrb_raylib_NPatchInfo_source_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "source=", mrb_raylib_NPatchInfo_source_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "left", mrb_raylib_NPatchInfo_left_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "left=", mrb_raylib_NPatchInfo_left_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "top", mrb_raylib_NPatchInfo_top_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "top=", mrb_raylib_NPatchInfo_top_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "right", mrb_raylib_NPatchInfo_right_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "right=", mrb_raylib_NPatchInfo_right_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "bottom", mrb_raylib_NPatchInfo_bottom_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "bottom=", mrb_raylib_NPatchInfo_bottom_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibNPatchInfo, "layout", mrb_raylib_NPatchInfo_layout_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibNPatchInfo, "layout=", mrb_raylib_NPatchInfo_layout_set, MRB_ARGS_REQ(1));
 
     cRaylibGlyphInfo = mrb_define_class_under(mrb, mRaylib, "GlyphInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibGlyphInfo, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibGlyphInfo, "initialize", mrb_raylib_GlyphInfo_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibGlyphInfo, "value", mrb_raylib_GlyphInfo_value_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGlyphInfo, "value=", mrb_raylib_GlyphInfo_value_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGlyphInfo, "offsetX", mrb_raylib_GlyphInfo_offsetX_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGlyphInfo, "offsetX=", mrb_raylib_GlyphInfo_offsetX_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGlyphInfo, "offsetY", mrb_raylib_GlyphInfo_offsetY_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGlyphInfo, "offsetY=", mrb_raylib_GlyphInfo_offsetY_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGlyphInfo, "advanceX", mrb_raylib_GlyphInfo_advanceX_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGlyphInfo, "advanceX=", mrb_raylib_GlyphInfo_advanceX_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGlyphInfo, "image", mrb_raylib_GlyphInfo_image_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGlyphInfo, "image=", mrb_raylib_GlyphInfo_image_set, MRB_ARGS_REQ(1));
 
     cRaylibFont = mrb_define_class_under(mrb, mRaylib, "Font", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibFont, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibFont, "initialize", mrb_raylib_Font_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibFont, "baseSize", mrb_raylib_Font_baseSize_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "baseSize=", mrb_raylib_Font_baseSize_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibFont, "glyphCount", mrb_raylib_Font_glyphCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "glyphCount=", mrb_raylib_Font_glyphCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibFont, "glyphPadding", mrb_raylib_Font_glyphPadding_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "glyphPadding=", mrb_raylib_Font_glyphPadding_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibFont, "texture", mrb_raylib_Font_texture_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "texture=", mrb_raylib_Font_texture_set, MRB_ARGS_REQ(1));
 
     cRaylibCamera3D = mrb_define_class_under(mrb, mRaylib, "Camera3D", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibCamera3D, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibCamera3D, "initialize", mrb_raylib_Camera3D_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibCamera3D, "position", mrb_raylib_Camera3D_position_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera3D, "position=", mrb_raylib_Camera3D_position_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera3D, "target", mrb_raylib_Camera3D_target_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera3D, "target=", mrb_raylib_Camera3D_target_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera3D, "up", mrb_raylib_Camera3D_up_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera3D, "up=", mrb_raylib_Camera3D_up_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera3D, "fovy", mrb_raylib_Camera3D_fovy_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera3D, "fovy=", mrb_raylib_Camera3D_fovy_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera3D, "projection", mrb_raylib_Camera3D_projection_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera3D, "projection=", mrb_raylib_Camera3D_projection_set, MRB_ARGS_REQ(1));
 
     cRaylibCamera2D = mrb_define_class_under(mrb, mRaylib, "Camera2D", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibCamera2D, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibCamera2D, "initialize", mrb_raylib_Camera2D_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibCamera2D, "offset", mrb_raylib_Camera2D_offset_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera2D, "offset=", mrb_raylib_Camera2D_offset_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera2D, "target", mrb_raylib_Camera2D_target_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera2D, "target=", mrb_raylib_Camera2D_target_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera2D, "rotation", mrb_raylib_Camera2D_rotation_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera2D, "rotation=", mrb_raylib_Camera2D_rotation_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibCamera2D, "zoom", mrb_raylib_Camera2D_zoom_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibCamera2D, "zoom=", mrb_raylib_Camera2D_zoom_set, MRB_ARGS_REQ(1));
 
     cRaylibMesh = mrb_define_class_under(mrb, mRaylib, "Mesh", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMesh, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibMesh, "initialize", mrb_raylib_Mesh_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibMesh, "vertexCount", mrb_raylib_Mesh_vertexCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "vertexCount=", mrb_raylib_Mesh_vertexCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "triangleCount", mrb_raylib_Mesh_triangleCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "triangleCount=", mrb_raylib_Mesh_triangleCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "vaoId", mrb_raylib_Mesh_vaoId_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "vaoId=", mrb_raylib_Mesh_vaoId_set, MRB_ARGS_REQ(1));
 
     cRaylibShader = mrb_define_class_under(mrb, mRaylib, "Shader", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibShader, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibShader, "initialize", mrb_raylib_Shader_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibShader, "id", mrb_raylib_Shader_id_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibShader, "id=", mrb_raylib_Shader_id_set, MRB_ARGS_REQ(1));
 
     cRaylibMaterialMap = mrb_define_class_under(mrb, mRaylib, "MaterialMap", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMaterialMap, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibMaterialMap, "initialize", mrb_raylib_MaterialMap_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibMaterialMap, "texture", mrb_raylib_MaterialMap_texture_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterialMap, "texture=", mrb_raylib_MaterialMap_texture_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMaterialMap, "color", mrb_raylib_MaterialMap_color_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterialMap, "color=", mrb_raylib_MaterialMap_color_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMaterialMap, "value", mrb_raylib_MaterialMap_value_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterialMap, "value=", mrb_raylib_MaterialMap_value_set, MRB_ARGS_REQ(1));
 
     cRaylibMaterial = mrb_define_class_under(mrb, mRaylib, "Material", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMaterial, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibMaterial, "initialize", mrb_raylib_Material_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibMaterial, "shader", mrb_raylib_Material_shader_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterial, "shader=", mrb_raylib_Material_shader_set, MRB_ARGS_REQ(1));
 
     cRaylibTransform = mrb_define_class_under(mrb, mRaylib, "Transform", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibTransform, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibTransform, "initialize", mrb_raylib_Transform_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibTransform, "translation", mrb_raylib_Transform_translation_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTransform, "translation=", mrb_raylib_Transform_translation_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTransform, "rotation", mrb_raylib_Transform_rotation_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTransform, "rotation=", mrb_raylib_Transform_rotation_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibTransform, "scale", mrb_raylib_Transform_scale_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibTransform, "scale=", mrb_raylib_Transform_scale_set, MRB_ARGS_REQ(1));
 
     cRaylibBoneInfo = mrb_define_class_under(mrb, mRaylib, "BoneInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibBoneInfo, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibBoneInfo, "initialize", mrb_raylib_BoneInfo_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibBoneInfo, "name", mrb_raylib_BoneInfo_name_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibBoneInfo, "name=", mrb_raylib_BoneInfo_name_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibBoneInfo, "parent", mrb_raylib_BoneInfo_parent_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibBoneInfo, "parent=", mrb_raylib_BoneInfo_parent_set, MRB_ARGS_REQ(1));
 
     cRaylibModel = mrb_define_class_under(mrb, mRaylib, "Model", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibModel, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibModel, "initialize", mrb_raylib_Model_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibModel, "transform", mrb_raylib_Model_transform_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "transform=", mrb_raylib_Model_transform_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "meshCount", mrb_raylib_Model_meshCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "meshCount=", mrb_raylib_Model_meshCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "materialCount", mrb_raylib_Model_materialCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "materialCount=", mrb_raylib_Model_materialCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "boneCount", mrb_raylib_Model_boneCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "boneCount=", mrb_raylib_Model_boneCount_set, MRB_ARGS_REQ(1));
 
     cRaylibModelAnimation = mrb_define_class_under(mrb, mRaylib, "ModelAnimation", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibModelAnimation, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibModelAnimation, "initialize", mrb_raylib_ModelAnimation_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibModelAnimation, "boneCount", mrb_raylib_ModelAnimation_boneCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModelAnimation, "boneCount=", mrb_raylib_ModelAnimation_boneCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModelAnimation, "frameCount", mrb_raylib_ModelAnimation_frameCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModelAnimation, "frameCount=", mrb_raylib_ModelAnimation_frameCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModelAnimation, "name", mrb_raylib_ModelAnimation_name_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModelAnimation, "name=", mrb_raylib_ModelAnimation_name_set, MRB_ARGS_REQ(1));
 
     cRaylibRay = mrb_define_class_under(mrb, mRaylib, "Ray", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRay, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibRay, "initialize", mrb_raylib_Ray_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibRay, "position", mrb_raylib_Ray_position_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRay, "position=", mrb_raylib_Ray_position_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRay, "direction", mrb_raylib_Ray_direction_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRay, "direction=", mrb_raylib_Ray_direction_set, MRB_ARGS_REQ(1));
 
     cRaylibRayCollision = mrb_define_class_under(mrb, mRaylib, "RayCollision", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRayCollision, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibRayCollision, "initialize", mrb_raylib_RayCollision_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibRayCollision, "hit", mrb_raylib_RayCollision_hit_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRayCollision, "hit=", mrb_raylib_RayCollision_hit_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRayCollision, "distance", mrb_raylib_RayCollision_distance_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRayCollision, "distance=", mrb_raylib_RayCollision_distance_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRayCollision, "point", mrb_raylib_RayCollision_point_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRayCollision, "point=", mrb_raylib_RayCollision_point_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibRayCollision, "normal", mrb_raylib_RayCollision_normal_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibRayCollision, "normal=", mrb_raylib_RayCollision_normal_set, MRB_ARGS_REQ(1));
 
     cRaylibBoundingBox = mrb_define_class_under(mrb, mRaylib, "BoundingBox", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibBoundingBox, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibBoundingBox, "initialize", mrb_raylib_BoundingBox_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibBoundingBox, "min", mrb_raylib_BoundingBox_min_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibBoundingBox, "min=", mrb_raylib_BoundingBox_min_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibBoundingBox, "max", mrb_raylib_BoundingBox_max_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibBoundingBox, "max=", mrb_raylib_BoundingBox_max_set, MRB_ARGS_REQ(1));
 
     cRaylibWave = mrb_define_class_under(mrb, mRaylib, "Wave", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibWave, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibWave, "initialize", mrb_raylib_Wave_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibWave, "frameCount", mrb_raylib_Wave_frameCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibWave, "frameCount=", mrb_raylib_Wave_frameCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibWave, "sampleRate", mrb_raylib_Wave_sampleRate_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibWave, "sampleRate=", mrb_raylib_Wave_sampleRate_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibWave, "sampleSize", mrb_raylib_Wave_sampleSize_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibWave, "sampleSize=", mrb_raylib_Wave_sampleSize_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibWave, "channels", mrb_raylib_Wave_channels_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibWave, "channels=", mrb_raylib_Wave_channels_set, MRB_ARGS_REQ(1));
 
     cRaylibAudioStream = mrb_define_class_under(mrb, mRaylib, "AudioStream", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAudioStream, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibAudioStream, "initialize", mrb_raylib_AudioStream_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibAudioStream, "sampleRate", mrb_raylib_AudioStream_sampleRate_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAudioStream, "sampleRate=", mrb_raylib_AudioStream_sampleRate_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibAudioStream, "sampleSize", mrb_raylib_AudioStream_sampleSize_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAudioStream, "sampleSize=", mrb_raylib_AudioStream_sampleSize_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibAudioStream, "channels", mrb_raylib_AudioStream_channels_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAudioStream, "channels=", mrb_raylib_AudioStream_channels_set, MRB_ARGS_REQ(1));
 
     cRaylibSound = mrb_define_class_under(mrb, mRaylib, "Sound", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibSound, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibSound, "initialize", mrb_raylib_Sound_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibSound, "stream", mrb_raylib_Sound_stream_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibSound, "stream=", mrb_raylib_Sound_stream_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibSound, "frameCount", mrb_raylib_Sound_frameCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibSound, "frameCount=", mrb_raylib_Sound_frameCount_set, MRB_ARGS_REQ(1));
 
     cRaylibMusic = mrb_define_class_under(mrb, mRaylib, "Music", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMusic, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibMusic, "initialize", mrb_raylib_Music_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibMusic, "stream", mrb_raylib_Music_stream_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMusic, "stream=", mrb_raylib_Music_stream_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMusic, "frameCount", mrb_raylib_Music_frameCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMusic, "frameCount=", mrb_raylib_Music_frameCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMusic, "looping", mrb_raylib_Music_looping_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMusic, "looping=", mrb_raylib_Music_looping_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMusic, "ctxType", mrb_raylib_Music_ctxType_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMusic, "ctxType=", mrb_raylib_Music_ctxType_set, MRB_ARGS_REQ(1));
 
     cRaylibVrDeviceInfo = mrb_define_class_under(mrb, mRaylib, "VrDeviceInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrDeviceInfo, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "initialize", mrb_raylib_VrDeviceInfo_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "hResolution", mrb_raylib_VrDeviceInfo_hResolution_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "hResolution=", mrb_raylib_VrDeviceInfo_hResolution_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vResolution", mrb_raylib_VrDeviceInfo_vResolution_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vResolution=", mrb_raylib_VrDeviceInfo_vResolution_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "hScreenSize", mrb_raylib_VrDeviceInfo_hScreenSize_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "hScreenSize=", mrb_raylib_VrDeviceInfo_hScreenSize_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenSize", mrb_raylib_VrDeviceInfo_vScreenSize_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenSize=", mrb_raylib_VrDeviceInfo_vScreenSize_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenCenter", mrb_raylib_VrDeviceInfo_vScreenCenter_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenCenter=", mrb_raylib_VrDeviceInfo_vScreenCenter_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "eyeToScreenDistance", mrb_raylib_VrDeviceInfo_eyeToScreenDistance_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "eyeToScreenDistance=", mrb_raylib_VrDeviceInfo_eyeToScreenDistance_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensSeparationDistance", mrb_raylib_VrDeviceInfo_lensSeparationDistance_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensSeparationDistance=", mrb_raylib_VrDeviceInfo_lensSeparationDistance_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "interpupillaryDistance", mrb_raylib_VrDeviceInfo_interpupillaryDistance_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "interpupillaryDistance=", mrb_raylib_VrDeviceInfo_interpupillaryDistance_set, MRB_ARGS_REQ(1));
 
     cRaylibVrStereoConfig = mrb_define_class_under(mrb, mRaylib, "VrStereoConfig", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrStereoConfig, MRB_TT_DATA);
@@ -1562,6 +3566,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
     cRaylibFilePathList = mrb_define_class_under(mrb, mRaylib, "FilePathList", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibFilePathList, MRB_TT_DATA);
     mrb_define_method(mrb, cRaylibFilePathList, "initialize", mrb_raylib_FilePathList_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibFilePathList, "capacity", mrb_raylib_FilePathList_capacity_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFilePathList, "capacity=", mrb_raylib_FilePathList_capacity_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibFilePathList, "count", mrb_raylib_FilePathList_count_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFilePathList, "count=", mrb_raylib_FilePathList_count_set, MRB_ARGS_REQ(1));
 
 
 }
