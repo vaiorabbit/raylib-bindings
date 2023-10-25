@@ -312,14 +312,54 @@ def generate_structunion_methods(ctx, indent = "", struct_prefix="", struct_post
         # Name of struct/class must be start with capital letter
         struct_name = struct_name[0].upper() + struct_name[1:]
 
+        len_members = len(struct_info.fields)
+
         # Initializer
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_initialize(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = ({struct_name}*)mrb_malloc(mrb, sizeof({struct_name}));', file = sys.stdout)
         print(indent + f'    // TODO per-member initialization', file = sys.stdout)
+        print(indent + f'    mrb_int argc = mrb_get_argc(mrb);', file = sys.stdout)
+        print(indent + f'    switch (argc) {{', file = sys.stdout)
+        print(indent + f'    case 0:', file = sys.stdout)
+        print(indent + f'    {{', file = sys.stdout)
+        print(indent + f'        memset(instance, 0, sizeof({struct_name}));', file = sys.stdout)
+        print(indent + f'        break;', file = sys.stdout)
+        print(indent + f'    }}', file = sys.stdout)
+        print(indent + f'    case {len_members}:', file = sys.stdout)
+        print(indent + f'    {{', file = sys.stdout)
+        print(indent + f'        mrb_value argv[{len_members}];', file = sys.stdout)
+        argv_ptrs = "{ "
+        for i in range(len_members):
+            argv_ptrs += f'&argv[{i}], '
+        argv_ptrs += "}"
+        print(indent + f'        void* ptrs[{len_members}] = {argv_ptrs};', file = sys.stdout)
+        format_string = "o" * len_members
+        print(indent + f'        mrb_get_args_a(mrb, "{format_string}", ptrs);', file = sys.stdout)
+
+        for idx, field in enumerate(struct_info.fields):
+            if field.element_count > 1:
+                if "char" in field.type_name:
+                    print(indent + f'        strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv[{idx}]), sizeof(char) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+                else:
+                    print(indent + f'        memcpy(instance->{field.element_name}, DATA_PTR(argv[{idx}]), sizeof({field.type_name}) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            elif "*" in field.type_name:
+                print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            elif any(ch.isupper() for ch in field.type_name):
+                print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            elif "float" in field.type_name:
+                print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            else:
+                print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            # print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]); // {field.type_kind} {field.type_name}', file = sys.stdout)
+
+        print(indent + f'    }}', file = sys.stdout)
+        print(indent + f'    break;', file = sys.stdout)
+        print(indent + f'    }}', file = sys.stdout)
+
         print(indent + f'    mrb_data_init(self, instance, &mrb_raylib_struct_{struct_name});', file = sys.stdout)
         print(indent + '    return self;', file = sys.stdout)
-        print(indent + '};', file = sys.stdout)
+        print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
 
     if struct_postfix != "":
@@ -492,6 +532,8 @@ def generate(ctx, prefix = PREFIX, postfix = POSTFIX, *, module_name = "", table
 #include <mruby/string.h>
 
 #include <raylib.h>
+
+#include <string.h>
 
 struct RClass* mRaylib;
 

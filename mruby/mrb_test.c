@@ -14,8 +14,15 @@ int main(void)
 
     char ruby_code[] =
         "p Raylib::RAYLIB_VERSION\n"
-        "color = Raylib::Color.new\n"
+        "color = Raylib::Color.new(255, 255, 255, 255)\n"
         "p color\n"
+        "vx = Raylib::Vector3.new(1.0, 0.0, 0.0)\n"
+        "vy = Raylib::Vector3.new(0.0, 1.0, 0.0)\n"
+        "p vx, vy\n"
+        "rc = Raylib::RayCollision.new(0, 3.0, vx, vy)\n"
+        "p rc\n"
+        "bi = Raylib::BoneInfo.new('Hi There!', 123)\n"
+        "p bi\n"
         ;
 
     mrb_load_string(mrb, ruby_code);
