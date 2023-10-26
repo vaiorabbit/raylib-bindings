@@ -336,17 +336,17 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
     for idx, field in enumerate(struct_info.fields):
         if field.element_count > 1:
             if "char" in field.type_name:
-                print(indent + f'        strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv[{idx}]), sizeof(char) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+                print(indent + f'        strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv[{idx}]), sizeof(char) * {field.element_count});', file = sys.stdout)
             else:
-                print(indent + f'        memcpy(instance->{field.element_name}, DATA_PTR(argv[{idx}]), sizeof({field.type_name}) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+                print(indent + f'        memcpy(instance->{field.element_name}, DATA_PTR(argv[{idx}]), sizeof({field.type_name}) * {field.element_count});', file = sys.stdout)
         elif "*" in field.type_name:
-            print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]);', file = sys.stdout)
         elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv[{idx}]);', file = sys.stdout)
         elif "float" in field.type_name:
-            print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]);', file = sys.stdout)
         else:
-            print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]);', file = sys.stdout)
 
     print(indent + f'    }}', file = sys.stdout)
     print(indent + f'    break;', file = sys.stdout)
@@ -370,8 +370,14 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
     for idx, field in enumerate(struct_info.fields):
         if field.element_count > 1:
             if not "char" in field.type_name:
-                continue # TODO add accessor to handle array
+                print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array', file = sys.stdout)
+                print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array', file = sys.stdout)
+                print("", file = sys.stdout)
+                continue # TODO add accessor which can handle array
         elif "*" in field.type_name:
+            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
+            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
+            print("", file = sys.stdout)
             continue # TODO prepare Buffer version of classes
 
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self)', file = sys.stdout)
@@ -397,17 +403,17 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         print(indent + '    mrb_get_args(mrb, "o", &argv);', file = sys.stdout)
         if field.element_count > 1:
             if "char" in field.type_name:
-                print(indent + f'    strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv), sizeof(char) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+                print(indent + f'    strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv), sizeof(char) * {field.element_count});', file = sys.stdout)
             else:
-                print(indent + f'    memcpy(instance->{field.element_name}, DATA_PTR(argv), sizeof({field.type_name}) * {field.element_count}); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+                print(indent + f'    memcpy(instance->{field.element_name}, DATA_PTR(argv), sizeof({field.type_name}) * {field.element_count});', file = sys.stdout)
         elif "*" in field.type_name:
-            print(indent + f'    instance->{field.element_name} = DATA_PTR(argv); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'    instance->{field.element_name} = DATA_PTR(argv);', file = sys.stdout)
         elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv);', file = sys.stdout)
         elif "float" in field.type_name:
-            print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
         else:
-            print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv); // {field.type_kind} {field.type_name} {field.element_count}', file = sys.stdout)
+            print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
         print(indent + '    return self;', file = sys.stdout)
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
@@ -442,8 +448,12 @@ def generate_structunion_define_class(ctx, indent = "", struct_prefix="", struct
         for idx, field in enumerate(struct_info.fields):
             if field.element_count > 1:
                 if not "char" in field.type_name:
-                    continue # TODO add accessor to handle array
+                    print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array', file = sys.stdout)
+                    print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array', file = sys.stdout)
+                    continue # TODO add accessor which can handle array
             elif "*" in field.type_name:
+                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes', file = sys.stdout)
+                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes', file = sys.stdout)
                 continue # TODO prepare Buffer version of classes
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE());', file = sys.stdout)
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1));', file = sys.stdout)
