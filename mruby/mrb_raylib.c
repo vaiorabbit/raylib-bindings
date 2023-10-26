@@ -2848,4010 +2848,6611 @@ static mrb_value mrb_raylib_FilePathList_count_set(mrb_state* mrb, mrb_value sel
 
 // Function
 
-static mrb_value mrb_raylib_InitWindow(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_InitWindow(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    const char * title = DATA_PTR(argv[2]);
+
+    InitWindow(width, height, title);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_WindowShouldClose(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_WindowShouldClose(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = WindowShouldClose();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CloseWindow(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_CloseWindow(mrb_state* mrb, mrb_value self)
 {
+    CloseWindow();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsWindowReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowReady(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowReady();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowFullscreen(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowFullscreen(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowFullscreen();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowHidden(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowHidden(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowHidden();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowMinimized(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowMinimized(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowMinimized();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowMaximized(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowMaximized(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowMaximized();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowFocused(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowFocused(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowFocused();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowResized(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowResized(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsWindowResized();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsWindowState(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWindowState(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    unsigned int flag = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsWindowState(flag);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetWindowState(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowState(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int flags = mrb_as_int(mrb, argv[0]);
+
+    SetWindowState(flags);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ClearWindowState(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ClearWindowState(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int flags = mrb_as_int(mrb, argv[0]);
+
+    ClearWindowState(flags);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ToggleFullscreen(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ToggleFullscreen(mrb_state* mrb, mrb_value self)
 {
+    ToggleFullscreen();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ToggleBorderlessWindowed(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ToggleBorderlessWindowed(mrb_state* mrb, mrb_value self)
 {
+    ToggleBorderlessWindowed();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_MaximizeWindow(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_MaximizeWindow(mrb_state* mrb, mrb_value self)
 {
+    MaximizeWindow();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_MinimizeWindow(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_MinimizeWindow(mrb_state* mrb, mrb_value self)
 {
+    MinimizeWindow();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_RestoreWindow(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_RestoreWindow(mrb_state* mrb, mrb_value self)
 {
+    RestoreWindow();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowIcon(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowIcon(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    SetWindowIcon(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowIcons(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowIcons(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * images = DATA_PTR(argv[0]);
+    int count = mrb_as_int(mrb, argv[1]);
+
+    SetWindowIcons(images, count);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowTitle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowTitle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    const char * title = DATA_PTR(argv[0]);
+
+    SetWindowTitle(title);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowPosition(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowPosition(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int x = mrb_as_int(mrb, argv[0]);
+    int y = mrb_as_int(mrb, argv[1]);
+
+    SetWindowPosition(x, y);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowMonitor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowMonitor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    SetWindowMonitor(monitor);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowMinSize(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowMinSize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+
+    SetWindowMinSize(width, height);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowMaxSize(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowMaxSize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+
+    SetWindowMaxSize(width, height);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowSize(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowSize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+
+    SetWindowSize(width, height);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowOpacity(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowOpacity(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    float opacity = mrb_as_float(mrb, argv[0]);
+
+    SetWindowOpacity(opacity);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetWindowFocused(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetWindowFocused(mrb_state* mrb, mrb_value self)
 {
+    SetWindowFocused();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetWindowHandle(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'void *'}
+static mrb_value mrb_raylib_GetWindowHandle(mrb_state* mrb, mrb_value self)
 {
-    return mrb_nil_value();
+    void * retval = GetWindowHandle();
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_GetScreenWidth(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetScreenWidth(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetScreenWidth();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetScreenHeight(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetScreenHeight(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetScreenHeight();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetRenderWidth(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetRenderWidth(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetRenderWidth();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetRenderHeight(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetRenderHeight(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetRenderHeight();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorCount(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorCount(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetMonitorCount();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetCurrentMonitor(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCurrentMonitor(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetCurrentMonitor();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorPosition(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetMonitorPosition(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetMonitorPosition(monitor);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetMonitorWidth(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorWidth(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetMonitorWidth(monitor);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorHeight(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorHeight(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetMonitorHeight(monitor);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorPhysicalWidth(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorPhysicalWidth(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetMonitorPhysicalWidth(monitor);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorPhysicalHeight(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorPhysicalHeight(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetMonitorPhysicalHeight(monitor);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMonitorRefreshRate(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMonitorRefreshRate(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetMonitorRefreshRate(monitor);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetWindowPosition(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetWindowPosition(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetWindowPosition();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetWindowScaleDPI(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetWindowScaleDPI(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetWindowScaleDPI();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetMonitorName(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_SetClipboardText(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_GetClipboardText(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_EnableEventWaiting(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DisableEventWaiting(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SwapScreenBuffer(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_PollInputEvents(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_WaitTime(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_GetMonitorName(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
+    int monitor = mrb_as_int(mrb, argv[0]);
+
+    const char * retval = GetMonitorName(monitor);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_ShowCursor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_HideCursor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_IsCursorHidden(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_EnableCursor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DisableCursor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_IsCursorOnScreen(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_ClearBackground(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetClipboardText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    const char * text = DATA_PTR(argv[0]);
+
+    SetClipboardText(text);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginDrawing(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_GetClipboardText(mrb_state* mrb, mrb_value self)
 {
-    return mrb_nil_value();
+    const char * retval = GetClipboardText();
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_EndDrawing(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_EnableEventWaiting(mrb_state* mrb, mrb_value self)
 {
+    EnableEventWaiting();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginMode2D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DisableEventWaiting(mrb_state* mrb, mrb_value self)
 {
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
+    DisableEventWaiting();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndMode2D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SwapScreenBuffer(mrb_state* mrb, mrb_value self)
 {
+    SwapScreenBuffer();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginMode3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PollInputEvents(mrb_state* mrb, mrb_value self)
 {
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
+    PollInputEvents();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndMode3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_BeginTextureMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_EndTextureMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_BeginShaderMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_WaitTime(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    double seconds = mrb_as_int(mrb, argv[0]);
+
+    WaitTime(seconds);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndShaderMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ShowCursor(mrb_state* mrb, mrb_value self)
 {
+    ShowCursor();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginBlendMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_HideCursor(mrb_state* mrb, mrb_value self)
+{
+    HideCursor();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_IsCursorHidden(mrb_state* mrb, mrb_value self)
+{
+    bool retval = IsCursorHidden();
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_EnableCursor(mrb_state* mrb, mrb_value self)
+{
+    EnableCursor();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DisableCursor(mrb_state* mrb, mrb_value self)
+{
+    DisableCursor();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_IsCursorOnScreen(mrb_state* mrb, mrb_value self)
+{
+    bool retval = IsCursorOnScreen();
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_ClearBackground(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Color color = *(Color*)DATA_PTR(argv[0]);
+
+    ClearBackground(color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndBlendMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_BeginDrawing(mrb_state* mrb, mrb_value self)
 {
+    BeginDrawing();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginScissorMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_EndDrawing(mrb_state* mrb, mrb_value self)
+{
+    EndDrawing();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginMode2D(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
+
+    BeginMode2D(camera);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_EndMode2D(mrb_state* mrb, mrb_value self)
+{
+    EndMode2D();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginMode3D(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Camera3D camera = *(Camera3D*)DATA_PTR(argv[0]);
+
+    BeginMode3D(camera);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_EndMode3D(mrb_state* mrb, mrb_value self)
+{
+    EndMode3D();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginTextureMode(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+
+    BeginTextureMode(target);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_EndTextureMode(mrb_state* mrb, mrb_value self)
+{
+    EndTextureMode();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginShaderMode(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+
+    BeginShaderMode(shader);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_EndShaderMode(mrb_state* mrb, mrb_value self)
+{
+    EndShaderMode();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginBlendMode(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int mode = mrb_as_int(mrb, argv[0]);
+
+    BeginBlendMode(mode);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_EndBlendMode(mrb_state* mrb, mrb_value self)
+{
+    EndBlendMode();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_BeginScissorMode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    int x = mrb_as_int(mrb, argv[0]);
+    int y = mrb_as_int(mrb, argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+
+    BeginScissorMode(x, y, width, height);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndScissorMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_EndScissorMode(mrb_state* mrb, mrb_value self)
 {
+    EndScissorMode();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_BeginVrStereoMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_BeginVrStereoMode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    VrStereoConfig config = *(VrStereoConfig*)DATA_PTR(argv[0]);
+
+    BeginVrStereoMode(config);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_EndVrStereoMode(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_EndVrStereoMode(mrb_state* mrb, mrb_value self)
 {
+    EndVrStereoMode();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadVrStereoConfig(mrb_state* mrb, mrb_value self) // {'type_kind': 'VrStereoConfig', 'type_name': 'VrStereoConfig'}
+static mrb_value mrb_raylib_LoadVrStereoConfig(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    VrDeviceInfo device = *(VrDeviceInfo*)DATA_PTR(argv[0]);
+
+    VrStereoConfig* retval;
+    /* TODO return newly allocated object */ *retval = LoadVrStereoConfig(device);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVrStereoConfig, &mrb_raylib_struct_VrStereoConfig, retval));
 }
 
-static mrb_value mrb_raylib_UnloadVrStereoConfig(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadVrStereoConfig(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    VrStereoConfig config = *(VrStereoConfig*)DATA_PTR(argv[0]);
+
+    UnloadVrStereoConfig(config);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadShader(mrb_state* mrb, mrb_value self) // {'type_kind': 'Shader', 'type_name': 'Shader'}
+static mrb_value mrb_raylib_LoadShader(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * vsFileName = DATA_PTR(argv[0]);
+    const char * fsFileName = DATA_PTR(argv[1]);
+
+    Shader* retval;
+    /* TODO return newly allocated object */ *retval = LoadShader(vsFileName, fsFileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibShader, &mrb_raylib_struct_Shader, retval));
 }
 
-static mrb_value mrb_raylib_LoadShaderFromMemory(mrb_state* mrb, mrb_value self) // {'type_kind': 'Shader', 'type_name': 'Shader'}
+static mrb_value mrb_raylib_LoadShaderFromMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * vsCode = DATA_PTR(argv[0]);
+    const char * fsCode = DATA_PTR(argv[1]);
+
+    Shader* retval;
+    /* TODO return newly allocated object */ *retval = LoadShaderFromMemory(vsCode, fsCode);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibShader, &mrb_raylib_struct_Shader, retval));
 }
 
-static mrb_value mrb_raylib_IsShaderReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsShaderReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+
+    bool retval = IsShaderReady(shader);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetShaderLocation(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetShaderLocation(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    const char * uniformName = DATA_PTR(argv[1]);
+
+    int retval = GetShaderLocation(shader, uniformName);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetShaderLocationAttrib(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetShaderLocationAttrib(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    const char * attribName = DATA_PTR(argv[1]);
+
+    int retval = GetShaderLocationAttrib(shader, attribName);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_SetShaderValue(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetShaderValue(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    int locIndex = mrb_as_int(mrb, argv[1]);
+    const void * value = DATA_PTR(argv[2]);
+    int uniformType = mrb_as_int(mrb, argv[3]);
+
+    SetShaderValue(shader, locIndex, value, uniformType);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetShaderValueV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetShaderValueV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    int locIndex = mrb_as_int(mrb, argv[1]);
+    const void * value = DATA_PTR(argv[2]);
+    int uniformType = mrb_as_int(mrb, argv[3]);
+    int count = mrb_as_int(mrb, argv[4]);
+
+    SetShaderValueV(shader, locIndex, value, uniformType, count);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetShaderValueMatrix(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetShaderValueMatrix(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    int locIndex = mrb_as_int(mrb, argv[1]);
+    Matrix mat = *(Matrix*)DATA_PTR(argv[2]);
+
+    SetShaderValueMatrix(shader, locIndex, mat);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetShaderValueTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetShaderValueTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    int locIndex = mrb_as_int(mrb, argv[1]);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[2]);
+
+    SetShaderValueTexture(shader, locIndex, texture);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadShader(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadShader(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+
+    UnloadShader(shader);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetMouseRay(mrb_state* mrb, mrb_value self) // {'type_kind': 'Ray', 'type_name': 'Ray'}
+static mrb_value mrb_raylib_GetMouseRay(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Vector2 mousePosition = *(Vector2*)DATA_PTR(argv[0]);
+    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+
+    Ray* retval;
+    /* TODO return newly allocated object */ *retval = GetMouseRay(mousePosition, camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRay, &mrb_raylib_struct_Ray, retval));
 }
 
-static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self) // {'type_kind': 'Matrix', 'type_name': 'Matrix'}
+static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+
+    Matrix* retval;
+    /* TODO return newly allocated object */ *retval = GetCameraMatrix(camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
 }
 
-static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self) // {'type_kind': 'Matrix', 'type_name': 'Matrix'}
+static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
+
+    Matrix* retval;
+    /* TODO return newly allocated object */ *retval = GetCameraMatrix2D(camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
 }
 
-static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetWorldToScreen(position, camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetScreenToWorld2D(position, camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetWorldToScreenEx(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetWorldToScreenEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetWorldToScreenEx(position, camera, width, height);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetWorldToScreen2D(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetWorldToScreen2D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetWorldToScreen2D(position, camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_SetTargetFPS(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetTargetFPS(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int fps = mrb_as_int(mrb, argv[0]);
+
+    SetTargetFPS(fps);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetFPS(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetFPS(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetFPS();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetFrameTime(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetFrameTime(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    float retval = GetFrameTime();
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetTime(mrb_state* mrb, mrb_value self) // {'type_kind': ':double', 'type_name': 'double'}
+static mrb_value mrb_raylib_GetTime(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    double retval = GetTime();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetRandomValue(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetRandomValue(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int min = mrb_as_int(mrb, argv[0]);
+    int max = mrb_as_int(mrb, argv[1]);
+
+    int retval = GetRandomValue(min, max);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_SetRandomSeed(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetRandomSeed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int seed = mrb_as_int(mrb, argv[0]);
+
+    SetRandomSeed(seed);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_TakeScreenshot(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_TakeScreenshot(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    TakeScreenshot(fileName);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetConfigFlags(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetConfigFlags(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int flags = mrb_as_int(mrb, argv[0]);
+
+    SetConfigFlags(flags);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_TraceLog(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetTraceLogLevel(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int logLevel = mrb_as_int(mrb, argv[0]);
+
+    SetTraceLogLevel(logLevel);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_MemAlloc(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int size = mrb_as_int(mrb, argv[0]);
+
+    void * retval = MemAlloc(size);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_MemRealloc(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    void * ptr = DATA_PTR(argv[0]);
+    unsigned int size = mrb_as_int(mrb, argv[1]);
+
+    void * retval = MemRealloc(ptr, size);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_MemFree(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    void * ptr = DATA_PTR(argv[0]);
+
+    MemFree(ptr);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_OpenURL(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * url = DATA_PTR(argv[0]);
+
+    OpenURL(url);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetTraceLogCallback(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    TraceLogCallback callback = *(TraceLogCallback*)DATA_PTR(argv[0]);
+
+    SetTraceLogCallback(callback);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetLoadFileDataCallback(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    LoadFileDataCallback callback = *(LoadFileDataCallback*)DATA_PTR(argv[0]);
+
+    SetLoadFileDataCallback(callback);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetSaveFileDataCallback(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    SaveFileDataCallback callback = *(SaveFileDataCallback*)DATA_PTR(argv[0]);
+
+    SetSaveFileDataCallback(callback);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetLoadFileTextCallback(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    LoadFileTextCallback callback = *(LoadFileTextCallback*)DATA_PTR(argv[0]);
+
+    SetLoadFileTextCallback(callback);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetSaveFileTextCallback(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    SaveFileTextCallback callback = *(SaveFileTextCallback*)DATA_PTR(argv[0]);
+
+    SetSaveFileTextCallback(callback);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_LoadFileData(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+    int * dataSize = DATA_PTR(argv[1]);
+
+    unsigned char * retval = LoadFileData(fileName, dataSize);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_UnloadFileData(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    unsigned char * data = DATA_PTR(argv[0]);
+
+    UnloadFileData(data);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SaveFileData(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return mrb_nil_value();
+    const char * fileName = DATA_PTR(argv[0]);
+    void * data = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+
+    bool retval = SaveFileData(fileName, data, dataSize);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetTraceLogLevel(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_MemAlloc(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'void *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_MemRealloc(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'void *'}
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_MemFree(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_OpenURL(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SetTraceLogCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SetLoadFileDataCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SetSaveFileDataCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SetLoadFileTextCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SetSaveFileTextCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_LoadFileData(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'unsigned char *'}
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_UnloadFileData(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_SaveFileData(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportDataAsCode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const unsigned char * data = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+    const char * fileName = DATA_PTR(argv[2]);
+
+    bool retval = ExportDataAsCode(data, dataSize, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_ExportDataAsCode(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_LoadFileText(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    char * retval = LoadFileText(fileName);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_UnloadFileText(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    char * text = DATA_PTR(argv[0]);
+
+    UnloadFileText(text);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SaveFileText(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+    char * text = DATA_PTR(argv[1]);
+
+    bool retval = SaveFileText(fileName, text);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_FileExists(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    bool retval = FileExists(fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_DirectoryExists(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * dirPath = DATA_PTR(argv[0]);
+
+    bool retval = DirectoryExists(dirPath);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_IsFileExtension(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+    const char * ext = DATA_PTR(argv[1]);
+
+    bool retval = IsFileExtension(fileName, ext);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_GetFileLength(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    int retval = GetFileLength(fileName);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GetFileExtension(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    const char * retval = GetFileExtension(fileName);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetFileName(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * filePath = DATA_PTR(argv[0]);
+
+    const char * retval = GetFileName(filePath);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetFileNameWithoutExt(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * filePath = DATA_PTR(argv[0]);
+
+    const char * retval = GetFileNameWithoutExt(filePath);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetDirectoryPath(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * filePath = DATA_PTR(argv[0]);
+
+    const char * retval = GetDirectoryPath(filePath);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetPrevDirectoryPath(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * dirPath = DATA_PTR(argv[0]);
+
+    const char * retval = GetPrevDirectoryPath(dirPath);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetWorkingDirectory(mrb_state* mrb, mrb_value self)
+{
+    const char * retval = GetWorkingDirectory();
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_GetApplicationDirectory(mrb_state* mrb, mrb_value self)
+{
+    const char * retval = GetApplicationDirectory();
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_ChangeDirectory(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * dir = DATA_PTR(argv[0]);
+
+    bool retval = ChangeDirectory(dir);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_IsPathFile(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * path = DATA_PTR(argv[0]);
+
+    bool retval = IsPathFile(path);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_LoadDirectoryFiles(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * dirPath = DATA_PTR(argv[0]);
+
+    FilePathList* retval;
+    /* TODO return newly allocated object */ *retval = LoadDirectoryFiles(dirPath);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
+}
+
+static mrb_value mrb_raylib_LoadDirectoryFilesEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * basePath = DATA_PTR(argv[0]);
+    const char * filter = DATA_PTR(argv[1]);
+    bool scanSubdirs = mrb_as_int(mrb, argv[2]);
+
+    FilePathList* retval;
+    /* TODO return newly allocated object */ *retval = LoadDirectoryFilesEx(basePath, filter, scanSubdirs);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
 }
 
-static mrb_value mrb_raylib_LoadFileText(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'char *'}
+static mrb_value mrb_raylib_UnloadDirectoryFiles(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
+    FilePathList files = *(FilePathList*)DATA_PTR(argv[0]);
 
-static mrb_value mrb_raylib_UnloadFileText(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
+    UnloadDirectoryFiles(files);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SaveFileText(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsFileDropped(mrb_state* mrb, mrb_value self)
 {
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    bool retval = IsFileDropped();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_FileExists(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_LoadDroppedFiles(mrb_state* mrb, mrb_value self)
 {
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    FilePathList* retval;
+    /* TODO return newly allocated object */ *retval = LoadDroppedFiles();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
 }
 
-static mrb_value mrb_raylib_DirectoryExists(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_UnloadDroppedFiles(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    FilePathList files = *(FilePathList*)DATA_PTR(argv[0]);
+
+    UnloadDroppedFiles(files);
+
+    return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsFileExtension(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetFileLength(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetFileModTime(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    long retval = GetFileModTime(fileName);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetFileExtension(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetFileName(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetFileNameWithoutExt(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetDirectoryPath(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetPrevDirectoryPath(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetWorkingDirectory(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_GetApplicationDirectory(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_ChangeDirectory(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_IsPathFile(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_LoadDirectoryFiles(mrb_state* mrb, mrb_value self) // {'type_kind': 'FilePathList', 'type_name': 'FilePathList'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_LoadDirectoryFilesEx(mrb_state* mrb, mrb_value self) // {'type_kind': 'FilePathList', 'type_name': 'FilePathList'}
+static mrb_value mrb_raylib_CompressData(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const unsigned char * data = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+    int * compDataSize = DATA_PTR(argv[2]);
+
+    unsigned char * retval = CompressData(data, dataSize, compDataSize);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UnloadDirectoryFiles(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_IsFileDropped(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_LoadDroppedFiles(mrb_state* mrb, mrb_value self) // {'type_kind': 'FilePathList', 'type_name': 'FilePathList'}
-{
-    return self;
-}
-
-static mrb_value mrb_raylib_UnloadDroppedFiles(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_GetFileModTime(mrb_state* mrb, mrb_value self) // {'type_kind': ':long', 'type_name': 'long'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_CompressData(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'unsigned char *'}
+static mrb_value mrb_raylib_DecompressData(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const unsigned char * compData = DATA_PTR(argv[0]);
+    int compDataSize = mrb_as_int(mrb, argv[1]);
+    int * dataSize = DATA_PTR(argv[2]);
+
+    unsigned char * retval = DecompressData(compData, compDataSize, dataSize);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_DecompressData(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'unsigned char *'}
+static mrb_value mrb_raylib_EncodeDataBase64(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const unsigned char * data = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+    int * outputSize = DATA_PTR(argv[2]);
+
+    char * retval = EncodeDataBase64(data, dataSize, outputSize);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_EncodeDataBase64(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'char *'}
-{
-    mrb_value argv[3];
-    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
-    mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_DecodeDataBase64(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'unsigned char *'}
+static mrb_value mrb_raylib_DecodeDataBase64(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const unsigned char * data = DATA_PTR(argv[0]);
+    int * outputSize = DATA_PTR(argv[1]);
+
+    unsigned char * retval = DecodeDataBase64(data, outputSize);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_IsKeyPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsKeyPressed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int key = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsKeyPressed(key);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsKeyPressedRepeat(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsKeyPressedRepeat(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int key = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsKeyPressedRepeat(key);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsKeyDown(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsKeyDown(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int key = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsKeyDown(key);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsKeyReleased(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsKeyReleased(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int key = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsKeyReleased(key);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsKeyUp(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsKeyUp(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int key = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsKeyUp(key);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetExitKey(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetExitKey(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int key = mrb_as_int(mrb, argv[0]);
+
+    SetExitKey(key);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetKeyPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetKeyPressed(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetKeyPressed();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetCharPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCharPressed(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetCharPressed();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_IsGamepadAvailable(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_GetGamepadName(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_IsGamepadAvailable(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsGamepadAvailable(gamepad);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsGamepadButtonPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_GetGamepadName(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int gamepad = mrb_as_int(mrb, argv[0]);
+
+    const char * retval = GetGamepadName(gamepad);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_IsGamepadButtonPressed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    int button = mrb_as_int(mrb, argv[1]);
+
+    bool retval = IsGamepadButtonPressed(gamepad, button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsGamepadButtonDown(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsGamepadButtonDown(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    int button = mrb_as_int(mrb, argv[1]);
+
+    bool retval = IsGamepadButtonDown(gamepad, button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsGamepadButtonReleased(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsGamepadButtonReleased(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    int button = mrb_as_int(mrb, argv[1]);
+
+    bool retval = IsGamepadButtonReleased(gamepad, button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsGamepadButtonUp(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsGamepadButtonUp(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    int button = mrb_as_int(mrb, argv[1]);
+
+    bool retval = IsGamepadButtonUp(gamepad, button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetGamepadButtonPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetGamepadButtonPressed(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetGamepadButtonPressed();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGamepadAxisCount(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetGamepadAxisCount(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetGamepadAxisCount(gamepad);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGamepadAxisMovement(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetGamepadAxisMovement(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    int axis = mrb_as_int(mrb, argv[1]);
+
+    float retval = GetGamepadAxisMovement(gamepad, axis);
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_SetGamepadMappings(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_SetGamepadMappings(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * mappings = DATA_PTR(argv[0]);
+
+    int retval = SetGamepadMappings(mappings);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_IsMouseButtonPressed(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMouseButtonPressed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int button = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsMouseButtonPressed(button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsMouseButtonDown(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMouseButtonDown(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int button = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsMouseButtonDown(button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsMouseButtonReleased(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMouseButtonReleased(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int button = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsMouseButtonReleased(button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_IsMouseButtonUp(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMouseButtonUp(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int button = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsMouseButtonUp(button);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetMouseX(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMouseX(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetMouseX();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMouseY(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetMouseY(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetMouseY();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMousePosition(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetMousePosition(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetMousePosition();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetMouseDelta(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetMouseDelta(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetMouseDelta();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_SetMousePosition(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMousePosition(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int x = mrb_as_int(mrb, argv[0]);
+    int y = mrb_as_int(mrb, argv[1]);
+
+    SetMousePosition(x, y);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMouseOffset(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMouseOffset(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int offsetX = mrb_as_int(mrb, argv[0]);
+    int offsetY = mrb_as_int(mrb, argv[1]);
+
+    SetMouseOffset(offsetX, offsetY);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMouseScale(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMouseScale(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    float scaleX = mrb_as_float(mrb, argv[0]);
+    float scaleY = mrb_as_float(mrb, argv[1]);
+
+    SetMouseScale(scaleX, scaleY);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetMouseWheelMove(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetMouseWheelMove(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    float retval = GetMouseWheelMove();
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMouseWheelMoveV(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetMouseWheelMoveV(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetMouseWheelMoveV();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_SetMouseCursor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMouseCursor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int cursor = mrb_as_int(mrb, argv[0]);
+
+    SetMouseCursor(cursor);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetTouchX(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetTouchX(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetTouchX();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetTouchY(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetTouchY(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetTouchY();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetTouchPosition(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetTouchPosition(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int index = mrb_as_int(mrb, argv[0]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetTouchPosition(index);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetTouchPointId(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetTouchPointId(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    int index = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetTouchPointId(index);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetTouchPointCount(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetTouchPointCount(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetTouchPointCount();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_SetGesturesEnabled(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetGesturesEnabled(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int flags = mrb_as_int(mrb, argv[0]);
+
+    SetGesturesEnabled(flags);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsGestureDetected(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsGestureDetected(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    unsigned int gesture = mrb_as_int(mrb, argv[0]);
+
+    bool retval = IsGestureDetected(gesture);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetGestureDetected(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetGestureDetected(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    int retval = GetGestureDetected();
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGestureHoldDuration(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetGestureHoldDuration(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    float retval = GetGestureHoldDuration();
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGestureDragVector(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetGestureDragVector(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetGestureDragVector();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetGestureDragAngle(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetGestureDragAngle(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    float retval = GetGestureDragAngle();
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGesturePinchVector(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_GetGesturePinchVector(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetGesturePinchVector();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetGesturePinchAngle(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetGesturePinchAngle(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    float retval = GetGesturePinchAngle();
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_UpdateCamera(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateCamera(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Camera * camera = DATA_PTR(argv[0]);
+    int mode = mrb_as_int(mrb, argv[1]);
+
+    UpdateCamera(camera, mode);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UpdateCameraPro(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateCameraPro(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Camera * camera = DATA_PTR(argv[0]);
+    Vector3 movement = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 rotation = *(Vector3*)DATA_PTR(argv[2]);
+    float zoom = mrb_as_float(mrb, argv[3]);
+
+    UpdateCameraPro(camera, movement, rotation, zoom);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetShapesTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetShapesTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
+
+    SetShapesTexture(texture, source);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPixel(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPixel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawPixel(posX, posY, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPixelV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPixelV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    DrawPixelV(position, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLine(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLine(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int startPosX = mrb_as_int(mrb, argv[0]);
+    int startPosY = mrb_as_int(mrb, argv[1]);
+    int endPosX = mrb_as_int(mrb, argv[2]);
+    int endPosY = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawLine(startPosX, startPosY, endPosX, endPosY, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawLineV(startPos, endPos, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawLineEx(startPos, endPos, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineBezier(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineBezier(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawLineBezier(startPos, endPos, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineBezierQuad(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineBezierQuad(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 controlPos = *(Vector2*)DATA_PTR(argv[2]);
+    float thick = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawLineBezierQuad(startPos, endPos, controlPos, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineBezierCubic(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineBezierCubic(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 startControlPos = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 endControlPos = *(Vector2*)DATA_PTR(argv[3]);
+    float thick = mrb_as_float(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineBSpline(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineBSpline(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawLineBSpline(points, pointCount, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineCatmullRom(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineCatmullRom(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawLineCatmullRom(points, pointCount, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawLineStrip(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLineStrip(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawLineStrip(points, pointCount, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    int centerX = mrb_as_int(mrb, argv[0]);
+    int centerY = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawCircle(centerX, centerY, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircleSector(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircleSector(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    float startAngle = mrb_as_float(mrb, argv[2]);
+    float endAngle = mrb_as_float(mrb, argv[3]);
+    int segments = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCircleSector(center, radius, startAngle, endAngle, segments, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircleSectorLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircleSectorLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    float startAngle = mrb_as_float(mrb, argv[2]);
+    float endAngle = mrb_as_float(mrb, argv[3]);
+    int segments = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircleGradient(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircleGradient(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int centerX = mrb_as_int(mrb, argv[0]);
+    int centerY = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    Color color1 = *(Color*)DATA_PTR(argv[3]);
+    Color color2 = *(Color*)DATA_PTR(argv[4]);
+
+    DrawCircleGradient(centerX, centerY, radius, color1, color2);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircleV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircleV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawCircleV(center, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircleLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    int centerX = mrb_as_int(mrb, argv[0]);
+    int centerY = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawCircleLines(centerX, centerY, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawEllipse(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawEllipse(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int centerX = mrb_as_int(mrb, argv[0]);
+    int centerY = mrb_as_int(mrb, argv[1]);
+    float radiusH = mrb_as_float(mrb, argv[2]);
+    float radiusV = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawEllipse(centerX, centerY, radiusH, radiusV, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawEllipseLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawEllipseLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int centerX = mrb_as_int(mrb, argv[0]);
+    int centerY = mrb_as_int(mrb, argv[1]);
+    float radiusH = mrb_as_float(mrb, argv[2]);
+    float radiusV = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawEllipseLines(centerX, centerY, radiusH, radiusV, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRing(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRing(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float innerRadius = mrb_as_float(mrb, argv[1]);
+    float outerRadius = mrb_as_float(mrb, argv[2]);
+    float startAngle = mrb_as_float(mrb, argv[3]);
+    float endAngle = mrb_as_float(mrb, argv[4]);
+    int segments = mrb_as_int(mrb, argv[5]);
+    Color color = *(Color*)DATA_PTR(argv[6]);
+
+    DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRingLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRingLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float innerRadius = mrb_as_float(mrb, argv[1]);
+    float outerRadius = mrb_as_float(mrb, argv[2]);
+    float startAngle = mrb_as_float(mrb, argv[3]);
+    float endAngle = mrb_as_float(mrb, argv[4]);
+    int segments = mrb_as_int(mrb, argv[5]);
+    Color color = *(Color*)DATA_PTR(argv[6]);
+
+    DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawRectangle(posX, posY, width, height, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 size = *(Vector2*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawRectangleV(position, size, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    DrawRectangleRec(rec, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectanglePro(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectanglePro(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Vector2 origin = *(Vector2*)DATA_PTR(argv[1]);
+    float rotation = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawRectanglePro(rec, origin, rotation, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleGradientV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleGradientV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+    Color color1 = *(Color*)DATA_PTR(argv[4]);
+    Color color2 = *(Color*)DATA_PTR(argv[5]);
+
+    DrawRectangleGradientV(posX, posY, width, height, color1, color2);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleGradientH(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleGradientH(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+    Color color1 = *(Color*)DATA_PTR(argv[4]);
+    Color color2 = *(Color*)DATA_PTR(argv[5]);
+
+    DrawRectangleGradientH(posX, posY, width, height, color1, color2);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleGradientEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleGradientEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Color col1 = *(Color*)DATA_PTR(argv[1]);
+    Color col2 = *(Color*)DATA_PTR(argv[2]);
+    Color col3 = *(Color*)DATA_PTR(argv[3]);
+    Color col4 = *(Color*)DATA_PTR(argv[4]);
+
+    DrawRectangleGradientEx(rec, col1, col2, col3, col4);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawRectangleLines(posX, posY, width, height, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleLinesEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleLinesEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    float lineThick = mrb_as_float(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawRectangleLinesEx(rec, lineThick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleRounded(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleRounded(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    float roundness = mrb_as_float(mrb, argv[1]);
+    int segments = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawRectangleRounded(rec, roundness, segments, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRectangleRoundedLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRectangleRoundedLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    float roundness = mrb_as_float(mrb, argv[1]);
+    int segments = mrb_as_int(mrb, argv[2]);
+    float lineThick = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 v1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 v2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 v3 = *(Vector2*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawTriangle(v1, v2, v3, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangleLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 v1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 v2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 v3 = *(Vector2*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawTriangleLines(v1, v2, v3, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangleFan(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangleFan(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawTriangleFan(points, pointCount, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangleStrip(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangleStrip(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawTriangleStrip(points, pointCount, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPoly(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPoly(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    int sides = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    float rotation = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawPoly(center, sides, radius, rotation, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPolyLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPolyLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    int sides = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    float rotation = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawPolyLines(center, sides, radius, rotation, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPolyLinesEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPolyLinesEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    int sides = mrb_as_int(mrb, argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    float rotation = mrb_as_float(mrb, argv[3]);
+    float lineThick = mrb_as_float(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionRecs(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionRecs(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Rectangle rec1 = *(Rectangle*)DATA_PTR(argv[0]);
+    Rectangle rec2 = *(Rectangle*)DATA_PTR(argv[1]);
+
+    bool retval = CheckCollisionRecs(rec1, rec2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionCircles(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionCircles(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Vector2 center1 = *(Vector2*)DATA_PTR(argv[0]);
+    float radius1 = mrb_as_float(mrb, argv[1]);
+    Vector2 center2 = *(Vector2*)DATA_PTR(argv[2]);
+    float radius2 = mrb_as_float(mrb, argv[3]);
+
+    bool retval = CheckCollisionCircles(center1, radius1, center2, radius2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionCircleRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionCircleRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[2]);
+
+    bool retval = CheckCollisionCircleRec(center, radius, rec);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionPointRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionPointRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+
+    bool retval = CheckCollisionPointRec(point, rec);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionPointCircle(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionPointCircle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+
+    bool retval = CheckCollisionPointCircle(point, center, radius);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionPointTriangle(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionPointTriangle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[3]);
+
+    bool retval = CheckCollisionPointTriangle(point, p1, p2, p3);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionPointPoly(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionPointPoly(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 * points = DATA_PTR(argv[1]);
+    int pointCount = mrb_as_int(mrb, argv[2]);
+
+    bool retval = CheckCollisionPointPoly(point, points, pointCount);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    Vector2 startPos1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos1 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 startPos2 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 endPos2 = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 * collisionPoint = DATA_PTR(argv[4]);
+
+    bool retval = CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionPointLine(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionPointLine(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[2]);
+    int threshold = mrb_as_int(mrb, argv[3]);
+
+    bool retval = CheckCollisionPointLine(point, p1, p2, threshold);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetCollisionRec(mrb_state* mrb, mrb_value self) // {'type_kind': 'Rectangle', 'type_name': 'Rectangle'}
+static mrb_value mrb_raylib_GetCollisionRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Rectangle rec1 = *(Rectangle*)DATA_PTR(argv[0]);
+    Rectangle rec2 = *(Rectangle*)DATA_PTR(argv[1]);
+
+    Rectangle* retval;
+    /* TODO return newly allocated object */ *retval = GetCollisionRec(rec1, rec2);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
-static mrb_value mrb_raylib_LoadImage(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImage(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImage(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageRaw(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageRaw(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+    int width = mrb_as_int(mrb, argv[1]);
+    int height = mrb_as_int(mrb, argv[2]);
+    int format = mrb_as_int(mrb, argv[3]);
+    int headerSize = mrb_as_int(mrb, argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageRaw(fileName, width, height, format, headerSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageSvg(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageSvg(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * fileNameOrString = DATA_PTR(argv[0]);
+    int width = mrb_as_int(mrb, argv[1]);
+    int height = mrb_as_int(mrb, argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageSvg(fileNameOrString, width, height);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageAnim(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageAnim(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+    int * frames = DATA_PTR(argv[1]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageAnim(fileName, frames);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageFromMemory(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageFromMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * fileType = DATA_PTR(argv[0]);
+    const unsigned char * fileData = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageFromMemory(fileType, fileData, dataSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageFromTexture(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageFromTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageFromTexture(texture);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_LoadImageFromScreen(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_LoadImageFromScreen(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageFromScreen();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_IsImageReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_UnloadImage(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_IsImageReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    bool retval = IsImageReady(image);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_UnloadImage(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    UnloadImage(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ExportImage(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportImage(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportImage(image, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_ExportImageToMemory(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'unsigned char *'}
+static mrb_value mrb_raylib_ExportImageToMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    const char * fileType = DATA_PTR(argv[1]);
+    int * fileSize = DATA_PTR(argv[2]);
+
+    unsigned char * retval = ExportImageToMemory(image, fileType, fileSize);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_ExportImageAsCode(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportImageAsCode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportImageAsCode(image, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GenImageColor(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageColor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageColor(width, height, color);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageGradientLinear(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageGradientLinear(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int direction = mrb_as_int(mrb, argv[2]);
+    Color start = *(Color*)DATA_PTR(argv[3]);
+    Color end = *(Color*)DATA_PTR(argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageGradientLinear(width, height, direction, start, end);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageGradientRadial(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageGradientRadial(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    float density = mrb_as_float(mrb, argv[2]);
+    Color inner = *(Color*)DATA_PTR(argv[3]);
+    Color outer = *(Color*)DATA_PTR(argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageGradientRadial(width, height, density, inner, outer);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageGradientSquare(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageGradientSquare(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    float density = mrb_as_float(mrb, argv[2]);
+    Color inner = *(Color*)DATA_PTR(argv[3]);
+    Color outer = *(Color*)DATA_PTR(argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageGradientSquare(width, height, density, inner, outer);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageChecked(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageChecked(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int checksX = mrb_as_int(mrb, argv[2]);
+    int checksY = mrb_as_int(mrb, argv[3]);
+    Color col1 = *(Color*)DATA_PTR(argv[4]);
+    Color col2 = *(Color*)DATA_PTR(argv[5]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageChecked(width, height, checksX, checksY, col1, col2);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageWhiteNoise(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageWhiteNoise(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    float factor = mrb_as_float(mrb, argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageWhiteNoise(width, height, factor);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImagePerlinNoise(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImagePerlinNoise(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int offsetX = mrb_as_int(mrb, argv[2]);
+    int offsetY = mrb_as_int(mrb, argv[3]);
+    float scale = mrb_as_float(mrb, argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImagePerlinNoise(width, height, offsetX, offsetY, scale);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageCellular(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageCellular(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int tileSize = mrb_as_int(mrb, argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageCellular(width, height, tileSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_GenImageText(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    const char * text = DATA_PTR(argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageText(width, height, text);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_ImageCopy(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_ImageCopy(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = ImageCopy(image);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_ImageFromImage(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_ImageFromImage(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = ImageFromImage(image, rec);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_ImageText(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_ImageText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int fontSize = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = ImageText(text, fontSize, color);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_ImageTextEx(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_ImageTextEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[1]);
+    float fontSize = mrb_as_float(mrb, argv[2]);
+    float spacing = mrb_as_float(mrb, argv[3]);
+    Color tint = *(Color*)DATA_PTR(argv[4]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = ImageTextEx(font, text, fontSize, spacing, tint);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_ImageFormat(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageFormat(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int newFormat = mrb_as_int(mrb, argv[1]);
+
+    ImageFormat(image, newFormat);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageToPOT(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageToPOT(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Color fill = *(Color*)DATA_PTR(argv[1]);
+
+    ImageToPOT(image, fill);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageCrop(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageCrop(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Rectangle crop = *(Rectangle*)DATA_PTR(argv[1]);
+
+    ImageCrop(image, crop);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageAlphaCrop(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageAlphaCrop(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    float threshold = mrb_as_float(mrb, argv[1]);
+
+    ImageAlphaCrop(image, threshold);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageAlphaClear(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageAlphaClear(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+    float threshold = mrb_as_float(mrb, argv[2]);
+
+    ImageAlphaClear(image, color, threshold);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageAlphaMask(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageAlphaMask(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Image alphaMask = *(Image*)DATA_PTR(argv[1]);
+
+    ImageAlphaMask(image, alphaMask);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageAlphaPremultiply(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageAlphaPremultiply(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageAlphaPremultiply(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageBlurGaussian(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageBlurGaussian(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int blurSize = mrb_as_int(mrb, argv[1]);
+
+    ImageBlurGaussian(image, blurSize);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageResize(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageResize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int newWidth = mrb_as_int(mrb, argv[1]);
+    int newHeight = mrb_as_int(mrb, argv[2]);
+
+    ImageResize(image, newWidth, newHeight);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageResizeNN(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageResizeNN(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int newWidth = mrb_as_int(mrb, argv[1]);
+    int newHeight = mrb_as_int(mrb, argv[2]);
+
+    ImageResizeNN(image, newWidth, newHeight);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageResizeCanvas(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageResizeCanvas(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int newWidth = mrb_as_int(mrb, argv[1]);
+    int newHeight = mrb_as_int(mrb, argv[2]);
+    int offsetX = mrb_as_int(mrb, argv[3]);
+    int offsetY = mrb_as_int(mrb, argv[4]);
+    Color fill = *(Color*)DATA_PTR(argv[5]);
+
+    ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageMipmaps(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageMipmaps(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageMipmaps(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDither(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDither(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int rBpp = mrb_as_int(mrb, argv[1]);
+    int gBpp = mrb_as_int(mrb, argv[2]);
+    int bBpp = mrb_as_int(mrb, argv[3]);
+    int aBpp = mrb_as_int(mrb, argv[4]);
+
+    ImageDither(image, rBpp, gBpp, bBpp, aBpp);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageFlipVertical(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageFlipVertical(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageFlipVertical(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageFlipHorizontal(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageFlipHorizontal(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageFlipHorizontal(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageRotate(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageRotate(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int degrees = mrb_as_int(mrb, argv[1]);
+
+    ImageRotate(image, degrees);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageRotateCW(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageRotateCW(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageRotateCW(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageRotateCCW(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageRotateCCW(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageRotateCCW(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorTint(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorTint(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    ImageColorTint(image, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorInvert(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorInvert(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageColorInvert(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorGrayscale(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorGrayscale(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+
+    ImageColorGrayscale(image);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorContrast(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorContrast(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    float contrast = mrb_as_float(mrb, argv[1]);
+
+    ImageColorContrast(image, contrast);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorBrightness(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorBrightness(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    int brightness = mrb_as_int(mrb, argv[1]);
+
+    ImageColorBrightness(image, brightness);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageColorReplace(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageColorReplace(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+    Color replace = *(Color*)DATA_PTR(argv[2]);
+
+    ImageColorReplace(image, color, replace);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadImageColors(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'Color *'}
+static mrb_value mrb_raylib_LoadImageColors(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_LoadImagePalette(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'Color *'}
+static mrb_value mrb_raylib_LoadImagePalette(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    int maxPaletteSize = mrb_as_int(mrb, argv[1]);
+    int * colorCount = DATA_PTR(argv[2]);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UnloadImageColors(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadImageColors(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Color * colors = DATA_PTR(argv[0]);
+
+    UnloadImageColors(colors);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadImagePalette(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadImagePalette(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Color * colors = DATA_PTR(argv[0]);
+
+    UnloadImagePalette(colors);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetImageAlphaBorder(mrb_state* mrb, mrb_value self) // {'type_kind': 'Rectangle', 'type_name': 'Rectangle'}
+static mrb_value mrb_raylib_GetImageAlphaBorder(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    float threshold = mrb_as_float(mrb, argv[1]);
+
+    Rectangle* retval;
+    /* TODO return newly allocated object */ *retval = GetImageAlphaBorder(image, threshold);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
-static mrb_value mrb_raylib_GetImageColor(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_GetImageColor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    int x = mrb_as_int(mrb, argv[1]);
+    int y = mrb_as_int(mrb, argv[2]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = GetImageColor(image, x, y);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ImageClearBackground(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageClearBackground(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    ImageClearBackground(dst, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawPixel(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawPixel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    int posX = mrb_as_int(mrb, argv[1]);
+    int posY = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawPixel(dst, posX, posY, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawPixelV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawPixelV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    ImageDrawPixelV(dst, position, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawLine(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawLine(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    int startPosX = mrb_as_int(mrb, argv[1]);
+    int startPosY = mrb_as_int(mrb, argv[2]);
+    int endPosX = mrb_as_int(mrb, argv[3]);
+    int endPosY = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawLineV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawLineV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Vector2 start = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 end = *(Vector2*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawLineV(dst, start, end, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawCircle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawCircle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    int centerX = mrb_as_int(mrb, argv[1]);
+    int centerY = mrb_as_int(mrb, argv[2]);
+    int radius = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    ImageDrawCircle(dst, centerX, centerY, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawCircleV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawCircleV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    int radius = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawCircleV(dst, center, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawCircleLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawCircleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    int centerX = mrb_as_int(mrb, argv[1]);
+    int centerY = mrb_as_int(mrb, argv[2]);
+    int radius = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    ImageDrawCircleLines(dst, centerX, centerY, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawCircleLinesV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawCircleLinesV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    int radius = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawCircleLinesV(dst, center, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawRectangle(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawRectangle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    int posX = mrb_as_int(mrb, argv[1]);
+    int posY = mrb_as_int(mrb, argv[2]);
+    int width = mrb_as_int(mrb, argv[3]);
+    int height = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    ImageDrawRectangle(dst, posX, posY, width, height, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawRectangleV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawRectangleV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 size = *(Vector2*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawRectangleV(dst, position, size, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawRectangleRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawRectangleRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    ImageDrawRectangleRec(dst, rec, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawRectangleLines(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawRectangleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    int thick = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    ImageDrawRectangleLines(dst, rec, thick, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDraw(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDraw(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Image src = *(Image*)DATA_PTR(argv[1]);
+    Rectangle srcRec = *(Rectangle*)DATA_PTR(argv[2]);
+    Rectangle dstRec = *(Rectangle*)DATA_PTR(argv[3]);
+    Color tint = *(Color*)DATA_PTR(argv[4]);
+
+    ImageDraw(dst, src, srcRec, dstRec, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawText(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[1]);
+    int posX = mrb_as_int(mrb, argv[2]);
+    int posY = mrb_as_int(mrb, argv[3]);
+    int fontSize = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    ImageDrawText(dst, text, posX, posY, fontSize, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ImageDrawTextEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ImageDrawTextEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
+    Image * dst = DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_PTR(argv[1]);
+    const char * text = DATA_PTR(argv[2]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[3]);
+    float fontSize = mrb_as_float(mrb, argv[4]);
+    float spacing = mrb_as_float(mrb, argv[5]);
+    Color tint = *(Color*)DATA_PTR(argv[6]);
+
+    ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadTexture(mrb_state* mrb, mrb_value self) // {'type_kind': 'Texture2D', 'type_name': 'Texture2D'}
+static mrb_value mrb_raylib_LoadTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Texture2D* retval;
+    /* TODO return newly allocated object */ *retval = LoadTexture(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
-static mrb_value mrb_raylib_LoadTextureFromImage(mrb_state* mrb, mrb_value self) // {'type_kind': 'Texture2D', 'type_name': 'Texture2D'}
+static mrb_value mrb_raylib_LoadTextureFromImage(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+
+    Texture2D* retval;
+    /* TODO return newly allocated object */ *retval = LoadTextureFromImage(image);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
-static mrb_value mrb_raylib_LoadTextureCubemap(mrb_state* mrb, mrb_value self) // {'type_kind': 'TextureCubemap', 'type_name': 'TextureCubemap'}
+static mrb_value mrb_raylib_LoadTextureCubemap(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    int layout = mrb_as_int(mrb, argv[1]);
+
+    TextureCubemap* retval;
+    /* TODO return newly allocated object */ *retval = LoadTextureCubemap(image, layout);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
-static mrb_value mrb_raylib_LoadRenderTexture(mrb_state* mrb, mrb_value self) // {'type_kind': 'RenderTexture2D', 'type_name': 'RenderTexture2D'}
+static mrb_value mrb_raylib_LoadRenderTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+
+    RenderTexture2D* retval;
+    /* TODO return newly allocated object */ *retval = LoadRenderTexture(width, height);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRenderTexture, &mrb_raylib_struct_RenderTexture, retval));
 }
 
-static mrb_value mrb_raylib_IsTextureReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsTextureReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+
+    bool retval = IsTextureReady(texture);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+
+    UnloadTexture(texture);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsRenderTextureReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsRenderTextureReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+
+    bool retval = IsRenderTextureReady(target);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadRenderTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadRenderTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+
+    UnloadRenderTexture(target);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UpdateTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    const void * pixels = DATA_PTR(argv[1]);
+
+    UpdateTexture(texture, pixels);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UpdateTextureRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateTextureRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    const void * pixels = DATA_PTR(argv[2]);
+
+    UpdateTextureRec(texture, rec, pixels);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GenTextureMipmaps(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_GenTextureMipmaps(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Texture2D * texture = DATA_PTR(argv[0]);
+
+    GenTextureMipmaps(texture);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetTextureFilter(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetTextureFilter(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    int filter = mrb_as_int(mrb, argv[1]);
+
+    SetTextureFilter(texture, filter);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetTextureWrap(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetTextureWrap(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    int wrap = mrb_as_int(mrb, argv[1]);
+
+    SetTextureWrap(texture, wrap);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    int posX = mrb_as_int(mrb, argv[1]);
+    int posY = mrb_as_int(mrb, argv[2]);
+    Color tint = *(Color*)DATA_PTR(argv[3]);
+
+    DrawTexture(texture, posX, posY, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextureV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextureV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
+    Color tint = *(Color*)DATA_PTR(argv[2]);
+
+    DrawTextureV(texture, position, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextureEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextureEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
+    float rotation = mrb_as_float(mrb, argv[2]);
+    float scale = mrb_as_float(mrb, argv[3]);
+    Color tint = *(Color*)DATA_PTR(argv[4]);
+
+    DrawTextureEx(texture, position, rotation, scale, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextureRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextureRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    Color tint = *(Color*)DATA_PTR(argv[3]);
+
+    DrawTextureRec(texture, source, position, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTexturePro(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTexturePro(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
+    Rectangle dest = *(Rectangle*)DATA_PTR(argv[2]);
+    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    float rotation = mrb_as_float(mrb, argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextureNPatch(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextureNPatch(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    NPatchInfo nPatchInfo = *(NPatchInfo*)DATA_PTR(argv[1]);
+    Rectangle dest = *(Rectangle*)DATA_PTR(argv[2]);
+    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    float rotation = mrb_as_float(mrb, argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_Fade(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_Fade(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+    float alpha = mrb_as_float(mrb, argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = Fade(color, alpha);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorToInt(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_ColorToInt(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+
+    int retval = ColorToInt(color);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_ColorNormalize(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector4', 'type_name': 'Vector4'}
+static mrb_value mrb_raylib_ColorNormalize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+
+    Vector4* retval;
+    /* TODO return newly allocated object */ *retval = ColorNormalize(color);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector4, &mrb_raylib_struct_Vector4, retval));
 }
 
-static mrb_value mrb_raylib_ColorFromNormalized(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorFromNormalized(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Vector4 normalized = *(Vector4*)DATA_PTR(argv[0]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorFromNormalized(normalized);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorToHSV(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector3', 'type_name': 'Vector3'}
+static mrb_value mrb_raylib_ColorToHSV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+
+    Vector3* retval;
+    /* TODO return newly allocated object */ *retval = ColorToHSV(color);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector3, &mrb_raylib_struct_Vector3, retval));
 }
 
-static mrb_value mrb_raylib_ColorFromHSV(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorFromHSV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float hue = mrb_as_float(mrb, argv[0]);
+    float saturation = mrb_as_float(mrb, argv[1]);
+    float value = mrb_as_float(mrb, argv[2]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorFromHSV(hue, saturation, value);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorTint(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorTint(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color tint = *(Color*)DATA_PTR(argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorTint(color, tint);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorBrightness(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorBrightness(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+    float factor = mrb_as_float(mrb, argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorBrightness(color, factor);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorContrast(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorContrast(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+    float contrast = mrb_as_float(mrb, argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorContrast(color, contrast);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorAlpha(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorAlpha(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Color color = *(Color*)DATA_PTR(argv[0]);
+    float alpha = mrb_as_float(mrb, argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorAlpha(color, alpha);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_ColorAlphaBlend(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_ColorAlphaBlend(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Color dst = *(Color*)DATA_PTR(argv[0]);
+    Color src = *(Color*)DATA_PTR(argv[1]);
+    Color tint = *(Color*)DATA_PTR(argv[2]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = ColorAlphaBlend(dst, src, tint);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_GetColor(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_GetColor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    unsigned int hexValue = mrb_as_int(mrb, argv[0]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = GetColor(hexValue);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_GetPixelColor(mrb_state* mrb, mrb_value self) // {'type_kind': 'Color', 'type_name': 'Color'}
+static mrb_value mrb_raylib_GetPixelColor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    void * srcPtr = DATA_PTR(argv[0]);
+    int format = mrb_as_int(mrb, argv[1]);
+
+    Color* retval;
+    /* TODO return newly allocated object */ *retval = GetPixelColor(srcPtr, format);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
-static mrb_value mrb_raylib_SetPixelColor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetPixelColor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    void * dstPtr = DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+    int format = mrb_as_int(mrb, argv[2]);
+
+    SetPixelColor(dstPtr, color, format);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetPixelDataSize(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetPixelDataSize(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int format = mrb_as_int(mrb, argv[2]);
+
+    int retval = GetPixelDataSize(width, height, format);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetFontDefault(mrb_state* mrb, mrb_value self) // {'type_kind': 'Font', 'type_name': 'Font'}
+static mrb_value mrb_raylib_GetFontDefault(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Font* retval;
+    /* TODO return newly allocated object */ *retval = GetFontDefault();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
-static mrb_value mrb_raylib_LoadFont(mrb_state* mrb, mrb_value self) // {'type_kind': 'Font', 'type_name': 'Font'}
+static mrb_value mrb_raylib_LoadFont(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Font* retval;
+    /* TODO return newly allocated object */ *retval = LoadFont(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
-static mrb_value mrb_raylib_LoadFontEx(mrb_state* mrb, mrb_value self) // {'type_kind': 'Font', 'type_name': 'Font'}
+static mrb_value mrb_raylib_LoadFontEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+    int fontSize = mrb_as_int(mrb, argv[1]);
+    int * codepoints = DATA_PTR(argv[2]);
+    int codepointCount = mrb_as_int(mrb, argv[3]);
+
+    Font* retval;
+    /* TODO return newly allocated object */ *retval = LoadFontEx(fileName, fontSize, codepoints, codepointCount);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
-static mrb_value mrb_raylib_LoadFontFromImage(mrb_state* mrb, mrb_value self) // {'type_kind': 'Font', 'type_name': 'Font'}
+static mrb_value mrb_raylib_LoadFontFromImage(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Image image = *(Image*)DATA_PTR(argv[0]);
+    Color key = *(Color*)DATA_PTR(argv[1]);
+    int firstChar = mrb_as_int(mrb, argv[2]);
+
+    Font* retval;
+    /* TODO return newly allocated object */ *retval = LoadFontFromImage(image, key, firstChar);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
-static mrb_value mrb_raylib_LoadFontFromMemory(mrb_state* mrb, mrb_value self) // {'type_kind': 'Font', 'type_name': 'Font'}
+static mrb_value mrb_raylib_LoadFontFromMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    return self;
+    const char * fileType = DATA_PTR(argv[0]);
+    const unsigned char * fileData = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+    int fontSize = mrb_as_int(mrb, argv[3]);
+    int * codepoints = DATA_PTR(argv[4]);
+    int codepointCount = mrb_as_int(mrb, argv[5]);
+
+    Font* retval;
+    /* TODO return newly allocated object */ *retval = LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
-static mrb_value mrb_raylib_IsFontReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsFontReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+
+    bool retval = IsFontReady(font);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_LoadFontData(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'GlyphInfo *'}
+static mrb_value mrb_raylib_LoadFontData(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    return self;
+    const unsigned char * fileData = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+    int fontSize = mrb_as_int(mrb, argv[2]);
+    int * codepoints = DATA_PTR(argv[3]);
+    int codepointCount = mrb_as_int(mrb, argv[4]);
+    int type = mrb_as_int(mrb, argv[5]);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_GenImageFontAtlas(mrb_state* mrb, mrb_value self) // {'type_kind': 'Image', 'type_name': 'Image'}
+static mrb_value mrb_raylib_GenImageFontAtlas(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    return self;
+    const GlyphInfo * glyphs = DATA_PTR(argv[0]);
+    Rectangle ** glyphRecs = DATA_PTR(argv[1]);
+    int glyphCount = mrb_as_int(mrb, argv[2]);
+    int fontSize = mrb_as_int(mrb, argv[3]);
+    int padding = mrb_as_int(mrb, argv[4]);
+    int packMethod = mrb_as_int(mrb, argv[5]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
-static mrb_value mrb_raylib_UnloadFontData(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadFontData(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    GlyphInfo * glyphs = DATA_PTR(argv[0]);
+    int glyphCount = mrb_as_int(mrb, argv[1]);
+
+    UnloadFontData(glyphs, glyphCount);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadFont(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadFont(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Font font = *(Font*)DATA_PTR(argv[0]);
+
+    UnloadFont(font);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ExportFontAsCode(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportFontAsCode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportFontAsCode(font, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_DrawFPS(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawFPS(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int posX = mrb_as_int(mrb, argv[0]);
+    int posY = mrb_as_int(mrb, argv[1]);
+
+    DrawFPS(posX, posY);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawText(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    const char * text = DATA_PTR(argv[0]);
+    int posX = mrb_as_int(mrb, argv[1]);
+    int posY = mrb_as_int(mrb, argv[2]);
+    int fontSize = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawText(text, posX, posY, fontSize, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    float fontSize = mrb_as_float(mrb, argv[3]);
+    float spacing = mrb_as_float(mrb, argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawTextEx(font, text, position, fontSize, spacing, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextPro(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextPro(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[8];
     void* ptrs[8] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], };
     mrb_get_args_a(mrb, "oooooooo", ptrs);
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    float rotation = mrb_as_float(mrb, argv[4]);
+    float fontSize = mrb_as_float(mrb, argv[5]);
+    float spacing = mrb_as_float(mrb, argv[6]);
+    Color tint = *(Color*)DATA_PTR(argv[7]);
+
+    DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextCodepoint(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextCodepoint(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    int codepoint = mrb_as_int(mrb, argv[1]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    float fontSize = mrb_as_float(mrb, argv[3]);
+    Color tint = *(Color*)DATA_PTR(argv[4]);
+
+    DrawTextCodepoint(font, codepoint, position, fontSize, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTextCodepoints(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTextCodepoints(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const int * codepoints = DATA_PTR(argv[1]);
+    int codepointCount = mrb_as_int(mrb, argv[2]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[3]);
+    float fontSize = mrb_as_float(mrb, argv[4]);
+    float spacing = mrb_as_float(mrb, argv[5]);
+    Color tint = *(Color*)DATA_PTR(argv[6]);
+
+    DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetTextLineSpacing(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetTextLineSpacing(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int spacing = mrb_as_int(mrb, argv[0]);
+
+    SetTextLineSpacing(spacing);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_MeasureText(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_MeasureText(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int fontSize = mrb_as_int(mrb, argv[1]);
+
+    int retval = MeasureText(text, fontSize);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_MeasureTextEx(mrb_state* mrb, mrb_value self) // {'type_kind': 'Vector2', 'type_name': 'Vector2'}
+static mrb_value mrb_raylib_MeasureTextEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[1]);
+    float fontSize = mrb_as_float(mrb, argv[2]);
+    float spacing = mrb_as_float(mrb, argv[3]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = MeasureTextEx(font, text, fontSize, spacing);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
-static mrb_value mrb_raylib_GetGlyphIndex(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetGlyphIndex(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    int codepoint = mrb_as_int(mrb, argv[1]);
+
+    int retval = GetGlyphIndex(font, codepoint);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetGlyphInfo(mrb_state* mrb, mrb_value self) // {'type_kind': 'GlyphInfo', 'type_name': 'GlyphInfo'}
+static mrb_value mrb_raylib_GetGlyphInfo(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    int codepoint = mrb_as_int(mrb, argv[1]);
+
+    GlyphInfo* retval;
+    /* TODO return newly allocated object */ *retval = GetGlyphInfo(font, codepoint);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibGlyphInfo, &mrb_raylib_struct_GlyphInfo, retval));
 }
 
-static mrb_value mrb_raylib_GetGlyphAtlasRec(mrb_state* mrb, mrb_value self) // {'type_kind': 'Rectangle', 'type_name': 'Rectangle'}
+static mrb_value mrb_raylib_GetGlyphAtlasRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Font font = *(Font*)DATA_PTR(argv[0]);
+    int codepoint = mrb_as_int(mrb, argv[1]);
+
+    Rectangle* retval;
+    /* TODO return newly allocated object */ *retval = GetGlyphAtlasRec(font, codepoint);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
-static mrb_value mrb_raylib_LoadUTF8(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'char *'}
+static mrb_value mrb_raylib_LoadUTF8(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const int * codepoints = DATA_PTR(argv[0]);
+    int length = mrb_as_int(mrb, argv[1]);
+
+    char * retval = LoadUTF8(codepoints, length);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UnloadUTF8(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadUTF8(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    char * text = DATA_PTR(argv[0]);
+
+    UnloadUTF8(text);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadCodepoints(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'int *'}
+static mrb_value mrb_raylib_LoadCodepoints(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int * count = DATA_PTR(argv[1]);
+
+    int * retval = LoadCodepoints(text, count);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UnloadCodepoints(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadCodepoints(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int * codepoints = DATA_PTR(argv[0]);
+
+    UnloadCodepoints(codepoints);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetCodepointCount(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCodepointCount(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    int retval = GetCodepointCount(text);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetCodepoint(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCodepoint(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int * codepointSize = DATA_PTR(argv[1]);
+
+    int retval = GetCodepoint(text, codepointSize);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetCodepointNext(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCodepointNext(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int * codepointSize = DATA_PTR(argv[1]);
+
+    int retval = GetCodepointNext(text, codepointSize);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetCodepointPrevious(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_GetCodepointPrevious(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int * codepointSize = DATA_PTR(argv[1]);
+
+    int retval = GetCodepointPrevious(text, codepointSize);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_CodepointToUTF8(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_CodepointToUTF8(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int codepoint = mrb_as_int(mrb, argv[0]);
+    int * utf8Size = DATA_PTR(argv[1]);
+
+    const char * retval = CodepointToUTF8(codepoint, utf8Size);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextCopy(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_TextCopy(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    char * dst = DATA_PTR(argv[0]);
+    const char * src = DATA_PTR(argv[1]);
+
+    int retval = TextCopy(dst, src);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_TextIsEqual(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_TextIsEqual(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text1 = DATA_PTR(argv[0]);
+    const char * text2 = DATA_PTR(argv[1]);
+
+    bool retval = TextIsEqual(text1, text2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_TextLength(mrb_state* mrb, mrb_value self) // {'type_kind': ':uint', 'type_name': 'unsigned int'}
+static mrb_value mrb_raylib_TextLength(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    unsigned int retval = TextLength(text);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_TextFormat(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
-}
-
-static mrb_value mrb_raylib_TextSubtext(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_TextSubtext(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    int position = mrb_as_int(mrb, argv[1]);
+    int length = mrb_as_int(mrb, argv[2]);
+
+    const char * retval = TextSubtext(text, position, length);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'char *'}
+static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    char * text = DATA_PTR(argv[0]);
+    const char * replace = DATA_PTR(argv[1]);
+    const char * by = DATA_PTR(argv[2]);
+
+    char * retval = TextReplace(text, replace, by);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextInsert(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'char *'}
+static mrb_value mrb_raylib_TextInsert(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    const char * insert = DATA_PTR(argv[1]);
+    int position = mrb_as_int(mrb, argv[2]);
+
+    char * retval = TextInsert(text, insert, position);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextJoin(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_TextJoin(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char ** textList = DATA_PTR(argv[0]);
+    int count = mrb_as_int(mrb, argv[1]);
+    const char * delimiter = DATA_PTR(argv[2]);
+
+    const char * retval = TextJoin(textList, count, delimiter);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextSplit(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char **'}
+static mrb_value mrb_raylib_TextSplit(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    char delimiter = mrb_as_int(mrb, argv[1]);
+    int * count = DATA_PTR(argv[2]);
+
+    const char ** retval = TextSplit(text, delimiter, count);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextAppend(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_TextAppend(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    char * text = DATA_PTR(argv[0]);
+    const char * append = DATA_PTR(argv[1]);
+    int * position = DATA_PTR(argv[2]);
+
+    TextAppend(text, append, position);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_TextFindIndex(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_TextFindIndex(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+    const char * find = DATA_PTR(argv[1]);
+
+    int retval = TextFindIndex(text, find);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_TextToUpper(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_TextToUpper(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    const char * retval = TextToUpper(text);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextToLower(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_TextToLower(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    const char * retval = TextToLower(text);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextToPascal(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'const char *'}
+static mrb_value mrb_raylib_TextToPascal(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    const char * retval = TextToPascal(text);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_TextToInteger(mrb_state* mrb, mrb_value self) // {'type_kind': ':int', 'type_name': 'int'}
+static mrb_value mrb_raylib_TextToInteger(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * text = DATA_PTR(argv[0]);
+
+    int retval = TextToInteger(text);
+
+    return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_DrawLine3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawLine3D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawLine3D(startPos, endPos, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPoint3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPoint3D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    DrawPoint3D(position, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCircle3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCircle3D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector3 center = *(Vector3*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    float rotationAngle = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawCircle3D(center, radius, rotationAxis, rotationAngle, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangle3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangle3D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector3 v1 = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 v2 = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 v3 = *(Vector3*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawTriangle3D(v1, v2, v3, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawTriangleStrip3D(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawTriangleStrip3D(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawTriangleStrip3D(points, pointCount, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCube(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCube(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    float width = mrb_as_float(mrb, argv[1]);
+    float height = mrb_as_float(mrb, argv[2]);
+    float length = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawCube(position, width, height, length, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCubeV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCubeV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawCubeV(position, size, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCubeWires(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCubeWires(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    float width = mrb_as_float(mrb, argv[1]);
+    float height = mrb_as_float(mrb, argv[2]);
+    float length = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawCubeWires(position, width, height, length, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCubeWiresV(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCubeWiresV(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawCubeWiresV(position, size, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawSphere(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawSphere(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawSphere(centerPos, radius, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawSphereEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawSphereEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    int rings = mrb_as_int(mrb, argv[2]);
+    int slices = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawSphereEx(centerPos, radius, rings, slices, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawSphereWires(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawSphereWires(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    int rings = mrb_as_int(mrb, argv[2]);
+    int slices = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawSphereWires(centerPos, radius, rings, slices, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCylinder(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCylinder(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    float radiusTop = mrb_as_float(mrb, argv[1]);
+    float radiusBottom = mrb_as_float(mrb, argv[2]);
+    float height = mrb_as_float(mrb, argv[3]);
+    int slices = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCylinder(position, radiusTop, radiusBottom, height, slices, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCylinderEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCylinderEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    float startRadius = mrb_as_float(mrb, argv[2]);
+    float endRadius = mrb_as_float(mrb, argv[3]);
+    int sides = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCylinderWires(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCylinderWires(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    float radiusTop = mrb_as_float(mrb, argv[1]);
+    float radiusBottom = mrb_as_float(mrb, argv[2]);
+    float height = mrb_as_float(mrb, argv[3]);
+    int slices = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCylinderWiresEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCylinderWiresEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    float startRadius = mrb_as_float(mrb, argv[2]);
+    float endRadius = mrb_as_float(mrb, argv[3]);
+    int sides = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCapsule(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCapsule(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    int slices = mrb_as_int(mrb, argv[3]);
+    int rings = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCapsule(startPos, endPos, radius, slices, rings, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawCapsuleWires(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawCapsuleWires(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+    int slices = mrb_as_int(mrb, argv[3]);
+    int rings = mrb_as_int(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawCapsuleWires(startPos, endPos, radius, slices, rings, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawPlane(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawPlane(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector2 size = *(Vector2*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawPlane(centerPos, size, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawRay(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawRay(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    DrawRay(ray, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawGrid(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawGrid(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    int slices = mrb_as_int(mrb, argv[0]);
+    float spacing = mrb_as_float(mrb, argv[1]);
+
+    DrawGrid(slices, spacing);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadModel(mrb_state* mrb, mrb_value self) // {'type_kind': 'Model', 'type_name': 'Model'}
+static mrb_value mrb_raylib_LoadModel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Model* retval;
+    /* TODO return newly allocated object */ *retval = LoadModel(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibModel, &mrb_raylib_struct_Model, retval));
 }
 
-static mrb_value mrb_raylib_LoadModelFromMesh(mrb_state* mrb, mrb_value self) // {'type_kind': 'Model', 'type_name': 'Model'}
+static mrb_value mrb_raylib_LoadModelFromMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+
+    Model* retval;
+    /* TODO return newly allocated object */ *retval = LoadModelFromMesh(mesh);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibModel, &mrb_raylib_struct_Model, retval));
 }
 
-static mrb_value mrb_raylib_IsModelReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsModelReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Model model = *(Model*)DATA_PTR(argv[0]);
+
+    bool retval = IsModelReady(model);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadModel(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadModel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+
+    UnloadModel(model);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetModelBoundingBox(mrb_state* mrb, mrb_value self) // {'type_kind': 'BoundingBox', 'type_name': 'BoundingBox'}
+static mrb_value mrb_raylib_GetModelBoundingBox(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Model model = *(Model*)DATA_PTR(argv[0]);
+
+    BoundingBox* retval;
+    /* TODO return newly allocated object */ *retval = GetModelBoundingBox(model);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibBoundingBox, &mrb_raylib_struct_BoundingBox, retval));
 }
 
-static mrb_value mrb_raylib_DrawModel(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawModel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    float scale = mrb_as_float(mrb, argv[2]);
+    Color tint = *(Color*)DATA_PTR(argv[3]);
+
+    DrawModel(model, position, scale, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawModelEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawModelEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    float rotationAngle = mrb_as_float(mrb, argv[3]);
+    Vector3 scale = *(Vector3*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawModelWires(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawModelWires(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    float scale = mrb_as_float(mrb, argv[2]);
+    Color tint = *(Color*)DATA_PTR(argv[3]);
+
+    DrawModelWires(model, position, scale, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawModelWiresEx(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawModelWiresEx(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    float rotationAngle = mrb_as_float(mrb, argv[3]);
+    Vector3 scale = *(Vector3*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawBoundingBox(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawBoundingBox(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_PTR(argv[1]);
+
+    DrawBoundingBox(box, color);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawBillboard(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawBillboard(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[2]);
+    float size = mrb_as_float(mrb, argv[3]);
+    Color tint = *(Color*)DATA_PTR(argv[4]);
+
+    DrawBillboard(camera, texture, position, size, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawBillboardRec(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawBillboardRec(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
+    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
+    Rectangle source = *(Rectangle*)DATA_PTR(argv[2]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[3]);
+    Vector2 size = *(Vector2*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_PTR(argv[5]);
+
+    DrawBillboardRec(camera, texture, source, position, size, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawBillboardPro(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawBillboardPro(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[9];
     void* ptrs[9] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], };
     mrb_get_args_a(mrb, "ooooooooo", ptrs);
+    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
+    Rectangle source = *(Rectangle*)DATA_PTR(argv[2]);
+    Vector3 position = *(Vector3*)DATA_PTR(argv[3]);
+    Vector3 up = *(Vector3*)DATA_PTR(argv[4]);
+    Vector2 size = *(Vector2*)DATA_PTR(argv[5]);
+    Vector2 origin = *(Vector2*)DATA_PTR(argv[6]);
+    float rotation = mrb_as_float(mrb, argv[7]);
+    Color tint = *(Color*)DATA_PTR(argv[8]);
+
+    DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UploadMesh(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UploadMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Mesh * mesh = DATA_PTR(argv[0]);
+    bool dynamic = mrb_as_int(mrb, argv[1]);
+
+    UploadMesh(mesh, dynamic);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UpdateMeshBuffer(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateMeshBuffer(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    int index = mrb_as_int(mrb, argv[1]);
+    const void * data = DATA_PTR(argv[2]);
+    int dataSize = mrb_as_int(mrb, argv[3]);
+    int offset = mrb_as_int(mrb, argv[4]);
+
+    UpdateMeshBuffer(mesh, index, data, dataSize, offset);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadMesh(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+
+    UnloadMesh(mesh);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawMesh(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Material material = *(Material*)DATA_PTR(argv[1]);
+    Matrix transform = *(Matrix*)DATA_PTR(argv[2]);
+
+    DrawMesh(mesh, material, transform);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DrawMeshInstanced(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DrawMeshInstanced(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Material material = *(Material*)DATA_PTR(argv[1]);
+    const Matrix * transforms = DATA_PTR(argv[2]);
+    int instances = mrb_as_int(mrb, argv[3]);
+
+    DrawMeshInstanced(mesh, material, transforms, instances);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportMesh(mesh, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetMeshBoundingBox(mrb_state* mrb, mrb_value self) // {'type_kind': 'BoundingBox', 'type_name': 'BoundingBox'}
+static mrb_value mrb_raylib_GetMeshBoundingBox(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+
+    BoundingBox* retval;
+    /* TODO return newly allocated object */ *retval = GetMeshBoundingBox(mesh);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibBoundingBox, &mrb_raylib_struct_BoundingBox, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshTangents(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_GenMeshTangents(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Mesh * mesh = DATA_PTR(argv[0]);
+
+    GenMeshTangents(mesh);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GenMeshPoly(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshPoly(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    int sides = mrb_as_int(mrb, argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshPoly(sides, radius);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshPlane(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshPlane(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    float width = mrb_as_float(mrb, argv[0]);
+    float length = mrb_as_float(mrb, argv[1]);
+    int resX = mrb_as_int(mrb, argv[2]);
+    int resZ = mrb_as_int(mrb, argv[3]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshPlane(width, length, resX, resZ);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshCube(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshCube(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float width = mrb_as_float(mrb, argv[0]);
+    float height = mrb_as_float(mrb, argv[1]);
+    float length = mrb_as_float(mrb, argv[2]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshCube(width, height, length);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshSphere(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshSphere(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    int rings = mrb_as_int(mrb, argv[1]);
+    int slices = mrb_as_int(mrb, argv[2]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshSphere(radius, rings, slices);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshHemiSphere(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshHemiSphere(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    int rings = mrb_as_int(mrb, argv[1]);
+    int slices = mrb_as_int(mrb, argv[2]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshHemiSphere(radius, rings, slices);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshCylinder(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshCylinder(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    float height = mrb_as_float(mrb, argv[1]);
+    int slices = mrb_as_int(mrb, argv[2]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshCylinder(radius, height, slices);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshCone(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshCone(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    float height = mrb_as_float(mrb, argv[1]);
+    int slices = mrb_as_int(mrb, argv[2]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshCone(radius, height, slices);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshTorus(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshTorus(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    float size = mrb_as_float(mrb, argv[1]);
+    int radSeg = mrb_as_int(mrb, argv[2]);
+    int sides = mrb_as_int(mrb, argv[3]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshTorus(radius, size, radSeg, sides);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshKnot(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshKnot(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    float radius = mrb_as_float(mrb, argv[0]);
+    float size = mrb_as_float(mrb, argv[1]);
+    int radSeg = mrb_as_int(mrb, argv[2]);
+    int sides = mrb_as_int(mrb, argv[3]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshKnot(radius, size, radSeg, sides);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshHeightmap(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshHeightmap(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image heightmap = *(Image*)DATA_PTR(argv[0]);
+    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshHeightmap(heightmap, size);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_GenMeshCubicmap(mrb_state* mrb, mrb_value self) // {'type_kind': 'Mesh', 'type_name': 'Mesh'}
+static mrb_value mrb_raylib_GenMeshCubicmap(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Image cubicmap = *(Image*)DATA_PTR(argv[0]);
+    Vector3 cubeSize = *(Vector3*)DATA_PTR(argv[1]);
+
+    Mesh* retval;
+    /* TODO return newly allocated object */ *retval = GenMeshCubicmap(cubicmap, cubeSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
-static mrb_value mrb_raylib_LoadMaterials(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'Material *'}
+static mrb_value mrb_raylib_LoadMaterials(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+    int * materialCount = DATA_PTR(argv[1]);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_LoadMaterialDefault(mrb_state* mrb, mrb_value self) // {'type_kind': 'Material', 'type_name': 'Material'}
+static mrb_value mrb_raylib_LoadMaterialDefault(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    Material* retval;
+    /* TODO return newly allocated object */ *retval = LoadMaterialDefault();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMaterial, &mrb_raylib_struct_Material, retval));
 }
 
-static mrb_value mrb_raylib_IsMaterialReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMaterialReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Material material = *(Material*)DATA_PTR(argv[0]);
+
+    bool retval = IsMaterialReady(material);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadMaterial(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadMaterial(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Material material = *(Material*)DATA_PTR(argv[0]);
+
+    UnloadMaterial(material);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMaterialTexture(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMaterialTexture(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Material * material = DATA_PTR(argv[0]);
+    int mapType = mrb_as_int(mrb, argv[1]);
+    Texture2D texture = *(Texture2D*)DATA_PTR(argv[2]);
+
+    SetMaterialTexture(material, mapType, texture);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetModelMeshMaterial(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetModelMeshMaterial(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Model * model = DATA_PTR(argv[0]);
+    int meshId = mrb_as_int(mrb, argv[1]);
+    int materialId = mrb_as_int(mrb, argv[2]);
+
+    SetModelMeshMaterial(model, meshId, materialId);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadModelAnimations(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'ModelAnimation *'}
+static mrb_value mrb_raylib_LoadModelAnimations(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+    int * animCount = DATA_PTR(argv[1]);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UpdateModelAnimation(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateModelAnimation(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[1]);
+    int frame = mrb_as_int(mrb, argv[2]);
+
+    UpdateModelAnimation(model, anim, frame);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadModelAnimation(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadModelAnimation(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[0]);
+
+    UnloadModelAnimation(anim);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadModelAnimations(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadModelAnimations(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    ModelAnimation * animations = DATA_PTR(argv[0]);
+    int animCount = mrb_as_int(mrb, argv[1]);
+
+    UnloadModelAnimations(animations, animCount);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsModelAnimationValid(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsModelAnimationValid(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Model model = *(Model*)DATA_PTR(argv[0]);
+    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[1]);
+
+    bool retval = IsModelAnimationValid(model, anim);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionSpheres(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionSpheres(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Vector3 center1 = *(Vector3*)DATA_PTR(argv[0]);
+    float radius1 = mrb_as_float(mrb, argv[1]);
+    Vector3 center2 = *(Vector3*)DATA_PTR(argv[2]);
+    float radius2 = mrb_as_float(mrb, argv[3]);
+
+    bool retval = CheckCollisionSpheres(center1, radius1, center2, radius2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionBoxes(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionBoxes(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    BoundingBox box1 = *(BoundingBox*)DATA_PTR(argv[0]);
+    BoundingBox box2 = *(BoundingBox*)DATA_PTR(argv[1]);
+
+    bool retval = CheckCollisionBoxes(box1, box2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_CheckCollisionBoxSphere(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_CheckCollisionBoxSphere(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[0]);
+    Vector3 center = *(Vector3*)DATA_PTR(argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+
+    bool retval = CheckCollisionBoxSphere(box, center, radius);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_GetRayCollisionSphere(mrb_state* mrb, mrb_value self) // {'type_kind': 'RayCollision', 'type_name': 'RayCollision'}
+static mrb_value mrb_raylib_GetRayCollisionSphere(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    Vector3 center = *(Vector3*)DATA_PTR(argv[1]);
+    float radius = mrb_as_float(mrb, argv[2]);
+
+    RayCollision* retval;
+    /* TODO return newly allocated object */ *retval = GetRayCollisionSphere(ray, center, radius);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
-static mrb_value mrb_raylib_GetRayCollisionBox(mrb_state* mrb, mrb_value self) // {'type_kind': 'RayCollision', 'type_name': 'RayCollision'}
+static mrb_value mrb_raylib_GetRayCollisionBox(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[1]);
+
+    RayCollision* retval;
+    /* TODO return newly allocated object */ *retval = GetRayCollisionBox(ray, box);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
-static mrb_value mrb_raylib_GetRayCollisionMesh(mrb_state* mrb, mrb_value self) // {'type_kind': 'RayCollision', 'type_name': 'RayCollision'}
+static mrb_value mrb_raylib_GetRayCollisionMesh(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[1]);
+    Matrix transform = *(Matrix*)DATA_PTR(argv[2]);
+
+    RayCollision* retval;
+    /* TODO return newly allocated object */ *retval = GetRayCollisionMesh(ray, mesh, transform);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
-static mrb_value mrb_raylib_GetRayCollisionTriangle(mrb_state* mrb, mrb_value self) // {'type_kind': 'RayCollision', 'type_name': 'RayCollision'}
+static mrb_value mrb_raylib_GetRayCollisionTriangle(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    return self;
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    Vector3 p1 = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 p2 = *(Vector3*)DATA_PTR(argv[2]);
+    Vector3 p3 = *(Vector3*)DATA_PTR(argv[3]);
+
+    RayCollision* retval;
+    /* TODO return newly allocated object */ *retval = GetRayCollisionTriangle(ray, p1, p2, p3);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
-static mrb_value mrb_raylib_GetRayCollisionQuad(mrb_state* mrb, mrb_value self) // {'type_kind': 'RayCollision', 'type_name': 'RayCollision'}
+static mrb_value mrb_raylib_GetRayCollisionQuad(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    return self;
+    Ray ray = *(Ray*)DATA_PTR(argv[0]);
+    Vector3 p1 = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 p2 = *(Vector3*)DATA_PTR(argv[2]);
+    Vector3 p3 = *(Vector3*)DATA_PTR(argv[3]);
+    Vector3 p4 = *(Vector3*)DATA_PTR(argv[4]);
+
+    RayCollision* retval;
+    /* TODO return newly allocated object */ *retval = GetRayCollisionQuad(ray, p1, p2, p3, p4);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
-static mrb_value mrb_raylib_InitAudioDevice(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_InitAudioDevice(mrb_state* mrb, mrb_value self)
 {
+    InitAudioDevice();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_CloseAudioDevice(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_CloseAudioDevice(mrb_state* mrb, mrb_value self)
 {
+    CloseAudioDevice();
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsAudioDeviceReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsAudioDeviceReady(mrb_state* mrb, mrb_value self)
 {
-    return self;
+    bool retval = IsAudioDeviceReady();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetMasterVolume(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMasterVolume(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    float volume = mrb_as_float(mrb, argv[0]);
+
+    SetMasterVolume(volume);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadWave(mrb_state* mrb, mrb_value self) // {'type_kind': 'Wave', 'type_name': 'Wave'}
+static mrb_value mrb_raylib_LoadWave(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Wave* retval;
+    /* TODO return newly allocated object */ *retval = LoadWave(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
-static mrb_value mrb_raylib_LoadWaveFromMemory(mrb_state* mrb, mrb_value self) // {'type_kind': 'Wave', 'type_name': 'Wave'}
+static mrb_value mrb_raylib_LoadWaveFromMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * fileType = DATA_PTR(argv[0]);
+    const unsigned char * fileData = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+
+    Wave* retval;
+    /* TODO return newly allocated object */ *retval = LoadWaveFromMemory(fileType, fileData, dataSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
-static mrb_value mrb_raylib_IsWaveReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsWaveReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+
+    bool retval = IsWaveReady(wave);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_LoadSound(mrb_state* mrb, mrb_value self) // {'type_kind': 'Sound', 'type_name': 'Sound'}
+static mrb_value mrb_raylib_LoadSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Sound* retval;
+    /* TODO return newly allocated object */ *retval = LoadSound(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
-static mrb_value mrb_raylib_LoadSoundFromWave(mrb_state* mrb, mrb_value self) // {'type_kind': 'Sound', 'type_name': 'Sound'}
+static mrb_value mrb_raylib_LoadSoundFromWave(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+
+    Sound* retval;
+    /* TODO return newly allocated object */ *retval = LoadSoundFromWave(wave);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
-static mrb_value mrb_raylib_LoadSoundAlias(mrb_state* mrb, mrb_value self) // {'type_kind': 'Sound', 'type_name': 'Sound'}
+static mrb_value mrb_raylib_LoadSoundAlias(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Sound source = *(Sound*)DATA_PTR(argv[0]);
+
+    Sound* retval;
+    /* TODO return newly allocated object */ *retval = LoadSoundAlias(source);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
-static mrb_value mrb_raylib_IsSoundReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsSoundReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    bool retval = IsSoundReady(sound);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UpdateSound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    const void * data = DATA_PTR(argv[1]);
+    int sampleCount = mrb_as_int(mrb, argv[2]);
+
+    UpdateSound(sound, data, sampleCount);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadWave(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadWave(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+
+    UnloadWave(wave);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadSound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    UnloadSound(sound);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UnloadSoundAlias(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadSoundAlias(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound alias = *(Sound*)DATA_PTR(argv[0]);
+
+    UnloadSoundAlias(alias);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ExportWave(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportWave(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportWave(wave, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_ExportWaveAsCode(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_ExportWaveAsCode(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportWaveAsCode(wave, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_PlaySound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PlaySound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    PlaySound(sound);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_StopSound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_StopSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    StopSound(sound);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_PauseSound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PauseSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    PauseSound(sound);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ResumeSound(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ResumeSound(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    ResumeSound(sound);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsSoundPlaying(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsSoundPlaying(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+
+    bool retval = IsSoundPlaying(sound);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetSoundVolume(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetSoundVolume(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    float volume = mrb_as_float(mrb, argv[1]);
+
+    SetSoundVolume(sound, volume);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetSoundPitch(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetSoundPitch(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    float pitch = mrb_as_float(mrb, argv[1]);
+
+    SetSoundPitch(sound, pitch);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetSoundPan(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetSoundPan(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    float pan = mrb_as_float(mrb, argv[1]);
+
+    SetSoundPan(sound, pan);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_WaveCopy(mrb_state* mrb, mrb_value self) // {'type_kind': 'Wave', 'type_name': 'Wave'}
+static mrb_value mrb_raylib_WaveCopy(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+
+    Wave* retval;
+    /* TODO return newly allocated object */ *retval = WaveCopy(wave);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
-static mrb_value mrb_raylib_WaveCrop(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_WaveCrop(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    Wave * wave = DATA_PTR(argv[0]);
+    int initSample = mrb_as_int(mrb, argv[1]);
+    int finalSample = mrb_as_int(mrb, argv[2]);
+
+    WaveCrop(wave, initSample, finalSample);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_WaveFormat(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_WaveFormat(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
+    Wave * wave = DATA_PTR(argv[0]);
+    int sampleRate = mrb_as_int(mrb, argv[1]);
+    int sampleSize = mrb_as_int(mrb, argv[2]);
+    int channels = mrb_as_int(mrb, argv[3]);
+
+    WaveFormat(wave, sampleRate, sampleSize, channels);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadWaveSamples(mrb_state* mrb, mrb_value self) // {'type_kind': ':pointer', 'type_name': 'float *'}
+static mrb_value mrb_raylib_LoadWaveSamples(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+
+    float * retval = LoadWaveSamples(wave);
+
+    return self; /* TODO return wrapped object */
 }
 
-static mrb_value mrb_raylib_UnloadWaveSamples(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadWaveSamples(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    float * samples = DATA_PTR(argv[0]);
+
+    UnloadWaveSamples(samples);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_LoadMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': 'Music', 'type_name': 'Music'}
+static mrb_value mrb_raylib_LoadMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    const char * fileName = DATA_PTR(argv[0]);
+
+    Music* retval;
+    /* TODO return newly allocated object */ *retval = LoadMusicStream(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMusic, &mrb_raylib_struct_Music, retval));
 }
 
-static mrb_value mrb_raylib_LoadMusicStreamFromMemory(mrb_state* mrb, mrb_value self) // {'type_kind': 'Music', 'type_name': 'Music'}
+static mrb_value mrb_raylib_LoadMusicStreamFromMemory(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    const char * fileType = DATA_PTR(argv[0]);
+    const unsigned char * data = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+
+    Music* retval;
+    /* TODO return newly allocated object */ *retval = LoadMusicStreamFromMemory(fileType, data, dataSize);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMusic, &mrb_raylib_struct_Music, retval));
 }
 
-static mrb_value mrb_raylib_IsMusicReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMusicReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    bool retval = IsMusicReady(music);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    UnloadMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_PlayMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PlayMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    PlayMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsMusicStreamPlaying(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsMusicStreamPlaying(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    bool retval = IsMusicStreamPlaying(music);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UpdateMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    UpdateMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_StopMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_StopMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    StopMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_PauseMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PauseMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    PauseMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ResumeMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ResumeMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    ResumeMusicStream(music);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SeekMusicStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SeekMusicStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+    float position = mrb_as_float(mrb, argv[1]);
+
+    SeekMusicStream(music, position);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMusicVolume(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMusicVolume(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+    float volume = mrb_as_float(mrb, argv[1]);
+
+    SetMusicVolume(music, volume);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMusicPitch(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMusicPitch(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+    float pitch = mrb_as_float(mrb, argv[1]);
+
+    SetMusicPitch(music, pitch);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetMusicPan(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetMusicPan(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    Music music = *(Music*)DATA_PTR(argv[0]);
+    float pan = mrb_as_float(mrb, argv[1]);
+
+    SetMusicPan(music, pan);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetMusicTimeLength(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetMusicTimeLength(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    float retval = GetMusicTimeLength(music);
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_GetMusicTimePlayed(mrb_state* mrb, mrb_value self) // {'type_kind': ':float', 'type_name': 'float'}
+static mrb_value mrb_raylib_GetMusicTimePlayed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    Music music = *(Music*)DATA_PTR(argv[0]);
+
+    float retval = GetMusicTimePlayed(music);
+
+    return mrb_float_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_LoadAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': 'AudioStream', 'type_name': 'AudioStream'}
+static mrb_value mrb_raylib_LoadAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    return self;
+    unsigned int sampleRate = mrb_as_int(mrb, argv[0]);
+    unsigned int sampleSize = mrb_as_int(mrb, argv[1]);
+    unsigned int channels = mrb_as_int(mrb, argv[2]);
+
+    AudioStream* retval;
+    /* TODO return newly allocated object */ *retval = LoadAudioStream(sampleRate, sampleSize, channels);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibAudioStream, &mrb_raylib_struct_AudioStream, retval));
 }
 
-static mrb_value mrb_raylib_IsAudioStreamReady(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsAudioStreamReady(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    bool retval = IsAudioStreamReady(stream);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_UnloadAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UnloadAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    UnloadAudioStream(stream);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_UpdateAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_UpdateAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    const void * data = DATA_PTR(argv[1]);
+    int frameCount = mrb_as_int(mrb, argv[2]);
+
+    UpdateAudioStream(stream, data, frameCount);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsAudioStreamProcessed(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsAudioStreamProcessed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    bool retval = IsAudioStreamProcessed(stream);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_PlayAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PlayAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    PlayAudioStream(stream);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_PauseAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_PauseAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    PauseAudioStream(stream);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ResumeAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_ResumeAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    ResumeAudioStream(stream);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_IsAudioStreamPlaying(mrb_state* mrb, mrb_value self) // {'type_kind': ':bool', 'type_name': 'bool'}
+static mrb_value mrb_raylib_IsAudioStreamPlaying(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    return self;
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    bool retval = IsAudioStreamPlaying(stream);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_StopAudioStream(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_StopAudioStream(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+
+    StopAudioStream(stream);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetAudioStreamVolume(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetAudioStreamVolume(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    float volume = mrb_as_float(mrb, argv[1]);
+
+    SetAudioStreamVolume(stream, volume);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetAudioStreamPitch(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetAudioStreamPitch(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    float pitch = mrb_as_float(mrb, argv[1]);
+
+    SetAudioStreamPitch(stream, pitch);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetAudioStreamPan(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetAudioStreamPan(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    float pan = mrb_as_float(mrb, argv[1]);
+
+    SetAudioStreamPan(stream, pan);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetAudioStreamBufferSizeDefault(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetAudioStreamBufferSizeDefault(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    int size = mrb_as_int(mrb, argv[0]);
+
+    SetAudioStreamBufferSizeDefault(size);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SetAudioStreamCallback(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_SetAudioStreamCallback(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioCallback callback = *(AudioCallback*)DATA_PTR(argv[1]);
+
+    SetAudioStreamCallback(stream, callback);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_AttachAudioStreamProcessor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_AttachAudioStreamProcessor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[1]);
+
+    AttachAudioStreamProcessor(stream, processor);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DetachAudioStreamProcessor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DetachAudioStreamProcessor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
+    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[1]);
+
+    DetachAudioStreamProcessor(stream, processor);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_AttachAudioMixedProcessor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_AttachAudioMixedProcessor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[0]);
+
+    AttachAudioMixedProcessor(processor);
+
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_DetachAudioMixedProcessor(mrb_state* mrb, mrb_value self) // {'type_kind': ':void', 'type_name': 'void'}
+static mrb_value mrb_raylib_DetachAudioMixedProcessor(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
+    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[0]);
+
+    DetachAudioMixedProcessor(processor);
+
     return mrb_nil_value();
 }
 
@@ -7684,7 +10285,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "SetRandomSeed", mrb_raylib_SetRandomSeed, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "TakeScreenshot", mrb_raylib_TakeScreenshot, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetConfigFlags", mrb_raylib_SetConfigFlags, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "TraceLog", mrb_raylib_TraceLog, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "SetTraceLogLevel", mrb_raylib_SetTraceLogLevel, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "MemAlloc", mrb_raylib_MemAlloc, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "MemRealloc", mrb_raylib_MemRealloc, MRB_ARGS_REQ(2));
@@ -7963,7 +10563,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "TextCopy", mrb_raylib_TextCopy, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "TextIsEqual", mrb_raylib_TextIsEqual, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "TextLength", mrb_raylib_TextLength, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "TextFormat", mrb_raylib_TextFormat, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "TextSubtext", mrb_raylib_TextSubtext, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "TextReplace", mrb_raylib_TextReplace, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "TextInsert", mrb_raylib_TextInsert, MRB_ARGS_REQ(3));

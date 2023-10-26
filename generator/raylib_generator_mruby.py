@@ -544,14 +544,21 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
     if function_postfix != "":
         print(function_postfix, file = sys.stdout)
 
-def generate_function_mruby(ctx, indent = "", module_name = ""):
+def generate_function_body(ctx, indent = "", module_name = ""):
     for func_name, func_info in ctx.decl_functions.items():
         if func_info == None:
             continue
-        print(f'static mrb_value mrb_raylib_{func_name}(mrb_state* mrb, mrb_value self) // {func_info.retval}', file = sys.stdout)
+
+        unsupported = any(("va_list" in arg.type_name) for arg in func_info.args)
+        if unsupported:
+            continue
+
+        retval_type_name = func_info.retval.type_name
+
+        print(f'static mrb_value mrb_raylib_{func_name}(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print('{', file = sys.stdout)
         have_args = len(func_info.args) > 0
-        have_retval = "void" not in func_info.retval.type_name
+        have_retval = (retval_type_name != "void")
         # Get arguments
         if have_args:
             len_args = len(func_info.args)
@@ -564,11 +571,58 @@ def generate_function_mruby(ctx, indent = "", module_name = ""):
             format_string = "o" * len_args
             print(indent + f'mrb_get_args_a(mrb, "{format_string}", ptrs);', file = sys.stdout)
 
+            for i, arg in enumerate(func_info.args):
+                arg_value = ""
+                if "*" in arg.type_name:
+                    arg_value = f'DATA_PTR(argv[{i}])'
+                elif any(ch.isupper() for ch in arg.type_name):
+                    arg_value = f'*({arg.type_name}*)DATA_PTR(argv[{i}])'
+                elif "float" in arg.type_name:
+                    arg_value = f'mrb_as_float(mrb, argv[{i}])'
+                else:
+                    arg_value = f'mrb_as_int(mrb, argv[{i}])'
+
+                print(indent + f'{arg.type_name} {arg.name} = {arg_value};', file = sys.stdout)
+
+            print("", file = sys.stdout)
+
         # Call API
-        # Return value
+        args_name_list = list(map((lambda t: str(t.name)), func_info.args))
+        arg_names = ', '.join(args_name_list)
+
         if have_retval:
-            print(indent + f'return self;', file = sys.stdout)
+            retval_str = ""
+            if any(ch.isupper() for ch in retval_type_name):
+                if "*" in retval_type_name:
+                    retval_str = f'/* TODO return wrapped object */ {retval_type_name} retval = '
+                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
+                else:
+                    retval_type_name_alias = retval_type_name
+                    if retval_type_name == "Texture2D":
+                        retval_type_name_alias = "Texture"
+                    elif retval_type_name == "TextureCubemap":
+                        retval_type_name_alias = "Texture"
+                    elif retval_type_name == "RenderTexture2D":
+                        retval_type_name_alias = "RenderTexture"
+                    print(indent + f'{retval_type_name}* retval;', file = sys.stdout)
+                    print(indent + f'/* TODO return newly allocated object */ *retval = {func_name}({arg_names});', file = sys.stdout)
+                    print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
+            else:
+                retval_str = f'{retval_type_name} retval = '
+                print(indent + f'{retval_str}{func_name}({arg_names});', file = sys.stdout)
+                print("", file = sys.stdout)
+
+                if "*" in retval_type_name:
+                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
+                elif "float" in retval_type_name:
+                    print(indent + f'return mrb_float_value(mrb, retval);', file = sys.stdout)
+                elif "bool" in retval_type_name:
+                    print(indent + f'return retval ? mrb_true_value() : mrb_false_value();', file = sys.stdout)
+                else:
+                    print(indent + f'return mrb_int_value(mrb, retval);', file = sys.stdout)
         else:
+            print(indent + f'{func_name}({arg_names});', file = sys.stdout)
+            print("", file = sys.stdout)
             print(indent + f'return mrb_nil_value();', file = sys.stdout)
         print('}', file = sys.stdout)
         print("", file = sys.stdout)
@@ -578,6 +632,10 @@ def generate_function_entry(ctx, indent = "", module_name = ""):
     for func_name, func_info in ctx.decl_functions.items():
         if func_info == None:
             continue
+        unsupported = any(("va_list" in arg.type_name) for arg in func_info.args)
+        if unsupported:
+            continue
+
         retval_str = ""
         if len(func_info.args) > 0:
             retval_str = f'MRB_ARGS_REQ({len(func_info.args)})'
@@ -666,7 +724,7 @@ struct RClass* mRaylib;
     # function
     if len(ctx.decl_functions) > 0:
         print("// Function\n", file = sys.stdout)
-        generate_function_mruby(ctx, indent, module_name)
+        generate_function_body(ctx, indent, module_name)
 
     print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
     print('{', file = sys.stdout)
