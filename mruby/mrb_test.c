@@ -35,6 +35,7 @@ int main(void)
         "raylib.closewindow()\n"
         */
         "c = 0\n"
+        "red = Raylib::Color.new(255,0,0,255)\n"
         "Raylib.InitWindow(720, 405, 'raylib/mruby')\n"
         "Raylib.SetTargetFPS(60)\n"
         "until Raylib.WindowShouldClose()\n"
@@ -42,6 +43,7 @@ int main(void)
         "    bg = Raylib::Color.new(c,c,c,255)\n"
         "    Raylib.ClearBackground(bg)\n"
         "    Raylib.DrawFPS(720 - 100, 16)\n"
+        "    Raylib.DrawCircle(720/2, 405/2, 50.0, red)\n"
         "    Raylib.EndDrawing()\n"
         "    c = (c + 1) % 255\n"
         "end\n"
