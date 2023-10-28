@@ -68,8 +68,8 @@
     },
     {
       "name": "SUPPORT_PARTIALBUSY_WAIT_LOOP",
-      "type": "GUARD",
-      "value": "",
+      "type": "INT",
+      "value": 1,
       "description": ""
     },
     {
@@ -86,6 +86,12 @@
     },
     {
       "name": "SUPPORT_COMPRESSION_API",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_AUTOMATION_EVENTS",
       "type": "INT",
       "value": 1,
       "description": ""
@@ -155,6 +161,12 @@
       "type": "INT",
       "value": 64,
       "description": "Max size allocated for decompression in MB"
+    },
+    {
+      "name": "MAX_AUTOMATION_EVENTS",
+      "type": "INT",
+      "value": 16384,
+      "description": "Maximum number of automation events to record"
     },
     {
       "name": "RL_DEFAULT_BATCH_BUFFERS",

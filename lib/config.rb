@@ -21,9 +21,11 @@ module Raylib
   SUPPORT_MOUSE_GESTURES = 1
   SUPPORT_SSH_KEYBOARD_RPI = 1
   SUPPORT_WINMM_HIGHRES_TIMER = 1
+  SUPPORT_PARTIALBUSY_WAIT_LOOP = 1
   SUPPORT_SCREEN_CAPTURE = 1
   SUPPORT_GIF_RECORDING = 1
   SUPPORT_COMPRESSION_API = 1
+  SUPPORT_AUTOMATION_EVENTS = 1
   MAX_FILEPATH_CAPACITY = 8192                                # Maximum file paths capacity
   MAX_FILEPATH_LENGTH = 4096                                  # Maximum length for filepaths (Linux PATH_MAX default value)
   MAX_KEYBOARD_KEYS = 512                                     # Maximum number of keyboard keys supported
@@ -35,6 +37,7 @@ module Raylib
   MAX_KEY_PRESSED_QUEUE = 16                                  # Maximum number of keys in the key input queue
   MAX_CHAR_PRESSED_QUEUE = 16                                 # Maximum number of characters in the char input queue
   MAX_DECOMPRESSION_SIZE = 64                                 # Max size allocated for decompression in MB
+  MAX_AUTOMATION_EVENTS = 16384                               # Maximum number of automation events to record
   RL_DEFAULT_BATCH_BUFFERS = 1                                # Default number of batch buffers (multi-buffering)
   RL_DEFAULT_BATCH_DRAWCALLS = 256                            # Default number of batch draw calls (by state changes: mode, texture)
   RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4                      # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())

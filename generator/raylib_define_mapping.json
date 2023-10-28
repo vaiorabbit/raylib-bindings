@@ -1,13 +1,13 @@
 {
       "RAYLIB_H" : null
-    , "RAYLIB_VERSION_MAJOR" : "4"
-    , "RAYLIB_VERSION_MINOR" : "6"
+    , "RAYLIB_VERSION_MAJOR" : "5"
+    , "RAYLIB_VERSION_MINOR" : "0"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : "\"4.6-dev\""
+    , "RAYLIB_VERSION" : "\"5.0-dev\""
     , "RLAPI" : null
     , "PI" : null
-    , "DEG2RAD" : "Math::PI / 180.0"
-    , "RAD2DEG" : "180.0 / Math::PI"
+    , "DEG2RAD" : null
+    , "RAD2DEG" : null
     , "RL_MALLOC" : null
     , "RL_CALLOC" : null
     , "RL_REALLOC" : null
@@ -152,10 +152,11 @@
     , "SUPPORT_MOUSE_GESTURES" : "1"
     , "SUPPORT_SSH_KEYBOARD_RPI" : "1"
     , "SUPPORT_WINMM_HIGHRES_TIMER" : "1"
-    , "SUPPORT_PARTIALBUSY_WAIT_LOOP" : null
+    , "SUPPORT_PARTIALBUSY_WAIT_LOOP" : "1"
     , "SUPPORT_SCREEN_CAPTURE" : "1"
     , "SUPPORT_GIF_RECORDING" : "1"
     , "SUPPORT_COMPRESSION_API" : "1"
+    , "SUPPORT_AUTOMATION_EVENTS" : "1"
     , "MAX_FILEPATH_CAPACITY" : "8192"
     , "MAX_FILEPATH_LENGTH" : "4096"
     , "MAX_KEYBOARD_KEYS" : "512"
@@ -167,6 +168,7 @@
     , "MAX_KEY_PRESSED_QUEUE" : "16"
     , "MAX_CHAR_PRESSED_QUEUE" : "16"
     , "MAX_DECOMPRESSION_SIZE" : "64"
+    , "MAX_AUTOMATION_EVENTS" : "16384"
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION" : "\"vertexPosition\""
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD" : "\"vertexTexCoord\""
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL" : "\"vertexNormal\""
@@ -244,6 +246,6 @@
     , "PHYSAC_COLLISION_ITERATIONS" : "100"
     , "PHYSAC_PENETRATION_ALLOWANCE" : "0.05"
     , "PHYSAC_PENETRATION_CORRECTION" : "0.4"
-    , "PHYSAC_PI" : "3.14159265358979323846"
+    , "PHYSAC_PI" : null
     , "PHYSAC_DEG2RAD" : null
 }

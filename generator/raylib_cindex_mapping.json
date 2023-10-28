@@ -38,6 +38,8 @@
     , "VrDeviceInfo" : "TypeKind.RECORD"
     , "VrStereoConfig" : "TypeKind.RECORD"
     , "FilePathList" : "TypeKind.RECORD"
+    , "AutomationEvent" : "TypeKind.RECORD"
+    , "AutomationEventList" : "TypeKind.RECORD"
     , "ConfigFlags" : "TypeKind.ENUM"
     , "TraceLogLevel" : "TypeKind.ENUM"
     , "KeyboardKey" : "TypeKind.ENUM"

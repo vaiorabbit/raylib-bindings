@@ -11,12 +11,10 @@ module Raylib
 
   # Define/Macro
 
-  RAYLIB_VERSION_MAJOR = 4
-  RAYLIB_VERSION_MINOR = 6
+  RAYLIB_VERSION_MAJOR = 5
+  RAYLIB_VERSION_MINOR = 0
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "4.6-dev"
-  DEG2RAD = Math::PI / 180.0
-  RAD2DEG = 180.0 / Math::PI
+  RAYLIB_VERSION = "5.0-dev"
 
   # Enum
 
@@ -1095,6 +1093,36 @@ module Raylib
     def paths=(v) self[:paths] = v end
   end
 
+  # Automation event (opaque struct)
+  class AutomationEvent < FFI::Struct
+    layout(
+      :frame, :uint,      # Event frame
+      :type, :uint,       # Event type (AutomationEventType)
+      :params, [:int, 4], # Event parameters (if required)
+    )
+    def frame = self[:frame]
+    def frame=(v) self[:frame] = v end
+    def type = self[:type]
+    def type=(v) self[:type] = v end
+    def params = self[:params]
+    def params=(v) self[:params] = v end
+  end
+
+  # Automation event list
+  class AutomationEventList < FFI::Struct
+    layout(
+      :capacity, :uint,  # Events max entries (MAX_AUTOMATION_EVENTS)
+      :count, :uint,     # Events entries count
+      :events, :pointer, # Events entries
+    )
+    def capacity = self[:capacity]
+    def capacity=(v) self[:capacity] = v end
+    def count = self[:count]
+    def count=(v) self[:count] = v end
+    def events = self[:events]
+    def events=(v) self[:events] = v end
+  end
+
 
   # Function
 
@@ -1109,15 +1137,15 @@ module Raylib
       #   @return [void]
       [:InitWindow, :InitWindow, [:int, :int, :pointer], :void],
 
-      # @!method WindowShouldClose()
-      #   WindowShouldClose : Check if KEY_ESCAPE pressed or Close icon pressed
-      #   @return [bool]
-      [:WindowShouldClose, :WindowShouldClose, [], :bool],
-
       # @!method CloseWindow()
       #   CloseWindow : Close window and unload OpenGL context
       #   @return [void]
       [:CloseWindow, :CloseWindow, [], :void],
+
+      # @!method WindowShouldClose()
+      #   WindowShouldClose : Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)
+      #   @return [bool]
+      [:WindowShouldClose, :WindowShouldClose, [], :bool],
 
       # @!method IsWindowReady()
       #   IsWindowReady : Check if window has been initialized successfully
@@ -1368,22 +1396,6 @@ module Raylib
       #   DisableEventWaiting : Disable waiting for events on EndDrawing(), automatic events polling
       #   @return [void]
       [:DisableEventWaiting, :DisableEventWaiting, [], :void],
-
-      # @!method SwapScreenBuffer()
-      #   SwapScreenBuffer : Swap back buffer with front buffer (screen drawing)
-      #   @return [void]
-      [:SwapScreenBuffer, :SwapScreenBuffer, [], :void],
-
-      # @!method PollInputEvents()
-      #   PollInputEvents : Register all input events
-      #   @return [void]
-      [:PollInputEvents, :PollInputEvents, [], :void],
-
-      # @!method WaitTime(seconds)
-      #   WaitTime : Wait for some time (halt program execution)
-      #   @param seconds [double]
-      #   @return [void]
-      [:WaitTime, :WaitTime, [:double], :void],
 
       # @!method ShowCursor()
       #   ShowCursor : Shows cursor
@@ -1653,11 +1665,6 @@ module Raylib
       #   @return [void]
       [:SetTargetFPS, :SetTargetFPS, [:int], :void],
 
-      # @!method GetFPS()
-      #   GetFPS : Get current FPS
-      #   @return [int]
-      [:GetFPS, :GetFPS, [], :int],
-
       # @!method GetFrameTime()
       #   GetFrameTime : Get time in seconds for last frame drawn (delta time)
       #   @return [float]
@@ -1667,6 +1674,27 @@ module Raylib
       #   GetTime : Get elapsed time in seconds since InitWindow()
       #   @return [double]
       [:GetTime, :GetTime, [], :double],
+
+      # @!method GetFPS()
+      #   GetFPS : Get current FPS
+      #   @return [int]
+      [:GetFPS, :GetFPS, [], :int],
+
+      # @!method SwapScreenBuffer()
+      #   SwapScreenBuffer : Swap back buffer with front buffer (screen drawing)
+      #   @return [void]
+      [:SwapScreenBuffer, :SwapScreenBuffer, [], :void],
+
+      # @!method PollInputEvents()
+      #   PollInputEvents : Register all input events
+      #   @return [void]
+      [:PollInputEvents, :PollInputEvents, [], :void],
+
+      # @!method WaitTime(seconds)
+      #   WaitTime : Wait for some time (halt program execution)
+      #   @param seconds [double]
+      #   @return [void]
+      [:WaitTime, :WaitTime, [:double], :void],
 
       # @!method GetRandomValue(min, max)
       #   GetRandomValue : Get a random value between min and max (both included)
@@ -1692,6 +1720,12 @@ module Raylib
       #   @param flags [unsigned int]
       #   @return [void]
       [:SetConfigFlags, :SetConfigFlags, [:uint], :void],
+
+      # @!method OpenURL(url)
+      #   OpenURL : Open URL with default system browser (if available)
+      #   @param url [const char *]
+      #   @return [void]
+      [:OpenURL, :OpenURL, [:pointer], :void],
 
       # @!method TraceLog(logLevel, text, ...)
       #   TraceLog : Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...)
@@ -1725,12 +1759,6 @@ module Raylib
       #   @param ptr [void *]
       #   @return [void]
       [:MemFree, :MemFree, [:pointer], :void],
-
-      # @!method OpenURL(url)
-      #   OpenURL : Open URL with default system browser (if available)
-      #   @param url [const char *]
-      #   @return [void]
-      [:OpenURL, :OpenURL, [:pointer], :void],
 
       # @!method SetTraceLogCallback(callback)
       #   SetTraceLogCallback : Set custom trace log
@@ -1960,6 +1988,53 @@ module Raylib
       #   @return [unsigned char *]
       [:DecodeDataBase64, :DecodeDataBase64, [:pointer, :pointer], :pointer],
 
+      # @!method LoadAutomationEventList(fileName)
+      #   LoadAutomationEventList : Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
+      #   @param fileName [const char *]
+      #   @return [AutomationEventList]
+      [:LoadAutomationEventList, :LoadAutomationEventList, [:pointer], AutomationEventList.by_value],
+
+      # @!method UnloadAutomationEventList(list)
+      #   UnloadAutomationEventList : Unload automation events list from file
+      #   @param list [AutomationEventList *]
+      #   @return [void]
+      [:UnloadAutomationEventList, :UnloadAutomationEventList, [:pointer], :void],
+
+      # @!method ExportAutomationEventList(list, fileName)
+      #   ExportAutomationEventList : Export automation events list as text file
+      #   @param list [AutomationEventList]
+      #   @param fileName [const char *]
+      #   @return [bool]
+      [:ExportAutomationEventList, :ExportAutomationEventList, [AutomationEventList.by_value, :pointer], :bool],
+
+      # @!method SetAutomationEventList(list)
+      #   SetAutomationEventList : Set automation event list to record to
+      #   @param list [AutomationEventList *]
+      #   @return [void]
+      [:SetAutomationEventList, :SetAutomationEventList, [:pointer], :void],
+
+      # @!method SetAutomationEventBaseFrame(frame)
+      #   SetAutomationEventBaseFrame : Set automation event internal base frame to start recording
+      #   @param frame [int]
+      #   @return [void]
+      [:SetAutomationEventBaseFrame, :SetAutomationEventBaseFrame, [:int], :void],
+
+      # @!method StartAutomationEventRecording()
+      #   StartAutomationEventRecording : Start recording automation events (AutomationEventList must be set)
+      #   @return [void]
+      [:StartAutomationEventRecording, :StartAutomationEventRecording, [], :void],
+
+      # @!method StopAutomationEventRecording()
+      #   StopAutomationEventRecording : Stop recording automation events
+      #   @return [void]
+      [:StopAutomationEventRecording, :StopAutomationEventRecording, [], :void],
+
+      # @!method PlayAutomationEvent(event)
+      #   PlayAutomationEvent : Play a recorded automation event
+      #   @param event [AutomationEvent]
+      #   @return [void]
+      [:PlayAutomationEvent, :PlayAutomationEvent, [AutomationEvent.by_value], :void],
+
       # @!method IsKeyPressed(key)
       #   IsKeyPressed : Check if a key has been pressed once
       #   @param key [int]
@@ -1990,12 +2065,6 @@ module Raylib
       #   @return [bool]
       [:IsKeyUp, :IsKeyUp, [:int], :bool],
 
-      # @!method SetExitKey(key)
-      #   SetExitKey : Set a custom key to exit program (default is ESC)
-      #   @param key [int]
-      #   @return [void]
-      [:SetExitKey, :SetExitKey, [:int], :void],
-
       # @!method GetKeyPressed()
       #   GetKeyPressed : Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
       #   @return [int]
@@ -2005,6 +2074,12 @@ module Raylib
       #   GetCharPressed : Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
       #   @return [int]
       [:GetCharPressed, :GetCharPressed, [], :int],
+
+      # @!method SetExitKey(key)
+      #   SetExitKey : Set a custom key to exit program (default is ESC)
+      #   @param key [int]
+      #   @return [void]
+      [:SetExitKey, :SetExitKey, [:int], :void],
 
       # @!method IsGamepadAvailable(gamepad)
       #   IsGamepadAvailable : Check if a gamepad is available
@@ -2398,6 +2473,14 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawCircleLines, :DrawCircleLines, [:int, :int, :float, Color.by_value], :void],
+
+      # @!method DrawCircleLinesV(center, radius, color)
+      #   DrawCircleLinesV : Draw circle outline (Vector version)
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawCircleLinesV, :DrawCircleLinesV, [Vector2.by_value, :float, Color.by_value], :void],
 
       # @!method DrawEllipse(centerX, centerY, radiusH, radiusV, color)
       #   DrawEllipse : Draw ellipse
@@ -4475,6 +4558,11 @@ module Raylib
       #   @param volume [float]
       #   @return [void]
       [:SetMasterVolume, :SetMasterVolume, [:float], :void],
+
+      # @!method GetMasterVolume()
+      #   GetMasterVolume : Get master volume (listener)
+      #   @return [float]
+      [:GetMasterVolume, :GetMasterVolume, [], :float],
 
       # @!method LoadWave(fileName)
       #   LoadWave : Load wave data from file
