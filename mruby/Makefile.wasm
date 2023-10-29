@@ -1,0 +1,29 @@
+all: libmrb_raylib_build libmrb_test_build
+
+clean: libmrb_test_clean libmrb_raylib_clean
+
+mruby_rebuild: mruby_clean mruby_clone mruby_build
+
+mruby_clone:
+	git clone --depth=1 https://github.com/mruby/mruby.git
+
+mruby_build:
+	cp ./mruby_script/default.rb ./mruby/build_config
+	cp ./mruby_script/emscripten.rb ./mruby/build_config
+	cd ./mruby && rake && cd ..
+
+mruby_clean:
+	rm -rf ./mruby
+
+libmrb_raylib_build:
+	emcc -c mrb_raylib.c -I ./mruby/build/emscripten/include -I ../raylib_dll/raylib/src
+	emar rc libmrb_raylib.a mrb_raylib.o
+
+libmrb_raylib_clean:
+	rm mrb_raylib.o libmrb_raylib.a
+
+libmrb_test_build:
+	emcc -o mrb_test.html mrb_test.c  -Os -s USE_GLFW=3 -s ASSERTIONS=1 -s WASM=1 -s ASYNCIFY -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy --shell-file ../raylib_dll/raylib/src/shell.html -I ./mruby/build/emscripten/include -L . -L ./mruby/build/emscripten/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib
+
+libmrb_test_clean:
+	rm mrb_test
