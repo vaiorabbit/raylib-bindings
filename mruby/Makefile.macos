@@ -1,0 +1,27 @@
+all: libmrb_raylib_build libmrb_test_build
+
+clean: libmrb_test_clean libmrb_raylib_clean
+
+mruby_rebuild: mruby_clean mruby_clone mruby_build
+
+mruby_clone:
+	git clone --depth=1 https://github.com/mruby/mruby.git
+
+mruby_build:
+	cd ./mruby && rake && cd ..
+
+mruby_clean:
+	rm -rf ./mruby
+
+libmrb_raylib_build:
+	clang -c mrb_raylib.c -I ./mruby/include -I ../raylib_dll/raylib/src
+	ar rc libmrb_raylib.a mrb_raylib.o
+
+libmrb_raylib_clean:
+	rm mrb_raylib.o libmrb_raylib.a
+
+libmrb_test_build:
+	clang -o mrb_test mrb_test.c -I ./mruby/include -L . -L ./mruby/build/host/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib -lm -framework IOKit -framework Cocoa
+
+libmrb_test_clean:
+	rm mrb_test
