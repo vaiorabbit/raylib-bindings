@@ -3100,7 +3100,7 @@ static mrb_value mrb_raylib_InitWindow(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
-    const char * title = DATA_PTR(argv[2]);
+    const char * title = RSTRING_PTR(argv[2]);
 
     InitWindow(width, height, title);
 
@@ -3271,7 +3271,7 @@ static mrb_value mrb_raylib_SetWindowTitle(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * title = DATA_PTR(argv[0]);
+    const char * title = RSTRING_PTR(argv[0]);
 
     SetWindowTitle(title);
 
@@ -3505,7 +3505,7 @@ static mrb_value mrb_raylib_GetMonitorName(mrb_state* mrb, mrb_value self)
 
     const char * retval = GetMonitorName(monitor);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_SetClipboardText(mrb_state* mrb, mrb_value self)
@@ -3513,7 +3513,7 @@ static mrb_value mrb_raylib_SetClipboardText(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     SetClipboardText(text);
 
@@ -3524,7 +3524,7 @@ static mrb_value mrb_raylib_GetClipboardText(mrb_state* mrb, mrb_value self)
 {
     const char * retval = GetClipboardText();
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_EnableEventWaiting(mrb_state* mrb, mrb_value self)
@@ -3774,8 +3774,8 @@ static mrb_value mrb_raylib_LoadShader(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * vsFileName = DATA_PTR(argv[0]);
-    const char * fsFileName = DATA_PTR(argv[1]);
+    const char * vsFileName = RSTRING_PTR(argv[0]);
+    const char * fsFileName = RSTRING_PTR(argv[1]);
 
     Shader* retval = (Shader*)mrb_malloc(mrb, sizeof(Shader));
     *retval = LoadShader(vsFileName, fsFileName); /* TODO check if this pattern leaks memory or not */
@@ -3787,8 +3787,8 @@ static mrb_value mrb_raylib_LoadShaderFromMemory(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * vsCode = DATA_PTR(argv[0]);
-    const char * fsCode = DATA_PTR(argv[1]);
+    const char * vsCode = RSTRING_PTR(argv[0]);
+    const char * fsCode = RSTRING_PTR(argv[1]);
 
     Shader* retval = (Shader*)mrb_malloc(mrb, sizeof(Shader));
     *retval = LoadShaderFromMemory(vsCode, fsCode); /* TODO check if this pattern leaks memory or not */
@@ -3813,7 +3813,7 @@ static mrb_value mrb_raylib_GetShaderLocation(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Shader shader = *(Shader*)DATA_PTR(argv[0]);
-    const char * uniformName = DATA_PTR(argv[1]);
+    const char * uniformName = RSTRING_PTR(argv[1]);
 
     int retval = GetShaderLocation(shader, uniformName);
 
@@ -3826,7 +3826,7 @@ static mrb_value mrb_raylib_GetShaderLocationAttrib(mrb_state* mrb, mrb_value se
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Shader shader = *(Shader*)DATA_PTR(argv[0]);
-    const char * attribName = DATA_PTR(argv[1]);
+    const char * attribName = RSTRING_PTR(argv[1]);
 
     int retval = GetShaderLocationAttrib(shader, attribName);
 
@@ -4084,7 +4084,7 @@ static mrb_value mrb_raylib_TakeScreenshot(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     TakeScreenshot(fileName);
 
@@ -4108,7 +4108,7 @@ static mrb_value mrb_raylib_OpenURL(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * url = DATA_PTR(argv[0]);
+    const char * url = RSTRING_PTR(argv[0]);
 
     OpenURL(url);
 
@@ -4229,7 +4229,7 @@ static mrb_value mrb_raylib_LoadFileData(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int * dataSize = DATA_PTR(argv[1]);
 
     unsigned char * retval = LoadFileData(fileName, dataSize);
@@ -4254,7 +4254,7 @@ static mrb_value mrb_raylib_SaveFileData(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     void * data = DATA_PTR(argv[1]);
     int dataSize = mrb_as_int(mrb, argv[2]);
 
@@ -4270,7 +4270,7 @@ static mrb_value mrb_raylib_ExportDataAsCode(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     const unsigned char * data = DATA_PTR(argv[0]);
     int dataSize = mrb_as_int(mrb, argv[1]);
-    const char * fileName = DATA_PTR(argv[2]);
+    const char * fileName = RSTRING_PTR(argv[2]);
 
     bool retval = ExportDataAsCode(data, dataSize, fileName);
 
@@ -4282,7 +4282,7 @@ static mrb_value mrb_raylib_LoadFileText(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     char * retval = LoadFileText(fileName);
 
@@ -4306,7 +4306,7 @@ static mrb_value mrb_raylib_SaveFileText(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     char * text = DATA_PTR(argv[1]);
 
     bool retval = SaveFileText(fileName, text);
@@ -4319,7 +4319,7 @@ static mrb_value mrb_raylib_FileExists(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     bool retval = FileExists(fileName);
 
@@ -4331,7 +4331,7 @@ static mrb_value mrb_raylib_DirectoryExists(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * dirPath = DATA_PTR(argv[0]);
+    const char * dirPath = RSTRING_PTR(argv[0]);
 
     bool retval = DirectoryExists(dirPath);
 
@@ -4343,8 +4343,8 @@ static mrb_value mrb_raylib_IsFileExtension(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
-    const char * ext = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[0]);
+    const char * ext = RSTRING_PTR(argv[1]);
 
     bool retval = IsFileExtension(fileName, ext);
 
@@ -4356,7 +4356,7 @@ static mrb_value mrb_raylib_GetFileLength(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     int retval = GetFileLength(fileName);
 
@@ -4368,11 +4368,11 @@ static mrb_value mrb_raylib_GetFileExtension(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     const char * retval = GetFileExtension(fileName);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetFileName(mrb_state* mrb, mrb_value self)
@@ -4380,11 +4380,11 @@ static mrb_value mrb_raylib_GetFileName(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * filePath = DATA_PTR(argv[0]);
+    const char * filePath = RSTRING_PTR(argv[0]);
 
     const char * retval = GetFileName(filePath);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetFileNameWithoutExt(mrb_state* mrb, mrb_value self)
@@ -4392,11 +4392,11 @@ static mrb_value mrb_raylib_GetFileNameWithoutExt(mrb_state* mrb, mrb_value self
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * filePath = DATA_PTR(argv[0]);
+    const char * filePath = RSTRING_PTR(argv[0]);
 
     const char * retval = GetFileNameWithoutExt(filePath);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetDirectoryPath(mrb_state* mrb, mrb_value self)
@@ -4404,11 +4404,11 @@ static mrb_value mrb_raylib_GetDirectoryPath(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * filePath = DATA_PTR(argv[0]);
+    const char * filePath = RSTRING_PTR(argv[0]);
 
     const char * retval = GetDirectoryPath(filePath);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetPrevDirectoryPath(mrb_state* mrb, mrb_value self)
@@ -4416,25 +4416,25 @@ static mrb_value mrb_raylib_GetPrevDirectoryPath(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * dirPath = DATA_PTR(argv[0]);
+    const char * dirPath = RSTRING_PTR(argv[0]);
 
     const char * retval = GetPrevDirectoryPath(dirPath);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetWorkingDirectory(mrb_state* mrb, mrb_value self)
 {
     const char * retval = GetWorkingDirectory();
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetApplicationDirectory(mrb_state* mrb, mrb_value self)
 {
     const char * retval = GetApplicationDirectory();
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_ChangeDirectory(mrb_state* mrb, mrb_value self)
@@ -4442,7 +4442,7 @@ static mrb_value mrb_raylib_ChangeDirectory(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * dir = DATA_PTR(argv[0]);
+    const char * dir = RSTRING_PTR(argv[0]);
 
     bool retval = ChangeDirectory(dir);
 
@@ -4454,7 +4454,7 @@ static mrb_value mrb_raylib_IsPathFile(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * path = DATA_PTR(argv[0]);
+    const char * path = RSTRING_PTR(argv[0]);
 
     bool retval = IsPathFile(path);
 
@@ -4466,7 +4466,7 @@ static mrb_value mrb_raylib_LoadDirectoryFiles(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * dirPath = DATA_PTR(argv[0]);
+    const char * dirPath = RSTRING_PTR(argv[0]);
 
     FilePathList* retval = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
     *retval = LoadDirectoryFiles(dirPath); /* TODO check if this pattern leaks memory or not */
@@ -4478,8 +4478,8 @@ static mrb_value mrb_raylib_LoadDirectoryFilesEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * basePath = DATA_PTR(argv[0]);
-    const char * filter = DATA_PTR(argv[1]);
+    const char * basePath = RSTRING_PTR(argv[0]);
+    const char * filter = RSTRING_PTR(argv[1]);
     bool scanSubdirs = mrb_as_int(mrb, argv[2]);
 
     FilePathList* retval = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
@@ -4530,7 +4530,7 @@ static mrb_value mrb_raylib_GetFileModTime(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     long retval = GetFileModTime(fileName);
 
@@ -4597,7 +4597,7 @@ static mrb_value mrb_raylib_LoadAutomationEventList(mrb_state* mrb, mrb_value se
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     AutomationEventList* retval = (AutomationEventList*)mrb_malloc(mrb, sizeof(AutomationEventList));
     *retval = LoadAutomationEventList(fileName); /* TODO check if this pattern leaks memory or not */
@@ -4622,7 +4622,7 @@ static mrb_value mrb_raylib_ExportAutomationEventList(mrb_state* mrb, mrb_value 
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     AutomationEventList list = *(AutomationEventList*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportAutomationEventList(list, fileName);
 
@@ -4786,7 +4786,7 @@ static mrb_value mrb_raylib_GetGamepadName(mrb_state* mrb, mrb_value self)
 
     const char * retval = GetGamepadName(gamepad);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_IsGamepadButtonPressed(mrb_state* mrb, mrb_value self)
@@ -4878,7 +4878,7 @@ static mrb_value mrb_raylib_SetGamepadMappings(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * mappings = DATA_PTR(argv[0]);
+    const char * mappings = RSTRING_PTR(argv[0]);
 
     int retval = SetGamepadMappings(mappings);
 
@@ -5941,7 +5941,7 @@ static mrb_value mrb_raylib_LoadImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = LoadImage(fileName); /* TODO check if this pattern leaks memory or not */
@@ -5953,7 +5953,7 @@ static mrb_value mrb_raylib_LoadImageRaw(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int width = mrb_as_int(mrb, argv[1]);
     int height = mrb_as_int(mrb, argv[2]);
     int format = mrb_as_int(mrb, argv[3]);
@@ -5969,7 +5969,7 @@ static mrb_value mrb_raylib_LoadImageSvg(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * fileNameOrString = DATA_PTR(argv[0]);
+    const char * fileNameOrString = RSTRING_PTR(argv[0]);
     int width = mrb_as_int(mrb, argv[1]);
     int height = mrb_as_int(mrb, argv[2]);
 
@@ -5983,7 +5983,7 @@ static mrb_value mrb_raylib_LoadImageAnim(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int * frames = DATA_PTR(argv[1]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
@@ -5996,7 +5996,7 @@ static mrb_value mrb_raylib_LoadImageFromMemory(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * fileType = DATA_PTR(argv[0]);
+    const char * fileType = RSTRING_PTR(argv[0]);
     const unsigned char * fileData = DATA_PTR(argv[1]);
     int dataSize = mrb_as_int(mrb, argv[2]);
 
@@ -6054,7 +6054,7 @@ static mrb_value mrb_raylib_ExportImage(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image image = *(Image*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportImage(image, fileName);
 
@@ -6067,7 +6067,7 @@ static mrb_value mrb_raylib_ExportImageToMemory(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     Image image = *(Image*)DATA_PTR(argv[0]);
-    const char * fileType = DATA_PTR(argv[1]);
+    const char * fileType = RSTRING_PTR(argv[1]);
     int * fileSize = DATA_PTR(argv[2]);
 
     unsigned char * retval = ExportImageToMemory(image, fileType, fileSize);
@@ -6081,7 +6081,7 @@ static mrb_value mrb_raylib_ExportImageAsCode(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image image = *(Image*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportImageAsCode(image, fileName);
 
@@ -6218,7 +6218,7 @@ static mrb_value mrb_raylib_GenImageText(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
-    const char * text = DATA_PTR(argv[2]);
+    const char * text = RSTRING_PTR(argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageText(width, height, text); /* TODO check if this pattern leaks memory or not */
@@ -6255,7 +6255,7 @@ static mrb_value mrb_raylib_ImageText(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int fontSize = mrb_as_int(mrb, argv[1]);
     Color color = *(Color*)DATA_PTR(argv[2]);
 
@@ -6270,7 +6270,7 @@ static mrb_value mrb_raylib_ImageTextEx(mrb_state* mrb, mrb_value self)
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
     Font font = *(Font*)DATA_PTR(argv[0]);
-    const char * text = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[1]);
     float fontSize = mrb_as_float(mrb, argv[2]);
     float spacing = mrb_as_float(mrb, argv[3]);
     Color tint = *(Color*)DATA_PTR(argv[4]);
@@ -6887,7 +6887,7 @@ static mrb_value mrb_raylib_ImageDrawText(mrb_state* mrb, mrb_value self)
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    const char * text = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[1]);
     int posX = mrb_as_int(mrb, argv[2]);
     int posY = mrb_as_int(mrb, argv[3]);
     int fontSize = mrb_as_int(mrb, argv[4]);
@@ -6905,7 +6905,7 @@ static mrb_value mrb_raylib_ImageDrawTextEx(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooooooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
     Font font = *(Font*)DATA_PTR(argv[1]);
-    const char * text = DATA_PTR(argv[2]);
+    const char * text = RSTRING_PTR(argv[2]);
     Vector2 position = *(Vector2*)DATA_PTR(argv[3]);
     float fontSize = mrb_as_float(mrb, argv[4]);
     float spacing = mrb_as_float(mrb, argv[5]);
@@ -6921,7 +6921,7 @@ static mrb_value mrb_raylib_LoadTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Texture2D* retval = (Texture2D*)mrb_malloc(mrb, sizeof(Texture2D));
     *retval = LoadTexture(fileName); /* TODO check if this pattern leaks memory or not */
@@ -7379,7 +7379,7 @@ static mrb_value mrb_raylib_LoadFont(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
     *retval = LoadFont(fileName); /* TODO check if this pattern leaks memory or not */
@@ -7391,7 +7391,7 @@ static mrb_value mrb_raylib_LoadFontEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int fontSize = mrb_as_int(mrb, argv[1]);
     int * codepoints = DATA_PTR(argv[2]);
     int codepointCount = mrb_as_int(mrb, argv[3]);
@@ -7420,7 +7420,7 @@ static mrb_value mrb_raylib_LoadFontFromMemory(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    const char * fileType = DATA_PTR(argv[0]);
+    const char * fileType = RSTRING_PTR(argv[0]);
     const unsigned char * fileData = DATA_PTR(argv[1]);
     int dataSize = mrb_as_int(mrb, argv[2]);
     int fontSize = mrb_as_int(mrb, argv[3]);
@@ -7507,7 +7507,7 @@ static mrb_value mrb_raylib_ExportFontAsCode(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Font font = *(Font*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportFontAsCode(font, fileName);
 
@@ -7532,7 +7532,7 @@ static mrb_value mrb_raylib_DrawText(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int posX = mrb_as_int(mrb, argv[1]);
     int posY = mrb_as_int(mrb, argv[2]);
     int fontSize = mrb_as_int(mrb, argv[3]);
@@ -7549,7 +7549,7 @@ static mrb_value mrb_raylib_DrawTextEx(mrb_state* mrb, mrb_value self)
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
     Font font = *(Font*)DATA_PTR(argv[0]);
-    const char * text = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[1]);
     Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
     float fontSize = mrb_as_float(mrb, argv[3]);
     float spacing = mrb_as_float(mrb, argv[4]);
@@ -7566,7 +7566,7 @@ static mrb_value mrb_raylib_DrawTextPro(mrb_state* mrb, mrb_value self)
     void* ptrs[8] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], };
     mrb_get_args_a(mrb, "oooooooo", ptrs);
     Font font = *(Font*)DATA_PTR(argv[0]);
-    const char * text = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[1]);
     Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
     Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
     float rotation = mrb_as_float(mrb, argv[4]);
@@ -7630,7 +7630,7 @@ static mrb_value mrb_raylib_MeasureText(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int fontSize = mrb_as_int(mrb, argv[1]);
 
     int retval = MeasureText(text, fontSize);
@@ -7644,7 +7644,7 @@ static mrb_value mrb_raylib_MeasureTextEx(mrb_state* mrb, mrb_value self)
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Font font = *(Font*)DATA_PTR(argv[0]);
-    const char * text = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[1]);
     float fontSize = mrb_as_float(mrb, argv[2]);
     float spacing = mrb_as_float(mrb, argv[3]);
 
@@ -7722,7 +7722,7 @@ static mrb_value mrb_raylib_LoadCodepoints(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int * count = DATA_PTR(argv[1]);
 
     int * retval = LoadCodepoints(text, count);
@@ -7747,7 +7747,7 @@ static mrb_value mrb_raylib_GetCodepointCount(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     int retval = GetCodepointCount(text);
 
@@ -7759,7 +7759,7 @@ static mrb_value mrb_raylib_GetCodepoint(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int * codepointSize = DATA_PTR(argv[1]);
 
     int retval = GetCodepoint(text, codepointSize);
@@ -7772,7 +7772,7 @@ static mrb_value mrb_raylib_GetCodepointNext(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int * codepointSize = DATA_PTR(argv[1]);
 
     int retval = GetCodepointNext(text, codepointSize);
@@ -7785,7 +7785,7 @@ static mrb_value mrb_raylib_GetCodepointPrevious(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int * codepointSize = DATA_PTR(argv[1]);
 
     int retval = GetCodepointPrevious(text, codepointSize);
@@ -7803,7 +7803,7 @@ static mrb_value mrb_raylib_CodepointToUTF8(mrb_state* mrb, mrb_value self)
 
     const char * retval = CodepointToUTF8(codepoint, utf8Size);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextCopy(mrb_state* mrb, mrb_value self)
@@ -7812,7 +7812,7 @@ static mrb_value mrb_raylib_TextCopy(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     char * dst = DATA_PTR(argv[0]);
-    const char * src = DATA_PTR(argv[1]);
+    const char * src = RSTRING_PTR(argv[1]);
 
     int retval = TextCopy(dst, src);
 
@@ -7824,8 +7824,8 @@ static mrb_value mrb_raylib_TextIsEqual(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text1 = DATA_PTR(argv[0]);
-    const char * text2 = DATA_PTR(argv[1]);
+    const char * text1 = RSTRING_PTR(argv[0]);
+    const char * text2 = RSTRING_PTR(argv[1]);
 
     bool retval = TextIsEqual(text1, text2);
 
@@ -7837,7 +7837,7 @@ static mrb_value mrb_raylib_TextLength(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     unsigned int retval = TextLength(text);
 
@@ -7849,13 +7849,13 @@ static mrb_value mrb_raylib_TextSubtext(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     int position = mrb_as_int(mrb, argv[1]);
     int length = mrb_as_int(mrb, argv[2]);
 
     const char * retval = TextSubtext(text, position, length);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self)
@@ -7864,8 +7864,8 @@ static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     char * text = DATA_PTR(argv[0]);
-    const char * replace = DATA_PTR(argv[1]);
-    const char * by = DATA_PTR(argv[2]);
+    const char * replace = RSTRING_PTR(argv[1]);
+    const char * by = RSTRING_PTR(argv[2]);
 
     char * retval = TextReplace(text, replace, by);
 
@@ -7877,8 +7877,8 @@ static mrb_value mrb_raylib_TextInsert(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
-    const char * insert = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[0]);
+    const char * insert = RSTRING_PTR(argv[1]);
     int position = mrb_as_int(mrb, argv[2]);
 
     char * retval = TextInsert(text, insert, position);
@@ -7893,11 +7893,11 @@ static mrb_value mrb_raylib_TextJoin(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     const char ** textList = DATA_PTR(argv[0]);
     int count = mrb_as_int(mrb, argv[1]);
-    const char * delimiter = DATA_PTR(argv[2]);
+    const char * delimiter = RSTRING_PTR(argv[2]);
 
     const char * retval = TextJoin(textList, count, delimiter);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextSplit(mrb_state* mrb, mrb_value self)
@@ -7905,7 +7905,7 @@ static mrb_value mrb_raylib_TextSplit(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
     char delimiter = mrb_as_int(mrb, argv[1]);
     int * count = DATA_PTR(argv[2]);
 
@@ -7920,7 +7920,7 @@ static mrb_value mrb_raylib_TextAppend(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     char * text = DATA_PTR(argv[0]);
-    const char * append = DATA_PTR(argv[1]);
+    const char * append = RSTRING_PTR(argv[1]);
     int * position = DATA_PTR(argv[2]);
 
     TextAppend(text, append, position);
@@ -7933,8 +7933,8 @@ static mrb_value mrb_raylib_TextFindIndex(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * text = DATA_PTR(argv[0]);
-    const char * find = DATA_PTR(argv[1]);
+    const char * text = RSTRING_PTR(argv[0]);
+    const char * find = RSTRING_PTR(argv[1]);
 
     int retval = TextFindIndex(text, find);
 
@@ -7946,11 +7946,11 @@ static mrb_value mrb_raylib_TextToUpper(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     const char * retval = TextToUpper(text);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextToLower(mrb_state* mrb, mrb_value self)
@@ -7958,11 +7958,11 @@ static mrb_value mrb_raylib_TextToLower(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     const char * retval = TextToLower(text);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextToPascal(mrb_state* mrb, mrb_value self)
@@ -7970,11 +7970,11 @@ static mrb_value mrb_raylib_TextToPascal(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     const char * retval = TextToPascal(text);
 
-    return self; /* TODO return wrapped object */
+    return mrb_str_new_cstr(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextToInteger(mrb_state* mrb, mrb_value self)
@@ -7982,7 +7982,7 @@ static mrb_value mrb_raylib_TextToInteger(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * text = DATA_PTR(argv[0]);
+    const char * text = RSTRING_PTR(argv[0]);
 
     int retval = TextToInteger(text);
 
@@ -8314,7 +8314,7 @@ static mrb_value mrb_raylib_LoadModel(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Model* retval = (Model*)mrb_malloc(mrb, sizeof(Model));
     *retval = LoadModel(fileName); /* TODO check if this pattern leaks memory or not */
@@ -8575,7 +8575,7 @@ static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportMesh(mesh, fileName);
 
@@ -8765,7 +8765,7 @@ static mrb_value mrb_raylib_LoadMaterials(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int * materialCount = DATA_PTR(argv[1]);
 
     return self; /* TODO return wrapped object */
@@ -8835,7 +8835,7 @@ static mrb_value mrb_raylib_LoadModelAnimations(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
     int * animCount = DATA_PTR(argv[1]);
 
     return self; /* TODO return wrapped object */
@@ -9052,7 +9052,7 @@ static mrb_value mrb_raylib_LoadWave(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Wave* retval = (Wave*)mrb_malloc(mrb, sizeof(Wave));
     *retval = LoadWave(fileName); /* TODO check if this pattern leaks memory or not */
@@ -9064,7 +9064,7 @@ static mrb_value mrb_raylib_LoadWaveFromMemory(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * fileType = DATA_PTR(argv[0]);
+    const char * fileType = RSTRING_PTR(argv[0]);
     const unsigned char * fileData = DATA_PTR(argv[1]);
     int dataSize = mrb_as_int(mrb, argv[2]);
 
@@ -9090,7 +9090,7 @@ static mrb_value mrb_raylib_LoadSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
     *retval = LoadSound(fileName); /* TODO check if this pattern leaks memory or not */
@@ -9189,7 +9189,7 @@ static mrb_value mrb_raylib_ExportWave(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Wave wave = *(Wave*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportWave(wave, fileName);
 
@@ -9202,7 +9202,7 @@ static mrb_value mrb_raylib_ExportWaveAsCode(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Wave wave = *(Wave*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
+    const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportWaveAsCode(wave, fileName);
 
@@ -9378,7 +9378,7 @@ static mrb_value mrb_raylib_LoadMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    const char * fileName = DATA_PTR(argv[0]);
+    const char * fileName = RSTRING_PTR(argv[0]);
 
     Music* retval = (Music*)mrb_malloc(mrb, sizeof(Music));
     *retval = LoadMusicStream(fileName); /* TODO check if this pattern leaks memory or not */
@@ -9390,7 +9390,7 @@ static mrb_value mrb_raylib_LoadMusicStreamFromMemory(mrb_state* mrb, mrb_value 
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    const char * fileType = DATA_PTR(argv[0]);
+    const char * fileType = RSTRING_PTR(argv[0]);
     const unsigned char * data = DATA_PTR(argv[1]);
     int dataSize = mrb_as_int(mrb, argv[2]);
 

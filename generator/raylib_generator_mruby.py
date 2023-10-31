@@ -327,7 +327,9 @@ def generate_function_body(ctx, indent = "", module_name = ""):
 
             for i, arg in enumerate(func_info.args):
                 arg_value = ""
-                if "*" in arg.type_name:
+                if "const char *" == arg.type_name:
+                    arg_value = f'RSTRING_PTR(argv[{i}])'
+                elif "*" in arg.type_name:
                     arg_value = f'DATA_PTR(argv[{i}])'
                 elif any(ch.isupper() for ch in arg.type_name):
                     arg_value = f'*({arg.type_name}*)DATA_PTR(argv[{i}])'
@@ -366,7 +368,9 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                 print(indent + f'{retval_str}{func_name}({arg_names});', file = sys.stdout)
                 print("", file = sys.stdout)
 
-                if "*" in retval_type_name:
+                if "const char *" == retval_type_name:
+                    print(indent + f'return mrb_str_new_cstr(mrb, retval);', file = sys.stdout)
+                elif "*" in retval_type_name:
                     print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
                 elif "float" in retval_type_name:
                     print(indent + f'return mrb_float_value(mrb, retval);', file = sys.stdout)
