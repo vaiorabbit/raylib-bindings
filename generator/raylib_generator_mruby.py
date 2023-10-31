@@ -358,8 +358,8 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                         retval_type_name_alias = "Texture"
                     elif retval_type_name == "RenderTexture2D":
                         retval_type_name_alias = "RenderTexture"
-                    print(indent + f'{retval_type_name}* retval;', file = sys.stdout)
-                    print(indent + f'/* TODO return newly allocated object */ *retval = {func_name}({arg_names});', file = sys.stdout)
+                    print(indent + f'{retval_type_name}* retval = ({retval_type_name}*)mrb_malloc(mrb, sizeof({retval_type_name}));', file = sys.stdout)
+                    print(indent + f'*retval = {func_name}({arg_names}); /* TODO check if this pattern leaks memory or not */', file = sys.stdout)
                     print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
             else:
                 retval_str = f'{retval_type_name} retval = '
