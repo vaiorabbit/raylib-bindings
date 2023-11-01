@@ -3535,7 +3535,7 @@ static mrb_value mrb_raylib_GetWindowHandle(mrb_state* mrb, mrb_value self)
 {
     void * retval = GetWindowHandle();
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetScreenWidth(mrb_state* mrb, mrb_value self)
@@ -4306,7 +4306,7 @@ static mrb_value mrb_raylib_MemAlloc(mrb_state* mrb, mrb_value self)
 
     void * retval = MemAlloc(size);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_MemRealloc(mrb_state* mrb, mrb_value self)
@@ -4319,7 +4319,7 @@ static mrb_value mrb_raylib_MemRealloc(mrb_state* mrb, mrb_value self)
 
     void * retval = MemRealloc(ptr, size);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_MemFree(mrb_state* mrb, mrb_value self)
@@ -4404,7 +4404,7 @@ static mrb_value mrb_raylib_LoadFileData(mrb_state* mrb, mrb_value self)
 
     unsigned char * retval = LoadFileData(fileName, dataSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadFileData(mrb_state* mrb, mrb_value self)
@@ -4456,7 +4456,7 @@ static mrb_value mrb_raylib_LoadFileText(mrb_state* mrb, mrb_value self)
 
     char * retval = LoadFileText(fileName);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadFileText(mrb_state* mrb, mrb_value self)
@@ -4718,7 +4718,7 @@ static mrb_value mrb_raylib_CompressData(mrb_state* mrb, mrb_value self)
 
     unsigned char * retval = CompressData(data, dataSize, compDataSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_DecompressData(mrb_state* mrb, mrb_value self)
@@ -4732,7 +4732,7 @@ static mrb_value mrb_raylib_DecompressData(mrb_state* mrb, mrb_value self)
 
     unsigned char * retval = DecompressData(compData, compDataSize, dataSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_EncodeDataBase64(mrb_state* mrb, mrb_value self)
@@ -4746,7 +4746,7 @@ static mrb_value mrb_raylib_EncodeDataBase64(mrb_state* mrb, mrb_value self)
 
     char * retval = EncodeDataBase64(data, dataSize, outputSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_DecodeDataBase64(mrb_state* mrb, mrb_value self)
@@ -4759,7 +4759,7 @@ static mrb_value mrb_raylib_DecodeDataBase64(mrb_state* mrb, mrb_value self)
 
     unsigned char * retval = DecodeDataBase64(data, outputSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_LoadAutomationEventList(mrb_state* mrb, mrb_value self)
@@ -6242,7 +6242,7 @@ static mrb_value mrb_raylib_ExportImageToMemory(mrb_state* mrb, mrb_value self)
 
     unsigned char * retval = ExportImageToMemory(image, fileType, fileSize);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_ExportImageAsCode(mrb_state* mrb, mrb_value self)
@@ -7872,7 +7872,7 @@ static mrb_value mrb_raylib_LoadUTF8(mrb_state* mrb, mrb_value self)
 
     char * retval = LoadUTF8(codepoints, length);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadUTF8(mrb_state* mrb, mrb_value self)
@@ -7897,7 +7897,7 @@ static mrb_value mrb_raylib_LoadCodepoints(mrb_state* mrb, mrb_value self)
 
     int * retval = LoadCodepoints(text, count);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadCodepoints(mrb_state* mrb, mrb_value self)
@@ -8039,7 +8039,7 @@ static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self)
 
     char * retval = TextReplace(text, replace, by);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextInsert(mrb_state* mrb, mrb_value self)
@@ -8053,7 +8053,7 @@ static mrb_value mrb_raylib_TextInsert(mrb_state* mrb, mrb_value self)
 
     char * retval = TextInsert(text, insert, position);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextJoin(mrb_state* mrb, mrb_value self)
@@ -8081,7 +8081,7 @@ static mrb_value mrb_raylib_TextSplit(mrb_state* mrb, mrb_value self)
 
     const char ** retval = TextSplit(text, delimiter, count);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_TextAppend(mrb_state* mrb, mrb_value self)
@@ -9528,7 +9528,7 @@ static mrb_value mrb_raylib_LoadWaveSamples(mrb_state* mrb, mrb_value self)
 
     float * retval = LoadWaveSamples(wave);
 
-    return self; /* TODO return wrapped object */
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadWaveSamples(mrb_state* mrb, mrb_value self)

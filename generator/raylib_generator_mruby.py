@@ -380,7 +380,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                 if "const char *" == retval_type_name:
                     print(indent + f'return mrb_str_new_cstr(mrb, retval);', file = sys.stdout)
                 elif "*" in retval_type_name:
-                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
+                    print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
                 elif "float" in retval_type_name:
                     print(indent + f'return mrb_float_value(mrb, retval);', file = sys.stdout)
                 elif "bool" in retval_type_name:
