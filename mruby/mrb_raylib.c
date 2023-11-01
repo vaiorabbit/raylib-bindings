@@ -214,6 +214,11 @@ static mrb_value mrb_raylib_Vector2_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Vector2_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Vector2));
+}
+
 static mrb_value mrb_raylib_Vector2_x_get(mrb_state* mrb, mrb_value self)
 {
     Vector2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Vector2, Vector2);
@@ -267,6 +272,11 @@ static mrb_value mrb_raylib_Vector3_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Vector3);
     return self;
+}
+
+static mrb_value mrb_raylib_Vector3_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Vector3));
 }
 
 static mrb_value mrb_raylib_Vector3_x_get(mrb_state* mrb, mrb_value self)
@@ -338,6 +348,11 @@ static mrb_value mrb_raylib_Vector4_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Vector4);
     return self;
+}
+
+static mrb_value mrb_raylib_Vector4_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Vector4));
 }
 
 static mrb_value mrb_raylib_Vector4_x_get(mrb_state* mrb, mrb_value self)
@@ -436,6 +451,11 @@ static mrb_value mrb_raylib_Matrix_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Matrix);
     return self;
+}
+
+static mrb_value mrb_raylib_Matrix_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Matrix));
 }
 
 static mrb_value mrb_raylib_Matrix_m0_get(mrb_state* mrb, mrb_value self)
@@ -704,6 +724,11 @@ static mrb_value mrb_raylib_Color_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Color_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Color));
+}
+
 static mrb_value mrb_raylib_Color_r_get(mrb_state* mrb, mrb_value self)
 {
     Color* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Color, Color);
@@ -788,6 +813,11 @@ static mrb_value mrb_raylib_Rectangle_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Rectangle);
     return self;
+}
+
+static mrb_value mrb_raylib_Rectangle_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Rectangle));
 }
 
 static mrb_value mrb_raylib_Rectangle_x_get(mrb_state* mrb, mrb_value self)
@@ -875,6 +905,11 @@ static mrb_value mrb_raylib_Image_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Image);
     return self;
+}
+
+static mrb_value mrb_raylib_Image_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Image));
 }
 
 // static mrb_value mrb_raylib_Image_data_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
@@ -965,6 +1000,11 @@ static mrb_value mrb_raylib_Texture_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Texture);
     return self;
+}
+
+static mrb_value mrb_raylib_Texture_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Texture));
 }
 
 static mrb_value mrb_raylib_Texture_id_get(mrb_state* mrb, mrb_value self)
@@ -1067,6 +1107,11 @@ static mrb_value mrb_raylib_RenderTexture_initialize(mrb_state* mrb, mrb_value s
     return self;
 }
 
+static mrb_value mrb_raylib_RenderTexture_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(RenderTexture));
+}
+
 static mrb_value mrb_raylib_RenderTexture_id_get(mrb_state* mrb, mrb_value self)
 {
     RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
@@ -1138,6 +1183,11 @@ static mrb_value mrb_raylib_NPatchInfo_initialize(mrb_state* mrb, mrb_value self
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_NPatchInfo);
     return self;
+}
+
+static mrb_value mrb_raylib_NPatchInfo_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(NPatchInfo));
 }
 
 static mrb_value mrb_raylib_NPatchInfo_source_get(mrb_state* mrb, mrb_value self)
@@ -1257,6 +1307,11 @@ static mrb_value mrb_raylib_GlyphInfo_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_GlyphInfo_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(GlyphInfo));
+}
+
 static mrb_value mrb_raylib_GlyphInfo_value_get(mrb_state* mrb, mrb_value self)
 {
     GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
@@ -1360,6 +1415,11 @@ static mrb_value mrb_raylib_Font_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Font_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Font));
+}
+
 static mrb_value mrb_raylib_Font_baseSize_get(mrb_state* mrb, mrb_value self)
 {
     Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
@@ -1451,6 +1511,11 @@ static mrb_value mrb_raylib_Camera3D_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Camera3D);
     return self;
+}
+
+static mrb_value mrb_raylib_Camera3D_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Camera3D));
 }
 
 static mrb_value mrb_raylib_Camera3D_position_get(mrb_state* mrb, mrb_value self)
@@ -1554,6 +1619,11 @@ static mrb_value mrb_raylib_Camera2D_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Camera2D_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Camera2D));
+}
+
 static mrb_value mrb_raylib_Camera2D_offset_get(mrb_state* mrb, mrb_value self)
 {
     Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
@@ -1649,6 +1719,11 @@ static mrb_value mrb_raylib_Mesh_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Mesh);
     return self;
+}
+
+static mrb_value mrb_raylib_Mesh_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Mesh));
 }
 
 static mrb_value mrb_raylib_Mesh_vertexCount_get(mrb_state* mrb, mrb_value self)
@@ -1756,6 +1831,11 @@ static mrb_value mrb_raylib_Shader_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Shader_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Shader));
+}
+
 static mrb_value mrb_raylib_Shader_id_get(mrb_state* mrb, mrb_value self)
 {
     Shader* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Shader, Shader);
@@ -1797,6 +1877,11 @@ static mrb_value mrb_raylib_MaterialMap_initialize(mrb_state* mrb, mrb_value sel
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_MaterialMap);
     return self;
+}
+
+static mrb_value mrb_raylib_MaterialMap_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(MaterialMap));
 }
 
 static mrb_value mrb_raylib_MaterialMap_texture_get(mrb_state* mrb, mrb_value self)
@@ -1869,6 +1954,11 @@ static mrb_value mrb_raylib_Material_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Material_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Material));
+}
+
 static mrb_value mrb_raylib_Material_shader_get(mrb_state* mrb, mrb_value self)
 {
     Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
@@ -1913,6 +2003,11 @@ static mrb_value mrb_raylib_Transform_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Transform);
     return self;
+}
+
+static mrb_value mrb_raylib_Transform_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Transform));
 }
 
 static mrb_value mrb_raylib_Transform_translation_get(mrb_state* mrb, mrb_value self)
@@ -1984,6 +2079,11 @@ static mrb_value mrb_raylib_BoneInfo_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_BoneInfo_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(BoneInfo));
+}
+
 static mrb_value mrb_raylib_BoneInfo_name_get(mrb_state* mrb, mrb_value self)
 {
     BoneInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoneInfo, BoneInfo);
@@ -2043,6 +2143,11 @@ static mrb_value mrb_raylib_Model_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Model);
     return self;
+}
+
+static mrb_value mrb_raylib_Model_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Model));
 }
 
 static mrb_value mrb_raylib_Model_transform_get(mrb_state* mrb, mrb_value self)
@@ -2147,6 +2252,11 @@ static mrb_value mrb_raylib_ModelAnimation_initialize(mrb_state* mrb, mrb_value 
     return self;
 }
 
+static mrb_value mrb_raylib_ModelAnimation_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(ModelAnimation));
+}
+
 static mrb_value mrb_raylib_ModelAnimation_boneCount_get(mrb_state* mrb, mrb_value self)
 {
     ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
@@ -2222,6 +2332,11 @@ static mrb_value mrb_raylib_Ray_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Ray_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Ray));
+}
+
 static mrb_value mrb_raylib_Ray_position_get(mrb_state* mrb, mrb_value self)
 {
     Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
@@ -2276,6 +2391,11 @@ static mrb_value mrb_raylib_RayCollision_initialize(mrb_state* mrb, mrb_value se
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_RayCollision);
     return self;
+}
+
+static mrb_value mrb_raylib_RayCollision_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(RayCollision));
 }
 
 static mrb_value mrb_raylib_RayCollision_hit_get(mrb_state* mrb, mrb_value self)
@@ -2362,6 +2482,11 @@ static mrb_value mrb_raylib_BoundingBox_initialize(mrb_state* mrb, mrb_value sel
     return self;
 }
 
+static mrb_value mrb_raylib_BoundingBox_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(BoundingBox));
+}
+
 static mrb_value mrb_raylib_BoundingBox_min_get(mrb_state* mrb, mrb_value self)
 {
     BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
@@ -2417,6 +2542,11 @@ static mrb_value mrb_raylib_Wave_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Wave);
     return self;
+}
+
+static mrb_value mrb_raylib_Wave_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Wave));
 }
 
 static mrb_value mrb_raylib_Wave_frameCount_get(mrb_state* mrb, mrb_value self)
@@ -2509,6 +2639,11 @@ static mrb_value mrb_raylib_AudioStream_initialize(mrb_state* mrb, mrb_value sel
     return self;
 }
 
+static mrb_value mrb_raylib_AudioStream_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(AudioStream));
+}
+
 // static mrb_value mrb_raylib_AudioStream_buffer_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
 // static mrb_value mrb_raylib_AudioStream_buffer_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
 
@@ -2584,6 +2719,11 @@ static mrb_value mrb_raylib_Sound_initialize(mrb_state* mrb, mrb_value self)
     return self;
 }
 
+static mrb_value mrb_raylib_Sound_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Sound));
+}
+
 static mrb_value mrb_raylib_Sound_stream_get(mrb_state* mrb, mrb_value self)
 {
     Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
@@ -2639,6 +2779,11 @@ static mrb_value mrb_raylib_Music_initialize(mrb_state* mrb, mrb_value self)
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_Music);
     return self;
+}
+
+static mrb_value mrb_raylib_Music_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Music));
 }
 
 static mrb_value mrb_raylib_Music_stream_get(mrb_state* mrb, mrb_value self)
@@ -2734,6 +2879,11 @@ static mrb_value mrb_raylib_VrDeviceInfo_initialize(mrb_state* mrb, mrb_value se
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_VrDeviceInfo);
     return self;
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(VrDeviceInfo));
 }
 
 static mrb_value mrb_raylib_VrDeviceInfo_hResolution_get(mrb_state* mrb, mrb_value self)
@@ -2892,6 +3042,11 @@ static mrb_value mrb_raylib_VrStereoConfig_initialize(mrb_state* mrb, mrb_value 
     return self;
 }
 
+static mrb_value mrb_raylib_VrStereoConfig_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(VrStereoConfig));
+}
+
 // static mrb_value mrb_raylib_VrStereoConfig_projection_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
 // static mrb_value mrb_raylib_VrStereoConfig_projection_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
 
@@ -2939,6 +3094,11 @@ static mrb_value mrb_raylib_FilePathList_initialize(mrb_state* mrb, mrb_value se
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_FilePathList);
     return self;
+}
+
+static mrb_value mrb_raylib_FilePathList_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(FilePathList));
 }
 
 static mrb_value mrb_raylib_FilePathList_capacity_get(mrb_state* mrb, mrb_value self)
@@ -2999,6 +3159,11 @@ static mrb_value mrb_raylib_AutomationEvent_initialize(mrb_state* mrb, mrb_value
     return self;
 }
 
+static mrb_value mrb_raylib_AutomationEvent_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(AutomationEvent));
+}
+
 static mrb_value mrb_raylib_AutomationEvent_frame_get(mrb_state* mrb, mrb_value self)
 {
     AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
@@ -3055,6 +3220,11 @@ static mrb_value mrb_raylib_AutomationEventList_initialize(mrb_state* mrb, mrb_v
     }
     mrb_data_init(self, instance, &mrb_raylib_struct_AutomationEventList);
     return self;
+}
+
+static mrb_value mrb_raylib_AutomationEventList_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(AutomationEventList));
 }
 
 static mrb_value mrb_raylib_AutomationEventList_capacity_get(mrb_state* mrb, mrb_value self)
@@ -3418,7 +3588,7 @@ static mrb_value mrb_raylib_GetMonitorPosition(mrb_state* mrb, mrb_value self)
     int monitor = mrb_as_int(mrb, argv[0]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetMonitorPosition(monitor); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMonitorPosition(monitor);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3485,14 +3655,14 @@ static mrb_value mrb_raylib_GetMonitorRefreshRate(mrb_state* mrb, mrb_value self
 static mrb_value mrb_raylib_GetWindowPosition(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetWindowPosition(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetWindowPosition();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
 static mrb_value mrb_raylib_GetWindowScaleDPI(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetWindowScaleDPI(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetWindowScaleDPI();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3753,7 +3923,7 @@ static mrb_value mrb_raylib_LoadVrStereoConfig(mrb_state* mrb, mrb_value self)
     VrDeviceInfo device = *(VrDeviceInfo*)DATA_PTR(argv[0]);
 
     VrStereoConfig* retval = (VrStereoConfig*)mrb_malloc(mrb, sizeof(VrStereoConfig));
-    *retval = LoadVrStereoConfig(device); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadVrStereoConfig(device);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVrStereoConfig, &mrb_raylib_struct_VrStereoConfig, retval));
 }
 
@@ -3778,7 +3948,7 @@ static mrb_value mrb_raylib_LoadShader(mrb_state* mrb, mrb_value self)
     const char * fsFileName = RSTRING_PTR(argv[1]);
 
     Shader* retval = (Shader*)mrb_malloc(mrb, sizeof(Shader));
-    *retval = LoadShader(vsFileName, fsFileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadShader(vsFileName, fsFileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibShader, &mrb_raylib_struct_Shader, retval));
 }
 
@@ -3791,7 +3961,7 @@ static mrb_value mrb_raylib_LoadShaderFromMemory(mrb_state* mrb, mrb_value self)
     const char * fsCode = RSTRING_PTR(argv[1]);
 
     Shader* retval = (Shader*)mrb_malloc(mrb, sizeof(Shader));
-    *retval = LoadShaderFromMemory(vsCode, fsCode); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadShaderFromMemory(vsCode, fsCode);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibShader, &mrb_raylib_struct_Shader, retval));
 }
 
@@ -3913,7 +4083,7 @@ static mrb_value mrb_raylib_GetMouseRay(mrb_state* mrb, mrb_value self)
     Camera camera = *(Camera*)DATA_PTR(argv[1]);
 
     Ray* retval = (Ray*)mrb_malloc(mrb, sizeof(Ray));
-    *retval = GetMouseRay(mousePosition, camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMouseRay(mousePosition, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRay, &mrb_raylib_struct_Ray, retval));
 }
 
@@ -3925,7 +4095,7 @@ static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self)
     Camera camera = *(Camera*)DATA_PTR(argv[0]);
 
     Matrix* retval = (Matrix*)mrb_malloc(mrb, sizeof(Matrix));
-    *retval = GetCameraMatrix(camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetCameraMatrix(camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
 }
 
@@ -3937,7 +4107,7 @@ static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self)
     Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
 
     Matrix* retval = (Matrix*)mrb_malloc(mrb, sizeof(Matrix));
-    *retval = GetCameraMatrix2D(camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetCameraMatrix2D(camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
 }
 
@@ -3950,7 +4120,7 @@ static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self)
     Camera camera = *(Camera*)DATA_PTR(argv[1]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetWorldToScreen(position, camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetWorldToScreen(position, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3963,7 +4133,7 @@ static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self)
     Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetScreenToWorld2D(position, camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetScreenToWorld2D(position, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3978,7 +4148,7 @@ static mrb_value mrb_raylib_GetWorldToScreenEx(mrb_state* mrb, mrb_value self)
     int height = mrb_as_int(mrb, argv[3]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetWorldToScreenEx(position, camera, width, height); /* TODO check if this pattern leaks memory or not */
+    *retval = GetWorldToScreenEx(position, camera, width, height);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3991,7 +4161,7 @@ static mrb_value mrb_raylib_GetWorldToScreen2D(mrb_state* mrb, mrb_value self)
     Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetWorldToScreen2D(position, camera); /* TODO check if this pattern leaks memory or not */
+    *retval = GetWorldToScreen2D(position, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -4469,7 +4639,7 @@ static mrb_value mrb_raylib_LoadDirectoryFiles(mrb_state* mrb, mrb_value self)
     const char * dirPath = RSTRING_PTR(argv[0]);
 
     FilePathList* retval = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
-    *retval = LoadDirectoryFiles(dirPath); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadDirectoryFiles(dirPath);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
 }
 
@@ -4483,7 +4653,7 @@ static mrb_value mrb_raylib_LoadDirectoryFilesEx(mrb_state* mrb, mrb_value self)
     bool scanSubdirs = mrb_as_int(mrb, argv[2]);
 
     FilePathList* retval = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
-    *retval = LoadDirectoryFilesEx(basePath, filter, scanSubdirs); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadDirectoryFilesEx(basePath, filter, scanSubdirs);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
 }
 
@@ -4509,7 +4679,7 @@ static mrb_value mrb_raylib_IsFileDropped(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_LoadDroppedFiles(mrb_state* mrb, mrb_value self)
 {
     FilePathList* retval = (FilePathList*)mrb_malloc(mrb, sizeof(FilePathList));
-    *retval = LoadDroppedFiles(); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadDroppedFiles();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFilePathList, &mrb_raylib_struct_FilePathList, retval));
 }
 
@@ -4600,7 +4770,7 @@ static mrb_value mrb_raylib_LoadAutomationEventList(mrb_state* mrb, mrb_value se
     const char * fileName = RSTRING_PTR(argv[0]);
 
     AutomationEventList* retval = (AutomationEventList*)mrb_malloc(mrb, sizeof(AutomationEventList));
-    *retval = LoadAutomationEventList(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadAutomationEventList(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibAutomationEventList, &mrb_raylib_struct_AutomationEventList, retval));
 }
 
@@ -4950,14 +5120,14 @@ static mrb_value mrb_raylib_GetMouseY(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_GetMousePosition(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetMousePosition(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMousePosition();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
 static mrb_value mrb_raylib_GetMouseDelta(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetMouseDelta(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMouseDelta();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -5010,7 +5180,7 @@ static mrb_value mrb_raylib_GetMouseWheelMove(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_GetMouseWheelMoveV(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetMouseWheelMoveV(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMouseWheelMoveV();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -5048,7 +5218,7 @@ static mrb_value mrb_raylib_GetTouchPosition(mrb_state* mrb, mrb_value self)
     int index = mrb_as_int(mrb, argv[0]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetTouchPosition(index); /* TODO check if this pattern leaks memory or not */
+    *retval = GetTouchPosition(index);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -5112,7 +5282,7 @@ static mrb_value mrb_raylib_GetGestureHoldDuration(mrb_state* mrb, mrb_value sel
 static mrb_value mrb_raylib_GetGestureDragVector(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetGestureDragVector(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetGestureDragVector();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -5126,7 +5296,7 @@ static mrb_value mrb_raylib_GetGestureDragAngle(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_GetGesturePinchVector(mrb_state* mrb, mrb_value self)
 {
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = GetGesturePinchVector(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetGesturePinchVector();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -5932,7 +6102,7 @@ static mrb_value mrb_raylib_GetCollisionRec(mrb_state* mrb, mrb_value self)
     Rectangle rec2 = *(Rectangle*)DATA_PTR(argv[1]);
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
-    *retval = GetCollisionRec(rec1, rec2); /* TODO check if this pattern leaks memory or not */
+    *retval = GetCollisionRec(rec1, rec2);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
@@ -5944,7 +6114,7 @@ static mrb_value mrb_raylib_LoadImage(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImage(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImage(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -5960,7 +6130,7 @@ static mrb_value mrb_raylib_LoadImageRaw(mrb_state* mrb, mrb_value self)
     int headerSize = mrb_as_int(mrb, argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageRaw(fileName, width, height, format, headerSize); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageRaw(fileName, width, height, format, headerSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -5974,7 +6144,7 @@ static mrb_value mrb_raylib_LoadImageSvg(mrb_state* mrb, mrb_value self)
     int height = mrb_as_int(mrb, argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageSvg(fileNameOrString, width, height); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageSvg(fileNameOrString, width, height);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -5987,7 +6157,7 @@ static mrb_value mrb_raylib_LoadImageAnim(mrb_state* mrb, mrb_value self)
     int * frames = DATA_PTR(argv[1]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageAnim(fileName, frames); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageAnim(fileName, frames);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6001,7 +6171,7 @@ static mrb_value mrb_raylib_LoadImageFromMemory(mrb_state* mrb, mrb_value self)
     int dataSize = mrb_as_int(mrb, argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageFromMemory(fileType, fileData, dataSize); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageFromMemory(fileType, fileData, dataSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6013,14 +6183,14 @@ static mrb_value mrb_raylib_LoadImageFromTexture(mrb_state* mrb, mrb_value self)
     Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageFromTexture(texture); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageFromTexture(texture);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
 static mrb_value mrb_raylib_LoadImageFromScreen(mrb_state* mrb, mrb_value self)
 {
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = LoadImageFromScreen(); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadImageFromScreen();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6098,7 +6268,7 @@ static mrb_value mrb_raylib_GenImageColor(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageColor(width, height, color); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageColor(width, height, color);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6114,7 +6284,7 @@ static mrb_value mrb_raylib_GenImageGradientLinear(mrb_state* mrb, mrb_value sel
     Color end = *(Color*)DATA_PTR(argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageGradientLinear(width, height, direction, start, end); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageGradientLinear(width, height, direction, start, end);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6130,7 +6300,7 @@ static mrb_value mrb_raylib_GenImageGradientRadial(mrb_state* mrb, mrb_value sel
     Color outer = *(Color*)DATA_PTR(argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageGradientRadial(width, height, density, inner, outer); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageGradientRadial(width, height, density, inner, outer);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6146,7 +6316,7 @@ static mrb_value mrb_raylib_GenImageGradientSquare(mrb_state* mrb, mrb_value sel
     Color outer = *(Color*)DATA_PTR(argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageGradientSquare(width, height, density, inner, outer); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageGradientSquare(width, height, density, inner, outer);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6163,7 +6333,7 @@ static mrb_value mrb_raylib_GenImageChecked(mrb_state* mrb, mrb_value self)
     Color col2 = *(Color*)DATA_PTR(argv[5]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageChecked(width, height, checksX, checksY, col1, col2); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageChecked(width, height, checksX, checksY, col1, col2);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6177,7 +6347,7 @@ static mrb_value mrb_raylib_GenImageWhiteNoise(mrb_state* mrb, mrb_value self)
     float factor = mrb_as_float(mrb, argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageWhiteNoise(width, height, factor); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageWhiteNoise(width, height, factor);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6193,7 +6363,7 @@ static mrb_value mrb_raylib_GenImagePerlinNoise(mrb_state* mrb, mrb_value self)
     float scale = mrb_as_float(mrb, argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImagePerlinNoise(width, height, offsetX, offsetY, scale); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImagePerlinNoise(width, height, offsetX, offsetY, scale);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6207,7 +6377,7 @@ static mrb_value mrb_raylib_GenImageCellular(mrb_state* mrb, mrb_value self)
     int tileSize = mrb_as_int(mrb, argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageCellular(width, height, tileSize); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageCellular(width, height, tileSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6221,7 +6391,7 @@ static mrb_value mrb_raylib_GenImageText(mrb_state* mrb, mrb_value self)
     const char * text = RSTRING_PTR(argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageText(width, height, text); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageText(width, height, text);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6233,7 +6403,7 @@ static mrb_value mrb_raylib_ImageCopy(mrb_state* mrb, mrb_value self)
     Image image = *(Image*)DATA_PTR(argv[0]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = ImageCopy(image); /* TODO check if this pattern leaks memory or not */
+    *retval = ImageCopy(image);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6246,7 +6416,7 @@ static mrb_value mrb_raylib_ImageFromImage(mrb_state* mrb, mrb_value self)
     Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = ImageFromImage(image, rec); /* TODO check if this pattern leaks memory or not */
+    *retval = ImageFromImage(image, rec);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6260,7 +6430,7 @@ static mrb_value mrb_raylib_ImageText(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[2]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = ImageText(text, fontSize, color); /* TODO check if this pattern leaks memory or not */
+    *retval = ImageText(text, fontSize, color);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6276,7 +6446,7 @@ static mrb_value mrb_raylib_ImageTextEx(mrb_state* mrb, mrb_value self)
     Color tint = *(Color*)DATA_PTR(argv[4]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = ImageTextEx(font, text, fontSize, spacing, tint); /* TODO check if this pattern leaks memory or not */
+    *retval = ImageTextEx(font, text, fontSize, spacing, tint);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6650,7 +6820,7 @@ static mrb_value mrb_raylib_GetImageAlphaBorder(mrb_state* mrb, mrb_value self)
     float threshold = mrb_as_float(mrb, argv[1]);
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
-    *retval = GetImageAlphaBorder(image, threshold); /* TODO check if this pattern leaks memory or not */
+    *retval = GetImageAlphaBorder(image, threshold);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
@@ -6664,7 +6834,7 @@ static mrb_value mrb_raylib_GetImageColor(mrb_state* mrb, mrb_value self)
     int y = mrb_as_int(mrb, argv[2]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = GetImageColor(image, x, y); /* TODO check if this pattern leaks memory or not */
+    *retval = GetImageColor(image, x, y);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -6924,7 +7094,7 @@ static mrb_value mrb_raylib_LoadTexture(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Texture2D* retval = (Texture2D*)mrb_malloc(mrb, sizeof(Texture2D));
-    *retval = LoadTexture(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadTexture(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
@@ -6936,7 +7106,7 @@ static mrb_value mrb_raylib_LoadTextureFromImage(mrb_state* mrb, mrb_value self)
     Image image = *(Image*)DATA_PTR(argv[0]);
 
     Texture2D* retval = (Texture2D*)mrb_malloc(mrb, sizeof(Texture2D));
-    *retval = LoadTextureFromImage(image); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadTextureFromImage(image);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
@@ -6949,7 +7119,7 @@ static mrb_value mrb_raylib_LoadTextureCubemap(mrb_state* mrb, mrb_value self)
     int layout = mrb_as_int(mrb, argv[1]);
 
     TextureCubemap* retval = (TextureCubemap*)mrb_malloc(mrb, sizeof(TextureCubemap));
-    *retval = LoadTextureCubemap(image, layout); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadTextureCubemap(image, layout);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
 }
 
@@ -6962,7 +7132,7 @@ static mrb_value mrb_raylib_LoadRenderTexture(mrb_state* mrb, mrb_value self)
     int height = mrb_as_int(mrb, argv[1]);
 
     RenderTexture2D* retval = (RenderTexture2D*)mrb_malloc(mrb, sizeof(RenderTexture2D));
-    *retval = LoadRenderTexture(width, height); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadRenderTexture(width, height);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRenderTexture, &mrb_raylib_struct_RenderTexture, retval));
 }
 
@@ -7182,7 +7352,7 @@ static mrb_value mrb_raylib_Fade(mrb_state* mrb, mrb_value self)
     float alpha = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = Fade(color, alpha); /* TODO check if this pattern leaks memory or not */
+    *retval = Fade(color, alpha);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7206,7 +7376,7 @@ static mrb_value mrb_raylib_ColorNormalize(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[0]);
 
     Vector4* retval = (Vector4*)mrb_malloc(mrb, sizeof(Vector4));
-    *retval = ColorNormalize(color); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorNormalize(color);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector4, &mrb_raylib_struct_Vector4, retval));
 }
 
@@ -7218,7 +7388,7 @@ static mrb_value mrb_raylib_ColorFromNormalized(mrb_state* mrb, mrb_value self)
     Vector4 normalized = *(Vector4*)DATA_PTR(argv[0]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorFromNormalized(normalized); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorFromNormalized(normalized);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7230,7 +7400,7 @@ static mrb_value mrb_raylib_ColorToHSV(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[0]);
 
     Vector3* retval = (Vector3*)mrb_malloc(mrb, sizeof(Vector3));
-    *retval = ColorToHSV(color); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorToHSV(color);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector3, &mrb_raylib_struct_Vector3, retval));
 }
 
@@ -7244,7 +7414,7 @@ static mrb_value mrb_raylib_ColorFromHSV(mrb_state* mrb, mrb_value self)
     float value = mrb_as_float(mrb, argv[2]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorFromHSV(hue, saturation, value); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorFromHSV(hue, saturation, value);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7257,7 +7427,7 @@ static mrb_value mrb_raylib_ColorTint(mrb_state* mrb, mrb_value self)
     Color tint = *(Color*)DATA_PTR(argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorTint(color, tint); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorTint(color, tint);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7270,7 +7440,7 @@ static mrb_value mrb_raylib_ColorBrightness(mrb_state* mrb, mrb_value self)
     float factor = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorBrightness(color, factor); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorBrightness(color, factor);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7283,7 +7453,7 @@ static mrb_value mrb_raylib_ColorContrast(mrb_state* mrb, mrb_value self)
     float contrast = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorContrast(color, contrast); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorContrast(color, contrast);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7296,7 +7466,7 @@ static mrb_value mrb_raylib_ColorAlpha(mrb_state* mrb, mrb_value self)
     float alpha = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorAlpha(color, alpha); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorAlpha(color, alpha);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7310,7 +7480,7 @@ static mrb_value mrb_raylib_ColorAlphaBlend(mrb_state* mrb, mrb_value self)
     Color tint = *(Color*)DATA_PTR(argv[2]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = ColorAlphaBlend(dst, src, tint); /* TODO check if this pattern leaks memory or not */
+    *retval = ColorAlphaBlend(dst, src, tint);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7322,7 +7492,7 @@ static mrb_value mrb_raylib_GetColor(mrb_state* mrb, mrb_value self)
     unsigned int hexValue = mrb_as_int(mrb, argv[0]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = GetColor(hexValue); /* TODO check if this pattern leaks memory or not */
+    *retval = GetColor(hexValue);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7335,7 +7505,7 @@ static mrb_value mrb_raylib_GetPixelColor(mrb_state* mrb, mrb_value self)
     int format = mrb_as_int(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
-    *retval = GetPixelColor(srcPtr, format); /* TODO check if this pattern leaks memory or not */
+    *retval = GetPixelColor(srcPtr, format);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibColor, &mrb_raylib_struct_Color, retval));
 }
 
@@ -7370,7 +7540,7 @@ static mrb_value mrb_raylib_GetPixelDataSize(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_GetFontDefault(mrb_state* mrb, mrb_value self)
 {
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
-    *retval = GetFontDefault(); /* TODO check if this pattern leaks memory or not */
+    *retval = GetFontDefault();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
@@ -7382,7 +7552,7 @@ static mrb_value mrb_raylib_LoadFont(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
-    *retval = LoadFont(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadFont(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
@@ -7397,7 +7567,7 @@ static mrb_value mrb_raylib_LoadFontEx(mrb_state* mrb, mrb_value self)
     int codepointCount = mrb_as_int(mrb, argv[3]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
-    *retval = LoadFontEx(fileName, fontSize, codepoints, codepointCount); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadFontEx(fileName, fontSize, codepoints, codepointCount);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
@@ -7411,7 +7581,7 @@ static mrb_value mrb_raylib_LoadFontFromImage(mrb_state* mrb, mrb_value self)
     int firstChar = mrb_as_int(mrb, argv[2]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
-    *retval = LoadFontFromImage(image, key, firstChar); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadFontFromImage(image, key, firstChar);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
@@ -7428,7 +7598,7 @@ static mrb_value mrb_raylib_LoadFontFromMemory(mrb_state* mrb, mrb_value self)
     int codepointCount = mrb_as_int(mrb, argv[5]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
-    *retval = LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
 }
 
@@ -7472,7 +7642,7 @@ static mrb_value mrb_raylib_GenImageFontAtlas(mrb_state* mrb, mrb_value self)
     int packMethod = mrb_as_int(mrb, argv[5]);
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
-    *retval = GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod); /* TODO check if this pattern leaks memory or not */
+    *retval = GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -7649,7 +7819,7 @@ static mrb_value mrb_raylib_MeasureTextEx(mrb_state* mrb, mrb_value self)
     float spacing = mrb_as_float(mrb, argv[3]);
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
-    *retval = MeasureTextEx(font, text, fontSize, spacing); /* TODO check if this pattern leaks memory or not */
+    *retval = MeasureTextEx(font, text, fontSize, spacing);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -7675,7 +7845,7 @@ static mrb_value mrb_raylib_GetGlyphInfo(mrb_state* mrb, mrb_value self)
     int codepoint = mrb_as_int(mrb, argv[1]);
 
     GlyphInfo* retval = (GlyphInfo*)mrb_malloc(mrb, sizeof(GlyphInfo));
-    *retval = GetGlyphInfo(font, codepoint); /* TODO check if this pattern leaks memory or not */
+    *retval = GetGlyphInfo(font, codepoint);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibGlyphInfo, &mrb_raylib_struct_GlyphInfo, retval));
 }
 
@@ -7688,7 +7858,7 @@ static mrb_value mrb_raylib_GetGlyphAtlasRec(mrb_state* mrb, mrb_value self)
     int codepoint = mrb_as_int(mrb, argv[1]);
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
-    *retval = GetGlyphAtlasRec(font, codepoint); /* TODO check if this pattern leaks memory or not */
+    *retval = GetGlyphAtlasRec(font, codepoint);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
 }
 
@@ -8317,7 +8487,7 @@ static mrb_value mrb_raylib_LoadModel(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Model* retval = (Model*)mrb_malloc(mrb, sizeof(Model));
-    *retval = LoadModel(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadModel(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibModel, &mrb_raylib_struct_Model, retval));
 }
 
@@ -8329,7 +8499,7 @@ static mrb_value mrb_raylib_LoadModelFromMesh(mrb_state* mrb, mrb_value self)
     Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
 
     Model* retval = (Model*)mrb_malloc(mrb, sizeof(Model));
-    *retval = LoadModelFromMesh(mesh); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadModelFromMesh(mesh);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibModel, &mrb_raylib_struct_Model, retval));
 }
 
@@ -8365,7 +8535,7 @@ static mrb_value mrb_raylib_GetModelBoundingBox(mrb_state* mrb, mrb_value self)
     Model model = *(Model*)DATA_PTR(argv[0]);
 
     BoundingBox* retval = (BoundingBox*)mrb_malloc(mrb, sizeof(BoundingBox));
-    *retval = GetModelBoundingBox(model); /* TODO check if this pattern leaks memory or not */
+    *retval = GetModelBoundingBox(model);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibBoundingBox, &mrb_raylib_struct_BoundingBox, retval));
 }
 
@@ -8590,7 +8760,7 @@ static mrb_value mrb_raylib_GetMeshBoundingBox(mrb_state* mrb, mrb_value self)
     Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
 
     BoundingBox* retval = (BoundingBox*)mrb_malloc(mrb, sizeof(BoundingBox));
-    *retval = GetMeshBoundingBox(mesh); /* TODO check if this pattern leaks memory or not */
+    *retval = GetMeshBoundingBox(mesh);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibBoundingBox, &mrb_raylib_struct_BoundingBox, retval));
 }
 
@@ -8615,7 +8785,7 @@ static mrb_value mrb_raylib_GenMeshPoly(mrb_state* mrb, mrb_value self)
     float radius = mrb_as_float(mrb, argv[1]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshPoly(sides, radius); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshPoly(sides, radius);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8630,7 +8800,7 @@ static mrb_value mrb_raylib_GenMeshPlane(mrb_state* mrb, mrb_value self)
     int resZ = mrb_as_int(mrb, argv[3]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshPlane(width, length, resX, resZ); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshPlane(width, length, resX, resZ);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8644,7 +8814,7 @@ static mrb_value mrb_raylib_GenMeshCube(mrb_state* mrb, mrb_value self)
     float length = mrb_as_float(mrb, argv[2]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshCube(width, height, length); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshCube(width, height, length);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8658,7 +8828,7 @@ static mrb_value mrb_raylib_GenMeshSphere(mrb_state* mrb, mrb_value self)
     int slices = mrb_as_int(mrb, argv[2]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshSphere(radius, rings, slices); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshSphere(radius, rings, slices);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8672,7 +8842,7 @@ static mrb_value mrb_raylib_GenMeshHemiSphere(mrb_state* mrb, mrb_value self)
     int slices = mrb_as_int(mrb, argv[2]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshHemiSphere(radius, rings, slices); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshHemiSphere(radius, rings, slices);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8686,7 +8856,7 @@ static mrb_value mrb_raylib_GenMeshCylinder(mrb_state* mrb, mrb_value self)
     int slices = mrb_as_int(mrb, argv[2]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshCylinder(radius, height, slices); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshCylinder(radius, height, slices);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8700,7 +8870,7 @@ static mrb_value mrb_raylib_GenMeshCone(mrb_state* mrb, mrb_value self)
     int slices = mrb_as_int(mrb, argv[2]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshCone(radius, height, slices); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshCone(radius, height, slices);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8715,7 +8885,7 @@ static mrb_value mrb_raylib_GenMeshTorus(mrb_state* mrb, mrb_value self)
     int sides = mrb_as_int(mrb, argv[3]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshTorus(radius, size, radSeg, sides); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshTorus(radius, size, radSeg, sides);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8730,7 +8900,7 @@ static mrb_value mrb_raylib_GenMeshKnot(mrb_state* mrb, mrb_value self)
     int sides = mrb_as_int(mrb, argv[3]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshKnot(radius, size, radSeg, sides); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshKnot(radius, size, radSeg, sides);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8743,7 +8913,7 @@ static mrb_value mrb_raylib_GenMeshHeightmap(mrb_state* mrb, mrb_value self)
     Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshHeightmap(heightmap, size); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshHeightmap(heightmap, size);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8756,7 +8926,7 @@ static mrb_value mrb_raylib_GenMeshCubicmap(mrb_state* mrb, mrb_value self)
     Vector3 cubeSize = *(Vector3*)DATA_PTR(argv[1]);
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
-    *retval = GenMeshCubicmap(cubicmap, cubeSize); /* TODO check if this pattern leaks memory or not */
+    *retval = GenMeshCubicmap(cubicmap, cubeSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMesh, &mrb_raylib_struct_Mesh, retval));
 }
 
@@ -8774,7 +8944,7 @@ static mrb_value mrb_raylib_LoadMaterials(mrb_state* mrb, mrb_value self)
 static mrb_value mrb_raylib_LoadMaterialDefault(mrb_state* mrb, mrb_value self)
 {
     Material* retval = (Material*)mrb_malloc(mrb, sizeof(Material));
-    *retval = LoadMaterialDefault(); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadMaterialDefault();
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMaterial, &mrb_raylib_struct_Material, retval));
 }
 
@@ -8945,7 +9115,7 @@ static mrb_value mrb_raylib_GetRayCollisionSphere(mrb_state* mrb, mrb_value self
     float radius = mrb_as_float(mrb, argv[2]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    *retval = GetRayCollisionSphere(ray, center, radius); /* TODO check if this pattern leaks memory or not */
+    *retval = GetRayCollisionSphere(ray, center, radius);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
@@ -8958,7 +9128,7 @@ static mrb_value mrb_raylib_GetRayCollisionBox(mrb_state* mrb, mrb_value self)
     BoundingBox box = *(BoundingBox*)DATA_PTR(argv[1]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    *retval = GetRayCollisionBox(ray, box); /* TODO check if this pattern leaks memory or not */
+    *retval = GetRayCollisionBox(ray, box);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
@@ -8972,7 +9142,7 @@ static mrb_value mrb_raylib_GetRayCollisionMesh(mrb_state* mrb, mrb_value self)
     Matrix transform = *(Matrix*)DATA_PTR(argv[2]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    *retval = GetRayCollisionMesh(ray, mesh, transform); /* TODO check if this pattern leaks memory or not */
+    *retval = GetRayCollisionMesh(ray, mesh, transform);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
@@ -8987,7 +9157,7 @@ static mrb_value mrb_raylib_GetRayCollisionTriangle(mrb_state* mrb, mrb_value se
     Vector3 p3 = *(Vector3*)DATA_PTR(argv[3]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    *retval = GetRayCollisionTriangle(ray, p1, p2, p3); /* TODO check if this pattern leaks memory or not */
+    *retval = GetRayCollisionTriangle(ray, p1, p2, p3);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
@@ -9003,7 +9173,7 @@ static mrb_value mrb_raylib_GetRayCollisionQuad(mrb_state* mrb, mrb_value self)
     Vector3 p4 = *(Vector3*)DATA_PTR(argv[4]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
-    *retval = GetRayCollisionQuad(ray, p1, p2, p3, p4); /* TODO check if this pattern leaks memory or not */
+    *retval = GetRayCollisionQuad(ray, p1, p2, p3, p4);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRayCollision, &mrb_raylib_struct_RayCollision, retval));
 }
 
@@ -9055,7 +9225,7 @@ static mrb_value mrb_raylib_LoadWave(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Wave* retval = (Wave*)mrb_malloc(mrb, sizeof(Wave));
-    *retval = LoadWave(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadWave(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
@@ -9069,7 +9239,7 @@ static mrb_value mrb_raylib_LoadWaveFromMemory(mrb_state* mrb, mrb_value self)
     int dataSize = mrb_as_int(mrb, argv[2]);
 
     Wave* retval = (Wave*)mrb_malloc(mrb, sizeof(Wave));
-    *retval = LoadWaveFromMemory(fileType, fileData, dataSize); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadWaveFromMemory(fileType, fileData, dataSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
@@ -9093,7 +9263,7 @@ static mrb_value mrb_raylib_LoadSound(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
-    *retval = LoadSound(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadSound(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
@@ -9105,7 +9275,7 @@ static mrb_value mrb_raylib_LoadSoundFromWave(mrb_state* mrb, mrb_value self)
     Wave wave = *(Wave*)DATA_PTR(argv[0]);
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
-    *retval = LoadSoundFromWave(wave); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadSoundFromWave(wave);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
@@ -9117,7 +9287,7 @@ static mrb_value mrb_raylib_LoadSoundAlias(mrb_state* mrb, mrb_value self)
     Sound source = *(Sound*)DATA_PTR(argv[0]);
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
-    *retval = LoadSoundAlias(source); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadSoundAlias(source);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibSound, &mrb_raylib_struct_Sound, retval));
 }
 
@@ -9316,7 +9486,7 @@ static mrb_value mrb_raylib_WaveCopy(mrb_state* mrb, mrb_value self)
     Wave wave = *(Wave*)DATA_PTR(argv[0]);
 
     Wave* retval = (Wave*)mrb_malloc(mrb, sizeof(Wave));
-    *retval = WaveCopy(wave); /* TODO check if this pattern leaks memory or not */
+    *retval = WaveCopy(wave);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibWave, &mrb_raylib_struct_Wave, retval));
 }
 
@@ -9381,7 +9551,7 @@ static mrb_value mrb_raylib_LoadMusicStream(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
 
     Music* retval = (Music*)mrb_malloc(mrb, sizeof(Music));
-    *retval = LoadMusicStream(fileName); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadMusicStream(fileName);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMusic, &mrb_raylib_struct_Music, retval));
 }
 
@@ -9395,7 +9565,7 @@ static mrb_value mrb_raylib_LoadMusicStreamFromMemory(mrb_state* mrb, mrb_value 
     int dataSize = mrb_as_int(mrb, argv[2]);
 
     Music* retval = (Music*)mrb_malloc(mrb, sizeof(Music));
-    *retval = LoadMusicStreamFromMemory(fileType, data, dataSize); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadMusicStreamFromMemory(fileType, data, dataSize);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMusic, &mrb_raylib_struct_Music, retval));
 }
 
@@ -9581,7 +9751,7 @@ static mrb_value mrb_raylib_LoadAudioStream(mrb_state* mrb, mrb_value self)
     unsigned int channels = mrb_as_int(mrb, argv[2]);
 
     AudioStream* retval = (AudioStream*)mrb_malloc(mrb, sizeof(AudioStream));
-    *retval = LoadAudioStream(sampleRate, sampleSize, channels); /* TODO check if this pattern leaks memory or not */
+    *retval = LoadAudioStream(sampleRate, sampleSize, channels);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibAudioStream, &mrb_raylib_struct_AudioStream, retval));
 }
 
@@ -10168,6 +10338,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibVector2 = mrb_define_class_under(mrb, mRaylib, "Vector2", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector2, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibVector2, "size", mrb_raylib_Vector2_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector2, "initialize", mrb_raylib_Vector2_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibVector2, "x", mrb_raylib_Vector2_x_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector2, "x=", mrb_raylib_Vector2_x_set, MRB_ARGS_REQ(1));
@@ -10176,6 +10347,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibVector3 = mrb_define_class_under(mrb, mRaylib, "Vector3", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector3, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibVector3, "size", mrb_raylib_Vector3_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector3, "initialize", mrb_raylib_Vector3_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibVector3, "x", mrb_raylib_Vector3_x_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector3, "x=", mrb_raylib_Vector3_x_set, MRB_ARGS_REQ(1));
@@ -10186,6 +10358,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibVector4 = mrb_define_class_under(mrb, mRaylib, "Vector4", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVector4, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibVector4, "size", mrb_raylib_Vector4_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector4, "initialize", mrb_raylib_Vector4_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibVector4, "x", mrb_raylib_Vector4_x_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVector4, "x=", mrb_raylib_Vector4_x_set, MRB_ARGS_REQ(1));
@@ -10198,6 +10371,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibMatrix = mrb_define_class_under(mrb, mRaylib, "Matrix", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMatrix, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMatrix, "size", mrb_raylib_Matrix_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMatrix, "initialize", mrb_raylib_Matrix_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMatrix, "m0", mrb_raylib_Matrix_m0_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMatrix, "m0=", mrb_raylib_Matrix_m0_set, MRB_ARGS_REQ(1));
@@ -10234,6 +10408,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibColor = mrb_define_class_under(mrb, mRaylib, "Color", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibColor, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibColor, "size", mrb_raylib_Color_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibColor, "initialize", mrb_raylib_Color_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibColor, "r", mrb_raylib_Color_r_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibColor, "r=", mrb_raylib_Color_r_set, MRB_ARGS_REQ(1));
@@ -10246,6 +10421,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibRectangle = mrb_define_class_under(mrb, mRaylib, "Rectangle", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRectangle, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibRectangle, "size", mrb_raylib_Rectangle_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRectangle, "initialize", mrb_raylib_Rectangle_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibRectangle, "x", mrb_raylib_Rectangle_x_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRectangle, "x=", mrb_raylib_Rectangle_x_set, MRB_ARGS_REQ(1));
@@ -10258,6 +10434,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibImage = mrb_define_class_under(mrb, mRaylib, "Image", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibImage, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibImage, "size", mrb_raylib_Image_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibImage, "initialize", mrb_raylib_Image_initialize, MRB_ARGS_OPT(1));
     // mrb_define_method(mrb, cRaylibImage, "data", mrb_raylib_Image_data_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
     // mrb_define_method(mrb, cRaylibImage, "data=", mrb_raylib_Image_data_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
@@ -10272,6 +10449,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibTexture = mrb_define_class_under(mrb, mRaylib, "Texture", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibTexture, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibTexture, "size", mrb_raylib_Texture_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibTexture, "initialize", mrb_raylib_Texture_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibTexture, "id", mrb_raylib_Texture_id_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibTexture, "id=", mrb_raylib_Texture_id_set, MRB_ARGS_REQ(1));
@@ -10286,6 +10464,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibRenderTexture = mrb_define_class_under(mrb, mRaylib, "RenderTexture", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRenderTexture, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibRenderTexture, "size", mrb_raylib_RenderTexture_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRenderTexture, "initialize", mrb_raylib_RenderTexture_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibRenderTexture, "id", mrb_raylib_RenderTexture_id_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRenderTexture, "id=", mrb_raylib_RenderTexture_id_set, MRB_ARGS_REQ(1));
@@ -10296,6 +10475,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibNPatchInfo = mrb_define_class_under(mrb, mRaylib, "NPatchInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibNPatchInfo, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibNPatchInfo, "size", mrb_raylib_NPatchInfo_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibNPatchInfo, "initialize", mrb_raylib_NPatchInfo_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibNPatchInfo, "source", mrb_raylib_NPatchInfo_source_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibNPatchInfo, "source=", mrb_raylib_NPatchInfo_source_set, MRB_ARGS_REQ(1));
@@ -10312,6 +10492,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibGlyphInfo = mrb_define_class_under(mrb, mRaylib, "GlyphInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibGlyphInfo, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibGlyphInfo, "size", mrb_raylib_GlyphInfo_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibGlyphInfo, "initialize", mrb_raylib_GlyphInfo_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibGlyphInfo, "value", mrb_raylib_GlyphInfo_value_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibGlyphInfo, "value=", mrb_raylib_GlyphInfo_value_set, MRB_ARGS_REQ(1));
@@ -10326,6 +10507,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibFont = mrb_define_class_under(mrb, mRaylib, "Font", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibFont, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibFont, "size", mrb_raylib_Font_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFont, "initialize", mrb_raylib_Font_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibFont, "baseSize", mrb_raylib_Font_baseSize_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFont, "baseSize=", mrb_raylib_Font_baseSize_set, MRB_ARGS_REQ(1));
@@ -10342,6 +10524,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibCamera3D = mrb_define_class_under(mrb, mRaylib, "Camera3D", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibCamera3D, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibCamera3D, "size", mrb_raylib_Camera3D_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibCamera3D, "initialize", mrb_raylib_Camera3D_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibCamera3D, "position", mrb_raylib_Camera3D_position_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibCamera3D, "position=", mrb_raylib_Camera3D_position_set, MRB_ARGS_REQ(1));
@@ -10356,6 +10539,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibCamera2D = mrb_define_class_under(mrb, mRaylib, "Camera2D", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibCamera2D, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibCamera2D, "size", mrb_raylib_Camera2D_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibCamera2D, "initialize", mrb_raylib_Camera2D_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibCamera2D, "offset", mrb_raylib_Camera2D_offset_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibCamera2D, "offset=", mrb_raylib_Camera2D_offset_set, MRB_ARGS_REQ(1));
@@ -10368,6 +10552,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibMesh = mrb_define_class_under(mrb, mRaylib, "Mesh", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMesh, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMesh, "size", mrb_raylib_Mesh_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMesh, "initialize", mrb_raylib_Mesh_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMesh, "vertexCount", mrb_raylib_Mesh_vertexCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMesh, "vertexCount=", mrb_raylib_Mesh_vertexCount_set, MRB_ARGS_REQ(1));
@@ -10402,6 +10587,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibShader = mrb_define_class_under(mrb, mRaylib, "Shader", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibShader, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibShader, "size", mrb_raylib_Shader_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibShader, "initialize", mrb_raylib_Shader_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibShader, "id", mrb_raylib_Shader_id_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibShader, "id=", mrb_raylib_Shader_id_set, MRB_ARGS_REQ(1));
@@ -10410,6 +10596,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibMaterialMap = mrb_define_class_under(mrb, mRaylib, "MaterialMap", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMaterialMap, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMaterialMap, "size", mrb_raylib_MaterialMap_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterialMap, "initialize", mrb_raylib_MaterialMap_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMaterialMap, "texture", mrb_raylib_MaterialMap_texture_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterialMap, "texture=", mrb_raylib_MaterialMap_texture_set, MRB_ARGS_REQ(1));
@@ -10420,6 +10607,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibMaterial = mrb_define_class_under(mrb, mRaylib, "Material", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMaterial, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMaterial, "size", mrb_raylib_Material_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterial, "initialize", mrb_raylib_Material_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMaterial, "shader", mrb_raylib_Material_shader_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterial, "shader=", mrb_raylib_Material_shader_set, MRB_ARGS_REQ(1));
@@ -10430,6 +10618,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibTransform = mrb_define_class_under(mrb, mRaylib, "Transform", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibTransform, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibTransform, "size", mrb_raylib_Transform_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibTransform, "initialize", mrb_raylib_Transform_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibTransform, "translation", mrb_raylib_Transform_translation_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibTransform, "translation=", mrb_raylib_Transform_translation_set, MRB_ARGS_REQ(1));
@@ -10440,6 +10629,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibBoneInfo = mrb_define_class_under(mrb, mRaylib, "BoneInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibBoneInfo, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibBoneInfo, "size", mrb_raylib_BoneInfo_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibBoneInfo, "initialize", mrb_raylib_BoneInfo_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibBoneInfo, "name", mrb_raylib_BoneInfo_name_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibBoneInfo, "name=", mrb_raylib_BoneInfo_name_set, MRB_ARGS_REQ(1));
@@ -10448,6 +10638,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibModel = mrb_define_class_under(mrb, mRaylib, "Model", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibModel, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibModel, "size", mrb_raylib_Model_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModel, "initialize", mrb_raylib_Model_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibModel, "transform", mrb_raylib_Model_transform_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModel, "transform=", mrb_raylib_Model_transform_set, MRB_ARGS_REQ(1));
@@ -10470,6 +10661,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibModelAnimation = mrb_define_class_under(mrb, mRaylib, "ModelAnimation", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibModelAnimation, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibModelAnimation, "size", mrb_raylib_ModelAnimation_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModelAnimation, "initialize", mrb_raylib_ModelAnimation_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibModelAnimation, "boneCount", mrb_raylib_ModelAnimation_boneCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModelAnimation, "boneCount=", mrb_raylib_ModelAnimation_boneCount_set, MRB_ARGS_REQ(1));
@@ -10484,6 +10676,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibRay = mrb_define_class_under(mrb, mRaylib, "Ray", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRay, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibRay, "size", mrb_raylib_Ray_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRay, "initialize", mrb_raylib_Ray_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibRay, "position", mrb_raylib_Ray_position_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRay, "position=", mrb_raylib_Ray_position_set, MRB_ARGS_REQ(1));
@@ -10492,6 +10685,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibRayCollision = mrb_define_class_under(mrb, mRaylib, "RayCollision", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibRayCollision, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibRayCollision, "size", mrb_raylib_RayCollision_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRayCollision, "initialize", mrb_raylib_RayCollision_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibRayCollision, "hit", mrb_raylib_RayCollision_hit_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibRayCollision, "hit=", mrb_raylib_RayCollision_hit_set, MRB_ARGS_REQ(1));
@@ -10504,6 +10698,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibBoundingBox = mrb_define_class_under(mrb, mRaylib, "BoundingBox", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibBoundingBox, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibBoundingBox, "size", mrb_raylib_BoundingBox_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibBoundingBox, "initialize", mrb_raylib_BoundingBox_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibBoundingBox, "min", mrb_raylib_BoundingBox_min_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibBoundingBox, "min=", mrb_raylib_BoundingBox_min_set, MRB_ARGS_REQ(1));
@@ -10512,6 +10707,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibWave = mrb_define_class_under(mrb, mRaylib, "Wave", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibWave, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibWave, "size", mrb_raylib_Wave_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibWave, "initialize", mrb_raylib_Wave_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibWave, "frameCount", mrb_raylib_Wave_frameCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibWave, "frameCount=", mrb_raylib_Wave_frameCount_set, MRB_ARGS_REQ(1));
@@ -10526,6 +10722,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibAudioStream = mrb_define_class_under(mrb, mRaylib, "AudioStream", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAudioStream, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibAudioStream, "size", mrb_raylib_AudioStream_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAudioStream, "initialize", mrb_raylib_AudioStream_initialize, MRB_ARGS_OPT(1));
     // mrb_define_method(mrb, cRaylibAudioStream, "buffer", mrb_raylib_AudioStream_buffer_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
     // mrb_define_method(mrb, cRaylibAudioStream, "buffer=", mrb_raylib_AudioStream_buffer_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
@@ -10540,6 +10737,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibSound = mrb_define_class_under(mrb, mRaylib, "Sound", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibSound, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibSound, "size", mrb_raylib_Sound_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibSound, "initialize", mrb_raylib_Sound_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibSound, "stream", mrb_raylib_Sound_stream_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibSound, "stream=", mrb_raylib_Sound_stream_set, MRB_ARGS_REQ(1));
@@ -10548,6 +10746,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibMusic = mrb_define_class_under(mrb, mRaylib, "Music", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMusic, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMusic, "size", mrb_raylib_Music_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMusic, "initialize", mrb_raylib_Music_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMusic, "stream", mrb_raylib_Music_stream_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMusic, "stream=", mrb_raylib_Music_stream_set, MRB_ARGS_REQ(1));
@@ -10562,6 +10761,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibVrDeviceInfo = mrb_define_class_under(mrb, mRaylib, "VrDeviceInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrDeviceInfo, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibVrDeviceInfo, "size", mrb_raylib_VrDeviceInfo_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "initialize", mrb_raylib_VrDeviceInfo_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "hResolution", mrb_raylib_VrDeviceInfo_hResolution_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "hResolution=", mrb_raylib_VrDeviceInfo_hResolution_set, MRB_ARGS_REQ(1));
@@ -10586,6 +10786,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibVrStereoConfig = mrb_define_class_under(mrb, mRaylib, "VrStereoConfig", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrStereoConfig, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibVrStereoConfig, "size", mrb_raylib_VrStereoConfig_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrStereoConfig, "initialize", mrb_raylib_VrStereoConfig_initialize, MRB_ARGS_OPT(1));
     // mrb_define_method(mrb, cRaylibVrStereoConfig, "projection", mrb_raylib_VrStereoConfig_projection_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
     // mrb_define_method(mrb, cRaylibVrStereoConfig, "projection=", mrb_raylib_VrStereoConfig_projection_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
@@ -10606,6 +10807,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibFilePathList = mrb_define_class_under(mrb, mRaylib, "FilePathList", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibFilePathList, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibFilePathList, "size", mrb_raylib_FilePathList_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFilePathList, "initialize", mrb_raylib_FilePathList_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibFilePathList, "capacity", mrb_raylib_FilePathList_capacity_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFilePathList, "capacity=", mrb_raylib_FilePathList_capacity_set, MRB_ARGS_REQ(1));
@@ -10616,6 +10818,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibAutomationEvent = mrb_define_class_under(mrb, mRaylib, "AutomationEvent", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAutomationEvent, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibAutomationEvent, "size", mrb_raylib_AutomationEvent_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEvent, "initialize", mrb_raylib_AutomationEvent_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibAutomationEvent, "frame", mrb_raylib_AutomationEvent_frame_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEvent, "frame=", mrb_raylib_AutomationEvent_frame_set, MRB_ARGS_REQ(1));
@@ -10626,6 +10829,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     cRaylibAutomationEventList = mrb_define_class_under(mrb, mRaylib, "AutomationEventList", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAutomationEventList, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibAutomationEventList, "size", mrb_raylib_AutomationEventList_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEventList, "initialize", mrb_raylib_AutomationEventList_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibAutomationEventList, "capacity", mrb_raylib_AutomationEventList_capacity_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEventList, "capacity=", mrb_raylib_AutomationEventList_capacity_set, MRB_ARGS_REQ(1));

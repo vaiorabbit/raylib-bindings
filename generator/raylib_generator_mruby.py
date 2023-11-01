@@ -190,6 +190,14 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
 
     len_members = len(struct_info.fields)
 
+    # sizeof class
+    print(indent + f'static mrb_value mrb_raylib_{struct_name}_class_size(mrb_state* mrb, mrb_value self)', file = sys.stdout)
+    print(indent + '{', file = sys.stdout)
+    print(indent + f'    return mrb_int_value(mrb, sizeof({struct_name}));', file = sys.stdout)
+    print(indent + '}', file = sys.stdout)
+    print("", file = sys.stdout)
+
+    # accessors
     for idx, field in enumerate(struct_info.fields):
         if field.element_count > 1:
             if not "char" in field.type_name:
@@ -266,6 +274,7 @@ def generate_structunion_define_class(ctx, indent = "", struct_prefix="", struct
         # Definition
         print(indent + f'    cRaylib{struct_name} = mrb_define_class_under(mrb, mRaylib, "{struct_name}", mrb->object_class);', file = sys.stdout)
         print(indent + f'    MRB_SET_INSTANCE_TT(cRaylib{struct_name}, MRB_TT_DATA);', file = sys.stdout)
+        print(indent + f'    mrb_define_class_method(mrb, cRaylib{struct_name}, "size", mrb_raylib_{struct_name}_class_size, MRB_ARGS_NONE());', file = sys.stdout)
         print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "initialize", mrb_raylib_{struct_name}_initialize, MRB_ARGS_OPT(1));', file = sys.stdout)
         # Accessors
         for idx, field in enumerate(struct_info.fields):
@@ -361,7 +370,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                     elif retval_type_name == "RenderTexture2D":
                         retval_type_name_alias = "RenderTexture"
                     print(indent + f'{retval_type_name}* retval = ({retval_type_name}*)mrb_malloc(mrb, sizeof({retval_type_name}));', file = sys.stdout)
-                    print(indent + f'*retval = {func_name}({arg_names}); /* TODO check if this pattern leaks memory or not */', file = sys.stdout)
+                    print(indent + f'*retval = {func_name}({arg_names});', file = sys.stdout)
                     print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
             else:
                 retval_str = f'{retval_type_name} retval = '

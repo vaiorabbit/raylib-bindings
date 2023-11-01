@@ -11,6 +11,7 @@ int main(void)
     mrb_raylib_module_init(mrb);
 
     char ruby_code[] =
+// #include "ruby_code.h"
         /*
         "p Raylib::RAYLIB_VERSION\n"
         "color = Raylib::Color.new(255, 255, 255, 255)\n"
@@ -32,6 +33,7 @@ int main(void)
         "sleep(1)\n"
         "raylib.closewindow()\n"
         */
+        //*
         "c = 0\n"
         "Raylib.InitWindow(720, 405, 'raylib/mruby')\n"
         "Raylib.SetTargetFPS(60)\n"
@@ -42,8 +44,10 @@ int main(void)
         "    Raylib.DrawFPS(720 - 100, 16)\n"
         "    Raylib.EndDrawing()\n"
         "    c = (c + 1) % 255\n"
+        "    p [Raylib::Vector3.size, bg.class.size]\n"
         "end\n"
         "Raylib.CloseWindow()\n"
+        //*/
         ;
 
     mrb_load_string(mrb, ruby_code);
