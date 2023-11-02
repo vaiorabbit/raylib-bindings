@@ -165,7 +165,16 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
         elif "*" in field.type_name:
             print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]);', file = sys.stdout)
         elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv[{idx}]);', file = sys.stdout)
+            field_type_name_alias = field.type_name
+            if field.type_name == "Texture2D":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "TextureCubemap":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "RenderTexture2D":
+                field_type_name_alias = "RenderTexture"
+            elif field.type_name == "Quaternion":
+                field_type_name_alias = "Vector4"
+            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv[{idx}], &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
         elif "float" in field.type_name:
             print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]);', file = sys.stdout)
         else:
@@ -240,7 +249,16 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         elif "*" in field.type_name:
             print(indent + f'    instance->{field.element_name} = DATA_PTR(argv);', file = sys.stdout)
         elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv);', file = sys.stdout)
+            field_type_name_alias = field.type_name
+            if field.type_name == "Texture2D":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "TextureCubemap":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "RenderTexture2D":
+                field_type_name_alias = "RenderTexture"
+            elif field.type_name == "Quaternion":
+                field_type_name_alias = "Vector4"
+            print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
         elif "float" in field.type_name:
             print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
         else:
@@ -338,10 +356,21 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                 arg_value = ""
                 if "const char *" == arg.type_name:
                     arg_value = f'RSTRING_PTR(argv[{i}])'
-                elif "*" in arg.type_name:
+                elif "*" in arg.type_name or "Callback" in arg.type_name:
                     arg_value = f'DATA_PTR(argv[{i}])'
                 elif any(ch.isupper() for ch in arg.type_name):
-                    arg_value = f'*({arg.type_name}*)DATA_PTR(argv[{i}])'
+                    arg_type_name_alias = arg.type_name
+                    if arg.type_name == "Texture2D":
+                        arg_type_name_alias = "Texture"
+                    elif arg.type_name == "TextureCubemap":
+                        arg_type_name_alias = "Texture"
+                    elif arg.type_name == "RenderTexture2D":
+                        arg_type_name_alias = "RenderTexture"
+                    elif arg.type_name == "Quaternion":
+                        arg_type_name_alias = "Vector4"
+                    elif arg.type_name == "Camera":
+                        arg_type_name_alias = "Camera3D"
+                    arg_value = f'*({arg.type_name}*)DATA_GET_PTR(mrb, argv[{i}], &mrb_raylib_struct_{arg_type_name_alias}, {arg.type_name});'
                 elif "float" in arg.type_name:
                     arg_value = f'mrb_as_float(mrb, argv[{i}])'
                 else:

@@ -1098,8 +1098,8 @@ static mrb_value mrb_raylib_RenderTexture_initialize(mrb_state* mrb, mrb_value s
         void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
         mrb_get_args_a(mrb, "ooo", ptrs);
         instance->id = mrb_as_int(mrb, argv[0]);
-        instance->texture = *(Texture*)DATA_PTR(argv[1]);
-        instance->depth = *(Texture*)DATA_PTR(argv[2]);
+        instance->texture = *(Texture*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Texture, Texture);
+        instance->depth = *(Texture*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Texture, Texture);
     }
     break;
     }
@@ -1138,7 +1138,7 @@ static mrb_value mrb_raylib_RenderTexture_texture_set(mrb_state* mrb, mrb_value 
     RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->texture = *(Texture*)DATA_PTR(argv);
+    instance->texture = *(Texture*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Texture, Texture);
     return self;
 }
 
@@ -1153,7 +1153,7 @@ static mrb_value mrb_raylib_RenderTexture_depth_set(mrb_state* mrb, mrb_value se
     RenderTexture* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RenderTexture, RenderTexture);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->depth = *(Texture*)DATA_PTR(argv);
+    instance->depth = *(Texture*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Texture, Texture);
     return self;
 }
 
@@ -1172,7 +1172,7 @@ static mrb_value mrb_raylib_NPatchInfo_initialize(mrb_state* mrb, mrb_value self
         mrb_value argv[6];
         void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
         mrb_get_args_a(mrb, "oooooo", ptrs);
-        instance->source = *(Rectangle*)DATA_PTR(argv[0]);
+        instance->source = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);
         instance->left = mrb_as_int(mrb, argv[1]);
         instance->top = mrb_as_int(mrb, argv[2]);
         instance->right = mrb_as_int(mrb, argv[3]);
@@ -1201,7 +1201,7 @@ static mrb_value mrb_raylib_NPatchInfo_source_set(mrb_state* mrb, mrb_value self
     NPatchInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_NPatchInfo, NPatchInfo);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->source = *(Rectangle*)DATA_PTR(argv);
+    instance->source = *(Rectangle*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Rectangle, Rectangle);
     return self;
 }
 
@@ -1299,7 +1299,7 @@ static mrb_value mrb_raylib_GlyphInfo_initialize(mrb_state* mrb, mrb_value self)
         instance->offsetX = mrb_as_int(mrb, argv[1]);
         instance->offsetY = mrb_as_int(mrb, argv[2]);
         instance->advanceX = mrb_as_int(mrb, argv[3]);
-        instance->image = *(Image*)DATA_PTR(argv[4]);
+        instance->image = *(Image*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Image, Image);
     }
     break;
     }
@@ -1383,7 +1383,7 @@ static mrb_value mrb_raylib_GlyphInfo_image_set(mrb_state* mrb, mrb_value self)
     GlyphInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GlyphInfo, GlyphInfo);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->image = *(Image*)DATA_PTR(argv);
+    instance->image = *(Image*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Image, Image);
     return self;
 }
 
@@ -1405,7 +1405,7 @@ static mrb_value mrb_raylib_Font_initialize(mrb_state* mrb, mrb_value self)
         instance->baseSize = mrb_as_int(mrb, argv[0]);
         instance->glyphCount = mrb_as_int(mrb, argv[1]);
         instance->glyphPadding = mrb_as_int(mrb, argv[2]);
-        instance->texture = *(Texture2D*)DATA_PTR(argv[3]);
+        instance->texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Texture, Texture2D);
         instance->recs = DATA_PTR(argv[4]);
         instance->glyphs = DATA_PTR(argv[5]);
     }
@@ -1476,7 +1476,7 @@ static mrb_value mrb_raylib_Font_texture_set(mrb_state* mrb, mrb_value self)
     Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->texture = *(Texture2D*)DATA_PTR(argv);
+    instance->texture = *(Texture2D*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Texture, Texture2D);
     return self;
 }
 
@@ -1501,9 +1501,9 @@ static mrb_value mrb_raylib_Camera3D_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[5];
         void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
         mrb_get_args_a(mrb, "ooooo", ptrs);
-        instance->position = *(Vector3*)DATA_PTR(argv[0]);
-        instance->target = *(Vector3*)DATA_PTR(argv[1]);
-        instance->up = *(Vector3*)DATA_PTR(argv[2]);
+        instance->position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);
+        instance->target = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);
+        instance->up = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);
         instance->fovy = mrb_as_float(mrb, argv[3]);
         instance->projection = mrb_as_int(mrb, argv[4]);
     }
@@ -1529,7 +1529,7 @@ static mrb_value mrb_raylib_Camera3D_position_set(mrb_state* mrb, mrb_value self
     Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->position = *(Vector3*)DATA_PTR(argv);
+    instance->position = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -1544,7 +1544,7 @@ static mrb_value mrb_raylib_Camera3D_target_set(mrb_state* mrb, mrb_value self)
     Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->target = *(Vector3*)DATA_PTR(argv);
+    instance->target = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -1559,7 +1559,7 @@ static mrb_value mrb_raylib_Camera3D_up_set(mrb_state* mrb, mrb_value self)
     Camera3D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera3D, Camera3D);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->up = *(Vector3*)DATA_PTR(argv);
+    instance->up = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -1608,8 +1608,8 @@ static mrb_value mrb_raylib_Camera2D_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[4];
         void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
         mrb_get_args_a(mrb, "oooo", ptrs);
-        instance->offset = *(Vector2*)DATA_PTR(argv[0]);
-        instance->target = *(Vector2*)DATA_PTR(argv[1]);
+        instance->offset = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);
+        instance->target = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);
         instance->rotation = mrb_as_float(mrb, argv[2]);
         instance->zoom = mrb_as_float(mrb, argv[3]);
     }
@@ -1635,7 +1635,7 @@ static mrb_value mrb_raylib_Camera2D_offset_set(mrb_state* mrb, mrb_value self)
     Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->offset = *(Vector2*)DATA_PTR(argv);
+    instance->offset = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
     return self;
 }
 
@@ -1650,7 +1650,7 @@ static mrb_value mrb_raylib_Camera2D_target_set(mrb_state* mrb, mrb_value self)
     Camera2D* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Camera2D, Camera2D);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->target = *(Vector2*)DATA_PTR(argv);
+    instance->target = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
     return self;
 }
 
@@ -1869,8 +1869,8 @@ static mrb_value mrb_raylib_MaterialMap_initialize(mrb_state* mrb, mrb_value sel
         mrb_value argv[3];
         void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
         mrb_get_args_a(mrb, "ooo", ptrs);
-        instance->texture = *(Texture2D*)DATA_PTR(argv[0]);
-        instance->color = *(Color*)DATA_PTR(argv[1]);
+        instance->texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);
+        instance->color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);
         instance->value = mrb_as_float(mrb, argv[2]);
     }
     break;
@@ -1895,7 +1895,7 @@ static mrb_value mrb_raylib_MaterialMap_texture_set(mrb_state* mrb, mrb_value se
     MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->texture = *(Texture2D*)DATA_PTR(argv);
+    instance->texture = *(Texture2D*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Texture, Texture2D);
     return self;
 }
 
@@ -1910,7 +1910,7 @@ static mrb_value mrb_raylib_MaterialMap_color_set(mrb_state* mrb, mrb_value self
     MaterialMap* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_MaterialMap, MaterialMap);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->color = *(Color*)DATA_PTR(argv);
+    instance->color = *(Color*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Color, Color);
     return self;
 }
 
@@ -1944,7 +1944,7 @@ static mrb_value mrb_raylib_Material_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[3];
         void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
         mrb_get_args_a(mrb, "ooo", ptrs);
-        instance->shader = *(Shader*)DATA_PTR(argv[0]);
+        instance->shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);
         instance->maps = DATA_PTR(argv[1]);
         memcpy(instance->params, DATA_PTR(argv[2]), sizeof(float) * 4);
     }
@@ -1970,7 +1970,7 @@ static mrb_value mrb_raylib_Material_shader_set(mrb_state* mrb, mrb_value self)
     Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->shader = *(Shader*)DATA_PTR(argv);
+    instance->shader = *(Shader*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Shader, Shader);
     return self;
 }
 
@@ -1995,9 +1995,9 @@ static mrb_value mrb_raylib_Transform_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[3];
         void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
         mrb_get_args_a(mrb, "ooo", ptrs);
-        instance->translation = *(Vector3*)DATA_PTR(argv[0]);
-        instance->rotation = *(Quaternion*)DATA_PTR(argv[1]);
-        instance->scale = *(Vector3*)DATA_PTR(argv[2]);
+        instance->translation = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);
+        instance->rotation = *(Quaternion*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector4, Quaternion);
+        instance->scale = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);
     }
     break;
     }
@@ -2021,7 +2021,7 @@ static mrb_value mrb_raylib_Transform_translation_set(mrb_state* mrb, mrb_value 
     Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->translation = *(Vector3*)DATA_PTR(argv);
+    instance->translation = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2036,7 +2036,7 @@ static mrb_value mrb_raylib_Transform_rotation_set(mrb_state* mrb, mrb_value sel
     Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->rotation = *(Quaternion*)DATA_PTR(argv);
+    instance->rotation = *(Quaternion*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector4, Quaternion);
     return self;
 }
 
@@ -2051,7 +2051,7 @@ static mrb_value mrb_raylib_Transform_scale_set(mrb_state* mrb, mrb_value self)
     Transform* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Transform, Transform);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->scale = *(Vector3*)DATA_PTR(argv);
+    instance->scale = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2129,7 +2129,7 @@ static mrb_value mrb_raylib_Model_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[9];
         void* ptrs[9] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], };
         mrb_get_args_a(mrb, "ooooooooo", ptrs);
-        instance->transform = *(Matrix*)DATA_PTR(argv[0]);
+        instance->transform = *(Matrix*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Matrix, Matrix);
         instance->meshCount = mrb_as_int(mrb, argv[1]);
         instance->materialCount = mrb_as_int(mrb, argv[2]);
         instance->meshes = DATA_PTR(argv[3]);
@@ -2161,7 +2161,7 @@ static mrb_value mrb_raylib_Model_transform_set(mrb_state* mrb, mrb_value self)
     Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->transform = *(Matrix*)DATA_PTR(argv);
+    instance->transform = *(Matrix*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Matrix, Matrix);
     return self;
 }
 
@@ -2323,8 +2323,8 @@ static mrb_value mrb_raylib_Ray_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[2];
         void* ptrs[2] = { &argv[0], &argv[1], };
         mrb_get_args_a(mrb, "oo", ptrs);
-        instance->position = *(Vector3*)DATA_PTR(argv[0]);
-        instance->direction = *(Vector3*)DATA_PTR(argv[1]);
+        instance->position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);
+        instance->direction = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);
     }
     break;
     }
@@ -2348,7 +2348,7 @@ static mrb_value mrb_raylib_Ray_position_set(mrb_state* mrb, mrb_value self)
     Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->position = *(Vector3*)DATA_PTR(argv);
+    instance->position = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2363,7 +2363,7 @@ static mrb_value mrb_raylib_Ray_direction_set(mrb_state* mrb, mrb_value self)
     Ray* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Ray, Ray);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->direction = *(Vector3*)DATA_PTR(argv);
+    instance->direction = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2384,8 +2384,8 @@ static mrb_value mrb_raylib_RayCollision_initialize(mrb_state* mrb, mrb_value se
         mrb_get_args_a(mrb, "oooo", ptrs);
         instance->hit = mrb_as_int(mrb, argv[0]);
         instance->distance = mrb_as_float(mrb, argv[1]);
-        instance->point = *(Vector3*)DATA_PTR(argv[2]);
-        instance->normal = *(Vector3*)DATA_PTR(argv[3]);
+        instance->point = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);
+        instance->normal = *(Vector3*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector3, Vector3);
     }
     break;
     }
@@ -2439,7 +2439,7 @@ static mrb_value mrb_raylib_RayCollision_point_set(mrb_state* mrb, mrb_value sel
     RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->point = *(Vector3*)DATA_PTR(argv);
+    instance->point = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2454,7 +2454,7 @@ static mrb_value mrb_raylib_RayCollision_normal_set(mrb_state* mrb, mrb_value se
     RayCollision* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_RayCollision, RayCollision);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->normal = *(Vector3*)DATA_PTR(argv);
+    instance->normal = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2473,8 +2473,8 @@ static mrb_value mrb_raylib_BoundingBox_initialize(mrb_state* mrb, mrb_value sel
         mrb_value argv[2];
         void* ptrs[2] = { &argv[0], &argv[1], };
         mrb_get_args_a(mrb, "oo", ptrs);
-        instance->min = *(Vector3*)DATA_PTR(argv[0]);
-        instance->max = *(Vector3*)DATA_PTR(argv[1]);
+        instance->min = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);
+        instance->max = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);
     }
     break;
     }
@@ -2498,7 +2498,7 @@ static mrb_value mrb_raylib_BoundingBox_min_set(mrb_state* mrb, mrb_value self)
     BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->min = *(Vector3*)DATA_PTR(argv);
+    instance->min = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2513,7 +2513,7 @@ static mrb_value mrb_raylib_BoundingBox_max_set(mrb_state* mrb, mrb_value self)
     BoundingBox* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_BoundingBox, BoundingBox);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->max = *(Vector3*)DATA_PTR(argv);
+    instance->max = *(Vector3*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector3, Vector3);
     return self;
 }
 
@@ -2710,7 +2710,7 @@ static mrb_value mrb_raylib_Sound_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[2];
         void* ptrs[2] = { &argv[0], &argv[1], };
         mrb_get_args_a(mrb, "oo", ptrs);
-        instance->stream = *(AudioStream*)DATA_PTR(argv[0]);
+        instance->stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);
         instance->frameCount = mrb_as_int(mrb, argv[1]);
     }
     break;
@@ -2735,7 +2735,7 @@ static mrb_value mrb_raylib_Sound_stream_set(mrb_state* mrb, mrb_value self)
     Sound* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Sound, Sound);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->stream = *(AudioStream*)DATA_PTR(argv);
+    instance->stream = *(AudioStream*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_AudioStream, AudioStream);
     return self;
 }
 
@@ -2769,7 +2769,7 @@ static mrb_value mrb_raylib_Music_initialize(mrb_state* mrb, mrb_value self)
         mrb_value argv[5];
         void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
         mrb_get_args_a(mrb, "ooooo", ptrs);
-        instance->stream = *(AudioStream*)DATA_PTR(argv[0]);
+        instance->stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);
         instance->frameCount = mrb_as_int(mrb, argv[1]);
         instance->looping = mrb_as_int(mrb, argv[2]);
         instance->ctxType = mrb_as_int(mrb, argv[3]);
@@ -2797,7 +2797,7 @@ static mrb_value mrb_raylib_Music_stream_set(mrb_state* mrb, mrb_value self)
     Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
-    instance->stream = *(AudioStream*)DATA_PTR(argv);
+    instance->stream = *(AudioStream*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_AudioStream, AudioStream);
     return self;
 }
 
@@ -3416,7 +3416,7 @@ static mrb_value mrb_raylib_SetWindowIcon(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     SetWindowIcon(image);
 
@@ -3758,7 +3758,7 @@ static mrb_value mrb_raylib_ClearBackground(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
 
     ClearBackground(color);
 
@@ -3784,7 +3784,7 @@ static mrb_value mrb_raylib_BeginMode2D(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
+    Camera2D camera = *(Camera2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera2D, Camera2D);;
 
     BeginMode2D(camera);
 
@@ -3803,7 +3803,7 @@ static mrb_value mrb_raylib_BeginMode3D(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Camera3D camera = *(Camera3D*)DATA_PTR(argv[0]);
+    Camera3D camera = *(Camera3D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera3D, Camera3D);;
 
     BeginMode3D(camera);
 
@@ -3822,7 +3822,7 @@ static mrb_value mrb_raylib_BeginTextureMode(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+    RenderTexture2D target = *(RenderTexture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_RenderTexture, RenderTexture2D);;
 
     BeginTextureMode(target);
 
@@ -3841,7 +3841,7 @@ static mrb_value mrb_raylib_BeginShaderMode(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
 
     BeginShaderMode(shader);
 
@@ -3901,7 +3901,7 @@ static mrb_value mrb_raylib_BeginVrStereoMode(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    VrStereoConfig config = *(VrStereoConfig*)DATA_PTR(argv[0]);
+    VrStereoConfig config = *(VrStereoConfig*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);;
 
     BeginVrStereoMode(config);
 
@@ -3920,7 +3920,7 @@ static mrb_value mrb_raylib_LoadVrStereoConfig(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    VrDeviceInfo device = *(VrDeviceInfo*)DATA_PTR(argv[0]);
+    VrDeviceInfo device = *(VrDeviceInfo*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);;
 
     VrStereoConfig* retval = (VrStereoConfig*)mrb_malloc(mrb, sizeof(VrStereoConfig));
     *retval = LoadVrStereoConfig(device);
@@ -3932,7 +3932,7 @@ static mrb_value mrb_raylib_UnloadVrStereoConfig(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    VrStereoConfig config = *(VrStereoConfig*)DATA_PTR(argv[0]);
+    VrStereoConfig config = *(VrStereoConfig*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);;
 
     UnloadVrStereoConfig(config);
 
@@ -3970,7 +3970,7 @@ static mrb_value mrb_raylib_IsShaderReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
 
     bool retval = IsShaderReady(shader);
 
@@ -3982,7 +3982,7 @@ static mrb_value mrb_raylib_GetShaderLocation(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     const char * uniformName = RSTRING_PTR(argv[1]);
 
     int retval = GetShaderLocation(shader, uniformName);
@@ -3995,7 +3995,7 @@ static mrb_value mrb_raylib_GetShaderLocationAttrib(mrb_state* mrb, mrb_value se
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     const char * attribName = RSTRING_PTR(argv[1]);
 
     int retval = GetShaderLocationAttrib(shader, attribName);
@@ -4008,7 +4008,7 @@ static mrb_value mrb_raylib_SetShaderValue(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     int locIndex = mrb_as_int(mrb, argv[1]);
     const void * value = DATA_PTR(argv[2]);
     int uniformType = mrb_as_int(mrb, argv[3]);
@@ -4023,7 +4023,7 @@ static mrb_value mrb_raylib_SetShaderValueV(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     int locIndex = mrb_as_int(mrb, argv[1]);
     const void * value = DATA_PTR(argv[2]);
     int uniformType = mrb_as_int(mrb, argv[3]);
@@ -4039,9 +4039,9 @@ static mrb_value mrb_raylib_SetShaderValueMatrix(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     int locIndex = mrb_as_int(mrb, argv[1]);
-    Matrix mat = *(Matrix*)DATA_PTR(argv[2]);
+    Matrix mat = *(Matrix*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Matrix, Matrix);;
 
     SetShaderValueMatrix(shader, locIndex, mat);
 
@@ -4053,9 +4053,9 @@ static mrb_value mrb_raylib_SetShaderValueTexture(mrb_state* mrb, mrb_value self
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
     int locIndex = mrb_as_int(mrb, argv[1]);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[2]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Texture, Texture2D);;
 
     SetShaderValueTexture(shader, locIndex, texture);
 
@@ -4067,7 +4067,7 @@ static mrb_value mrb_raylib_UnloadShader(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Shader shader = *(Shader*)DATA_PTR(argv[0]);
+    Shader shader = *(Shader*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Shader, Shader);;
 
     UnloadShader(shader);
 
@@ -4079,8 +4079,8 @@ static mrb_value mrb_raylib_GetMouseRay(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 mousePosition = *(Vector2*)DATA_PTR(argv[0]);
-    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+    Vector2 mousePosition = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Camera3D, Camera);;
 
     Ray* retval = (Ray*)mrb_malloc(mrb, sizeof(Ray));
     *retval = GetMouseRay(mousePosition, camera);
@@ -4092,7 +4092,7 @@ static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera3D, Camera);;
 
     Matrix* retval = (Matrix*)mrb_malloc(mrb, sizeof(Matrix));
     *retval = GetCameraMatrix(camera);
@@ -4104,7 +4104,7 @@ static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
+    Camera2D camera = *(Camera2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera2D, Camera2D);;
 
     Matrix* retval = (Matrix*)mrb_malloc(mrb, sizeof(Matrix));
     *retval = GetCameraMatrix2D(camera);
@@ -4116,8 +4116,8 @@ static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
-    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Camera3D, Camera);;
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
     *retval = GetWorldToScreen(position, camera);
@@ -4129,8 +4129,8 @@ static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Camera2D camera = *(Camera2D*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Camera2D, Camera2D);;
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
     *retval = GetScreenToWorld2D(position, camera);
@@ -4142,8 +4142,8 @@ static mrb_value mrb_raylib_GetWorldToScreenEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
-    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Camera3D, Camera);;
     int width = mrb_as_int(mrb, argv[2]);
     int height = mrb_as_int(mrb, argv[3]);
 
@@ -4157,8 +4157,8 @@ static mrb_value mrb_raylib_GetWorldToScreen2D(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Camera2D camera = *(Camera2D*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Camera2D, Camera2D);;
 
     Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
     *retval = GetWorldToScreen2D(position, camera);
@@ -4339,7 +4339,7 @@ static mrb_value mrb_raylib_SetTraceLogCallback(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    TraceLogCallback callback = *(TraceLogCallback*)DATA_PTR(argv[0]);
+    TraceLogCallback callback = DATA_PTR(argv[0]);
 
     SetTraceLogCallback(callback);
 
@@ -4351,7 +4351,7 @@ static mrb_value mrb_raylib_SetLoadFileDataCallback(mrb_state* mrb, mrb_value se
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    LoadFileDataCallback callback = *(LoadFileDataCallback*)DATA_PTR(argv[0]);
+    LoadFileDataCallback callback = DATA_PTR(argv[0]);
 
     SetLoadFileDataCallback(callback);
 
@@ -4363,7 +4363,7 @@ static mrb_value mrb_raylib_SetSaveFileDataCallback(mrb_state* mrb, mrb_value se
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    SaveFileDataCallback callback = *(SaveFileDataCallback*)DATA_PTR(argv[0]);
+    SaveFileDataCallback callback = DATA_PTR(argv[0]);
 
     SetSaveFileDataCallback(callback);
 
@@ -4375,7 +4375,7 @@ static mrb_value mrb_raylib_SetLoadFileTextCallback(mrb_state* mrb, mrb_value se
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    LoadFileTextCallback callback = *(LoadFileTextCallback*)DATA_PTR(argv[0]);
+    LoadFileTextCallback callback = DATA_PTR(argv[0]);
 
     SetLoadFileTextCallback(callback);
 
@@ -4387,7 +4387,7 @@ static mrb_value mrb_raylib_SetSaveFileTextCallback(mrb_state* mrb, mrb_value se
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    SaveFileTextCallback callback = *(SaveFileTextCallback*)DATA_PTR(argv[0]);
+    SaveFileTextCallback callback = DATA_PTR(argv[0]);
 
     SetSaveFileTextCallback(callback);
 
@@ -4662,7 +4662,7 @@ static mrb_value mrb_raylib_UnloadDirectoryFiles(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    FilePathList files = *(FilePathList*)DATA_PTR(argv[0]);
+    FilePathList files = *(FilePathList*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_FilePathList, FilePathList);;
 
     UnloadDirectoryFiles(files);
 
@@ -4688,7 +4688,7 @@ static mrb_value mrb_raylib_UnloadDroppedFiles(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    FilePathList files = *(FilePathList*)DATA_PTR(argv[0]);
+    FilePathList files = *(FilePathList*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_FilePathList, FilePathList);;
 
     UnloadDroppedFiles(files);
 
@@ -4791,7 +4791,7 @@ static mrb_value mrb_raylib_ExportAutomationEventList(mrb_state* mrb, mrb_value 
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AutomationEventList list = *(AutomationEventList*)DATA_PTR(argv[0]);
+    AutomationEventList list = *(AutomationEventList*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AutomationEventList, AutomationEventList);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportAutomationEventList(list, fileName);
@@ -4842,7 +4842,7 @@ static mrb_value mrb_raylib_PlayAutomationEvent(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AutomationEvent event = *(AutomationEvent*)DATA_PTR(argv[0]);
+    AutomationEvent event = *(AutomationEvent*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AutomationEvent, AutomationEvent);;
 
     PlayAutomationEvent(event);
 
@@ -5326,8 +5326,8 @@ static mrb_value mrb_raylib_UpdateCameraPro(mrb_state* mrb, mrb_value self)
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Camera * camera = DATA_PTR(argv[0]);
-    Vector3 movement = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 rotation = *(Vector3*)DATA_PTR(argv[2]);
+    Vector3 movement = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 rotation = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float zoom = mrb_as_float(mrb, argv[3]);
 
     UpdateCameraPro(camera, movement, rotation, zoom);
@@ -5340,8 +5340,8 @@ static mrb_value mrb_raylib_SetShapesTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle source = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     SetShapesTexture(texture, source);
 
@@ -5355,7 +5355,7 @@ static mrb_value mrb_raylib_DrawPixel(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     int posX = mrb_as_int(mrb, argv[0]);
     int posY = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawPixel(posX, posY, color);
 
@@ -5367,8 +5367,8 @@ static mrb_value mrb_raylib_DrawPixelV(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     DrawPixelV(position, color);
 
@@ -5384,7 +5384,7 @@ static mrb_value mrb_raylib_DrawLine(mrb_state* mrb, mrb_value self)
     int startPosY = mrb_as_int(mrb, argv[1]);
     int endPosX = mrb_as_int(mrb, argv[2]);
     int endPosY = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawLine(startPosX, startPosY, endPosX, endPosY, color);
 
@@ -5396,9 +5396,9 @@ static mrb_value mrb_raylib_DrawLineV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector2 startPos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawLineV(startPos, endPos, color);
 
@@ -5410,10 +5410,10 @@ static mrb_value mrb_raylib_DrawLineEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 startPos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawLineEx(startPos, endPos, thick, color);
 
@@ -5425,10 +5425,10 @@ static mrb_value mrb_raylib_DrawLineBezier(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 startPos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawLineBezier(startPos, endPos, thick, color);
 
@@ -5440,11 +5440,11 @@ static mrb_value mrb_raylib_DrawLineBezierQuad(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 controlPos = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 startPos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 controlPos = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
     float thick = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawLineBezierQuad(startPos, endPos, controlPos, thick, color);
 
@@ -5456,12 +5456,12 @@ static mrb_value mrb_raylib_DrawLineBezierCubic(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 startControlPos = *(Vector2*)DATA_PTR(argv[2]);
-    Vector2 endControlPos = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 startPos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 startControlPos = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endControlPos = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float thick = mrb_as_float(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color);
 
@@ -5476,7 +5476,7 @@ static mrb_value mrb_raylib_DrawLineBSpline(mrb_state* mrb, mrb_value self)
     Vector2 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
     float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawLineBSpline(points, pointCount, thick, color);
 
@@ -5491,7 +5491,7 @@ static mrb_value mrb_raylib_DrawLineCatmullRom(mrb_state* mrb, mrb_value self)
     Vector2 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
     float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawLineCatmullRom(points, pointCount, thick, color);
 
@@ -5505,7 +5505,7 @@ static mrb_value mrb_raylib_DrawLineStrip(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     Vector2 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawLineStrip(points, pointCount, color);
 
@@ -5520,7 +5520,7 @@ static mrb_value mrb_raylib_DrawCircle(mrb_state* mrb, mrb_value self)
     int centerX = mrb_as_int(mrb, argv[0]);
     int centerY = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawCircle(centerX, centerY, radius, color);
 
@@ -5532,12 +5532,12 @@ static mrb_value mrb_raylib_DrawCircleSector(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[1]);
     float startAngle = mrb_as_float(mrb, argv[2]);
     float endAngle = mrb_as_float(mrb, argv[3]);
     int segments = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleSector(center, radius, startAngle, endAngle, segments, color);
 
@@ -5549,12 +5549,12 @@ static mrb_value mrb_raylib_DrawCircleSectorLines(mrb_state* mrb, mrb_value self
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[1]);
     float startAngle = mrb_as_float(mrb, argv[2]);
     float endAngle = mrb_as_float(mrb, argv[3]);
     int segments = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleSectorLines(center, radius, startAngle, endAngle, segments, color);
 
@@ -5569,8 +5569,8 @@ static mrb_value mrb_raylib_DrawCircleGradient(mrb_state* mrb, mrb_value self)
     int centerX = mrb_as_int(mrb, argv[0]);
     int centerY = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
-    Color color1 = *(Color*)DATA_PTR(argv[3]);
-    Color color2 = *(Color*)DATA_PTR(argv[4]);
+    Color color1 = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
+    Color color2 = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleGradient(centerX, centerY, radius, color1, color2);
 
@@ -5582,9 +5582,9 @@ static mrb_value mrb_raylib_DrawCircleV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleV(center, radius, color);
 
@@ -5599,7 +5599,7 @@ static mrb_value mrb_raylib_DrawCircleLines(mrb_state* mrb, mrb_value self)
     int centerX = mrb_as_int(mrb, argv[0]);
     int centerY = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleLines(centerX, centerY, radius, color);
 
@@ -5611,9 +5611,9 @@ static mrb_value mrb_raylib_DrawCircleLinesV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawCircleLinesV(center, radius, color);
 
@@ -5629,7 +5629,7 @@ static mrb_value mrb_raylib_DrawEllipse(mrb_state* mrb, mrb_value self)
     int centerY = mrb_as_int(mrb, argv[1]);
     float radiusH = mrb_as_float(mrb, argv[2]);
     float radiusV = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawEllipse(centerX, centerY, radiusH, radiusV, color);
 
@@ -5645,7 +5645,7 @@ static mrb_value mrb_raylib_DrawEllipseLines(mrb_state* mrb, mrb_value self)
     int centerY = mrb_as_int(mrb, argv[1]);
     float radiusH = mrb_as_float(mrb, argv[2]);
     float radiusV = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawEllipseLines(centerX, centerY, radiusH, radiusV, color);
 
@@ -5657,13 +5657,13 @@ static mrb_value mrb_raylib_DrawRing(mrb_state* mrb, mrb_value self)
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float innerRadius = mrb_as_float(mrb, argv[1]);
     float outerRadius = mrb_as_float(mrb, argv[2]);
     float startAngle = mrb_as_float(mrb, argv[3]);
     float endAngle = mrb_as_float(mrb, argv[4]);
     int segments = mrb_as_int(mrb, argv[5]);
-    Color color = *(Color*)DATA_PTR(argv[6]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
 
     DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
 
@@ -5675,13 +5675,13 @@ static mrb_value mrb_raylib_DrawRingLines(mrb_state* mrb, mrb_value self)
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float innerRadius = mrb_as_float(mrb, argv[1]);
     float outerRadius = mrb_as_float(mrb, argv[2]);
     float startAngle = mrb_as_float(mrb, argv[3]);
     float endAngle = mrb_as_float(mrb, argv[4]);
     int segments = mrb_as_int(mrb, argv[5]);
-    Color color = *(Color*)DATA_PTR(argv[6]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
 
     DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
 
@@ -5697,7 +5697,7 @@ static mrb_value mrb_raylib_DrawRectangle(mrb_state* mrb, mrb_value self)
     int posY = mrb_as_int(mrb, argv[1]);
     int width = mrb_as_int(mrb, argv[2]);
     int height = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangle(posX, posY, width, height, color);
 
@@ -5709,9 +5709,9 @@ static mrb_value mrb_raylib_DrawRectangleV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 size = *(Vector2*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 size = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleV(position, size, color);
 
@@ -5723,8 +5723,8 @@ static mrb_value mrb_raylib_DrawRectangleRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleRec(rec, color);
 
@@ -5736,10 +5736,10 @@ static mrb_value mrb_raylib_DrawRectanglePro(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
-    Vector2 origin = *(Vector2*)DATA_PTR(argv[1]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector2 origin = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawRectanglePro(rec, origin, rotation, color);
 
@@ -5755,8 +5755,8 @@ static mrb_value mrb_raylib_DrawRectangleGradientV(mrb_state* mrb, mrb_value sel
     int posY = mrb_as_int(mrb, argv[1]);
     int width = mrb_as_int(mrb, argv[2]);
     int height = mrb_as_int(mrb, argv[3]);
-    Color color1 = *(Color*)DATA_PTR(argv[4]);
-    Color color2 = *(Color*)DATA_PTR(argv[5]);
+    Color color1 = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+    Color color2 = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleGradientV(posX, posY, width, height, color1, color2);
 
@@ -5772,8 +5772,8 @@ static mrb_value mrb_raylib_DrawRectangleGradientH(mrb_state* mrb, mrb_value sel
     int posY = mrb_as_int(mrb, argv[1]);
     int width = mrb_as_int(mrb, argv[2]);
     int height = mrb_as_int(mrb, argv[3]);
-    Color color1 = *(Color*)DATA_PTR(argv[4]);
-    Color color2 = *(Color*)DATA_PTR(argv[5]);
+    Color color1 = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+    Color color2 = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleGradientH(posX, posY, width, height, color1, color2);
 
@@ -5785,11 +5785,11 @@ static mrb_value mrb_raylib_DrawRectangleGradientEx(mrb_state* mrb, mrb_value se
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
-    Color col1 = *(Color*)DATA_PTR(argv[1]);
-    Color col2 = *(Color*)DATA_PTR(argv[2]);
-    Color col3 = *(Color*)DATA_PTR(argv[3]);
-    Color col4 = *(Color*)DATA_PTR(argv[4]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Color col1 = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
+    Color col2 = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
+    Color col3 = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
+    Color col4 = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleGradientEx(rec, col1, col2, col3, col4);
 
@@ -5805,7 +5805,7 @@ static mrb_value mrb_raylib_DrawRectangleLines(mrb_state* mrb, mrb_value self)
     int posY = mrb_as_int(mrb, argv[1]);
     int width = mrb_as_int(mrb, argv[2]);
     int height = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleLines(posX, posY, width, height, color);
 
@@ -5817,9 +5817,9 @@ static mrb_value mrb_raylib_DrawRectangleLinesEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
     float lineThick = mrb_as_float(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleLinesEx(rec, lineThick, color);
 
@@ -5831,10 +5831,10 @@ static mrb_value mrb_raylib_DrawRectangleRounded(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
     float roundness = mrb_as_float(mrb, argv[1]);
     int segments = mrb_as_int(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleRounded(rec, roundness, segments, color);
 
@@ -5846,11 +5846,11 @@ static mrb_value mrb_raylib_DrawRectangleRoundedLines(mrb_state* mrb, mrb_value 
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
     float roundness = mrb_as_float(mrb, argv[1]);
     int segments = mrb_as_int(mrb, argv[2]);
     float lineThick = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color);
 
@@ -5862,10 +5862,10 @@ static mrb_value mrb_raylib_DrawTriangle(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 v1 = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 v2 = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 v3 = *(Vector2*)DATA_PTR(argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Vector2 v1 = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v2 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v3 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangle(v1, v2, v3, color);
 
@@ -5877,10 +5877,10 @@ static mrb_value mrb_raylib_DrawTriangleLines(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 v1 = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 v2 = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 v3 = *(Vector2*)DATA_PTR(argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Vector2 v1 = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v2 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v3 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangleLines(v1, v2, v3, color);
 
@@ -5894,7 +5894,7 @@ static mrb_value mrb_raylib_DrawTriangleFan(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     Vector2 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangleFan(points, pointCount, color);
 
@@ -5908,7 +5908,7 @@ static mrb_value mrb_raylib_DrawTriangleStrip(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     Vector2 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangleStrip(points, pointCount, color);
 
@@ -5920,11 +5920,11 @@ static mrb_value mrb_raylib_DrawPoly(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     int sides = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
     float rotation = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawPoly(center, sides, radius, rotation, color);
 
@@ -5936,11 +5936,11 @@ static mrb_value mrb_raylib_DrawPolyLines(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     int sides = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
     float rotation = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawPolyLines(center, sides, radius, rotation, color);
 
@@ -5952,12 +5952,12 @@ static mrb_value mrb_raylib_DrawPolyLinesEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     int sides = mrb_as_int(mrb, argv[1]);
     float radius = mrb_as_float(mrb, argv[2]);
     float rotation = mrb_as_float(mrb, argv[3]);
     float lineThick = mrb_as_float(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color);
 
@@ -5969,8 +5969,8 @@ static mrb_value mrb_raylib_CheckCollisionRecs(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Rectangle rec1 = *(Rectangle*)DATA_PTR(argv[0]);
-    Rectangle rec2 = *(Rectangle*)DATA_PTR(argv[1]);
+    Rectangle rec1 = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Rectangle rec2 = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     bool retval = CheckCollisionRecs(rec1, rec2);
 
@@ -5982,9 +5982,9 @@ static mrb_value mrb_raylib_CheckCollisionCircles(mrb_state* mrb, mrb_value self
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 center1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center1 = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius1 = mrb_as_float(mrb, argv[1]);
-    Vector2 center2 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 center2 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
     float radius2 = mrb_as_float(mrb, argv[3]);
 
     bool retval = CheckCollisionCircles(center1, radius1, center2, radius2);
@@ -5997,9 +5997,9 @@ static mrb_value mrb_raylib_CheckCollisionCircleRec(mrb_state* mrb, mrb_value se
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[1]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[2]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     bool retval = CheckCollisionCircleRec(center, radius, rec);
 
@@ -6011,8 +6011,8 @@ static mrb_value mrb_raylib_CheckCollisionPointRec(mrb_state* mrb, mrb_value sel
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    Vector2 point = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     bool retval = CheckCollisionPointRec(point, rec);
 
@@ -6024,8 +6024,8 @@ static mrb_value mrb_raylib_CheckCollisionPointCircle(mrb_state* mrb, mrb_value 
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 point = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     float radius = mrb_as_float(mrb, argv[2]);
 
     bool retval = CheckCollisionPointCircle(point, center, radius);
@@ -6038,10 +6038,10 @@ static mrb_value mrb_raylib_CheckCollisionPointTriangle(mrb_state* mrb, mrb_valu
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 p1 = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 p2 = *(Vector2*)DATA_PTR(argv[2]);
-    Vector2 p3 = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 point = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 p1 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 p2 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 p3 = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
 
     bool retval = CheckCollisionPointTriangle(point, p1, p2, p3);
 
@@ -6053,7 +6053,7 @@ static mrb_value mrb_raylib_CheckCollisionPointPoly(mrb_state* mrb, mrb_value se
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 point = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
     Vector2 * points = DATA_PTR(argv[1]);
     int pointCount = mrb_as_int(mrb, argv[2]);
 
@@ -6067,10 +6067,10 @@ static mrb_value mrb_raylib_CheckCollisionLines(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector2 startPos1 = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos1 = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 startPos2 = *(Vector2*)DATA_PTR(argv[2]);
-    Vector2 endPos2 = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 startPos1 = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos1 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 startPos2 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 endPos2 = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     Vector2 * collisionPoint = DATA_PTR(argv[4]);
 
     bool retval = CheckCollisionLines(startPos1, endPos1, startPos2, endPos2, collisionPoint);
@@ -6083,9 +6083,9 @@ static mrb_value mrb_raylib_CheckCollisionPointLine(mrb_state* mrb, mrb_value se
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 point = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 p1 = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 p2 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 point = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 p1 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 p2 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
     int threshold = mrb_as_int(mrb, argv[3]);
 
     bool retval = CheckCollisionPointLine(point, p1, p2, threshold);
@@ -6098,8 +6098,8 @@ static mrb_value mrb_raylib_GetCollisionRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Rectangle rec1 = *(Rectangle*)DATA_PTR(argv[0]);
-    Rectangle rec2 = *(Rectangle*)DATA_PTR(argv[1]);
+    Rectangle rec1 = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Rectangle rec2 = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
     *retval = GetCollisionRec(rec1, rec2);
@@ -6180,7 +6180,7 @@ static mrb_value mrb_raylib_LoadImageFromTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = LoadImageFromTexture(texture);
@@ -6199,7 +6199,7 @@ static mrb_value mrb_raylib_IsImageReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     bool retval = IsImageReady(image);
 
@@ -6211,7 +6211,7 @@ static mrb_value mrb_raylib_UnloadImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     UnloadImage(image);
 
@@ -6223,7 +6223,7 @@ static mrb_value mrb_raylib_ExportImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportImage(image, fileName);
@@ -6236,7 +6236,7 @@ static mrb_value mrb_raylib_ExportImageToMemory(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     const char * fileType = RSTRING_PTR(argv[1]);
     int * fileSize = DATA_PTR(argv[2]);
 
@@ -6250,7 +6250,7 @@ static mrb_value mrb_raylib_ExportImageAsCode(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportImageAsCode(image, fileName);
@@ -6265,7 +6265,7 @@ static mrb_value mrb_raylib_GenImageColor(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageColor(width, height, color);
@@ -6280,8 +6280,8 @@ static mrb_value mrb_raylib_GenImageGradientLinear(mrb_state* mrb, mrb_value sel
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
     int direction = mrb_as_int(mrb, argv[2]);
-    Color start = *(Color*)DATA_PTR(argv[3]);
-    Color end = *(Color*)DATA_PTR(argv[4]);
+    Color start = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
+    Color end = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageGradientLinear(width, height, direction, start, end);
@@ -6296,8 +6296,8 @@ static mrb_value mrb_raylib_GenImageGradientRadial(mrb_state* mrb, mrb_value sel
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
     float density = mrb_as_float(mrb, argv[2]);
-    Color inner = *(Color*)DATA_PTR(argv[3]);
-    Color outer = *(Color*)DATA_PTR(argv[4]);
+    Color inner = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
+    Color outer = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageGradientRadial(width, height, density, inner, outer);
@@ -6312,8 +6312,8 @@ static mrb_value mrb_raylib_GenImageGradientSquare(mrb_state* mrb, mrb_value sel
     int width = mrb_as_int(mrb, argv[0]);
     int height = mrb_as_int(mrb, argv[1]);
     float density = mrb_as_float(mrb, argv[2]);
-    Color inner = *(Color*)DATA_PTR(argv[3]);
-    Color outer = *(Color*)DATA_PTR(argv[4]);
+    Color inner = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
+    Color outer = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageGradientSquare(width, height, density, inner, outer);
@@ -6329,8 +6329,8 @@ static mrb_value mrb_raylib_GenImageChecked(mrb_state* mrb, mrb_value self)
     int height = mrb_as_int(mrb, argv[1]);
     int checksX = mrb_as_int(mrb, argv[2]);
     int checksY = mrb_as_int(mrb, argv[3]);
-    Color col1 = *(Color*)DATA_PTR(argv[4]);
-    Color col2 = *(Color*)DATA_PTR(argv[5]);
+    Color col1 = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+    Color col2 = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = GenImageChecked(width, height, checksX, checksY, col1, col2);
@@ -6400,7 +6400,7 @@ static mrb_value mrb_raylib_ImageCopy(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = ImageCopy(image);
@@ -6412,8 +6412,8 @@ static mrb_value mrb_raylib_ImageFromImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = ImageFromImage(image, rec);
@@ -6427,7 +6427,7 @@ static mrb_value mrb_raylib_ImageText(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     const char * text = RSTRING_PTR(argv[0]);
     int fontSize = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = ImageText(text, fontSize, color);
@@ -6439,11 +6439,11 @@ static mrb_value mrb_raylib_ImageTextEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const char * text = RSTRING_PTR(argv[1]);
     float fontSize = mrb_as_float(mrb, argv[2]);
     float spacing = mrb_as_float(mrb, argv[3]);
-    Color tint = *(Color*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     Image* retval = (Image*)mrb_malloc(mrb, sizeof(Image));
     *retval = ImageTextEx(font, text, fontSize, spacing, tint);
@@ -6469,7 +6469,7 @@ static mrb_value mrb_raylib_ImageToPOT(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Color fill = *(Color*)DATA_PTR(argv[1]);
+    Color fill = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     ImageToPOT(image, fill);
 
@@ -6482,7 +6482,7 @@ static mrb_value mrb_raylib_ImageCrop(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Rectangle crop = *(Rectangle*)DATA_PTR(argv[1]);
+    Rectangle crop = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
 
     ImageCrop(image, crop);
 
@@ -6508,7 +6508,7 @@ static mrb_value mrb_raylib_ImageAlphaClear(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
     float threshold = mrb_as_float(mrb, argv[2]);
 
     ImageAlphaClear(image, color, threshold);
@@ -6522,7 +6522,7 @@ static mrb_value mrb_raylib_ImageAlphaMask(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Image alphaMask = *(Image*)DATA_PTR(argv[1]);
+    Image alphaMask = *(Image*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Image, Image);;
 
     ImageAlphaMask(image, alphaMask);
 
@@ -6592,7 +6592,7 @@ static mrb_value mrb_raylib_ImageResizeCanvas(mrb_state* mrb, mrb_value self)
     int newHeight = mrb_as_int(mrb, argv[2]);
     int offsetX = mrb_as_int(mrb, argv[3]);
     int offsetY = mrb_as_int(mrb, argv[4]);
-    Color fill = *(Color*)DATA_PTR(argv[5]);
+    Color fill = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     ImageResizeCanvas(image, newWidth, newHeight, offsetX, offsetY, fill);
 
@@ -6694,7 +6694,7 @@ static mrb_value mrb_raylib_ImageColorTint(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     ImageColorTint(image, color);
 
@@ -6757,8 +6757,8 @@ static mrb_value mrb_raylib_ImageColorReplace(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     Image * image = DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
-    Color replace = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
+    Color replace = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     ImageColorReplace(image, color, replace);
 
@@ -6770,7 +6770,7 @@ static mrb_value mrb_raylib_LoadImageColors(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     return self; /* TODO return wrapped object */
 }
@@ -6780,7 +6780,7 @@ static mrb_value mrb_raylib_LoadImagePalette(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     int maxPaletteSize = mrb_as_int(mrb, argv[1]);
     int * colorCount = DATA_PTR(argv[2]);
 
@@ -6816,7 +6816,7 @@ static mrb_value mrb_raylib_GetImageAlphaBorder(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     float threshold = mrb_as_float(mrb, argv[1]);
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
@@ -6829,7 +6829,7 @@ static mrb_value mrb_raylib_GetImageColor(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     int x = mrb_as_int(mrb, argv[1]);
     int y = mrb_as_int(mrb, argv[2]);
 
@@ -6844,7 +6844,7 @@ static mrb_value mrb_raylib_ImageClearBackground(mrb_state* mrb, mrb_value self)
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     ImageClearBackground(dst, color);
 
@@ -6859,7 +6859,7 @@ static mrb_value mrb_raylib_ImageDrawPixel(mrb_state* mrb, mrb_value self)
     Image * dst = DATA_PTR(argv[0]);
     int posX = mrb_as_int(mrb, argv[1]);
     int posY = mrb_as_int(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawPixel(dst, posX, posY, color);
 
@@ -6872,8 +6872,8 @@ static mrb_value mrb_raylib_ImageDrawPixelV(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawPixelV(dst, position, color);
 
@@ -6890,7 +6890,7 @@ static mrb_value mrb_raylib_ImageDrawLine(mrb_state* mrb, mrb_value self)
     int startPosY = mrb_as_int(mrb, argv[2]);
     int endPosX = mrb_as_int(mrb, argv[3]);
     int endPosY = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawLine(dst, startPosX, startPosY, endPosX, endPosY, color);
 
@@ -6903,9 +6903,9 @@ static mrb_value mrb_raylib_ImageDrawLineV(mrb_state* mrb, mrb_value self)
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Vector2 start = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 end = *(Vector2*)DATA_PTR(argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Vector2 start = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 end = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawLineV(dst, start, end, color);
 
@@ -6921,7 +6921,7 @@ static mrb_value mrb_raylib_ImageDrawCircle(mrb_state* mrb, mrb_value self)
     int centerX = mrb_as_int(mrb, argv[1]);
     int centerY = mrb_as_int(mrb, argv[2]);
     int radius = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawCircle(dst, centerX, centerY, radius, color);
 
@@ -6934,9 +6934,9 @@ static mrb_value mrb_raylib_ImageDrawCircleV(mrb_state* mrb, mrb_value self)
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     int radius = mrb_as_int(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawCircleV(dst, center, radius, color);
 
@@ -6952,7 +6952,7 @@ static mrb_value mrb_raylib_ImageDrawCircleLines(mrb_state* mrb, mrb_value self)
     int centerX = mrb_as_int(mrb, argv[1]);
     int centerY = mrb_as_int(mrb, argv[2]);
     int radius = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawCircleLines(dst, centerX, centerY, radius, color);
 
@@ -6965,9 +6965,9 @@ static mrb_value mrb_raylib_ImageDrawCircleLinesV(mrb_state* mrb, mrb_value self
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Vector2 center = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     int radius = mrb_as_int(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawCircleLinesV(dst, center, radius, color);
 
@@ -6984,7 +6984,7 @@ static mrb_value mrb_raylib_ImageDrawRectangle(mrb_state* mrb, mrb_value self)
     int posY = mrb_as_int(mrb, argv[2]);
     int width = mrb_as_int(mrb, argv[3]);
     int height = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawRectangle(dst, posX, posY, width, height, color);
 
@@ -6997,9 +6997,9 @@ static mrb_value mrb_raylib_ImageDrawRectangleV(mrb_state* mrb, mrb_value self)
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 size = *(Vector2*)DATA_PTR(argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 size = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawRectangleV(dst, position, size, color);
 
@@ -7012,8 +7012,8 @@ static mrb_value mrb_raylib_ImageDrawRectangleRec(mrb_state* mrb, mrb_value self
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawRectangleRec(dst, rec, color);
 
@@ -7026,9 +7026,9 @@ static mrb_value mrb_raylib_ImageDrawRectangleLines(mrb_state* mrb, mrb_value se
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
     int thick = mrb_as_int(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawRectangleLines(dst, rec, thick, color);
 
@@ -7041,10 +7041,10 @@ static mrb_value mrb_raylib_ImageDraw(mrb_state* mrb, mrb_value self)
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Image src = *(Image*)DATA_PTR(argv[1]);
-    Rectangle srcRec = *(Rectangle*)DATA_PTR(argv[2]);
-    Rectangle dstRec = *(Rectangle*)DATA_PTR(argv[3]);
-    Color tint = *(Color*)DATA_PTR(argv[4]);
+    Image src = *(Image*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Image, Image);;
+    Rectangle srcRec = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Rectangle dstRec = *(Rectangle*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     ImageDraw(dst, src, srcRec, dstRec, tint);
 
@@ -7061,7 +7061,7 @@ static mrb_value mrb_raylib_ImageDrawText(mrb_state* mrb, mrb_value self)
     int posX = mrb_as_int(mrb, argv[2]);
     int posY = mrb_as_int(mrb, argv[3]);
     int fontSize = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawText(dst, text, posX, posY, fontSize, color);
 
@@ -7074,12 +7074,12 @@ static mrb_value mrb_raylib_ImageDrawTextEx(mrb_state* mrb, mrb_value self)
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
     Image * dst = DATA_PTR(argv[0]);
-    Font font = *(Font*)DATA_PTR(argv[1]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Font, Font);;
     const char * text = RSTRING_PTR(argv[2]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float fontSize = mrb_as_float(mrb, argv[4]);
     float spacing = mrb_as_float(mrb, argv[5]);
-    Color tint = *(Color*)DATA_PTR(argv[6]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
 
     ImageDrawTextEx(dst, font, text, position, fontSize, spacing, tint);
 
@@ -7103,7 +7103,7 @@ static mrb_value mrb_raylib_LoadTextureFromImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
     Texture2D* retval = (Texture2D*)mrb_malloc(mrb, sizeof(Texture2D));
     *retval = LoadTextureFromImage(image);
@@ -7115,7 +7115,7 @@ static mrb_value mrb_raylib_LoadTextureCubemap(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
     int layout = mrb_as_int(mrb, argv[1]);
 
     TextureCubemap* retval = (TextureCubemap*)mrb_malloc(mrb, sizeof(TextureCubemap));
@@ -7141,7 +7141,7 @@ static mrb_value mrb_raylib_IsTextureReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
 
     bool retval = IsTextureReady(texture);
 
@@ -7153,7 +7153,7 @@ static mrb_value mrb_raylib_UnloadTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
 
     UnloadTexture(texture);
 
@@ -7165,7 +7165,7 @@ static mrb_value mrb_raylib_IsRenderTextureReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+    RenderTexture2D target = *(RenderTexture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_RenderTexture, RenderTexture2D);;
 
     bool retval = IsRenderTextureReady(target);
 
@@ -7177,7 +7177,7 @@ static mrb_value mrb_raylib_UnloadRenderTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    RenderTexture2D target = *(RenderTexture2D*)DATA_PTR(argv[0]);
+    RenderTexture2D target = *(RenderTexture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_RenderTexture, RenderTexture2D);;
 
     UnloadRenderTexture(target);
 
@@ -7189,7 +7189,7 @@ static mrb_value mrb_raylib_UpdateTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
     const void * pixels = DATA_PTR(argv[1]);
 
     UpdateTexture(texture, pixels);
@@ -7202,8 +7202,8 @@ static mrb_value mrb_raylib_UpdateTextureRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Rectangle rec = *(Rectangle*)DATA_PTR(argv[1]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle rec = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
     const void * pixels = DATA_PTR(argv[2]);
 
     UpdateTextureRec(texture, rec, pixels);
@@ -7228,7 +7228,7 @@ static mrb_value mrb_raylib_SetTextureFilter(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
     int filter = mrb_as_int(mrb, argv[1]);
 
     SetTextureFilter(texture, filter);
@@ -7241,7 +7241,7 @@ static mrb_value mrb_raylib_SetTextureWrap(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
     int wrap = mrb_as_int(mrb, argv[1]);
 
     SetTextureWrap(texture, wrap);
@@ -7254,10 +7254,10 @@ static mrb_value mrb_raylib_DrawTexture(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
     int posX = mrb_as_int(mrb, argv[1]);
     int posY = mrb_as_int(mrb, argv[2]);
-    Color tint = *(Color*)DATA_PTR(argv[3]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawTexture(texture, posX, posY, tint);
 
@@ -7269,9 +7269,9 @@ static mrb_value mrb_raylib_DrawTextureV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
-    Color tint = *(Color*)DATA_PTR(argv[2]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawTextureV(texture, position, tint);
 
@@ -7283,11 +7283,11 @@ static mrb_value mrb_raylib_DrawTextureEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[1]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[2]);
     float scale = mrb_as_float(mrb, argv[3]);
-    Color tint = *(Color*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawTextureEx(texture, position, rotation, scale, tint);
 
@@ -7299,10 +7299,10 @@ static mrb_value mrb_raylib_DrawTextureRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
-    Color tint = *(Color*)DATA_PTR(argv[3]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle source = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawTextureRec(texture, source, position, tint);
 
@@ -7314,12 +7314,12 @@ static mrb_value mrb_raylib_DrawTexturePro(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    Rectangle source = *(Rectangle*)DATA_PTR(argv[1]);
-    Rectangle dest = *(Rectangle*)DATA_PTR(argv[2]);
-    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle source = *(Rectangle*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Rectangle dest = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector2 origin = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawTexturePro(texture, source, dest, origin, rotation, tint);
 
@@ -7331,12 +7331,12 @@ static mrb_value mrb_raylib_DrawTextureNPatch(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[0]);
-    NPatchInfo nPatchInfo = *(NPatchInfo*)DATA_PTR(argv[1]);
-    Rectangle dest = *(Rectangle*)DATA_PTR(argv[2]);
-    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Texture, Texture2D);;
+    NPatchInfo nPatchInfo = *(NPatchInfo*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_NPatchInfo, NPatchInfo);;
+    Rectangle dest = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector2 origin = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint);
 
@@ -7348,7 +7348,7 @@ static mrb_value mrb_raylib_Fade(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
     float alpha = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
@@ -7361,7 +7361,7 @@ static mrb_value mrb_raylib_ColorToInt(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
 
     int retval = ColorToInt(color);
 
@@ -7373,7 +7373,7 @@ static mrb_value mrb_raylib_ColorNormalize(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
 
     Vector4* retval = (Vector4*)mrb_malloc(mrb, sizeof(Vector4));
     *retval = ColorNormalize(color);
@@ -7385,7 +7385,7 @@ static mrb_value mrb_raylib_ColorFromNormalized(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Vector4 normalized = *(Vector4*)DATA_PTR(argv[0]);
+    Vector4 normalized = *(Vector4*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector4, Vector4);;
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
     *retval = ColorFromNormalized(normalized);
@@ -7397,7 +7397,7 @@ static mrb_value mrb_raylib_ColorToHSV(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
 
     Vector3* retval = (Vector3*)mrb_malloc(mrb, sizeof(Vector3));
     *retval = ColorToHSV(color);
@@ -7423,8 +7423,8 @@ static mrb_value mrb_raylib_ColorTint(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
-    Color tint = *(Color*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
     *retval = ColorTint(color, tint);
@@ -7436,7 +7436,7 @@ static mrb_value mrb_raylib_ColorBrightness(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
     float factor = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
@@ -7449,7 +7449,7 @@ static mrb_value mrb_raylib_ColorContrast(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
     float contrast = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
@@ -7462,7 +7462,7 @@ static mrb_value mrb_raylib_ColorAlpha(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Color color = *(Color*)DATA_PTR(argv[0]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
     float alpha = mrb_as_float(mrb, argv[1]);
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
@@ -7475,9 +7475,9 @@ static mrb_value mrb_raylib_ColorAlphaBlend(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Color dst = *(Color*)DATA_PTR(argv[0]);
-    Color src = *(Color*)DATA_PTR(argv[1]);
-    Color tint = *(Color*)DATA_PTR(argv[2]);
+    Color dst = *(Color*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Color, Color);;
+    Color src = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     Color* retval = (Color*)mrb_malloc(mrb, sizeof(Color));
     *retval = ColorAlphaBlend(dst, src, tint);
@@ -7515,7 +7515,7 @@ static mrb_value mrb_raylib_SetPixelColor(mrb_state* mrb, mrb_value self)
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
     void * dstPtr = DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
     int format = mrb_as_int(mrb, argv[2]);
 
     SetPixelColor(dstPtr, color, format);
@@ -7576,8 +7576,8 @@ static mrb_value mrb_raylib_LoadFontFromImage(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Image image = *(Image*)DATA_PTR(argv[0]);
-    Color key = *(Color*)DATA_PTR(argv[1]);
+    Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
+    Color key = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
     int firstChar = mrb_as_int(mrb, argv[2]);
 
     Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
@@ -7607,7 +7607,7 @@ static mrb_value mrb_raylib_IsFontReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
 
     bool retval = IsFontReady(font);
 
@@ -7664,7 +7664,7 @@ static mrb_value mrb_raylib_UnloadFont(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
 
     UnloadFont(font);
 
@@ -7676,7 +7676,7 @@ static mrb_value mrb_raylib_ExportFontAsCode(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportFontAsCode(font, fileName);
@@ -7706,7 +7706,7 @@ static mrb_value mrb_raylib_DrawText(mrb_state* mrb, mrb_value self)
     int posX = mrb_as_int(mrb, argv[1]);
     int posY = mrb_as_int(mrb, argv[2]);
     int fontSize = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawText(text, posX, posY, fontSize, color);
 
@@ -7718,12 +7718,12 @@ static mrb_value mrb_raylib_DrawTextEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const char * text = RSTRING_PTR(argv[1]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
     float fontSize = mrb_as_float(mrb, argv[3]);
     float spacing = mrb_as_float(mrb, argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawTextEx(font, text, position, fontSize, spacing, tint);
 
@@ -7735,14 +7735,14 @@ static mrb_value mrb_raylib_DrawTextPro(mrb_state* mrb, mrb_value self)
     mrb_value argv[8];
     void* ptrs[8] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], };
     mrb_get_args_a(mrb, "oooooooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const char * text = RSTRING_PTR(argv[1]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
-    Vector2 origin = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 origin = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[4]);
     float fontSize = mrb_as_float(mrb, argv[5]);
     float spacing = mrb_as_float(mrb, argv[6]);
-    Color tint = *(Color*)DATA_PTR(argv[7]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[7], &mrb_raylib_struct_Color, Color);;
 
     DrawTextPro(font, text, position, origin, rotation, fontSize, spacing, tint);
 
@@ -7754,11 +7754,11 @@ static mrb_value mrb_raylib_DrawTextCodepoint(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     int codepoint = mrb_as_int(mrb, argv[1]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
     float fontSize = mrb_as_float(mrb, argv[3]);
-    Color tint = *(Color*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawTextCodepoint(font, codepoint, position, fontSize, tint);
 
@@ -7770,13 +7770,13 @@ static mrb_value mrb_raylib_DrawTextCodepoints(mrb_state* mrb, mrb_value self)
     mrb_value argv[7];
     void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
     mrb_get_args_a(mrb, "ooooooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const int * codepoints = DATA_PTR(argv[1]);
     int codepointCount = mrb_as_int(mrb, argv[2]);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[3]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);;
     float fontSize = mrb_as_float(mrb, argv[4]);
     float spacing = mrb_as_float(mrb, argv[5]);
-    Color tint = *(Color*)DATA_PTR(argv[6]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
 
     DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint);
 
@@ -7813,7 +7813,7 @@ static mrb_value mrb_raylib_MeasureTextEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     const char * text = RSTRING_PTR(argv[1]);
     float fontSize = mrb_as_float(mrb, argv[2]);
     float spacing = mrb_as_float(mrb, argv[3]);
@@ -7828,7 +7828,7 @@ static mrb_value mrb_raylib_GetGlyphIndex(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     int codepoint = mrb_as_int(mrb, argv[1]);
 
     int retval = GetGlyphIndex(font, codepoint);
@@ -7841,7 +7841,7 @@ static mrb_value mrb_raylib_GetGlyphInfo(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     int codepoint = mrb_as_int(mrb, argv[1]);
 
     GlyphInfo* retval = (GlyphInfo*)mrb_malloc(mrb, sizeof(GlyphInfo));
@@ -7854,7 +7854,7 @@ static mrb_value mrb_raylib_GetGlyphAtlasRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Font font = *(Font*)DATA_PTR(argv[0]);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
     int codepoint = mrb_as_int(mrb, argv[1]);
 
     Rectangle* retval = (Rectangle*)mrb_malloc(mrb, sizeof(Rectangle));
@@ -8164,9 +8164,9 @@ static mrb_value mrb_raylib_DrawLine3D(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector3 startPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 endPos = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawLine3D(startPos, endPos, color);
 
@@ -8178,8 +8178,8 @@ static mrb_value mrb_raylib_DrawPoint3D(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     DrawPoint3D(position, color);
 
@@ -8191,11 +8191,11 @@ static mrb_value mrb_raylib_DrawCircle3D(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector3 center = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 center = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[1]);
-    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    Vector3 rotationAxis = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float rotationAngle = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawCircle3D(center, radius, rotationAxis, rotationAngle, color);
 
@@ -8207,10 +8207,10 @@ static mrb_value mrb_raylib_DrawTriangle3D(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector3 v1 = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 v2 = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 v3 = *(Vector3*)DATA_PTR(argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
+    Vector3 v1 = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 v2 = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 v3 = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangle3D(v1, v2, v3, color);
 
@@ -8224,7 +8224,7 @@ static mrb_value mrb_raylib_DrawTriangleStrip3D(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     Vector3 * points = DATA_PTR(argv[0]);
     int pointCount = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawTriangleStrip3D(points, pointCount, color);
 
@@ -8236,11 +8236,11 @@ static mrb_value mrb_raylib_DrawCube(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float width = mrb_as_float(mrb, argv[1]);
     float height = mrb_as_float(mrb, argv[2]);
     float length = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawCube(position, width, height, length, color);
 
@@ -8252,9 +8252,9 @@ static mrb_value mrb_raylib_DrawCubeV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 size = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawCubeV(position, size, color);
 
@@ -8266,11 +8266,11 @@ static mrb_value mrb_raylib_DrawCubeWires(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float width = mrb_as_float(mrb, argv[1]);
     float height = mrb_as_float(mrb, argv[2]);
     float length = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawCubeWires(position, width, height, length, color);
 
@@ -8282,9 +8282,9 @@ static mrb_value mrb_raylib_DrawCubeWiresV(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 size = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawCubeWiresV(position, size, color);
 
@@ -8296,9 +8296,9 @@ static mrb_value mrb_raylib_DrawSphere(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 centerPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawSphere(centerPos, radius, color);
 
@@ -8310,11 +8310,11 @@ static mrb_value mrb_raylib_DrawSphereEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 centerPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[1]);
     int rings = mrb_as_int(mrb, argv[2]);
     int slices = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawSphereEx(centerPos, radius, rings, slices, color);
 
@@ -8326,11 +8326,11 @@ static mrb_value mrb_raylib_DrawSphereWires(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 centerPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[1]);
     int rings = mrb_as_int(mrb, argv[2]);
     int slices = mrb_as_int(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawSphereWires(centerPos, radius, rings, slices, color);
 
@@ -8342,12 +8342,12 @@ static mrb_value mrb_raylib_DrawCylinder(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radiusTop = mrb_as_float(mrb, argv[1]);
     float radiusBottom = mrb_as_float(mrb, argv[2]);
     float height = mrb_as_float(mrb, argv[3]);
     int slices = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCylinder(position, radiusTop, radiusBottom, height, slices, color);
 
@@ -8359,12 +8359,12 @@ static mrb_value mrb_raylib_DrawCylinderEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 startPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 endPos = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float startRadius = mrb_as_float(mrb, argv[2]);
     float endRadius = mrb_as_float(mrb, argv[3]);
     int sides = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCylinderEx(startPos, endPos, startRadius, endRadius, sides, color);
 
@@ -8376,12 +8376,12 @@ static mrb_value mrb_raylib_DrawCylinderWires(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radiusTop = mrb_as_float(mrb, argv[1]);
     float radiusBottom = mrb_as_float(mrb, argv[2]);
     float height = mrb_as_float(mrb, argv[3]);
     int slices = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color);
 
@@ -8393,12 +8393,12 @@ static mrb_value mrb_raylib_DrawCylinderWiresEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 startPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 endPos = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float startRadius = mrb_as_float(mrb, argv[2]);
     float endRadius = mrb_as_float(mrb, argv[3]);
     int sides = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCylinderWiresEx(startPos, endPos, startRadius, endRadius, sides, color);
 
@@ -8410,12 +8410,12 @@ static mrb_value mrb_raylib_DrawCapsule(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 startPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 endPos = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[2]);
     int slices = mrb_as_int(mrb, argv[3]);
     int rings = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCapsule(startPos, endPos, radius, slices, rings, color);
 
@@ -8427,12 +8427,12 @@ static mrb_value mrb_raylib_DrawCapsuleWires(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector3 startPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector3 endPos = *(Vector3*)DATA_PTR(argv[1]);
+    Vector3 startPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 endPos = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[2]);
     int slices = mrb_as_int(mrb, argv[3]);
     int rings = mrb_as_int(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawCapsuleWires(startPos, endPos, radius, slices, rings, color);
 
@@ -8444,9 +8444,9 @@ static mrb_value mrb_raylib_DrawPlane(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector3 centerPos = *(Vector3*)DATA_PTR(argv[0]);
-    Vector2 size = *(Vector2*)DATA_PTR(argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
+    Vector3 centerPos = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector2 size = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Color, Color);;
 
     DrawPlane(centerPos, size, color);
 
@@ -8458,8 +8458,8 @@ static mrb_value mrb_raylib_DrawRay(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     DrawRay(ray, color);
 
@@ -8496,7 +8496,7 @@ static mrb_value mrb_raylib_LoadModelFromMesh(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
 
     Model* retval = (Model*)mrb_malloc(mrb, sizeof(Model));
     *retval = LoadModelFromMesh(mesh);
@@ -8508,7 +8508,7 @@ static mrb_value mrb_raylib_IsModelReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
 
     bool retval = IsModelReady(model);
 
@@ -8520,7 +8520,7 @@ static mrb_value mrb_raylib_UnloadModel(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
 
     UnloadModel(model);
 
@@ -8532,7 +8532,7 @@ static mrb_value mrb_raylib_GetModelBoundingBox(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
 
     BoundingBox* retval = (BoundingBox*)mrb_malloc(mrb, sizeof(BoundingBox));
     *retval = GetModelBoundingBox(model);
@@ -8544,10 +8544,10 @@ static mrb_value mrb_raylib_DrawModel(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float scale = mrb_as_float(mrb, argv[2]);
-    Color tint = *(Color*)DATA_PTR(argv[3]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawModel(model, position, scale, tint);
 
@@ -8559,12 +8559,12 @@ static mrb_value mrb_raylib_DrawModelEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 rotationAxis = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float rotationAngle = mrb_as_float(mrb, argv[3]);
-    Vector3 scale = *(Vector3*)DATA_PTR(argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Vector3 scale = *(Vector3*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector3, Vector3);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint);
 
@@ -8576,10 +8576,10 @@ static mrb_value mrb_raylib_DrawModelWires(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float scale = mrb_as_float(mrb, argv[2]);
-    Color tint = *(Color*)DATA_PTR(argv[3]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Color, Color);;
 
     DrawModelWires(model, position, scale, tint);
 
@@ -8591,12 +8591,12 @@ static mrb_value mrb_raylib_DrawModelWiresEx(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 rotationAxis = *(Vector3*)DATA_PTR(argv[2]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 rotationAxis = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float rotationAngle = mrb_as_float(mrb, argv[3]);
-    Vector3 scale = *(Vector3*)DATA_PTR(argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Vector3 scale = *(Vector3*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector3, Vector3);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint);
 
@@ -8608,8 +8608,8 @@ static mrb_value mrb_raylib_DrawBoundingBox(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[0]);
-    Color color = *(Color*)DATA_PTR(argv[1]);
+    BoundingBox box = *(BoundingBox*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_BoundingBox, BoundingBox);;
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Color, Color);;
 
     DrawBoundingBox(box, color);
 
@@ -8621,11 +8621,11 @@ static mrb_value mrb_raylib_DrawBillboard(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Camera camera = *(Camera*)DATA_PTR(argv[0]);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[2]);
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera3D, Camera);;
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Texture, Texture2D);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float size = mrb_as_float(mrb, argv[3]);
-    Color tint = *(Color*)DATA_PTR(argv[4]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
 
     DrawBillboard(camera, texture, position, size, tint);
 
@@ -8637,12 +8637,12 @@ static mrb_value mrb_raylib_DrawBillboardRec(mrb_state* mrb, mrb_value self)
     mrb_value argv[6];
     void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
     mrb_get_args_a(mrb, "oooooo", ptrs);
-    Camera camera = *(Camera*)DATA_PTR(argv[0]);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
-    Rectangle source = *(Rectangle*)DATA_PTR(argv[2]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[3]);
-    Vector2 size = *(Vector2*)DATA_PTR(argv[4]);
-    Color tint = *(Color*)DATA_PTR(argv[5]);
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera3D, Camera);;
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle source = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector2 size = *(Vector2*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector2, Vector2);;
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Color, Color);;
 
     DrawBillboardRec(camera, texture, source, position, size, tint);
 
@@ -8654,15 +8654,15 @@ static mrb_value mrb_raylib_DrawBillboardPro(mrb_state* mrb, mrb_value self)
     mrb_value argv[9];
     void* ptrs[9] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], };
     mrb_get_args_a(mrb, "ooooooooo", ptrs);
-    Camera camera = *(Camera*)DATA_PTR(argv[0]);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[1]);
-    Rectangle source = *(Rectangle*)DATA_PTR(argv[2]);
-    Vector3 position = *(Vector3*)DATA_PTR(argv[3]);
-    Vector3 up = *(Vector3*)DATA_PTR(argv[4]);
-    Vector2 size = *(Vector2*)DATA_PTR(argv[5]);
-    Vector2 origin = *(Vector2*)DATA_PTR(argv[6]);
+    Camera camera = *(Camera*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Camera3D, Camera);;
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Texture, Texture2D);;
+    Rectangle source = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector3 position = *(Vector3*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 up = *(Vector3*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector2 size = *(Vector2*)DATA_GET_PTR(mrb, argv[5], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 origin = *(Vector2*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Vector2, Vector2);;
     float rotation = mrb_as_float(mrb, argv[7]);
-    Color tint = *(Color*)DATA_PTR(argv[8]);
+    Color tint = *(Color*)DATA_GET_PTR(mrb, argv[8], &mrb_raylib_struct_Color, Color);;
 
     DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint);
 
@@ -8687,7 +8687,7 @@ static mrb_value mrb_raylib_UpdateMeshBuffer(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
     int index = mrb_as_int(mrb, argv[1]);
     const void * data = DATA_PTR(argv[2]);
     int dataSize = mrb_as_int(mrb, argv[3]);
@@ -8703,7 +8703,7 @@ static mrb_value mrb_raylib_UnloadMesh(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
 
     UnloadMesh(mesh);
 
@@ -8715,9 +8715,9 @@ static mrb_value mrb_raylib_DrawMesh(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
-    Material material = *(Material*)DATA_PTR(argv[1]);
-    Matrix transform = *(Matrix*)DATA_PTR(argv[2]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
+    Material material = *(Material*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Material, Material);;
+    Matrix transform = *(Matrix*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Matrix, Matrix);;
 
     DrawMesh(mesh, material, transform);
 
@@ -8729,8 +8729,8 @@ static mrb_value mrb_raylib_DrawMeshInstanced(mrb_state* mrb, mrb_value self)
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
-    Material material = *(Material*)DATA_PTR(argv[1]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
+    Material material = *(Material*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Material, Material);;
     const Matrix * transforms = DATA_PTR(argv[2]);
     int instances = mrb_as_int(mrb, argv[3]);
 
@@ -8744,7 +8744,7 @@ static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportMesh(mesh, fileName);
@@ -8757,7 +8757,7 @@ static mrb_value mrb_raylib_GetMeshBoundingBox(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Mesh, Mesh);;
 
     BoundingBox* retval = (BoundingBox*)mrb_malloc(mrb, sizeof(BoundingBox));
     *retval = GetMeshBoundingBox(mesh);
@@ -8909,8 +8909,8 @@ static mrb_value mrb_raylib_GenMeshHeightmap(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image heightmap = *(Image*)DATA_PTR(argv[0]);
-    Vector3 size = *(Vector3*)DATA_PTR(argv[1]);
+    Image heightmap = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
+    Vector3 size = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
     *retval = GenMeshHeightmap(heightmap, size);
@@ -8922,8 +8922,8 @@ static mrb_value mrb_raylib_GenMeshCubicmap(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Image cubicmap = *(Image*)DATA_PTR(argv[0]);
-    Vector3 cubeSize = *(Vector3*)DATA_PTR(argv[1]);
+    Image cubicmap = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
+    Vector3 cubeSize = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
 
     Mesh* retval = (Mesh*)mrb_malloc(mrb, sizeof(Mesh));
     *retval = GenMeshCubicmap(cubicmap, cubeSize);
@@ -8953,7 +8953,7 @@ static mrb_value mrb_raylib_IsMaterialReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Material material = *(Material*)DATA_PTR(argv[0]);
+    Material material = *(Material*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Material, Material);;
 
     bool retval = IsMaterialReady(material);
 
@@ -8965,7 +8965,7 @@ static mrb_value mrb_raylib_UnloadMaterial(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Material material = *(Material*)DATA_PTR(argv[0]);
+    Material material = *(Material*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Material, Material);;
 
     UnloadMaterial(material);
 
@@ -8979,7 +8979,7 @@ static mrb_value mrb_raylib_SetMaterialTexture(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "ooo", ptrs);
     Material * material = DATA_PTR(argv[0]);
     int mapType = mrb_as_int(mrb, argv[1]);
-    Texture2D texture = *(Texture2D*)DATA_PTR(argv[2]);
+    Texture2D texture = *(Texture2D*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Texture, Texture2D);;
 
     SetMaterialTexture(material, mapType, texture);
 
@@ -9016,8 +9016,8 @@ static mrb_value mrb_raylib_UpdateModelAnimation(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[1]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    ModelAnimation anim = *(ModelAnimation*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_ModelAnimation, ModelAnimation);;
     int frame = mrb_as_int(mrb, argv[2]);
 
     UpdateModelAnimation(model, anim, frame);
@@ -9030,7 +9030,7 @@ static mrb_value mrb_raylib_UnloadModelAnimation(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[0]);
+    ModelAnimation anim = *(ModelAnimation*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_ModelAnimation, ModelAnimation);;
 
     UnloadModelAnimation(anim);
 
@@ -9055,8 +9055,8 @@ static mrb_value mrb_raylib_IsModelAnimationValid(mrb_state* mrb, mrb_value self
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Model model = *(Model*)DATA_PTR(argv[0]);
-    ModelAnimation anim = *(ModelAnimation*)DATA_PTR(argv[1]);
+    Model model = *(Model*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Model, Model);;
+    ModelAnimation anim = *(ModelAnimation*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_ModelAnimation, ModelAnimation);;
 
     bool retval = IsModelAnimationValid(model, anim);
 
@@ -9068,9 +9068,9 @@ static mrb_value mrb_raylib_CheckCollisionSpheres(mrb_state* mrb, mrb_value self
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector3 center1 = *(Vector3*)DATA_PTR(argv[0]);
+    Vector3 center1 = *(Vector3*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector3, Vector3);;
     float radius1 = mrb_as_float(mrb, argv[1]);
-    Vector3 center2 = *(Vector3*)DATA_PTR(argv[2]);
+    Vector3 center2 = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
     float radius2 = mrb_as_float(mrb, argv[3]);
 
     bool retval = CheckCollisionSpheres(center1, radius1, center2, radius2);
@@ -9083,8 +9083,8 @@ static mrb_value mrb_raylib_CheckCollisionBoxes(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    BoundingBox box1 = *(BoundingBox*)DATA_PTR(argv[0]);
-    BoundingBox box2 = *(BoundingBox*)DATA_PTR(argv[1]);
+    BoundingBox box1 = *(BoundingBox*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_BoundingBox, BoundingBox);;
+    BoundingBox box2 = *(BoundingBox*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_BoundingBox, BoundingBox);;
 
     bool retval = CheckCollisionBoxes(box1, box2);
 
@@ -9096,8 +9096,8 @@ static mrb_value mrb_raylib_CheckCollisionBoxSphere(mrb_state* mrb, mrb_value se
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[0]);
-    Vector3 center = *(Vector3*)DATA_PTR(argv[1]);
+    BoundingBox box = *(BoundingBox*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_BoundingBox, BoundingBox);;
+    Vector3 center = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[2]);
 
     bool retval = CheckCollisionBoxSphere(box, center, radius);
@@ -9110,8 +9110,8 @@ static mrb_value mrb_raylib_GetRayCollisionSphere(mrb_state* mrb, mrb_value self
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    Vector3 center = *(Vector3*)DATA_PTR(argv[1]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    Vector3 center = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
     float radius = mrb_as_float(mrb, argv[2]);
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
@@ -9124,8 +9124,8 @@ static mrb_value mrb_raylib_GetRayCollisionBox(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    BoundingBox box = *(BoundingBox*)DATA_PTR(argv[1]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    BoundingBox box = *(BoundingBox*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_BoundingBox, BoundingBox);;
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
     *retval = GetRayCollisionBox(ray, box);
@@ -9137,9 +9137,9 @@ static mrb_value mrb_raylib_GetRayCollisionMesh(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[1]);
-    Matrix transform = *(Matrix*)DATA_PTR(argv[2]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    Mesh mesh = *(Mesh*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Mesh, Mesh);;
+    Matrix transform = *(Matrix*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Matrix, Matrix);;
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
     *retval = GetRayCollisionMesh(ray, mesh, transform);
@@ -9151,10 +9151,10 @@ static mrb_value mrb_raylib_GetRayCollisionTriangle(mrb_state* mrb, mrb_value se
     mrb_value argv[4];
     void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
     mrb_get_args_a(mrb, "oooo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    Vector3 p1 = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 p2 = *(Vector3*)DATA_PTR(argv[2]);
-    Vector3 p3 = *(Vector3*)DATA_PTR(argv[3]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    Vector3 p1 = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 p2 = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 p3 = *(Vector3*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector3, Vector3);;
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
     *retval = GetRayCollisionTriangle(ray, p1, p2, p3);
@@ -9166,11 +9166,11 @@ static mrb_value mrb_raylib_GetRayCollisionQuad(mrb_state* mrb, mrb_value self)
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
-    Ray ray = *(Ray*)DATA_PTR(argv[0]);
-    Vector3 p1 = *(Vector3*)DATA_PTR(argv[1]);
-    Vector3 p2 = *(Vector3*)DATA_PTR(argv[2]);
-    Vector3 p3 = *(Vector3*)DATA_PTR(argv[3]);
-    Vector3 p4 = *(Vector3*)DATA_PTR(argv[4]);
+    Ray ray = *(Ray*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Ray, Ray);;
+    Vector3 p1 = *(Vector3*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 p2 = *(Vector3*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 p3 = *(Vector3*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector3, Vector3);;
+    Vector3 p4 = *(Vector3*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector3, Vector3);;
 
     RayCollision* retval = (RayCollision*)mrb_malloc(mrb, sizeof(RayCollision));
     *retval = GetRayCollisionQuad(ray, p1, p2, p3, p4);
@@ -9248,7 +9248,7 @@ static mrb_value mrb_raylib_IsWaveReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
 
     bool retval = IsWaveReady(wave);
 
@@ -9272,7 +9272,7 @@ static mrb_value mrb_raylib_LoadSoundFromWave(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
     *retval = LoadSoundFromWave(wave);
@@ -9284,7 +9284,7 @@ static mrb_value mrb_raylib_LoadSoundAlias(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound source = *(Sound*)DATA_PTR(argv[0]);
+    Sound source = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     Sound* retval = (Sound*)mrb_malloc(mrb, sizeof(Sound));
     *retval = LoadSoundAlias(source);
@@ -9296,7 +9296,7 @@ static mrb_value mrb_raylib_IsSoundReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     bool retval = IsSoundReady(sound);
 
@@ -9308,7 +9308,7 @@ static mrb_value mrb_raylib_UpdateSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
     const void * data = DATA_PTR(argv[1]);
     int sampleCount = mrb_as_int(mrb, argv[2]);
 
@@ -9322,7 +9322,7 @@ static mrb_value mrb_raylib_UnloadWave(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
 
     UnloadWave(wave);
 
@@ -9334,7 +9334,7 @@ static mrb_value mrb_raylib_UnloadSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     UnloadSound(sound);
 
@@ -9346,7 +9346,7 @@ static mrb_value mrb_raylib_UnloadSoundAlias(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound alias = *(Sound*)DATA_PTR(argv[0]);
+    Sound alias = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     UnloadSoundAlias(alias);
 
@@ -9358,7 +9358,7 @@ static mrb_value mrb_raylib_ExportWave(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportWave(wave, fileName);
@@ -9371,7 +9371,7 @@ static mrb_value mrb_raylib_ExportWaveAsCode(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
     const char * fileName = RSTRING_PTR(argv[1]);
 
     bool retval = ExportWaveAsCode(wave, fileName);
@@ -9384,7 +9384,7 @@ static mrb_value mrb_raylib_PlaySound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     PlaySound(sound);
 
@@ -9396,7 +9396,7 @@ static mrb_value mrb_raylib_StopSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     StopSound(sound);
 
@@ -9408,7 +9408,7 @@ static mrb_value mrb_raylib_PauseSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     PauseSound(sound);
 
@@ -9420,7 +9420,7 @@ static mrb_value mrb_raylib_ResumeSound(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     ResumeSound(sound);
 
@@ -9432,7 +9432,7 @@ static mrb_value mrb_raylib_IsSoundPlaying(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
 
     bool retval = IsSoundPlaying(sound);
 
@@ -9444,7 +9444,7 @@ static mrb_value mrb_raylib_SetSoundVolume(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
     float volume = mrb_as_float(mrb, argv[1]);
 
     SetSoundVolume(sound, volume);
@@ -9457,7 +9457,7 @@ static mrb_value mrb_raylib_SetSoundPitch(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
     float pitch = mrb_as_float(mrb, argv[1]);
 
     SetSoundPitch(sound, pitch);
@@ -9470,7 +9470,7 @@ static mrb_value mrb_raylib_SetSoundPan(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Sound sound = *(Sound*)DATA_PTR(argv[0]);
+    Sound sound = *(Sound*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Sound, Sound);;
     float pan = mrb_as_float(mrb, argv[1]);
 
     SetSoundPan(sound, pan);
@@ -9483,7 +9483,7 @@ static mrb_value mrb_raylib_WaveCopy(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
 
     Wave* retval = (Wave*)mrb_malloc(mrb, sizeof(Wave));
     *retval = WaveCopy(wave);
@@ -9524,7 +9524,7 @@ static mrb_value mrb_raylib_LoadWaveSamples(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Wave wave = *(Wave*)DATA_PTR(argv[0]);
+    Wave wave = *(Wave*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Wave, Wave);;
 
     float * retval = LoadWaveSamples(wave);
 
@@ -9574,7 +9574,7 @@ static mrb_value mrb_raylib_IsMusicReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     bool retval = IsMusicReady(music);
 
@@ -9586,7 +9586,7 @@ static mrb_value mrb_raylib_UnloadMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     UnloadMusicStream(music);
 
@@ -9598,7 +9598,7 @@ static mrb_value mrb_raylib_PlayMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     PlayMusicStream(music);
 
@@ -9610,7 +9610,7 @@ static mrb_value mrb_raylib_IsMusicStreamPlaying(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     bool retval = IsMusicStreamPlaying(music);
 
@@ -9622,7 +9622,7 @@ static mrb_value mrb_raylib_UpdateMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     UpdateMusicStream(music);
 
@@ -9634,7 +9634,7 @@ static mrb_value mrb_raylib_StopMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     StopMusicStream(music);
 
@@ -9646,7 +9646,7 @@ static mrb_value mrb_raylib_PauseMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     PauseMusicStream(music);
 
@@ -9658,7 +9658,7 @@ static mrb_value mrb_raylib_ResumeMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     ResumeMusicStream(music);
 
@@ -9670,7 +9670,7 @@ static mrb_value mrb_raylib_SeekMusicStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
     float position = mrb_as_float(mrb, argv[1]);
 
     SeekMusicStream(music, position);
@@ -9683,7 +9683,7 @@ static mrb_value mrb_raylib_SetMusicVolume(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
     float volume = mrb_as_float(mrb, argv[1]);
 
     SetMusicVolume(music, volume);
@@ -9696,7 +9696,7 @@ static mrb_value mrb_raylib_SetMusicPitch(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
     float pitch = mrb_as_float(mrb, argv[1]);
 
     SetMusicPitch(music, pitch);
@@ -9709,7 +9709,7 @@ static mrb_value mrb_raylib_SetMusicPan(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
     float pan = mrb_as_float(mrb, argv[1]);
 
     SetMusicPan(music, pan);
@@ -9722,7 +9722,7 @@ static mrb_value mrb_raylib_GetMusicTimeLength(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     float retval = GetMusicTimeLength(music);
 
@@ -9734,7 +9734,7 @@ static mrb_value mrb_raylib_GetMusicTimePlayed(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    Music music = *(Music*)DATA_PTR(argv[0]);
+    Music music = *(Music*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Music, Music);;
 
     float retval = GetMusicTimePlayed(music);
 
@@ -9760,7 +9760,7 @@ static mrb_value mrb_raylib_IsAudioStreamReady(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     bool retval = IsAudioStreamReady(stream);
 
@@ -9772,7 +9772,7 @@ static mrb_value mrb_raylib_UnloadAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     UnloadAudioStream(stream);
 
@@ -9784,7 +9784,7 @@ static mrb_value mrb_raylib_UpdateAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
     const void * data = DATA_PTR(argv[1]);
     int frameCount = mrb_as_int(mrb, argv[2]);
 
@@ -9798,7 +9798,7 @@ static mrb_value mrb_raylib_IsAudioStreamProcessed(mrb_state* mrb, mrb_value sel
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     bool retval = IsAudioStreamProcessed(stream);
 
@@ -9810,7 +9810,7 @@ static mrb_value mrb_raylib_PlayAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     PlayAudioStream(stream);
 
@@ -9822,7 +9822,7 @@ static mrb_value mrb_raylib_PauseAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     PauseAudioStream(stream);
 
@@ -9834,7 +9834,7 @@ static mrb_value mrb_raylib_ResumeAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     ResumeAudioStream(stream);
 
@@ -9846,7 +9846,7 @@ static mrb_value mrb_raylib_IsAudioStreamPlaying(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     bool retval = IsAudioStreamPlaying(stream);
 
@@ -9858,7 +9858,7 @@ static mrb_value mrb_raylib_StopAudioStream(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
 
     StopAudioStream(stream);
 
@@ -9870,7 +9870,7 @@ static mrb_value mrb_raylib_SetAudioStreamVolume(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
     float volume = mrb_as_float(mrb, argv[1]);
 
     SetAudioStreamVolume(stream, volume);
@@ -9883,7 +9883,7 @@ static mrb_value mrb_raylib_SetAudioStreamPitch(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
     float pitch = mrb_as_float(mrb, argv[1]);
 
     SetAudioStreamPitch(stream, pitch);
@@ -9896,7 +9896,7 @@ static mrb_value mrb_raylib_SetAudioStreamPan(mrb_state* mrb, mrb_value self)
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
     float pan = mrb_as_float(mrb, argv[1]);
 
     SetAudioStreamPan(stream, pan);
@@ -9921,8 +9921,8 @@ static mrb_value mrb_raylib_SetAudioStreamCallback(mrb_state* mrb, mrb_value sel
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
-    AudioCallback callback = *(AudioCallback*)DATA_PTR(argv[1]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
+    AudioCallback callback = DATA_PTR(argv[1]);
 
     SetAudioStreamCallback(stream, callback);
 
@@ -9934,8 +9934,8 @@ static mrb_value mrb_raylib_AttachAudioStreamProcessor(mrb_state* mrb, mrb_value
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
-    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[1]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
+    AudioCallback processor = DATA_PTR(argv[1]);
 
     AttachAudioStreamProcessor(stream, processor);
 
@@ -9947,8 +9947,8 @@ static mrb_value mrb_raylib_DetachAudioStreamProcessor(mrb_state* mrb, mrb_value
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    AudioStream stream = *(AudioStream*)DATA_PTR(argv[0]);
-    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[1]);
+    AudioStream stream = *(AudioStream*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_AudioStream, AudioStream);;
+    AudioCallback processor = DATA_PTR(argv[1]);
 
     DetachAudioStreamProcessor(stream, processor);
 
@@ -9960,7 +9960,7 @@ static mrb_value mrb_raylib_AttachAudioMixedProcessor(mrb_state* mrb, mrb_value 
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[0]);
+    AudioCallback processor = DATA_PTR(argv[0]);
 
     AttachAudioMixedProcessor(processor);
 
@@ -9972,7 +9972,7 @@ static mrb_value mrb_raylib_DetachAudioMixedProcessor(mrb_state* mrb, mrb_value 
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    AudioCallback processor = *(AudioCallback*)DATA_PTR(argv[0]);
+    AudioCallback processor = DATA_PTR(argv[0]);
 
     DetachAudioMixedProcessor(processor);
 
