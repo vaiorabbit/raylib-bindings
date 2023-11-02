@@ -912,8 +912,20 @@ static mrb_value mrb_raylib_Image_class_size(mrb_state* mrb, mrb_value self)
     return mrb_int_value(mrb, sizeof(Image));
 }
 
-// static mrb_value mrb_raylib_Image_data_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Image_data_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Image_data_get(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    return mrb_cptr_value(mrb, instance->data);
+}
+
+static mrb_value mrb_raylib_Image_data_set(mrb_state* mrb, mrb_value self)
+{
+    Image* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Image, Image);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->data = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_Image_width_get(mrb_state* mrb, mrb_value self)
 {
@@ -1480,11 +1492,35 @@ static mrb_value mrb_raylib_Font_texture_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Font_recs_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Font_recs_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Font_recs_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_cptr_value(mrb, instance->recs);
+}
 
-// static mrb_value mrb_raylib_Font_glyphs_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Font_glyphs_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Font_recs_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->recs = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Font_glyphs_get(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    return mrb_cptr_value(mrb, instance->glyphs);
+}
+
+static mrb_value mrb_raylib_Font_glyphs_set(mrb_state* mrb, mrb_value self)
+{
+    Font* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Font, Font);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->glyphs = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_Camera3D_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -1756,38 +1792,170 @@ static mrb_value mrb_raylib_Mesh_triangleCount_set(mrb_state* mrb, mrb_value sel
     return self;
 }
 
-// static mrb_value mrb_raylib_Mesh_vertices_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_vertices_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_vertices_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->vertices);
+}
 
-// static mrb_value mrb_raylib_Mesh_texcoords_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_texcoords_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_vertices_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vertices = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Mesh_texcoords2_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_texcoords2_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_texcoords_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->texcoords);
+}
 
-// static mrb_value mrb_raylib_Mesh_normals_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_normals_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_texcoords_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->texcoords = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Mesh_tangents_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_tangents_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_texcoords2_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->texcoords2);
+}
 
-// static mrb_value mrb_raylib_Mesh_colors_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_colors_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_texcoords2_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->texcoords2 = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Mesh_indices_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_indices_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_normals_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->normals);
+}
 
-// static mrb_value mrb_raylib_Mesh_animVertices_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_animVertices_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_normals_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->normals = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Mesh_animNormals_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_animNormals_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_tangents_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->tangents);
+}
 
-// static mrb_value mrb_raylib_Mesh_boneIds_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_boneIds_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_tangents_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->tangents = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Mesh_boneWeights_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_boneWeights_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_colors_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->colors);
+}
+
+static mrb_value mrb_raylib_Mesh_colors_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->colors = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_indices_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->indices);
+}
+
+static mrb_value mrb_raylib_Mesh_indices_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->indices = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_animVertices_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->animVertices);
+}
+
+static mrb_value mrb_raylib_Mesh_animVertices_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->animVertices = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_animNormals_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->animNormals);
+}
+
+static mrb_value mrb_raylib_Mesh_animNormals_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->animNormals = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_boneIds_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->boneIds);
+}
+
+static mrb_value mrb_raylib_Mesh_boneIds_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->boneIds = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Mesh_boneWeights_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->boneWeights);
+}
+
+static mrb_value mrb_raylib_Mesh_boneWeights_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->boneWeights = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_Mesh_vaoId_get(mrb_state* mrb, mrb_value self)
 {
@@ -1804,8 +1972,20 @@ static mrb_value mrb_raylib_Mesh_vaoId_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Mesh_vboId_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Mesh_vboId_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Mesh_vboId_get(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    return mrb_cptr_value(mrb, instance->vboId);
+}
+
+static mrb_value mrb_raylib_Mesh_vboId_set(mrb_state* mrb, mrb_value self)
+{
+    Mesh* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Mesh, Mesh);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vboId = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_Shader_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -1851,8 +2031,20 @@ static mrb_value mrb_raylib_Shader_id_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Shader_locs_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Shader_locs_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Shader_locs_get(mrb_state* mrb, mrb_value self)
+{
+    Shader* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Shader, Shader);
+    return mrb_cptr_value(mrb, instance->locs);
+}
+
+static mrb_value mrb_raylib_Shader_locs_set(mrb_state* mrb, mrb_value self)
+{
+    Shader* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Shader, Shader);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->locs = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_MaterialMap_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -1974,8 +2166,20 @@ static mrb_value mrb_raylib_Material_shader_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Material_maps_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Material_maps_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Material_maps_get(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    return mrb_cptr_value(mrb, instance->maps);
+}
+
+static mrb_value mrb_raylib_Material_maps_set(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->maps = DATA_PTR(argv);
+    return self;
+}
 
 // static mrb_value mrb_raylib_Material_params_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
 // static mrb_value mrb_raylib_Material_params_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
@@ -2195,14 +2399,50 @@ static mrb_value mrb_raylib_Model_materialCount_set(mrb_state* mrb, mrb_value se
     return self;
 }
 
-// static mrb_value mrb_raylib_Model_meshes_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Model_meshes_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Model_meshes_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_cptr_value(mrb, instance->meshes);
+}
 
-// static mrb_value mrb_raylib_Model_materials_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Model_materials_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Model_meshes_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->meshes = DATA_PTR(argv);
+    return self;
+}
 
-// static mrb_value mrb_raylib_Model_meshMaterial_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Model_meshMaterial_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Model_materials_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_cptr_value(mrb, instance->materials);
+}
+
+static mrb_value mrb_raylib_Model_materials_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->materials = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Model_meshMaterial_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_cptr_value(mrb, instance->meshMaterial);
+}
+
+static mrb_value mrb_raylib_Model_meshMaterial_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->meshMaterial = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_Model_boneCount_get(mrb_state* mrb, mrb_value self)
 {
@@ -2219,11 +2459,35 @@ static mrb_value mrb_raylib_Model_boneCount_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Model_bones_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Model_bones_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Model_bones_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_cptr_value(mrb, instance->bones);
+}
 
-// static mrb_value mrb_raylib_Model_bindPose_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Model_bindPose_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Model_bones_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bones = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_Model_bindPose_get(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    return mrb_cptr_value(mrb, instance->bindPose);
+}
+
+static mrb_value mrb_raylib_Model_bindPose_set(mrb_state* mrb, mrb_value self)
+{
+    Model* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Model, Model);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bindPose = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_ModelAnimation_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -2287,11 +2551,35 @@ static mrb_value mrb_raylib_ModelAnimation_frameCount_set(mrb_state* mrb, mrb_va
     return self;
 }
 
-// static mrb_value mrb_raylib_ModelAnimation_bones_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_ModelAnimation_bones_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_ModelAnimation_bones_get(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    return mrb_cptr_value(mrb, instance->bones);
+}
 
-// static mrb_value mrb_raylib_ModelAnimation_framePoses_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_ModelAnimation_framePoses_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_ModelAnimation_bones_set(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bones = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_ModelAnimation_framePoses_get(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    return mrb_cptr_value(mrb, instance->framePoses);
+}
+
+static mrb_value mrb_raylib_ModelAnimation_framePoses_set(mrb_state* mrb, mrb_value self)
+{
+    ModelAnimation* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_ModelAnimation, ModelAnimation);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->framePoses = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_ModelAnimation_name_get(mrb_state* mrb, mrb_value self)
 {
@@ -2609,8 +2897,20 @@ static mrb_value mrb_raylib_Wave_channels_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Wave_data_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Wave_data_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Wave_data_get(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    return mrb_cptr_value(mrb, instance->data);
+}
+
+static mrb_value mrb_raylib_Wave_data_set(mrb_state* mrb, mrb_value self)
+{
+    Wave* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Wave, Wave);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->data = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_AudioStream_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -2644,11 +2944,35 @@ static mrb_value mrb_raylib_AudioStream_class_size(mrb_state* mrb, mrb_value sel
     return mrb_int_value(mrb, sizeof(AudioStream));
 }
 
-// static mrb_value mrb_raylib_AudioStream_buffer_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_AudioStream_buffer_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_AudioStream_buffer_get(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    return mrb_cptr_value(mrb, instance->buffer);
+}
 
-// static mrb_value mrb_raylib_AudioStream_processor_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_AudioStream_processor_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_AudioStream_buffer_set(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->buffer = DATA_PTR(argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_AudioStream_processor_get(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    return mrb_cptr_value(mrb, instance->processor);
+}
+
+static mrb_value mrb_raylib_AudioStream_processor_set(mrb_state* mrb, mrb_value self)
+{
+    AudioStream* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AudioStream, AudioStream);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->processor = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_AudioStream_sampleRate_get(mrb_state* mrb, mrb_value self)
 {
@@ -2846,8 +3170,20 @@ static mrb_value mrb_raylib_Music_ctxType_set(mrb_state* mrb, mrb_value self)
     return self;
 }
 
-// static mrb_value mrb_raylib_Music_ctxData_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_Music_ctxData_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_Music_ctxData_get(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    return mrb_cptr_value(mrb, instance->ctxData);
+}
+
+static mrb_value mrb_raylib_Music_ctxData_set(mrb_state* mrb, mrb_value self)
+{
+    Music* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Music, Music);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->ctxData = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_VrDeviceInfo_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -3131,8 +3467,20 @@ static mrb_value mrb_raylib_FilePathList_count_set(mrb_state* mrb, mrb_value sel
     return self;
 }
 
-// static mrb_value mrb_raylib_FilePathList_paths_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_FilePathList_paths_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_FilePathList_paths_get(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    return mrb_cptr_value(mrb, instance->paths);
+}
+
+static mrb_value mrb_raylib_FilePathList_paths_set(mrb_state* mrb, mrb_value self)
+{
+    FilePathList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_FilePathList, FilePathList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->paths = DATA_PTR(argv);
+    return self;
+}
 
 static mrb_value mrb_raylib_AutomationEvent_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -3257,8 +3605,20 @@ static mrb_value mrb_raylib_AutomationEventList_count_set(mrb_state* mrb, mrb_va
     return self;
 }
 
-// static mrb_value mrb_raylib_AutomationEventList_events_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
-// static mrb_value mrb_raylib_AutomationEventList_events_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+static mrb_value mrb_raylib_AutomationEventList_events_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    return mrb_cptr_value(mrb, instance->events);
+}
+
+static mrb_value mrb_raylib_AutomationEventList_events_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->events = DATA_PTR(argv);
+    return self;
+}
 
 
 // Function
@@ -10436,8 +10796,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     MRB_SET_INSTANCE_TT(cRaylibImage, MRB_TT_DATA);
     mrb_define_class_method(mrb, cRaylibImage, "size", mrb_raylib_Image_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibImage, "initialize", mrb_raylib_Image_initialize, MRB_ARGS_OPT(1));
-    // mrb_define_method(mrb, cRaylibImage, "data", mrb_raylib_Image_data_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibImage, "data=", mrb_raylib_Image_data_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibImage, "data", mrb_raylib_Image_data_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibImage, "data=", mrb_raylib_Image_data_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibImage, "width", mrb_raylib_Image_width_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibImage, "width=", mrb_raylib_Image_width_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibImage, "height", mrb_raylib_Image_height_get, MRB_ARGS_NONE());
@@ -10517,10 +10877,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibFont, "glyphPadding=", mrb_raylib_Font_glyphPadding_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibFont, "texture", mrb_raylib_Font_texture_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFont, "texture=", mrb_raylib_Font_texture_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibFont, "recs", mrb_raylib_Font_recs_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibFont, "recs=", mrb_raylib_Font_recs_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibFont, "glyphs", mrb_raylib_Font_glyphs_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibFont, "glyphs=", mrb_raylib_Font_glyphs_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibFont, "recs", mrb_raylib_Font_recs_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "recs=", mrb_raylib_Font_recs_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibFont, "glyphs", mrb_raylib_Font_glyphs_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFont, "glyphs=", mrb_raylib_Font_glyphs_set, MRB_ARGS_REQ(1));
 
     cRaylibCamera3D = mrb_define_class_under(mrb, mRaylib, "Camera3D", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibCamera3D, MRB_TT_DATA);
@@ -10558,32 +10918,32 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibMesh, "vertexCount=", mrb_raylib_Mesh_vertexCount_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibMesh, "triangleCount", mrb_raylib_Mesh_triangleCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMesh, "triangleCount=", mrb_raylib_Mesh_triangleCount_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibMesh, "vertices", mrb_raylib_Mesh_vertices_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "vertices=", mrb_raylib_Mesh_vertices_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "texcoords", mrb_raylib_Mesh_texcoords_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "texcoords=", mrb_raylib_Mesh_texcoords_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "texcoords2", mrb_raylib_Mesh_texcoords2_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "texcoords2=", mrb_raylib_Mesh_texcoords2_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "normals", mrb_raylib_Mesh_normals_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "normals=", mrb_raylib_Mesh_normals_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "tangents", mrb_raylib_Mesh_tangents_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "tangents=", mrb_raylib_Mesh_tangents_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "colors", mrb_raylib_Mesh_colors_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "colors=", mrb_raylib_Mesh_colors_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "indices", mrb_raylib_Mesh_indices_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "indices=", mrb_raylib_Mesh_indices_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "animVertices", mrb_raylib_Mesh_animVertices_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "animVertices=", mrb_raylib_Mesh_animVertices_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "animNormals", mrb_raylib_Mesh_animNormals_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "animNormals=", mrb_raylib_Mesh_animNormals_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "boneIds", mrb_raylib_Mesh_boneIds_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "boneIds=", mrb_raylib_Mesh_boneIds_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "boneWeights", mrb_raylib_Mesh_boneWeights_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "boneWeights=", mrb_raylib_Mesh_boneWeights_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibMesh, "vertices", mrb_raylib_Mesh_vertices_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "vertices=", mrb_raylib_Mesh_vertices_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "texcoords", mrb_raylib_Mesh_texcoords_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "texcoords=", mrb_raylib_Mesh_texcoords_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "texcoords2", mrb_raylib_Mesh_texcoords2_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "texcoords2=", mrb_raylib_Mesh_texcoords2_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "normals", mrb_raylib_Mesh_normals_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "normals=", mrb_raylib_Mesh_normals_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "tangents", mrb_raylib_Mesh_tangents_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "tangents=", mrb_raylib_Mesh_tangents_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "colors", mrb_raylib_Mesh_colors_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "colors=", mrb_raylib_Mesh_colors_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "indices", mrb_raylib_Mesh_indices_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "indices=", mrb_raylib_Mesh_indices_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "animVertices", mrb_raylib_Mesh_animVertices_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "animVertices=", mrb_raylib_Mesh_animVertices_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "animNormals", mrb_raylib_Mesh_animNormals_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "animNormals=", mrb_raylib_Mesh_animNormals_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "boneIds", mrb_raylib_Mesh_boneIds_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "boneIds=", mrb_raylib_Mesh_boneIds_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMesh, "boneWeights", mrb_raylib_Mesh_boneWeights_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "boneWeights=", mrb_raylib_Mesh_boneWeights_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibMesh, "vaoId", mrb_raylib_Mesh_vaoId_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMesh, "vaoId=", mrb_raylib_Mesh_vaoId_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibMesh, "vboId", mrb_raylib_Mesh_vboId_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMesh, "vboId=", mrb_raylib_Mesh_vboId_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibMesh, "vboId", mrb_raylib_Mesh_vboId_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMesh, "vboId=", mrb_raylib_Mesh_vboId_set, MRB_ARGS_REQ(1));
 
     cRaylibShader = mrb_define_class_under(mrb, mRaylib, "Shader", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibShader, MRB_TT_DATA);
@@ -10591,8 +10951,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibShader, "initialize", mrb_raylib_Shader_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibShader, "id", mrb_raylib_Shader_id_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibShader, "id=", mrb_raylib_Shader_id_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibShader, "locs", mrb_raylib_Shader_locs_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibShader, "locs=", mrb_raylib_Shader_locs_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibShader, "locs", mrb_raylib_Shader_locs_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibShader, "locs=", mrb_raylib_Shader_locs_set, MRB_ARGS_REQ(1));
 
     cRaylibMaterialMap = mrb_define_class_under(mrb, mRaylib, "MaterialMap", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibMaterialMap, MRB_TT_DATA);
@@ -10611,8 +10971,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibMaterial, "initialize", mrb_raylib_Material_initialize, MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cRaylibMaterial, "shader", mrb_raylib_Material_shader_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterial, "shader=", mrb_raylib_Material_shader_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibMaterial, "maps", mrb_raylib_Material_maps_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMaterial, "maps=", mrb_raylib_Material_maps_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibMaterial, "maps", mrb_raylib_Material_maps_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterial, "maps=", mrb_raylib_Material_maps_set, MRB_ARGS_REQ(1));
     // mrb_define_method(mrb, cRaylibMaterial, "params", mrb_raylib_Material_params_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
     // mrb_define_method(mrb, cRaylibMaterial, "params=", mrb_raylib_Material_params_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
 
@@ -10646,18 +11006,18 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibModel, "meshCount=", mrb_raylib_Model_meshCount_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibModel, "materialCount", mrb_raylib_Model_materialCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModel, "materialCount=", mrb_raylib_Model_materialCount_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibModel, "meshes", mrb_raylib_Model_meshes_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "meshes=", mrb_raylib_Model_meshes_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "materials", mrb_raylib_Model_materials_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "materials=", mrb_raylib_Model_materials_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "meshMaterial", mrb_raylib_Model_meshMaterial_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "meshMaterial=", mrb_raylib_Model_meshMaterial_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibModel, "meshes", mrb_raylib_Model_meshes_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "meshes=", mrb_raylib_Model_meshes_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "materials", mrb_raylib_Model_materials_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "materials=", mrb_raylib_Model_materials_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "meshMaterial", mrb_raylib_Model_meshMaterial_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "meshMaterial=", mrb_raylib_Model_meshMaterial_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibModel, "boneCount", mrb_raylib_Model_boneCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModel, "boneCount=", mrb_raylib_Model_boneCount_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibModel, "bones", mrb_raylib_Model_bones_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "bones=", mrb_raylib_Model_bones_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "bindPose", mrb_raylib_Model_bindPose_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModel, "bindPose=", mrb_raylib_Model_bindPose_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibModel, "bones", mrb_raylib_Model_bones_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "bones=", mrb_raylib_Model_bones_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModel, "bindPose", mrb_raylib_Model_bindPose_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModel, "bindPose=", mrb_raylib_Model_bindPose_set, MRB_ARGS_REQ(1));
 
     cRaylibModelAnimation = mrb_define_class_under(mrb, mRaylib, "ModelAnimation", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibModelAnimation, MRB_TT_DATA);
@@ -10667,10 +11027,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibModelAnimation, "boneCount=", mrb_raylib_ModelAnimation_boneCount_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibModelAnimation, "frameCount", mrb_raylib_ModelAnimation_frameCount_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModelAnimation, "frameCount=", mrb_raylib_ModelAnimation_frameCount_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibModelAnimation, "bones", mrb_raylib_ModelAnimation_bones_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModelAnimation, "bones=", mrb_raylib_ModelAnimation_bones_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModelAnimation, "framePoses", mrb_raylib_ModelAnimation_framePoses_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibModelAnimation, "framePoses=", mrb_raylib_ModelAnimation_framePoses_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibModelAnimation, "bones", mrb_raylib_ModelAnimation_bones_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModelAnimation, "bones=", mrb_raylib_ModelAnimation_bones_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibModelAnimation, "framePoses", mrb_raylib_ModelAnimation_framePoses_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibModelAnimation, "framePoses=", mrb_raylib_ModelAnimation_framePoses_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibModelAnimation, "name", mrb_raylib_ModelAnimation_name_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibModelAnimation, "name=", mrb_raylib_ModelAnimation_name_set, MRB_ARGS_REQ(1));
 
@@ -10717,17 +11077,17 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibWave, "sampleSize=", mrb_raylib_Wave_sampleSize_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibWave, "channels", mrb_raylib_Wave_channels_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibWave, "channels=", mrb_raylib_Wave_channels_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibWave, "data", mrb_raylib_Wave_data_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibWave, "data=", mrb_raylib_Wave_data_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibWave, "data", mrb_raylib_Wave_data_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibWave, "data=", mrb_raylib_Wave_data_set, MRB_ARGS_REQ(1));
 
     cRaylibAudioStream = mrb_define_class_under(mrb, mRaylib, "AudioStream", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAudioStream, MRB_TT_DATA);
     mrb_define_class_method(mrb, cRaylibAudioStream, "size", mrb_raylib_AudioStream_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAudioStream, "initialize", mrb_raylib_AudioStream_initialize, MRB_ARGS_OPT(1));
-    // mrb_define_method(mrb, cRaylibAudioStream, "buffer", mrb_raylib_AudioStream_buffer_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibAudioStream, "buffer=", mrb_raylib_AudioStream_buffer_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibAudioStream, "processor", mrb_raylib_AudioStream_processor_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibAudioStream, "processor=", mrb_raylib_AudioStream_processor_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibAudioStream, "buffer", mrb_raylib_AudioStream_buffer_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAudioStream, "buffer=", mrb_raylib_AudioStream_buffer_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibAudioStream, "processor", mrb_raylib_AudioStream_processor_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAudioStream, "processor=", mrb_raylib_AudioStream_processor_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibAudioStream, "sampleRate", mrb_raylib_AudioStream_sampleRate_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAudioStream, "sampleRate=", mrb_raylib_AudioStream_sampleRate_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibAudioStream, "sampleSize", mrb_raylib_AudioStream_sampleSize_get, MRB_ARGS_NONE());
@@ -10756,8 +11116,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibMusic, "looping=", mrb_raylib_Music_looping_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibMusic, "ctxType", mrb_raylib_Music_ctxType_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMusic, "ctxType=", mrb_raylib_Music_ctxType_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibMusic, "ctxData", mrb_raylib_Music_ctxData_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibMusic, "ctxData=", mrb_raylib_Music_ctxData_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibMusic, "ctxData", mrb_raylib_Music_ctxData_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMusic, "ctxData=", mrb_raylib_Music_ctxData_set, MRB_ARGS_REQ(1));
 
     cRaylibVrDeviceInfo = mrb_define_class_under(mrb, mRaylib, "VrDeviceInfo", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrDeviceInfo, MRB_TT_DATA);
@@ -10813,8 +11173,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibFilePathList, "capacity=", mrb_raylib_FilePathList_capacity_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibFilePathList, "count", mrb_raylib_FilePathList_count_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibFilePathList, "count=", mrb_raylib_FilePathList_count_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibFilePathList, "paths", mrb_raylib_FilePathList_paths_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibFilePathList, "paths=", mrb_raylib_FilePathList_paths_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibFilePathList, "paths", mrb_raylib_FilePathList_paths_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibFilePathList, "paths=", mrb_raylib_FilePathList_paths_set, MRB_ARGS_REQ(1));
 
     cRaylibAutomationEvent = mrb_define_class_under(mrb, mRaylib, "AutomationEvent", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAutomationEvent, MRB_TT_DATA);
@@ -10835,8 +11195,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibAutomationEventList, "capacity=", mrb_raylib_AutomationEventList_capacity_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibAutomationEventList, "count", mrb_raylib_AutomationEventList_count_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEventList, "count=", mrb_raylib_AutomationEventList_count_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibAutomationEventList, "events", mrb_raylib_AutomationEventList_events_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
-    // mrb_define_method(mrb, cRaylibAutomationEventList, "events=", mrb_raylib_AutomationEventList_events_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+    mrb_define_method(mrb, cRaylibAutomationEventList, "events", mrb_raylib_AutomationEventList_events_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEventList, "events=", mrb_raylib_AutomationEventList_events_set, MRB_ARGS_REQ(1));
 
 
     // Function

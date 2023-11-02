@@ -214,17 +214,19 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array', file = sys.stdout)
                 print("", file = sys.stdout)
                 continue # TODO add accessor which can handle array
-        elif "*" in field.type_name:
-            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
-            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
-            print("", file = sys.stdout)
-            continue # TODO prepare Buffer version of classes
+        # elif "*" in field.type_name:
+        #     print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
+        #     print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
+        #     print("", file = sys.stdout)
+        #     continue # TODO prepare Buffer version of classes
 
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_{struct_name}, {struct_name});', file = sys.stdout)
 
-        if any(ch.isupper() for ch in field.type_name):
+        if "*" in field.type_name:
+            print(indent + f'    return mrb_cptr_value(mrb, instance->{field.element_name});', file = sys.stdout)
+        elif any(ch.isupper() for ch in field.type_name):
             print(indent + f'    return mrb_obj_value(&instance->{field.element_name});', file = sys.stdout);
         elif "char" in field.type_name and field.element_count > 1:
             print(indent + f'    return mrb_str_new_cstr(mrb, (const char*)&instance->{field.element_name});', file = sys.stdout);
@@ -301,10 +303,10 @@ def generate_structunion_define_class(ctx, indent = "", struct_prefix="", struct
                     print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array', file = sys.stdout)
                     print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array', file = sys.stdout)
                     continue # TODO add accessor which can handle array
-            elif "*" in field.type_name:
-                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes', file = sys.stdout)
-                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes', file = sys.stdout)
-                continue # TODO prepare Buffer version of classes
+            # elif "*" in field.type_name:
+            #     print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes', file = sys.stdout)
+            #     print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes', file = sys.stdout)
+            #     continue # TODO prepare Buffer version of classes
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE());', file = sys.stdout)
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1));', file = sys.stdout)
             pass
