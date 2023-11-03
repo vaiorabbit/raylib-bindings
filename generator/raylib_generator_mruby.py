@@ -138,6 +138,7 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
     print(indent + f'static mrb_value mrb_raylib_{struct_name}_initialize(mrb_state* mrb, mrb_value self)', file = sys.stdout)
     print(indent + '{', file = sys.stdout)
     print(indent + f'    {struct_name}* instance = ({struct_name}*)mrb_malloc(mrb, sizeof({struct_name}));', file = sys.stdout)
+    print("", file = sys.stdout)
     print(indent + f'    mrb_int argc = mrb_get_argc(mrb);', file = sys.stdout)
     print(indent + f'    switch (argc) {{', file = sys.stdout)
     print(indent + f'    case 0:', file = sys.stdout)
@@ -185,6 +186,7 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
     print(indent + f'    }}', file = sys.stdout)
 
     print(indent + f'    mrb_data_init(self, instance, &mrb_raylib_struct_{struct_name});', file = sys.stdout)
+    print("", file = sys.stdout)
     print(indent + '    return self;', file = sys.stdout)
     print(indent + '}', file = sys.stdout)
     print("", file = sys.stdout)
@@ -215,6 +217,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_{struct_name}, {struct_name});', file = sys.stdout)
+        print("", file = sys.stdout)
 
         if field.element_count > 1:
             if "char" in field.type_name:
@@ -230,6 +233,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                         val_strs += f'mrb_int_value(mrb, instance->{field.element_name}[{i}]), '
                 val_strs += "}"
                 print(indent + f'    mrb_value vals[{field.element_count}] = {val_strs};', file = sys.stdout)
+                print("", file = sys.stdout)
                 print(indent + f'    return mrb_ary_new_from_values(mrb, {field.element_count}, vals);', file = sys.stdout)
         else:
             if "*" in field.type_name:
@@ -251,6 +255,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_{struct_name}, {struct_name});', file = sys.stdout)
+        print("", file = sys.stdout)
         if field.element_count > 1:
             if "char" in field.type_name:
                 print(indent + '    mrb_value argv;', file = sys.stdout)
@@ -286,6 +291,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
             else:
                 print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
+        print("", file = sys.stdout)
         print(indent + '    return mrb_nil_value();', file = sys.stdout)
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
@@ -415,6 +421,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                 else:
                     print(indent + f'{retval_type_name}* retval = ({retval_type_name}*)mrb_malloc(mrb, sizeof({retval_type_name}));', file = sys.stdout)
                     print(indent + f'*retval = {func_name}({arg_names});', file = sys.stdout)
+                    print("", file = sys.stdout)
                     print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
             else:
                 retval_str = f'{retval_type_name} retval = '
