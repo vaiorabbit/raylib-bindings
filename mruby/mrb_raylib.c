@@ -3,6 +3,7 @@
 
 
 #include <mruby.h>
+#include <mruby/array.h>
 #include <mruby/class.h>
 #include <mruby/compile.h>
 #include <mruby/data.h>
@@ -2181,8 +2182,24 @@ static mrb_value mrb_raylib_Material_maps_set(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-// static mrb_value mrb_raylib_Material_params_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_Material_params_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_Material_params_get(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    mrb_value vals[4] = { mrb_float_value(mrb, instance->params[0]), mrb_float_value(mrb, instance->params[1]), mrb_float_value(mrb, instance->params[2]), mrb_float_value(mrb, instance->params[3]), };
+    return mrb_ary_new_from_values(mrb, 4, vals);
+}
+
+static mrb_value mrb_raylib_Material_params_set(mrb_state* mrb, mrb_value self)
+{
+    Material* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Material, Material);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->params[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->params[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    instance->params[2] = mrb_as_float(mrb, RARRAY_PTR(argv)[2]);
+    instance->params[3] = mrb_as_float(mrb, RARRAY_PTR(argv)[3]);
+    return mrb_nil_value();
+}
 
 static mrb_value mrb_raylib_Transform_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -3342,11 +3359,43 @@ static mrb_value mrb_raylib_VrDeviceInfo_interpupillaryDistance_set(mrb_state* m
     return mrb_nil_value();
 }
 
-// static mrb_value mrb_raylib_VrDeviceInfo_lensDistortionValues_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrDeviceInfo_lensDistortionValues_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrDeviceInfo_lensDistortionValues_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value vals[4] = { mrb_float_value(mrb, instance->lensDistortionValues[0]), mrb_float_value(mrb, instance->lensDistortionValues[1]), mrb_float_value(mrb, instance->lensDistortionValues[2]), mrb_float_value(mrb, instance->lensDistortionValues[3]), };
+    return mrb_ary_new_from_values(mrb, 4, vals);
+}
 
-// static mrb_value mrb_raylib_VrDeviceInfo_chromaAbCorrection_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrDeviceInfo_chromaAbCorrection_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrDeviceInfo_lensDistortionValues_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->lensDistortionValues[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->lensDistortionValues[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    instance->lensDistortionValues[2] = mrb_as_float(mrb, RARRAY_PTR(argv)[2]);
+    instance->lensDistortionValues[3] = mrb_as_float(mrb, RARRAY_PTR(argv)[3]);
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_chromaAbCorrection_get(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value vals[4] = { mrb_float_value(mrb, instance->chromaAbCorrection[0]), mrb_float_value(mrb, instance->chromaAbCorrection[1]), mrb_float_value(mrb, instance->chromaAbCorrection[2]), mrb_float_value(mrb, instance->chromaAbCorrection[3]), };
+    return mrb_ary_new_from_values(mrb, 4, vals);
+}
+
+static mrb_value mrb_raylib_VrDeviceInfo_chromaAbCorrection_set(mrb_state* mrb, mrb_value self)
+{
+    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->chromaAbCorrection[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->chromaAbCorrection[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    instance->chromaAbCorrection[2] = mrb_as_float(mrb, RARRAY_PTR(argv)[2]);
+    instance->chromaAbCorrection[3] = mrb_as_float(mrb, RARRAY_PTR(argv)[3]);
+    return mrb_nil_value();
+}
 
 static mrb_value mrb_raylib_VrStereoConfig_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -3383,29 +3432,141 @@ static mrb_value mrb_raylib_VrStereoConfig_class_size(mrb_state* mrb, mrb_value 
     return mrb_int_value(mrb, sizeof(VrStereoConfig));
 }
 
-// static mrb_value mrb_raylib_VrStereoConfig_projection_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_projection_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_projection_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_obj_value(&instance->projection[0]), mrb_obj_value(&instance->projection[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_viewOffset_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_viewOffset_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_projection_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->projection[0] = *(Matrix*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[0], &mrb_raylib_struct_Matrix, Matrix);
+    instance->projection[1] = *(Matrix*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[1], &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_nil_value();
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_leftLensCenter_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_leftLensCenter_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_viewOffset_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_obj_value(&instance->viewOffset[0]), mrb_obj_value(&instance->viewOffset[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_rightLensCenter_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_rightLensCenter_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_viewOffset_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->viewOffset[0] = *(Matrix*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[0], &mrb_raylib_struct_Matrix, Matrix);
+    instance->viewOffset[1] = *(Matrix*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[1], &mrb_raylib_struct_Matrix, Matrix);
+    return mrb_nil_value();
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_leftScreenCenter_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_leftScreenCenter_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_leftLensCenter_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->leftLensCenter[0]), mrb_float_value(mrb, instance->leftLensCenter[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_rightScreenCenter_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_rightScreenCenter_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_leftLensCenter_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->leftLensCenter[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->leftLensCenter[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_scale_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_scale_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_rightLensCenter_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->rightLensCenter[0]), mrb_float_value(mrb, instance->rightLensCenter[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
 
-// static mrb_value mrb_raylib_VrStereoConfig_scaleIn_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_VrStereoConfig_scaleIn_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_VrStereoConfig_rightLensCenter_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->rightLensCenter[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->rightLensCenter[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_leftScreenCenter_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->leftScreenCenter[0]), mrb_float_value(mrb, instance->leftScreenCenter[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_leftScreenCenter_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->leftScreenCenter[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->leftScreenCenter[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_rightScreenCenter_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->rightScreenCenter[0]), mrb_float_value(mrb, instance->rightScreenCenter[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_rightScreenCenter_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->rightScreenCenter[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->rightScreenCenter[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_scale_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->scale[0]), mrb_float_value(mrb, instance->scale[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_scale_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->scale[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->scale[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_scaleIn_get(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value vals[2] = { mrb_float_value(mrb, instance->scaleIn[0]), mrb_float_value(mrb, instance->scaleIn[1]), };
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
+
+static mrb_value mrb_raylib_VrStereoConfig_scaleIn_set(mrb_state* mrb, mrb_value self)
+{
+    VrStereoConfig* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrStereoConfig, VrStereoConfig);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->scaleIn[0] = mrb_as_float(mrb, RARRAY_PTR(argv)[0]);
+    instance->scaleIn[1] = mrb_as_float(mrb, RARRAY_PTR(argv)[1]);
+    return mrb_nil_value();
+}
 
 static mrb_value mrb_raylib_FilePathList_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -3542,8 +3703,24 @@ static mrb_value mrb_raylib_AutomationEvent_type_set(mrb_state* mrb, mrb_value s
     return mrb_nil_value();
 }
 
-// static mrb_value mrb_raylib_AutomationEvent_params_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
-// static mrb_value mrb_raylib_AutomationEvent_params_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+static mrb_value mrb_raylib_AutomationEvent_params_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    mrb_value vals[4] = { mrb_int_value(mrb, instance->params[0]), mrb_int_value(mrb, instance->params[1]), mrb_int_value(mrb, instance->params[2]), mrb_int_value(mrb, instance->params[3]), };
+    return mrb_ary_new_from_values(mrb, 4, vals);
+}
+
+static mrb_value mrb_raylib_AutomationEvent_params_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->params[0] = mrb_as_int(mrb, RARRAY_PTR(argv)[0]);
+    instance->params[1] = mrb_as_int(mrb, RARRAY_PTR(argv)[1]);
+    instance->params[2] = mrb_as_int(mrb, RARRAY_PTR(argv)[2]);
+    instance->params[3] = mrb_as_int(mrb, RARRAY_PTR(argv)[3]);
+    return mrb_nil_value();
+}
 
 static mrb_value mrb_raylib_AutomationEventList_initialize(mrb_state* mrb, mrb_value self)
 {
@@ -10973,8 +11150,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibMaterial, "shader=", mrb_raylib_Material_shader_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibMaterial, "maps", mrb_raylib_Material_maps_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibMaterial, "maps=", mrb_raylib_Material_maps_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibMaterial, "params", mrb_raylib_Material_params_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibMaterial, "params=", mrb_raylib_Material_params_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
+    mrb_define_method(mrb, cRaylibMaterial, "params", mrb_raylib_Material_params_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMaterial, "params=", mrb_raylib_Material_params_set, MRB_ARGS_REQ(1));
 
     cRaylibTransform = mrb_define_class_under(mrb, mRaylib, "Transform", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibTransform, MRB_TT_DATA);
@@ -11139,31 +11316,31 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensSeparationDistance=", mrb_raylib_VrDeviceInfo_lensSeparationDistance_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "interpupillaryDistance", mrb_raylib_VrDeviceInfo_interpupillaryDistance_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "interpupillaryDistance=", mrb_raylib_VrDeviceInfo_interpupillaryDistance_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensDistortionValues", mrb_raylib_VrDeviceInfo_lensDistortionValues_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensDistortionValues=", mrb_raylib_VrDeviceInfo_lensDistortionValues_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrDeviceInfo, "chromaAbCorrection", mrb_raylib_VrDeviceInfo_chromaAbCorrection_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrDeviceInfo, "chromaAbCorrection=", mrb_raylib_VrDeviceInfo_chromaAbCorrection_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensDistortionValues", mrb_raylib_VrDeviceInfo_lensDistortionValues_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensDistortionValues=", mrb_raylib_VrDeviceInfo_lensDistortionValues_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "chromaAbCorrection", mrb_raylib_VrDeviceInfo_chromaAbCorrection_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrDeviceInfo, "chromaAbCorrection=", mrb_raylib_VrDeviceInfo_chromaAbCorrection_set, MRB_ARGS_REQ(1));
 
     cRaylibVrStereoConfig = mrb_define_class_under(mrb, mRaylib, "VrStereoConfig", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibVrStereoConfig, MRB_TT_DATA);
     mrb_define_class_method(mrb, cRaylibVrStereoConfig, "size", mrb_raylib_VrStereoConfig_class_size, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrStereoConfig, "initialize", mrb_raylib_VrStereoConfig_initialize, MRB_ARGS_OPT(1));
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "projection", mrb_raylib_VrStereoConfig_projection_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "projection=", mrb_raylib_VrStereoConfig_projection_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "viewOffset", mrb_raylib_VrStereoConfig_viewOffset_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "viewOffset=", mrb_raylib_VrStereoConfig_viewOffset_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "leftLensCenter", mrb_raylib_VrStereoConfig_leftLensCenter_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "leftLensCenter=", mrb_raylib_VrStereoConfig_leftLensCenter_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "rightLensCenter", mrb_raylib_VrStereoConfig_rightLensCenter_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "rightLensCenter=", mrb_raylib_VrStereoConfig_rightLensCenter_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "leftScreenCenter", mrb_raylib_VrStereoConfig_leftScreenCenter_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "leftScreenCenter=", mrb_raylib_VrStereoConfig_leftScreenCenter_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "rightScreenCenter", mrb_raylib_VrStereoConfig_rightScreenCenter_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "rightScreenCenter=", mrb_raylib_VrStereoConfig_rightScreenCenter_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "scale", mrb_raylib_VrStereoConfig_scale_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "scale=", mrb_raylib_VrStereoConfig_scale_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "scaleIn", mrb_raylib_VrStereoConfig_scaleIn_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibVrStereoConfig, "scaleIn=", mrb_raylib_VrStereoConfig_scaleIn_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "projection", mrb_raylib_VrStereoConfig_projection_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "projection=", mrb_raylib_VrStereoConfig_projection_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "viewOffset", mrb_raylib_VrStereoConfig_viewOffset_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "viewOffset=", mrb_raylib_VrStereoConfig_viewOffset_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "leftLensCenter", mrb_raylib_VrStereoConfig_leftLensCenter_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "leftLensCenter=", mrb_raylib_VrStereoConfig_leftLensCenter_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "rightLensCenter", mrb_raylib_VrStereoConfig_rightLensCenter_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "rightLensCenter=", mrb_raylib_VrStereoConfig_rightLensCenter_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "leftScreenCenter", mrb_raylib_VrStereoConfig_leftScreenCenter_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "leftScreenCenter=", mrb_raylib_VrStereoConfig_leftScreenCenter_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "rightScreenCenter", mrb_raylib_VrStereoConfig_rightScreenCenter_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "rightScreenCenter=", mrb_raylib_VrStereoConfig_rightScreenCenter_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "scale", mrb_raylib_VrStereoConfig_scale_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "scale=", mrb_raylib_VrStereoConfig_scale_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "scaleIn", mrb_raylib_VrStereoConfig_scaleIn_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibVrStereoConfig, "scaleIn=", mrb_raylib_VrStereoConfig_scaleIn_set, MRB_ARGS_REQ(1));
 
     cRaylibFilePathList = mrb_define_class_under(mrb, mRaylib, "FilePathList", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibFilePathList, MRB_TT_DATA);
@@ -11184,8 +11361,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibAutomationEvent, "frame=", mrb_raylib_AutomationEvent_frame_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibAutomationEvent, "type", mrb_raylib_AutomationEvent_type_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEvent, "type=", mrb_raylib_AutomationEvent_type_set, MRB_ARGS_REQ(1));
-    // mrb_define_method(mrb, cRaylibAutomationEvent, "params", mrb_raylib_AutomationEvent_params_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
-    // mrb_define_method(mrb, cRaylibAutomationEvent, "params=", mrb_raylib_AutomationEvent_params_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
+    mrb_define_method(mrb, cRaylibAutomationEvent, "params", mrb_raylib_AutomationEvent_params_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEvent, "params=", mrb_raylib_AutomationEvent_params_set, MRB_ARGS_REQ(1));
 
     cRaylibAutomationEventList = mrb_define_class_under(mrb, mRaylib, "AutomationEventList", mrb->object_class);
     MRB_SET_INSTANCE_TT(cRaylibAutomationEventList, MRB_TT_DATA);
