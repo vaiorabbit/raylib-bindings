@@ -265,7 +265,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
             print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
         else:
             print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
-        print(indent + '    return self;', file = sys.stdout)
+        print(indent + '    return mrb_nil_value();', file = sys.stdout)
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
 
