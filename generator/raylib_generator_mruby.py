@@ -509,7 +509,6 @@ struct RClass* mRaylib;
 
     # macro
     if len(ctx.decl_macros) > 0:
-        print("", file = sys.stdout)
         print(indent + "// Define/Macro\n", file = sys.stdout)
         generate_macrodefine(ctx, indent, json_schema)
         print("", file = sys.stdout)
@@ -518,13 +517,11 @@ struct RClass* mRaylib;
     if len(ctx.decl_enums) > 0:
         print(indent + "// Enum\n", file = sys.stdout)
         generate_enum(ctx, indent, json_schema)
-        print("", file = sys.stdout)
 
     # struct/union define class
     if len(ctx.decl_structs) > 0:
         print(indent + "// Struct\n", file = sys.stdout)
         generate_structunion_define_class(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
-        print("", file = sys.stdout)
 
     # function
     if len(ctx.decl_functions) > 0:

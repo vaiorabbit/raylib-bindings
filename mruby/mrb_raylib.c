@@ -11209,7 +11209,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
 {
     mRaylib = mrb_define_module(mrb, "Raylib");
 
-
     // Define/Macro
 
     mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_MAJOR", mrb_int_value(mrb, 5));
@@ -11558,7 +11557,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_const(mrb, mRaylib, "NPATCH_NINE_PATCH", mrb_int_value(mrb, 0));
     mrb_define_const(mrb, mRaylib, "NPATCH_THREE_PATCH_VERTICAL", mrb_int_value(mrb, 1));
     mrb_define_const(mrb, mRaylib, "NPATCH_THREE_PATCH_HORIZONTAL", mrb_int_value(mrb, 2));
-
 
     // Struct
 
@@ -12063,7 +12061,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibAutomationEventList, "count=", mrb_raylib_AutomationEventList_count_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibAutomationEventList, "events", mrb_raylib_AutomationEventList_events_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibAutomationEventList, "events=", mrb_raylib_AutomationEventList_events_set, MRB_ARGS_REQ(1));
-
 
     // Function
 
