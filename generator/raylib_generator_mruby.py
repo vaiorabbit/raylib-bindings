@@ -401,17 +401,18 @@ def generate_function_body(ctx, indent = "", module_name = ""):
         if have_retval:
             retval_str = ""
             if any(ch.isupper() for ch in retval_type_name):
+                retval_type_name_alias = retval_type_name
+                if retval_type_name == "Texture2D":
+                    retval_type_name_alias = "Texture"
+                elif retval_type_name == "TextureCubemap":
+                    retval_type_name_alias = "Texture"
+                elif retval_type_name == "RenderTexture2D":
+                    retval_type_name_alias = "RenderTexture"
                 if "*" in retval_type_name:
-                    retval_str = f'/* TODO return wrapped object */ {retval_type_name} retval = '
-                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
+                    print(indent + f'{retval_type_name} retval = {func_name}({arg_names});', file = sys.stdout)
+                    print("", file = sys.stdout)
+                    print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
                 else:
-                    retval_type_name_alias = retval_type_name
-                    if retval_type_name == "Texture2D":
-                        retval_type_name_alias = "Texture"
-                    elif retval_type_name == "TextureCubemap":
-                        retval_type_name_alias = "Texture"
-                    elif retval_type_name == "RenderTexture2D":
-                        retval_type_name_alias = "RenderTexture"
                     print(indent + f'{retval_type_name}* retval = ({retval_type_name}*)mrb_malloc(mrb, sizeof({retval_type_name}));', file = sys.stdout)
                     print(indent + f'*retval = {func_name}({arg_names});', file = sys.stdout)
                     print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)

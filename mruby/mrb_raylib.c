@@ -7309,7 +7309,9 @@ static mrb_value mrb_raylib_LoadImageColors(mrb_state* mrb, mrb_value self)
     mrb_get_args_a(mrb, "o", ptrs);
     Image image = *(Image*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Image, Image);;
 
-    return self; /* TODO return wrapped object */
+    Color * retval = LoadImageColors(image);
+
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_LoadImagePalette(mrb_state* mrb, mrb_value self)
@@ -7321,7 +7323,9 @@ static mrb_value mrb_raylib_LoadImagePalette(mrb_state* mrb, mrb_value self)
     int maxPaletteSize = mrb_as_int(mrb, argv[1]);
     int * colorCount = DATA_PTR(argv[2]);
 
-    return self; /* TODO return wrapped object */
+    Color * retval = LoadImagePalette(image, maxPaletteSize, colorCount);
+
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UnloadImageColors(mrb_state* mrb, mrb_value self)
@@ -8163,7 +8167,9 @@ static mrb_value mrb_raylib_LoadFontData(mrb_state* mrb, mrb_value self)
     int codepointCount = mrb_as_int(mrb, argv[4]);
     int type = mrb_as_int(mrb, argv[5]);
 
-    return self; /* TODO return wrapped object */
+    GlyphInfo * retval = LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type);
+
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GenImageFontAtlas(mrb_state* mrb, mrb_value self)
@@ -9475,7 +9481,9 @@ static mrb_value mrb_raylib_LoadMaterials(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
     int * materialCount = DATA_PTR(argv[1]);
 
-    return self; /* TODO return wrapped object */
+    Material * retval = LoadMaterials(fileName, materialCount);
+
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_LoadMaterialDefault(mrb_state* mrb, mrb_value self)
@@ -9545,7 +9553,9 @@ static mrb_value mrb_raylib_LoadModelAnimations(mrb_state* mrb, mrb_value self)
     const char * fileName = RSTRING_PTR(argv[0]);
     int * animCount = DATA_PTR(argv[1]);
 
-    return self; /* TODO return wrapped object */
+    ModelAnimation * retval = LoadModelAnimations(fileName, animCount);
+
+    return mrb_cptr_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_UpdateModelAnimation(mrb_state* mrb, mrb_value self)
