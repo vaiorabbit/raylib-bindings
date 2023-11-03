@@ -1,3 +1,4 @@
+# -*- Makefile -*-
 all: libmrb_raylib_build libmrb_test_build
 
 clean: libmrb_test_clean libmrb_raylib_clean
