@@ -1,15 +1,10 @@
 archive/
 physac_dll/build
-physac_dll/build_x86_64
-physac_dll/build_arm64
 raygui_dll/build
-raygui_dll/build_x86_64
-raygui_dll/build_arm64
 raylib_dll/build
-raylib_dll/build_x86_64
-raylib_dll/build_arm64
 generator/build
 generator/backup
 __pycache__
-mruby/build
 mruby/*.dSYM
+mruby/build
+tmp/
