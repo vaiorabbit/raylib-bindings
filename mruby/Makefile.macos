@@ -15,14 +15,20 @@ mruby_clean:
 	rm -rf ./mruby
 
 libmrb_raylib_build:
-	clang -c mrb_raylib.c -I ./mruby/include -I ../raylib_dll/raylib/src
+	clang -g -O0 -c mrb_raylib.c -I ./mruby/include -I ../raylib_dll/raylib/src
 	ar rc libmrb_raylib.a mrb_raylib.o
 
 libmrb_raylib_clean:
 	rm mrb_raylib.o libmrb_raylib.a
 
 libmrb_test_build:
-	clang -o mrb_test mrb_test.c -I ./mruby/include -L . -L ./mruby/build/host/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib -lm -framework IOKit -framework Cocoa
+	clang -g -O0 -o mrb_test mrb_test.c -I ./mruby/include -L . -L ./mruby/build/host/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib -lm -framework IOKit -framework Cocoa
 
 libmrb_test_clean:
 	rm mrb_test
+
+r3_build:
+	clang -g -O0 -o RubyRaylibRuntime RubyRaylibRuntime.c -I ./mruby/include -L . -L ./mruby/build/host/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib -lm -framework IOKit -framework Cocoa
+
+r3_clean:
+	rm RubyRaylibRuntime

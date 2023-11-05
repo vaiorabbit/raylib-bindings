@@ -22,7 +22,7 @@ MRuby::CrossBuild.new('emscripten') do |conf|
   toolchain :clang
   conf.gembox 'default'
   conf.cc.command = 'emcc'
-  conf.cc.flags = %W(-Os)
+  conf.cc.flags = %W(-g -O0)
   conf.linker.command = 'emcc'
   conf.archiver.command = 'emar'
 end
