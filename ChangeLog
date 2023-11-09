@@ -1,3 +1,7 @@
+2023-11-10  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* example/text_font_sdf.rb : Added
+
 2023-11-09  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/21dc42d2ad02cafed83cd39afd7305212787c114 ) and raygui ( https://github.com/raysan5/raygui/commit/a2726c8600058cf2b1e6a2660d6d26312b0df424 )
