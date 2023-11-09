@@ -14,7 +14,7 @@ module Raylib
   RAYLIB_VERSION_MAJOR = 5
   RAYLIB_VERSION_MINOR = 0
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "5.0-dev"
+  RAYLIB_VERSION = "5.0"
 
   # Enum
 
@@ -1093,7 +1093,7 @@ module Raylib
     def paths=(v) self[:paths] = v end
   end
 
-  # Automation event (opaque struct)
+  # Automation event
   class AutomationEvent < FFI::Struct
     layout(
       :frame, :uint,      # Event frame
@@ -1696,6 +1696,12 @@ module Raylib
       #   @return [void]
       [:WaitTime, :WaitTime, [:double], :void],
 
+      # @!method SetRandomSeed(seed)
+      #   SetRandomSeed : Set the seed for the random number generator
+      #   @param seed [unsigned int]
+      #   @return [void]
+      [:SetRandomSeed, :SetRandomSeed, [:uint], :void],
+
       # @!method GetRandomValue(min, max)
       #   GetRandomValue : Get a random value between min and max (both included)
       #   @param min [int]
@@ -1703,11 +1709,19 @@ module Raylib
       #   @return [int]
       [:GetRandomValue, :GetRandomValue, [:int, :int], :int],
 
-      # @!method SetRandomSeed(seed)
-      #   SetRandomSeed : Set the seed for the random number generator
-      #   @param seed [unsigned int]
+      # @!method LoadRandomSequence(count, min, max)
+      #   LoadRandomSequence : Load random values sequence, no values repeated
+      #   @param count [unsigned int]
+      #   @param min [int]
+      #   @param max [int]
+      #   @return [int *]
+      [:LoadRandomSequence, :LoadRandomSequence, [:uint, :int, :int], :pointer],
+
+      # @!method UnloadRandomSequence(sequence)
+      #   UnloadRandomSequence : Unload random values sequence
+      #   @param sequence [int *]
       #   @return [void]
-      [:SetRandomSeed, :SetRandomSeed, [:uint], :void],
+      [:UnloadRandomSequence, :UnloadRandomSequence, [:pointer], :void],
 
       # @!method TakeScreenshot(fileName)
       #   TakeScreenshot : Takes a screenshot of current screen (filename extension defines format)
@@ -2344,7 +2358,7 @@ module Raylib
       [:DrawLine, :DrawLine, [:int, :int, :int, :int, Color.by_value], :void],
 
       # @!method DrawLineV(startPos, endPos, color)
-      #   DrawLineV : Draw a line (Vector version)
+      #   DrawLineV : Draw a line (using gl lines)
       #   @param startPos [Vector2]
       #   @param endPos [Vector2]
       #   @param color [Color]
@@ -2352,7 +2366,7 @@ module Raylib
       [:DrawLineV, :DrawLineV, [Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
       # @!method DrawLineEx(startPos, endPos, thick, color)
-      #   DrawLineEx : Draw a line defining thickness
+      #   DrawLineEx : Draw a line (using triangles/quads)
       #   @param startPos [Vector2]
       #   @param endPos [Vector2]
       #   @param thick [float]
@@ -2360,61 +2374,22 @@ module Raylib
       #   @return [void]
       [:DrawLineEx, :DrawLineEx, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
+      # @!method DrawLineStrip(points, pointCount, color)
+      #   DrawLineStrip : Draw lines sequence (using gl lines)
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawLineStrip, :DrawLineStrip, [:pointer, :int, Color.by_value], :void],
+
       # @!method DrawLineBezier(startPos, endPos, thick, color)
-      #   DrawLineBezier : Draw a line using cubic-bezier curves in-out
+      #   DrawLineBezier : Draw line segment cubic-bezier in-out interpolation
       #   @param startPos [Vector2]
       #   @param endPos [Vector2]
       #   @param thick [float]
       #   @param color [Color]
       #   @return [void]
       [:DrawLineBezier, :DrawLineBezier, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawLineBezierQuad(startPos, endPos, controlPos, thick, color)
-      #   DrawLineBezierQuad : Draw line using quadratic bezier curves with a control point
-      #   @param startPos [Vector2]
-      #   @param endPos [Vector2]
-      #   @param controlPos [Vector2]
-      #   @param thick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawLineBezierQuad, :DrawLineBezierQuad, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color)
-      #   DrawLineBezierCubic : Draw line using cubic bezier curves with 2 control points
-      #   @param startPos [Vector2]
-      #   @param endPos [Vector2]
-      #   @param startControlPos [Vector2]
-      #   @param endControlPos [Vector2]
-      #   @param thick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawLineBezierCubic, :DrawLineBezierCubic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawLineBSpline(points, pointCount, thick, color)
-      #   DrawLineBSpline : Draw a B-Spline line, minimum 4 points
-      #   @param points [Vector2 *]
-      #   @param pointCount [int]
-      #   @param thick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawLineBSpline, :DrawLineBSpline, [:pointer, :int, :float, Color.by_value], :void],
-
-      # @!method DrawLineCatmullRom(points, pointCount, thick, color)
-      #   DrawLineCatmullRom : Draw a Catmull Rom spline line, minimum 4 points
-      #   @param points [Vector2 *]
-      #   @param pointCount [int]
-      #   @param thick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawLineCatmullRom, :DrawLineCatmullRom, [:pointer, :int, :float, Color.by_value], :void],
-
-      # @!method DrawLineStrip(points, pointCount, color)
-      #   DrawLineStrip : Draw lines sequence
-      #   @param points [Vector2 *]
-      #   @param pointCount [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawLineStrip, :DrawLineStrip, [:pointer, :int, Color.by_value], :void],
 
       # @!method DrawCircle(centerX, centerY, radius, color)
       #   DrawCircle : Draw a color-filled circle
@@ -2693,6 +2668,150 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawPolyLinesEx, :DrawPolyLinesEx, [Vector2.by_value, :int, :float, :float, :float, Color.by_value], :void],
+
+      # @!method DrawSplineLinear(points, pointCount, thick, color)
+      #   DrawSplineLinear : Draw spline: Linear, minimum 2 points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineLinear, :DrawSplineLinear, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawSplineBasis(points, pointCount, thick, color)
+      #   DrawSplineBasis : Draw spline: B-Spline, minimum 4 points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineBasis, :DrawSplineBasis, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawSplineCatmullRom(points, pointCount, thick, color)
+      #   DrawSplineCatmullRom : Draw spline: Catmull-Rom, minimum 4 points
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineCatmullRom, :DrawSplineCatmullRom, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawSplineBezierQuadratic(points, pointCount, thick, color)
+      #   DrawSplineBezierQuadratic : Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineBezierQuadratic, :DrawSplineBezierQuadratic, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawSplineBezierCubic(points, pointCount, thick, color)
+      #   DrawSplineBezierCubic : Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineBezierCubic, :DrawSplineBezierCubic, [:pointer, :int, :float, Color.by_value], :void],
+
+      # @!method DrawSplineSegmentLinear(p1, p2, thick, color)
+      #   DrawSplineSegmentLinear : Draw spline segment: Linear, 2 points
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineSegmentLinear, :DrawSplineSegmentLinear, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color)
+      #   DrawSplineSegmentBasis : Draw spline segment: B-Spline, 4 points
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineSegmentBasis, :DrawSplineSegmentBasis, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color)
+      #   DrawSplineSegmentCatmullRom : Draw spline segment: Catmull-Rom, 4 points
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineSegmentCatmullRom, :DrawSplineSegmentCatmullRom, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color)
+      #   DrawSplineSegmentBezierQuadratic : Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+      #   @param p1 [Vector2]
+      #   @param c2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineSegmentBezierQuadratic, :DrawSplineSegmentBezierQuadratic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color)
+      #   DrawSplineSegmentBezierCubic : Draw spline segment: Cubic Bezier, 2 points, 2 control points
+      #   @param p1 [Vector2]
+      #   @param c2 [Vector2]
+      #   @param c3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawSplineSegmentBezierCubic, :DrawSplineSegmentBezierCubic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method GetSplinePointLinear(startPos, endPos, t)
+      #   GetSplinePointLinear : Get (evaluate) spline point: Linear
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param t [float]
+      #   @return [Vector2]
+      [:GetSplinePointLinear, :GetSplinePointLinear, [Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # @!method GetSplinePointBasis(p1, p2, p3, p4, t)
+      #   GetSplinePointBasis : Get (evaluate) spline point: B-Spline
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param t [float]
+      #   @return [Vector2]
+      [:GetSplinePointBasis, :GetSplinePointBasis, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # @!method GetSplinePointCatmullRom(p1, p2, p3, p4, t)
+      #   GetSplinePointCatmullRom : Get (evaluate) spline point: Catmull-Rom
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param t [float]
+      #   @return [Vector2]
+      [:GetSplinePointCatmullRom, :GetSplinePointCatmullRom, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # @!method GetSplinePointBezierQuad(p1, c2, p3, t)
+      #   GetSplinePointBezierQuad : Get (evaluate) spline point: Quadratic Bezier
+      #   @param p1 [Vector2]
+      #   @param c2 [Vector2]
+      #   @param p3 [Vector2]
+      #   @param t [float]
+      #   @return [Vector2]
+      [:GetSplinePointBezierQuad, :GetSplinePointBezierQuad, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+
+      # @!method GetSplinePointBezierCubic(p1, c2, c3, p4, t)
+      #   GetSplinePointBezierCubic : Get (evaluate) spline point: Cubic Bezier
+      #   @param p1 [Vector2]
+      #   @param c2 [Vector2]
+      #   @param c3 [Vector2]
+      #   @param p4 [Vector2]
+      #   @param t [float]
+      #   @return [Vector2]
+      [:GetSplinePointBezierCubic, :GetSplinePointBezierCubic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
 
       # @!method CheckCollisionRecs(rec1, rec2)
       #   CheckCollisionRecs : Check collision between two rectangles

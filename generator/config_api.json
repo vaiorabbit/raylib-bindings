@@ -49,6 +49,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_RPRAND_GENERATOR",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_MOUSE_GESTURES",
       "type": "INT",
       "value": 1,
@@ -305,6 +311,12 @@
       "type": "INT",
       "value": 1,
       "description": ""
+    },
+    {
+      "name": "SPLINE_SEGMENT_DIVISIONS",
+      "type": "INT",
+      "value": 24,
+      "description": "Spline segments subdivisions"
     },
     {
       "name": "SUPPORT_FILEFORMAT_PNG",

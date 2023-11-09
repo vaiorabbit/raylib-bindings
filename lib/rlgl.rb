@@ -590,6 +590,20 @@ module Raylib
       #   @return [void]
       [:rlActiveDrawBuffers, :rlActiveDrawBuffers, [:int], :void],
 
+      # @!method rlBlitFramebuffer(srcX, srcY, srcWidth, srcHeight, dstX, dstY, dstWidth, dstHeight, bufferMask)
+      #   rlBlitFramebuffer : Blit active framebuffer to main framebuffer
+      #   @param srcX [int]
+      #   @param srcY [int]
+      #   @param srcWidth [int]
+      #   @param srcHeight [int]
+      #   @param dstX [int]
+      #   @param dstY [int]
+      #   @param dstWidth [int]
+      #   @param dstHeight [int]
+      #   @param bufferMask [int]
+      #   @return [void]
+      [:rlBlitFramebuffer, :rlBlitFramebuffer, [:int, :int, :int, :int, :int, :int, :int, :int, :int], :void],
+
       # @!method rlEnableColorBlend()
       #   rlEnableColorBlend : Enable color blending
       #   @return [void]
@@ -660,8 +674,13 @@ module Raylib
       #   @return [void]
       [:rlEnableWireMode, :rlEnableWireMode, [], :void],
 
+      # @!method rlEnablePointMode()
+      #   rlEnablePointMode : Enable point mode
+      #   @return [void]
+      [:rlEnablePointMode, :rlEnablePointMode, [], :void],
+
       # @!method rlDisableWireMode()
-      #   rlDisableWireMode : Disable wire mode
+      #   rlDisableWireMode : Disable wire mode ( and point ) maybe rename
       #   @return [void]
       [:rlDisableWireMode, :rlDisableWireMode, [], :void],
 
