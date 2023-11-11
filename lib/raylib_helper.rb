@@ -75,6 +75,10 @@ module Raylib
       self[:y] = y
       self
     end
+
+    def to_a
+      [x, y]
+    end
   end
 
   class Vector3
@@ -91,6 +95,10 @@ module Raylib
       self[:y] = y
       self[:z] = z
       self
+    end
+
+    def to_a
+      [x, y, z]
     end
   end
 
@@ -110,6 +118,10 @@ module Raylib
       self[:w] = w
       self
     end
+
+    def to_a
+      [x, y, z, w]
+    end
   end
 
   class Quaternion
@@ -127,6 +139,10 @@ module Raylib
       self[:z] = z
       self[:w] = w
       self
+    end
+
+    def to_a
+      [x, y, z, w]
     end
   end
 

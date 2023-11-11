@@ -1,6 +1,10 @@
+2023-11-11  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/shapes_splines_drawing.rb : Added
+
 2023-11-10  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/text_font_sdf.rb : Added
+	* examples/text_font_sdf.rb : Added
 
 2023-11-09  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -9,7 +13,7 @@
 2023-10-28  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/b46505b13d4a85e26d1d5b6f9fc2a4264bf8b02f ) and raygui ( https://github.com/raysan5/raygui/commit/499e8bf7b1d9b0a92af8f685e646bc61f13c6dff )
-	* example/core_automation_events.rb : Added
+	* examples/core_automation_events.rb : Added
 
 2023-10-08  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -21,13 +25,13 @@
 
 2023-09-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/raylib_with_imgui.rb : Added
+	* examples/raylib_with_imgui.rb : Added
 
 2023-09-16  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* lib/raygui_helper.rb: Added more APIs
-	* example/gui_controls.rb: Added
-	* example/shaders_basic_lighting.rb: Added
+	* examples/gui_controls.rb: Added
+	* examples/shaders_basic_lighting.rb: Added
 
 2023-09-12  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -36,7 +40,7 @@
 2023-09-09  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/37f60e75e72eebd5ff687b8857bf9043d291b0df ) and raygui ( https://github.com/raysan5/raygui/commit/0fccdc61fbd787fdfa9e254fd99def2cdb34fb10 )
-	* example/template.rb: now calls UpdateCamera only when orbital model is on
+	* examples/template.rb: now calls UpdateCamera only when orbital model is on
 
 2023-09-02  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -55,7 +59,7 @@
 
 2023-07-16  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/textures_image_rotate.rb: Added
+	* examples/textures_image_rotate.rb: Added
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/22895ba14fab982ca74ec1526b48b924d1174e60 ) and raygui ( https://github.com/raysan5/raygui/commit/848569ce3399a8f6fe00091f968808f3ab042c4b )
 
 2023-06-26  vaiorabbit  <http://twitter.com/vaiorabbit>
@@ -73,7 +77,7 @@
 
 2023-05-22  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/textures_image_generation.rb: Added
+	* examples/textures_image_generation.rb: Added
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/a4a6d4da8a26d131bc3f3e643f6fe51de281d15f ) and raygui ( https://github.com/raysan5/raygui/commit/135718ee04d57493039fd7b8fb1d73b49f3ec1ea )
 
 2023-05-14  vaiorabbit  <http://twitter.com/vaiorabbit>
@@ -104,11 +108,11 @@
 
 2023-02-18  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/generate_heightmap_obj.rb: Added
+	* examples/generate_heightmap_obj.rb: Added
 
 2023-02-15  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/models_heightmap.rb: Added
+	* examples/models_heightmap.rb: Added
 
 2023-02-04  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -121,7 +125,7 @@
 
 2023-01-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/util/setup_dll.rb: Fixed
+	* examples/util/setup_dll.rb: Fixed
 
 2023-01-21  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -129,15 +133,15 @@
 
 2023-01-03  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/models_loading_gltf.rb: Added glTF animation playback
+	* examples/models_loading_gltf.rb: Added glTF animation playback
 
 2023-01-01  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/reversi_board.rb: Added
+	* examples/reversi_board.rb: Added
 
 2022-12-31  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/game_of_life_simple.rb: Added
+	* examples/game_of_life_simple.rb: Added
 
 2022-12-30  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -165,7 +169,7 @@
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/2c9d116a5ce835328dc3267313f1b34b2e7ad8c9 ) / and raygui ( https://github.com/raysan5/raygui/commit/64179558e425f6e05054d2a70eb12530e0fec103 )
 	* [Windows] Updated DLLs with the latest raylib
-	* example/rlgl_compute_shader.rb: Fixed API usage
+	* examples/rlgl_compute_shader.rb: Fixed API usage
 
 2022-10-23  vaiorabbit  <http://twitter.com/vaiorabbit>
 
@@ -175,13 +179,13 @@
 2022-10-16  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Pulled latest raylib ( https://github.com/raysan5/raylib/commit/c5e89241c515d12a739a0d0bacb6a05395bf2a95 ) / and raygui ( https://github.com/raysan5/raygui/commit/98df231227d87dbf5954520169af29e610cd6a87 )
-	* example/models_loading_m3d.rb: Added
-	* example/models_loading_gltf.rb: Fixed model paths
+	* examples/models_loading_m3d.rb: Added
+	* examples/models_loading_gltf.rb: Fixed model paths
 	* [Windows] Updated DLLs with the latest raylib
 
 2022-08-28  vaiorabbit  <http://twitter.com/vaiorabbit>
 
-	* example/template.rb: Added demonstration program included in gem package
+	* examples/template.rb: Added demonstration program included in gem package
 	* lib/raylib.rb: Added method 'Raylib.template' to generate template code
 
 2022-08-12  vaiorabbit  <http://twitter.com/vaiorabbit>
