@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(physac C)
+
+option(BUILD_PLATFORM "arm64, aarch64, x86_64, etc." "x86_64")
 
 set(PROJECT_VERSION 3.0)
 set(API_VERSION 300)
@@ -8,7 +10,11 @@ include_directories( ${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/raylib/src )
 include_directories( ${CMAKE_CURRENT_LIST_DIR}/physac_dll/physac/src )
 include_directories(.)
 
-link_directories(${CMAKE_SOURCE_DIR}/../raylib_dll/build/raylib)
+if (APPLE)
+    link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build_${BUILD_PLATFORM}/raylib)
+else()
+    link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build/raylib)
+endif()
 
 add_definitions("-DPHYSAC_NO_THREADS")
 add_definitions("-DPHYSAC_STANDALONE")

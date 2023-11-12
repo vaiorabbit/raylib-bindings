@@ -1,9 +1,16 @@
-#
-# For macOS + Xcode + CMake users.
-#
-mkdir -p build
-cd build
-export MACOSX_DEPLOYMENT_TARGET=11.5
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_OSX_ARCHITECTURES="x86_64;arm64" -D BUILD_SHARED_LIBS=ON -D CMAKE_C_COMPILER=clang ../
+#!/bin/sh
+export MACOSX_DEPLOYMENT_TARGET=13.0
+
+mkdir -p build_x86_64
+cd build_x86_64
+cmake -D CMAKE_C_FLAGS="" -D CMAKE_BUILD_TYPE=Release -D CMAKE_OSX_ARCHITECTURES="x86_64" -D BUILD_SHARED_LIBS=ON -D BUILD_PLATFORM="x86_64" -D CMAKE_C_COMPILER=clang ../
 make
-cp -R *.dylib ../../lib
+cp raygui.dylib ../../lib/raygui.x86_64.dylib
+
+cd ..
+
+mkdir -p build_arm64
+cd build_arm64
+cmake -D CMAKE_C_FLAGS="" -D CMAKE_BUILD_TYPE=Release -D CMAKE_OSX_ARCHITECTURES="arm64" -D BUILD_SHARED_LIBS=ON -D BUILD_PLATFORM="arm64" -D CMAKE_C_COMPILER=clang ../
+make
+cp raygui.dylib ../../lib/raygui.arm64.dylib
