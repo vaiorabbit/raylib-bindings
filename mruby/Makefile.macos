@@ -27,7 +27,7 @@ libmrb_test_build:
 libmrb_test_clean:
 	rm mrb_test
 
-r3_build:
+r3_build: mruby_build libmrb_raylib_build
 	clang -g -O0 -o RubyRaylibRuntime RubyRaylibRuntime.c -I ./mruby/include -L . -L ./mruby/build/host/lib -L ../raylib_dll/build/raylib -lmrb_raylib -lmruby -lraylib -lm -framework IOKit -framework Cocoa
 
 r3_clean:
