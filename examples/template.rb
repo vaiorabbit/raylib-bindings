@@ -25,7 +25,7 @@ when /linux/
   arch = RUBY_PLATFORM.split('-')[0]
   Raylib.load_lib(shared_lib_path + "libraylib.#{arch}.so", raygui_libpath: shared_lib_path + "raygui.#{arch}.so", physac_libpath: shared_lib_path + "physac.#{arch}.so")
 else
-  raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
+  raise RuntimeError, "Unknown OS: #{RUBY_PLATFORM}"
 end
 
 include Raylib
