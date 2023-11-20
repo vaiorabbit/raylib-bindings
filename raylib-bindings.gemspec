@@ -18,7 +18,6 @@ Ruby bindings for raylib ( https://github.com/raysan5/raylib ), raygui ( https:/
   spec.required_ruby_version = '>= 3.0.0'
 
   spec.add_runtime_dependency 'ffi', '~> 1.16'
-  spec.add_runtime_dependency 'opengl-bindings2', '~> 2'
 
   spec.files = Dir.glob("lib/*.rb") +
                ["README.md", "LICENSE.txt", "ChangeLog"] +
