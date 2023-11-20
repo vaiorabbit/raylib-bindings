@@ -5317,7 +5317,7 @@ static mrb_value mrb_raylib_GetTime(mrb_state* mrb, mrb_value self)
 {
     double retval = GetTime();
 
-    return mrb_int_value(mrb, retval);
+    return mrb_float_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetFPS(mrb_state* mrb, mrb_value self)
@@ -5346,7 +5346,7 @@ static mrb_value mrb_raylib_WaitTime(mrb_state* mrb, mrb_value self)
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    double seconds = mrb_as_int(mrb, argv[0]);
+    double seconds = mrb_as_float(mrb, argv[0]);
 
     WaitTime(seconds);
 

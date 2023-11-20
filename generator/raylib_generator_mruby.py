@@ -176,7 +176,7 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
             elif field.type_name == "Quaternion":
                 field_type_name_alias = "Vector4"
             print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv[{idx}], &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
-        elif "float" in field.type_name:
+        elif "float" in field.type_name or "double" in field.type_name:
             print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]);', file = sys.stdout)
         else:
             print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]);', file = sys.stdout)
@@ -227,7 +227,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 for i in range(field.element_count):
                     if any(ch.isupper() for ch in field.type_name):
                         val_strs += f'mrb_obj_value(&instance->{field.element_name}[{i}]), '
-                    elif "float" in field.type_name:
+                    elif "float" in field.type_name or "double" in field.type_name:
                         val_strs += f'mrb_float_value(mrb, instance->{field.element_name}[{i}]), '
                     else:
                         val_strs += f'mrb_int_value(mrb, instance->{field.element_name}[{i}]), '
@@ -267,7 +267,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 for i in range(field.element_count):
                     if any(ch.isupper() for ch in field.type_name):
                         print(indent + f'    instance->{field.element_name}[{i}] = *({field.type_name}*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[{i}], &mrb_raylib_struct_{field.type_name}, {field.type_name});', file = sys.stdout)
-                    elif "float" in field.type_name:
+                    elif "float" in field.type_name or "double" in field.type_name:
                         print(indent + f'    instance->{field.element_name}[{i}] = mrb_as_float(mrb, RARRAY_PTR(argv)[{i}]);', file = sys.stdout)
                     else:
                         print(indent + f'    instance->{field.element_name}[{i}] = mrb_as_int(mrb, RARRAY_PTR(argv)[{i}]);', file = sys.stdout)
@@ -287,7 +287,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 elif field.type_name == "Quaternion":
                     field_type_name_alias = "Vector4"
                 print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
-            elif "float" in field.type_name:
+            elif "float" in field.type_name or "double" in field.type_name:
                 print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
             else:
                 print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
@@ -391,7 +391,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                     elif arg.type_name == "Camera":
                         arg_type_name_alias = "Camera3D"
                     arg_value = f'*({arg.type_name}*)DATA_GET_PTR(mrb, argv[{i}], &mrb_raylib_struct_{arg_type_name_alias}, {arg.type_name});'
-                elif "float" in arg.type_name:
+                elif "float" in arg.type_name or "double" in arg.type_name:
                     arg_value = f'mrb_as_float(mrb, argv[{i}])'
                 else:
                     arg_value = f'mrb_as_int(mrb, argv[{i}])'
@@ -432,7 +432,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                     print(indent + f'return mrb_str_new_cstr(mrb, retval);', file = sys.stdout)
                 elif "*" in retval_type_name:
                     print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
-                elif "float" in retval_type_name:
+                elif "float" in retval_type_name or "double" in retval_type_name:
                     print(indent + f'return mrb_float_value(mrb, retval);', file = sys.stdout)
                 elif "bool" in retval_type_name:
                     print(indent + f'return retval ? mrb_true_value() : mrb_false_value();', file = sys.stdout)
