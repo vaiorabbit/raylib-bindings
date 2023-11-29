@@ -1,3 +1,7 @@
+2023-11-30  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/e7a486fa81adac1833253c849ca73c5b3f7ef361 )
+
 2023-11-20  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Removed unnecessary dependency

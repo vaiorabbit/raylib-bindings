@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 5
-  RAYLIB_VERSION_MINOR = 0
+  RAYLIB_VERSION_MINOR = 1
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "5.0"
+  RAYLIB_VERSION = "5.1-dev"
 
   # Enum
 
@@ -3148,6 +3148,14 @@ module Raylib
       #   @param blurSize [int]
       #   @return [void]
       [:ImageBlurGaussian, :ImageBlurGaussian, [:pointer, :int], :void],
+
+      # @!method ImageKernelConvolution(image, kernel, kernelSize)
+      #   ImageKernelConvolution : Apply Custom Square image convolution kernel
+      #   @param image [Image *]
+      #   @param kernel [float*]
+      #   @param kernelSize [int]
+      #   @return [void]
+      [:ImageKernelConvolution, :ImageKernelConvolution, [:pointer, :pointer, :int], :void],
 
       # @!method ImageResize(image, newWidth, newHeight)
       #   ImageResize : Resize image (Bicubic scaling algorithm)
