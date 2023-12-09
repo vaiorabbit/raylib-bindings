@@ -10220,21 +10220,6 @@
       ]
     },
     {
-      "name": "ExportMesh",
-      "description": "Export mesh data to file, returns true on success",
-      "returnType": "bool",
-      "params": [
-        {
-          "type": "Mesh",
-          "name": "mesh"
-        },
-        {
-          "type": "const char *",
-          "name": "fileName"
-        }
-      ]
-    },
-    {
       "name": "GetMeshBoundingBox",
       "description": "Compute mesh bounding box limits",
       "returnType": "BoundingBox",
@@ -10253,6 +10238,36 @@
         {
           "type": "Mesh *",
           "name": "mesh"
+        }
+      ]
+    },
+    {
+      "name": "ExportMesh",
+      "description": "Export mesh data to file, returns true on success",
+      "returnType": "bool",
+      "params": [
+        {
+          "type": "Mesh",
+          "name": "mesh"
+        },
+        {
+          "type": "const char *",
+          "name": "fileName"
+        }
+      ]
+    },
+    {
+      "name": "ExportMeshAsCode",
+      "description": "Export mesh as code file (.h) defining multiple arrays of vertex attributes",
+      "returnType": "bool",
+      "params": [
+        {
+          "type": "Mesh",
+          "name": "mesh"
+        },
+        {
+          "type": "const char *",
+          "name": "fileName"
         }
       ]
     },

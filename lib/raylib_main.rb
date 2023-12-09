@@ -4417,13 +4417,6 @@ module Raylib
       #   @return [void]
       [:DrawMeshInstanced, :DrawMeshInstanced, [Mesh.by_value, Material.by_value, :pointer, :int], :void],
 
-      # @!method ExportMesh(mesh, fileName)
-      #   ExportMesh : Export mesh data to file, returns true on success
-      #   @param mesh [Mesh]
-      #   @param fileName [const char *]
-      #   @return [bool]
-      [:ExportMesh, :ExportMesh, [Mesh.by_value, :pointer], :bool],
-
       # @!method GetMeshBoundingBox(mesh)
       #   GetMeshBoundingBox : Compute mesh bounding box limits
       #   @param mesh [Mesh]
@@ -4435,6 +4428,20 @@ module Raylib
       #   @param mesh [Mesh *]
       #   @return [void]
       [:GenMeshTangents, :GenMeshTangents, [:pointer], :void],
+
+      # @!method ExportMesh(mesh, fileName)
+      #   ExportMesh : Export mesh data to file, returns true on success
+      #   @param mesh [Mesh]
+      #   @param fileName [const char *]
+      #   @return [bool]
+      [:ExportMesh, :ExportMesh, [Mesh.by_value, :pointer], :bool],
+
+      # @!method ExportMeshAsCode(mesh, fileName)
+      #   ExportMeshAsCode : Export mesh as code file (.h) defining multiple arrays of vertex attributes
+      #   @param mesh [Mesh]
+      #   @param fileName [const char *]
+      #   @return [bool]
+      [:ExportMeshAsCode, :ExportMeshAsCode, [Mesh.by_value, :pointer], :bool],
 
       # @!method GenMeshPoly(sides, radius)
       #   GenMeshPoly : Generate polygonal mesh

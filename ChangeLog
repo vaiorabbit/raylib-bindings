@@ -1,3 +1,7 @@
+2023-12-09  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/a9ba51aa72cfc9c75c2230726a49e1d9065b3c01 ) and raygui ( https://github.com/raysan5/raygui/commit/dc103715435a258c68b00a89ba48b95c146e5b87 )
+
 2023-11-30  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/e7a486fa81adac1833253c849ca73c5b3f7ef361 )

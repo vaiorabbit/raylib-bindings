@@ -2376,7 +2376,7 @@
     },
     {
       "name": "rlLoadVertexBuffer",
-      "description": "Load a vertex buffer attribute",
+      "description": "Load a vertex buffer object",
       "returnType": "unsigned int",
       "params": [
         {
@@ -2395,7 +2395,7 @@
     },
     {
       "name": "rlLoadVertexBufferElement",
-      "description": "Load a new attributes element buffer",
+      "description": "Load vertex buffer elements object",
       "returnType": "unsigned int",
       "params": [
         {
@@ -2414,7 +2414,7 @@
     },
     {
       "name": "rlUpdateVertexBuffer",
-      "description": "Update GPU buffer with new data",
+      "description": "Update vertex buffer object data on GPU buffer",
       "returnType": "void",
       "params": [
         {
@@ -2437,7 +2437,7 @@
     },
     {
       "name": "rlUpdateVertexBufferElements",
-      "description": "Update vertex buffer elements with new data",
+      "description": "Update vertex buffer elements data on GPU buffer",
       "returnType": "void",
       "params": [
         {
@@ -2460,7 +2460,7 @@
     },
     {
       "name": "rlUnloadVertexArray",
-      "description": "",
+      "description": "Unload vertex array (vao)",
       "returnType": "void",
       "params": [
         {
@@ -2471,7 +2471,7 @@
     },
     {
       "name": "rlUnloadVertexBuffer",
-      "description": "",
+      "description": "Unload vertex buffer object",
       "returnType": "void",
       "params": [
         {
@@ -2482,7 +2482,7 @@
     },
     {
       "name": "rlSetVertexAttribute",
-      "description": "",
+      "description": "Set vertex attribute data configuration",
       "returnType": "void",
       "params": [
         {
@@ -2513,7 +2513,7 @@
     },
     {
       "name": "rlSetVertexAttributeDivisor",
-      "description": "",
+      "description": "Set vertex attribute data divisor",
       "returnType": "void",
       "params": [
         {
@@ -2528,7 +2528,7 @@
     },
     {
       "name": "rlSetVertexAttributeDefault",
-      "description": "Set vertex attribute default value",
+      "description": "Set vertex attribute default value, when attribute to provided",
       "returnType": "void",
       "params": [
         {
@@ -2551,7 +2551,7 @@
     },
     {
       "name": "rlDrawVertexArray",
-      "description": "",
+      "description": "Draw vertex array (currently active vao)",
       "returnType": "void",
       "params": [
         {
@@ -2566,7 +2566,7 @@
     },
     {
       "name": "rlDrawVertexArrayElements",
-      "description": "",
+      "description": "Draw vertex array elements",
       "returnType": "void",
       "params": [
         {
@@ -2585,7 +2585,7 @@
     },
     {
       "name": "rlDrawVertexArrayInstanced",
-      "description": "",
+      "description": "Draw vertex array (currently active vao) with instancing",
       "returnType": "void",
       "params": [
         {
@@ -2604,7 +2604,7 @@
     },
     {
       "name": "rlDrawVertexArrayElementsInstanced",
-      "description": "",
+      "description": "Draw vertex array elements with instancing",
       "returnType": "void",
       "params": [
         {
@@ -2627,7 +2627,7 @@
     },
     {
       "name": "rlLoadTexture",
-      "description": "Load texture in GPU",
+      "description": "Load texture data",
       "returnType": "unsigned int",
       "params": [
         {
@@ -2673,7 +2673,7 @@
     },
     {
       "name": "rlLoadTextureCubemap",
-      "description": "Load texture cubemap",
+      "description": "Load texture cubemap data",
       "returnType": "unsigned int",
       "params": [
         {
@@ -2692,7 +2692,7 @@
     },
     {
       "name": "rlUpdateTexture",
-      "description": "Update GPU texture with new data",
+      "description": "Update texture with new data on GPU",
       "returnType": "void",
       "params": [
         {

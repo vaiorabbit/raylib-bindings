@@ -872,7 +872,7 @@ module Raylib
       [:rlLoadVertexArray, :rlLoadVertexArray, [], :uint],
 
       # @!method rlLoadVertexBuffer(buffer, size, dynamic)
-      #   rlLoadVertexBuffer : Load a vertex buffer attribute
+      #   rlLoadVertexBuffer : Load a vertex buffer object
       #   @param buffer [const void *]
       #   @param size [int]
       #   @param dynamic [bool]
@@ -880,7 +880,7 @@ module Raylib
       [:rlLoadVertexBuffer, :rlLoadVertexBuffer, [:pointer, :int, :bool], :uint],
 
       # @!method rlLoadVertexBufferElement(buffer, size, dynamic)
-      #   rlLoadVertexBufferElement : Load a new attributes element buffer
+      #   rlLoadVertexBufferElement : Load vertex buffer elements object
       #   @param buffer [const void *]
       #   @param size [int]
       #   @param dynamic [bool]
@@ -888,7 +888,7 @@ module Raylib
       [:rlLoadVertexBufferElement, :rlLoadVertexBufferElement, [:pointer, :int, :bool], :uint],
 
       # @!method rlUpdateVertexBuffer(bufferId, data, dataSize, offset)
-      #   rlUpdateVertexBuffer : Update GPU buffer with new data
+      #   rlUpdateVertexBuffer : Update vertex buffer object data on GPU buffer
       #   @param bufferId [unsigned int]
       #   @param data [const void *]
       #   @param dataSize [int]
@@ -897,7 +897,7 @@ module Raylib
       [:rlUpdateVertexBuffer, :rlUpdateVertexBuffer, [:uint, :pointer, :int, :int], :void],
 
       # @!method rlUpdateVertexBufferElements(id, data, dataSize, offset)
-      #   rlUpdateVertexBufferElements : Update vertex buffer elements with new data
+      #   rlUpdateVertexBufferElements : Update vertex buffer elements data on GPU buffer
       #   @param id [unsigned int]
       #   @param data [const void *]
       #   @param dataSize [int]
@@ -906,19 +906,19 @@ module Raylib
       [:rlUpdateVertexBufferElements, :rlUpdateVertexBufferElements, [:uint, :pointer, :int, :int], :void],
 
       # @!method rlUnloadVertexArray(vaoId)
-      #   rlUnloadVertexArray
+      #   rlUnloadVertexArray : Unload vertex array (vao)
       #   @param vaoId [unsigned int]
       #   @return [void]
       [:rlUnloadVertexArray, :rlUnloadVertexArray, [:uint], :void],
 
       # @!method rlUnloadVertexBuffer(vboId)
-      #   rlUnloadVertexBuffer
+      #   rlUnloadVertexBuffer : Unload vertex buffer object
       #   @param vboId [unsigned int]
       #   @return [void]
       [:rlUnloadVertexBuffer, :rlUnloadVertexBuffer, [:uint], :void],
 
       # @!method rlSetVertexAttribute(index, compSize, type, normalized, stride, pointer)
-      #   rlSetVertexAttribute
+      #   rlSetVertexAttribute : Set vertex attribute data configuration
       #   @param index [unsigned int]
       #   @param compSize [int]
       #   @param type [int]
@@ -929,14 +929,14 @@ module Raylib
       [:rlSetVertexAttribute, :rlSetVertexAttribute, [:uint, :int, :int, :bool, :int, :pointer], :void],
 
       # @!method rlSetVertexAttributeDivisor(index, divisor)
-      #   rlSetVertexAttributeDivisor
+      #   rlSetVertexAttributeDivisor : Set vertex attribute data divisor
       #   @param index [unsigned int]
       #   @param divisor [int]
       #   @return [void]
       [:rlSetVertexAttributeDivisor, :rlSetVertexAttributeDivisor, [:uint, :int], :void],
 
       # @!method rlSetVertexAttributeDefault(locIndex, value, attribType, count)
-      #   rlSetVertexAttributeDefault : Set vertex attribute default value
+      #   rlSetVertexAttributeDefault : Set vertex attribute default value, when attribute to provided
       #   @param locIndex [int]
       #   @param value [const void *]
       #   @param attribType [int]
@@ -945,14 +945,14 @@ module Raylib
       [:rlSetVertexAttributeDefault, :rlSetVertexAttributeDefault, [:int, :pointer, :int, :int], :void],
 
       # @!method rlDrawVertexArray(offset, count)
-      #   rlDrawVertexArray
+      #   rlDrawVertexArray : Draw vertex array (currently active vao)
       #   @param offset [int]
       #   @param count [int]
       #   @return [void]
       [:rlDrawVertexArray, :rlDrawVertexArray, [:int, :int], :void],
 
       # @!method rlDrawVertexArrayElements(offset, count, buffer)
-      #   rlDrawVertexArrayElements
+      #   rlDrawVertexArrayElements : Draw vertex array elements
       #   @param offset [int]
       #   @param count [int]
       #   @param buffer [const void *]
@@ -960,7 +960,7 @@ module Raylib
       [:rlDrawVertexArrayElements, :rlDrawVertexArrayElements, [:int, :int, :pointer], :void],
 
       # @!method rlDrawVertexArrayInstanced(offset, count, instances)
-      #   rlDrawVertexArrayInstanced
+      #   rlDrawVertexArrayInstanced : Draw vertex array (currently active vao) with instancing
       #   @param offset [int]
       #   @param count [int]
       #   @param instances [int]
@@ -968,7 +968,7 @@ module Raylib
       [:rlDrawVertexArrayInstanced, :rlDrawVertexArrayInstanced, [:int, :int, :int], :void],
 
       # @!method rlDrawVertexArrayElementsInstanced(offset, count, buffer, instances)
-      #   rlDrawVertexArrayElementsInstanced
+      #   rlDrawVertexArrayElementsInstanced : Draw vertex array elements with instancing
       #   @param offset [int]
       #   @param count [int]
       #   @param buffer [const void *]
@@ -977,7 +977,7 @@ module Raylib
       [:rlDrawVertexArrayElementsInstanced, :rlDrawVertexArrayElementsInstanced, [:int, :int, :pointer, :int], :void],
 
       # @!method rlLoadTexture(data, width, height, format, mipmapCount)
-      #   rlLoadTexture : Load texture in GPU
+      #   rlLoadTexture : Load texture data
       #   @param data [const void *]
       #   @param width [int]
       #   @param height [int]
@@ -995,7 +995,7 @@ module Raylib
       [:rlLoadTextureDepth, :rlLoadTextureDepth, [:int, :int, :bool], :uint],
 
       # @!method rlLoadTextureCubemap(data, size, format)
-      #   rlLoadTextureCubemap : Load texture cubemap
+      #   rlLoadTextureCubemap : Load texture cubemap data
       #   @param data [const void *]
       #   @param size [int]
       #   @param format [int]
@@ -1003,7 +1003,7 @@ module Raylib
       [:rlLoadTextureCubemap, :rlLoadTextureCubemap, [:pointer, :int, :int], :uint],
 
       # @!method rlUpdateTexture(id, offsetX, offsetY, width, height, format, data)
-      #   rlUpdateTexture : Update GPU texture with new data
+      #   rlUpdateTexture : Update texture with new data on GPU
       #   @param id [unsigned int]
       #   @param offsetX [int]
       #   @param offsetY [int]
