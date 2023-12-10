@@ -12,7 +12,8 @@ if __FILE__ == $PROGRAM_NAME
                       when /mswin|msys|mingw/
                         'dll'
                       when /darwin/
-                        'dylib'
+                        arch = RUBY_PLATFORM.split('-')[0]
+                        "#{arch}.dylib"
                       when /linux/
                         arch = RUBY_PLATFORM.split('-')[0]
                         "#{arch}.so"
