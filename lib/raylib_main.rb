@@ -1019,7 +1019,6 @@ module Raylib
       :vResolution, :int,                 # Vertical resolution in pixels
       :hScreenSize, :float,               # Horizontal size in meters
       :vScreenSize, :float,               # Vertical size in meters
-      :vScreenCenter, :float,             # Screen center in meters
       :eyeToScreenDistance, :float,       # Distance between eye and display in meters
       :lensSeparationDistance, :float,    # Lens separation distance in meters
       :interpupillaryDistance, :float,    # IPD (distance between pupils) in meters
@@ -1034,8 +1033,6 @@ module Raylib
     def hScreenSize=(v) self[:hScreenSize] = v end
     def vScreenSize = self[:vScreenSize]
     def vScreenSize=(v) self[:vScreenSize] = v end
-    def vScreenCenter = self[:vScreenCenter]
-    def vScreenCenter=(v) self[:vScreenCenter] = v end
     def eyeToScreenDistance = self[:eyeToScreenDistance]
     def eyeToScreenDistance=(v) self[:eyeToScreenDistance] = v end
     def lensSeparationDistance = self[:lensSeparationDistance]
@@ -4070,6 +4067,12 @@ module Raylib
       #   @param text [const char *]
       #   @return [int]
       [:TextToInteger, :TextToInteger, [:pointer], :int],
+
+      # @!method TextToFloat(text)
+      #   TextToFloat : Get float value from text (negative values not supported)
+      #   @param text [const char *]
+      #   @return [float]
+      [:TextToFloat, :TextToFloat, [:pointer], :float],
 
       # @!method DrawLine3D(startPos, endPos, color)
       #   DrawLine3D : Draw a line in 3D world space

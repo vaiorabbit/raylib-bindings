@@ -1233,11 +1233,6 @@
         },
         {
           "type": "float",
-          "name": "vScreenCenter",
-          "description": "Screen center in meters"
-        },
-        {
-          "type": "float",
           "name": "eyeToScreenDistance",
           "description": "Distance between eye and display in meters"
         },
@@ -9335,6 +9330,17 @@
       "name": "TextToInteger",
       "description": "Get integer value from text (negative values not supported)",
       "returnType": "int",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "text"
+        }
+      ]
+    },
+    {
+      "name": "TextToFloat",
+      "description": "Get float value from text (negative values not supported)",
+      "returnType": "float",
       "params": [
         {
           "type": "const char *",
