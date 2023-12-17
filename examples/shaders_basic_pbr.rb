@@ -377,7 +377,6 @@ class PBRModel
       material_map.texture = @pbr_material.texNormal
     end
     if @pbr_material.useTexEmissive == 1
-      pp @pbr_material.texEmissive
       material_map = MaterialMap.new(model_material.maps + MATERIAL_MAP_EMISSIVE * MaterialMap.size)
       material_map.texture = @pbr_material.texEmissive
     end
@@ -410,7 +409,6 @@ class PBRModel
     DrawModel(@model, position, scale, WHITE)
   end
 
-
   def load(filename)
     @model = LoadModel(filename)
     return @model
@@ -427,8 +425,6 @@ class PBRModel
   end
 
 end
-
-$lightsCount = 0
 
 if __FILE__ == $PROGRAM_NAME
 
