@@ -48,7 +48,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS] https://rvm.io
-            *   ruby 3.2.1 (2023-02-08 revision 31819e82c8) [arm64-darwin22]
+            *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [arm64-darwin23]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
@@ -63,8 +63,8 @@ D:\> ruby template.rb
             *   [macOS] clang
 
                     $ clang --version
-                    Apple clang version 14.0.0 (clang-1400.0.29.202)
-                    Target: arm64-apple-darwin22.2.0
+                    Apple clang version 15.0.0 (clang-1500.0.40.1)
+                    Target: arm64-apple-darwin23.0.0
                     Thread model: posix
                     InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
@@ -83,6 +83,7 @@ D:\> ruby template.rb
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
+            *   ruby 3.2.1 (2023-02-08 revision 31819e82c8) [arm64-darwin22]
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [arm64-darwin21]
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [arm64-darwin21]
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
@@ -95,6 +96,12 @@ D:\> ruby template.rb
 *   Compiler
     *   Tested on:
         *   [macOS] clang
+
+                $ clang --version
+                Apple clang version 14.0.0 (clang-1400.0.29.202)
+                Target: arm64-apple-darwin22.2.0
+                Thread model: posix
+                InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 
                 $ clang --version
                 Apple clang version 13.1.6 (clang-1316.0.21.2.5)
