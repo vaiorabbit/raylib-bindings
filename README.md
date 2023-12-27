@@ -50,7 +50,7 @@ D:\> ruby template.rb
         *   [macOS] https://rvm.io
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [arm64-darwin23]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
+		    *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
@@ -70,7 +70,7 @@ D:\> ruby template.rb
 
             *   [Windows] gcc
 
-                    gcc (Rev7, Built by MSYS2 project) 12.2.0
+                    gcc (Rev3, Built by MSYS2 project) 13.2.0
 
             *   [Linux] gcc, clang
 
@@ -89,6 +89,7 @@ D:\> ruby template.rb
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
             *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
@@ -122,8 +123,9 @@ D:\> ruby template.rb
 
         *   [Windows] gcc
 
-                gcc (Rev9, Built by MSYS2 project) 11.2.0
+                gcc (Rev7, Built by MSYS2 project) 12.2.0
                 gcc (Rev10, Built by MSYS2 project) 11.2.0
+                gcc (Rev9, Built by MSYS2 project) 11.2.0
 
 </details>
 
