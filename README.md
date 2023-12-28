@@ -54,7 +54,7 @@ D:\> ruby template.rb
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
-            *   ruby 3.2.0 (2022-12-25 revision a528908271) [aarch64-linux]
+            *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [aarch64-linux]
 
 *   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
     *   CMake https://cmake.org/download/
@@ -75,7 +75,7 @@ D:\> ruby template.rb
             *   [Linux] gcc, clang
 
                     (x86_64) Ubuntu clang version 14.0.0-1ubuntu1
-                    (arm64) aarch64-linux-gnu-g++ ( https://packages.ubuntu.com/focal/g++-aarch64-linux-gnu )
+                    (arm64) Debian clang version 14.0.6
 
 <details>
 <summary>Older versions</summary>
@@ -93,6 +93,8 @@ D:\> ruby template.rb
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
             *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
+        *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.2.0 (2022-12-25 revision a528908271) [aarch64-linux]
 
 *   Compiler
     *   Tested on:
