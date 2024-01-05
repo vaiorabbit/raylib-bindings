@@ -17,26 +17,20 @@ jobs:
     - name: Update sources.list for cross compilation tools
       continue-on-error: true
       run: |
-        # Ref.: How to use apt-get to download multi-arch library?
-        # https://askubuntu.com/a/1323570
+        # - https://askubuntu.com/a/1323570
+        # Apt can't find packages on Ubuntu 20.04 arm64 (Raspberry Pi 4)
+        # - https://askubuntu.com/questions/1255707/apt-cant-find-packages-on-ubuntu-20-04-arm64-raspberry-pi-4
         sudo dpkg --add-architecture arm64
         sudo touch /etc/apt/sources.list.d/arm-cross-compile-sources.list
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main restricted" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main restricted" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy multiverse" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates multiverse" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-backports main restricted universe multiverse" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        # sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-security main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-backports main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
         sudo apt update
 
     - name: Setup OpenGL and cross compilation tools
       run: |
-        sudo apt -y install libc6-arm64-cross libc6-dev-arm64-cross libstdc++-12-dev-arm64-cross g++-12-aarch64-linux-gnu
-        # sudo apt -y install libc6:arm64 libx11-dev:arm64 libx11-6:arm64
-        # sudo apt -y install gcc-multilib g++-multilib libc6-dev-arm64-cross libstdc++-10-dev-arm64-cross g++-aarch64-linux-gnu
-        sudo apt -y install libopengl-dev:arm64 libxrandr-dev:arm64 mesa-common-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxi-dev:arm64 libglu1-mesa:arm64 libglu1-mesa-dev:arm64
-        # sudo apt --fix-broken -y install
+        sudo apt -y install libc6-arm64-cross libc6-dev-arm64-cross libstdc++-12-dev-arm64-cross g++-12-aarch64-linux-gnu g++-aarch64-linux-gnu libopengl-dev:arm64 libxrandr-dev:arm64 mesa-common-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxi-dev:arm64
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -45,14 +39,14 @@ jobs:
         fetch-depth: 1
         submodules: recursive
 
-    - name: Check before
-      continue-on-error: true
-      run: |
-        # ls -l lib/*
-        ls -l /lib/aarch64-linux-gnu/*
-        # ls -l /usr/include/*
-        ls -l /usr/aarch64-linux-gnu/include/*
-        ls -l /usr/include/aarch64-linux-gnu/*
+    # - name: Check before
+    #   continue-on-error: true
+    #   run: |
+    #     # ls -l lib/*
+    #     ls -l /lib/aarch64-linux-gnu/*
+    #     # ls -l /usr/include/*
+    #     ls -l /usr/aarch64-linux-gnu/include/*
+    #     ls -l /usr/include/aarch64-linux-gnu/*
 
     - name: Run rebuild script
       run: |
@@ -60,9 +54,9 @@ jobs:
         bash ./rebuild_libs_linux_cross.sh
         cd ${GITHUB_WORKSPACE}
 
-    - name: Check after
-      run: |
-        ls -l lib/*
+    # - name: Check after
+    #   run: |
+    #     ls -l lib/*
 
     - name: Commit new libraries
       continue-on-error: true

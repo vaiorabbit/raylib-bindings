@@ -76,6 +76,18 @@ module Raylib
       self
     end
 
+    def add(x, y)
+      self[:x] = self[:x] + x
+      self[:y] = self[:y] + y
+      self
+    end
+
+    def add_vector(v)
+      self[:x] = self[:x] + v[:x]
+      self[:y] = self[:y] + v[:y]
+      self
+    end
+
     def to_a
       [x, y]
     end

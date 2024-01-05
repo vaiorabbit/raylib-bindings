@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2023-12-30
+*   Last modified : 2024-01-05
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -50,7 +50,7 @@ D:\> ruby template.rb
         *   [macOS] https://rvm.io
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [arm64-darwin23]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-		    *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x64-mingw-ucrt]
+            *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
@@ -165,7 +165,7 @@ Shared libraries in `lib` directory are built on top of these products and are a
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 
     Ruby-raylib : Yet another raylib wrapper for Ruby
-    Copyright (c) 2021-2023 vaiorabbit <http://twitter.com/vaiorabbit>
+    Copyright (c) 2021-2024 vaiorabbit <http://twitter.com/vaiorabbit>
 
     This software is provided 'as-is', without any express or implied
     warranty. In no event will the authors be held liable for any damages
