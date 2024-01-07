@@ -133,6 +133,8 @@ D:\> ruby template.rb
 
 ## Projects ##
 
+### Games ###
+
 See the projects below to learn how to use this library:
 
 *   Whac-a-Mole! : Ruby raylib bindings demo
@@ -146,6 +148,12 @@ See the projects below to learn how to use this library:
 *   flapper.rb : Ruby raylib bindings demo
     *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-flapper/main/doc/screenshot_01.png" width="150">
     *   <https://github.com/vaiorabbit/raylib-bindings-flapper>
+
+### Libraries ###
+
+*   raylib-bindings-tileson : Provides Ruby bindings for raylib-tileson ( https://github.com/RobLoach/raylib-tileson )
+    *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-tileson/main/doc/screenshot_00.png" width="600">
+    *   <https://github.com/vaiorabbit/raylib-bindings-tileson>
 
 ## Limitation ##
 
