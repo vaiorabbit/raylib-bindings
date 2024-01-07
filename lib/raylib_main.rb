@@ -2007,9 +2007,9 @@ module Raylib
 
       # @!method UnloadAutomationEventList(list)
       #   UnloadAutomationEventList : Unload automation events list from file
-      #   @param list [AutomationEventList *]
+      #   @param list [AutomationEventList]
       #   @return [void]
-      [:UnloadAutomationEventList, :UnloadAutomationEventList, [:pointer], :void],
+      [:UnloadAutomationEventList, :UnloadAutomationEventList, [AutomationEventList.by_value], :void],
 
       # @!method ExportAutomationEventList(list, fileName)
       #   ExportAutomationEventList : Export automation events list as text file
@@ -2328,6 +2328,16 @@ module Raylib
       #   @param source [Rectangle]
       #   @return [void]
       [:SetShapesTexture, :SetShapesTexture, [Texture2D.by_value, Rectangle.by_value], :void],
+
+      # @!method GetShapesTexture()
+      #   GetShapesTexture : Get texture that is used for shapes drawing
+      #   @return [Texture2D]
+      [:GetShapesTexture, :GetShapesTexture, [], Texture2D.by_value],
+
+      # @!method GetShapesTextureRectangle()
+      #   GetShapesTextureRectangle : Get texture source rectangle that is used for shapes drawing
+      #   @return [Rectangle]
+      [:GetShapesTextureRectangle, :GetShapesTextureRectangle, [], Rectangle.by_value],
 
       # @!method DrawPixel(posX, posY, color)
       #   DrawPixel : Draw a pixel
@@ -2922,6 +2932,15 @@ module Raylib
       #   @param frames [int *]
       #   @return [Image]
       [:LoadImageAnim, :LoadImageAnim, [:pointer, :pointer], Image.by_value],
+
+      # @!method LoadImageAnimFromMemory(fileType, fileData, dataSize, frames)
+      #   LoadImageAnimFromMemory : Load image sequence from memory buffer
+      #   @param fileType [const char *]
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param frames [int *]
+      #   @return [Image]
+      [:LoadImageAnimFromMemory, :LoadImageAnimFromMemory, [:pointer, :pointer, :int, :pointer], Image.by_value],
 
       # @!method LoadImageFromMemory(fileType, fileData, dataSize)
       #   LoadImageFromMemory : Load image from memory buffer, fileType refers to extension: i.e. '.png'
@@ -3999,7 +4018,7 @@ module Raylib
 
       # @!method TextReplace(text, replace, by)
       #   TextReplace : Replace text string (WARNING: memory must be freed!)
-      #   @param text [char *]
+      #   @param text [const char *]
       #   @param replace [const char *]
       #   @param by [const char *]
       #   @return [char *]

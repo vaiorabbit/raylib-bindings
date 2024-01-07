@@ -3,7 +3,7 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2024-01-05
+*   Last modified : 2024-01-07
 
 Provides Ruby bindings for raylib-related libraries including:
 
@@ -23,7 +23,7 @@ Provides Ruby bindings for raylib-related libraries including:
 *   Pre-built binaries are inside:
     *   Windows (x86_64)
     *   macOS (x86_64, ARM64)
-    *   Linux (x86_64 WSL, ARM64 Chromebook)
+    *   Linux (x86_64, ARM64)
 
 ## Quick Start ##
 
@@ -143,6 +143,10 @@ See the projects below to learn how to use this library:
     *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-pacone/main/doc/screenshot_00.png" width="600">
     *   <https://github.com/vaiorabbit/raylib-bindings-pacone>
 
+*   flapper.rb : Ruby raylib bindings demo
+    *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-flapper/main/doc/screenshot_01.png" width="150">
+    *   <https://github.com/vaiorabbit/raylib-bindings-flapper>
+
 ## Limitation ##
 
 *   `SetTraceLogCallback` and `TraceLogCallback` are unusable since Ruby-FFI does not support `:varargs` parameter in callbacks (`Proc`, etc.)
@@ -152,13 +156,13 @@ See the projects below to learn how to use this library:
 
 Shared libraries in `lib` directory are built on top of these products and are available under the terms of these licenses:
 
-*   `libraylib.dylib`, `libraylib.dll`, `libraylib.aarch64.so`, `libraylib.x86_64.so`
+*   `libraylib.arm64.dylib`, `libraylib.x86_64.dylib`, `libraylib.dll`, `libraylib.aarch64.so`, `libraylib.x86_64.so`
     *   raylib ( https://github.com/raysan5/raylib )
         *   zlib License https://github.com/raysan5/raylib/blob/master/LICENSE
-*   `raygui.dylib`, `raygui.dll`, `raygui.aarch64.so`, `raygui.x86_64.so`
+*   `raygui.arm64.dylib`, `raygui.x86_64.dylib`, `raygui.dll`, `raygui.aarch64.so`, `raygui.x86_64.so`
     *   raygui ( https://github.com/raysan5/raygui )
         *   zlib License https://github.com/raysan5/raygui/blob/master/LICENSE
-*   `physac.dylib`, `physac.dll`, `physac.aarch64.so` `physac.x86_64.so`
+*   `physac.arm64.dylib`, `physac.x86_64.dylib`, `physac.dll`, `physac.aarch64.so`, `physac.x86_64.so`
     *   Physac ( https://github.com/raysan5/physac )
         *   LICENSE: zlib/libpng https://github.com/raysan5/physac/blob/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833/src/physac.h#L51-L68
 

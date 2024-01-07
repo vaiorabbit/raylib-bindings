@@ -1,3 +1,8 @@
+2024-01-07  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated README
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/be0ea89f830cce2fcb62acfedc69da4faca11b43 )
+
 2024-01-05  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/eb6dcab308162037272edbad93ea1f10797c7352 ) and raygui ( https://github.com/raysan5/raygui/commit/e30a826909cefbce39bae4ceaee76da6b163e2b1 )

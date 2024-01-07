@@ -604,6 +604,13 @@ module Raylib
       #   @return [void]
       [:rlBlitFramebuffer, :rlBlitFramebuffer, [:int, :int, :int, :int, :int, :int, :int, :int, :int], :void],
 
+      # @!method rlBindFramebuffer(target, framebuffer)
+      #   rlBindFramebuffer : Bind framebuffer (FBO) 
+      #   @param target [unsigned int]
+      #   @param framebuffer [unsigned int]
+      #   @return [void]
+      [:rlBindFramebuffer, :rlBindFramebuffer, [:uint, :uint], :void],
+
       # @!method rlEnableColorBlend()
       #   rlEnableColorBlend : Enable color blending
       #   @return [void]
@@ -643,6 +650,15 @@ module Raylib
       #   rlDisableBackfaceCulling : Disable backface culling
       #   @return [void]
       [:rlDisableBackfaceCulling, :rlDisableBackfaceCulling, [], :void],
+
+      # @!method rlColorMask(r, g, b, a)
+      #   rlColorMask : Color mask control
+      #   @param r [bool]
+      #   @param g [bool]
+      #   @param b [bool]
+      #   @param a [bool]
+      #   @return [void]
+      [:rlColorMask, :rlColorMask, [:bool, :bool, :bool, :bool], :void],
 
       # @!method rlSetCullFace(mode)
       #   rlSetCullFace : Set face culling mode
