@@ -186,7 +186,7 @@ module Raylib
 
   # Function
 
-  def self.setup_physac_symbols
+  def self.setup_physac_symbols(method_naming: :original)
     entries = [
 
       # @!method InitPhysics()
@@ -314,7 +314,16 @@ module Raylib
       [:GetPhysicsShapeVertex, :GetPhysicsShapeVertex, [:pointer, :int], Vector2.by_value],
     ]
     entries.each do |entry|
-      attach_function entry[0], entry[1], entry[2], entry[3]
+      api_name = if method_naming == :snake_case
+                   snake_case_name = entry[0].to_s.gsub(/([A-Z]+)([A-Z0-9][a-z])/, '\1_\2').gsub(/([a-z\d])([A-Z0-9])/, '\1_\2').downcase
+                   snake_case_name.gsub!('vector_3', 'vector3_') if snake_case_name.include?('vector_3')
+                   snake_case_name.gsub!('vector_2', 'vector2_') if snake_case_name.include?('vector_2')
+                   snake_case_name.chop! if snake_case_name.end_with?('_')
+                   snake_case_name.to_sym
+                 else
+                   entry[0]
+                 end
+      attach_function api_name, entry[1], entry[2], entry[3]
     rescue FFI::NotFoundError => e
       warn "[Warning] Failed to import #{entry[0]} (#{e})."
     end

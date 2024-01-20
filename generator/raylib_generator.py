@@ -308,7 +308,7 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
 
         func_entries.append(func_entry)
 
-    print(indent + "def self.setup_%s_symbols" % module_name , file = sys.stdout)
+    print(indent + "def self.setup_%s_symbols(method_naming: :original)" % module_name , file = sys.stdout)
     indent = "  "
     print(indent + "  entries = [", file = sys.stdout)
     for func_entry in func_entries:
@@ -327,7 +327,16 @@ def generate_function(ctx, indent = "", module_name = "", function_prefix = "", 
 
     print(indent +
       """  entries.each do |entry|
-      attach_function entry[0], entry[1], entry[2], entry[3]
+      api_name = if method_naming == :snake_case
+                   snake_case_name = entry[0].to_s.gsub(/([A-Z]+)([A-Z0-9][a-z])/, '\\1_\\2').gsub(/([a-z\d])([A-Z0-9])/, '\\1_\\2').downcase
+                   snake_case_name.gsub!('vector_3', 'vector3_') if snake_case_name.include?('vector_3')
+                   snake_case_name.gsub!('vector_2', 'vector2_') if snake_case_name.include?('vector_2')
+                   snake_case_name.chop! if snake_case_name.end_with?('_')
+                   snake_case_name.to_sym
+                 else
+                   entry[0]
+                 end
+      attach_function api_name, entry[1], entry[2], entry[3]
     rescue FFI::NotFoundError => e
       warn "[Warning] Failed to import #{s}."
     end""".format(s="{entry[0]} (#{e})"))

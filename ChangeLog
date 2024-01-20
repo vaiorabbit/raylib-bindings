@@ -1,3 +1,8 @@
+2024-01-20  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Raylib.load_lib : Added 'method_naming' option to import APIs in snake case convention
+	* examples/snake_case_api.rb : Added
+
 2024-01-07  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated README
