@@ -1,3 +1,7 @@
+2024-01-27  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/snake_case_rlgl : Added
+
 2024-01-20  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Raylib.load_lib : Added 'method_naming' option to import APIs in snake case convention

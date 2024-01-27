@@ -11,9 +11,9 @@
 # * https://www.raylib.com/cheatsheet/cheatsheet.html for API reference
 # * https://github.com/vaiorabbit/raylib-bindings/tree/main/examples for more actual codes written in Ruby
 
-require_relative '../lib/raylib'
+require 'raylib'
 
-shared_lib_path = '../lib/' # Gem::Specification.find_by_name('raylib-bindings').full_gem_path + '/lib/'
+shared_lib_path = Gem::Specification.find_by_name('raylib-bindings').full_gem_path + '/lib/'
 
 case RUBY_PLATFORM
 when /mswin|msys|mingw|cygwin/
