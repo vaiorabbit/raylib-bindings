@@ -61,6 +61,9 @@ module Raylib
   # Math helper
   #
 
+  DEG2RAD = Math::PI / 180.0
+  RAD2DEG = 180.0 / Math::PI
+
   class Vector2
     def self.create(x = 0, y = 0)
       Vector2.new.set(x, y)
