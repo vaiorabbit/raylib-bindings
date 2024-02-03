@@ -1936,6 +1936,11 @@
       "returnType": "void"
     },
     {
+      "name": "rlGetActiveFramebuffer",
+      "description": "Get the currently active render texture (fbo), 0 for default framebuffer",
+      "returnType": "unsigned int"
+    },
+    {
       "name": "rlActiveDrawBuffers",
       "description": "Activate multiple draw color buffers",
       "returnType": "void",

@@ -1,3 +1,7 @@
+2024-02-03  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/29ff658d9223068378269e4a705811f085fafdf4 ) and raygui ( https://github.com/raysan5/raygui/commit/58411f4cceb8ae82933f2001461db9940278fdeb )
+
 2024-01-27  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/snake_case_rlgl : Added

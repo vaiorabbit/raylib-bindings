@@ -2471,7 +2471,7 @@
     },
     {
       "name": "GuiLabel",
-      "description": "Label control, shows text",
+      "description": "Label control",
       "returnType": "int",
       "params": [
         {
@@ -2501,7 +2501,7 @@
     },
     {
       "name": "GuiLabelButton",
-      "description": "Label button control, show true when clicked",
+      "description": "Label button control, returns true when clicked",
       "returnType": "int",
       "params": [
         {
@@ -2516,7 +2516,7 @@
     },
     {
       "name": "GuiToggle",
-      "description": "Toggle Button control, returns true when active",
+      "description": "Toggle Button control",
       "returnType": "int",
       "params": [
         {
@@ -2535,7 +2535,7 @@
     },
     {
       "name": "GuiToggleGroup",
-      "description": "Toggle Group control, returns active toggle index",
+      "description": "Toggle Group control",
       "returnType": "int",
       "params": [
         {
@@ -2554,7 +2554,7 @@
     },
     {
       "name": "GuiToggleSlider",
-      "description": "Toggle Slider control, returns true when clicked",
+      "description": "Toggle Slider control",
       "returnType": "int",
       "params": [
         {
@@ -2592,7 +2592,7 @@
     },
     {
       "name": "GuiComboBox",
-      "description": "Combo Box control, returns selected item index",
+      "description": "Combo Box control",
       "returnType": "int",
       "params": [
         {
@@ -2611,7 +2611,7 @@
     },
     {
       "name": "GuiDropdownBox",
-      "description": "Dropdown Box control, returns selected item",
+      "description": "Dropdown Box control",
       "returnType": "int",
       "params": [
         {
@@ -2634,7 +2634,7 @@
     },
     {
       "name": "GuiSpinner",
-      "description": "Spinner control, returns selected value",
+      "description": "Spinner control",
       "returnType": "int",
       "params": [
         {
@@ -2719,7 +2719,7 @@
     },
     {
       "name": "GuiSlider",
-      "description": "Slider control, returns selected value",
+      "description": "Slider control",
       "returnType": "int",
       "params": [
         {
@@ -2750,7 +2750,7 @@
     },
     {
       "name": "GuiSliderBar",
-      "description": "Slider Bar control, returns selected value",
+      "description": "Slider Bar control",
       "returnType": "int",
       "params": [
         {
@@ -2781,7 +2781,7 @@
     },
     {
       "name": "GuiProgressBar",
-      "description": "Progress Bar control, shows current progress value",
+      "description": "Progress Bar control",
       "returnType": "int",
       "params": [
         {
@@ -2842,7 +2842,7 @@
     },
     {
       "name": "GuiGrid",
-      "description": "Grid control, returns mouse cell position",
+      "description": "Grid control",
       "returnType": "int",
       "params": [
         {
@@ -2869,7 +2869,7 @@
     },
     {
       "name": "GuiListView",
-      "description": "List View control, returns selected list item index",
+      "description": "List View control",
       "returnType": "int",
       "params": [
         {
@@ -3076,7 +3076,7 @@
     },
     {
       "name": "GuiColorPanelHSV",
-      "description": "Color Panel control that returns HSV color value, used by GuiColorPickerHSV()",
+      "description": "Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()",
       "returnType": "int",
       "params": [
         {

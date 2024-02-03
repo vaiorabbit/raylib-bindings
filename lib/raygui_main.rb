@@ -635,7 +635,7 @@ module Raylib
       [:GuiScrollPanel, :GuiScrollPanel, [Rectangle.by_value, :pointer, Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiLabel(bounds, text)
-      #   GuiLabel : Label control, shows text
+      #   GuiLabel : Label control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @return [int]
@@ -649,14 +649,14 @@ module Raylib
       [:GuiButton, :GuiButton, [Rectangle.by_value, :pointer], :int],
 
       # @!method GuiLabelButton(bounds, text)
-      #   GuiLabelButton : Label button control, show true when clicked
+      #   GuiLabelButton : Label button control, returns true when clicked
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @return [int]
       [:GuiLabelButton, :GuiLabelButton, [Rectangle.by_value, :pointer], :int],
 
       # @!method GuiToggle(bounds, text, active)
-      #   GuiToggle : Toggle Button control, returns true when active
+      #   GuiToggle : Toggle Button control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param active [bool *]
@@ -664,7 +664,7 @@ module Raylib
       [:GuiToggle, :GuiToggle, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiToggleGroup(bounds, text, active)
-      #   GuiToggleGroup : Toggle Group control, returns active toggle index
+      #   GuiToggleGroup : Toggle Group control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param active [int *]
@@ -672,7 +672,7 @@ module Raylib
       [:GuiToggleGroup, :GuiToggleGroup, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiToggleSlider(bounds, text, active)
-      #   GuiToggleSlider : Toggle Slider control, returns true when clicked
+      #   GuiToggleSlider : Toggle Slider control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param active [int *]
@@ -688,7 +688,7 @@ module Raylib
       [:GuiCheckBox, :GuiCheckBox, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiComboBox(bounds, text, active)
-      #   GuiComboBox : Combo Box control, returns selected item index
+      #   GuiComboBox : Combo Box control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param active [int *]
@@ -696,7 +696,7 @@ module Raylib
       [:GuiComboBox, :GuiComboBox, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiDropdownBox(bounds, text, active, editMode)
-      #   GuiDropdownBox : Dropdown Box control, returns selected item
+      #   GuiDropdownBox : Dropdown Box control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param active [int *]
@@ -705,7 +705,7 @@ module Raylib
       [:GuiDropdownBox, :GuiDropdownBox, [Rectangle.by_value, :pointer, :pointer, :bool], :int],
 
       # @!method GuiSpinner(bounds, text, value, minValue, maxValue, editMode)
-      #   GuiSpinner : Spinner control, returns selected value
+      #   GuiSpinner : Spinner control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param value [int *]
@@ -736,7 +736,7 @@ module Raylib
       [:GuiTextBox, :GuiTextBox, [Rectangle.by_value, :pointer, :int, :bool], :int],
 
       # @!method GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue)
-      #   GuiSlider : Slider control, returns selected value
+      #   GuiSlider : Slider control
       #   @param bounds [Rectangle]
       #   @param textLeft [const char *]
       #   @param textRight [const char *]
@@ -747,7 +747,7 @@ module Raylib
       [:GuiSlider, :GuiSlider, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float], :int],
 
       # @!method GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)
-      #   GuiSliderBar : Slider Bar control, returns selected value
+      #   GuiSliderBar : Slider Bar control
       #   @param bounds [Rectangle]
       #   @param textLeft [const char *]
       #   @param textRight [const char *]
@@ -758,7 +758,7 @@ module Raylib
       [:GuiSliderBar, :GuiSliderBar, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float], :int],
 
       # @!method GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue)
-      #   GuiProgressBar : Progress Bar control, shows current progress value
+      #   GuiProgressBar : Progress Bar control
       #   @param bounds [Rectangle]
       #   @param textLeft [const char *]
       #   @param textRight [const char *]
@@ -783,7 +783,7 @@ module Raylib
       [:GuiDummyRec, :GuiDummyRec, [Rectangle.by_value, :pointer], :int],
 
       # @!method GuiGrid(bounds, text, spacing, subdivs, mouseCell)
-      #   GuiGrid : Grid control, returns mouse cell position
+      #   GuiGrid : Grid control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param spacing [float]
@@ -793,7 +793,7 @@ module Raylib
       [:GuiGrid, :GuiGrid, [Rectangle.by_value, :pointer, :float, :int, :pointer], :int],
 
       # @!method GuiListView(bounds, text, scrollIndex, active)
-      #   GuiListView : List View control, returns selected list item index
+      #   GuiListView : List View control
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param scrollIndex [int *]
@@ -874,7 +874,7 @@ module Raylib
       [:GuiColorPickerHSV, :GuiColorPickerHSV, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiColorPanelHSV(bounds, text, colorHsv)
-      #   GuiColorPanelHSV : Color Panel control that returns HSV color value, used by GuiColorPickerHSV()
+      #   GuiColorPanelHSV : Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param colorHsv [Vector3 *]

@@ -77,6 +77,8 @@ module Raylib
   RL_BLEND_DST_ALPHA = 0x80CA                   # GL_BLEND_DST_ALPHA
   RL_BLEND_SRC_ALPHA = 0x80CB                   # GL_BLEND_SRC_ALPHA
   RL_BLEND_COLOR = 0x8005                       # GL_BLEND_COLOR
+  RL_READ_FRAMEBUFFER = 0x8CA8                  # GL_READ_FRAMEBUFFER
+  RL_DRAW_FRAMEBUFFER = 0x8CA9                  # GL_DRAW_FRAMEBUFFER
 
   # Enum
 
@@ -583,6 +585,11 @@ module Raylib
       #   rlDisableFramebuffer : Disable render texture (fbo), return to default framebuffer
       #   @return [void]
       [:rlDisableFramebuffer, :rlDisableFramebuffer, [], :void],
+
+      # @!method rlGetActiveFramebuffer()
+      #   rlGetActiveFramebuffer : Get the currently active render texture (fbo), 0 for default framebuffer
+      #   @return [unsigned int]
+      [:rlGetActiveFramebuffer, :rlGetActiveFramebuffer, [], :uint],
 
       # @!method rlActiveDrawBuffers(count)
       #   rlActiveDrawBuffers : Activate multiple draw color buffers

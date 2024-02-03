@@ -139,6 +139,8 @@
     , "RL_BLEND_DST_ALPHA" : "0x80CA"
     , "RL_BLEND_SRC_ALPHA" : "0x80CB"
     , "RL_BLEND_COLOR" : "0x8005"
+    , "RL_READ_FRAMEBUFFER" : "0x8CA8"
+    , "RL_DRAW_FRAMEBUFFER" : "0x8CA9"
     , "RL_SHADER_LOC_MAP_DIFFUSE" : null
     , "RL_SHADER_LOC_MAP_SPECULAR" : null
     , "CONFIG_H" : null

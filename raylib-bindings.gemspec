@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "raylib-bindings"
-  spec.version       = "0.6.1"
+  spec.version       = "0.7.0"
   spec.authors       = ["vaiorabbit"]
   spec.email         = ["vaiorabbit@gmail.com"]
   spec.summary       = %q{Ruby bindings for raylib, raygui and Physac}
