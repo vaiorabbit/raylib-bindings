@@ -2893,17 +2893,7 @@
     {
       "name": "rlLoadFramebuffer",
       "description": "Load an empty framebuffer",
-      "returnType": "unsigned int",
-      "params": [
-        {
-          "type": "int",
-          "name": "width"
-        },
-        {
-          "type": "int",
-          "name": "height"
-        }
-      ]
+      "returnType": "unsigned int"
     },
     {
       "name": "rlFramebufferAttach",

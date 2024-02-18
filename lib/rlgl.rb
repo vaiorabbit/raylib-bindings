@@ -1084,12 +1084,10 @@ module Raylib
       #   @return [unsigned char *]
       [:rlReadScreenPixels, :rlReadScreenPixels, [:int, :int], :pointer],
 
-      # @!method rlLoadFramebuffer(width, height)
+      # @!method rlLoadFramebuffer()
       #   rlLoadFramebuffer : Load an empty framebuffer
-      #   @param width [int]
-      #   @param height [int]
       #   @return [unsigned int]
-      [:rlLoadFramebuffer, :rlLoadFramebuffer, [:int, :int], :uint],
+      [:rlLoadFramebuffer, :rlLoadFramebuffer, [], :uint],
 
       # @!method rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel)
       #   rlFramebufferAttach : Attach texture/renderbuffer to a framebuffer

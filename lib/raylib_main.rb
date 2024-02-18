@@ -1614,17 +1614,14 @@ module Raylib
       #   @return [Ray]
       [:GetMouseRay, :GetMouseRay, [Vector2.by_value, Camera.by_value], Ray.by_value],
 
-      # @!method GetCameraMatrix(camera)
-      #   GetCameraMatrix : Get camera transform matrix (view matrix)
+      # @!method GetViewRay(mousePosition, camera, width, height)
+      #   GetViewRay : Get a ray trace from mouse position in a viewport
+      #   @param mousePosition [Vector2]
       #   @param camera [Camera]
-      #   @return [Matrix]
-      [:GetCameraMatrix, :GetCameraMatrix, [Camera.by_value], Matrix.by_value],
-
-      # @!method GetCameraMatrix2D(camera)
-      #   GetCameraMatrix2D : Get camera 2d transform matrix
-      #   @param camera [Camera2D]
-      #   @return [Matrix]
-      [:GetCameraMatrix2D, :GetCameraMatrix2D, [Camera2D.by_value], Matrix.by_value],
+      #   @param width [float]
+      #   @param height [float]
+      #   @return [Ray]
+      [:GetViewRay, :GetViewRay, [Vector2.by_value, Camera.by_value, :float, :float], Ray.by_value],
 
       # @!method GetWorldToScreen(position, camera)
       #   GetWorldToScreen : Get the screen space position for a 3d world space position
@@ -1632,13 +1629,6 @@ module Raylib
       #   @param camera [Camera]
       #   @return [Vector2]
       [:GetWorldToScreen, :GetWorldToScreen, [Vector3.by_value, Camera.by_value], Vector2.by_value],
-
-      # @!method GetScreenToWorld2D(position, camera)
-      #   GetScreenToWorld2D : Get the world space position for a 2d camera screen space position
-      #   @param position [Vector2]
-      #   @param camera [Camera2D]
-      #   @return [Vector2]
-      [:GetScreenToWorld2D, :GetScreenToWorld2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
 
       # @!method GetWorldToScreenEx(position, camera, width, height)
       #   GetWorldToScreenEx : Get size position for a 3d world space position
@@ -1655,6 +1645,25 @@ module Raylib
       #   @param camera [Camera2D]
       #   @return [Vector2]
       [:GetWorldToScreen2D, :GetWorldToScreen2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
+
+      # @!method GetScreenToWorld2D(position, camera)
+      #   GetScreenToWorld2D : Get the world space position for a 2d camera screen space position
+      #   @param position [Vector2]
+      #   @param camera [Camera2D]
+      #   @return [Vector2]
+      [:GetScreenToWorld2D, :GetScreenToWorld2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
+
+      # @!method GetCameraMatrix(camera)
+      #   GetCameraMatrix : Get camera transform matrix (view matrix)
+      #   @param camera [Camera]
+      #   @return [Matrix]
+      [:GetCameraMatrix, :GetCameraMatrix, [Camera.by_value], Matrix.by_value],
+
+      # @!method GetCameraMatrix2D(camera)
+      #   GetCameraMatrix2D : Get camera 2d transform matrix
+      #   @param camera [Camera2D]
+      #   @return [Matrix]
+      [:GetCameraMatrix2D, :GetCameraMatrix2D, [Camera2D.by_value], Matrix.by_value],
 
       # @!method SetTargetFPS(fps)
       #   SetTargetFPS : Set target FPS (maximum)
