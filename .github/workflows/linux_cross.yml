@@ -33,7 +33,7 @@ jobs:
         sudo apt -y install libc6-arm64-cross libc6-dev-arm64-cross libstdc++-12-dev-arm64-cross g++-12-aarch64-linux-gnu g++-aarch64-linux-gnu libopengl-dev:arm64 libxrandr-dev:arm64 mesa-common-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxi-dev:arm64
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         ref: 'update'
         fetch-depth: 1
