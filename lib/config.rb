@@ -34,6 +34,7 @@ module Raylib
   MAX_GAMEPADS = 4                                            # Maximum number of gamepads supported
   MAX_GAMEPAD_AXIS = 8                                        # Maximum number of axis supported (per gamepad)
   MAX_GAMEPAD_BUTTONS = 32                                    # Maximum number of buttons supported (per gamepad)
+  MAX_GAMEPAD_VIBRATION_TIME = 2.0                            # Maximum vibration time in seconds
   MAX_TOUCH_POINTS = 8                                        # Maximum number of touch points supported
   MAX_KEY_PRESSED_QUEUE = 16                                  # Maximum number of keys in the key input queue
   MAX_CHAR_PRESSED_QUEUE = 16                                 # Maximum number of characters in the char input queue

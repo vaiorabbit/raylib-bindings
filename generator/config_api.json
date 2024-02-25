@@ -145,6 +145,12 @@
       "description": "Maximum number of buttons supported (per gamepad)"
     },
     {
+      "name": "MAX_GAMEPAD_VIBRATION_TIME",
+      "type": "FLOAT",
+      "value": 2.0,
+      "description": "Maximum vibration time in seconds"
+    },
+    {
       "name": "MAX_TOUCH_POINTS",
       "type": "INT",
       "value": 8,

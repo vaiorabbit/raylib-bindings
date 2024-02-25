@@ -2165,6 +2165,14 @@ module Raylib
       #   @return [int]
       [:SetGamepadMappings, :SetGamepadMappings, [:pointer], :int],
 
+      # @!method SetGamepadVibration(gamepad, leftMotor, rightMotor)
+      #   SetGamepadVibration : Set gamepad vibration for both motors
+      #   @param gamepad [int]
+      #   @param leftMotor [float]
+      #   @param rightMotor [float]
+      #   @return [void]
+      [:SetGamepadVibration, :SetGamepadVibration, [:int, :float, :float], :void],
+
       # @!method IsMouseButtonPressed(button)
       #   IsMouseButtonPressed : Check if a mouse button has been pressed once
       #   @param button [int]
