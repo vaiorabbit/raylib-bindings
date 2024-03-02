@@ -230,6 +230,20 @@ module Raylib
       #   @return [Vector2]
       [:Vector2Reflect, :Vector2Reflect, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
 
+      # @!method Vector2Min(v1, v2)
+      #   Vector2Min
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @return [Vector2]
+      [:Vector2Min, :Vector2Min, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
+      # @!method Vector2Max(v1, v2)
+      #   Vector2Max
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @return [Vector2]
+      [:Vector2Max, :Vector2Max, [Vector2.by_value, Vector2.by_value], Vector2.by_value],
+
       # @!method Vector2Rotate(v, angle)
       #   Vector2Rotate
       #   @param v [Vector2]
@@ -273,6 +287,14 @@ module Raylib
       #   @param q [Vector2]
       #   @return [int]
       [:Vector2Equals, :Vector2Equals, [Vector2.by_value, Vector2.by_value], :int],
+
+      # @!method Vector2Refract(v, n, r)
+      #   Vector2Refract
+      #   @param v [Vector2]
+      #   @param n [Vector2]
+      #   @param r [float]
+      #   @return [Vector2]
+      [:Vector2Refract, :Vector2Refract, [Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
 
       # @!method Vector3Zero()
       #   Vector3Zero
@@ -441,6 +463,14 @@ module Raylib
       #   @return [Vector3]
       [:Vector3RotateByAxisAngle, :Vector3RotateByAxisAngle, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
 
+      # @!method Vector3MoveTowards(v, target, maxDistance)
+      #   Vector3MoveTowards
+      #   @param v [Vector3]
+      #   @param target [Vector3]
+      #   @param maxDistance [float]
+      #   @return [Vector3]
+      [:Vector3MoveTowards, :Vector3MoveTowards, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
       # @!method Vector3Lerp(v1, v2, amount)
       #   Vector3Lerp
       #   @param v1 [Vector3]
@@ -529,6 +559,153 @@ module Raylib
       #   @param r [float]
       #   @return [Vector3]
       [:Vector3Refract, :Vector3Refract, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
+      # @!method Vector4Zero()
+      #   Vector4Zero
+      #   @return [Vector4]
+      [:Vector4Zero, :Vector4Zero, [], Vector4.by_value],
+
+      # @!method Vector4One()
+      #   Vector4One
+      #   @return [Vector4]
+      [:Vector4One, :Vector4One, [], Vector4.by_value],
+
+      # @!method Vector4Add(v1, v2)
+      #   Vector4Add
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Add, :Vector4Add, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4AddValue(v, add)
+      #   Vector4AddValue
+      #   @param v [Vector4]
+      #   @param add [float]
+      #   @return [Vector4]
+      [:Vector4AddValue, :Vector4AddValue, [Vector4.by_value, :float], Vector4.by_value],
+
+      # @!method Vector4Subtract(v1, v2)
+      #   Vector4Subtract
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Subtract, :Vector4Subtract, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4SubtractValue(v, add)
+      #   Vector4SubtractValue
+      #   @param v [Vector4]
+      #   @param add [float]
+      #   @return [Vector4]
+      [:Vector4SubtractValue, :Vector4SubtractValue, [Vector4.by_value, :float], Vector4.by_value],
+
+      # @!method Vector4Length(v)
+      #   Vector4Length
+      #   @param v [Vector4]
+      #   @return [float]
+      [:Vector4Length, :Vector4Length, [Vector4.by_value], :float],
+
+      # @!method Vector4LengthSqr(v)
+      #   Vector4LengthSqr
+      #   @param v [Vector4]
+      #   @return [float]
+      [:Vector4LengthSqr, :Vector4LengthSqr, [Vector4.by_value], :float],
+
+      # @!method Vector4DotProduct(v1, v2)
+      #   Vector4DotProduct
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [float]
+      [:Vector4DotProduct, :Vector4DotProduct, [Vector4.by_value, Vector4.by_value], :float],
+
+      # @!method Vector4Distance(v1, v2)
+      #   Vector4Distance
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [float]
+      [:Vector4Distance, :Vector4Distance, [Vector4.by_value, Vector4.by_value], :float],
+
+      # @!method Vector4DistanceSqr(v1, v2)
+      #   Vector4DistanceSqr
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [float]
+      [:Vector4DistanceSqr, :Vector4DistanceSqr, [Vector4.by_value, Vector4.by_value], :float],
+
+      # @!method Vector4Scale(v, scale)
+      #   Vector4Scale
+      #   @param v [Vector4]
+      #   @param scale [float]
+      #   @return [Vector4]
+      [:Vector4Scale, :Vector4Scale, [Vector4.by_value, :float], Vector4.by_value],
+
+      # @!method Vector4Multiply(v1, v2)
+      #   Vector4Multiply
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Multiply, :Vector4Multiply, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Negate(v)
+      #   Vector4Negate
+      #   @param v [Vector4]
+      #   @return [Vector4]
+      [:Vector4Negate, :Vector4Negate, [Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Divide(v1, v2)
+      #   Vector4Divide
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Divide, :Vector4Divide, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Normalize(v)
+      #   Vector4Normalize
+      #   @param v [Vector4]
+      #   @return [Vector4]
+      [:Vector4Normalize, :Vector4Normalize, [Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Min(v1, v2)
+      #   Vector4Min
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Min, :Vector4Min, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Max(v1, v2)
+      #   Vector4Max
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @return [Vector4]
+      [:Vector4Max, :Vector4Max, [Vector4.by_value, Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Lerp(v1, v2, amount)
+      #   Vector4Lerp
+      #   @param v1 [Vector4]
+      #   @param v2 [Vector4]
+      #   @param amount [float]
+      #   @return [Vector4]
+      [:Vector4Lerp, :Vector4Lerp, [Vector4.by_value, Vector4.by_value, :float], Vector4.by_value],
+
+      # @!method Vector4MoveTowards(v, target, maxDistance)
+      #   Vector4MoveTowards
+      #   @param v [Vector4]
+      #   @param target [Vector4]
+      #   @param maxDistance [float]
+      #   @return [Vector4]
+      [:Vector4MoveTowards, :Vector4MoveTowards, [Vector4.by_value, Vector4.by_value, :float], Vector4.by_value],
+
+      # @!method Vector4Invert(v)
+      #   Vector4Invert
+      #   @param v [Vector4]
+      #   @return [Vector4]
+      [:Vector4Invert, :Vector4Invert, [Vector4.by_value], Vector4.by_value],
+
+      # @!method Vector4Equals(p, q)
+      #   Vector4Equals
+      #   @param p [Vector4]
+      #   @param q [Vector4]
+      #   @return [int]
+      [:Vector4Equals, :Vector4Equals, [Vector4.by_value, Vector4.by_value], :int],
 
       # @!method MatrixDeterminant(mat)
       #   MatrixDeterminant

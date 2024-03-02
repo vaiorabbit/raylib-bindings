@@ -3641,6 +3641,13 @@ module Raylib
       #   @return [void]
       [:DrawTextureNPatch, :DrawTextureNPatch, [Texture2D.by_value, NPatchInfo.by_value, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
+      # @!method ColorIsEqual(col1, col2)
+      #   ColorIsEqual : Check if two colors are equal
+      #   @param col1 [Color]
+      #   @param col2 [Color]
+      #   @return [bool]
+      [:ColorIsEqual, :ColorIsEqual, [Color.by_value, Color.by_value], :bool],
+
       # @!method Fade(color, alpha)
       #   Fade : Get color with alpha applied, alpha goes from 0.0f to 1.0f
       #   @param color [Color]
