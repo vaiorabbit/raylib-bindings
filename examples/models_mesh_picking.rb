@@ -66,7 +66,7 @@ if __FILE__ == $PROGRAM_NAME
     cursorColor = WHITE
 
     # Get ray and test against objects
-    ray = GetMouseRay(GetMousePosition(), camera)
+    ray = GetScreenToWorldRay(GetMousePosition(), camera)
 
     # Check ray collision against ground quad
     groundHitInfo = GetRayCollisionQuad(ray, g0, g1, g2, g3)

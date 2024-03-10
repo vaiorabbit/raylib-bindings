@@ -1962,17 +1962,17 @@
           "description": ""
         },
         {
-          "name": "ICON_220",
+          "name": "ICON_WARNING",
           "value": 220,
           "description": ""
         },
         {
-          "name": "ICON_221",
+          "name": "ICON_HELP_BOX",
           "value": 221,
           "description": ""
         },
         {
-          "name": "ICON_222",
+          "name": "ICON_INFO_BOX",
           "value": 222,
           "description": ""
         },

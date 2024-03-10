@@ -1607,21 +1607,21 @@ module Raylib
       #   @return [void]
       [:UnloadShader, :UnloadShader, [Shader.by_value], :void],
 
-      # @!method GetMouseRay(mousePosition, camera)
-      #   GetMouseRay : Get a ray trace from mouse position
-      #   @param mousePosition [Vector2]
+      # @!method GetScreenToWorldRay(position, camera)
+      #   GetScreenToWorldRay : Get a ray trace from screen position (i.e mouse)
+      #   @param position [Vector2]
       #   @param camera [Camera]
       #   @return [Ray]
-      [:GetMouseRay, :GetMouseRay, [Vector2.by_value, Camera.by_value], Ray.by_value],
+      [:GetScreenToWorldRay, :GetScreenToWorldRay, [Vector2.by_value, Camera.by_value], Ray.by_value],
 
-      # @!method GetViewRay(mousePosition, camera, width, height)
-      #   GetViewRay : Get a ray trace from mouse position in a viewport
-      #   @param mousePosition [Vector2]
+      # @!method GetScreenToWorldRayEx(position, camera, width, height)
+      #   GetScreenToWorldRayEx : Get a ray trace from screen position (i.e mouse) in a viewport
+      #   @param position [Vector2]
       #   @param camera [Camera]
       #   @param width [float]
       #   @param height [float]
       #   @return [Ray]
-      [:GetViewRay, :GetViewRay, [Vector2.by_value, Camera.by_value, :float, :float], Ray.by_value],
+      [:GetScreenToWorldRayEx, :GetScreenToWorldRayEx, [Vector2.by_value, Camera.by_value, :float, :float], Ray.by_value],
 
       # @!method GetWorldToScreen(position, camera)
       #   GetWorldToScreen : Get the screen space position for a 3d world space position
@@ -3656,7 +3656,7 @@ module Raylib
       [:Fade, :Fade, [Color.by_value, :float], Color.by_value],
 
       # @!method ColorToInt(color)
-      #   ColorToInt : Get hexadecimal value for a Color
+      #   ColorToInt : Get hexadecimal value for a Color (0xRRGGBBAA)
       #   @param color [Color]
       #   @return [int]
       [:ColorToInt, :ColorToInt, [Color.by_value], :int],

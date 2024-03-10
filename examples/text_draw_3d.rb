@@ -354,7 +354,7 @@ if __FILE__ == $PROGRAM_NAME
 
     # Handle clicking the cube
     if IsMouseButtonPressed(MOUSE_BUTTON_LEFT)
-      ray = GetMouseRay(GetMousePosition(), camera)
+      ray = GetScreenToWorldRay(GetMousePosition(), camera)
 
       # Check collision between ray and box
       collision = GetRayCollisionBox(ray, BoundingBox.new
