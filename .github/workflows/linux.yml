@@ -24,7 +24,7 @@ jobs:
     - name: Setup OpenGL
       run: |
         sudo apt update
-        sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev libwayland-bin libwayland-dev libwayland-client0 libwayland-cursor0 libwayland-egl1
+        sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev libwayland-bin libwayland-dev libwayland-client0 libwayland-server0 libwayland-cursor0 libwayland-egl1
 
     - name: Check before
       run: ls -l lib/*
