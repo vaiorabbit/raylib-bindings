@@ -1,3 +1,8 @@
+2024-03-31  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+ 	* examples/textures_bunnymark_plain.rb : Renamed from textures_bunnymark.rb
+ 	* examples/textures_bunnymark_optimized.rb : Added
+
 2024-03-24  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/35252fceefdeb7b0920d9c1513efb4b5c05633dc ) and raygui ( https://github.com/raysan5/raygui/commit/9060e3bf33795dad4fdb4f60585b07901ffa5dee )
