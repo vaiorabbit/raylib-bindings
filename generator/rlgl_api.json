@@ -1996,7 +1996,7 @@
     },
     {
       "name": "rlBindFramebuffer",
-      "description": "Bind framebuffer (FBO) ",
+      "description": "Bind framebuffer (FBO)",
       "returnType": "void",
       "params": [
         {

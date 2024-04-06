@@ -1,7 +1,11 @@
+2024-04-06  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/414229bcf93816daaa253a82cd54fbd7b18e6449 ) and raygui ( https://github.com/raysan5/raygui/commit/0a9a9f897a16968444e10fea4fbac33ba1d5d640 )
+
 2024-03-31  vaiorabbit  <http://twitter.com/vaiorabbit>
 
- 	* examples/textures_bunnymark_plain.rb : Renamed from textures_bunnymark.rb
- 	* examples/textures_bunnymark_optimized.rb : Added
+	* examples/textures_bunnymark_plain.rb : Renamed from textures_bunnymark.rb
+	* examples/textures_bunnymark_optimized.rb : Added
 
 2024-03-24  vaiorabbit  <http://twitter.com/vaiorabbit>
 

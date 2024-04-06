@@ -612,7 +612,7 @@ module Raylib
       [:rlBlitFramebuffer, :rlBlitFramebuffer, [:int, :int, :int, :int, :int, :int, :int, :int, :int], :void],
 
       # @!method rlBindFramebuffer(target, framebuffer)
-      #   rlBindFramebuffer : Bind framebuffer (FBO) 
+      #   rlBindFramebuffer : Bind framebuffer (FBO)
       #   @param target [unsigned int]
       #   @param framebuffer [unsigned int]
       #   @return [void]

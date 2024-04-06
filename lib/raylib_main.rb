@@ -193,9 +193,9 @@ module Raylib
   GAMEPAD_BUTTON_LEFT_FACE_DOWN = 3   # Gamepad left DPAD down button
   GAMEPAD_BUTTON_LEFT_FACE_LEFT = 4   # Gamepad left DPAD left button
   GAMEPAD_BUTTON_RIGHT_FACE_UP = 5    # Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
-  GAMEPAD_BUTTON_RIGHT_FACE_RIGHT = 6 # Gamepad right button right (i.e. PS3: Square, Xbox: X)
+  GAMEPAD_BUTTON_RIGHT_FACE_RIGHT = 6 # Gamepad right button right (i.e. PS3: Circle, Xbox: B)
   GAMEPAD_BUTTON_RIGHT_FACE_DOWN = 7  # Gamepad right button down (i.e. PS3: Cross, Xbox: A)
-  GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8  # Gamepad right button left (i.e. PS3: Circle, Xbox: B)
+  GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8  # Gamepad right button left (i.e. PS3: Square, Xbox: X)
   GAMEPAD_BUTTON_LEFT_TRIGGER_1 = 9   # Gamepad top/back trigger left (first), it could be a trailing button
   GAMEPAD_BUTTON_LEFT_TRIGGER_2 = 10  # Gamepad top/back trigger left (second), it could be a trailing button
   GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11 # Gamepad top/back trigger right (one), it could be a trailing button
@@ -1618,10 +1618,10 @@ module Raylib
       #   GetScreenToWorldRayEx : Get a ray trace from screen position (i.e mouse) in a viewport
       #   @param position [Vector2]
       #   @param camera [Camera]
-      #   @param width [float]
-      #   @param height [float]
+      #   @param width [int]
+      #   @param height [int]
       #   @return [Ray]
-      [:GetScreenToWorldRayEx, :GetScreenToWorldRayEx, [Vector2.by_value, Camera.by_value, :float, :float], Ray.by_value],
+      [:GetScreenToWorldRayEx, :GetScreenToWorldRayEx, [Vector2.by_value, Camera.by_value, :int, :int], Ray.by_value],
 
       # @!method GetWorldToScreen(position, camera)
       #   GetWorldToScreen : Get the screen space position for a 3d world space position
@@ -5115,7 +5115,7 @@ module Raylib
       [:SetAudioStreamCallback, :SetAudioStreamCallback, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioStreamProcessor(stream, processor)
-      #   AttachAudioStreamProcessor : Attach audio stream processor to stream, receives the samples as <float>s
+      #   AttachAudioStreamProcessor : Attach audio stream processor to stream, receives the samples as 'float'
       #   @param stream [AudioStream]
       #   @param processor [AudioCallback]
       #   @return [void]
@@ -5129,7 +5129,7 @@ module Raylib
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioMixedProcessor(processor)
-      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline, receives the samples as <float>s
+      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline, receives the samples as 'float'
       #   @param processor [AudioCallback]
       #   @return [void]
       [:AttachAudioMixedProcessor, :AttachAudioMixedProcessor, [:AudioCallback], :void],

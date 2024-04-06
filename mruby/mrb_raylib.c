@@ -2714,21 +2714,20 @@ static mrb_value mrb_raylib_VrDeviceInfo_initialize(mrb_state* mrb, mrb_value se
         memset(instance, 0, sizeof(VrDeviceInfo));
         break;
     }
-    case 10:
+    case 9:
     {
-        mrb_value argv[10];
-        void* ptrs[10] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], &argv[9], };
-        mrb_get_args_a(mrb, "oooooooooo", ptrs);
+        mrb_value argv[9];
+        void* ptrs[9] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], };
+        mrb_get_args_a(mrb, "ooooooooo", ptrs);
         instance->hResolution = mrb_as_int(mrb, argv[0]);
         instance->vResolution = mrb_as_int(mrb, argv[1]);
         instance->hScreenSize = mrb_as_float(mrb, argv[2]);
         instance->vScreenSize = mrb_as_float(mrb, argv[3]);
-        instance->vScreenCenter = mrb_as_float(mrb, argv[4]);
-        instance->eyeToScreenDistance = mrb_as_float(mrb, argv[5]);
-        instance->lensSeparationDistance = mrb_as_float(mrb, argv[6]);
-        instance->interpupillaryDistance = mrb_as_float(mrb, argv[7]);
-        memcpy(instance->lensDistortionValues, DATA_PTR(argv[8]), sizeof(float) * 4);
-        memcpy(instance->chromaAbCorrection, DATA_PTR(argv[9]), sizeof(float) * 4);
+        instance->eyeToScreenDistance = mrb_as_float(mrb, argv[4]);
+        instance->lensSeparationDistance = mrb_as_float(mrb, argv[5]);
+        instance->interpupillaryDistance = mrb_as_float(mrb, argv[6]);
+        memcpy(instance->lensDistortionValues, DATA_PTR(argv[7]), sizeof(float) * 4);
+        memcpy(instance->chromaAbCorrection, DATA_PTR(argv[8]), sizeof(float) * 4);
     }
     break;
     }
@@ -3909,8 +3908,8 @@ static mrb_value mrb_raylib_GetScreenToWorldRayEx(mrb_state* mrb, mrb_value self
     mrb_get_args_a(mrb, "oooo", ptrs);
     Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
     Camera camera = *(Camera*)DATA_PTR(argv[1]);
-    float width = mrb_as_float(mrb, argv[2]);
-    float height = mrb_as_float(mrb, argv[3]);
+    int width = mrb_as_int(mrb, argv[2]);
+    int height = mrb_as_int(mrb, argv[3]);
 
     Ray* retval;
     /* TODO return newly allocated object */ *retval = GetScreenToWorldRayEx(position, camera, width, height);
