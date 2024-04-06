@@ -77,7 +77,7 @@ def generate_macrodefine(ctx, indent = "", json_schema=None):
             mrbval = ""
             if "\"" in macro_value[0]:
                 mrbval = "mrb_str_new_cstr_frozen"
-            elif "\." in macro_value[0]:
+            elif "." in macro_value[0]:
                 mrbval = "mrb_float_value"
             elif any(elem in macro_value[0] for elem in r"\:\/"): # Math::PI / 180.0, etc.
                 continue

@@ -177,6 +177,16 @@ static const struct mrb_data_type mrb_raylib_struct_FilePathList = {
     "FilePathList", mrb_free
 };
 
+struct RClass* cRaylibAutomationEvent;
+static const struct mrb_data_type mrb_raylib_struct_AutomationEvent = {
+    "AutomationEvent", mrb_free
+};
+
+struct RClass* cRaylibAutomationEventList;
+static const struct mrb_data_type mrb_raylib_struct_AutomationEventList = {
+    "AutomationEventList", mrb_free
+};
+
 
 // Struct
 
@@ -2786,21 +2796,6 @@ static mrb_value mrb_raylib_VrDeviceInfo_vScreenSize_set(mrb_state* mrb, mrb_val
     return self;
 }
 
-static mrb_value mrb_raylib_VrDeviceInfo_vScreenCenter_get(mrb_state* mrb, mrb_value self)
-{
-    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
-    return mrb_float_value(mrb, instance->vScreenCenter);
-}
-
-static mrb_value mrb_raylib_VrDeviceInfo_vScreenCenter_set(mrb_state* mrb, mrb_value self)
-{
-    VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
-    mrb_value argv;
-    mrb_get_args(mrb, "o", &argv);
-    instance->vScreenCenter = mrb_as_float(mrb, argv);
-    return self;
-}
-
 static mrb_value mrb_raylib_VrDeviceInfo_eyeToScreenDistance_get(mrb_state* mrb, mrb_value self)
 {
     VrDeviceInfo* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_VrDeviceInfo, VrDeviceInfo);
@@ -2964,6 +2959,122 @@ static mrb_value mrb_raylib_FilePathList_count_set(mrb_state* mrb, mrb_value sel
 // static mrb_value mrb_raylib_FilePathList_paths_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
 // static mrb_value mrb_raylib_FilePathList_paths_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
 
+static mrb_value mrb_raylib_AutomationEvent_initialize(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = (AutomationEvent*)mrb_malloc(mrb, sizeof(AutomationEvent));
+    mrb_int argc = mrb_get_argc(mrb);
+    switch (argc) {
+    case 0:
+    {
+        memset(instance, 0, sizeof(AutomationEvent));
+        break;
+    }
+    case 3:
+    {
+        mrb_value argv[3];
+        void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+        mrb_get_args_a(mrb, "ooo", ptrs);
+        instance->frame = mrb_as_int(mrb, argv[0]);
+        instance->type = mrb_as_int(mrb, argv[1]);
+        memcpy(instance->params, DATA_PTR(argv[2]), sizeof(int) * 4);
+    }
+    break;
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_AutomationEvent);
+    return self;
+}
+
+static mrb_value mrb_raylib_AutomationEvent_frame_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    return mrb_int_value(mrb, instance->frame);
+}
+
+static mrb_value mrb_raylib_AutomationEvent_frame_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->frame = mrb_as_int(mrb, argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_AutomationEvent_type_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    return mrb_int_value(mrb, instance->type);
+}
+
+static mrb_value mrb_raylib_AutomationEvent_type_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEvent* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEvent, AutomationEvent);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->type = mrb_as_int(mrb, argv);
+    return self;
+}
+
+// static mrb_value mrb_raylib_AutomationEvent_params_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+// static mrb_value mrb_raylib_AutomationEvent_params_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array
+
+static mrb_value mrb_raylib_AutomationEventList_initialize(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = (AutomationEventList*)mrb_malloc(mrb, sizeof(AutomationEventList));
+    mrb_int argc = mrb_get_argc(mrb);
+    switch (argc) {
+    case 0:
+    {
+        memset(instance, 0, sizeof(AutomationEventList));
+        break;
+    }
+    case 3:
+    {
+        mrb_value argv[3];
+        void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+        mrb_get_args_a(mrb, "ooo", ptrs);
+        instance->capacity = mrb_as_int(mrb, argv[0]);
+        instance->count = mrb_as_int(mrb, argv[1]);
+        instance->events = DATA_PTR(argv[2]);
+    }
+    break;
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_AutomationEventList);
+    return self;
+}
+
+static mrb_value mrb_raylib_AutomationEventList_capacity_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    return mrb_int_value(mrb, instance->capacity);
+}
+
+static mrb_value mrb_raylib_AutomationEventList_capacity_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->capacity = mrb_as_int(mrb, argv);
+    return self;
+}
+
+static mrb_value mrb_raylib_AutomationEventList_count_get(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    return mrb_int_value(mrb, instance->count);
+}
+
+static mrb_value mrb_raylib_AutomationEventList_count_set(mrb_state* mrb, mrb_value self)
+{
+    AutomationEventList* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_AutomationEventList, AutomationEventList);
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->count = mrb_as_int(mrb, argv);
+    return self;
+}
+
+// static mrb_value mrb_raylib_AutomationEventList_events_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+// static mrb_value mrb_raylib_AutomationEventList_events_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes
+
 
 // Function
 
@@ -2981,18 +3092,18 @@ static mrb_value mrb_raylib_InitWindow(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_WindowShouldClose(mrb_state* mrb, mrb_value self)
-{
-    bool retval = WindowShouldClose();
-
-    return retval ? mrb_true_value() : mrb_false_value();
-}
-
 static mrb_value mrb_raylib_CloseWindow(mrb_state* mrb, mrb_value self)
 {
     CloseWindow();
 
     return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_WindowShouldClose(mrb_state* mrb, mrb_value self)
+{
+    bool retval = WindowShouldClose();
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
 static mrb_value mrb_raylib_IsWindowReady(mrb_state* mrb, mrb_value self)
@@ -3415,32 +3526,6 @@ static mrb_value mrb_raylib_DisableEventWaiting(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_SwapScreenBuffer(mrb_state* mrb, mrb_value self)
-{
-    SwapScreenBuffer();
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_PollInputEvents(mrb_state* mrb, mrb_value self)
-{
-    PollInputEvents();
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_WaitTime(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    double seconds = mrb_as_int(mrb, argv[0]);
-
-    WaitTime(seconds);
-
-    return mrb_nil_value();
-}
-
 static mrb_value mrb_raylib_ShowCursor(mrb_state* mrb, mrb_value self)
 {
     ShowCursor();
@@ -3804,41 +3889,32 @@ static mrb_value mrb_raylib_UnloadShader(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_GetMouseRay(mrb_state* mrb, mrb_value self)
+static mrb_value mrb_raylib_GetScreenToWorldRay(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
     void* ptrs[2] = { &argv[0], &argv[1], };
     mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 mousePosition = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
     Camera camera = *(Camera*)DATA_PTR(argv[1]);
 
     Ray* retval;
-    /* TODO return newly allocated object */ *retval = GetMouseRay(mousePosition, camera);
+    /* TODO return newly allocated object */ *retval = GetScreenToWorldRay(position, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRay, &mrb_raylib_struct_Ray, retval));
 }
 
-static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self)
+static mrb_value mrb_raylib_GetScreenToWorldRayEx(mrb_state* mrb, mrb_value self)
 {
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Camera camera = *(Camera*)DATA_PTR(argv[1]);
+    float width = mrb_as_float(mrb, argv[2]);
+    float height = mrb_as_float(mrb, argv[3]);
 
-    Matrix* retval;
-    /* TODO return newly allocated object */ *retval = GetCameraMatrix(camera);
-    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
-}
-
-static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
-
-    Matrix* retval;
-    /* TODO return newly allocated object */ *retval = GetCameraMatrix2D(camera);
-    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
+    Ray* retval;
+    /* TODO return newly allocated object */ *retval = GetScreenToWorldRayEx(position, camera, width, height);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRay, &mrb_raylib_struct_Ray, retval));
 }
 
 static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self)
@@ -3851,19 +3927,6 @@ static mrb_value mrb_raylib_GetWorldToScreen(mrb_state* mrb, mrb_value self)
 
     Vector2* retval;
     /* TODO return newly allocated object */ *retval = GetWorldToScreen(position, camera);
-    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
-}
-
-static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
-    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
-
-    Vector2* retval;
-    /* TODO return newly allocated object */ *retval = GetScreenToWorld2D(position, camera);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
@@ -3895,6 +3958,43 @@ static mrb_value mrb_raylib_GetWorldToScreen2D(mrb_state* mrb, mrb_value self)
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
 }
 
+static mrb_value mrb_raylib_GetScreenToWorld2D(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Vector2 position = *(Vector2*)DATA_PTR(argv[0]);
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[1]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetScreenToWorld2D(position, camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
+static mrb_value mrb_raylib_GetCameraMatrix(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Camera camera = *(Camera*)DATA_PTR(argv[0]);
+
+    Matrix* retval;
+    /* TODO return newly allocated object */ *retval = GetCameraMatrix(camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
+}
+
+static mrb_value mrb_raylib_GetCameraMatrix2D(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Camera2D camera = *(Camera2D*)DATA_PTR(argv[0]);
+
+    Matrix* retval;
+    /* TODO return newly allocated object */ *retval = GetCameraMatrix2D(camera);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibMatrix, &mrb_raylib_struct_Matrix, retval));
+}
+
 static mrb_value mrb_raylib_SetTargetFPS(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
@@ -3905,13 +4005,6 @@ static mrb_value mrb_raylib_SetTargetFPS(mrb_state* mrb, mrb_value self)
     SetTargetFPS(fps);
 
     return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_GetFPS(mrb_state* mrb, mrb_value self)
-{
-    int retval = GetFPS();
-
-    return mrb_int_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_GetFrameTime(mrb_state* mrb, mrb_value self)
@@ -3928,6 +4021,51 @@ static mrb_value mrb_raylib_GetTime(mrb_state* mrb, mrb_value self)
     return mrb_int_value(mrb, retval);
 }
 
+static mrb_value mrb_raylib_GetFPS(mrb_state* mrb, mrb_value self)
+{
+    int retval = GetFPS();
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_SwapScreenBuffer(mrb_state* mrb, mrb_value self)
+{
+    SwapScreenBuffer();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PollInputEvents(mrb_state* mrb, mrb_value self)
+{
+    PollInputEvents();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_WaitTime(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    double seconds = mrb_as_int(mrb, argv[0]);
+
+    WaitTime(seconds);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetRandomSeed(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    unsigned int seed = mrb_as_int(mrb, argv[0]);
+
+    SetRandomSeed(seed);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_GetRandomValue(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
@@ -3941,14 +4079,28 @@ static mrb_value mrb_raylib_GetRandomValue(mrb_state* mrb, mrb_value self)
     return mrb_int_value(mrb, retval);
 }
 
-static mrb_value mrb_raylib_SetRandomSeed(mrb_state* mrb, mrb_value self)
+static mrb_value mrb_raylib_LoadRandomSequence(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    unsigned int count = mrb_as_int(mrb, argv[0]);
+    int min = mrb_as_int(mrb, argv[1]);
+    int max = mrb_as_int(mrb, argv[2]);
+
+    int * retval = LoadRandomSequence(count, min, max);
+
+    return self; /* TODO return wrapped object */
+}
+
+static mrb_value mrb_raylib_UnloadRandomSequence(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
     void* ptrs[1] = { &argv[0], };
     mrb_get_args_a(mrb, "o", ptrs);
-    unsigned int seed = mrb_as_int(mrb, argv[0]);
+    int * sequence = DATA_PTR(argv[0]);
 
-    SetRandomSeed(seed);
+    UnloadRandomSequence(sequence);
 
     return mrb_nil_value();
 }
@@ -3973,6 +4125,18 @@ static mrb_value mrb_raylib_SetConfigFlags(mrb_state* mrb, mrb_value self)
     unsigned int flags = mrb_as_int(mrb, argv[0]);
 
     SetConfigFlags(flags);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_OpenURL(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * url = DATA_PTR(argv[0]);
+
+    OpenURL(url);
 
     return mrb_nil_value();
 }
@@ -4022,18 +4186,6 @@ static mrb_value mrb_raylib_MemFree(mrb_state* mrb, mrb_value self)
     void * ptr = DATA_PTR(argv[0]);
 
     MemFree(ptr);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_OpenURL(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    const char * url = DATA_PTR(argv[0]);
-
-    OpenURL(url);
 
     return mrb_nil_value();
 }
@@ -4466,6 +4618,93 @@ static mrb_value mrb_raylib_DecodeDataBase64(mrb_state* mrb, mrb_value self)
     return self; /* TODO return wrapped object */
 }
 
+static mrb_value mrb_raylib_LoadAutomationEventList(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = DATA_PTR(argv[0]);
+
+    AutomationEventList* retval;
+    /* TODO return newly allocated object */ *retval = LoadAutomationEventList(fileName);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibAutomationEventList, &mrb_raylib_struct_AutomationEventList, retval));
+}
+
+static mrb_value mrb_raylib_UnloadAutomationEventList(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    AutomationEventList list = *(AutomationEventList*)DATA_PTR(argv[0]);
+
+    UnloadAutomationEventList(list);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_ExportAutomationEventList(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    AutomationEventList list = *(AutomationEventList*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportAutomationEventList(list, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_SetAutomationEventList(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    AutomationEventList * list = DATA_PTR(argv[0]);
+
+    SetAutomationEventList(list);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetAutomationEventBaseFrame(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int frame = mrb_as_int(mrb, argv[0]);
+
+    SetAutomationEventBaseFrame(frame);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_StartAutomationEventRecording(mrb_state* mrb, mrb_value self)
+{
+    StartAutomationEventRecording();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_StopAutomationEventRecording(mrb_state* mrb, mrb_value self)
+{
+    StopAutomationEventRecording();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PlayAutomationEvent(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    AutomationEvent event = *(AutomationEvent*)DATA_PTR(argv[0]);
+
+    PlayAutomationEvent(event);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_IsKeyPressed(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
@@ -4526,18 +4765,6 @@ static mrb_value mrb_raylib_IsKeyUp(mrb_state* mrb, mrb_value self)
     return retval ? mrb_true_value() : mrb_false_value();
 }
 
-static mrb_value mrb_raylib_SetExitKey(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[1];
-    void* ptrs[1] = { &argv[0], };
-    mrb_get_args_a(mrb, "o", ptrs);
-    int key = mrb_as_int(mrb, argv[0]);
-
-    SetExitKey(key);
-
-    return mrb_nil_value();
-}
-
 static mrb_value mrb_raylib_GetKeyPressed(mrb_state* mrb, mrb_value self)
 {
     int retval = GetKeyPressed();
@@ -4550,6 +4777,18 @@ static mrb_value mrb_raylib_GetCharPressed(mrb_state* mrb, mrb_value self)
     int retval = GetCharPressed();
 
     return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_SetExitKey(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int key = mrb_as_int(mrb, argv[0]);
+
+    SetExitKey(key);
+
+    return mrb_nil_value();
 }
 
 static mrb_value mrb_raylib_IsGamepadAvailable(mrb_state* mrb, mrb_value self)
@@ -4670,6 +4909,20 @@ static mrb_value mrb_raylib_SetGamepadMappings(mrb_state* mrb, mrb_value self)
     int retval = SetGamepadMappings(mappings);
 
     return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_SetGamepadVibration(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    int gamepad = mrb_as_int(mrb, argv[0]);
+    float leftMotor = mrb_as_float(mrb, argv[1]);
+    float rightMotor = mrb_as_float(mrb, argv[2]);
+
+    SetGamepadVibration(gamepad, leftMotor, rightMotor);
+
+    return mrb_nil_value();
 }
 
 static mrb_value mrb_raylib_IsMouseButtonPressed(mrb_state* mrb, mrb_value self)
@@ -4965,6 +5218,20 @@ static mrb_value mrb_raylib_SetShapesTexture(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_GetShapesTexture(mrb_state* mrb, mrb_value self)
+{
+    Texture2D* retval;
+    /* TODO return newly allocated object */ *retval = GetShapesTexture();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibTexture, &mrb_raylib_struct_Texture, retval));
+}
+
+static mrb_value mrb_raylib_GetShapesTextureRectangle(mrb_state* mrb, mrb_value self)
+{
+    Rectangle* retval;
+    /* TODO return newly allocated object */ *retval = GetShapesTextureRectangle();
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRectangle, &mrb_raylib_struct_Rectangle, retval));
+}
+
 static mrb_value mrb_raylib_DrawPixel(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
@@ -5037,6 +5304,20 @@ static mrb_value mrb_raylib_DrawLineEx(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_DrawLineStrip(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawLineStrip(points, pointCount, color);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_DrawLineBezier(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
@@ -5048,83 +5329,6 @@ static mrb_value mrb_raylib_DrawLineBezier(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[3]);
 
     DrawLineBezier(startPos, endPos, thick, color);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DrawLineBezierQuad(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[5];
-    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
-    mrb_get_args_a(mrb, "ooooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 controlPos = *(Vector2*)DATA_PTR(argv[2]);
-    float thick = mrb_as_float(mrb, argv[3]);
-    Color color = *(Color*)DATA_PTR(argv[4]);
-
-    DrawLineBezierQuad(startPos, endPos, controlPos, thick, color);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DrawLineBezierCubic(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[6];
-    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
-    mrb_get_args_a(mrb, "oooooo", ptrs);
-    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
-    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
-    Vector2 startControlPos = *(Vector2*)DATA_PTR(argv[2]);
-    Vector2 endControlPos = *(Vector2*)DATA_PTR(argv[3]);
-    float thick = mrb_as_float(mrb, argv[4]);
-    Color color = *(Color*)DATA_PTR(argv[5]);
-
-    DrawLineBezierCubic(startPos, endPos, startControlPos, endControlPos, thick, color);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DrawLineBSpline(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[4];
-    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
-    mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 * points = DATA_PTR(argv[0]);
-    int pointCount = mrb_as_int(mrb, argv[1]);
-    float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
-
-    DrawLineBSpline(points, pointCount, thick, color);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DrawLineCatmullRom(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[4];
-    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
-    mrb_get_args_a(mrb, "oooo", ptrs);
-    Vector2 * points = DATA_PTR(argv[0]);
-    int pointCount = mrb_as_int(mrb, argv[1]);
-    float thick = mrb_as_float(mrb, argv[2]);
-    Color color = *(Color*)DATA_PTR(argv[3]);
-
-    DrawLineCatmullRom(points, pointCount, thick, color);
-
-    return mrb_nil_value();
-}
-
-static mrb_value mrb_raylib_DrawLineStrip(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[3];
-    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
-    mrb_get_args_a(mrb, "ooo", ptrs);
-    Vector2 * points = DATA_PTR(argv[0]);
-    int pointCount = mrb_as_int(mrb, argv[1]);
-    Color color = *(Color*)DATA_PTR(argv[2]);
-
-    DrawLineStrip(points, pointCount, color);
 
     return mrb_nil_value();
 }
@@ -5219,6 +5423,20 @@ static mrb_value mrb_raylib_DrawCircleLines(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_PTR(argv[3]);
 
     DrawCircleLines(centerX, centerY, radius, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawCircleLinesV(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_PTR(argv[0]);
+    float radius = mrb_as_float(mrb, argv[1]);
+    Color color = *(Color*)DATA_PTR(argv[2]);
+
+    DrawCircleLinesV(center, radius, color);
 
     return mrb_nil_value();
 }
@@ -5567,6 +5785,240 @@ static mrb_value mrb_raylib_DrawPolyLinesEx(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_DrawSplineLinear(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineLinear(points, pointCount, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineBasis(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineBasis(points, pointCount, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineCatmullRom(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineCatmullRom(points, pointCount, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineBezierQuadratic(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineBezierQuadratic(points, pointCount, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineBezierCubic(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 * points = DATA_PTR(argv[0]);
+    int pointCount = mrb_as_int(mrb, argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineBezierCubic(points, pointCount, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineSegmentLinear(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[1]);
+    float thick = mrb_as_float(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawSplineSegmentLinear(p1, p2, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineSegmentBasis(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float thick = mrb_as_float(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawSplineSegmentBasis(p1, p2, p3, p4, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineSegmentCatmullRom(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float thick = mrb_as_float(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawSplineSegmentCatmullRom(p1, p2, p3, p4, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineSegmentBezierQuadratic(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 c2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    float thick = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_PTR(argv[4]);
+
+    DrawSplineSegmentBezierQuadratic(p1, c2, p3, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawSplineSegmentBezierCubic(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 c2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 c3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float thick = mrb_as_float(mrb, argv[4]);
+    Color color = *(Color*)DATA_PTR(argv[5]);
+
+    DrawSplineSegmentBezierCubic(p1, c2, c3, p4, thick, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GetSplinePointLinear(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 startPos = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 endPos = *(Vector2*)DATA_PTR(argv[1]);
+    float t = mrb_as_float(mrb, argv[2]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetSplinePointLinear(startPos, endPos, t);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
+static mrb_value mrb_raylib_GetSplinePointBasis(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float t = mrb_as_float(mrb, argv[4]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetSplinePointBasis(p1, p2, p3, p4, t);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
+static mrb_value mrb_raylib_GetSplinePointCatmullRom(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 p2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float t = mrb_as_float(mrb, argv[4]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetSplinePointCatmullRom(p1, p2, p3, p4, t);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
+static mrb_value mrb_raylib_GetSplinePointBezierQuad(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 c2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 p3 = *(Vector2*)DATA_PTR(argv[2]);
+    float t = mrb_as_float(mrb, argv[3]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetSplinePointBezierQuad(p1, c2, p3, t);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
+static mrb_value mrb_raylib_GetSplinePointBezierCubic(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 p1 = *(Vector2*)DATA_PTR(argv[0]);
+    Vector2 c2 = *(Vector2*)DATA_PTR(argv[1]);
+    Vector2 c3 = *(Vector2*)DATA_PTR(argv[2]);
+    Vector2 p4 = *(Vector2*)DATA_PTR(argv[3]);
+    float t = mrb_as_float(mrb, argv[4]);
+
+    Vector2* retval;
+    /* TODO return newly allocated object */ *retval = GetSplinePointBezierCubic(p1, c2, c3, p4, t);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
 static mrb_value mrb_raylib_CheckCollisionRecs(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
@@ -5761,6 +6213,21 @@ static mrb_value mrb_raylib_LoadImageAnim(mrb_state* mrb, mrb_value self)
 
     Image* retval;
     /* TODO return newly allocated object */ *retval = LoadImageAnim(fileName, frames);
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
+}
+
+static mrb_value mrb_raylib_LoadImageAnimFromMemory(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    const char * fileType = DATA_PTR(argv[0]);
+    const unsigned char * fileData = DATA_PTR(argv[1]);
+    int dataSize = mrb_as_int(mrb, argv[2]);
+    int * frames = DATA_PTR(argv[3]);
+
+    Image* retval;
+    /* TODO return newly allocated object */ *retval = LoadImageAnimFromMemory(fileType, fileData, dataSize, frames);
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibImage, &mrb_raylib_struct_Image, retval));
 }
 
@@ -6153,6 +6620,20 @@ static mrb_value mrb_raylib_ImageBlurGaussian(mrb_state* mrb, mrb_value self)
     int blurSize = mrb_as_int(mrb, argv[1]);
 
     ImageBlurGaussian(image, blurSize);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_ImageKernelConvolution(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Image * image = DATA_PTR(argv[0]);
+    float * kernel = DATA_PTR(argv[1]);
+    int kernelSize = mrb_as_int(mrb, argv[2]);
+
+    ImageKernelConvolution(image, kernel, kernelSize);
 
     return mrb_nil_value();
 }
@@ -6946,6 +7427,19 @@ static mrb_value mrb_raylib_DrawTextureNPatch(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_ColorIsEqual(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Color col1 = *(Color*)DATA_PTR(argv[0]);
+    Color col2 = *(Color*)DATA_PTR(argv[1]);
+
+    bool retval = ColorIsEqual(col1, col2);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
 static mrb_value mrb_raylib_Fade(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[2];
@@ -7636,7 +8130,7 @@ static mrb_value mrb_raylib_TextReplace(mrb_state* mrb, mrb_value self)
     mrb_value argv[3];
     void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
     mrb_get_args_a(mrb, "ooo", ptrs);
-    char * text = DATA_PTR(argv[0]);
+    const char * text = DATA_PTR(argv[0]);
     const char * replace = DATA_PTR(argv[1]);
     const char * by = DATA_PTR(argv[2]);
 
@@ -7760,6 +8254,18 @@ static mrb_value mrb_raylib_TextToInteger(mrb_state* mrb, mrb_value self)
     int retval = TextToInteger(text);
 
     return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_TextToFloat(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * text = DATA_PTR(argv[0]);
+
+    float retval = TextToFloat(text);
+
+    return mrb_float_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_DrawLine3D(mrb_state* mrb, mrb_value self)
@@ -8342,19 +8848,6 @@ static mrb_value mrb_raylib_DrawMeshInstanced(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self)
-{
-    mrb_value argv[2];
-    void* ptrs[2] = { &argv[0], &argv[1], };
-    mrb_get_args_a(mrb, "oo", ptrs);
-    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
-    const char * fileName = DATA_PTR(argv[1]);
-
-    bool retval = ExportMesh(mesh, fileName);
-
-    return retval ? mrb_true_value() : mrb_false_value();
-}
-
 static mrb_value mrb_raylib_GetMeshBoundingBox(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
@@ -8377,6 +8870,32 @@ static mrb_value mrb_raylib_GenMeshTangents(mrb_state* mrb, mrb_value self)
     GenMeshTangents(mesh);
 
     return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_ExportMesh(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportMesh(mesh, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_ExportMeshAsCode(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Mesh mesh = *(Mesh*)DATA_PTR(argv[0]);
+    const char * fileName = DATA_PTR(argv[1]);
+
+    bool retval = ExportMeshAsCode(mesh, fileName);
+
+    return retval ? mrb_true_value() : mrb_false_value();
 }
 
 static mrb_value mrb_raylib_GenMeshPoly(mrb_state* mrb, mrb_value self)
@@ -8811,6 +9330,13 @@ static mrb_value mrb_raylib_SetMasterVolume(mrb_state* mrb, mrb_value self)
     SetMasterVolume(volume);
 
     return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GetMasterVolume(mrb_state* mrb, mrb_value self)
+{
+    float retval = GetMasterVolume();
+
+    return mrb_float_value(mrb, retval);
 }
 
 static mrb_value mrb_raylib_LoadWave(mrb_state* mrb, mrb_value self)
@@ -9582,10 +10108,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
 
     // Define/Macro
 
-    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_MAJOR", mrb_int_value(mrb, 4));
-    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_MINOR", mrb_int_value(mrb, 6));
+    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_MAJOR", mrb_int_value(mrb, 5));
+    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_MINOR", mrb_int_value(mrb, 1));
     mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION_PATCH", mrb_int_value(mrb, 0));
-    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION", mrb_str_new_cstr_frozen(mrb, "4.6-dev"));
+    mrb_define_const(mrb, mRaylib, "RAYLIB_VERSION", mrb_str_new_cstr_frozen(mrb, "5.1-dev"));
 
     // Enum
 
@@ -9725,7 +10251,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_const(mrb, mRaylib, "KEY_KP_ENTER", mrb_int_value(mrb, 335));
     mrb_define_const(mrb, mRaylib, "KEY_KP_EQUAL", mrb_int_value(mrb, 336));
     mrb_define_const(mrb, mRaylib, "KEY_BACK", mrb_int_value(mrb, 4));
-    mrb_define_const(mrb, mRaylib, "KEY_MENU", mrb_int_value(mrb, 82));
+    mrb_define_const(mrb, mRaylib, "KEY_MENU", mrb_int_value(mrb, 5));
     mrb_define_const(mrb, mRaylib, "KEY_VOLUME_UP", mrb_int_value(mrb, 24));
     mrb_define_const(mrb, mRaylib, "KEY_VOLUME_DOWN", mrb_int_value(mrb, 25));
 
@@ -10337,8 +10863,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "hScreenSize=", mrb_raylib_VrDeviceInfo_hScreenSize_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenSize", mrb_raylib_VrDeviceInfo_vScreenSize_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenSize=", mrb_raylib_VrDeviceInfo_vScreenSize_set, MRB_ARGS_REQ(1));
-    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenCenter", mrb_raylib_VrDeviceInfo_vScreenCenter_get, MRB_ARGS_NONE());
-    mrb_define_method(mrb, cRaylibVrDeviceInfo, "vScreenCenter=", mrb_raylib_VrDeviceInfo_vScreenCenter_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "eyeToScreenDistance", mrb_raylib_VrDeviceInfo_eyeToScreenDistance_get, MRB_ARGS_NONE());
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "eyeToScreenDistance=", mrb_raylib_VrDeviceInfo_eyeToScreenDistance_set, MRB_ARGS_REQ(1));
     mrb_define_method(mrb, cRaylibVrDeviceInfo, "lensSeparationDistance", mrb_raylib_VrDeviceInfo_lensSeparationDistance_get, MRB_ARGS_NONE());
@@ -10380,12 +10904,32 @@ void mrb_raylib_module_init(mrb_state* mrb)
     // mrb_define_method(mrb, cRaylibFilePathList, "paths", mrb_raylib_FilePathList_paths_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
     // mrb_define_method(mrb, cRaylibFilePathList, "paths=", mrb_raylib_FilePathList_paths_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
 
+    cRaylibAutomationEvent = mrb_define_class_under(mrb, mRaylib, "AutomationEvent", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibAutomationEvent, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibAutomationEvent, "initialize", mrb_raylib_AutomationEvent_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibAutomationEvent, "frame", mrb_raylib_AutomationEvent_frame_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEvent, "frame=", mrb_raylib_AutomationEvent_frame_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibAutomationEvent, "type", mrb_raylib_AutomationEvent_type_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEvent, "type=", mrb_raylib_AutomationEvent_type_set, MRB_ARGS_REQ(1));
+    // mrb_define_method(mrb, cRaylibAutomationEvent, "params", mrb_raylib_AutomationEvent_params_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array
+    // mrb_define_method(mrb, cRaylibAutomationEvent, "params=", mrb_raylib_AutomationEvent_params_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array
+
+    cRaylibAutomationEventList = mrb_define_class_under(mrb, mRaylib, "AutomationEventList", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibAutomationEventList, MRB_TT_DATA);
+    mrb_define_method(mrb, cRaylibAutomationEventList, "initialize", mrb_raylib_AutomationEventList_initialize, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cRaylibAutomationEventList, "capacity", mrb_raylib_AutomationEventList_capacity_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEventList, "capacity=", mrb_raylib_AutomationEventList_capacity_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibAutomationEventList, "count", mrb_raylib_AutomationEventList_count_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibAutomationEventList, "count=", mrb_raylib_AutomationEventList_count_set, MRB_ARGS_REQ(1));
+    // mrb_define_method(mrb, cRaylibAutomationEventList, "events", mrb_raylib_AutomationEventList_events_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes
+    // mrb_define_method(mrb, cRaylibAutomationEventList, "events=", mrb_raylib_AutomationEventList_events_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes
+
 
     // Function
 
     mrb_define_module_function(mrb, mRaylib, "InitWindow", mrb_raylib_InitWindow, MRB_ARGS_REQ(3));
-    mrb_define_module_function(mrb, mRaylib, "WindowShouldClose", mrb_raylib_WindowShouldClose, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "CloseWindow", mrb_raylib_CloseWindow, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "WindowShouldClose", mrb_raylib_WindowShouldClose, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "IsWindowReady", mrb_raylib_IsWindowReady, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "IsWindowFullscreen", mrb_raylib_IsWindowFullscreen, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "IsWindowHidden", mrb_raylib_IsWindowHidden, MRB_ARGS_NONE());
@@ -10431,9 +10975,6 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "GetClipboardText", mrb_raylib_GetClipboardText, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "EnableEventWaiting", mrb_raylib_EnableEventWaiting, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "DisableEventWaiting", mrb_raylib_DisableEventWaiting, MRB_ARGS_NONE());
-    mrb_define_module_function(mrb, mRaylib, "SwapScreenBuffer", mrb_raylib_SwapScreenBuffer, MRB_ARGS_NONE());
-    mrb_define_module_function(mrb, mRaylib, "PollInputEvents", mrb_raylib_PollInputEvents, MRB_ARGS_NONE());
-    mrb_define_module_function(mrb, mRaylib, "WaitTime", mrb_raylib_WaitTime, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "ShowCursor", mrb_raylib_ShowCursor, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "HideCursor", mrb_raylib_HideCursor, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "IsCursorHidden", mrb_raylib_IsCursorHidden, MRB_ARGS_NONE());
@@ -10469,26 +11010,32 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "SetShaderValueMatrix", mrb_raylib_SetShaderValueMatrix, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "SetShaderValueTexture", mrb_raylib_SetShaderValueTexture, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "UnloadShader", mrb_raylib_UnloadShader, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "GetMouseRay", mrb_raylib_GetMouseRay, MRB_ARGS_REQ(2));
-    mrb_define_module_function(mrb, mRaylib, "GetCameraMatrix", mrb_raylib_GetCameraMatrix, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "GetCameraMatrix2D", mrb_raylib_GetCameraMatrix2D, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetScreenToWorldRay", mrb_raylib_GetScreenToWorldRay, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetScreenToWorldRayEx", mrb_raylib_GetScreenToWorldRayEx, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "GetWorldToScreen", mrb_raylib_GetWorldToScreen, MRB_ARGS_REQ(2));
-    mrb_define_module_function(mrb, mRaylib, "GetScreenToWorld2D", mrb_raylib_GetScreenToWorld2D, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "GetWorldToScreenEx", mrb_raylib_GetWorldToScreenEx, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "GetWorldToScreen2D", mrb_raylib_GetWorldToScreen2D, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetScreenToWorld2D", mrb_raylib_GetScreenToWorld2D, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetCameraMatrix", mrb_raylib_GetCameraMatrix, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetCameraMatrix2D", mrb_raylib_GetCameraMatrix2D, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetTargetFPS", mrb_raylib_SetTargetFPS, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "GetFPS", mrb_raylib_GetFPS, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "GetFrameTime", mrb_raylib_GetFrameTime, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "GetTime", mrb_raylib_GetTime, MRB_ARGS_NONE());
-    mrb_define_module_function(mrb, mRaylib, "GetRandomValue", mrb_raylib_GetRandomValue, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetFPS", mrb_raylib_GetFPS, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "SwapScreenBuffer", mrb_raylib_SwapScreenBuffer, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "PollInputEvents", mrb_raylib_PollInputEvents, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "WaitTime", mrb_raylib_WaitTime, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetRandomSeed", mrb_raylib_SetRandomSeed, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetRandomValue", mrb_raylib_GetRandomValue, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "LoadRandomSequence", mrb_raylib_LoadRandomSequence, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "UnloadRandomSequence", mrb_raylib_UnloadRandomSequence, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "TakeScreenshot", mrb_raylib_TakeScreenshot, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetConfigFlags", mrb_raylib_SetConfigFlags, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "OpenURL", mrb_raylib_OpenURL, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetTraceLogLevel", mrb_raylib_SetTraceLogLevel, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "MemAlloc", mrb_raylib_MemAlloc, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "MemRealloc", mrb_raylib_MemRealloc, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "MemFree", mrb_raylib_MemFree, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "OpenURL", mrb_raylib_OpenURL, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetTraceLogCallback", mrb_raylib_SetTraceLogCallback, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetLoadFileDataCallback", mrb_raylib_SetLoadFileDataCallback, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "SetSaveFileDataCallback", mrb_raylib_SetSaveFileDataCallback, MRB_ARGS_REQ(1));
@@ -10525,14 +11072,22 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DecompressData", mrb_raylib_DecompressData, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "EncodeDataBase64", mrb_raylib_EncodeDataBase64, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DecodeDataBase64", mrb_raylib_DecodeDataBase64, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "LoadAutomationEventList", mrb_raylib_LoadAutomationEventList, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "UnloadAutomationEventList", mrb_raylib_UnloadAutomationEventList, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "ExportAutomationEventList", mrb_raylib_ExportAutomationEventList, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "SetAutomationEventList", mrb_raylib_SetAutomationEventList, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "SetAutomationEventBaseFrame", mrb_raylib_SetAutomationEventBaseFrame, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "StartAutomationEventRecording", mrb_raylib_StartAutomationEventRecording, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "StopAutomationEventRecording", mrb_raylib_StopAutomationEventRecording, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "PlayAutomationEvent", mrb_raylib_PlayAutomationEvent, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsKeyPressed", mrb_raylib_IsKeyPressed, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsKeyPressedRepeat", mrb_raylib_IsKeyPressedRepeat, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsKeyDown", mrb_raylib_IsKeyDown, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsKeyReleased", mrb_raylib_IsKeyReleased, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsKeyUp", mrb_raylib_IsKeyUp, MRB_ARGS_REQ(1));
-    mrb_define_module_function(mrb, mRaylib, "SetExitKey", mrb_raylib_SetExitKey, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetKeyPressed", mrb_raylib_GetKeyPressed, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "GetCharPressed", mrb_raylib_GetCharPressed, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "SetExitKey", mrb_raylib_SetExitKey, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsGamepadAvailable", mrb_raylib_IsGamepadAvailable, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetGamepadName", mrb_raylib_GetGamepadName, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsGamepadButtonPressed", mrb_raylib_IsGamepadButtonPressed, MRB_ARGS_REQ(2));
@@ -10543,6 +11098,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "GetGamepadAxisCount", mrb_raylib_GetGamepadAxisCount, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetGamepadAxisMovement", mrb_raylib_GetGamepadAxisMovement, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "SetGamepadMappings", mrb_raylib_SetGamepadMappings, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "SetGamepadVibration", mrb_raylib_SetGamepadVibration, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "IsMouseButtonPressed", mrb_raylib_IsMouseButtonPressed, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsMouseButtonDown", mrb_raylib_IsMouseButtonDown, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsMouseButtonReleased", mrb_raylib_IsMouseButtonReleased, MRB_ARGS_REQ(1));
@@ -10573,23 +11129,22 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "UpdateCamera", mrb_raylib_UpdateCamera, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "UpdateCameraPro", mrb_raylib_UpdateCameraPro, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "SetShapesTexture", mrb_raylib_SetShapesTexture, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetShapesTexture", mrb_raylib_GetShapesTexture, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GetShapesTextureRectangle", mrb_raylib_GetShapesTextureRectangle, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "DrawPixel", mrb_raylib_DrawPixel, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawPixelV", mrb_raylib_DrawPixelV, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "DrawLine", mrb_raylib_DrawLine, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawLineV", mrb_raylib_DrawLineV, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawLineEx", mrb_raylib_DrawLineEx, MRB_ARGS_REQ(4));
-    mrb_define_module_function(mrb, mRaylib, "DrawLineBezier", mrb_raylib_DrawLineBezier, MRB_ARGS_REQ(4));
-    mrb_define_module_function(mrb, mRaylib, "DrawLineBezierQuad", mrb_raylib_DrawLineBezierQuad, MRB_ARGS_REQ(5));
-    mrb_define_module_function(mrb, mRaylib, "DrawLineBezierCubic", mrb_raylib_DrawLineBezierCubic, MRB_ARGS_REQ(6));
-    mrb_define_module_function(mrb, mRaylib, "DrawLineBSpline", mrb_raylib_DrawLineBSpline, MRB_ARGS_REQ(4));
-    mrb_define_module_function(mrb, mRaylib, "DrawLineCatmullRom", mrb_raylib_DrawLineCatmullRom, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawLineStrip", mrb_raylib_DrawLineStrip, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "DrawLineBezier", mrb_raylib_DrawLineBezier, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawCircle", mrb_raylib_DrawCircle, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleSector", mrb_raylib_DrawCircleSector, MRB_ARGS_REQ(6));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleSectorLines", mrb_raylib_DrawCircleSectorLines, MRB_ARGS_REQ(6));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleGradient", mrb_raylib_DrawCircleGradient, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleV", mrb_raylib_DrawCircleV, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleLines", mrb_raylib_DrawCircleLines, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawCircleLinesV", mrb_raylib_DrawCircleLinesV, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawEllipse", mrb_raylib_DrawEllipse, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawEllipseLines", mrb_raylib_DrawEllipseLines, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawRing", mrb_raylib_DrawRing, MRB_ARGS_REQ(7));
@@ -10612,6 +11167,21 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawPoly", mrb_raylib_DrawPoly, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawPolyLines", mrb_raylib_DrawPolyLines, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawPolyLinesEx", mrb_raylib_DrawPolyLinesEx, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineLinear", mrb_raylib_DrawSplineLinear, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineBasis", mrb_raylib_DrawSplineBasis, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineCatmullRom", mrb_raylib_DrawSplineCatmullRom, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineBezierQuadratic", mrb_raylib_DrawSplineBezierQuadratic, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineBezierCubic", mrb_raylib_DrawSplineBezierCubic, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineSegmentLinear", mrb_raylib_DrawSplineSegmentLinear, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineSegmentBasis", mrb_raylib_DrawSplineSegmentBasis, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineSegmentCatmullRom", mrb_raylib_DrawSplineSegmentCatmullRom, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineSegmentBezierQuadratic", mrb_raylib_DrawSplineSegmentBezierQuadratic, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "DrawSplineSegmentBezierCubic", mrb_raylib_DrawSplineSegmentBezierCubic, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GetSplinePointLinear", mrb_raylib_GetSplinePointLinear, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GetSplinePointBasis", mrb_raylib_GetSplinePointBasis, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GetSplinePointCatmullRom", mrb_raylib_GetSplinePointCatmullRom, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GetSplinePointBezierQuad", mrb_raylib_GetSplinePointBezierQuad, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "GetSplinePointBezierCubic", mrb_raylib_GetSplinePointBezierCubic, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "CheckCollisionRecs", mrb_raylib_CheckCollisionRecs, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "CheckCollisionCircles", mrb_raylib_CheckCollisionCircles, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "CheckCollisionCircleRec", mrb_raylib_CheckCollisionCircleRec, MRB_ARGS_REQ(3));
@@ -10626,6 +11196,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "LoadImageRaw", mrb_raylib_LoadImageRaw, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "LoadImageSvg", mrb_raylib_LoadImageSvg, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "LoadImageAnim", mrb_raylib_LoadImageAnim, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "LoadImageAnimFromMemory", mrb_raylib_LoadImageAnimFromMemory, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "LoadImageFromMemory", mrb_raylib_LoadImageFromMemory, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "LoadImageFromTexture", mrb_raylib_LoadImageFromTexture, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "LoadImageFromScreen", mrb_raylib_LoadImageFromScreen, MRB_ARGS_NONE());
@@ -10655,6 +11226,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "ImageAlphaMask", mrb_raylib_ImageAlphaMask, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "ImageAlphaPremultiply", mrb_raylib_ImageAlphaPremultiply, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "ImageBlurGaussian", mrb_raylib_ImageBlurGaussian, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "ImageKernelConvolution", mrb_raylib_ImageKernelConvolution, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "ImageResize", mrb_raylib_ImageResize, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "ImageResizeNN", mrb_raylib_ImageResizeNN, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "ImageResizeCanvas", mrb_raylib_ImageResizeCanvas, MRB_ARGS_REQ(6));
@@ -10712,6 +11284,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawTextureRec", mrb_raylib_DrawTextureRec, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawTexturePro", mrb_raylib_DrawTexturePro, MRB_ARGS_REQ(6));
     mrb_define_module_function(mrb, mRaylib, "DrawTextureNPatch", mrb_raylib_DrawTextureNPatch, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "ColorIsEqual", mrb_raylib_ColorIsEqual, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "Fade", mrb_raylib_Fade, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "ColorToInt", mrb_raylib_ColorToInt, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "ColorNormalize", mrb_raylib_ColorNormalize, MRB_ARGS_REQ(1));
@@ -10773,6 +11346,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "TextToLower", mrb_raylib_TextToLower, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "TextToPascal", mrb_raylib_TextToPascal, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "TextToInteger", mrb_raylib_TextToInteger, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "TextToFloat", mrb_raylib_TextToFloat, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "DrawLine3D", mrb_raylib_DrawLine3D, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawPoint3D", mrb_raylib_DrawPoint3D, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "DrawCircle3D", mrb_raylib_DrawCircle3D, MRB_ARGS_REQ(5));
@@ -10812,9 +11386,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "UnloadMesh", mrb_raylib_UnloadMesh, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "DrawMesh", mrb_raylib_DrawMesh, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawMeshInstanced", mrb_raylib_DrawMeshInstanced, MRB_ARGS_REQ(4));
-    mrb_define_module_function(mrb, mRaylib, "ExportMesh", mrb_raylib_ExportMesh, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "GetMeshBoundingBox", mrb_raylib_GetMeshBoundingBox, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GenMeshTangents", mrb_raylib_GenMeshTangents, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "ExportMesh", mrb_raylib_ExportMesh, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "ExportMeshAsCode", mrb_raylib_ExportMeshAsCode, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "GenMeshPoly", mrb_raylib_GenMeshPoly, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "GenMeshPlane", mrb_raylib_GenMeshPlane, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "GenMeshCube", mrb_raylib_GenMeshCube, MRB_ARGS_REQ(3));
@@ -10849,6 +11424,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "CloseAudioDevice", mrb_raylib_CloseAudioDevice, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "IsAudioDeviceReady", mrb_raylib_IsAudioDeviceReady, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "SetMasterVolume", mrb_raylib_SetMasterVolume, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetMasterVolume", mrb_raylib_GetMasterVolume, MRB_ARGS_NONE());
     mrb_define_module_function(mrb, mRaylib, "LoadWave", mrb_raylib_LoadWave, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "LoadWaveFromMemory", mrb_raylib_LoadWaveFromMemory, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "IsWaveReady", mrb_raylib_IsWaveReady, MRB_ARGS_REQ(1));
