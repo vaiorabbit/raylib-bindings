@@ -223,40 +223,76 @@
       "description": "Default projection matrix far cull distance"
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL",
+      "type": "INT",
+      "value": 2,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR",
+      "type": "INT",
+      "value": 3,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT",
+      "type": "INT",
+      "value": 4,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2",
+      "type": "INT",
+      "value": 5,
+      "description": ""
+    },
+    {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION",
       "type": "STRING",
       "value": "vertexPosition",
-      "description": "Bound by default to shader location: 0"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD",
       "type": "STRING",
       "value": "vertexTexCoord",
-      "description": "Bound by default to shader location: 1"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL",
       "type": "STRING",
       "value": "vertexNormal",
-      "description": "Bound by default to shader location: 2"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_COLOR",
       "type": "STRING",
       "value": "vertexColor",
-      "description": "Bound by default to shader location: 3"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TANGENT",
       "type": "STRING",
       "value": "vertexTangent",
-      "description": "Bound by default to shader location: 4"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD2",
       "type": "STRING",
       "value": "vertexTexCoord2",
-      "description": "Bound by default to shader location: 5"
+      "description": "Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2"
     },
     {
       "name": "RL_DEFAULT_SHADER_UNIFORM_NAME_MVP",
@@ -373,19 +409,7 @@
       "description": ""
     },
     {
-      "name": "SUPPORT_FILEFORMAT_FNT",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
       "name": "SUPPORT_FILEFORMAT_TTF",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
-      "name": "SUPPORT_FILEFORMAT_BDF",
       "type": "INT",
       "value": 1,
       "description": ""

@@ -9,7 +9,7 @@
     {
       "name": "RLGL_VERSION",
       "type": "STRING",
-      "value": "4.5",
+      "value": "5.0",
       "description": ""
     },
     {
@@ -642,6 +642,11 @@
           "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
+          "type": "float *",
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+        },
+        {
           "type": "unsigned char *",
           "name": "colors",
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
@@ -682,9 +687,9 @@
           "description": "OpenGL Vertex Array Object id"
         },
         {
-          "type": "unsigned int[4]",
+          "type": "unsigned int[5]",
           "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (4 types of vertex data)"
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         }
       ]
     },
@@ -1559,6 +1564,43 @@
         {
           "type": "int",
           "name": "height"
+        }
+      ]
+    },
+    {
+      "name": "rlSetClipPlanes",
+      "description": "Set clip planes distances",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "double",
+          "name": "near"
+        },
+        {
+          "type": "double",
+          "name": "far"
+        }
+      ]
+    },
+    {
+      "name": "rlGetCullDistanceNear",
+      "description": "Get cull plane distance near",
+      "returnType": "double",
+      "params": [
+        {
+          "type": "",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "name": "rlGetCullDistanceFar",
+      "description": "Get cull plane distance far",
+      "returnType": "double",
+      "params": [
+        {
+          "type": "",
+          "name": ""
         }
       ]
     },
@@ -2561,8 +2603,8 @@
           "name": "stride"
         },
         {
-          "type": "const void *",
-          "name": "pointer"
+          "type": "int",
+          "name": "offset"
         }
       ]
     },

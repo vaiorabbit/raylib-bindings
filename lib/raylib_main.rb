@@ -2618,15 +2618,24 @@ module Raylib
       #   @return [void]
       [:DrawRectangleRounded, :DrawRectangleRounded, [Rectangle.by_value, :float, :int, Color.by_value], :void],
 
-      # @!method DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color)
-      #   DrawRectangleRoundedLines : Draw rectangle with rounded edges outline
+      # @!method DrawRectangleRoundedLines(rec, roundness, segments, color)
+      #   DrawRectangleRoundedLines : Draw rectangle lines with rounded edges
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, Color.by_value], :void],
+
+      # @!method DrawRectangleRoundedLinesEx(rec, roundness, segments, lineThick, color)
+      #   DrawRectangleRoundedLinesEx : Draw rectangle with rounded edges outline
       #   @param rec [Rectangle]
       #   @param roundness [float]
       #   @param segments [int]
       #   @param lineThick [float]
       #   @param color [Color]
       #   @return [void]
-      [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, :float, Color.by_value], :void],
+      [:DrawRectangleRoundedLinesEx, :DrawRectangleRoundedLinesEx, [Rectangle.by_value, :float, :int, :float, Color.by_value], :void],
 
       # @!method DrawTriangle(v1, v2, v3, color)
       #   DrawTriangle : Draw a color-filled triangle (vertex in counter-clockwise order!)

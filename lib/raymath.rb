@@ -479,6 +479,16 @@ module Raylib
       #   @return [Vector3]
       [:Vector3Lerp, :Vector3Lerp, [Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
 
+      # @!method Vector3CubicHermite(v1, tangent1, v2, tangent2, amount)
+      #   Vector3CubicHermite
+      #   @param v1 [Vector3]
+      #   @param tangent1 [Vector3]
+      #   @param v2 [Vector3]
+      #   @param tangent2 [Vector3]
+      #   @param amount [float]
+      #   @return [Vector3]
+      [:Vector3CubicHermite, :Vector3CubicHermite, [Vector3.by_value, Vector3.by_value, Vector3.by_value, Vector3.by_value, :float], Vector3.by_value],
+
       # @!method Vector3Reflect(v, normal)
       #   Vector3Reflect
       #   @param v [Vector3]
@@ -950,6 +960,16 @@ module Raylib
       #   @param amount [float]
       #   @return [Quaternion]
       [:QuaternionSlerp, :QuaternionSlerp, [Quaternion.by_value, Quaternion.by_value, :float], Quaternion.by_value],
+
+      # @!method QuaternionCubicHermiteSpline(q1, outTangent1, q2, inTangent2, t)
+      #   QuaternionCubicHermiteSpline
+      #   @param q1 [Quaternion]
+      #   @param outTangent1 [Quaternion]
+      #   @param q2 [Quaternion]
+      #   @param inTangent2 [Quaternion]
+      #   @param t [float]
+      #   @return [Quaternion]
+      [:QuaternionCubicHermiteSpline, :QuaternionCubicHermiteSpline, [Quaternion.by_value, Quaternion.by_value, Quaternion.by_value, Quaternion.by_value, :float], Quaternion.by_value],
 
       # @!method QuaternionFromVector3ToVector3(from, to)
       #   QuaternionFromVector3ToVector3

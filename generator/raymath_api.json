@@ -1190,6 +1190,33 @@
       ]
     },
     {
+      "name": "Vector3CubicHermite",
+      "description": "",
+      "returnType": "Vector3",
+      "params": [
+        {
+          "type": "Vector3",
+          "name": "v1"
+        },
+        {
+          "type": "Vector3",
+          "name": "tangent1"
+        },
+        {
+          "type": "Vector3",
+          "name": "v2"
+        },
+        {
+          "type": "Vector3",
+          "name": "tangent2"
+        },
+        {
+          "type": "float",
+          "name": "amount"
+        }
+      ]
+    },
+    {
       "name": "Vector3Reflect",
       "description": "",
       "returnType": "Vector3",
@@ -2182,6 +2209,33 @@
         {
           "type": "float",
           "name": "amount"
+        }
+      ]
+    },
+    {
+      "name": "QuaternionCubicHermiteSpline",
+      "description": "",
+      "returnType": "Quaternion",
+      "params": [
+        {
+          "type": "Quaternion",
+          "name": "q1"
+        },
+        {
+          "type": "Quaternion",
+          "name": "outTangent1"
+        },
+        {
+          "type": "Quaternion",
+          "name": "q2"
+        },
+        {
+          "type": "Quaternion",
+          "name": "inTangent2"
+        },
+        {
+          "type": "float",
+          "name": "t"
         }
       ]
     },

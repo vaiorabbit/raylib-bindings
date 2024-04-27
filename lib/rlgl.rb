@@ -11,7 +11,7 @@ module Raylib
 
   # Define/Macro
 
-  RLGL_VERSION = "4.5"
+  RLGL_VERSION = "5.0"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
   RL_TEXTURE_WRAP_S = 0x2802                    # GL_TEXTURE_WRAP_S
   RL_TEXTURE_WRAP_T = 0x2803                    # GL_TEXTURE_WRAP_T
@@ -249,10 +249,11 @@ module Raylib
       :elementCount, :int,  # Number of elements in the buffer (QUADS)
       :vertices, :pointer,  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
       :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
+      :normals, :pointer,   # Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)
       :colors, :pointer,    # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
       :indices, :pointer,   # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
       :vaoId, :uint,        # OpenGL Vertex Array Object id
-      :vboId, [:uint, 4],   # OpenGL Vertex Buffer Objects id (4 types of vertex data)
+      :vboId, [:uint, 5],   # OpenGL Vertex Buffer Objects id (5 types of vertex data)
     )
     def elementCount = self[:elementCount]
     def elementCount=(v) self[:elementCount] = v end
@@ -260,6 +261,8 @@ module Raylib
     def vertices=(v) self[:vertices] = v end
     def texcoords = self[:texcoords]
     def texcoords=(v) self[:texcoords] = v end
+    def normals = self[:normals]
+    def normals=(v) self[:normals] = v end
     def colors = self[:colors]
     def colors=(v) self[:colors] = v end
     def indices = self[:indices]
@@ -400,6 +403,25 @@ module Raylib
       #   @param height [int]
       #   @return [void]
       [:rlViewport, :rlViewport, [:int, :int, :int, :int], :void],
+
+      # @!method rlSetClipPlanes(near, far)
+      #   rlSetClipPlanes : Set clip planes distances
+      #   @param near [double]
+      #   @param far [double]
+      #   @return [void]
+      [:rlSetClipPlanes, :rlSetClipPlanes, [:double, :double], :void],
+
+      # @!method rlGetCullDistanceNear()
+      #   rlGetCullDistanceNear : Get cull plane distance near
+      #   @param  []
+      #   @return [double]
+      [:rlGetCullDistanceNear, :rlGetCullDistanceNear, [], :double],
+
+      # @!method rlGetCullDistanceFar()
+      #   rlGetCullDistanceFar : Get cull plane distance far
+      #   @param  []
+      #   @return [double]
+      [:rlGetCullDistanceFar, :rlGetCullDistanceFar, [], :double],
 
       # @!method rlBegin(mode)
       #   rlBegin : Initialize drawing mode (how to organize vertex)
@@ -940,16 +962,16 @@ module Raylib
       #   @return [void]
       [:rlUnloadVertexBuffer, :rlUnloadVertexBuffer, [:uint], :void],
 
-      # @!method rlSetVertexAttribute(index, compSize, type, normalized, stride, pointer)
+      # @!method rlSetVertexAttribute(index, compSize, type, normalized, stride, offset)
       #   rlSetVertexAttribute : Set vertex attribute data configuration
       #   @param index [unsigned int]
       #   @param compSize [int]
       #   @param type [int]
       #   @param normalized [bool]
       #   @param stride [int]
-      #   @param pointer [const void *]
+      #   @param offset [int]
       #   @return [void]
-      [:rlSetVertexAttribute, :rlSetVertexAttribute, [:uint, :int, :int, :bool, :int, :pointer], :void],
+      [:rlSetVertexAttribute, :rlSetVertexAttribute, [:uint, :int, :int, :bool, :int, :int], :void],
 
       # @!method rlSetVertexAttributeDivisor(index, divisor)
       #   rlSetVertexAttributeDivisor : Set vertex attribute data divisor
