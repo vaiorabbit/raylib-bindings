@@ -5663,6 +5663,21 @@ static mrb_value mrb_raylib_DrawRectangleRounded(mrb_state* mrb, mrb_value self)
 
 static mrb_value mrb_raylib_DrawRectangleRoundedLines(mrb_state* mrb, mrb_value self)
 {
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle rec = *(Rectangle*)DATA_PTR(argv[0]);
+    float roundness = mrb_as_float(mrb, argv[1]);
+    int segments = mrb_as_int(mrb, argv[2]);
+    Color color = *(Color*)DATA_PTR(argv[3]);
+
+    DrawRectangleRoundedLines(rec, roundness, segments, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawRectangleRoundedLinesEx(mrb_state* mrb, mrb_value self)
+{
     mrb_value argv[5];
     void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
     mrb_get_args_a(mrb, "ooooo", ptrs);
@@ -5672,7 +5687,7 @@ static mrb_value mrb_raylib_DrawRectangleRoundedLines(mrb_state* mrb, mrb_value 
     float lineThick = mrb_as_float(mrb, argv[3]);
     Color color = *(Color*)DATA_PTR(argv[4]);
 
-    DrawRectangleRoundedLines(rec, roundness, segments, lineThick, color);
+    DrawRectangleRoundedLinesEx(rec, roundness, segments, lineThick, color);
 
     return mrb_nil_value();
 }
@@ -11158,7 +11173,8 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawRectangleLines", mrb_raylib_DrawRectangleLines, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawRectangleLinesEx", mrb_raylib_DrawRectangleLinesEx, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawRectangleRounded", mrb_raylib_DrawRectangleRounded, MRB_ARGS_REQ(4));
-    mrb_define_module_function(mrb, mRaylib, "DrawRectangleRoundedLines", mrb_raylib_DrawRectangleRoundedLines, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "DrawRectangleRoundedLines", mrb_raylib_DrawRectangleRoundedLines, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawRectangleRoundedLinesEx", mrb_raylib_DrawRectangleRoundedLinesEx, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangle", mrb_raylib_DrawTriangle, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleLines", mrb_raylib_DrawTriangleLines, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleFan", mrb_raylib_DrawTriangleFan, MRB_ARGS_REQ(3));
