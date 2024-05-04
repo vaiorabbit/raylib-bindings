@@ -517,6 +517,42 @@
       "description": "GL_DRAW_FRAMEBUFFER"
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL",
+      "type": "INT",
+      "value": 2,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR",
+      "type": "INT",
+      "value": 3,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT",
+      "type": "INT",
+      "value": 4,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2",
+      "type": "INT",
+      "value": 5,
+      "description": ""
+    },
+    {
       "name": "RL_MATRIX_TYPE",
       "type": "GUARD",
       "value": "",

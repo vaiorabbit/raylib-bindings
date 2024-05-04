@@ -3,15 +3,15 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2024-04-27
+*   Last modified : 2024-05-04
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.1-dev]( https://github.com/raysan5/raylib/commit/414229bcf93816daaa253a82cd54fbd7b18e6449 )
+*   [raylib](https://github.com/raysan5/raylib) version [5.1-dev]( https://github.com/raysan5/raylib/commit/f1007554a0a8145060797c0aa8169bdaf2c1c6b8 )
     *   raylib
     *   raymath
     *   rlgl
-*   [raygui](https://github.com/raysan5/raygui) version [4.1-dev]( https://github.com/raysan5/raygui/commit/0a9a9f897a16968444e10fea4fbac33ba1d5d640 )
+*   [raygui](https://github.com/raysan5/raygui) version [4.1-dev]( https://github.com/raysan5/raygui/commit/a3a0e86e215145c28726e6f469f13d0aa6647a5e )
 *   [Physac](https://github.com/raysan5/physac) version [1.1]( https://github.com/raysan5/physac/commit/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833 )
 
 <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/bitmap_font_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/game_of_life_simple_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/lissajous_curve_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/procedural_texture_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/reversi_board_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/utf8_font_rb.png" width="125">
@@ -159,6 +159,9 @@ See the projects below to learn how to use this library:
 
 *   `SetTraceLogCallback` and `TraceLogCallback` are unusable since Ruby-FFI does not support `:varargs` parameter in callbacks (`Proc`, etc.)
     *   Ref.: https://ffi.github.io/ruby-ffi-archive/messages/20130214-%5Bruby-ffi%5D%20Re_%20Callback%20Function%20with%20varargs-345.html
+
+*   For macOS users: if you get error messages like “'.... .dylib' not valid for use in process: library load disallowed by system policy” , you can work around it with the following command (although it is not recommended):
+    *   $ xattr -dr com.apple.quarantine (path to the .dylib)
 
 ## License ##
 
