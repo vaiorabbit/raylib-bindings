@@ -726,6 +726,16 @@ module Raylib
       #   @return [int]
       [:GuiValueBox, :GuiValueBox, [Rectangle.by_value, :pointer, :pointer, :int, :int, :bool], :int],
 
+      # @!method GuiValueBoxFloat(bounds, text, textValue, value, editMode)
+      #   GuiValueBoxFloat : Value box control for float values
+      #   @param bounds [Rectangle]
+      #   @param text [const char*]
+      #   @param textValue [char *]
+      #   @param value [float *]
+      #   @param editMode [bool]
+      #   @return [int]
+      [:GuiValueBoxFloat, :GuiValueBoxFloat, [Rectangle.by_value, :pointer, :pointer, :pointer, :bool], :int],
+
       # @!method GuiTextBox(bounds, text, textSize, editMode)
       #   GuiTextBox : Text Box control, updates input text
       #   @param bounds [Rectangle]

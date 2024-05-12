@@ -198,7 +198,7 @@ module Raylib
   GAMEPAD_BUTTON_RIGHT_FACE_LEFT = 8  # Gamepad right button left (i.e. PS3: Square, Xbox: X)
   GAMEPAD_BUTTON_LEFT_TRIGGER_1 = 9   # Gamepad top/back trigger left (first), it could be a trailing button
   GAMEPAD_BUTTON_LEFT_TRIGGER_2 = 10  # Gamepad top/back trigger left (second), it could be a trailing button
-  GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11 # Gamepad top/back trigger right (one), it could be a trailing button
+  GAMEPAD_BUTTON_RIGHT_TRIGGER_1 = 11 # Gamepad top/back trigger right (first), it could be a trailing button
   GAMEPAD_BUTTON_RIGHT_TRIGGER_2 = 12 # Gamepad top/back trigger right (second), it could be a trailing button
   GAMEPAD_BUTTON_MIDDLE_LEFT = 13     # Gamepad center buttons, left one (i.e. PS3: Select)
   GAMEPAD_BUTTON_MIDDLE = 14          # Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
@@ -362,11 +362,11 @@ module Raylib
 
   # enum CameraMode
   # Camera system modes
-  CAMERA_CUSTOM = 0       # Custom camera
-  CAMERA_FREE = 1         # Free camera
-  CAMERA_ORBITAL = 2      # Orbital camera
-  CAMERA_FIRST_PERSON = 3 # First person camera
-  CAMERA_THIRD_PERSON = 4 # Third person camera
+  CAMERA_CUSTOM = 0       # Camera custom, controlled by user (UpdateCamera() does nothing)
+  CAMERA_FREE = 1         # Camera free mode
+  CAMERA_ORBITAL = 2      # Camera orbital, around target, zoom supported
+  CAMERA_FIRST_PERSON = 3 # Camera first person
+  CAMERA_THIRD_PERSON = 4 # Camera third person
 
   # enum CameraProjection
   # Camera projection

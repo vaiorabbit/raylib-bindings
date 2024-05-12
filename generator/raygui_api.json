@@ -2695,6 +2695,33 @@
       ]
     },
     {
+      "name": "GuiValueBoxFloat",
+      "description": "Value box control for float values",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char*",
+          "name": "text"
+        },
+        {
+          "type": "char *",
+          "name": "textValue"
+        },
+        {
+          "type": "float *",
+          "name": "value"
+        },
+        {
+          "type": "bool",
+          "name": "editMode"
+        }
+      ]
+    },
+    {
       "name": "GuiTextBox",
       "description": "Text Box control, updates input text",
       "returnType": "int",
