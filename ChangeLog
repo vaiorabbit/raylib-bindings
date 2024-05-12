@@ -1,6 +1,7 @@
 2024-05-12  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/f62202198e35161a9fe394a14bbd1a7c655107ad ) and raygui ( https://github.com/raysan5/raygui/commit/12804826d01bfb636e36f816bda19eaa23b4ace7 )
+	* Fixed constant redefinition warnings. (Ref.: https://github.com/raysan5/raylib/commit/33b32ca53a7817a9cfdb1840a8ab75fa7cb47723 https://github.com/raysan5/raylib/blob/f62202198e35161a9fe394a14bbd1a7c655107ad/src/config.h#L115-L121 )
 
 2024-05-04  vaiorabbit  <http://twitter.com/vaiorabbit>
 
