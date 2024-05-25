@@ -1621,24 +1621,12 @@
     {
       "name": "rlGetCullDistanceNear",
       "description": "Get cull plane distance near",
-      "returnType": "double",
-      "params": [
-        {
-          "type": "",
-          "name": ""
-        }
-      ]
+      "returnType": "double"
     },
     {
       "name": "rlGetCullDistanceFar",
       "description": "Get cull plane distance far",
-      "returnType": "double",
-      "params": [
-        {
-          "type": "",
-          "name": ""
-        }
-      ]
+      "returnType": "double"
     },
     {
       "name": "rlBegin",

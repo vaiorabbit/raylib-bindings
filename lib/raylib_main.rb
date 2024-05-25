@@ -4894,11 +4894,11 @@ module Raylib
       #   @return [Wave]
       [:WaveCopy, :WaveCopy, [Wave.by_value], Wave.by_value],
 
-      # @!method WaveCrop(wave, initSample, finalSample)
-      #   WaveCrop : Crop a wave to defined samples range
+      # @!method WaveCrop(wave, initFrame, finalFrame)
+      #   WaveCrop : Crop a wave to defined frames range
       #   @param wave [Wave *]
-      #   @param initSample [int]
-      #   @param finalSample [int]
+      #   @param initFrame [int]
+      #   @param finalFrame [int]
       #   @return [void]
       [:WaveCrop, :WaveCrop, [:pointer, :int, :int], :void],
 

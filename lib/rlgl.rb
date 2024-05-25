@@ -413,13 +413,11 @@ module Raylib
 
       # @!method rlGetCullDistanceNear()
       #   rlGetCullDistanceNear : Get cull plane distance near
-      #   @param  []
       #   @return [double]
       [:rlGetCullDistanceNear, :rlGetCullDistanceNear, [], :double],
 
       # @!method rlGetCullDistanceFar()
       #   rlGetCullDistanceFar : Get cull plane distance far
-      #   @param  []
       #   @return [double]
       [:rlGetCullDistanceFar, :rlGetCullDistanceFar, [], :double],
 

@@ -415,6 +415,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FILEFORMAT_FNT",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_TEXT_MANIPULATION",
       "type": "INT",
       "value": 1,
