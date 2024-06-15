@@ -127,6 +127,7 @@ module Raylib
   # DropdownBox
   ARROW_PADDING = 16          # DropdownBox arrow separation from border and items
   DROPDOWN_ITEMS_SPACING = 17 # DropdownBox items separation
+  DROPDOWN_ARROW_HIDDEN = 18  # DropdownBox arrow hidden
 
   # enum GuiTextBoxProperty
   # TextBox/TextBoxMulti/ValueBox/Spinner
@@ -139,10 +140,11 @@ module Raylib
 
   # enum GuiListViewProperty
   # ListView
-  LIST_ITEMS_HEIGHT = 16  # ListView items height
-  LIST_ITEMS_SPACING = 17 # ListView items separation
-  SCROLLBAR_WIDTH = 18    # ListView scrollbar size (usually width)
-  SCROLLBAR_SIDE = 19     # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
+  LIST_ITEMS_HEIGHT = 16       # ListView items height
+  LIST_ITEMS_SPACING = 17      # ListView items separation
+  SCROLLBAR_WIDTH = 18         # ListView scrollbar size (usually width)
+  SCROLLBAR_SIDE = 19          # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
+  LIST_ITEMS_BORDER_WIDTH = 20 # ListView items border width
 
   # enum GuiColorPickerProperty
   # ColorPicker

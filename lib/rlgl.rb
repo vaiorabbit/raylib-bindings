@@ -404,10 +404,10 @@ module Raylib
       #   @return [void]
       [:rlViewport, :rlViewport, [:int, :int, :int, :int], :void],
 
-      # @!method rlSetClipPlanes(near, far)
+      # @!method rlSetClipPlanes(nearPlane, farPlane)
       #   rlSetClipPlanes : Set clip planes distances
-      #   @param near [double]
-      #   @param far [double]
+      #   @param nearPlane [double]
+      #   @param farPlane [double]
       #   @return [void]
       [:rlSetClipPlanes, :rlSetClipPlanes, [:double, :double], :void],
 

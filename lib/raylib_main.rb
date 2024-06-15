@@ -1935,6 +1935,12 @@ module Raylib
       #   @return [bool]
       [:IsPathFile, :IsPathFile, [:pointer], :bool],
 
+      # @!method IsFileNameValid(fileName)
+      #   IsFileNameValid : Check if fileName is valid for the platform/OS
+      #   @param fileName [const char *]
+      #   @return [bool]
+      [:IsFileNameValid, :IsFileNameValid, [:pointer], :bool],
+
       # @!method LoadDirectoryFiles(dirPath)
       #   LoadDirectoryFiles : Load directory filepaths
       #   @param dirPath [const char *]
@@ -2400,7 +2406,7 @@ module Raylib
 
       # @!method DrawLineStrip(points, pointCount, color)
       #   DrawLineStrip : Draw lines sequence (using gl lines)
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]
@@ -2657,7 +2663,7 @@ module Raylib
 
       # @!method DrawTriangleFan(points, pointCount, color)
       #   DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]
@@ -2665,7 +2671,7 @@ module Raylib
 
       # @!method DrawTriangleStrip(points, pointCount, color)
       #   DrawTriangleStrip : Draw a triangle strip defined by points
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]
@@ -2704,7 +2710,7 @@ module Raylib
 
       # @!method DrawSplineLinear(points, pointCount, thick, color)
       #   DrawSplineLinear : Draw spline: Linear, minimum 2 points
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param thick [float]
       #   @param color [Color]
@@ -2713,7 +2719,7 @@ module Raylib
 
       # @!method DrawSplineBasis(points, pointCount, thick, color)
       #   DrawSplineBasis : Draw spline: B-Spline, minimum 4 points
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param thick [float]
       #   @param color [Color]
@@ -2722,7 +2728,7 @@ module Raylib
 
       # @!method DrawSplineCatmullRom(points, pointCount, thick, color)
       #   DrawSplineCatmullRom : Draw spline: Catmull-Rom, minimum 4 points
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param thick [float]
       #   @param color [Color]
@@ -2731,7 +2737,7 @@ module Raylib
 
       # @!method DrawSplineBezierQuadratic(points, pointCount, thick, color)
       #   DrawSplineBezierQuadratic : Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param thick [float]
       #   @param color [Color]
@@ -2740,7 +2746,7 @@ module Raylib
 
       # @!method DrawSplineBezierCubic(points, pointCount, thick, color)
       #   DrawSplineBezierCubic : Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param thick [float]
       #   @param color [Color]
@@ -2897,7 +2903,7 @@ module Raylib
       # @!method CheckCollisionPointPoly(point, points, pointCount)
       #   CheckCollisionPointPoly : Check if point is within a polygon described by array of vertices
       #   @param point [Vector2]
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @return [bool]
       [:CheckCollisionPointPoly, :CheckCollisionPointPoly, [Vector2.by_value, :pointer, :int], :bool],
@@ -2920,6 +2926,15 @@ module Raylib
       #   @param threshold [int]
       #   @return [bool]
       [:CheckCollisionPointLine, :CheckCollisionPointLine, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :int], :bool],
+
+      # @!method CheckCollisionCircleLine(center, radius, p1, p2)
+      #   CheckCollisionCircleLine : Check if circle collides with a line created betweeen two points [p1] and [p2]
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @return [bool]
+      [:CheckCollisionCircleLine, :CheckCollisionCircleLine, [Vector2.by_value, :float, Vector2.by_value, Vector2.by_value], :bool],
 
       # @!method GetCollisionRec(rec1, rec2)
       #   GetCollisionRec : Get collision rectangle for two rectangles collision
@@ -4114,6 +4129,18 @@ module Raylib
       #   @return [const char *]
       [:TextToPascal, :TextToPascal, [:pointer], :pointer],
 
+      # @!method TextToSnake(text)
+      #   TextToSnake : Get Snake case notation version of provided string
+      #   @param text [const char *]
+      #   @return [const char *]
+      [:TextToSnake, :TextToSnake, [:pointer], :pointer],
+
+      # @!method TextToCamel(text)
+      #   TextToCamel : Get Camel case notation version of provided string
+      #   @param text [const char *]
+      #   @return [const char *]
+      [:TextToCamel, :TextToCamel, [:pointer], :pointer],
+
       # @!method TextToInteger(text)
       #   TextToInteger : Get integer value from text (negative values not supported)
       #   @param text [const char *]
@@ -4162,7 +4189,7 @@ module Raylib
 
       # @!method DrawTriangleStrip3D(points, pointCount, color)
       #   DrawTriangleStrip3D : Draw a triangle strip defined by points
-      #   @param points [Vector3 *]
+      #   @param points [const Vector3 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]

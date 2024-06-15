@@ -820,14 +820,14 @@ module Raylib
       #   @return [Matrix]
       [:MatrixScale, :MatrixScale, [:float, :float, :float], Matrix.by_value],
 
-      # @!method MatrixFrustum(left, right, bottom, top, near, far)
+      # @!method MatrixFrustum(left, right, bottom, top, nearPlane, farPlane)
       #   MatrixFrustum
       #   @param left [double]
       #   @param right [double]
       #   @param bottom [double]
       #   @param top [double]
-      #   @param near [double]
-      #   @param far [double]
+      #   @param nearPlane [double]
+      #   @param farPlane [double]
       #   @return [Matrix]
       [:MatrixFrustum, :MatrixFrustum, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
 

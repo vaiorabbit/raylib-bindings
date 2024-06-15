@@ -1610,11 +1610,11 @@
       "params": [
         {
           "type": "double",
-          "name": "near"
+          "name": "nearPlane"
         },
         {
           "type": "double",
-          "name": "far"
+          "name": "farPlane"
         }
       ]
     },
