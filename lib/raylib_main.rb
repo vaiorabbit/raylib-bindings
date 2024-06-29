@@ -3207,9 +3207,9 @@ module Raylib
       [:ImageBlurGaussian, :ImageBlurGaussian, [:pointer, :int], :void],
 
       # @!method ImageKernelConvolution(image, kernel, kernelSize)
-      #   ImageKernelConvolution : Apply Custom Square image convolution kernel
+      #   ImageKernelConvolution : Apply custom square convolution kernel to image
       #   @param image [Image *]
-      #   @param kernel [float*]
+      #   @param kernel [const float *]
       #   @param kernelSize [int]
       #   @return [void]
       [:ImageKernelConvolution, :ImageKernelConvolution, [:pointer, :pointer, :int], :void],
@@ -3414,6 +3414,16 @@ module Raylib
       #   @return [void]
       [:ImageDrawLineV, :ImageDrawLineV, [:pointer, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
+      # @!method ImageDrawLineEx(dst, start, end, thick, color)
+      #   ImageDrawLineEx : Draw a line defining thickness within an image
+      #   @param dst [Image *]
+      #   @param start [Vector2]
+      #   @param end [Vector2]
+      #   @param thick [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawLineEx, :ImageDrawLineEx, [:pointer, Vector2.by_value, Vector2.by_value, :int, Color.by_value], :void],
+
       # @!method ImageDrawCircle(dst, centerX, centerY, radius, color)
       #   ImageDrawCircle : Draw a filled circle within an image
       #   @param dst [Image *]
@@ -3488,6 +3498,56 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
+
+      # @!method ImageDrawTriangle(dst, v1, v2, v3, color)
+      #   ImageDrawTriangle : Draw triangle within an image
+      #   @param dst [Image *]
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawTriangle, :ImageDrawTriangle, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawTriangleEx(dst, v1, v2, v3, c1, c2, c3)
+      #   ImageDrawTriangleEx : Draw triangle with interpolated colors within an image
+      #   @param dst [Image *]
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param c1 [Color]
+      #   @param c2 [Color]
+      #   @param c3 [Color]
+      #   @return [void]
+      [:ImageDrawTriangleEx, :ImageDrawTriangleEx, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawTriangleLines(dst, v1, v2, v3, color)
+      #   ImageDrawTriangleLines : Draw triangle outline within an image
+      #   @param dst [Image *]
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawTriangleLines, :ImageDrawTriangleLines, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawTriangleFan(dst, points, pointCount, color)
+      #   ImageDrawTriangleFan : Draw a triangle fan defined by points within an image (first vertex is the center)
+      #   @param dst [Image *]
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawTriangleFan, :ImageDrawTriangleFan, [:pointer, :pointer, :int, Color.by_value], :void],
+
+      # @!method ImageDrawTriangleStrip(dst, points, pointCount, color)
+      #   ImageDrawTriangleStrip : Draw a triangle strip defined by points within an image
+      #   @param dst [Image *]
+      #   @param points [Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawTriangleStrip, :ImageDrawTriangleStrip, [:pointer, :pointer, :int, Color.by_value], :void],
 
       # @!method ImageDraw(dst, src, srcRec, dstRec, tint)
       #   ImageDraw : Draw a source image within a destination image (tint applied to source)

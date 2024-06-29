@@ -2369,6 +2369,29 @@
           "name": "q"
         }
       ]
+    },
+    {
+      "name": "MatrixDecompose",
+      "description": "",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "Matrix",
+          "name": "mat"
+        },
+        {
+          "type": "Vector3 *",
+          "name": "translation"
+        },
+        {
+          "type": "Quaternion *",
+          "name": "rotation"
+        },
+        {
+          "type": "Vector3 *",
+          "name": "scale"
+        }
+      ]
     }
   ]
 }

@@ -1032,6 +1032,15 @@ module Raylib
       #   @param q [Quaternion]
       #   @return [int]
       [:QuaternionEquals, :QuaternionEquals, [Quaternion.by_value, Quaternion.by_value], :int],
+
+      # @!method MatrixDecompose(mat, translation, rotation, scale)
+      #   MatrixDecompose
+      #   @param mat [Matrix]
+      #   @param translation [Vector3 *]
+      #   @param rotation [Quaternion *]
+      #   @param scale [Vector3 *]
+      #   @return [void]
+      [:MatrixDecompose, :MatrixDecompose, [Matrix.by_value, :pointer, :pointer, :pointer], :void],
     ]
     entries.each do |entry|
       api_name = if method_naming == :snake_case
