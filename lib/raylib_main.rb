@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 5
-  RAYLIB_VERSION_MINOR = 1
+  RAYLIB_VERSION_MINOR = 5
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "5.1-dev"
+  RAYLIB_VERSION = "5.5"
 
   # Enum
 
@@ -899,7 +899,7 @@ module Raylib
   class Ray < FFI::Struct
     layout(
       :position, Vector3,  # Ray position (origin)
-      :direction, Vector3, # Ray direction
+      :direction, Vector3, # Ray direction (normalized)
     )
     def position = self[:position]
     def position=(v) self[:position] = v end
@@ -3132,6 +3132,13 @@ module Raylib
       #   @return [Image]
       [:ImageFromImage, :ImageFromImage, [Image.by_value, Rectangle.by_value], Image.by_value],
 
+      # @!method ImageFromChannel(image, selectedChannel)
+      #   ImageFromChannel : Create an image from a selected channel of another image (GRAYSCALE)
+      #   @param image [Image]
+      #   @param selectedChannel [int]
+      #   @return [Image]
+      [:ImageFromChannel, :ImageFromChannel, [Image.by_value, :int], Image.by_value],
+
       # @!method ImageText(text, fontSize, color)
       #   ImageText : Create an image from text (default font)
       #   @param text [const char *]
@@ -4484,12 +4491,12 @@ module Raylib
       #   @return [void]
       [:DrawBoundingBox, :DrawBoundingBox, [BoundingBox.by_value, Color.by_value], :void],
 
-      # @!method DrawBillboard(camera, texture, position, size, tint)
+      # @!method DrawBillboard(camera, texture, position, scale, tint)
       #   DrawBillboard : Draw a billboard texture
       #   @param camera [Camera]
       #   @param texture [Texture2D]
       #   @param position [Vector3]
-      #   @param size [float]
+      #   @param scale [float]
       #   @param tint [Color]
       #   @return [void]
       [:DrawBillboard, :DrawBillboard, [Camera.by_value, Texture2D.by_value, Vector3.by_value, :float, Color.by_value], :void],

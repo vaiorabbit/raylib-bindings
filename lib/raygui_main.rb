@@ -731,7 +731,7 @@ module Raylib
       # @!method GuiValueBoxFloat(bounds, text, textValue, value, editMode)
       #   GuiValueBoxFloat : Value box control for float values
       #   @param bounds [Rectangle]
-      #   @param text [const char*]
+      #   @param text [const char *]
       #   @param textValue [char *]
       #   @param value [float *]
       #   @param editMode [bool]

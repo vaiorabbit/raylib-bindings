@@ -2714,7 +2714,7 @@
           "name": "bounds"
         },
         {
-          "type": "const char*",
+          "type": "const char *",
           "name": "text"
         },
         {
