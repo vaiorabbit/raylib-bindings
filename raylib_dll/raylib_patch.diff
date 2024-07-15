@@ -1,0 +1,54 @@
+diff --git a/CMakeOptions.txt b/CMakeOptions.txt
+index b063f02a..fc3f4dd6 100644
+--- a/CMakeOptions.txt
++++ b/CMakeOptions.txt
+@@ -17,6 +17,7 @@ option(ENABLE_MSAN "Enable MemorySanitizer (MSan) for debugging (not recommended
+ option(WITH_PIC "Compile static library as position-independent code" OFF)
+ option(BUILD_SHARED_LIBS "Build raylib as a shared library" OFF)
+ option(MACOS_FATLIB "Build fat library for both i386 and x86_64 on macOS" OFF)
++option(MACOS_FRAMEWORK "Build as a framework on macOS (remember to turn BUILD_SHARED_LIBS on)" OFF)
+ cmake_dependent_option(USE_AUDIO "Build raylib with audio module" ON CUSTOMIZE_BUILD ON)
+ 
+ enum_option(USE_EXTERNAL_GLFW "OFF;IF_POSSIBLE;ON" "Link raylib against system GLFW instead of embedded one")
+diff --git a/cmake/InstallConfigurations.cmake b/cmake/InstallConfigurations.cmake
+index 6c606e56..bac484a5 100644
+--- a/cmake/InstallConfigurations.cmake
++++ b/cmake/InstallConfigurations.cmake
+@@ -3,6 +3,7 @@ install(
+         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
++        FRAMEWORK DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+         PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+ )
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index c1360ee2..0b61bbe9 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -88,6 +88,25 @@ endif ()
+ if (BUILD_SHARED_LIBS)
+     # Hide raylib's symbols by default so RLAPI can expose them
+     set_property(TARGET raylib PROPERTY C_VISIBILITY_PRESET hidden)
++    if (APPLE AND MACOS_FRAMEWORK)
++        set_property(TARGET raylib PROPERTY FRAMEWORK TRUE)
++        set_property(TARGET raylib PROPERTY FRAMEWORK_VERSION C)
++        set_property(TARGET raylib PROPERTY MACOSX_FRAMEWORK_IDENTIFIER com.raylib.raylibFramework)
++        set_property(TARGET raylib PROPERTY MACOSX_FRAMEWORK_INFO_PLIST Info.plist)
++#		set_property(TARGET raylib PROPERTY FRAMEWORK DESTINATION "${CMAKE_INSTALL_LIBDIR}"
++#        set_target_properties(raylib PROPERTIES
++#            FRAMEWORK TRUE
++#            FRAMEWORK_VERSION C
++#            MACOSX_FRAMEWORK_IDENTIFIER com.raylib.raylibFramework
++#            MACOSX_FRAMEWORK_INFO_PLIST Info.plist
++#            # "current version" in semantic format in Mach-O binary file
++#            VERSION 16.4.0
++#            # "compatibility version" in semantic format in Mach-O binary file
++#            SOVERSION 1.0.0
++#            # PUBLIC_HEADER dynamicFramework.h
++#            # XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
++#        )
++    endif()
+ endif ()
+ 
+ target_link_libraries(raylib "${LIBS_PRIVATE}")
