@@ -23,7 +23,7 @@ index 6c606e56..bac484a5 100644
  )
  
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index c1360ee2..0b61bbe9 100644
+index c1360ee2..44a80694 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -88,6 +88,25 @@ endif ()
@@ -34,7 +34,7 @@ index c1360ee2..0b61bbe9 100644
 +        set_property(TARGET raylib PROPERTY FRAMEWORK TRUE)
 +        set_property(TARGET raylib PROPERTY FRAMEWORK_VERSION C)
 +        set_property(TARGET raylib PROPERTY MACOSX_FRAMEWORK_IDENTIFIER com.raylib.raylibFramework)
-+        set_property(TARGET raylib PROPERTY MACOSX_FRAMEWORK_INFO_PLIST Info.plist)
++        set_property(TARGET raylib PROPERTY MACOSX_FRAMEWORK_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/../../Info.plist.in")
 +#		set_property(TARGET raylib PROPERTY FRAMEWORK DESTINATION "${CMAKE_INSTALL_LIBDIR}"
 +#        set_target_properties(raylib PROPERTIES
 +#            FRAMEWORK TRUE
