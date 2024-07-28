@@ -15,7 +15,7 @@
     {
       "name": "RAYGUI_VERSION_MINOR",
       "type": "INT",
-      "value": 1,
+      "value": 5,
       "description": ""
     },
     {
@@ -27,7 +27,7 @@
     {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "4.1-dev",
+      "value": "4.5-dev",
       "description": ""
     },
     {
@@ -775,6 +775,11 @@
           "name": "DROPDOWN_ARROW_HIDDEN",
           "value": 18,
           "description": "DropdownBox arrow hidden"
+        },
+        {
+          "name": "DROPDOWN_ROLL_UP",
+          "value": 19,
+          "description": "DropdownBox roll up flag (default rolls down)"
         }
       ]
     },
@@ -1987,27 +1992,27 @@
           "description": ""
         },
         {
-          "name": "ICON_223",
+          "name": "ICON_PRIORITY",
           "value": 223,
           "description": ""
         },
         {
-          "name": "ICON_224",
+          "name": "ICON_LAYERS_ISO",
           "value": 224,
           "description": ""
         },
         {
-          "name": "ICON_225",
+          "name": "ICON_LAYERS2",
           "value": 225,
           "description": ""
         },
         {
-          "name": "ICON_226",
+          "name": "ICON_MLAYERS",
           "value": 226,
           "description": ""
         },
         {
-          "name": "ICON_227",
+          "name": "ICON_MAPS",
           "value": 227,
           "description": ""
         },
