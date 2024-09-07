@@ -180,15 +180,19 @@ module Raylib
 
   # enum rlShaderUniformDataType
   # Shader uniform data type
-  RL_SHADER_UNIFORM_FLOAT = 0     # Shader uniform type: float
-  RL_SHADER_UNIFORM_VEC2 = 1      # Shader uniform type: vec2 (2 float)
-  RL_SHADER_UNIFORM_VEC3 = 2      # Shader uniform type: vec3 (3 float)
-  RL_SHADER_UNIFORM_VEC4 = 3      # Shader uniform type: vec4 (4 float)
-  RL_SHADER_UNIFORM_INT = 4       # Shader uniform type: int
-  RL_SHADER_UNIFORM_IVEC2 = 5     # Shader uniform type: ivec2 (2 int)
-  RL_SHADER_UNIFORM_IVEC3 = 6     # Shader uniform type: ivec3 (3 int)
-  RL_SHADER_UNIFORM_IVEC4 = 7     # Shader uniform type: ivec4 (4 int)
-  RL_SHADER_UNIFORM_SAMPLER2D = 8 # Shader uniform type: sampler2d
+  RL_SHADER_UNIFORM_FLOAT = 0      # Shader uniform type: float
+  RL_SHADER_UNIFORM_VEC2 = 1       # Shader uniform type: vec2 (2 float)
+  RL_SHADER_UNIFORM_VEC3 = 2       # Shader uniform type: vec3 (3 float)
+  RL_SHADER_UNIFORM_VEC4 = 3       # Shader uniform type: vec4 (4 float)
+  RL_SHADER_UNIFORM_INT = 4        # Shader uniform type: int
+  RL_SHADER_UNIFORM_IVEC2 = 5      # Shader uniform type: ivec2 (2 int)
+  RL_SHADER_UNIFORM_IVEC3 = 6      # Shader uniform type: ivec3 (3 int)
+  RL_SHADER_UNIFORM_IVEC4 = 7      # Shader uniform type: ivec4 (4 int)
+  RL_SHADER_UNIFORM_UINT = 8       # Shader uniform type: unsigned int
+  RL_SHADER_UNIFORM_UIVEC2 = 9     # Shader uniform type: uivec2 (2 unsigned int)
+  RL_SHADER_UNIFORM_UIVEC3 = 10    # Shader uniform type: uivec3 (3 unsigned int)
+  RL_SHADER_UNIFORM_UIVEC4 = 11    # Shader uniform type: uivec4 (4 unsigned int)
+  RL_SHADER_UNIFORM_SAMPLER2D = 12 # Shader uniform type: sampler2d
 
   # enum rlShaderAttributeDataType
   # Shader attribute data types
@@ -723,7 +727,7 @@ module Raylib
       [:rlEnablePointMode, :rlEnablePointMode, [], :void],
 
       # @!method rlDisableWireMode()
-      #   rlDisableWireMode : Disable wire mode ( and point ) maybe rename
+      #   rlDisableWireMode : Disable wire (and point) mode
       #   @return [void]
       [:rlDisableWireMode, :rlDisableWireMode, [], :void],
 

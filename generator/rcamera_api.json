@@ -33,8 +33,8 @@
     {
       "name": "CAMERA_MOVE_SPEED",
       "type": "FLOAT",
-      "value": 0.09,
-      "description": ""
+      "value": 5.4,
+      "description": "Units per second"
     },
     {
       "name": "CAMERA_ROTATION_SPEED",
@@ -52,7 +52,7 @@
       "name": "CAMERA_MOUSE_MOVE_SENSITIVITY",
       "type": "FLOAT",
       "value": 0.003,
-      "description": "TODO: it should be independant of framerate"
+      "description": ""
     },
     {
       "name": "CAMERA_ORBITAL_SPEED",

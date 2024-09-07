@@ -1198,12 +1198,12 @@ module Raylib
       [:ClearWindowState, :ClearWindowState, [:uint], :void],
 
       # @!method ToggleFullscreen()
-      #   ToggleFullscreen : Toggle window state: fullscreen/windowed (only PLATFORM_DESKTOP)
+      #   ToggleFullscreen : Toggle window state: fullscreen/windowed [resizes monitor to match window resolution] (only PLATFORM_DESKTOP)
       #   @return [void]
       [:ToggleFullscreen, :ToggleFullscreen, [], :void],
 
       # @!method ToggleBorderlessWindowed()
-      #   ToggleBorderlessWindowed : Toggle window state: borderless windowed (only PLATFORM_DESKTOP)
+      #   ToggleBorderlessWindowed : Toggle window state: borderless windowed [resizes window to match monitor resolution] (only PLATFORM_DESKTOP)
       #   @return [void]
       [:ToggleBorderlessWindowed, :ToggleBorderlessWindowed, [], :void],
 
@@ -2452,13 +2452,13 @@ module Raylib
       #   @return [void]
       [:DrawCircleSectorLines, :DrawCircleSectorLines, [Vector2.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
-      # @!method DrawCircleGradient(centerX, centerY, radius, color1, color2)
+      # @!method DrawCircleGradient(centerX, centerY, radius, inner, outer)
       #   DrawCircleGradient : Draw a gradient-filled circle
       #   @param centerX [int]
       #   @param centerY [int]
       #   @param radius [float]
-      #   @param color1 [Color]
-      #   @param color2 [Color]
+      #   @param inner [Color]
+      #   @param outer [Color]
       #   @return [void]
       [:DrawCircleGradient, :DrawCircleGradient, [:int, :int, :float, Color.by_value, Color.by_value], :void],
 
@@ -2565,35 +2565,35 @@ module Raylib
       #   @return [void]
       [:DrawRectanglePro, :DrawRectanglePro, [Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # @!method DrawRectangleGradientV(posX, posY, width, height, color1, color2)
+      # @!method DrawRectangleGradientV(posX, posY, width, height, top, bottom)
       #   DrawRectangleGradientV : Draw a vertical-gradient-filled rectangle
       #   @param posX [int]
       #   @param posY [int]
       #   @param width [int]
       #   @param height [int]
-      #   @param color1 [Color]
-      #   @param color2 [Color]
+      #   @param top [Color]
+      #   @param bottom [Color]
       #   @return [void]
       [:DrawRectangleGradientV, :DrawRectangleGradientV, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
 
-      # @!method DrawRectangleGradientH(posX, posY, width, height, color1, color2)
+      # @!method DrawRectangleGradientH(posX, posY, width, height, left, right)
       #   DrawRectangleGradientH : Draw a horizontal-gradient-filled rectangle
       #   @param posX [int]
       #   @param posY [int]
       #   @param width [int]
       #   @param height [int]
-      #   @param color1 [Color]
-      #   @param color2 [Color]
+      #   @param left [Color]
+      #   @param right [Color]
       #   @return [void]
       [:DrawRectangleGradientH, :DrawRectangleGradientH, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
 
-      # @!method DrawRectangleGradientEx(rec, col1, col2, col3, col4)
+      # @!method DrawRectangleGradientEx(rec, topLeft, bottomLeft, topRight, bottomRight)
       #   DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors
       #   @param rec [Rectangle]
-      #   @param col1 [Color]
-      #   @param col2 [Color]
-      #   @param col3 [Color]
-      #   @param col4 [Color]
+      #   @param topLeft [Color]
+      #   @param bottomLeft [Color]
+      #   @param topRight [Color]
+      #   @param bottomRight [Color]
       #   @return [void]
       [:DrawRectangleGradientEx, :DrawRectangleGradientEx, [Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
 
@@ -3855,7 +3855,7 @@ module Raylib
       [:LoadFont, :LoadFont, [:pointer], Font.by_value],
 
       # @!method LoadFontEx(fileName, fontSize, codepoints, codepointCount)
-      #   LoadFontEx : Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character setFont
+      #   LoadFontEx : Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height
       #   @param fileName [const char *]
       #   @param fontSize [int]
       #   @param codepoints [int *]
@@ -4483,6 +4483,26 @@ module Raylib
       #   @param tint [Color]
       #   @return [void]
       [:DrawModelWiresEx, :DrawModelWiresEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
+
+      # @!method DrawModelPoints(model, position, scale, tint)
+      #   DrawModelPoints : Draw a model as points
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param scale [float]
+      #   @param tint [Color]
+      #   @return [void]
+      [:DrawModelPoints, :DrawModelPoints, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawModelPointsEx(model, position, rotationAxis, rotationAngle, scale, tint)
+      #   DrawModelPointsEx : Draw a model as points with extended parameters
+      #   @param model [Model]
+      #   @param position [Vector3]
+      #   @param rotationAxis [Vector3]
+      #   @param rotationAngle [float]
+      #   @param scale [Vector3]
+      #   @param tint [Color]
+      #   @return [void]
+      [:DrawModelPointsEx, :DrawModelPointsEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
 
       # @!method DrawBoundingBox(box, color)
       #   DrawBoundingBox : Draw bounding box (wires)
