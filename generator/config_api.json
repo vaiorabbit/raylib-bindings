@@ -259,6 +259,12 @@
       "description": ""
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES",
+      "type": "INT",
+      "value": 6,
+      "description": ""
+    },
+    {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION",
       "type": "STRING",
       "value": "vertexPosition",

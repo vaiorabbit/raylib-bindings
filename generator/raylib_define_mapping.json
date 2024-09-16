@@ -180,6 +180,7 @@
     , "MAX_CHAR_PRESSED_QUEUE" : "16"
     , "MAX_DECOMPRESSION_SIZE" : "64"
     , "MAX_AUTOMATION_EVENTS" : "16384"
+    , "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES" : "6"
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION" : "\"vertexPosition\""
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD" : "\"vertexTexCoord\""
     , "RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL" : "\"vertexNormal\""
@@ -235,9 +236,9 @@
     , "MAX_TRACELOG_MSG_LENGTH" : "256"
     , "RAYGUI_H" : null
     , "RAYGUI_VERSION_MAJOR" : "4"
-    , "RAYGUI_VERSION_MINOR" : "1"
+    , "RAYGUI_VERSION_MINOR" : "5"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"4.1-dev\""
+    , "RAYGUI_VERSION" : "\"4.5-dev\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null

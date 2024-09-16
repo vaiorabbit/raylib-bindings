@@ -1948,7 +1948,7 @@ module Raylib
       [:LoadDirectoryFiles, :LoadDirectoryFiles, [:pointer], FilePathList.by_value],
 
       # @!method LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
-      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan
+      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan. Use "/DIR" in the filter string to include directories in the result
       #   @param basePath [const char *]
       #   @param filter [const char *]
       #   @param scanSubdirs [bool]
@@ -3813,6 +3813,14 @@ module Raylib
       #   @param tint [Color]
       #   @return [Color]
       [:ColorAlphaBlend, :ColorAlphaBlend, [Color.by_value, Color.by_value, Color.by_value], Color.by_value],
+
+      # @!method ColorLerp(color1, color2, factor)
+      #   ColorLerp : Get color lerp interpolation between two colors, factor [0.0f..1.0f]
+      #   @param color1 [Color]
+      #   @param color2 [Color]
+      #   @param factor [float]
+      #   @return [Color]
+      [:ColorLerp, :ColorLerp, [Color.by_value, Color.by_value, :float], Color.by_value],
 
       # @!method GetColor(hexValue)
       #   GetColor : Get Color structure from hexadecimal value
