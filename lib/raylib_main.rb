@@ -231,32 +231,35 @@ module Raylib
 
   # enum ShaderLocationIndex
   # Shader location index
-  SHADER_LOC_VERTEX_POSITION = 0   # Shader location: vertex attribute: position
-  SHADER_LOC_VERTEX_TEXCOORD01 = 1 # Shader location: vertex attribute: texcoord01
-  SHADER_LOC_VERTEX_TEXCOORD02 = 2 # Shader location: vertex attribute: texcoord02
-  SHADER_LOC_VERTEX_NORMAL = 3     # Shader location: vertex attribute: normal
-  SHADER_LOC_VERTEX_TANGENT = 4    # Shader location: vertex attribute: tangent
-  SHADER_LOC_VERTEX_COLOR = 5      # Shader location: vertex attribute: color
-  SHADER_LOC_MATRIX_MVP = 6        # Shader location: matrix uniform: model-view-projection
-  SHADER_LOC_MATRIX_VIEW = 7       # Shader location: matrix uniform: view (camera transform)
-  SHADER_LOC_MATRIX_PROJECTION = 8 # Shader location: matrix uniform: projection
-  SHADER_LOC_MATRIX_MODEL = 9      # Shader location: matrix uniform: model (transform)
-  SHADER_LOC_MATRIX_NORMAL = 10    # Shader location: matrix uniform: normal
-  SHADER_LOC_VECTOR_VIEW = 11      # Shader location: vector uniform: view
-  SHADER_LOC_COLOR_DIFFUSE = 12    # Shader location: vector uniform: diffuse color
-  SHADER_LOC_COLOR_SPECULAR = 13   # Shader location: vector uniform: specular color
-  SHADER_LOC_COLOR_AMBIENT = 14    # Shader location: vector uniform: ambient color
-  SHADER_LOC_MAP_ALBEDO = 15       # Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
-  SHADER_LOC_MAP_METALNESS = 16    # Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
-  SHADER_LOC_MAP_NORMAL = 17       # Shader location: sampler2d texture: normal
-  SHADER_LOC_MAP_ROUGHNESS = 18    # Shader location: sampler2d texture: roughness
-  SHADER_LOC_MAP_OCCLUSION = 19    # Shader location: sampler2d texture: occlusion
-  SHADER_LOC_MAP_EMISSION = 20     # Shader location: sampler2d texture: emission
-  SHADER_LOC_MAP_HEIGHT = 21       # Shader location: sampler2d texture: height
-  SHADER_LOC_MAP_CUBEMAP = 22      # Shader location: samplerCube texture: cubemap
-  SHADER_LOC_MAP_IRRADIANCE = 23   # Shader location: samplerCube texture: irradiance
-  SHADER_LOC_MAP_PREFILTER = 24    # Shader location: samplerCube texture: prefilter
-  SHADER_LOC_MAP_BRDF = 25         # Shader location: sampler2d texture: brdf
+  SHADER_LOC_VERTEX_POSITION = 0     # Shader location: vertex attribute: position
+  SHADER_LOC_VERTEX_TEXCOORD01 = 1   # Shader location: vertex attribute: texcoord01
+  SHADER_LOC_VERTEX_TEXCOORD02 = 2   # Shader location: vertex attribute: texcoord02
+  SHADER_LOC_VERTEX_NORMAL = 3       # Shader location: vertex attribute: normal
+  SHADER_LOC_VERTEX_TANGENT = 4      # Shader location: vertex attribute: tangent
+  SHADER_LOC_VERTEX_COLOR = 5        # Shader location: vertex attribute: color
+  SHADER_LOC_MATRIX_MVP = 6          # Shader location: matrix uniform: model-view-projection
+  SHADER_LOC_MATRIX_VIEW = 7         # Shader location: matrix uniform: view (camera transform)
+  SHADER_LOC_MATRIX_PROJECTION = 8   # Shader location: matrix uniform: projection
+  SHADER_LOC_MATRIX_MODEL = 9        # Shader location: matrix uniform: model (transform)
+  SHADER_LOC_MATRIX_NORMAL = 10      # Shader location: matrix uniform: normal
+  SHADER_LOC_VECTOR_VIEW = 11        # Shader location: vector uniform: view
+  SHADER_LOC_COLOR_DIFFUSE = 12      # Shader location: vector uniform: diffuse color
+  SHADER_LOC_COLOR_SPECULAR = 13     # Shader location: vector uniform: specular color
+  SHADER_LOC_COLOR_AMBIENT = 14      # Shader location: vector uniform: ambient color
+  SHADER_LOC_MAP_ALBEDO = 15         # Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
+  SHADER_LOC_MAP_METALNESS = 16      # Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
+  SHADER_LOC_MAP_NORMAL = 17         # Shader location: sampler2d texture: normal
+  SHADER_LOC_MAP_ROUGHNESS = 18      # Shader location: sampler2d texture: roughness
+  SHADER_LOC_MAP_OCCLUSION = 19      # Shader location: sampler2d texture: occlusion
+  SHADER_LOC_MAP_EMISSION = 20       # Shader location: sampler2d texture: emission
+  SHADER_LOC_MAP_HEIGHT = 21         # Shader location: sampler2d texture: height
+  SHADER_LOC_MAP_CUBEMAP = 22        # Shader location: samplerCube texture: cubemap
+  SHADER_LOC_MAP_IRRADIANCE = 23     # Shader location: samplerCube texture: irradiance
+  SHADER_LOC_MAP_PREFILTER = 24      # Shader location: samplerCube texture: prefilter
+  SHADER_LOC_MAP_BRDF = 25           # Shader location: sampler2d texture: brdf
+  SHADER_LOC_VERTEX_BONEIDS = 26     # Shader location: vertex attribute: boneIds
+  SHADER_LOC_VERTEX_BONEWEIGHTS = 27 # Shader location: vertex attribute: boneWeights
+  SHADER_LOC_BONE_MATRICES = 28      # Shader location: array of matrices uniform: boneMatrices
 
   # enum ShaderUniformDataType
   # Shader uniform data type
@@ -403,7 +406,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :int], :void
+  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :int], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
@@ -735,8 +738,10 @@ module Raylib
       :indices, :pointer,      # Vertex indices (in case vertex data comes indexed)
       :animVertices, :pointer, # Animated vertex positions (after bones transformations)
       :animNormals, :pointer,  # Animated normals (after bones transformations)
-      :boneIds, :pointer,      # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning)
-      :boneWeights, :pointer,  # Vertex bone weight, up to 4 bones influence by vertex (skinning)
+      :boneIds, :pointer,      # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) (shader-location = 6)
+      :boneWeights, :pointer,  # Vertex bone weight, up to 4 bones influence by vertex (skinning) (shader-location = 7)
+      :boneMatrices, :pointer, # Bones animated transformation matrices
+      :boneCount, :int,        # Number of bones
       :vaoId, :uint,           # OpenGL Vertex Array Object id
       :vboId, :pointer,        # OpenGL Vertex Buffer Objects id (default vertex data)
     )
@@ -766,6 +771,10 @@ module Raylib
     def boneIds=(v) self[:boneIds] = v end
     def boneWeights = self[:boneWeights]
     def boneWeights=(v) self[:boneWeights] = v end
+    def boneMatrices = self[:boneMatrices]
+    def boneMatrices=(v) self[:boneMatrices] = v end
+    def boneCount = self[:boneCount]
+    def boneCount=(v) self[:boneCount] = v end
     def vaoId = self[:vaoId]
     def vaoId=(v) self[:vaoId] = v end
     def vboId = self[:vboId]
@@ -1923,6 +1932,12 @@ module Raylib
       #   @return [const char *]
       [:GetApplicationDirectory, :GetApplicationDirectory, [], :pointer],
 
+      # @!method MakeDirectory(dirPath)
+      #   MakeDirectory : Create directories (including full path requested), returns 0 on success
+      #   @param dirPath [const char *]
+      #   @return [int]
+      [:MakeDirectory, :MakeDirectory, [:pointer], :int],
+
       # @!method ChangeDirectory(dir)
       #   ChangeDirectory : Change working directory, return true on success
       #   @param dir [const char *]
@@ -1948,7 +1963,7 @@ module Raylib
       [:LoadDirectoryFiles, :LoadDirectoryFiles, [:pointer], FilePathList.by_value],
 
       # @!method LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
-      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan. Use "/DIR" in the filter string to include directories in the result
+      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result
       #   @param basePath [const char *]
       #   @param filter [const char *]
       #   @param scanSubdirs [bool]
@@ -2363,7 +2378,7 @@ module Raylib
       [:GetShapesTextureRectangle, :GetShapesTextureRectangle, [], Rectangle.by_value],
 
       # @!method DrawPixel(posX, posY, color)
-      #   DrawPixel : Draw a pixel
+      #   DrawPixel : Draw a pixel using geometry [Can be slow, use with care]
       #   @param posX [int]
       #   @param posY [int]
       #   @param color [Color]
@@ -2371,7 +2386,7 @@ module Raylib
       [:DrawPixel, :DrawPixel, [:int, :int, Color.by_value], :void],
 
       # @!method DrawPixelV(position, color)
-      #   DrawPixelV : Draw a pixel (Vector version)
+      #   DrawPixelV : Draw a pixel using geometry (Vector version) [Can be slow, use with care]
       #   @param position [Vector2]
       #   @param color [Color]
       #   @return [void]
@@ -2958,14 +2973,6 @@ module Raylib
       #   @param headerSize [int]
       #   @return [Image]
       [:LoadImageRaw, :LoadImageRaw, [:pointer, :int, :int, :int, :int], Image.by_value],
-
-      # @!method LoadImageSvg(fileNameOrString, width, height)
-      #   LoadImageSvg : Load image from SVG file data or string with specified size
-      #   @param fileNameOrString [const char *]
-      #   @param width [int]
-      #   @param height [int]
-      #   @return [Image]
-      [:LoadImageSvg, :LoadImageSvg, [:pointer, :int, :int], Image.by_value],
 
       # @!method LoadImageAnim(fileName, frames)
       #   LoadImageAnim : Load image sequence from file (frames appended to image.data)
@@ -4782,6 +4789,14 @@ module Raylib
       #   @param anim [ModelAnimation]
       #   @return [bool]
       [:IsModelAnimationValid, :IsModelAnimationValid, [Model.by_value, ModelAnimation.by_value], :bool],
+
+      # @!method UpdateModelAnimationBoneMatrices(model, anim, frame)
+      #   UpdateModelAnimationBoneMatrices : Update model animation mesh bone matrices (Note GPU skinning does not work on Mac)
+      #   @param model [Model]
+      #   @param anim [ModelAnimation]
+      #   @param frame [int]
+      #   @return [void]
+      [:UpdateModelAnimationBoneMatrices, :UpdateModelAnimationBoneMatrices, [Model.by_value, ModelAnimation.by_value, :int], :void],
 
       # @!method CheckCollisionSpheres(center1, radius1, center2, radius2)
       #   CheckCollisionSpheres : Check collision between two spheres

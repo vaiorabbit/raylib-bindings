@@ -265,6 +265,24 @@
       "description": ""
     },
     {
+      "name": "RL_SUPPORT_MESH_GPU_SKINNING",
+      "type": "GUARD",
+      "value": "",
+      "description": "Remove this if your GPU does not support more than 8 VBOs"
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS",
+      "type": "INT",
+      "value": 7,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS",
+      "type": "INT",
+      "value": 8,
+      "description": ""
+    },
+    {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION",
       "type": "STRING",
       "value": "vertexPosition",
@@ -501,7 +519,7 @@
     {
       "name": "MAX_MESH_VERTEX_BUFFERS",
       "type": "INT",
-      "value": 7,
+      "value": 9,
       "description": "Maximum vertex buffers (VBO) per mesh"
     },
     {

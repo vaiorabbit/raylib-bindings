@@ -6,7 +6,7 @@ from clang.cindex import Config, CursorKind, Index, TranslationUnit, Translation
 
 # Config.set_compatibility_check(False)
 if platform.system() == 'Windows':
-    Config.set_library_path('D:/Program Files/LLVM/bin')
+    Config.set_library_path('C:/Program Files/LLVM/bin')
 elif platform.system() == 'Darwin':
     Config.set_library_path("/opt/homebrew/opt/llvm/lib")
 else:
