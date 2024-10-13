@@ -553,6 +553,24 @@
       "description": ""
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES",
+      "type": "INT",
+      "value": 6,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS",
+      "type": "INT",
+      "value": 7,
+      "description": ""
+    },
+    {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS",
+      "type": "INT",
+      "value": 8,
+      "description": ""
+    },
+    {
       "name": "RL_MATRIX_TYPE",
       "type": "GUARD",
       "value": "",
@@ -689,8 +707,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int *",
@@ -698,14 +716,14 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "rlVertexBuffer",
+          "description": ""
         },
         {
           "type": "unsigned short *",
@@ -714,8 +732,8 @@
         },
         {
           "type": "#endif",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "texcoords",
+          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "unsigned int",
@@ -3151,6 +3169,25 @@
         {
           "type": "Matrix",
           "name": "mat"
+        }
+      ]
+    },
+    {
+      "name": "rlSetUniformMatrices",
+      "description": "Set shader value matrices",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "locIndex"
+        },
+        {
+          "type": "const Matrix *",
+          "name": "mat"
+        },
+        {
+          "type": "int",
+          "name": "count"
         }
       ]
     },

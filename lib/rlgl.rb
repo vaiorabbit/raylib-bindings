@@ -79,6 +79,7 @@ module Raylib
   RL_BLEND_COLOR = 0x8005                       # GL_BLEND_COLOR
   RL_READ_FRAMEBUFFER = 0x8CA8                  # GL_READ_FRAMEBUFFER
   RL_DRAW_FRAMEBUFFER = 0x8CA9                  # GL_DRAW_FRAMEBUFFER
+  RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES = 6
 
   # Enum
 
@@ -1191,6 +1192,14 @@ module Raylib
       #   @param mat [Matrix]
       #   @return [void]
       [:rlSetUniformMatrix, :rlSetUniformMatrix, [:int, Matrix.by_value], :void],
+
+      # @!method rlSetUniformMatrices(locIndex, mat, count)
+      #   rlSetUniformMatrices : Set shader value matrices
+      #   @param locIndex [int]
+      #   @param mat [const Matrix *]
+      #   @param count [int]
+      #   @return [void]
+      [:rlSetUniformMatrices, :rlSetUniformMatrices, [:int, :pointer, :int], :void],
 
       # @!method rlSetUniformSampler(locIndex, textureId)
       #   rlSetUniformSampler : Set shader value sampler
