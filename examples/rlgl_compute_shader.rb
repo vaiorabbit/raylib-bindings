@@ -23,6 +23,39 @@ if __FILE__ == $PROGRAM_NAME
       :w, :uint,         # width of the filled zone
       :enabled, :uint,   # whether to enable or disable zone
     )
+
+    def x
+      self[:x]
+    end
+
+    def x=(v)
+      self[:x] = v
+    end
+
+    def y
+      self[:y]
+    end
+
+    def y=(v)
+      self[:y] = v
+    end
+
+    def w
+      self[:w]
+    end
+
+    def w=(v)
+      self[:w] = v
+    end
+
+    def enabled
+      self[:enabled]
+    end
+
+    def enabled=(v)
+      self[:enabled] = v
+    end
+
   end
 
   # Game Of Life Update Commands SSBO
@@ -31,6 +64,18 @@ if __FILE__ == $PROGRAM_NAME
       :count, :uint,
       :commands, [GolUpdateCmd, MAX_BUFFERED_TRANSFERTS],
     )
+
+    def commands
+      self[:commands]
+    end
+
+    def count
+      self[:count]
+    end
+
+    def count=(v)
+      self[:count] = v
+    end
   end
 
   InitWindow(GOL_WIDTH, GOL_WIDTH, "Yet Another Ruby-raylib bindings - compute shader - game of life")
