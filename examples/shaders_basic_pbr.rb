@@ -30,13 +30,13 @@ class PBRLight
     @intensityLoc = GetShaderLocation(shader, "lights[#{@id}].intensity")
 
     # Buffers for pointer handling
-    @enabled_buf = FFI::MemoryPointer.new(:bool, 1)
+    @enabled_buf = FFI::MemoryPointer.new(:int, 1)
     @type_buf = FFI::MemoryPointer.new(:int, 1)
     @intensity_buf = FFI::MemoryPointer.new(:float, 1)
   end
 
   def update(shader)
-    @enabled_buf.write(:bool, @enabled)
+    @enabled_buf.write(:int, @enabled ? 1 : 0)
     SetShaderValue(shader, @enabledLoc, @enabled_buf, SHADER_UNIFORM_INT)
 
     @type_buf.write(:int, @type)
