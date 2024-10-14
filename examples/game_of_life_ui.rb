@@ -76,15 +76,17 @@ class GameOfLife
 end
 
 if __FILE__ == $PROGRAM_NAME
-  screen_width = 1280
-  screen_height = 1280
+  screen_width = 720
+  screen_height = 720
+
   InitWindow(screen_width, screen_height, "Yet Another Ruby-raylib bindings - Game of Life")
   SetTargetFPS(60)
 
-  font_size = 48
+  font_size = 24
   font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", font_size, nil, 65535)
   SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
   GuiSetFont(font)
+  GuiSetStyle(DEFAULT, TEXT_SIZE, font_size)
 
   cell_width = 18
   cell_height = 18
@@ -103,12 +105,15 @@ if __FILE__ == $PROGRAM_NAME
   show_grid = true
   show_ui = true
 
-  ui_base_x = 720
-  ui_base_y = 900
   ui_space_x = 20
   ui_space_y = 20
   ui_line_height = font_size + 10
-  ui_area = Rectangle.create(ui_base_x, ui_base_y, 550, 2 * ui_space_y + 5 * ui_line_height)
+
+  ui_rect_w = 450
+  ui_rect_h = 2 * ui_space_y + 5 * ui_line_height
+  ui_base_x = screen_width - ui_rect_w - ui_space_x
+  ui_base_y = screen_height - ui_rect_h - ui_space_y
+  ui_area = Rectangle.create(ui_base_x, ui_base_y, ui_rect_w, ui_rect_h)
 
   until WindowShouldClose()
     exec_update = !exec_update if IsKeyPressed(KEY_SPACE)
