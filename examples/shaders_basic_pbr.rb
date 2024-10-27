@@ -1,10 +1,8 @@
 require_relative 'util/setup_dll'
 require_relative 'util/resource_path'
 
-SHADER_LOC_MAP_MRA       = SHADER_LOC_MAP_METALNESS # METALLIC, ROUGHNESS and AO
-SHADER_LOC_MAP_EMISSIVE  = SHADER_LOC_MAP_HEIGHT    # EMISSIVE
-MATERIAL_MAP_MRA         = MATERIAL_MAP_METALNESS
-MATERIAL_MAP_EMISSIVE    = MATERIAL_MAP_HEIGHT
+SHADER_LOC_MAP_MRA = SHADER_LOC_MAP_METALNESS
+MATERIAL_MAP_MRA   = MATERIAL_MAP_METALNESS
 
 class PBRLight
   attr_accessor :id
@@ -90,10 +88,10 @@ PBR_PARAM_EMISSIVE = 3
 PBR_PARAM_AO = 4
 
 # enum PBRTexType
-PBR_TEXTURE_ALBEDO = 0
-PBR_TEXTURE_NORMAL = 1
-PBR_TEXTURE_MRA = 2
-PBR_TEXTURE_EMISSIVE = 3
+PBR_TEXTURE_ALBEDO = MATERIAL_MAP_ALBEDO
+PBR_TEXTURE_NORMAL = MATERIAL_MAP_NORMAL
+PBR_TEXTURE_MRA = MATERIAL_MAP_METALNESS
+PBR_TEXTURE_EMISSIVE = MATERIAL_MAP_EMISSION
 
 class PBRMaterial
   attr_accessor :pbrShader, :albedo, :normal, :metallic, :roughness, :ao, :emissive, :ambient, :emissivePower
@@ -357,9 +355,11 @@ class PBRModel
     model_material = Material.new(@model[:materials] + matIndex * Material.size)
     model_material.shader = @pbr_material.pbrShader
 
+    location_map_albedo_ptr = @pbr_material.pbrShader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MAP_ALBEDO)
+    location_map_albedo_ptr.write_int32(GetShaderLocation(@pbr_material.pbrShader, "albedoMap"))
     location_map_mra_ptr = @pbr_material.pbrShader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MAP_MRA)
     location_map_mra_ptr.write_int32(GetShaderLocation(@pbr_material.pbrShader, "mraMap"))
-    location_map_emissive_ptr = @pbr_material.pbrShader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MAP_EMISSIVE)
+    location_map_emissive_ptr = @pbr_material.pbrShader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MAP_EMISSION)
     location_map_emissive_ptr.write_int32(GetShaderLocation(@pbr_material.pbrShader, "emissiveMap"))
     location_map_normal_ptr = @pbr_material.pbrShader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_MAP_NORMAL)
     location_map_normal_ptr.write_int32(GetShaderLocation(@pbr_material.pbrShader, "normalMap"))
@@ -377,7 +377,7 @@ class PBRModel
       material_map.texture = @pbr_material.texNormal
     end
     if @pbr_material.useTexEmissive == 1
-      material_map = MaterialMap.new(model_material.maps + MATERIAL_MAP_EMISSIVE * MaterialMap.size)
+      material_map = MaterialMap.new(model_material.maps + MATERIAL_MAP_EMISSION * MaterialMap.size)
       material_map.texture = @pbr_material.texEmissive
     end
 
@@ -472,11 +472,10 @@ if __FILE__ == $PROGRAM_NAME
   pbr_mat_floor.set_vec2(PBR_VEC2_TILING, Vector2.create(0.5, 0.5))
   model_floor.set_material(pbr_mat_floor, 0)
 
-
-
   # Get some required shader loactions
   location_vector_view_ptr = shader.locs + (FFI::NativeType::INT32.size * SHADER_LOC_VECTOR_VIEW)
-  location_vector_view_ptr.write_int32(GetShaderLocation(shader, "viewPos"))
+  viewPosLoc = GetShaderLocation(shader, "viewPos")
+  location_vector_view_ptr.write_int32(viewPosLoc)
 
   numOfLightsLoc = GetShaderLocation(shader, "numOfLights")
   numOfLights = 4
@@ -530,7 +529,7 @@ if __FILE__ == $PROGRAM_NAME
       ClearBackground(BLACK)
       BeginMode3D(camera)
         model_floor.draw(Vector3Zero(), 5.0)
-        model_car.draw(Vector3Zero(), 0.005)
+        model_car.draw(Vector3Zero(), 0.25)
 
         lights.each do |light|
           col = Color.from_u8(light.color[0] * 255, light.color[1] * 255, light.color[2] * 255, light.color[3] * 255)
