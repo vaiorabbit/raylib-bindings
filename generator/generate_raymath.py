@@ -4,7 +4,7 @@ import raylib_parser, raylib_generator
 if __name__ == "__main__":
 
     ctx = raylib_parser.ParseContext('../raylib_dll/raylib/src/raymath.h')
-    raylib_parser.execute(ctx, ["-DDEG2RAD", "-DRAD2DEG"])
+    raylib_parser.execute(ctx, ["-DDEG2RAD", "-DRAD2DEG", "-DRAYMATH_DISABLE_CPP_OPERATORS"])
 
     omit_structs = [
         'Vector2',

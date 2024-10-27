@@ -1,5 +1,5 @@
 #!/bin/sh
-export MACOSX_DEPLOYMENT_TARGET=13.0
+export MACOSX_DEPLOYMENT_TARGET=15.0
 
 mkdir -p build_x86_64
 cd build_x86_64

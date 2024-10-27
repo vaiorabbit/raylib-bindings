@@ -707,8 +707,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned int *",
@@ -716,14 +716,14 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#endif",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "rlVertexBuffer",
-          "description": ""
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",
@@ -732,8 +732,8 @@
         },
         {
           "type": "#endif",
-          "name": "texcoords",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int",
@@ -2846,6 +2846,10 @@
         {
           "type": "int",
           "name": "format"
+        },
+        {
+          "type": "int",
+          "name": "mipmapCount"
         }
       ]
     },

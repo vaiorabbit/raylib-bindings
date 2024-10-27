@@ -147,6 +147,13 @@ module Raylib
       #   @return [float]
       [:Vector2DotProduct, :Vector2DotProduct, [Vector2.by_value, Vector2.by_value], :float],
 
+      # @!method Vector2CrossProduct(v1, v2)
+      #   Vector2CrossProduct
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @return [float]
+      [:Vector2CrossProduct, :Vector2CrossProduct, [Vector2.by_value, Vector2.by_value], :float],
+
       # @!method Vector2Distance(v1, v2)
       #   Vector2Distance
       #   @param v1 [Vector2]
