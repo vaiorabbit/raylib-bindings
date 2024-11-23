@@ -1042,13 +1042,14 @@ module Raylib
       #   @return [unsigned int]
       [:rlLoadTextureDepth, :rlLoadTextureDepth, [:int, :int, :bool], :uint],
 
-      # @!method rlLoadTextureCubemap(data, size, format)
+      # @!method rlLoadTextureCubemap(data, size, format, mipmapCount)
       #   rlLoadTextureCubemap : Load texture cubemap data
       #   @param data [const void *]
       #   @param size [int]
       #   @param format [int]
+      #   @param mipmapCount [int]
       #   @return [unsigned int]
-      [:rlLoadTextureCubemap, :rlLoadTextureCubemap, [:pointer, :int, :int], :uint],
+      [:rlLoadTextureCubemap, :rlLoadTextureCubemap, [:pointer, :int, :int, :int], :uint],
 
       # @!method rlUpdateTexture(id, offsetX, offsetY, width, height, format, data)
       #   rlUpdateTexture : Update texture with new data on GPU

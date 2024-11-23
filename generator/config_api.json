@@ -103,6 +103,36 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_CLIPBOARD_IMAGE",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "STBI_REQUIRED",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_FILEFORMAT_BMP",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_FILEFORMAT_PNG",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_FILEFORMAT_JPG",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
       "name": "MAX_FILEPATH_CAPACITY",
       "type": "INT",
       "value": 8192,
@@ -179,6 +209,12 @@
       "type": "INT",
       "value": 16384,
       "description": "Maximum number of automation events to record"
+    },
+    {
+      "name": "RL_SUPPORT_MESH_GPU_SKINNING",
+      "type": "INT",
+      "value": 1,
+      "description": "GPU skinning, comment if your GPU does not support more than 8 VBOs"
     },
     {
       "name": "RL_DEFAULT_BATCH_BUFFERS",
@@ -263,12 +299,6 @@
       "type": "INT",
       "value": 6,
       "description": ""
-    },
-    {
-      "name": "RL_SUPPORT_MESH_GPU_SKINNING",
-      "type": "GUARD",
-      "value": "",
-      "description": "Remove this if your GPU does not support more than 8 VBOs"
     },
     {
       "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS",
@@ -383,12 +413,6 @@
       "type": "INT",
       "value": 24,
       "description": "Spline segments subdivisions"
-    },
-    {
-      "name": "SUPPORT_FILEFORMAT_PNG",
-      "type": "INT",
-      "value": 1,
-      "description": ""
     },
     {
       "name": "SUPPORT_FILEFORMAT_GIF",

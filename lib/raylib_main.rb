@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 5
-  RAYLIB_VERSION_MINOR = 5
+  RAYLIB_VERSION_MINOR = 6
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "5.5-dev"
+  RAYLIB_VERSION = "5.6-dev"
 
   # Enum
 
@@ -330,7 +330,6 @@ module Raylib
   CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2     # Layout is defined by a horizontal line with faces
   CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = 3 # Layout is defined by a 3x4 cross with cubemap faces
   CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = 4 # Layout is defined by a 4x3 cross with cubemap faces
-  CUBEMAP_LAYOUT_PANORAMA = 5            # Layout is defined by a panorama image (equirrectangular map)
 
   # enum FontType
   # Font type, defines generation method
@@ -406,7 +405,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
+  callback :TraceLogCallback, [:int, :pointer, :int], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :int], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer
@@ -1164,22 +1163,22 @@ module Raylib
       [:IsWindowFullscreen, :IsWindowFullscreen, [], :bool],
 
       # @!method IsWindowHidden()
-      #   IsWindowHidden : Check if window is currently hidden (only PLATFORM_DESKTOP)
+      #   IsWindowHidden : Check if window is currently hidden
       #   @return [bool]
       [:IsWindowHidden, :IsWindowHidden, [], :bool],
 
       # @!method IsWindowMinimized()
-      #   IsWindowMinimized : Check if window is currently minimized (only PLATFORM_DESKTOP)
+      #   IsWindowMinimized : Check if window is currently minimized
       #   @return [bool]
       [:IsWindowMinimized, :IsWindowMinimized, [], :bool],
 
       # @!method IsWindowMaximized()
-      #   IsWindowMaximized : Check if window is currently maximized (only PLATFORM_DESKTOP)
+      #   IsWindowMaximized : Check if window is currently maximized
       #   @return [bool]
       [:IsWindowMaximized, :IsWindowMaximized, [], :bool],
 
       # @!method IsWindowFocused()
-      #   IsWindowFocused : Check if window is currently focused (only PLATFORM_DESKTOP)
+      #   IsWindowFocused : Check if window is currently focused
       #   @return [bool]
       [:IsWindowFocused, :IsWindowFocused, [], :bool],
 
@@ -1195,7 +1194,7 @@ module Raylib
       [:IsWindowState, :IsWindowState, [:uint], :bool],
 
       # @!method SetWindowState(flags)
-      #   SetWindowState : Set window configuration state using flags (only PLATFORM_DESKTOP)
+      #   SetWindowState : Set window configuration state using flags
       #   @param flags [unsigned int]
       #   @return [void]
       [:SetWindowState, :SetWindowState, [:uint], :void],
@@ -1207,51 +1206,51 @@ module Raylib
       [:ClearWindowState, :ClearWindowState, [:uint], :void],
 
       # @!method ToggleFullscreen()
-      #   ToggleFullscreen : Toggle window state: fullscreen/windowed [resizes monitor to match window resolution] (only PLATFORM_DESKTOP)
+      #   ToggleFullscreen : Toggle window state: fullscreen/windowed, resizes monitor to match window resolution
       #   @return [void]
       [:ToggleFullscreen, :ToggleFullscreen, [], :void],
 
       # @!method ToggleBorderlessWindowed()
-      #   ToggleBorderlessWindowed : Toggle window state: borderless windowed [resizes window to match monitor resolution] (only PLATFORM_DESKTOP)
+      #   ToggleBorderlessWindowed : Toggle window state: borderless windowed, resizes window to match monitor resolution
       #   @return [void]
       [:ToggleBorderlessWindowed, :ToggleBorderlessWindowed, [], :void],
 
       # @!method MaximizeWindow()
-      #   MaximizeWindow : Set window state: maximized, if resizable (only PLATFORM_DESKTOP)
+      #   MaximizeWindow : Set window state: maximized, if resizable
       #   @return [void]
       [:MaximizeWindow, :MaximizeWindow, [], :void],
 
       # @!method MinimizeWindow()
-      #   MinimizeWindow : Set window state: minimized, if resizable (only PLATFORM_DESKTOP)
+      #   MinimizeWindow : Set window state: minimized, if resizable
       #   @return [void]
       [:MinimizeWindow, :MinimizeWindow, [], :void],
 
       # @!method RestoreWindow()
-      #   RestoreWindow : Set window state: not minimized/maximized (only PLATFORM_DESKTOP)
+      #   RestoreWindow : Set window state: not minimized/maximized
       #   @return [void]
       [:RestoreWindow, :RestoreWindow, [], :void],
 
       # @!method SetWindowIcon(image)
-      #   SetWindowIcon : Set icon for window (single image, RGBA 32bit, only PLATFORM_DESKTOP)
+      #   SetWindowIcon : Set icon for window (single image, RGBA 32bit)
       #   @param image [Image]
       #   @return [void]
       [:SetWindowIcon, :SetWindowIcon, [Image.by_value], :void],
 
       # @!method SetWindowIcons(images, count)
-      #   SetWindowIcons : Set icon for window (multiple images, RGBA 32bit, only PLATFORM_DESKTOP)
+      #   SetWindowIcons : Set icon for window (multiple images, RGBA 32bit)
       #   @param images [Image *]
       #   @param count [int]
       #   @return [void]
       [:SetWindowIcons, :SetWindowIcons, [:pointer, :int], :void],
 
       # @!method SetWindowTitle(title)
-      #   SetWindowTitle : Set title for window (only PLATFORM_DESKTOP and PLATFORM_WEB)
+      #   SetWindowTitle : Set title for window
       #   @param title [const char *]
       #   @return [void]
       [:SetWindowTitle, :SetWindowTitle, [:pointer], :void],
 
       # @!method SetWindowPosition(x, y)
-      #   SetWindowPosition : Set window position on screen (only PLATFORM_DESKTOP)
+      #   SetWindowPosition : Set window position on screen
       #   @param x [int]
       #   @param y [int]
       #   @return [void]
@@ -1285,13 +1284,13 @@ module Raylib
       [:SetWindowSize, :SetWindowSize, [:int, :int], :void],
 
       # @!method SetWindowOpacity(opacity)
-      #   SetWindowOpacity : Set window opacity [0.0f..1.0f] (only PLATFORM_DESKTOP)
+      #   SetWindowOpacity : Set window opacity [0.0f..1.0f]
       #   @param opacity [float]
       #   @return [void]
       [:SetWindowOpacity, :SetWindowOpacity, [:float], :void],
 
       # @!method SetWindowFocused()
-      #   SetWindowFocused : Set window focused (only PLATFORM_DESKTOP)
+      #   SetWindowFocused : Set window focused
       #   @return [void]
       [:SetWindowFocused, :SetWindowFocused, [], :void],
 
@@ -1326,7 +1325,7 @@ module Raylib
       [:GetMonitorCount, :GetMonitorCount, [], :int],
 
       # @!method GetCurrentMonitor()
-      #   GetCurrentMonitor : Get current connected monitor
+      #   GetCurrentMonitor : Get current monitor where window is placed
       #   @return [int]
       [:GetCurrentMonitor, :GetCurrentMonitor, [], :int],
 
@@ -1392,6 +1391,11 @@ module Raylib
       #   GetClipboardText : Get clipboard text content
       #   @return [const char *]
       [:GetClipboardText, :GetClipboardText, [], :pointer],
+
+      # @!method GetClipboardImage()
+      #   GetClipboardImage : Get clipboard image content
+      #   @return [Image]
+      [:GetClipboardImage, :GetClipboardImage, [], Image.by_value],
 
       # @!method EnableEventWaiting()
       #   EnableEventWaiting : Enable waiting for events on EndDrawing(), no automatic event polling
@@ -1555,11 +1559,11 @@ module Raylib
       #   @return [Shader]
       [:LoadShaderFromMemory, :LoadShaderFromMemory, [:pointer, :pointer], Shader.by_value],
 
-      # @!method IsShaderReady(shader)
-      #   IsShaderReady : Check if a shader is ready
+      # @!method IsShaderValid(shader)
+      #   IsShaderValid : Check if a shader is valid (loaded on GPU)
       #   @param shader [Shader]
       #   @return [bool]
-      [:IsShaderReady, :IsShaderReady, [Shader.by_value], :bool],
+      [:IsShaderValid, :IsShaderValid, [Shader.by_value], :bool],
 
       # @!method GetShaderLocation(shader, uniformName)
       #   GetShaderLocation : Get shader uniform location
@@ -2029,6 +2033,27 @@ module Raylib
       #   @return [unsigned char *]
       [:DecodeDataBase64, :DecodeDataBase64, [:pointer, :pointer], :pointer],
 
+      # @!method ComputeCRC32(data, dataSize)
+      #   ComputeCRC32 : Compute CRC32 hash code
+      #   @param data [unsigned char *]
+      #   @param dataSize [int]
+      #   @return [unsigned int]
+      [:ComputeCRC32, :ComputeCRC32, [:pointer, :int], :uint],
+
+      # @!method ComputeMD5(data, dataSize)
+      #   ComputeMD5 : Compute MD5 hash code, returns static int[4] (16 bytes)
+      #   @param data [unsigned char *]
+      #   @param dataSize [int]
+      #   @return [unsigned int *]
+      [:ComputeMD5, :ComputeMD5, [:pointer, :int], :pointer],
+
+      # @!method ComputeSHA1(data, dataSize)
+      #   ComputeSHA1 : Compute SHA1 hash code, returns static int[5] (20 bytes)
+      #   @param data [unsigned char *]
+      #   @param dataSize [int]
+      #   @return [unsigned int *]
+      [:ComputeSHA1, :ComputeSHA1, [:pointer, :int], :pointer],
+
       # @!method LoadAutomationEventList(fileName)
       #   LoadAutomationEventList : Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
       #   @param fileName [const char *]
@@ -2083,7 +2108,7 @@ module Raylib
       [:IsKeyPressed, :IsKeyPressed, [:int], :bool],
 
       # @!method IsKeyPressedRepeat(key)
-      #   IsKeyPressedRepeat : Check if a key has been pressed again (Only PLATFORM_DESKTOP)
+      #   IsKeyPressedRepeat : Check if a key has been pressed again
       #   @param key [int]
       #   @return [bool]
       [:IsKeyPressedRepeat, :IsKeyPressedRepeat, [:int], :bool],
@@ -2186,13 +2211,14 @@ module Raylib
       #   @return [int]
       [:SetGamepadMappings, :SetGamepadMappings, [:pointer], :int],
 
-      # @!method SetGamepadVibration(gamepad, leftMotor, rightMotor)
-      #   SetGamepadVibration : Set gamepad vibration for both motors
+      # @!method SetGamepadVibration(gamepad, leftMotor, rightMotor, duration)
+      #   SetGamepadVibration : Set gamepad vibration for both motors (duration in seconds)
       #   @param gamepad [int]
       #   @param leftMotor [float]
       #   @param rightMotor [float]
+      #   @param duration [float]
       #   @return [void]
-      [:SetGamepadVibration, :SetGamepadVibration, [:int, :float, :float], :void],
+      [:SetGamepadVibration, :SetGamepadVibration, [:int, :float, :float, :float], :void],
 
       # @!method IsMouseButtonPressed(button)
       #   IsMouseButtonPressed : Check if a mouse button has been pressed once
@@ -2320,7 +2346,7 @@ module Raylib
       [:GetGestureDetected, :GetGestureDetected, [], :int],
 
       # @!method GetGestureHoldDuration()
-      #   GetGestureHoldDuration : Get gesture hold time in milliseconds
+      #   GetGestureHoldDuration : Get gesture hold time in seconds
       #   @return [float]
       [:GetGestureHoldDuration, :GetGestureHoldDuration, [], :float],
 
@@ -2891,6 +2917,15 @@ module Raylib
       #   @return [bool]
       [:CheckCollisionCircleRec, :CheckCollisionCircleRec, [Vector2.by_value, :float, Rectangle.by_value], :bool],
 
+      # @!method CheckCollisionCircleLine(center, radius, p1, p2)
+      #   CheckCollisionCircleLine : Check if circle collides with a line created betweeen two points [p1] and [p2]
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @return [bool]
+      [:CheckCollisionCircleLine, :CheckCollisionCircleLine, [Vector2.by_value, :float, Vector2.by_value, Vector2.by_value], :bool],
+
       # @!method CheckCollisionPointRec(point, rec)
       #   CheckCollisionPointRec : Check if point is inside rectangle
       #   @param point [Vector2]
@@ -2915,6 +2950,15 @@ module Raylib
       #   @return [bool]
       [:CheckCollisionPointTriangle, :CheckCollisionPointTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value], :bool],
 
+      # @!method CheckCollisionPointLine(point, p1, p2, threshold)
+      #   CheckCollisionPointLine : Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
+      #   @param point [Vector2]
+      #   @param p1 [Vector2]
+      #   @param p2 [Vector2]
+      #   @param threshold [int]
+      #   @return [bool]
+      [:CheckCollisionPointLine, :CheckCollisionPointLine, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :int], :bool],
+
       # @!method CheckCollisionPointPoly(point, points, pointCount)
       #   CheckCollisionPointPoly : Check if point is within a polygon described by array of vertices
       #   @param point [Vector2]
@@ -2932,24 +2976,6 @@ module Raylib
       #   @param collisionPoint [Vector2 *]
       #   @return [bool]
       [:CheckCollisionLines, :CheckCollisionLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :pointer], :bool],
-
-      # @!method CheckCollisionPointLine(point, p1, p2, threshold)
-      #   CheckCollisionPointLine : Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
-      #   @param point [Vector2]
-      #   @param p1 [Vector2]
-      #   @param p2 [Vector2]
-      #   @param threshold [int]
-      #   @return [bool]
-      [:CheckCollisionPointLine, :CheckCollisionPointLine, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :int], :bool],
-
-      # @!method CheckCollisionCircleLine(center, radius, p1, p2)
-      #   CheckCollisionCircleLine : Check if circle collides with a line created betweeen two points [p1] and [p2]
-      #   @param center [Vector2]
-      #   @param radius [float]
-      #   @param p1 [Vector2]
-      #   @param p2 [Vector2]
-      #   @return [bool]
-      [:CheckCollisionCircleLine, :CheckCollisionCircleLine, [Vector2.by_value, :float, Vector2.by_value, Vector2.by_value], :bool],
 
       # @!method GetCollisionRec(rec1, rec2)
       #   GetCollisionRec : Get collision rectangle for two rectangles collision
@@ -3009,11 +3035,11 @@ module Raylib
       #   @return [Image]
       [:LoadImageFromScreen, :LoadImageFromScreen, [], Image.by_value],
 
-      # @!method IsImageReady(image)
-      #   IsImageReady : Check if an image is ready
+      # @!method IsImageValid(image)
+      #   IsImageValid : Check if an image is valid (data and parameters)
       #   @param image [Image]
       #   @return [bool]
-      [:IsImageReady, :IsImageReady, [Image.by_value], :bool],
+      [:IsImageValid, :IsImageValid, [Image.by_value], :bool],
 
       # @!method UnloadImage(image)
       #   UnloadImage : Unload image from CPU memory (RAM)
@@ -3622,11 +3648,11 @@ module Raylib
       #   @return [RenderTexture2D]
       [:LoadRenderTexture, :LoadRenderTexture, [:int, :int], RenderTexture2D.by_value],
 
-      # @!method IsTextureReady(texture)
-      #   IsTextureReady : Check if a texture is ready
+      # @!method IsTextureValid(texture)
+      #   IsTextureValid : Check if a texture is valid (loaded in GPU)
       #   @param texture [Texture2D]
       #   @return [bool]
-      [:IsTextureReady, :IsTextureReady, [Texture2D.by_value], :bool],
+      [:IsTextureValid, :IsTextureValid, [Texture2D.by_value], :bool],
 
       # @!method UnloadTexture(texture)
       #   UnloadTexture : Unload texture from GPU memory (VRAM)
@@ -3634,11 +3660,11 @@ module Raylib
       #   @return [void]
       [:UnloadTexture, :UnloadTexture, [Texture2D.by_value], :void],
 
-      # @!method IsRenderTextureReady(target)
-      #   IsRenderTextureReady : Check if a render texture is ready
+      # @!method IsRenderTextureValid(target)
+      #   IsRenderTextureValid : Check if a render texture is valid (loaded in GPU)
       #   @param target [RenderTexture2D]
       #   @return [bool]
-      [:IsRenderTextureReady, :IsRenderTextureReady, [RenderTexture2D.by_value], :bool],
+      [:IsRenderTextureValid, :IsRenderTextureValid, [RenderTexture2D.by_value], :bool],
 
       # @!method UnloadRenderTexture(target)
       #   UnloadRenderTexture : Unload render texture from GPU memory (VRAM)
@@ -3897,11 +3923,11 @@ module Raylib
       #   @return [Font]
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
 
-      # @!method IsFontReady(font)
-      #   IsFontReady : Check if a font is ready
+      # @!method IsFontValid(font)
+      #   IsFontValid : Check if a font is valid (font data loaded, WARNING: GPU texture not checked)
       #   @param font [Font]
       #   @return [bool]
-      [:IsFontReady, :IsFontReady, [Font.by_value], :bool],
+      [:IsFontValid, :IsFontValid, [Font.by_value], :bool],
 
       # @!method LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type)
       #   LoadFontData : Load font data for further use
@@ -4441,11 +4467,11 @@ module Raylib
       #   @return [Model]
       [:LoadModelFromMesh, :LoadModelFromMesh, [Mesh.by_value], Model.by_value],
 
-      # @!method IsModelReady(model)
-      #   IsModelReady : Check if a model is ready
+      # @!method IsModelValid(model)
+      #   IsModelValid : Check if a model is valid (loaded in GPU, VAO/VBOs)
       #   @param model [Model]
       #   @return [bool]
-      [:IsModelReady, :IsModelReady, [Model.by_value], :bool],
+      [:IsModelValid, :IsModelValid, [Model.by_value], :bool],
 
       # @!method UnloadModel(model)
       #   UnloadModel : Unload model (including meshes) from memory (RAM and/or VRAM)
@@ -4727,11 +4753,11 @@ module Raylib
       #   @return [Material]
       [:LoadMaterialDefault, :LoadMaterialDefault, [], Material.by_value],
 
-      # @!method IsMaterialReady(material)
-      #   IsMaterialReady : Check if a material is ready
+      # @!method IsMaterialValid(material)
+      #   IsMaterialValid : Check if a material is valid (shader assigned, map textures loaded in GPU)
       #   @param material [Material]
       #   @return [bool]
-      [:IsMaterialReady, :IsMaterialReady, [Material.by_value], :bool],
+      [:IsMaterialValid, :IsMaterialValid, [Material.by_value], :bool],
 
       # @!method UnloadMaterial(material)
       #   UnloadMaterial : Unload material from GPU memory (VRAM)
@@ -4763,12 +4789,20 @@ module Raylib
       [:LoadModelAnimations, :LoadModelAnimations, [:pointer, :pointer], :pointer],
 
       # @!method UpdateModelAnimation(model, anim, frame)
-      #   UpdateModelAnimation : Update model animation pose
+      #   UpdateModelAnimation : Update model animation pose (CPU)
       #   @param model [Model]
       #   @param anim [ModelAnimation]
       #   @param frame [int]
       #   @return [void]
       [:UpdateModelAnimation, :UpdateModelAnimation, [Model.by_value, ModelAnimation.by_value, :int], :void],
+
+      # @!method UpdateModelAnimationBones(model, anim, frame)
+      #   UpdateModelAnimationBones : Update model animation mesh bone matrices (GPU skinning)
+      #   @param model [Model]
+      #   @param anim [ModelAnimation]
+      #   @param frame [int]
+      #   @return [void]
+      [:UpdateModelAnimationBones, :UpdateModelAnimationBones, [Model.by_value, ModelAnimation.by_value, :int], :void],
 
       # @!method UnloadModelAnimation(anim)
       #   UnloadModelAnimation : Unload animation data
@@ -4789,14 +4823,6 @@ module Raylib
       #   @param anim [ModelAnimation]
       #   @return [bool]
       [:IsModelAnimationValid, :IsModelAnimationValid, [Model.by_value, ModelAnimation.by_value], :bool],
-
-      # @!method UpdateModelAnimationBoneMatrices(model, anim, frame)
-      #   UpdateModelAnimationBoneMatrices : Update model animation mesh bone matrices (Note GPU skinning does not work on Mac)
-      #   @param model [Model]
-      #   @param anim [ModelAnimation]
-      #   @param frame [int]
-      #   @return [void]
-      [:UpdateModelAnimationBoneMatrices, :UpdateModelAnimationBoneMatrices, [Model.by_value, ModelAnimation.by_value, :int], :void],
 
       # @!method CheckCollisionSpheres(center1, radius1, center2, radius2)
       #   CheckCollisionSpheres : Check collision between two spheres
@@ -4904,11 +4930,11 @@ module Raylib
       #   @return [Wave]
       [:LoadWaveFromMemory, :LoadWaveFromMemory, [:pointer, :pointer, :int], Wave.by_value],
 
-      # @!method IsWaveReady(wave)
-      #   IsWaveReady : Checks if wave data is ready
+      # @!method IsWaveValid(wave)
+      #   IsWaveValid : Checks if wave data is valid (data loaded and parameters)
       #   @param wave [Wave]
       #   @return [bool]
-      [:IsWaveReady, :IsWaveReady, [Wave.by_value], :bool],
+      [:IsWaveValid, :IsWaveValid, [Wave.by_value], :bool],
 
       # @!method LoadSound(fileName)
       #   LoadSound : Load sound from file
@@ -4928,11 +4954,11 @@ module Raylib
       #   @return [Sound]
       [:LoadSoundAlias, :LoadSoundAlias, [Sound.by_value], Sound.by_value],
 
-      # @!method IsSoundReady(sound)
-      #   IsSoundReady : Checks if a sound is ready
+      # @!method IsSoundValid(sound)
+      #   IsSoundValid : Checks if a sound is valid (data loaded and buffers initialized)
       #   @param sound [Sound]
       #   @return [bool]
-      [:IsSoundReady, :IsSoundReady, [Sound.by_value], :bool],
+      [:IsSoundValid, :IsSoundValid, [Sound.by_value], :bool],
 
       # @!method UpdateSound(sound, data, sampleCount)
       #   UpdateSound : Update sound buffer with new data
@@ -5074,11 +5100,11 @@ module Raylib
       #   @return [Music]
       [:LoadMusicStreamFromMemory, :LoadMusicStreamFromMemory, [:pointer, :pointer, :int], Music.by_value],
 
-      # @!method IsMusicReady(music)
-      #   IsMusicReady : Checks if a music stream is ready
+      # @!method IsMusicValid(music)
+      #   IsMusicValid : Checks if a music stream is valid (context and buffers initialized)
       #   @param music [Music]
       #   @return [bool]
-      [:IsMusicReady, :IsMusicReady, [Music.by_value], :bool],
+      [:IsMusicValid, :IsMusicValid, [Music.by_value], :bool],
 
       # @!method UnloadMusicStream(music)
       #   UnloadMusicStream : Unload music stream
@@ -5170,11 +5196,11 @@ module Raylib
       #   @return [AudioStream]
       [:LoadAudioStream, :LoadAudioStream, [:uint, :uint, :uint], AudioStream.by_value],
 
-      # @!method IsAudioStreamReady(stream)
-      #   IsAudioStreamReady : Checks if an audio stream is ready
+      # @!method IsAudioStreamValid(stream)
+      #   IsAudioStreamValid : Checks if an audio stream is valid (buffers initialized)
       #   @param stream [AudioStream]
       #   @return [bool]
-      [:IsAudioStreamReady, :IsAudioStreamReady, [AudioStream.by_value], :bool],
+      [:IsAudioStreamValid, :IsAudioStreamValid, [AudioStream.by_value], :bool],
 
       # @!method UnloadAudioStream(stream)
       #   UnloadAudioStream : Unload audio stream and free memory

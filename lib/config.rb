@@ -27,6 +27,10 @@ module Raylib
   SUPPORT_GIF_RECORDING = 1
   SUPPORT_COMPRESSION_API = 1
   SUPPORT_AUTOMATION_EVENTS = 1
+  SUPPORT_CLIPBOARD_IMAGE = 1
+  SUPPORT_FILEFORMAT_BMP = 1
+  SUPPORT_FILEFORMAT_PNG = 1
+  SUPPORT_FILEFORMAT_JPG = 1
   MAX_FILEPATH_CAPACITY = 8192                                # Maximum file paths capacity
   MAX_FILEPATH_LENGTH = 4096                                  # Maximum length for filepaths (Linux PATH_MAX default value)
   MAX_KEYBOARD_KEYS = 512                                     # Maximum number of keyboard keys supported
@@ -40,6 +44,7 @@ module Raylib
   MAX_CHAR_PRESSED_QUEUE = 16                                 # Maximum number of characters in the char input queue
   MAX_DECOMPRESSION_SIZE = 64                                 # Max size allocated for decompression in MB
   MAX_AUTOMATION_EVENTS = 16384                               # Maximum number of automation events to record
+  RL_SUPPORT_MESH_GPU_SKINNING = 1                            # GPU skinning, comment if your GPU does not support more than 8 VBOs
   RL_DEFAULT_BATCH_BUFFERS = 1                                # Default number of batch buffers (multi-buffering)
   RL_DEFAULT_BATCH_DRAWCALLS = 256                            # Default number of batch draw calls (by state changes: mode, texture)
   RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4                      # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
@@ -54,6 +59,8 @@ module Raylib
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT = 4
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2 = 5
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES = 6
+  RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS = 7
+  RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS = 8
   RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION = "vertexPosition"   # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION
   RL_DEFAULT_SHADER_ATTRIB_NAME_TEXCOORD = "vertexTexCoord"   # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD
   RL_DEFAULT_SHADER_ATTRIB_NAME_NORMAL = "vertexNormal"       # Bound by default to shader location: RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL
@@ -71,7 +78,6 @@ module Raylib
   RL_DEFAULT_SHADER_SAMPLER2D_NAME_TEXTURE2 = "texture2"      # texture2 (texture slot active 2)
   SUPPORT_QUADS_DRAW_MODE = 1
   SPLINE_SEGMENT_DIVISIONS = 24                               # Spline segments subdivisions
-  SUPPORT_FILEFORMAT_PNG = 1
   SUPPORT_FILEFORMAT_GIF = 1
   SUPPORT_FILEFORMAT_QOI = 1
   SUPPORT_FILEFORMAT_DDS = 1
@@ -93,14 +99,13 @@ module Raylib
   SUPPORT_FILEFORMAT_M3D = 1
   SUPPORT_MESH_GENERATION = 1
   MAX_MATERIAL_MAPS = 12                                      # Maximum number of shader maps supported
-  MAX_MESH_VERTEX_BUFFERS = 7                                 # Maximum vertex buffers (VBO) per mesh
+  MAX_MESH_VERTEX_BUFFERS = 9                                 # Maximum vertex buffers (VBO) per mesh
   SUPPORT_FILEFORMAT_WAV = 1
   SUPPORT_FILEFORMAT_OGG = 1
   SUPPORT_FILEFORMAT_MP3 = 1
   SUPPORT_FILEFORMAT_QOA = 1
   SUPPORT_FILEFORMAT_XM = 1
   SUPPORT_FILEFORMAT_MOD = 1
-  AUDIO_DEVICE_FORMAT = "ma_format_f32"                       # Device output format (miniaudio: float-32bit)
   AUDIO_DEVICE_CHANNELS = 2                                   # Device output channels: stereo
   AUDIO_DEVICE_SAMPLE_RATE = 0                                # Device sample rate (device default)
   MAX_AUDIO_BUFFER_POOL_CHANNELS = 16                         # Maximum number of audio pool channels
