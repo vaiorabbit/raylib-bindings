@@ -455,7 +455,7 @@
       "returnType": "Matrix",
       "params": [
         {
-          "type": "Camera*",
+          "type": "Camera *",
           "name": "camera"
         },
         {

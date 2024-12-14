@@ -313,6 +313,12 @@
       "description": ""
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX",
+      "type": "INT",
+      "value": 9,
+      "description": ""
+    },
+    {
       "name": "RL_DEFAULT_SHADER_ATTRIB_NAME_POSITION",
       "type": "STRING",
       "value": "vertexPosition",

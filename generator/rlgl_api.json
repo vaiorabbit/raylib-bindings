@@ -571,6 +571,12 @@
       "description": ""
     },
     {
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX",
+      "type": "INT",
+      "value": 9,
+      "description": ""
+    },
+    {
       "name": "RL_MATRIX_TYPE",
       "type": "GUARD",
       "value": "",
@@ -707,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "vertices",
+          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "unsigned int *",
@@ -716,14 +722,29 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "type": "",
+          "name": "",
+          "description": ""
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "m3",
+          "description": "Matrix fourth row (4 components)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "m7",
+          "description": "Matrix fourth row (4 components)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "m11",
+          "description": "Matrix fourth row (4 components)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "m15",
+          "description": "Matrix fourth row (4 components)"
         },
         {
           "type": "unsigned short *",
@@ -732,8 +753,8 @@
         },
         {
           "type": "#endif",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "shaderId",
+          "description": "Shader id to be used on the draw -> Using RLGL.currentShaderId"
         },
         {
           "type": "unsigned int",
