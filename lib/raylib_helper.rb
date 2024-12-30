@@ -12,11 +12,27 @@ module Raylib
       Color.new.set(r, g, b, a)
     end
 
+    def self.from_u32(rgba = 255)
+      r = (rgba >> 24) & 0xFF
+      g = (rgba >> 16) & 0xFF
+      b = (rgba >>  8) & 0xFF
+      a = (rgba >>  0) & 0xFF
+      Color.new.set(r, g, b, a)
+    end
+
     def set(r, g, b, a)
       self[:r] = r
       self[:g] = g
       self[:b] = b
       self[:a] = a
+      self
+    end
+
+    def self.set(rgba)
+      self[:r] = (rgba >> 24) & 0xFF
+      self[:g] = (rgba >> 16) & 0xFF
+      self[:b] = (rgba >>  8) & 0xFF
+      self[:a] = (rgba >>  0) & 0xFF
       self
     end
 
