@@ -410,7 +410,7 @@ module Raylib
   typedef :int, :CameraMode
   typedef :int, :CameraProjection
   typedef :int, :NPatchLayout
-  callback :TraceLogCallback, [:int, :pointer, :pointer], :void
+  callback :TraceLogCallback, [:int, :pointer, :int], :void
   callback :LoadFileDataCallback, [:pointer, :pointer], :pointer
   callback :SaveFileDataCallback, [:pointer, :pointer, :int], :bool
   callback :LoadFileTextCallback, [:pointer], :pointer

@@ -713,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "vertices",
-          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned int *",
@@ -722,29 +722,14 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "",
-          "name": "",
-          "description": ""
+          "type": "#endif",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m3",
-          "description": "Matrix fourth row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m7",
-          "description": "Matrix fourth row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m11",
-          "description": "Matrix fourth row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m15",
-          "description": "Matrix fourth row (4 components)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",
@@ -753,8 +738,8 @@
         },
         {
           "type": "#endif",
-          "name": "shaderId",
-          "description": "Shader id to be used on the draw -> Using RLGL.currentShaderId"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int",

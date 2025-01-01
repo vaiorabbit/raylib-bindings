@@ -103,7 +103,7 @@ module Raylib
 
       # @!method GetCameraProjectionMatrix(camera, aspect)
       #   GetCameraProjectionMatrix
-      #   @param camera [Camera*]
+      #   @param camera [Camera *]
       #   @param aspect [float]
       #   @return [Matrix]
       [:GetCameraProjectionMatrix, :GetCameraProjectionMatrix, [:pointer, :float], Matrix.by_value],
