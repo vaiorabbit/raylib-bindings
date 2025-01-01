@@ -8,7 +8,7 @@ jobs:
   build:
     permissions:
       contents: write
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -22,31 +22,32 @@ jobs:
         # - https://askubuntu.com/questions/1255707/apt-cant-find-packages-on-ubuntu-20-04-arm64-raspberry-pi-4
         sudo dpkg --add-architecture arm64
         sudo touch /etc/apt/sources.list.d/arm-cross-compile-sources.list
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        # sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-security main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-backports main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        # sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-security main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-backports main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-updates main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
         sudo apt update
 
     - name: Setup OpenGL and cross compilation tools
       run: |
-        sudo apt -y install libc6-arm64-cross libc6-dev-arm64-cross libstdc++-12-dev-arm64-cross g++-12-aarch64-linux-gnu g++-aarch64-linux-gnu libopengl-dev:arm64 libxrandr-dev:arm64 mesa-common-dev:arm64 libxinerama-dev:arm64 libxcursor-dev:arm64 libxi-dev:arm64 libxkbcommon-dev:arm64 libwayland-bin:arm64 libwayland-dev:arm64 libwayland-client0:arm64 libwayland-server0:arm64 libwayland-cursor0:arm64 libwayland-egl1:arm64
-
+        sudo apt -y install libc6-arm64-cross libc6-dev-arm64-cross libstdc++-12-dev-arm64-cross g++-12-aarch64-linux-gnu g++-aarch64-linux-gnu libopengl-dev:arm64 libglfw3:arm64 libglfw3-dev:arm64 libx11-dev:arm64 libxcursor-dev:arm64 libxrandr-dev:arm64 libxinerama-dev:arm64 libxi-dev:arm64 libxext-dev:arm64 libxfixes-dev:arm64 libwayland-dev:arm64 libxkbcommon-dev:arm64 mesa-common-dev:arm64 libwayland-bin:arm64 libwayland-dev:arm64 libwayland-client0:arm64 libwayland-server0:arm64 libwayland-cursor0:arm64 libwayland-egl1:arm64
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        ref: 'update'
+        ref: ${{github.ref}}
         fetch-depth: 1
         submodules: recursive
 
-    # - name: Check before
-    #   continue-on-error: true
-    #   run: |
-    #     # ls -l lib/*
-    #     ls -l /lib/aarch64-linux-gnu/*
-    #     # ls -l /usr/include/*
-    #     ls -l /usr/aarch64-linux-gnu/include/*
-    #     ls -l /usr/include/aarch64-linux-gnu/*
+    - name: Check before
+      continue-on-error: true
+      run: |
+        # ls -l lib/*
+        ls -l /lib/aarch64-linux-gnu/*
+        # ls -l /usr/include/*
+        ls -l /usr/aarch64-linux-gnu/lib/*
+        ls -l /usr/aarch64-linux-gnu/include/*
+        ls -l /usr/aarch64-linux-gnu/lib/*
+        ls -l /usr/include/aarch64-linux-gnu/*
 
     - name: Run rebuild script
       run: |
@@ -65,4 +66,4 @@ jobs:
         git config user.email "${GITHUB_ACTOR}"
         git add lib/*
         git commit -a -m "commit by ${GITHUB_ACTOR} via GitHub Actions"
-        git push --force-with-lease -u origin update
+        git push --force-with-lease -u origin ${{github.ref}}
