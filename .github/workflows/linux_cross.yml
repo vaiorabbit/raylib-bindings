@@ -8,7 +8,7 @@ jobs:
   build:
     permissions:
       contents: write
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -22,10 +22,10 @@ jobs:
         # - https://askubuntu.com/questions/1255707/apt-cant-find-packages-on-ubuntu-20-04-arm64-raspberry-pi-4
         sudo dpkg --add-architecture arm64
         sudo touch /etc/apt/sources.list.d/arm-cross-compile-sources.list
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        # sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-security main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-backports main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
-        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        # sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-security main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-backports main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
+        sudo bash -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ noble-updates main multiverse universe" >> /etc/apt/sources.list.d/arm-cross-compile-sources.list'
         sudo apt update
 
     - name: Setup OpenGL and cross compilation tools
@@ -35,7 +35,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        ref: 'update'
+        ref: ${{github.ref}}
         fetch-depth: 1
         submodules: recursive
 
@@ -65,4 +65,4 @@ jobs:
         git config user.email "${GITHUB_ACTOR}"
         git add lib/*
         git commit -a -m "commit by ${GITHUB_ACTOR} via GitHub Actions"
-        git push --force-with-lease -u origin update
+        git push --force-with-lease -u origin ${{github.ref}}
