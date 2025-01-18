@@ -27,8 +27,8 @@ def update_grid(grid_now, grid_new)
 end
 
 if __FILE__ == $PROGRAM_NAME
-  screen_width = 1280
-  screen_height = 1280
+  screen_width = 720
+  screen_height = 720
   InitWindow(screen_width, screen_height, "Yet Another Ruby-raylib bindings - Game of Life")
   SetTargetFPS(60)
 
