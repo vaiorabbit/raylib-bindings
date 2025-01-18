@@ -1,7 +1,7 @@
 require_relative 'util/setup_dll'
 
 class Reversi
-  attr_reader :cell_width, :cell_height, :row_count, :col_count, :current_color, :game_status
+  attr_reader :row_count, :col_count, :current_color, :game_status
 
   BOARD_GRIDS_W = 8
   BOARD_GRIDS_H = 8
@@ -42,10 +42,7 @@ class Reversi
     end
   end
 
-  def initialize(cell_width: 40, cell_height: 40)
-    @cell_width = cell_width
-    @cell_height = cell_height
-    @cell_radius = 0.5 * [@cell_width, @cell_height].min
+  def initialize
     @row_count = Reversi::BOARD_GRIDS_H
     @col_count = Reversi::BOARD_GRIDS_W
     reset_game
@@ -56,6 +53,8 @@ class Reversi
   def finish = @game_status = STATUS_FINISH
 
   def finished? = @game_status == STATUS_FINISH
+
+  def grid = @grid_now;
 
   def reset_game
     @grid_now = Array.new(@row_count) { Array.new (@col_count) { Grid.new } }
@@ -71,26 +70,6 @@ class Reversi
   def set_grid(row_index, col_index, color) = @grid_now[row_index][col_index].color = color
 
   def grid_empty?(row_index, col_index) = @grid_now[row_index][col_index].color == GRID_EMPTY
-
-  def render
-    # render grid
-    line_height = @row_count * @cell_height
-    (@col_count + 1).times do |col|
-      DrawLine(col * @cell_width, 0, col * @cell_width, line_height, DARKGRAY)
-    end
-    line_width = @col_count * @cell_width
-    (@row_count + 1).times do |row|
-      DrawLine(0, row * @cell_height, line_width, row * @cell_height, DARKGRAY)
-    end
-
-    # render stones
-    @grid_now.each_with_index do |row_grids, row|
-      row_grids.each_with_index do |grid, col|
-        next if grid.color == GRID_EMPTY
-        DrawCircle(col * @cell_width + @cell_radius, row * @cell_height + @cell_radius, @cell_radius, grid.color == GRID_BLACK ? BLACK : WHITE)
-      end
-    end
-  end
 
   def get_color_count(color)
     point = 0
@@ -182,12 +161,88 @@ class Reversi
   end
 end
 
-if __FILE__ == $PROGRAM_NAME
-  reversi = Reversi.new(cell_width: 48, cell_height: 48)
 
+class GUI
+  attr_reader :cell_width, :cell_height
+
+  def initialize(reversi: nil, cell_width: 48, cell_height: 48)
+    @reversi = reversi
+    @cell_width = cell_width
+    @cell_height = cell_height
+
+    @cell_radius = 0.5 * [@cell_width, @cell_height].min
+  end
+
+  def render
+    # render grid
+    line_height = @reversi.row_count * @cell_height
+    (@reversi.col_count + 1).times do |col|
+      DrawLine(col * @cell_width, 0, col * @cell_width, line_height, DARKGRAY)
+    end
+    line_width = @reversi.col_count * @cell_width
+    (@reversi.row_count + 1).times do |row|
+      DrawLine(0, row * @cell_height, line_width, row * @cell_height, DARKGRAY)
+    end
+
+    # render stones
+    @reversi.grid.each_with_index do |row_grids, row|
+      row_grids.each_with_index do |grid, col|
+        next if grid.color == Reversi::GRID_EMPTY
+        DrawCircle(col * @cell_width + @cell_radius, row * @cell_height + @cell_radius, @cell_radius, grid.color == Reversi::GRID_BLACK ? BLACK : WHITE)
+      end
+    end
+  end
+end
+
+
+class Messages
+  LANG_EN = 0
+  LANG_JA = 1
+
+  def initialize(language: LANG_EN)
+    @language = language
+    @ids = [
+      :game_finished_winner,
+      :game_finished_draw,
+      :black,
+      :white,
+      :turn,
+      :score,
+      :reset_game,
+    ]
+    @msgs = {
+      :game_finished_winner => ['Game finished. Winner', 'ゲーム終了 勝者'],
+      :game_finished_draw => ['Game finished. Result > Draw', 'ゲーム終了 > 引き分け'],
+      :black => ['Black', '黒'],
+      :white => ['White', '白'],
+      :turn => ['Turn', '順番'],
+      :score => ['Score', 'スコア'],
+      :reset_game => ['Reset Game', 'ゲームをリセット'],
+    }
+    Messages.const_set('ID', Module.new)
+    @ids.each do |sym|
+      ID.const_set(sym.to_s.upcase!, sym)
+    end
+  end
+
+  def get(id)
+    @msgs[id][@language]
+  end
+end
+
+
+if __FILE__ == $PROGRAM_NAME
+
+  msg = Messages.new(language: Messages::LANG_EN)
+  pp msg.get(Messages::ID::GAME_FINISHED_DRAW)
+
+  reversi = Reversi.new
+
+  cell_width = 48
+  cell_height = 48
   font_size = 24
-  screen_width = reversi.cell_width * Reversi::BOARD_GRIDS_W
-  screen_height = reversi.cell_height * Reversi::BOARD_GRIDS_H + font_size * 7
+  screen_width = cell_width * Reversi::BOARD_GRIDS_W
+  screen_height = cell_height * Reversi::BOARD_GRIDS_H + font_size * 7
   InitWindow(screen_width, screen_height, "Ruby-raylib bindings - Reversi")
 
   font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", font_size, nil, 65535)
@@ -197,15 +252,18 @@ if __FILE__ == $PROGRAM_NAME
 
   SetTargetFPS(60)
 
-  ui_base_x, ui_base_y = 0, reversi.cell_height * Reversi::BOARD_GRIDS_H + 10
+  gui = GUI.new(reversi: reversi, cell_width: 48, cell_height: 48)
+
+  ui_base_x, ui_base_y = 0, gui.cell_height * Reversi::BOARD_GRIDS_H + 10
   ui_space_x, ui_space_y = 10, 10
   ui_line_height = font_size + 4
-  ui_area = Rectangle.create(ui_base_x, ui_base_y, reversi.cell_width * Reversi::BOARD_GRIDS_W, 2 * ui_space_y + 3 * ui_line_height)
+  ui_area = Rectangle.create(ui_base_x, ui_base_y, gui.cell_width * Reversi::BOARD_GRIDS_W, 2 * ui_space_y + 3 * ui_line_height)
+
 
   until WindowShouldClose()
     mouse_pos = GetMousePosition()
-    col_index = (mouse_pos.x / reversi.cell_width).clamp(0, reversi.col_count - 1)
-    row_index = (mouse_pos.y / reversi.cell_height).clamp(0, reversi.row_count - 1)
+    col_index = (mouse_pos.x / gui.cell_width).clamp(0, reversi.col_count - 1)
+    row_index = (mouse_pos.y / gui.cell_height).clamp(0, reversi.row_count - 1)
     color = reversi.current_color
     if !reversi.finished? && IsMouseButtonDown(MOUSE_BUTTON_LEFT) && reversi.grid_placeable?(row_index, col_index, color)
       on_ui = CheckCollisionPointRec(mouse_pos, ui_area)
@@ -231,23 +289,23 @@ if __FILE__ == $PROGRAM_NAME
     BeginDrawing()
     ClearBackground(DARKGREEN)
 
-    reversi.render
+    gui.render
 
     black_count = reversi.get_color_count(Reversi::GRID_BLACK)
     white_count = reversi.get_color_count(Reversi::GRID_WHITE)
     status_message = if reversi.finished?
                        if black_count > white_count
-                         'Game finished. Winner > ■Black'
+                         "#{msg.get(Messages::ID::GAME_FINISHED_WINNER)} > ■#{msg.get(Messages::ID::BLACK)}"
                        elsif black_count < white_count
-                         'Game finished. Winner > □White'
+                         "#{msg.get(Messages::ID:GAME_FINISHED_WINNER)} > □#{msg.get(Messages::ID::WHITE)}"
                        else
-                         'Game finished. Result > Draw'
+                         "#{msg.get(Messages::ID:GAME_FINISHED_DRAW)}"
                        end
                      else
-                       "Turn: #{reversi.current_color == Reversi::GRID_BLACK ? '■Black' : '□White'}"
+                       "#{msg.get(Messages::ID::TURN)}: #{reversi.current_color == Reversi::GRID_BLACK ? '■' + msg.get(Messages::ID::BLACK) : '□' + msg.get(Messages::ID::WHITE)}"
                      end
 
-    score_message = "[Score] ■Black: #{black_count} / □White: #{white_count}"
+    score_message = "[#{msg.get(Messages::ID::SCORE)}] ■#{msg.get(Messages::ID::BLACK)}: #{black_count} / □#{msg.get(Messages::ID::WHITE)}: #{white_count}"
 
     DrawRectangleRec(ui_area, Fade(WHITE, 0.9))
     widget_x = ui_base_x + ui_space_x
@@ -255,7 +313,7 @@ if __FILE__ == $PROGRAM_NAME
     GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 0, ui_area.width - 2 * ui_space_x, font_size), status_message)
     DrawLine(0, widget_base_y + ui_line_height * 1, ui_area.width, widget_base_y + ui_line_height * 1, GRAY)
     GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, ui_area.width - 2 * ui_space_x, font_size), score_message)
-    clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, ui_area.width - 2 * ui_space_x, font_size * 1.5), 'Reset Game') == 1
+    clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, ui_area.width - 2 * ui_space_x, font_size * 1.5), "#{msg.get(Messages::ID::RESET_GAME)}") == 1
     EndDrawing()
 
     reversi.reset_game if clear_grid
