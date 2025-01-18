@@ -49,9 +49,10 @@ if __FILE__ == $PROGRAM_NAME
 
     if IsMouseButtonDown(MOUSE_BUTTON_LEFT)
       mouse_x, mouse_y = GetMouseX(), GetMouseY()
+      erase_mode = (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT))
       col_index = (mouse_x / cell_width).clamp(0, col_count - 1)
       row_index = (mouse_y / cell_height).clamp(0, row_count - 1)
-      grid_now[row_index][col_index] = 1
+      grid_now[row_index][col_index] = erase_mode ? 0 : 1
     end
 
     if exec_update
