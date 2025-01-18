@@ -4201,7 +4201,7 @@ module Raylib
 
       # @!method TextJoin(textList, count, delimiter)
       #   TextJoin : Join text strings with delimiter
-      #   @param textList [const char **]
+      #   @param textList [char **]
       #   @param count [int]
       #   @param delimiter [const char *]
       #   @return [char *]

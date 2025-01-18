@@ -717,18 +717,23 @@ module Raylib
       #   @return [void]
       [:rlScissor, :rlScissor, [:int, :int, :int, :int], :void],
 
-      # @!method rlEnableWireMode()
-      #   rlEnableWireMode : Enable wire mode
-      #   @return [void]
-      [:rlEnableWireMode, :rlEnableWireMode, [], :void],
-
       # @!method rlEnablePointMode()
       #   rlEnablePointMode : Enable point mode
       #   @return [void]
       [:rlEnablePointMode, :rlEnablePointMode, [], :void],
 
+      # @!method rlDisablePointMode()
+      #   rlDisablePointMode : Disable point mode
+      #   @return [void]
+      [:rlDisablePointMode, :rlDisablePointMode, [], :void],
+
+      # @!method rlEnableWireMode()
+      #   rlEnableWireMode : Enable wire mode
+      #   @return [void]
+      [:rlEnableWireMode, :rlEnableWireMode, [], :void],
+
       # @!method rlDisableWireMode()
-      #   rlDisableWireMode : Disable wire (and point) mode
+      #   rlDisableWireMode : Disable wire mode
       #   @return [void]
       [:rlDisableWireMode, :rlDisableWireMode, [], :void],
 

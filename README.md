@@ -3,15 +3,15 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2025-01-11
+*   Last modified : 2025-01-18
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/62d8969a56909a4721114860cbe1350b5dcb20eb )
+*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/0275d13aa84f8a464b5246abbef9205b94c73c5e )
     *   raylib
     *   raymath
     *   rlgl
-*   [raygui](https://github.com/raysan5/raygui) version [4.5-dev]( https://github.com/raysan5/raygui/commit/f11dc823d1c938def8f0a823fd5f51979caab94d )
+*   [raygui](https://github.com/raysan5/raygui) version [4.5-dev]( https://github.com/raysan5/raygui/commit/76b36b597edb70ffaf96f046076adc20d67e7827 )
 *   [Physac](https://github.com/raysan5/physac) version [1.1]( https://github.com/raysan5/physac/commit/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833 )
 
 <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/bitmap_font_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/game_of_life_simple_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/lissajous_curve_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/procedural_texture_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/reversi_board_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/utf8_font_rb.png" width="125">

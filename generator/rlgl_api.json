@@ -723,13 +723,13 @@
         },
         {
           "type": "#endif",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "Matrix",
+          "description": ""
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned short *",
@@ -737,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned int",
@@ -2227,18 +2227,23 @@
       ]
     },
     {
-      "name": "rlEnableWireMode",
-      "description": "Enable wire mode",
-      "returnType": "void"
-    },
-    {
       "name": "rlEnablePointMode",
       "description": "Enable point mode",
       "returnType": "void"
     },
     {
+      "name": "rlDisablePointMode",
+      "description": "Disable point mode",
+      "returnType": "void"
+    },
+    {
+      "name": "rlEnableWireMode",
+      "description": "Enable wire mode",
+      "returnType": "void"
+    },
+    {
       "name": "rlDisableWireMode",
-      "description": "Disable wire (and point) mode",
+      "description": "Disable wire mode",
       "returnType": "void"
     },
     {
