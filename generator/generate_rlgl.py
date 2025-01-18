@@ -29,6 +29,7 @@ if __name__ == "__main__":
         'RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES',
         'RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS',
         'RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEWEIGHTS',
+        'RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX',
     ]
     for key in omit_macros:
         ctx.decl_macros.pop(key, None)
