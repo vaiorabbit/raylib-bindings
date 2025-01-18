@@ -196,11 +196,13 @@ end
 
 
 class Messages
+  attr_accessor :current_language
+
   LANG_EN = 0
   LANG_JA = 1
 
   def initialize(language: LANG_EN)
-    @language = language
+    @current_language = language
     @ids = [
       :game_finished_winner,
       :game_finished_draw,
@@ -209,6 +211,7 @@ class Messages
       :turn,
       :score,
       :reset_game,
+      :language,
     ]
     @msgs = {
       :game_finished_winner => ['Game finished. Winner', 'ゲーム終了 勝者'],
@@ -218,6 +221,7 @@ class Messages
       :turn => ['Turn', '順番'],
       :score => ['Score', 'スコア'],
       :reset_game => ['Reset Game', 'ゲームをリセット'],
+      :language => ['Language', '言語'],
     }
     Messages.const_set('ID', Module.new)
     @ids.each do |sym|
@@ -226,7 +230,7 @@ class Messages
   end
 
   def get(id)
-    @msgs[id][@language]
+    @msgs[id][@current_language]
   end
 end
 
@@ -254,11 +258,12 @@ if __FILE__ == $PROGRAM_NAME
 
   gui = GUI.new(reversi: reversi, cell_width: 48, cell_height: 48)
 
+  current_language = Messages::LANG_EN
+
   ui_base_x, ui_base_y = 0, gui.cell_height * Reversi::BOARD_GRIDS_H + 10
   ui_space_x, ui_space_y = 10, 10
   ui_line_height = font_size + 4
-  ui_area = Rectangle.create(ui_base_x, ui_base_y, gui.cell_width * Reversi::BOARD_GRIDS_W, 2 * ui_space_y + 3 * ui_line_height)
-
+  ui_area = Rectangle.create(ui_base_x, ui_base_y, gui.cell_width * Reversi::BOARD_GRIDS_W, 2 * ui_space_y + 4.5 * ui_line_height)
 
   until WindowShouldClose()
     mouse_pos = GetMousePosition()
@@ -314,6 +319,14 @@ if __FILE__ == $PROGRAM_NAME
     DrawLine(0, widget_base_y + ui_line_height * 1, ui_area.width, widget_base_y + ui_line_height * 1, GRAY)
     GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, ui_area.width - 2 * ui_space_x, font_size), score_message)
     clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, ui_area.width - 2 * ui_space_x, font_size * 1.5), "#{msg.get(Messages::ID::RESET_GAME)}") == 1
+
+    GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 3.5, ui_area.width - 2 * ui_space_x, font_size), "#{msg.get(Messages::ID::LANGUAGE)}:")
+
+    msg_length =  MeasureText("#{msg.get(Messages::ID::LANGUAGE)}:", font_size)
+    msg_scale = current_language == Messages::LANG_JA ? 2 : 1;
+    current_language, result = RGuiToggleSlider(Rectangle.create(widget_x + msg_scale * msg_length, widget_base_y + ui_line_height * 3.5, 140, font_size), "English;日本語", current_language)
+    msg.current_language = current_language if result != 0
+
     EndDrawing()
 
     reversi.reset_game if clear_grid
