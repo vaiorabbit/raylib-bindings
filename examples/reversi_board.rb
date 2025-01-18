@@ -42,9 +42,9 @@ class Reversi
     end
   end
 
-  def initialize
-    @cell_width = 40
-    @cell_height = 40
+  def initialize(cell_width: 40, cell_height: 40)
+    @cell_width = cell_width
+    @cell_height = cell_height
     @cell_radius = 0.5 * [@cell_width, @cell_height].min
     @row_count = Reversi::BOARD_GRIDS_H
     @col_count = Reversi::BOARD_GRIDS_W
@@ -183,9 +183,9 @@ class Reversi
 end
 
 if __FILE__ == $PROGRAM_NAME
-  reversi = Reversi.new
+  reversi = Reversi.new(cell_width: 48, cell_height: 48)
 
-  font_size = 16
+  font_size = 24
   screen_width = reversi.cell_width * Reversi::BOARD_GRIDS_W
   screen_height = reversi.cell_height * Reversi::BOARD_GRIDS_H + font_size * 7
   InitWindow(screen_width, screen_height, "Ruby-raylib bindings - Reversi")
@@ -193,6 +193,7 @@ if __FILE__ == $PROGRAM_NAME
   font = LoadFontEx("jpfont/x12y16pxMaruMonica.ttf", font_size, nil, 65535)
   SetTextureFilter(font.texture, TEXTURE_FILTER_POINT)
   GuiSetFont(font)
+  GuiSetStyle(DEFAULT, TEXT_SIZE, font_size)
 
   SetTargetFPS(60)
 
@@ -254,7 +255,7 @@ if __FILE__ == $PROGRAM_NAME
     GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 0, ui_area.width - 2 * ui_space_x, font_size), status_message)
     DrawLine(0, widget_base_y + ui_line_height * 1, ui_area.width, widget_base_y + ui_line_height * 1, GRAY)
     GuiLabel(Rectangle.create(widget_x, widget_base_y + ui_line_height * 1, ui_area.width - 2 * ui_space_x, font_size), score_message)
-    clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, ui_area.width - 2 * ui_space_x, font_size * 1.5), 'Reset Game')
+    clear_grid = GuiButton(   Rectangle.create(widget_x, widget_base_y + ui_line_height * 2, ui_area.width - 2 * ui_space_x, font_size * 1.5), 'Reset Game') == 1
     EndDrawing()
 
     reversi.reset_game if clear_grid
