@@ -1,0 +1,48 @@
+name: Build (Linux ARM64)
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-22.04-arm
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{github.ref}}
+        fetch-depth: 1
+        submodules: recursive
+
+    - name: Setup OpenGL
+      run: |
+        sudo apt update
+        sudo apt -y install libopengl-dev libxrandr-dev mesa-common-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev libwayland-bin libwayland-dev libwayland-client0 libwayland-server0 libwayland-cursor0 libwayland-egl1
+
+    - name: Check before
+      run: ls -l lib/*
+
+    - name: Run rebuild script
+      run: |
+        cd ${GITHUB_WORKSPACE}/script
+        bash ./rebuild_libs_linux.sh
+        cd ${GITHUB_WORKSPACE}
+
+    - name: Check after
+      run: ls -l lib/*
+
+    - name: Commit new libraries
+      continue-on-error: true
+      run: |
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}"
+        git add lib/*
+        git commit -a -m "commit by ${GITHUB_ACTOR} via GitHub Actions"
+        git push --force-with-lease -u origin ${{github.ref}}
