@@ -4201,10 +4201,10 @@ module Raylib
 
       # @!method TextJoin(textList, count, delimiter)
       #   TextJoin : Join text strings with delimiter
-      #   @param textList [const char **]
+      #   @param textList [char **]
       #   @param count [int]
       #   @param delimiter [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextJoin, :TextJoin, [:pointer, :int, :pointer], :pointer],
 
       # @!method TextSplit(text, delimiter, count)
@@ -4212,7 +4212,7 @@ module Raylib
       #   @param text [const char *]
       #   @param delimiter [char]
       #   @param count [int *]
-      #   @return [const char **]
+      #   @return [char **]
       [:TextSplit, :TextSplit, [:pointer, :char, :pointer], :pointer],
 
       # @!method TextAppend(text, append, position)
@@ -4233,31 +4233,31 @@ module Raylib
       # @!method TextToUpper(text)
       #   TextToUpper : Get upper case version of provided string
       #   @param text [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextToUpper, :TextToUpper, [:pointer], :pointer],
 
       # @!method TextToLower(text)
       #   TextToLower : Get lower case version of provided string
       #   @param text [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextToLower, :TextToLower, [:pointer], :pointer],
 
       # @!method TextToPascal(text)
       #   TextToPascal : Get Pascal case notation version of provided string
       #   @param text [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextToPascal, :TextToPascal, [:pointer], :pointer],
 
       # @!method TextToSnake(text)
       #   TextToSnake : Get Snake case notation version of provided string
       #   @param text [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextToSnake, :TextToSnake, [:pointer], :pointer],
 
       # @!method TextToCamel(text)
       #   TextToCamel : Get Camel case notation version of provided string
       #   @param text [const char *]
-      #   @return [const char *]
+      #   @return [char *]
       [:TextToCamel, :TextToCamel, [:pointer], :pointer],
 
       # @!method TextToInteger(text)
