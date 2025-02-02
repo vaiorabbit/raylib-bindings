@@ -723,13 +723,13 @@
         },
         {
           "type": "#endif",
-          "name": "Matrix",
-          "description": ""
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "normals",
-          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+          "name": "not",
+          "description": ""
         },
         {
           "type": "unsigned short *",
@@ -737,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#endif",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned int",

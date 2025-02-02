@@ -58,7 +58,7 @@ module Raylib
   DROPDOWNBOX = 8
   TEXTBOX = 9      # Used also for: TEXTBOXMULTI
   VALUEBOX = 10
-  SPINNER = 11     # Uses: BUTTON, VALUEBOX
+  CONTROL11 = 11
   LISTVIEW = 12
   COLORPICKER = 13
   SCROLLBAR = 14
@@ -134,10 +134,10 @@ module Raylib
   # TextBox/TextBoxMulti/ValueBox/Spinner
   TEXT_READONLY = 16 # TextBox in read-only mode: 0-text editable, 1-text no-editable
 
-  # enum GuiSpinnerProperty
-  # Spinner
-  SPIN_BUTTON_WIDTH = 16   # Spinner left/right buttons width
-  SPIN_BUTTON_SPACING = 17 # Spinner buttons separation
+  # enum GuiValueBoxProperty
+  # ValueBox/Spinner
+  SPINNER_BUTTON_WIDTH = 16   # Spinner left/right buttons width
+  SPINNER_BUTTON_SPACING = 17 # Spinner buttons separation
 
   # enum GuiListViewProperty
   # ListView
@@ -432,7 +432,7 @@ module Raylib
   typedef :int, :GuiComboBoxProperty
   typedef :int, :GuiDropdownBoxProperty
   typedef :int, :GuiTextBoxProperty
-  typedef :int, :GuiSpinnerProperty
+  typedef :int, :GuiValueBoxProperty
   typedef :int, :GuiListViewProperty
   typedef :int, :GuiColorPickerProperty
   typedef :int, :GuiIconName

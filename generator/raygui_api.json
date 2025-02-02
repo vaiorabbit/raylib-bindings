@@ -508,9 +508,9 @@
           "description": ""
         },
         {
-          "name": "SPINNER",
+          "name": "CONTROL11",
           "value": 11,
-          "description": "Uses: BUTTON, VALUEBOX"
+          "description": ""
         },
         {
           "name": "LISTVIEW",
@@ -795,16 +795,16 @@
       ]
     },
     {
-      "name": "GuiSpinnerProperty",
-      "description": "Spinner",
+      "name": "GuiValueBoxProperty",
+      "description": "ValueBox/Spinner",
       "values": [
         {
-          "name": "SPIN_BUTTON_WIDTH",
+          "name": "SPINNER_BUTTON_WIDTH",
           "value": 16,
           "description": "Spinner left/right buttons width"
         },
         {
-          "name": "SPIN_BUTTON_SPACING",
+          "name": "SPINNER_BUTTON_SPACING",
           "value": 17,
           "description": "Spinner buttons separation"
         }

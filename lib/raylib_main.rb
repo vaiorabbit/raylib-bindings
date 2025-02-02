@@ -1612,7 +1612,7 @@ module Raylib
       [:SetShaderValueMatrix, :SetShaderValueMatrix, [Shader.by_value, :int, Matrix.by_value], :void],
 
       # @!method SetShaderValueTexture(shader, locIndex, texture)
-      #   SetShaderValueTexture : Set shader uniform value for texture (sampler2d)
+      #   SetShaderValueTexture : Set shader uniform value and bind the texture (sampler2d)
       #   @param shader [Shader]
       #   @param locIndex [int]
       #   @param texture [Texture2D]

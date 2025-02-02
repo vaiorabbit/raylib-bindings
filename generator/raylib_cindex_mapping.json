@@ -99,7 +99,7 @@
     , "GuiComboBoxProperty" : "TypeKind.ENUM"
     , "GuiDropdownBoxProperty" : "TypeKind.ENUM"
     , "GuiTextBoxProperty" : "TypeKind.ENUM"
-    , "GuiSpinnerProperty" : "TypeKind.ENUM"
+    , "GuiValueBoxProperty" : "TypeKind.ENUM"
     , "GuiListViewProperty" : "TypeKind.ENUM"
     , "GuiColorPickerProperty" : "TypeKind.ENUM"
     , "GuiIconName" : "TypeKind.ENUM"
