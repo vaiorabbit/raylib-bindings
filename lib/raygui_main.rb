@@ -141,11 +141,12 @@ module Raylib
 
   # enum GuiListViewProperty
   # ListView
-  LIST_ITEMS_HEIGHT = 16       # ListView items height
-  LIST_ITEMS_SPACING = 17      # ListView items separation
-  SCROLLBAR_WIDTH = 18         # ListView scrollbar size (usually width)
-  SCROLLBAR_SIDE = 19          # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
-  LIST_ITEMS_BORDER_WIDTH = 20 # ListView items border width
+  LIST_ITEMS_HEIGHT = 16        # ListView items height
+  LIST_ITEMS_SPACING = 17       # ListView items separation
+  SCROLLBAR_WIDTH = 18          # ListView scrollbar size (usually width)
+  SCROLLBAR_SIDE = 19           # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
+  LIST_ITEMS_BORDER_NORMAL = 20 # ListView items border enabled in normal state
+  LIST_ITEMS_BORDER_WIDTH = 21  # ListView items border width
 
   # enum GuiColorPickerProperty
   # ColorPicker

@@ -27,7 +27,7 @@
     {
       "name": "RAYGUI_VERSION",
       "type": "STRING",
-      "value": "4.5-dev",
+      "value": "5.0-dev",
       "description": ""
     },
     {
@@ -835,8 +835,13 @@
           "description": "ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)"
         },
         {
-          "name": "LIST_ITEMS_BORDER_WIDTH",
+          "name": "LIST_ITEMS_BORDER_NORMAL",
           "value": 20,
+          "description": "ListView items border enabled in normal state"
+        },
+        {
+          "name": "LIST_ITEMS_BORDER_WIDTH",
+          "value": 21,
           "description": "ListView items border width"
         }
       ]

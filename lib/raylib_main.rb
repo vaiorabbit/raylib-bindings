@@ -5298,7 +5298,7 @@ module Raylib
       [:SetAudioStreamCallback, :SetAudioStreamCallback, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioStreamProcessor(stream, processor)
-      #   AttachAudioStreamProcessor : Attach audio stream processor to stream, receives the samples as 'float'
+      #   AttachAudioStreamProcessor : Attach audio stream processor to stream, receives frames x 2 samples as 'float' (stereo)
       #   @param stream [AudioStream]
       #   @param processor [AudioCallback]
       #   @return [void]
@@ -5312,7 +5312,7 @@ module Raylib
       [:DetachAudioStreamProcessor, :DetachAudioStreamProcessor, [AudioStream.by_value, :AudioCallback], :void],
 
       # @!method AttachAudioMixedProcessor(processor)
-      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline, receives the samples as 'float'
+      #   AttachAudioMixedProcessor : Attach audio stream processor to the entire audio pipeline, receives frames x 2 samples as 'float' (stereo)
       #   @param processor [AudioCallback]
       #   @return [void]
       [:AttachAudioMixedProcessor, :AttachAudioMixedProcessor, [:AudioCallback], :void],
