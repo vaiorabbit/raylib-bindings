@@ -1231,7 +1231,7 @@ module Raylib
       [:MinimizeWindow, :MinimizeWindow, [], :void],
 
       # @!method RestoreWindow()
-      #   RestoreWindow : Set window state: not minimized/maximized
+      #   RestoreWindow : Restore window from being minimized/maximized
       #   @return [void]
       [:RestoreWindow, :RestoreWindow, [], :void],
 

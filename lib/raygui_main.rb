@@ -14,7 +14,7 @@ module Raylib
   RAYGUI_VERSION_MAJOR = 4
   RAYGUI_VERSION_MINOR = 5
   RAYGUI_VERSION_PATCH = 0
-  RAYGUI_VERSION = "4.5-dev"
+  RAYGUI_VERSION = "5.0-dev"
   SCROLLBAR_LEFT_SIDE = 0
   SCROLLBAR_RIGHT_SIDE = 1
 
@@ -759,6 +759,18 @@ module Raylib
       #   @param maxValue [float]
       #   @return [int]
       [:GuiSlider, :GuiSlider, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float], :int],
+
+      # @!method GuiSliderPro(bounds, textLeft, textRight, value, minValue, maxValue, sliderWidth)
+      #   GuiSliderPro : Slider control with extended parameters
+      #   @param bounds [Rectangle]
+      #   @param textLeft [const char *]
+      #   @param textRight [const char *]
+      #   @param value [float *]
+      #   @param minValue [float]
+      #   @param maxValue [float]
+      #   @param sliderWidth [int]
+      #   @return [int]
+      [:GuiSliderPro, :GuiSliderPro, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float, :int], :int],
 
       # @!method GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)
       #   GuiSliderBar : Slider Bar control

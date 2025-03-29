@@ -249,13 +249,13 @@
     {
       "name": "RL_CULL_DISTANCE_NEAR",
       "type": "DOUBLE",
-      "value": 0.01,
+      "value": 0.001,
       "description": "Default projection matrix near cull distance"
     },
     {
       "name": "RL_CULL_DISTANCE_FAR",
       "type": "DOUBLE",
-      "value": 1000.0,
+      "value": 10000.0,
       "description": "Default projection matrix far cull distance"
     },
     {

@@ -74,7 +74,7 @@
     , "RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS" : "4"
     , "RL_MAX_MATRIX_STACK_SIZE" : "32"
     , "RL_MAX_SHADER_LOCATIONS" : "32"
-    , "RL_CULL_DISTANCE_NEAR" : "0.01"
+    , "RL_CULL_DISTANCE_NEAR" : "0.001"
     , "RL_CULL_DISTANCE_FAR" : "1000.0"
     , "RL_TEXTURE_WRAP_S" : "0x2802"
     , "RL_TEXTURE_WRAP_T" : "0x2803"
@@ -246,7 +246,7 @@
     , "RAYGUI_VERSION_MAJOR" : "4"
     , "RAYGUI_VERSION_MINOR" : "5"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"4.5-dev\""
+    , "RAYGUI_VERSION" : "\"5.0-dev\""
     , "RAYGUIAPI" : null
     , "RAYGUI_MALLOC" : null
     , "RAYGUI_CALLOC" : null

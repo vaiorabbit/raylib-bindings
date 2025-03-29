@@ -2796,6 +2796,41 @@
       ]
     },
     {
+      "name": "GuiSliderPro",
+      "description": "Slider control with extended parameters",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char *",
+          "name": "textLeft"
+        },
+        {
+          "type": "const char *",
+          "name": "textRight"
+        },
+        {
+          "type": "float *",
+          "name": "value"
+        },
+        {
+          "type": "float",
+          "name": "minValue"
+        },
+        {
+          "type": "float",
+          "name": "maxValue"
+        },
+        {
+          "type": "int",
+          "name": "sliderWidth"
+        }
+      ]
+    },
+    {
       "name": "GuiSliderBar",
       "description": "Slider Bar control",
       "returnType": "int",
