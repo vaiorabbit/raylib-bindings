@@ -2027,27 +2027,27 @@
           "description": ""
         },
         {
-          "name": "ICON_229",
+          "name": "ICON_LABEL",
           "value": 229,
           "description": ""
         },
         {
-          "name": "ICON_230",
+          "name": "ICON_NAME_ID",
           "value": 230,
           "description": ""
         },
         {
-          "name": "ICON_231",
+          "name": "ICON_SLICING",
           "value": 231,
           "description": ""
         },
         {
-          "name": "ICON_232",
+          "name": "ICON_MANUAL_CONTROL",
           "value": 232,
           "description": ""
         },
         {
-          "name": "ICON_233",
+          "name": "ICON_COLLISION",
           "value": 233,
           "description": ""
         },
@@ -2792,41 +2792,6 @@
         {
           "type": "float",
           "name": "maxValue"
-        }
-      ]
-    },
-    {
-      "name": "GuiSliderPro",
-      "description": "Slider control with extended parameters",
-      "returnType": "int",
-      "params": [
-        {
-          "type": "Rectangle",
-          "name": "bounds"
-        },
-        {
-          "type": "const char *",
-          "name": "textLeft"
-        },
-        {
-          "type": "const char *",
-          "name": "textRight"
-        },
-        {
-          "type": "float *",
-          "name": "value"
-        },
-        {
-          "type": "float",
-          "name": "minValue"
-        },
-        {
-          "type": "float",
-          "name": "maxValue"
-        },
-        {
-          "type": "int",
-          "name": "sliderWidth"
         }
       ]
     },

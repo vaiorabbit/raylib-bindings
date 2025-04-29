@@ -688,58 +688,58 @@
       "fields": [
         {
           "type": "int",
-          "name": "elementCount",
-          "description": "Number of elements in the buffer (QUADS)"
+          "name": "",
+          "description": ""
         },
         {
           "type": "float *",
-          "name": "vertices",
-          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
+          "name": "",
+          "description": ""
         },
         {
           "type": "float *",
-          "name": "texcoords",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+          "name": "",
+          "description": ""
         },
         {
           "type": "float *",
-          "name": "normals",
-          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+          "name": "",
+          "description": ""
         },
         {
           "type": "unsigned char *",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+          "name": "",
+          "description": ""
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "",
+          "description": "inttex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "unsigned int *",
-          "name": "indices",
+          "name": "",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "",
+          "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "Matrix",
-          "description": ""
+          "name": "",
+          "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "unsigned short *",
-          "name": "indices",
+          "name": "",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "rlVertexBuffer",
-          "description": ""
+          "name": "elementCount",
+          "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "unsigned int",

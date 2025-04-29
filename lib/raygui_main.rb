@@ -387,11 +387,11 @@ module Raylib
   ICON_MLAYERS = 226
   ICON_MAPS = 227
   ICON_HOT = 228
-  ICON_229 = 229
-  ICON_230 = 230
-  ICON_231 = 231
-  ICON_232 = 232
-  ICON_233 = 233
+  ICON_LABEL = 229
+  ICON_NAME_ID = 230
+  ICON_SLICING = 231
+  ICON_MANUAL_CONTROL = 232
+  ICON_COLLISION = 233
   ICON_234 = 234
   ICON_235 = 235
   ICON_236 = 236
@@ -759,18 +759,6 @@ module Raylib
       #   @param maxValue [float]
       #   @return [int]
       [:GuiSlider, :GuiSlider, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float], :int],
-
-      # @!method GuiSliderPro(bounds, textLeft, textRight, value, minValue, maxValue, sliderWidth)
-      #   GuiSliderPro : Slider control with extended parameters
-      #   @param bounds [Rectangle]
-      #   @param textLeft [const char *]
-      #   @param textRight [const char *]
-      #   @param value [float *]
-      #   @param minValue [float]
-      #   @param maxValue [float]
-      #   @param sliderWidth [int]
-      #   @return [int]
-      [:GuiSliderPro, :GuiSliderPro, [Rectangle.by_value, :pointer, :pointer, :pointer, :float, :float, :int], :int],
 
       # @!method GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue)
       #   GuiSliderBar : Slider Bar control
