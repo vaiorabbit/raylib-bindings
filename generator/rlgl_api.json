@@ -111,13 +111,13 @@
     {
       "name": "RL_CULL_DISTANCE_NEAR",
       "type": "DOUBLE",
-      "value": 0.001,
+      "value": 0.05,
       "description": "Default near cull distance"
     },
     {
       "name": "RL_CULL_DISTANCE_FAR",
       "type": "DOUBLE",
-      "value": 10000.0,
+      "value": 4000.0,
       "description": "Default far cull distance"
     },
     {
@@ -688,58 +688,58 @@
       "fields": [
         {
           "type": "int",
-          "name": "",
-          "description": ""
+          "name": "elementCount",
+          "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "float *",
-          "name": "",
-          "description": ""
+          "name": "vertices",
+          "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "float *",
-          "name": "",
-          "description": ""
+          "name": "texcoords",
+          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "float *",
-          "name": "",
-          "description": ""
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned char *",
-          "name": "",
-          "description": ""
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "",
-          "description": "inttex position (XYZ - 3 components per vertex) (shader-location = 0)"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int *",
-          "name": "",
+          "name": "indices",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "",
-          "description": "Number of elements in the buffer (QUADS)"
+          "name": "vertexAlignment",
+          "description": "Number of vertex required for index alignment (LINES, TRIANGLES)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "",
-          "description": "Number of elements in the buffer (QUADS)"
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned short *",
-          "name": "",
+          "name": "indices",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "elementCount",
-          "description": "Number of elements in the buffer (QUADS)"
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned int",
