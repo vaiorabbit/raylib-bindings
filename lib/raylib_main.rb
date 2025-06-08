@@ -207,7 +207,7 @@ module Raylib
   GAMEPAD_BUTTON_RIGHT_THUMB = 17     # Gamepad joystick pressed button right
 
   # enum GamepadAxis
-  # Gamepad axis
+  # Gamepad axes
   GAMEPAD_AXIS_LEFT_X = 0        # Gamepad left stick X axis
   GAMEPAD_AXIS_LEFT_Y = 1        # Gamepad left stick Y axis
   GAMEPAD_AXIS_RIGHT_X = 2       # Gamepad right stick X axis
@@ -1872,7 +1872,7 @@ module Raylib
       # @!method SaveFileText(fileName, text)
       #   SaveFileText : Save text data to file (write), string must be '\0' terminated, returns true on success
       #   @param fileName [const char *]
-      #   @param text [char *]
+      #   @param text [const char *]
       #   @return [bool]
       [:SaveFileText, :SaveFileText, [:pointer, :pointer], :bool],
 
@@ -2024,16 +2024,16 @@ module Raylib
       [:DecompressData, :DecompressData, [:pointer, :int, :pointer], :pointer],
 
       # @!method EncodeDataBase64(data, dataSize, outputSize)
-      #   EncodeDataBase64 : Encode data to Base64 string, memory must be MemFree()
+      #   EncodeDataBase64 : Encode data to Base64 string (includes NULL terminator), memory must be MemFree()
       #   @param data [const unsigned char *]
       #   @param dataSize [int]
       #   @param outputSize [int *]
       #   @return [char *]
       [:EncodeDataBase64, :EncodeDataBase64, [:pointer, :int, :pointer], :pointer],
 
-      # @!method DecodeDataBase64(data, outputSize)
-      #   DecodeDataBase64 : Decode Base64 string data, memory must be MemFree()
-      #   @param data [const unsigned char *]
+      # @!method DecodeDataBase64(text, outputSize)
+      #   DecodeDataBase64 : Decode Base64 string (expected NULL terminated), memory must be MemFree()
+      #   @param text [const char *]
       #   @param outputSize [int *]
       #   @return [unsigned char *]
       [:DecodeDataBase64, :DecodeDataBase64, [:pointer, :pointer], :pointer],
@@ -2204,13 +2204,13 @@ module Raylib
       [:GetGamepadButtonPressed, :GetGamepadButtonPressed, [], :int],
 
       # @!method GetGamepadAxisCount(gamepad)
-      #   GetGamepadAxisCount : Get gamepad axis count for a gamepad
+      #   GetGamepadAxisCount : Get axis count for a gamepad
       #   @param gamepad [int]
       #   @return [int]
       [:GetGamepadAxisCount, :GetGamepadAxisCount, [:int], :int],
 
       # @!method GetGamepadAxisMovement(gamepad, axis)
-      #   GetGamepadAxisMovement : Get axis movement value for a gamepad axis
+      #   GetGamepadAxisMovement : Get movement value for a gamepad axis
       #   @param gamepad [int]
       #   @param axis [int]
       #   @return [float]
@@ -2549,6 +2549,15 @@ module Raylib
       #   @return [void]
       [:DrawEllipse, :DrawEllipse, [:int, :int, :float, :float, Color.by_value], :void],
 
+      # @!method DrawEllipseV(center, radiusH, radiusV, color)
+      #   DrawEllipseV : Draw ellipse (Vector version)
+      #   @param center [Vector2]
+      #   @param radiusH [float]
+      #   @param radiusV [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawEllipseV, :DrawEllipseV, [Vector2.by_value, :float, :float, Color.by_value], :void],
+
       # @!method DrawEllipseLines(centerX, centerY, radiusH, radiusV, color)
       #   DrawEllipseLines : Draw ellipse outline
       #   @param centerX [int]
@@ -2558,6 +2567,15 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawEllipseLines, :DrawEllipseLines, [:int, :int, :float, :float, Color.by_value], :void],
+
+      # @!method DrawEllipseLinesV(center, radiusH, radiusV, color)
+      #   DrawEllipseLinesV : Draw ellipse outline (Vector version)
+      #   @param center [Vector2]
+      #   @param radiusH [float]
+      #   @param radiusV [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawEllipseLinesV, :DrawEllipseLinesV, [Vector2.by_value, :float, :float, Color.by_value], :void],
 
       # @!method DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
       #   DrawRing : Draw ring
@@ -2639,13 +2657,13 @@ module Raylib
       #   @return [void]
       [:DrawRectangleGradientH, :DrawRectangleGradientH, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
 
-      # @!method DrawRectangleGradientEx(rec, topLeft, bottomLeft, topRight, bottomRight)
+      # @!method DrawRectangleGradientEx(rec, topLeft, bottomLeft, bottomRight, topRight)
       #   DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors
       #   @param rec [Rectangle]
       #   @param topLeft [Color]
       #   @param bottomLeft [Color]
-      #   @param topRight [Color]
       #   @param bottomRight [Color]
+      #   @param topRight [Color]
       #   @return [void]
       [:DrawRectangleGradientEx, :DrawRectangleGradientEx, [Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
 
@@ -3585,7 +3603,7 @@ module Raylib
       # @!method ImageDrawTriangleFan(dst, points, pointCount, color)
       #   ImageDrawTriangleFan : Draw a triangle fan defined by points within an image (first vertex is the center)
       #   @param dst [Image *]
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]
@@ -3594,7 +3612,7 @@ module Raylib
       # @!method ImageDrawTriangleStrip(dst, points, pointCount, color)
       #   ImageDrawTriangleStrip : Draw a triangle strip defined by points within an image
       #   @param dst [Image *]
-      #   @param points [Vector2 *]
+      #   @param points [const Vector2 *]
       #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]

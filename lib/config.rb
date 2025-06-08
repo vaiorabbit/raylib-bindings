@@ -36,7 +36,7 @@ module Raylib
   MAX_KEYBOARD_KEYS = 512                                     # Maximum number of keyboard keys supported
   MAX_MOUSE_BUTTONS = 8                                       # Maximum number of mouse buttons supported
   MAX_GAMEPADS = 4                                            # Maximum number of gamepads supported
-  MAX_GAMEPAD_AXIS = 8                                        # Maximum number of axis supported (per gamepad)
+  MAX_GAMEPAD_AXES = 8                                        # Maximum number of axes supported (per gamepad)
   MAX_GAMEPAD_BUTTONS = 32                                    # Maximum number of buttons supported (per gamepad)
   MAX_GAMEPAD_VIBRATION_TIME = 2.0                            # Maximum vibration time in seconds
   MAX_TOUCH_POINTS = 8                                        # Maximum number of touch points supported
@@ -50,8 +50,8 @@ module Raylib
   RL_DEFAULT_BATCH_MAX_TEXTURE_UNITS = 4                      # Maximum number of textures units that can be activated on batch drawing (SetShaderValueTexture())
   RL_MAX_MATRIX_STACK_SIZE = 32                               # Maximum size of internal Matrix stack
   RL_MAX_SHADER_LOCATIONS = 32                                # Maximum number of shader locations supported
-  RL_CULL_DISTANCE_NEAR = 0.01                                # Default projection matrix near cull distance
-  RL_CULL_DISTANCE_FAR = 1000.0                               # Default projection matrix far cull distance
+  RL_CULL_DISTANCE_NEAR = 0.05                                # Default projection matrix near cull distance
+  RL_CULL_DISTANCE_FAR = 4000.0                               # Default projection matrix far cull distance
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION = 0
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD = 1
   RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL = 2

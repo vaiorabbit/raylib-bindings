@@ -713,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned int *",
@@ -723,13 +723,13 @@
         },
         {
           "type": "#endif",
-          "name": "vertexAlignment",
-          "description": "Number of vertex required for index alignment (LINES, TRIANGLES)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",

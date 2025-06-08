@@ -3,15 +3,15 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2025-05-10
+*   Last modified : 2025-06-08
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/7e072783683e8449c70e39148c4ac5ccc2ae8c49 )
+*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/59bcf680aafb6f054e150f70c8c71deb44ad04b1 )
     *   raylib
     *   raymath
     *   rlgl
-*   [raygui](https://github.com/raysan5/raygui) version [5.0-dev]( https://github.com/raysan5/raygui/commit/cb78993237b4887fb0277317483b1c757d8ffc14 )
+*   [raygui](https://github.com/raysan5/raygui) version [5.0-dev]( https://github.com/raysan5/raygui/commit/99b37e4d4fdc19e7bf73844d6b9f177cbb27ce24 )
 *   [Physac](https://github.com/raysan5/physac) version [1.1]( https://github.com/raysan5/physac/commit/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833 )
 
 <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/bitmap_font_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/game_of_life_simple_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/lissajous_curve_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/procedural_texture_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/reversi_board_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/utf8_font_rb.png" width="125">
@@ -50,7 +50,7 @@ D:\> ruby template.rb
         *   [macOS] https://rvm.io
             *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [arm64-darwin24]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x64-mingw-ucrt]
+            *   ruby 3.4.2 (2025-02-15 revision d2930f8e7a) +PRISM [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
@@ -70,7 +70,7 @@ D:\> ruby template.rb
 
             *   [Windows] gcc
 
-                    gcc (Rev3, Built by MSYS2 project) 13.2.0
+                    gcc (Rev3, Built by MSYS2 project) 14.2.0
 
             *   [Linux] gcc, clang
 
@@ -91,6 +91,7 @@ D:\> ruby template.rb
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x64-mingw-ucrt]
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x64-mingw-ucrt]
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
@@ -140,6 +141,7 @@ D:\> ruby template.rb
 
         *   [Windows] gcc
 
+                gcc (Rev3, Built by MSYS2 project) 13.2.0
                 gcc (Rev7, Built by MSYS2 project) 12.2.0
                 gcc (Rev10, Built by MSYS2 project) 11.2.0
                 gcc (Rev9, Built by MSYS2 project) 11.2.0

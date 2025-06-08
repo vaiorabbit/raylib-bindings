@@ -163,10 +163,10 @@
       "description": "Maximum number of gamepads supported"
     },
     {
-      "name": "MAX_GAMEPAD_AXIS",
+      "name": "MAX_GAMEPAD_AXES",
       "type": "INT",
       "value": 8,
-      "description": "Maximum number of axis supported (per gamepad)"
+      "description": "Maximum number of axes supported (per gamepad)"
     },
     {
       "name": "MAX_GAMEPAD_BUTTONS",
