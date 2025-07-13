@@ -3,11 +3,11 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2025-06-08
+*   Last modified : 2025-07-13
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/59bcf680aafb6f054e150f70c8c71deb44ad04b1 )
+*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/20a07a65d7b5625f9d165d2659cfc06bd67116a4 )
     *   raylib
     *   raymath
     *   rlgl

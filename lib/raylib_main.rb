@@ -3702,14 +3702,14 @@ module Raylib
       [:UnloadRenderTexture, :UnloadRenderTexture, [RenderTexture2D.by_value], :void],
 
       # @!method UpdateTexture(texture, pixels)
-      #   UpdateTexture : Update GPU texture with new data
+      #   UpdateTexture : Update GPU texture with new data (pixels should be able to fill texture)
       #   @param texture [Texture2D]
       #   @param pixels [const void *]
       #   @return [void]
       [:UpdateTexture, :UpdateTexture, [Texture2D.by_value, :pointer], :void],
 
       # @!method UpdateTextureRec(texture, rec, pixels)
-      #   UpdateTextureRec : Update GPU texture rectangle with new data
+      #   UpdateTextureRec : Update GPU texture rectangle with new data (pixels and rec should fit in texture)
       #   @param texture [Texture2D]
       #   @param rec [Rectangle]
       #   @param pixels [const void *]
@@ -4990,7 +4990,7 @@ module Raylib
       [:IsSoundValid, :IsSoundValid, [Sound.by_value], :bool],
 
       # @!method UpdateSound(sound, data, sampleCount)
-      #   UpdateSound : Update sound buffer with new data
+      #   UpdateSound : Update sound buffer with new data (data and frame count should fit in sound)
       #   @param sound [Sound]
       #   @param data [const void *]
       #   @param sampleCount [int]
