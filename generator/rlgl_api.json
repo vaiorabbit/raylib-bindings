@@ -61,6 +61,12 @@
       "description": ""
     },
     {
+      "name": "GRAPHICS_API_OPENGL_11",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
       "name": "GRAPHICS_API_OPENGL_ES2",
       "type": "GUARD",
       "value": "",
@@ -713,8 +719,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned int *",
@@ -723,13 +729,13 @@
         },
         {
           "type": "#endif",
-          "name": "elementCount",
-          "description": "Number of elements in the buffer (QUADS)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "texcoords",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",
@@ -738,8 +744,8 @@
         },
         {
           "type": "#endif",
-          "name": "texcoords",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int",
@@ -823,6 +829,11 @@
       "name": "rlGlVersion",
       "description": "OpenGL version",
       "values": [
+        {
+          "name": "RL_OPENGL_11_SOFTWARE",
+          "value": 0,
+          "description": "Software rendering"
+        },
         {
           "name": "RL_OPENGL_11",
           "value": 1,
@@ -2237,6 +2248,22 @@
       "returnType": "void"
     },
     {
+      "name": "rlSetPointSize",
+      "description": "Set the point drawing size",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "float",
+          "name": "size"
+        }
+      ]
+    },
+    {
+      "name": "rlGetPointSize",
+      "description": "Get the point drawing size",
+      "returnType": "float"
+    },
+    {
       "name": "rlEnableWireMode",
       "description": "Enable wire mode",
       "returnType": "void"
@@ -2409,6 +2436,17 @@
         {
           "type": "void *",
           "name": "loader"
+        }
+      ]
+    },
+    {
+      "name": "rlGetProcAddress",
+      "description": "Get OpenGL procedure address",
+      "returnType": "void *",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "procName"
         }
       ]
     },
@@ -3064,6 +3102,52 @@
       ]
     },
     {
+      "name": "rlCopyFramebuffer",
+      "description": "Copy framebuffer pixel data to internal buffer",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "x"
+        },
+        {
+          "type": "int",
+          "name": "y"
+        },
+        {
+          "type": "int",
+          "name": "width"
+        },
+        {
+          "type": "int",
+          "name": "height"
+        },
+        {
+          "type": "int",
+          "name": "format"
+        },
+        {
+          "type": "void *",
+          "name": "pixels"
+        }
+      ]
+    },
+    {
+      "name": "rlResizeFramebuffer",
+      "description": "Resize internal framebuffer",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "int",
+          "name": "width"
+        },
+        {
+          "type": "int",
+          "name": "height"
+        }
+      ]
+    },
+    {
       "name": "rlLoadShaderCode",
       "description": "Load shader from code strings",
       "returnType": "unsigned int",
@@ -3121,7 +3205,7 @@
     },
     {
       "name": "rlGetLocationUniform",
-      "description": "Get shader location uniform",
+      "description": "Get shader location uniform, requires shader program id",
       "returnType": "int",
       "params": [
         {
@@ -3136,7 +3220,7 @@
     },
     {
       "name": "rlGetLocationAttrib",
-      "description": "Get shader location attribute",
+      "description": "Get shader location attribute, requires shader program id",
       "returnType": "int",
       "params": [
         {

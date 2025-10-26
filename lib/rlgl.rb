@@ -84,12 +84,13 @@ module Raylib
 
   # enum rlGlVersion
   # OpenGL version
-  RL_OPENGL_11 = 1    # OpenGL 1.1
-  RL_OPENGL_21 = 2    # OpenGL 2.1 (GLSL 120)
-  RL_OPENGL_33 = 3    # OpenGL 3.3 (GLSL 330)
-  RL_OPENGL_43 = 4    # OpenGL 4.3 (using GLSL 330)
-  RL_OPENGL_ES_20 = 5 # OpenGL ES 2.0 (GLSL 100)
-  RL_OPENGL_ES_30 = 6 # OpenGL ES 3.0 (GLSL 300 es)
+  RL_OPENGL_11_SOFTWARE = 0 # Software rendering
+  RL_OPENGL_11 = 1          # OpenGL 1.1
+  RL_OPENGL_21 = 2          # OpenGL 2.1 (GLSL 120)
+  RL_OPENGL_33 = 3          # OpenGL 3.3 (GLSL 330)
+  RL_OPENGL_43 = 4          # OpenGL 4.3 (using GLSL 330)
+  RL_OPENGL_ES_20 = 5       # OpenGL ES 2.0 (GLSL 100)
+  RL_OPENGL_ES_30 = 6       # OpenGL ES 3.0 (GLSL 300 es)
 
   # enum rlTraceLogLevel
   # Trace log level
@@ -544,6 +545,19 @@ module Raylib
       #   @return [void]
       [:rlDisableVertexAttribute, :rlDisableVertexAttribute, [:uint], :void],
 
+      # @!method rlEnableStatePointer(vertexAttribType, buffer)
+      #   rlEnableStatePointer : Enable attribute state pointer
+      #   @param vertexAttribType [int]
+      #   @param buffer [void *]
+      #   @return [void]
+      [:rlEnableStatePointer, :rlEnableStatePointer, [:int, :pointer], :void],
+
+      # @!method rlDisableStatePointer(vertexAttribType)
+      #   rlDisableStatePointer : Disable attribute state pointer
+      #   @param vertexAttribType [int]
+      #   @return [void]
+      [:rlDisableStatePointer, :rlDisableStatePointer, [:int], :void],
+
       # @!method rlActiveTextureSlot(slot)
       #   rlActiveTextureSlot : Select and active a texture slot
       #   @param slot [int]
@@ -726,6 +740,17 @@ module Raylib
       #   @return [void]
       [:rlDisablePointMode, :rlDisablePointMode, [], :void],
 
+      # @!method rlSetPointSize(size)
+      #   rlSetPointSize : Set the point drawing size
+      #   @param size [float]
+      #   @return [void]
+      [:rlSetPointSize, :rlSetPointSize, [:float], :void],
+
+      # @!method rlGetPointSize()
+      #   rlGetPointSize : Get the point drawing size
+      #   @return [float]
+      [:rlGetPointSize, :rlGetPointSize, [], :float],
+
       # @!method rlEnableWireMode()
       #   rlEnableWireMode : Enable wire mode
       #   @return [void]
@@ -833,6 +858,12 @@ module Raylib
       #   @param loader [void *]
       #   @return [void]
       [:rlLoadExtensions, :rlLoadExtensions, [:pointer], :void],
+
+      # @!method rlGetProcAddress(procName)
+      #   rlGetProcAddress : Get OpenGL procedure address
+      #   @param procName [const char *]
+      #   @return [void *]
+      [:rlGetProcAddress, :rlGetProcAddress, [:pointer], :pointer],
 
       # @!method rlGetVersion()
       #   rlGetVersion : Get current OpenGL version
@@ -1169,14 +1200,14 @@ module Raylib
       [:rlUnloadShaderProgram, :rlUnloadShaderProgram, [:uint], :void],
 
       # @!method rlGetLocationUniform(shaderId, uniformName)
-      #   rlGetLocationUniform : Get shader location uniform
+      #   rlGetLocationUniform : Get shader location uniform, requires shader program id
       #   @param shaderId [unsigned int]
       #   @param uniformName [const char *]
       #   @return [int]
       [:rlGetLocationUniform, :rlGetLocationUniform, [:uint, :pointer], :int],
 
       # @!method rlGetLocationAttrib(shaderId, attribName)
-      #   rlGetLocationAttrib : Get shader location attribute
+      #   rlGetLocationAttrib : Get shader location attribute, requires shader program id
       #   @param shaderId [unsigned int]
       #   @param attribName [const char *]
       #   @return [int]

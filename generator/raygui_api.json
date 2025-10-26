@@ -37,24 +37,6 @@
       "description": "We are building the library as a Win32 shared library (.dll)"
     },
     {
-      "name": "RAYGUI_MALLOC(sz)",
-      "type": "MACRO",
-      "value": "malloc(sz)",
-      "description": ""
-    },
-    {
-      "name": "RAYGUI_CALLOC(n,sz)",
-      "type": "MACRO",
-      "value": "calloc(n,sz)",
-      "description": ""
-    },
-    {
-      "name": "RAYGUI_FREE(p)",
-      "type": "MACRO",
-      "value": "free(p)",
-      "description": ""
-    },
-    {
       "name": "RAYGUI_SUPPORT_LOG_INFO",
       "type": "GUARD",
       "value": "",
@@ -170,7 +152,7 @@
       ]
     },
     {
-      "name": "Texture2D",
+      "name": "Texture",
       "description": "It should be redesigned to be provided by user",
       "fields": [
         {
@@ -357,6 +339,11 @@
     }
   ],
   "aliases": [
+    {
+      "type": "Texture",
+      "name": "Texture2D",
+      "description": "Texture2D, same as Texture"
+    }
   ],
   "enums": [
     {
@@ -2376,6 +2363,17 @@
         {
           "type": "Color",
           "name": "color"
+        }
+      ]
+    },
+    {
+      "name": "GuiGetTextWidth",
+      "description": "Get text width considering gui style and icon size (if required)",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "text"
         }
       ]
     },

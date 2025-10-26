@@ -693,7 +693,7 @@ module Raylib
       :position, Vector3, # Camera position
       :target, Vector3,   # Camera target it looks-at
       :up, Vector3,       # Camera up vector (rotation over its axis)
-      :fovy, :float,      # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane width in orthographic
+      :fovy, :float,      # Camera field-of-view aperture in Y (degrees) in perspective, used as near plane height in world units in orthographic
       :projection, :int,  # Camera projection: CAMERA_PERSPECTIVE or CAMERA_ORTHOGRAPHIC
     )
     def position = self[:position]
@@ -1876,6 +1876,48 @@ module Raylib
       #   @return [bool]
       [:SaveFileText, :SaveFileText, [:pointer, :pointer], :bool],
 
+      # @!method FileRename(fileName, fileRename)
+      #   FileRename : Rename file (if exists)
+      #   @param fileName [const char *]
+      #   @param fileRename [const char *]
+      #   @return [int]
+      [:FileRename, :FileRename, [:pointer, :pointer], :int],
+
+      # @!method FileRemove(fileName)
+      #   FileRemove : Remove file (if exists)
+      #   @param fileName [const char *]
+      #   @return [int]
+      [:FileRemove, :FileRemove, [:pointer], :int],
+
+      # @!method FileCopy(srcPath, dstPath)
+      #   FileCopy : Copy file from one path to another, dstPath created if it doesn't exist
+      #   @param srcPath [const char *]
+      #   @param dstPath [const char *]
+      #   @return [int]
+      [:FileCopy, :FileCopy, [:pointer, :pointer], :int],
+
+      # @!method FileMove(srcPath, dstPath)
+      #   FileMove : Move file from one directory to another, dstPath created if it doesn't exist
+      #   @param srcPath [const char *]
+      #   @param dstPath [const char *]
+      #   @return [int]
+      [:FileMove, :FileMove, [:pointer, :pointer], :int],
+
+      # @!method FileTextReplace(fileName, search, replacement)
+      #   FileTextReplace : Replace text in an existing file
+      #   @param fileName [const char *]
+      #   @param search [const char *]
+      #   @param replacement [const char *]
+      #   @return [int]
+      [:FileTextReplace, :FileTextReplace, [:pointer, :pointer, :pointer], :int],
+
+      # @!method FileTextFindIndex(fileName, search)
+      #   FileTextFindIndex : Find text in existing file
+      #   @param fileName [const char *]
+      #   @param search [const char *]
+      #   @return [int]
+      [:FileTextFindIndex, :FileTextFindIndex, [:pointer, :pointer], :int],
+
       # @!method FileExists(fileName)
       #   FileExists : Check if file exists
       #   @param fileName [const char *]
@@ -1889,7 +1931,7 @@ module Raylib
       [:DirectoryExists, :DirectoryExists, [:pointer], :bool],
 
       # @!method IsFileExtension(fileName, ext)
-      #   IsFileExtension : Check file extension (including point: .png, .wav)
+      #   IsFileExtension : Check file extension (recommended include point: .png, .wav)
       #   @param fileName [const char *]
       #   @param ext [const char *]
       #   @return [bool]
@@ -1900,6 +1942,12 @@ module Raylib
       #   @param fileName [const char *]
       #   @return [int]
       [:GetFileLength, :GetFileLength, [:pointer], :int],
+
+      # @!method GetFileModTime(fileName)
+      #   GetFileModTime : Get file modification time (last write time)
+      #   @param fileName [const char *]
+      #   @return [long]
+      [:GetFileModTime, :GetFileModTime, [:pointer], :long],
 
       # @!method GetFileExtension(fileName)
       #   GetFileExtension : Get pointer to extension for a filename string (includes dot: '.png')
@@ -2001,12 +2049,6 @@ module Raylib
       #   @return [void]
       [:UnloadDroppedFiles, :UnloadDroppedFiles, [FilePathList.by_value], :void],
 
-      # @!method GetFileModTime(fileName)
-      #   GetFileModTime : Get file modification time (last write time)
-      #   @param fileName [const char *]
-      #   @return [long]
-      [:GetFileModTime, :GetFileModTime, [:pointer], :long],
-
       # @!method CompressData(data, dataSize, compDataSize)
       #   CompressData : Compress data (DEFLATE algorithm), memory must be MemFree()
       #   @param data [const unsigned char *]
@@ -2058,6 +2100,13 @@ module Raylib
       #   @param dataSize [int]
       #   @return [unsigned int *]
       [:ComputeSHA1, :ComputeSHA1, [:pointer, :int], :pointer],
+
+      # @!method ComputeSHA256(data, dataSize)
+      #   ComputeSHA256 : Compute SHA256 hash code, returns static int[8] (32 bytes)
+      #   @param data [unsigned char *]
+      #   @param dataSize [int]
+      #   @return [unsigned int *]
+      [:ComputeSHA256, :ComputeSHA256, [:pointer, :int], :pointer],
 
       # @!method LoadAutomationEventList(fileName)
       #   LoadAutomationEventList : Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
@@ -2472,6 +2521,16 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawLineBezier, :DrawLineBezier, [Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawLineDashed(startPos, endPos, dashSize, spaceSize, color)
+      #   DrawLineDashed : Draw a dashed line
+      #   @param startPos [Vector2]
+      #   @param endPos [Vector2]
+      #   @param dashSize [int]
+      #   @param spaceSize [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawLineDashed, :DrawLineDashed, [Vector2.by_value, Vector2.by_value, :int, :int, Color.by_value], :void],
 
       # @!method DrawCircle(centerX, centerY, radius, color)
       #   DrawCircle : Draw a color-filled circle
@@ -3928,7 +3987,7 @@ module Raylib
       #   LoadFontEx : Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height
       #   @param fileName [const char *]
       #   @param fontSize [int]
-      #   @param codepoints [int *]
+      #   @param codepoints [const int *]
       #   @param codepointCount [int]
       #   @return [Font]
       [:LoadFontEx, :LoadFontEx, [:pointer, :int, :pointer, :int], Font.by_value],
@@ -3947,7 +4006,7 @@ module Raylib
       #   @param fileData [const unsigned char *]
       #   @param dataSize [int]
       #   @param fontSize [int]
-      #   @param codepoints [int *]
+      #   @param codepoints [const int *]
       #   @param codepointCount [int]
       #   @return [Font]
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
@@ -3958,16 +4017,17 @@ module Raylib
       #   @return [bool]
       [:IsFontValid, :IsFontValid, [Font.by_value], :bool],
 
-      # @!method LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type)
+      # @!method LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type, glyphCount)
       #   LoadFontData : Load font data for further use
       #   @param fileData [const unsigned char *]
       #   @param dataSize [int]
       #   @param fontSize [int]
-      #   @param codepoints [int *]
+      #   @param codepoints [const int *]
       #   @param codepointCount [int]
       #   @param type [int]
+      #   @param glyphCount [int *]
       #   @return [GlyphInfo *]
-      [:LoadFontData, :LoadFontData, [:pointer, :int, :int, :pointer, :int, :int], :pointer],
+      [:LoadFontData, :LoadFontData, [:pointer, :int, :int, :pointer, :int, :int, :pointer], :pointer],
 
       # @!method GenImageFontAtlas(glyphs, glyphRecs, glyphCount, fontSize, padding, packMethod)
       #   GenImageFontAtlas : Generate image font atlas using chars info
@@ -4166,6 +4226,20 @@ module Raylib
       #   @return [const char *]
       [:CodepointToUTF8, :CodepointToUTF8, [:int, :pointer], :pointer],
 
+      # @!method LoadTextLines(text, count)
+      #   LoadTextLines : Load text as separate lines ('\n')
+      #   @param text [const char *]
+      #   @param count [int *]
+      #   @return [char **]
+      [:LoadTextLines, :LoadTextLines, [:pointer, :pointer], :pointer],
+
+      # @!method UnloadTextLines(text, lineCount)
+      #   UnloadTextLines : Unload text lines
+      #   @param text [char **]
+      #   @param lineCount [int]
+      #   @return [void]
+      [:UnloadTextLines, :UnloadTextLines, [:pointer, :int], :void],
+
       # @!method TextCopy(dst, src)
       #   TextCopy : Copy one string to another, returns bytes copied
       #   @param dst [char *]
@@ -4201,13 +4275,36 @@ module Raylib
       #   @return [const char *]
       [:TextSubtext, :TextSubtext, [:pointer, :int, :int], :pointer],
 
-      # @!method TextReplace(text, replace, by)
+      # @!method TextRemoveSpaces(text)
+      #   TextRemoveSpaces : Remove text spaces, concat words
+      #   @param text [const char *]
+      #   @return [const char *]
+      [:TextRemoveSpaces, :TextRemoveSpaces, [:pointer], :pointer],
+
+      # @!method GetTextBetween(text, begin, end)
+      #   GetTextBetween : Get text between two strings
+      #   @param text [const char *]
+      #   @param begin [const char *]
+      #   @param end [const char *]
+      #   @return [char *]
+      [:GetTextBetween, :GetTextBetween, [:pointer, :pointer, :pointer], :pointer],
+
+      # @!method TextReplace(text, search, replacement)
       #   TextReplace : Replace text string (WARNING: memory must be freed!)
       #   @param text [const char *]
-      #   @param replace [const char *]
-      #   @param by [const char *]
+      #   @param search [const char *]
+      #   @param replacement [const char *]
       #   @return [char *]
       [:TextReplace, :TextReplace, [:pointer, :pointer, :pointer], :pointer],
+
+      # @!method TextReplaceBetween(text, begin, end, replacement)
+      #   TextReplaceBetween : Replace text between two specific strings (WARNING: memory must be freed!)
+      #   @param text [const char *]
+      #   @param begin [const char *]
+      #   @param end [const char *]
+      #   @param replacement [const char *]
+      #   @return [char *]
+      [:TextReplaceBetween, :TextReplaceBetween, [:pointer, :pointer, :pointer, :pointer], :pointer],
 
       # @!method TextInsert(text, insert, position)
       #   TextInsert : Insert text in a position (WARNING: memory must be freed!)
@@ -4226,7 +4323,7 @@ module Raylib
       [:TextJoin, :TextJoin, [:pointer, :int, :pointer], :pointer],
 
       # @!method TextSplit(text, delimiter, count)
-      #   TextSplit : Split text into multiple strings
+      #   TextSplit : Split text into multiple strings, using MAX_TEXTSPLIT_COUNT static strings
       #   @param text [const char *]
       #   @param delimiter [char]
       #   @param count [int *]
@@ -4234,17 +4331,17 @@ module Raylib
       [:TextSplit, :TextSplit, [:pointer, :char, :pointer], :pointer],
 
       # @!method TextAppend(text, append, position)
-      #   TextAppend : Append text at specific position and move cursor!
+      #   TextAppend : Append text at specific position and move cursor
       #   @param text [char *]
       #   @param append [const char *]
       #   @param position [int *]
       #   @return [void]
       [:TextAppend, :TextAppend, [:pointer, :pointer, :pointer], :void],
 
-      # @!method TextFindIndex(text, find)
-      #   TextFindIndex : Find first text occurrence within a string
+      # @!method TextFindIndex(text, search)
+      #   TextFindIndex : Find first text occurrence within a string, -1 if not found
       #   @param text [const char *]
-      #   @param find [const char *]
+      #   @param search [const char *]
       #   @return [int]
       [:TextFindIndex, :TextFindIndex, [:pointer, :pointer], :int],
 

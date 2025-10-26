@@ -21,13 +21,13 @@
     {
       "name": "CAMERA_CULL_DISTANCE_NEAR",
       "type": "DOUBLE",
-      "value": 0.01,
+      "value": 0.05,
       "description": ""
     },
     {
       "name": "CAMERA_CULL_DISTANCE_FAR",
       "type": "DOUBLE",
-      "value": 1000.0,
+      "value": 4000.0,
       "description": ""
     },
     {

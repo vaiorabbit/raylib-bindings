@@ -248,9 +248,6 @@
     , "RAYGUI_VERSION_PATCH" : "0"
     , "RAYGUI_VERSION" : "\"5.0-dev\""
     , "RAYGUIAPI" : null
-    , "RAYGUI_MALLOC" : null
-    , "RAYGUI_CALLOC" : null
-    , "RAYGUI_FREE" : null
     , "RAYGUI_SUPPORT_LOG_INFO" : null
     , "RAYGUI_LOG" : null
     , "SCROLLBAR_LEFT_SIDE" : "0"

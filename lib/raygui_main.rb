@@ -440,6 +440,27 @@ module Raylib
 
   # Struct
 
+  # It should be redesigned to be provided by user
+  class Texture < FFI::Struct
+    layout(
+      :id, :uint,     # OpenGL texture id
+      :width, :int,   # Texture base width
+      :height, :int,  # Texture base height
+      :mipmaps, :int, # Mipmap levels, 1 by default
+      :format, :int,  # Data format (PixelFormat type)
+    )
+    def id = self[:id]
+    def id=(v) self[:id] = v end
+    def width = self[:width]
+    def width=(v) self[:width] = v end
+    def height = self[:height]
+    def height=(v) self[:height] = v end
+    def mipmaps = self[:mipmaps]
+    def mipmaps=(v) self[:mipmaps] = v end
+    def format = self[:format]
+    def format=(v) self[:format] = v end
+  end
+
   # NOTE: Used when exporting style as code for convenience
   class GuiStyleProp < FFI::Struct
     layout(
@@ -590,6 +611,12 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:GuiDrawIcon, :GuiDrawIcon, [:int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method GuiGetTextWidth(text)
+      #   GuiGetTextWidth : Get text width considering gui style and icon size (if required)
+      #   @param text [const char *]
+      #   @return [int]
+      [:GuiGetTextWidth, :GuiGetTextWidth, [:pointer], :int],
 
       # @!method GuiWindowBox(bounds, title)
       #   GuiWindowBox : Window Box control, shows a window that can be closed
