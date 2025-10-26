@@ -50,9 +50,9 @@ D:\> ruby template.rb
         *   [macOS] https://rvm.io
             *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [arm64-darwin24]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 3.4.4 (2025-05-14 revision a38531fd3f) +PRISM [x64-mingw-ucrt]
+            *   ruby 3.4.7 (2025-10-08 revision 7a5688e2a2) +PRISM [x64-mingw-ucrt]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
-            *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
+            *   ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [aarch64-linux]
 
@@ -70,7 +70,7 @@ D:\> ruby template.rb
 
             *   [Windows] gcc
 
-                    gcc (Rev3, Built by MSYS2 project) 14.2.0
+                    gcc (Rev8, Built by MSYS2 project) 15.2.0
 
             *   [Linux] gcc, clang
 
@@ -91,12 +91,16 @@ D:\> ruby template.rb
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 3.4.4 (2025-05-14 revision a38531fd3f) +PRISM [x64-mingw-ucrt]
+            *   ruby 3.4.2 (2025-02-15 revision d2930f8e7a) +PRISM [x64-mingw-ucrt]
             *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [x64-mingw-ucrt]
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x64-mingw-ucrt]
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [x64-mingw-ucrt]
             *   ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x64-mingw-ucrt]
             *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
+        *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [aarch64-linux]
 
