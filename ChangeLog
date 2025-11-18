@@ -1,3 +1,7 @@
+2025-11-18  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/particles_fireworks.rb : Added
+
 2025-10-26  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/a818508158119f74e99b4dc98345c28ce112733c ) and raygui ( https://github.com/raysan5/raygui/commit/b9971133b2f7b7513904770d565b683a93fb3624 )
