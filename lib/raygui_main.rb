@@ -440,27 +440,6 @@ module Raylib
 
   # Struct
 
-  # It should be redesigned to be provided by user
-  class Texture < FFI::Struct
-    layout(
-      :id, :uint,     # OpenGL texture id
-      :width, :int,   # Texture base width
-      :height, :int,  # Texture base height
-      :mipmaps, :int, # Mipmap levels, 1 by default
-      :format, :int,  # Data format (PixelFormat type)
-    )
-    def id = self[:id]
-    def id=(v) self[:id] = v end
-    def width = self[:width]
-    def width=(v) self[:width] = v end
-    def height = self[:height]
-    def height=(v) self[:height] = v end
-    def mipmaps = self[:mipmaps]
-    def mipmaps=(v) self[:mipmaps] = v end
-    def format = self[:format]
-    def format=(v) self[:format] = v end
-  end
-
   # NOTE: Used when exporting style as code for convenience
   class GuiStyleProp < FFI::Struct
     layout(
