@@ -1172,6 +1172,24 @@ module Raylib
       #   @return [void]
       [:rlUnloadFramebuffer, :rlUnloadFramebuffer, [:uint], :void],
 
+      # @!method rlCopyFramebuffer(x, y, width, height, format, pixels)
+      #   rlCopyFramebuffer : Copy framebuffer pixel data to internal buffer
+      #   @param x [int]
+      #   @param y [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @param pixels [void *]
+      #   @return [void]
+      [:rlCopyFramebuffer, :rlCopyFramebuffer, [:int, :int, :int, :int, :int, :pointer], :void],
+
+      # @!method rlResizeFramebuffer(width, height)
+      #   rlResizeFramebuffer : Resize internal framebuffer
+      #   @param width [int]
+      #   @param height [int]
+      #   @return [void]
+      [:rlResizeFramebuffer, :rlResizeFramebuffer, [:int, :int], :void],
+
       # @!method rlLoadShaderCode(vsCode, fsCode)
       #   rlLoadShaderCode : Load shader from code strings
       #   @param vsCode [const char *]

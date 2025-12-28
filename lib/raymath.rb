@@ -1040,6 +1040,14 @@ module Raylib
       #   @return [int]
       [:QuaternionEquals, :QuaternionEquals, [Quaternion.by_value, Quaternion.by_value], :int],
 
+      # @!method MatrixCompose(translation, rotation, scale)
+      #   MatrixCompose
+      #   @param translation [Vector3]
+      #   @param rotation [Quaternion]
+      #   @param scale [Vector3]
+      #   @return [Matrix]
+      [:MatrixCompose, :MatrixCompose, [Vector3.by_value, Quaternion.by_value, Vector3.by_value], Matrix.by_value],
+
       # @!method MatrixDecompose(mat, translation, rotation, scale)
       #   MatrixDecompose
       #   @param mat [Matrix]

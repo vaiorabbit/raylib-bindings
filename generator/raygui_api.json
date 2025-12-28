@@ -2039,82 +2039,82 @@
           "description": ""
         },
         {
-          "name": "ICON_234",
+          "name": "ICON_CIRCLE_ADD",
           "value": 234,
           "description": ""
         },
         {
-          "name": "ICON_235",
+          "name": "ICON_CIRCLE_ADD_FILL",
           "value": 235,
           "description": ""
         },
         {
-          "name": "ICON_236",
+          "name": "ICON_CIRCLE_WARNING",
           "value": 236,
           "description": ""
         },
         {
-          "name": "ICON_237",
+          "name": "ICON_CIRCLE_WARNING_FILL",
           "value": 237,
           "description": ""
         },
         {
-          "name": "ICON_238",
+          "name": "ICON_BOX_MORE",
           "value": 238,
           "description": ""
         },
         {
-          "name": "ICON_239",
+          "name": "ICON_BOX_MORE_FILL",
           "value": 239,
           "description": ""
         },
         {
-          "name": "ICON_240",
+          "name": "ICON_BOX_MINUS",
           "value": 240,
           "description": ""
         },
         {
-          "name": "ICON_241",
+          "name": "ICON_BOX_MINUS_FILL",
           "value": 241,
           "description": ""
         },
         {
-          "name": "ICON_242",
+          "name": "ICON_UNION",
           "value": 242,
           "description": ""
         },
         {
-          "name": "ICON_243",
+          "name": "ICON_INTERSECTION",
           "value": 243,
           "description": ""
         },
         {
-          "name": "ICON_244",
+          "name": "ICON_DIFFERENCE",
           "value": 244,
           "description": ""
         },
         {
-          "name": "ICON_245",
+          "name": "ICON_SPHERE",
           "value": 245,
           "description": ""
         },
         {
-          "name": "ICON_246",
+          "name": "ICON_CYLINDER",
           "value": 246,
           "description": ""
         },
         {
-          "name": "ICON_247",
+          "name": "ICON_CONE",
           "value": 247,
           "description": ""
         },
         {
-          "name": "ICON_248",
+          "name": "ICON_ELLIPSOID",
           "value": 248,
           "description": ""
         },
         {
-          "name": "ICON_249",
+          "name": "ICON_CAPSULE",
           "value": 249,
           "description": ""
         },

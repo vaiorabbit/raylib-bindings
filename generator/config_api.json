@@ -85,12 +85,6 @@
       "description": ""
     },
     {
-      "name": "SUPPORT_GIF_RECORDING",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
       "name": "SUPPORT_COMPRESSION_API",
       "type": "INT",
       "value": 1,

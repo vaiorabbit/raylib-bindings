@@ -713,10 +713,10 @@ module Raylib
   # Camera2D, defines position/orientation in 2d space
   class Camera2D < FFI::Struct
     layout(
-      :offset, Vector2,  # Camera offset (displacement from target)
-      :target, Vector2,  # Camera target (rotation and zoom origin)
-      :rotation, :float, # Camera rotation in degrees
-      :zoom, :float,     # Camera zoom (scaling), should be 1.0f by default
+      :offset, Vector2,  # Camera offset (screen space offset from window origin)
+      :target, Vector2,  # Camera target (world space target point that is mapped to screen space offset)
+      :rotation, :float, # Camera rotation in degrees (pivots around target)
+      :zoom, :float,     # Camera zoom (scaling around target), must not be set to 0, set to 1.0f for no scale
     )
     def offset = self[:offset]
     def offset=(v) self[:offset] = v end
@@ -1995,9 +1995,9 @@ module Raylib
       #   @return [int]
       [:MakeDirectory, :MakeDirectory, [:pointer], :int],
 
-      # @!method ChangeDirectory(dir)
+      # @!method ChangeDirectory(dirPath)
       #   ChangeDirectory : Change working directory, return true on success
-      #   @param dir [const char *]
+      #   @param dirPath [const char *]
       #   @return [bool]
       [:ChangeDirectory, :ChangeDirectory, [:pointer], :bool],
 
@@ -5087,7 +5087,7 @@ module Raylib
       [:IsSoundValid, :IsSoundValid, [Sound.by_value], :bool],
 
       # @!method UpdateSound(sound, data, sampleCount)
-      #   UpdateSound : Update sound buffer with new data (data and frame count should fit in sound)
+      #   UpdateSound : Update sound buffer with new data (default data format: 32 bit float, stereo)
       #   @param sound [Sound]
       #   @param data [const void *]
       #   @param sampleCount [int]
@@ -5171,7 +5171,7 @@ module Raylib
       [:SetSoundPitch, :SetSoundPitch, [Sound.by_value, :float], :void],
 
       # @!method SetSoundPan(sound, pan)
-      #   SetSoundPan : Set pan for a sound (0.5 is center)
+      #   SetSoundPan : Set pan for a sound (-1.0 left, 0.0 center, 1.0 right)
       #   @param sound [Sound]
       #   @param pan [float]
       #   @return [void]
@@ -5296,7 +5296,7 @@ module Raylib
       [:SetMusicPitch, :SetMusicPitch, [Music.by_value, :float], :void],
 
       # @!method SetMusicPan(music, pan)
-      #   SetMusicPan : Set pan for a music (0.5 is center)
+      #   SetMusicPan : Set pan for a music (-1.0 left, 0.0 center, 1.0 right)
       #   @param music [Music]
       #   @param pan [float]
       #   @return [void]
