@@ -3,15 +3,15 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2025-12-28
+*   Last modified : 2026-01-10
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/05f5143603ba4db9b3157e981926a42c55c4c766 )
+*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/f2c8a9c085c26c0a7a0b5bf7d6e69a56618bd964 )
     *   raylib
     *   raymath
     *   rlgl
-*   [raygui](https://github.com/raysan5/raygui) version [5.0-dev]( https://github.com/raysan5/raygui/commit/0b94b80c92c34c79f8d902f51f68dfc1edacf51b )
+*   [raygui](https://github.com/raysan5/raygui) version [5.0-dev]( https://github.com/raysan5/raygui/commit/51e6bcb39346b3e363643f95c3532119af41f6fd )
 *   [Physac](https://github.com/raysan5/physac) version [1.1]( https://github.com/raysan5/physac/commit/4a8e17f263fb8e1150b3fbafc96f880c7d7a4833 )
 
 <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/bitmap_font_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/game_of_life_simple_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/lissajous_curve_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/procedural_texture_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/reversi_board_rb.png" width="125"> <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/utf8_font_rb.png" width="125">
@@ -202,7 +202,7 @@ Shared libraries in `lib` directory are built on top of these products and are a
 All ruby codes here are available under the terms of the zlib/libpng License ( http://opensource.org/licenses/Zlib ).
 
     Ruby-raylib : Yet another raylib wrapper for Ruby
-    Copyright (c) 2021-2025 vaiorabbit <http://twitter.com/vaiorabbit>
+    Copyright (c) 2021-2026 vaiorabbit <http://twitter.com/vaiorabbit>
 
     This software is provided 'as-is', without any express or implied
     warranty. In no event will the authors be held liable for any damages

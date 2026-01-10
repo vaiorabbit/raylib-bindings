@@ -37,6 +37,24 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_STANDARD_FILEIO",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "SUPPORT_TRACELOG",
+      "type": "INT",
+      "value": 1,
+      "description": ""
+    },
+    {
+      "name": "TRACELOG(level, ...)",
+      "type": "MACRO",
+      "value": "TraceLog(level, __VA_ARGS__)",
+      "description": ""
+    },
+    {
       "name": "SUPPORT_CAMERA_SYSTEM",
       "type": "INT",
       "value": 1,
@@ -127,6 +145,12 @@
       "description": ""
     },
     {
+      "name": "MAX_TRACELOG_MSG_LENGTH",
+      "type": "INT",
+      "value": 256,
+      "description": "Max length of one trace-log message"
+    },
+    {
       "name": "MAX_FILEPATH_CAPACITY",
       "type": "INT",
       "value": 8192,
@@ -177,7 +201,7 @@
     {
       "name": "MAX_TOUCH_POINTS",
       "type": "INT",
-      "value": 8,
+      "value": 10,
       "description": "Maximum number of touch points supported"
     },
     {
@@ -605,24 +629,6 @@
       "type": "INT",
       "value": 16,
       "description": "Maximum number of audio pool channels"
-    },
-    {
-      "name": "SUPPORT_STANDARD_FILEIO",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
-      "name": "SUPPORT_TRACELOG",
-      "type": "INT",
-      "value": 1,
-      "description": ""
-    },
-    {
-      "name": "MAX_TRACELOG_MSG_LENGTH",
-      "type": "INT",
-      "value": 256,
-      "description": "Max length of one trace-log message"
     }
   ],
   "structs": [

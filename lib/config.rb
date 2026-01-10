@@ -16,6 +16,8 @@ module Raylib
   SUPPORT_MODULE_RTEXT = 1                                    # WARNING: It requires SUPPORT_MODULE_RTEXTURES to load sprite font textures
   SUPPORT_MODULE_RMODELS = 1
   SUPPORT_MODULE_RAUDIO = 1
+  SUPPORT_STANDARD_FILEIO = 1
+  SUPPORT_TRACELOG = 1
   SUPPORT_CAMERA_SYSTEM = 1
   SUPPORT_GESTURES_SYSTEM = 1
   SUPPORT_RPRAND_GENERATOR = 1
@@ -30,6 +32,7 @@ module Raylib
   SUPPORT_FILEFORMAT_BMP = 1
   SUPPORT_FILEFORMAT_PNG = 1
   SUPPORT_FILEFORMAT_JPG = 1
+  MAX_TRACELOG_MSG_LENGTH = 256                               # Max length of one trace-log message
   MAX_FILEPATH_CAPACITY = 8192                                # Maximum file paths capacity
   MAX_FILEPATH_LENGTH = 4096                                  # Maximum length for filepaths (Linux PATH_MAX default value)
   MAX_KEYBOARD_KEYS = 512                                     # Maximum number of keyboard keys supported
@@ -38,7 +41,7 @@ module Raylib
   MAX_GAMEPAD_AXES = 8                                        # Maximum number of axes supported (per gamepad)
   MAX_GAMEPAD_BUTTONS = 32                                    # Maximum number of buttons supported (per gamepad)
   MAX_GAMEPAD_VIBRATION_TIME = 2.0                            # Maximum vibration time in seconds
-  MAX_TOUCH_POINTS = 8                                        # Maximum number of touch points supported
+  MAX_TOUCH_POINTS = 10                                       # Maximum number of touch points supported
   MAX_KEY_PRESSED_QUEUE = 16                                  # Maximum number of keys in the key input queue
   MAX_CHAR_PRESSED_QUEUE = 16                                 # Maximum number of characters in the char input queue
   MAX_DECOMPRESSION_SIZE = 64                                 # Max size allocated for decompression in MB
@@ -109,8 +112,5 @@ module Raylib
   AUDIO_DEVICE_CHANNELS = 2                                   # Device output channels: stereo
   AUDIO_DEVICE_SAMPLE_RATE = 0                                # Device sample rate (device default)
   MAX_AUDIO_BUFFER_POOL_CHANNELS = 16                         # Maximum number of audio pool channels
-  SUPPORT_STANDARD_FILEIO = 1
-  SUPPORT_TRACELOG = 1
-  MAX_TRACELOG_MSG_LENGTH = 256                               # Max length of one trace-log message
 
 end

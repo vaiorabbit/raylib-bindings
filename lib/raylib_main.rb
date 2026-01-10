@@ -1765,6 +1765,12 @@ module Raylib
       #   @return [void]
       [:OpenURL, :OpenURL, [:pointer], :void],
 
+      # @!method SetTraceLogLevel(logLevel)
+      #   SetTraceLogLevel : Set the current threshold (minimum) log level
+      #   @param logLevel [int]
+      #   @return [void]
+      [:SetTraceLogLevel, :SetTraceLogLevel, [:int], :void],
+
       # @!method TraceLog(logLevel, text, ...)
       #   TraceLog : Show trace log messages (LOG_DEBUG, LOG_INFO, LOG_WARNING, LOG_ERROR...)
       #   @param logLevel [int]
@@ -1773,11 +1779,11 @@ module Raylib
       #   @return [void]
       [:TraceLog, :TraceLog, [:int, :pointer, :varargs], :void],
 
-      # @!method SetTraceLogLevel(logLevel)
-      #   SetTraceLogLevel : Set the current threshold (minimum) log level
-      #   @param logLevel [int]
+      # @!method SetTraceLogCallback(callback)
+      #   SetTraceLogCallback : Set custom trace log
+      #   @param callback [TraceLogCallback]
       #   @return [void]
-      [:SetTraceLogLevel, :SetTraceLogLevel, [:int], :void],
+      [:SetTraceLogCallback, :SetTraceLogCallback, [:TraceLogCallback], :void],
 
       # @!method MemAlloc(size)
       #   MemAlloc : Internal memory allocator
@@ -1797,36 +1803,6 @@ module Raylib
       #   @param ptr [void *]
       #   @return [void]
       [:MemFree, :MemFree, [:pointer], :void],
-
-      # @!method SetTraceLogCallback(callback)
-      #   SetTraceLogCallback : Set custom trace log
-      #   @param callback [TraceLogCallback]
-      #   @return [void]
-      [:SetTraceLogCallback, :SetTraceLogCallback, [:TraceLogCallback], :void],
-
-      # @!method SetLoadFileDataCallback(callback)
-      #   SetLoadFileDataCallback : Set custom file binary data loader
-      #   @param callback [LoadFileDataCallback]
-      #   @return [void]
-      [:SetLoadFileDataCallback, :SetLoadFileDataCallback, [:LoadFileDataCallback], :void],
-
-      # @!method SetSaveFileDataCallback(callback)
-      #   SetSaveFileDataCallback : Set custom file binary data saver
-      #   @param callback [SaveFileDataCallback]
-      #   @return [void]
-      [:SetSaveFileDataCallback, :SetSaveFileDataCallback, [:SaveFileDataCallback], :void],
-
-      # @!method SetLoadFileTextCallback(callback)
-      #   SetLoadFileTextCallback : Set custom file text data loader
-      #   @param callback [LoadFileTextCallback]
-      #   @return [void]
-      [:SetLoadFileTextCallback, :SetLoadFileTextCallback, [:LoadFileTextCallback], :void],
-
-      # @!method SetSaveFileTextCallback(callback)
-      #   SetSaveFileTextCallback : Set custom file text data saver
-      #   @param callback [SaveFileTextCallback]
-      #   @return [void]
-      [:SetSaveFileTextCallback, :SetSaveFileTextCallback, [:SaveFileTextCallback], :void],
 
       # @!method LoadFileData(fileName, dataSize)
       #   LoadFileData : Load file data as byte array (read)
@@ -1875,6 +1851,30 @@ module Raylib
       #   @param text [const char *]
       #   @return [bool]
       [:SaveFileText, :SaveFileText, [:pointer, :pointer], :bool],
+
+      # @!method SetLoadFileDataCallback(callback)
+      #   SetLoadFileDataCallback : Set custom file binary data loader
+      #   @param callback [LoadFileDataCallback]
+      #   @return [void]
+      [:SetLoadFileDataCallback, :SetLoadFileDataCallback, [:LoadFileDataCallback], :void],
+
+      # @!method SetSaveFileDataCallback(callback)
+      #   SetSaveFileDataCallback : Set custom file binary data saver
+      #   @param callback [SaveFileDataCallback]
+      #   @return [void]
+      [:SetSaveFileDataCallback, :SetSaveFileDataCallback, [:SaveFileDataCallback], :void],
+
+      # @!method SetLoadFileTextCallback(callback)
+      #   SetLoadFileTextCallback : Set custom file text data loader
+      #   @param callback [LoadFileTextCallback]
+      #   @return [void]
+      [:SetLoadFileTextCallback, :SetLoadFileTextCallback, [:LoadFileTextCallback], :void],
+
+      # @!method SetSaveFileTextCallback(callback)
+      #   SetSaveFileTextCallback : Set custom file text data saver
+      #   @param callback [SaveFileTextCallback]
+      #   @return [void]
+      [:SetSaveFileTextCallback, :SetSaveFileTextCallback, [:SaveFileTextCallback], :void],
 
       # @!method FileRename(fileName, fileRename)
       #   FileRename : Rename file (if exists)
