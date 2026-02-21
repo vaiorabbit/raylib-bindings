@@ -59,6 +59,8 @@
     , "EPSILON" : "0.000001"
     , "MatrixToFloat" : null
     , "Vector3ToFloat" : null
+    , "RL_FLOAT3_TYPE" : null
+    , "RL_FLOAT16_TYPE" : null
     , "RCAMERA_H" : null
     , "CAMERA_CULL_DISTANCE_NEAR" : null
     , "CAMERA_CULL_DISTANCE_FAR" : null
@@ -66,7 +68,6 @@
     , "RLGL_VERSION" : "\"5.0\""
     , "TRACELOG" : null
     , "GRAPHICS_API_OPENGL_33" : null
-    , "RLGL_RENDER_TEXTURES_HINT" : null
     , "RL_DEFAULT_BATCH_BUFFER_ELEMENTS" : "8192"
     , "RL_DEFAULT_BATCH_BUFFERS" : "1"
     , "RL_DEFAULT_BATCH_DRAWCALLS" : "256"
@@ -239,15 +240,26 @@
     , "AUDIO_DEVICE_FORMAT" : null
     , "AUDIO_DEVICE_CHANNELS" : "2"
     , "AUDIO_DEVICE_SAMPLE_RATE" : "0"
+    , "AUDIO_DEVICE_PERIOD_SIZE_IN_FRAMES" : "0"
     , "MAX_AUDIO_BUFFER_POOL_CHANNELS" : "16"
     , "RAYGUI_H" : null
     , "RAYGUI_VERSION_MAJOR" : "4"
     , "RAYGUI_VERSION_MINOR" : "5"
     , "RAYGUI_VERSION_PATCH" : "0"
     , "RAYGUI_VERSION" : "\"5.0-dev\""
+    , "_CRT_SECURE_NO_WARNINGS" : null
     , "RAYGUIAPI" : null
     , "RAYGUI_SUPPORT_LOG_INFO" : null
     , "RAYGUI_LOG" : null
+    , "GUI_BUTTON_DOWN" : null
+    , "GUI_BUTTON_DOWN_ALT" : null
+    , "GUI_BUTTON_PRESSED" : null
+    , "GUI_BUTTON_RELEASED" : null
+    , "GUI_SCROLL_DELTA" : null
+    , "GUI_POINTER_POSITION" : null
+    , "GUI_KEY_DOWN" : null
+    , "GUI_KEY_PRESSED" : null
+    , "GUI_INPUT_KEY" : null
     , "SCROLLBAR_LEFT_SIDE" : "0"
     , "SCROLLBAR_RIGHT_SIDE" : "1"
     , "PHYSAC_H" : null

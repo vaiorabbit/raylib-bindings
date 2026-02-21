@@ -890,12 +890,14 @@ module Raylib
   # ModelAnimation
   class ModelAnimation < FFI::Struct
     layout(
+      :name, [:char, 32],    # Animation name
       :boneCount, :int,      # Number of bones
       :frameCount, :int,     # Number of animation frames
       :bones, :pointer,      # Bones information (skeleton)
       :framePoses, :pointer, # Poses array by frame
-      :name, [:char, 32],    # Animation name
     )
+    def name = self[:name]
+    def name=(v) self[:name] = v end
     def boneCount = self[:boneCount]
     def boneCount=(v) self[:boneCount] = v end
     def frameCount = self[:frameCount]
@@ -904,8 +906,6 @@ module Raylib
     def bones=(v) self[:bones] = v end
     def framePoses = self[:framePoses]
     def framePoses=(v) self[:framePoses] = v end
-    def name = self[:name]
-    def name=(v) self[:name] = v end
   end
 
   # Ray, ray for raycasting
@@ -1091,12 +1091,9 @@ module Raylib
   # File path list
   class FilePathList < FFI::Struct
     layout(
-      :capacity, :uint, # Filepaths max entries
       :count, :uint,    # Filepaths entries count
       :paths, :pointer, # Filepaths entries
     )
-    def capacity = self[:capacity]
-    def capacity=(v) self[:capacity] = v end
     def count = self[:count]
     def count=(v) self[:count] = v end
     def paths = self[:paths]
@@ -2048,6 +2045,20 @@ module Raylib
       #   @param files [FilePathList]
       #   @return [void]
       [:UnloadDroppedFiles, :UnloadDroppedFiles, [FilePathList.by_value], :void],
+
+      # @!method GetDirectoryFileCount(dirPath)
+      #   GetDirectoryFileCount : Get the file count in a directory
+      #   @param dirPath [const char *]
+      #   @return [unsigned int]
+      [:GetDirectoryFileCount, :GetDirectoryFileCount, [:pointer], :uint],
+
+      # @!method GetDirectoryFileCountEx(basePath, filter, scanSubdirs)
+      #   GetDirectoryFileCountEx : Get the file count in a directory with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result
+      #   @param basePath [const char *]
+      #   @param filter [const char *]
+      #   @param scanSubdirs [bool]
+      #   @return [unsigned int]
+      [:GetDirectoryFileCountEx, :GetDirectoryFileCountEx, [:pointer, :pointer, :bool], :uint],
 
       # @!method CompressData(data, dataSize, compDataSize)
       #   CompressData : Compress data (DEFLATE algorithm), memory must be MemFree()
@@ -4929,6 +4940,23 @@ module Raylib
       #   @param frame [int]
       #   @return [void]
       [:UpdateModelAnimationBones, :UpdateModelAnimationBones, [Model.by_value, ModelAnimation.by_value, :int], :void],
+
+      # @!method UpdateModelAnimationBonesLerp(model, animA, frameA, animB, frameB, value)
+      #   UpdateModelAnimationBonesLerp : Update model animation mesh bone matrices with interpolation between two poses(GPU skinning)
+      #   @param model [Model]
+      #   @param animA [ModelAnimation]
+      #   @param frameA [int]
+      #   @param animB [ModelAnimation]
+      #   @param frameB [int]
+      #   @param value [float]
+      #   @return [void]
+      [:UpdateModelAnimationBonesLerp, :UpdateModelAnimationBonesLerp, [Model.by_value, ModelAnimation.by_value, :int, ModelAnimation.by_value, :int, :float], :void],
+
+      # @!method UpdateModelVertsToCurrentBones(model)
+      #   UpdateModelVertsToCurrentBones : Update model vertices according to mesh bone matrices (CPU)
+      #   @param model [Model]
+      #   @return [void]
+      [:UpdateModelVertsToCurrentBones, :UpdateModelVertsToCurrentBones, [Model.by_value], :void],
 
       # @!method UnloadModelAnimation(anim)
       #   UnloadModelAnimation : Unload animation data

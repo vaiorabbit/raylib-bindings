@@ -10,7 +10,7 @@
       "name": "RMAPI",
       "type": "UNKNOWN",
       "value": "__declspec(dllexport) extern inline",
-      "description": "We are building raylib as a Win32 shared library (.dll)"
+      "description": "Building raylib as a Win32 shared library (.dll)"
     },
     {
       "name": "PI",
@@ -74,6 +74,18 @@
     },
     {
       "name": "RL_MATRIX_TYPE",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "RL_FLOAT3_TYPE",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "RL_FLOAT16_TYPE",
       "type": "GUARD",
       "value": "",
       "description": ""
@@ -267,7 +279,7 @@
     },
     {
       "name": "float3",
-      "description": "NOTE: Helper types to be used instead of array return types for *ToFloat functions",
+      "description": "",
       "fields": [
         {
           "type": "float[3]",

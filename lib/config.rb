@@ -111,6 +111,7 @@ module Raylib
   SUPPORT_FILEFORMAT_MOD = 1
   AUDIO_DEVICE_CHANNELS = 2                                   # Device output channels: stereo
   AUDIO_DEVICE_SAMPLE_RATE = 0                                # Device sample rate (device default)
+  AUDIO_DEVICE_PERIOD_SIZE_IN_FRAMES = 0                      # Device period size (controls latency, 0 defaults to 10ms)
   MAX_AUDIO_BUFFER_POOL_CHANNELS = 16                         # Maximum number of audio pool channels
 
 end

@@ -628,7 +628,7 @@ module Raylib
       # @!method GuiTabBar(bounds, text, count, active)
       #   GuiTabBar : Tab Bar control, returns TAB to be closed or -1
       #   @param bounds [Rectangle]
-      #   @param text [const char **]
+      #   @param text [char **]
       #   @param count [int]
       #   @param active [int *]
       #   @return [int]
@@ -824,7 +824,7 @@ module Raylib
       # @!method GuiListViewEx(bounds, text, count, scrollIndex, active, focus)
       #   GuiListViewEx : List View with extended parameters
       #   @param bounds [Rectangle]
-      #   @param text [const char **]
+      #   @param text [char **]
       #   @param count [int]
       #   @param scrollIndex [int *]
       #   @param active [int *]

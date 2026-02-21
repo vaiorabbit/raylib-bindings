@@ -34,7 +34,13 @@
       "name": "RAYGUIAPI",
       "type": "UNKNOWN",
       "value": "__declspec(dllexport)",
-      "description": "We are building the library as a Win32 shared library (.dll)"
+      "description": "Building the library as a Win32 shared library (.dll)"
+    },
+    {
+      "name": "_CRT_SECURE_NO_WARNINGS",
+      "type": "GUARD",
+      "value": "",
+      "description": "Disable unsafe warnings on scanf() functions in MSVC"
     },
     {
       "name": "RAYGUI_SUPPORT_LOG_INFO",
@@ -46,6 +52,60 @@
       "name": "RAYGUI_LOG(...)",
       "type": "MACRO",
       "value": "printf(__VA_ARGS__)",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_DOWN",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonDown(MOUSE_LEFT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_DOWN_ALT",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonDown(MOUSE_RIGHT_BUTTON) || IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_FACE_RIGHT))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_PRESSED",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_BUTTON_RELEASED",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonReleased(MOUSE_LEFT_BUTTON) || IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
+      "description": ""
+    },
+    {
+      "name": "GUI_SCROLL_DELTA",
+      "type": "UNKNOWN",
+      "value": "((float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_RIGHT_TRIGGER_2) - (float)IsGamepadButtonDown(0, GAMEPAD_BUTTON_LEFT_TRIGGER_2))",
+      "description": ""
+    },
+    {
+      "name": "GUI_POINTER_POSITION",
+      "type": "UNKNOWN",
+      "value": "GetMousePosition()",
+      "description": ""
+    },
+    {
+      "name": "GUI_KEY_DOWN(key)",
+      "type": "MACRO",
+      "value": "IsKeyDown(key)",
+      "description": ""
+    },
+    {
+      "name": "GUI_KEY_PRESSED(key)",
+      "type": "MACRO",
+      "value": "IsKeyPressed(key)",
+      "description": ""
+    },
+    {
+      "name": "GUI_INPUT_KEY",
+      "type": "UNKNOWN",
+      "value": "GetCharPressed()",
       "description": ""
     },
     {
@@ -2447,7 +2507,7 @@
           "name": "bounds"
         },
         {
-          "type": "const char **",
+          "type": "char **",
           "name": "text"
         },
         {
@@ -2945,7 +3005,7 @@
           "name": "bounds"
         },
         {
-          "type": "const char **",
+          "type": "char **",
           "name": "text"
         },
         {

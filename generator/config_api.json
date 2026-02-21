@@ -49,12 +49,6 @@
       "description": ""
     },
     {
-      "name": "TRACELOG(level, ...)",
-      "type": "MACRO",
-      "value": "TraceLog(level, __VA_ARGS__)",
-      "description": ""
-    },
-    {
       "name": "SUPPORT_CAMERA_SYSTEM",
       "type": "INT",
       "value": 1,
@@ -142,6 +136,12 @@
       "name": "SUPPORT_FILEFORMAT_JPG",
       "type": "INT",
       "value": 1,
+      "description": ""
+    },
+    {
+      "name": "TRACELOG(level, ...)",
+      "type": "MACRO",
+      "value": "TraceLog(level, __VA_ARGS__)",
       "description": ""
     },
     {
@@ -623,6 +623,12 @@
       "type": "INT",
       "value": 0,
       "description": "Device sample rate (device default)"
+    },
+    {
+      "name": "AUDIO_DEVICE_PERIOD_SIZE_IN_FRAMES",
+      "type": "INT",
+      "value": 0,
+      "description": "Device period size (controls latency, 0 defaults to 10ms)"
     },
     {
       "name": "MAX_AUDIO_BUFFER_POOL_CHANNELS",
