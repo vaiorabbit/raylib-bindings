@@ -1,6 +1,7 @@
 2026-02-22  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/11e3e6e0b994d0543cb83e253438e08402dba014 ) and raygui ( https://github.com/raysan5/raygui/commit/960f13b6e07ab9876fbba572fa5f17eed268d6b4 )
+	* examples/models_animation_blending.cpu.rb, examples/models_animation_blending.gpu.rb : Added
 
 2026-01-10  vaiorabbit  <http://twitter.com/vaiorabbit>
 
