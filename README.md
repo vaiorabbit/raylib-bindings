@@ -43,6 +43,33 @@ D:\> ruby template.rb
 
 <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings/main/doc/template_screenshot.png" width="400">
 
+## Example Smoke Test ##
+
+Run curated examples one by one for a short duration, terminate them, and report status:
+
+```
+# cross-platform
+ruby script/examples_smoke_test.rb
+
+# Windows helper
+script\examples_smoke_test.cmd
+
+# POSIX helper
+sh script/examples_smoke_test.sh
+```
+
+Options:
+
+*   `--timeout 5` : per-example runtime in seconds before termination
+*   `--allowlist examples/smoke_allowlist.txt` : explicit list of runnable examples
+*   `--list` : print resolved allowlist and exit
+*   `--verbose` : print execution details and child output on failures
+
+Exit code policy:
+
+*   `0` when all examples either exit successfully or are timeout-terminated
+*   non-zero when any example fails to spawn or exits with non-zero status before timeout
+
 ## Prerequisites ##
 
 *   Ruby interpreter

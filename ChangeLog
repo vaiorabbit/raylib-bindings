@@ -2,6 +2,7 @@
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/8a685877eb321fe0eaeabab7b8ec69d2f8a0064d ) and raygui ( https://github.com/raysan5/raygui/commit/3b2855842ab578a034f827c38cf8f62c042fc983 )
 	* Updated GitHub Actions scripts
+	* Added smoke test
 
 2026-02-22  vaiorabbit  <http://twitter.com/vaiorabbit>
 
