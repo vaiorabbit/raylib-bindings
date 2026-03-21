@@ -11,86 +11,88 @@ module Raylib
 
   # Define/Macro
 
-  RLGL_VERSION = "5.0"
+  RLGL_VERSION = "6.0"
   RL_DEFAULT_BATCH_BUFFER_ELEMENTS = 8192
-  RL_TEXTURE_WRAP_S = 0x2802                    # GL_TEXTURE_WRAP_S
-  RL_TEXTURE_WRAP_T = 0x2803                    # GL_TEXTURE_WRAP_T
-  RL_TEXTURE_MAG_FILTER = 0x2800                # GL_TEXTURE_MAG_FILTER
-  RL_TEXTURE_MIN_FILTER = 0x2801                # GL_TEXTURE_MIN_FILTER
-  RL_TEXTURE_FILTER_NEAREST = 0x2600            # GL_NEAREST
-  RL_TEXTURE_FILTER_LINEAR = 0x2601             # GL_LINEAR
-  RL_TEXTURE_FILTER_MIP_NEAREST = 0x2700        # GL_NEAREST_MIPMAP_NEAREST
-  RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 0x2702 # GL_NEAREST_MIPMAP_LINEAR
-  RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 0x2701 # GL_LINEAR_MIPMAP_NEAREST
-  RL_TEXTURE_FILTER_MIP_LINEAR = 0x2703         # GL_LINEAR_MIPMAP_LINEAR
-  RL_TEXTURE_FILTER_ANISOTROPIC = 0x3000        # Anisotropic filter (custom identifier)
-  RL_TEXTURE_MIPMAP_BIAS_RATIO = 0x4000         # Texture mipmap bias, percentage ratio (custom identifier)
-  RL_TEXTURE_WRAP_REPEAT = 0x2901               # GL_REPEAT
-  RL_TEXTURE_WRAP_CLAMP = 0x812F                # GL_CLAMP_TO_EDGE
-  RL_TEXTURE_WRAP_MIRROR_REPEAT = 0x8370        # GL_MIRRORED_REPEAT
-  RL_TEXTURE_WRAP_MIRROR_CLAMP = 0x8742         # GL_MIRROR_CLAMP_EXT
-  RL_MODELVIEW = 0x1700                         # GL_MODELVIEW
-  RL_PROJECTION = 0x1701                        # GL_PROJECTION
-  RL_TEXTURE = 0x1702                           # GL_TEXTURE
-  RL_LINES = 0x0001                             # GL_LINES
-  RL_TRIANGLES = 0x0004                         # GL_TRIANGLES
-  RL_QUADS = 0x0007                             # GL_QUADS
-  RL_UNSIGNED_BYTE = 0x1401                     # GL_UNSIGNED_BYTE
-  RL_FLOAT = 0x1406                             # GL_FLOAT
-  RL_STREAM_DRAW = 0x88E0                       # GL_STREAM_DRAW
-  RL_STREAM_READ = 0x88E1                       # GL_STREAM_READ
-  RL_STREAM_COPY = 0x88E2                       # GL_STREAM_COPY
-  RL_STATIC_DRAW = 0x88E4                       # GL_STATIC_DRAW
-  RL_STATIC_READ = 0x88E5                       # GL_STATIC_READ
-  RL_STATIC_COPY = 0x88E6                       # GL_STATIC_COPY
-  RL_DYNAMIC_DRAW = 0x88E8                      # GL_DYNAMIC_DRAW
-  RL_DYNAMIC_READ = 0x88E9                      # GL_DYNAMIC_READ
-  RL_DYNAMIC_COPY = 0x88EA                      # GL_DYNAMIC_COPY
-  RL_FRAGMENT_SHADER = 0x8B30                   # GL_FRAGMENT_SHADER
-  RL_VERTEX_SHADER = 0x8B31                     # GL_VERTEX_SHADER
-  RL_COMPUTE_SHADER = 0x91B9                    # GL_COMPUTE_SHADER
-  RL_ZERO = 0                                   # GL_ZERO
-  RL_ONE = 1                                    # GL_ONE
-  RL_SRC_COLOR = 0x0300                         # GL_SRC_COLOR
-  RL_ONE_MINUS_SRC_COLOR = 0x0301               # GL_ONE_MINUS_SRC_COLOR
-  RL_SRC_ALPHA = 0x0302                         # GL_SRC_ALPHA
-  RL_ONE_MINUS_SRC_ALPHA = 0x0303               # GL_ONE_MINUS_SRC_ALPHA
-  RL_DST_ALPHA = 0x0304                         # GL_DST_ALPHA
-  RL_ONE_MINUS_DST_ALPHA = 0x0305               # GL_ONE_MINUS_DST_ALPHA
-  RL_DST_COLOR = 0x0306                         # GL_DST_COLOR
-  RL_ONE_MINUS_DST_COLOR = 0x0307               # GL_ONE_MINUS_DST_COLOR
-  RL_SRC_ALPHA_SATURATE = 0x0308                # GL_SRC_ALPHA_SATURATE
-  RL_CONSTANT_COLOR = 0x8001                    # GL_CONSTANT_COLOR
-  RL_ONE_MINUS_CONSTANT_COLOR = 0x8002          # GL_ONE_MINUS_CONSTANT_COLOR
-  RL_CONSTANT_ALPHA = 0x8003                    # GL_CONSTANT_ALPHA
-  RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004          # GL_ONE_MINUS_CONSTANT_ALPHA
-  RL_FUNC_ADD = 0x8006                          # GL_FUNC_ADD
-  RL_MIN = 0x8007                               # GL_MIN
-  RL_MAX = 0x8008                               # GL_MAX
-  RL_FUNC_SUBTRACT = 0x800A                     # GL_FUNC_SUBTRACT
-  RL_FUNC_REVERSE_SUBTRACT = 0x800B             # GL_FUNC_REVERSE_SUBTRACT
-  RL_BLEND_EQUATION = 0x8009                    # GL_BLEND_EQUATION
-  RL_BLEND_EQUATION_RGB = 0x8009                # GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
-  RL_BLEND_EQUATION_ALPHA = 0x883D              # GL_BLEND_EQUATION_ALPHA
-  RL_BLEND_DST_RGB = 0x80C8                     # GL_BLEND_DST_RGB
-  RL_BLEND_SRC_RGB = 0x80C9                     # GL_BLEND_SRC_RGB
-  RL_BLEND_DST_ALPHA = 0x80CA                   # GL_BLEND_DST_ALPHA
-  RL_BLEND_SRC_ALPHA = 0x80CB                   # GL_BLEND_SRC_ALPHA
-  RL_BLEND_COLOR = 0x8005                       # GL_BLEND_COLOR
-  RL_READ_FRAMEBUFFER = 0x8CA8                  # GL_READ_FRAMEBUFFER
-  RL_DRAW_FRAMEBUFFER = 0x8CA9                  # GL_DRAW_FRAMEBUFFER
+  RL_TEXTURE_WRAP_S = 0x2802                              # GL_TEXTURE_WRAP_S
+  RL_TEXTURE_WRAP_T = 0x2803                              # GL_TEXTURE_WRAP_T
+  RL_TEXTURE_MAG_FILTER = 0x2800                          # GL_TEXTURE_MAG_FILTER
+  RL_TEXTURE_MIN_FILTER = 0x2801                          # GL_TEXTURE_MIN_FILTER
+  RL_TEXTURE_FILTER_NEAREST = 0x2600                      # GL_NEAREST
+  RL_TEXTURE_FILTER_LINEAR = 0x2601                       # GL_LINEAR
+  RL_TEXTURE_FILTER_MIP_NEAREST = 0x2700                  # GL_NEAREST_MIPMAP_NEAREST
+  RL_TEXTURE_FILTER_NEAREST_MIP_LINEAR = 0x2702           # GL_NEAREST_MIPMAP_LINEAR
+  RL_TEXTURE_FILTER_LINEAR_MIP_NEAREST = 0x2701           # GL_LINEAR_MIPMAP_NEAREST
+  RL_TEXTURE_FILTER_MIP_LINEAR = 0x2703                   # GL_LINEAR_MIPMAP_LINEAR
+  RL_TEXTURE_FILTER_ANISOTROPIC = 0x3000                  # Anisotropic filter (custom identifier)
+  RL_TEXTURE_MIPMAP_BIAS_RATIO = 0x4000                   # Texture mipmap bias, percentage ratio (custom identifier)
+  RL_TEXTURE_WRAP_REPEAT = 0x2901                         # GL_REPEAT
+  RL_TEXTURE_WRAP_CLAMP = 0x812F                          # GL_CLAMP_TO_EDGE
+  RL_TEXTURE_WRAP_MIRROR_REPEAT = 0x8370                  # GL_MIRRORED_REPEAT
+  RL_TEXTURE_WRAP_MIRROR_CLAMP = 0x8742                   # GL_MIRROR_CLAMP_EXT
+  RL_MODELVIEW = 0x1700                                   # GL_MODELVIEW
+  RL_PROJECTION = 0x1701                                  # GL_PROJECTION
+  RL_TEXTURE = 0x1702                                     # GL_TEXTURE
+  RL_LINES = 0x0001                                       # GL_LINES
+  RL_TRIANGLES = 0x0004                                   # GL_TRIANGLES
+  RL_QUADS = 0x0007                                       # GL_QUADS
+  RL_UNSIGNED_BYTE = 0x1401                               # GL_UNSIGNED_BYTE
+  RL_FLOAT = 0x1406                                       # GL_FLOAT
+  RL_STREAM_DRAW = 0x88E0                                 # GL_STREAM_DRAW
+  RL_STREAM_READ = 0x88E1                                 # GL_STREAM_READ
+  RL_STREAM_COPY = 0x88E2                                 # GL_STREAM_COPY
+  RL_STATIC_DRAW = 0x88E4                                 # GL_STATIC_DRAW
+  RL_STATIC_READ = 0x88E5                                 # GL_STATIC_READ
+  RL_STATIC_COPY = 0x88E6                                 # GL_STATIC_COPY
+  RL_DYNAMIC_DRAW = 0x88E8                                # GL_DYNAMIC_DRAW
+  RL_DYNAMIC_READ = 0x88E9                                # GL_DYNAMIC_READ
+  RL_DYNAMIC_COPY = 0x88EA                                # GL_DYNAMIC_COPY
+  RL_FRAGMENT_SHADER = 0x8B30                             # GL_FRAGMENT_SHADER
+  RL_VERTEX_SHADER = 0x8B31                               # GL_VERTEX_SHADER
+  RL_COMPUTE_SHADER = 0x91B9                              # GL_COMPUTE_SHADER
+  RL_ZERO = 0                                             # GL_ZERO
+  RL_ONE = 1                                              # GL_ONE
+  RL_SRC_COLOR = 0x0300                                   # GL_SRC_COLOR
+  RL_ONE_MINUS_SRC_COLOR = 0x0301                         # GL_ONE_MINUS_SRC_COLOR
+  RL_SRC_ALPHA = 0x0302                                   # GL_SRC_ALPHA
+  RL_ONE_MINUS_SRC_ALPHA = 0x0303                         # GL_ONE_MINUS_SRC_ALPHA
+  RL_DST_ALPHA = 0x0304                                   # GL_DST_ALPHA
+  RL_ONE_MINUS_DST_ALPHA = 0x0305                         # GL_ONE_MINUS_DST_ALPHA
+  RL_DST_COLOR = 0x0306                                   # GL_DST_COLOR
+  RL_ONE_MINUS_DST_COLOR = 0x0307                         # GL_ONE_MINUS_DST_COLOR
+  RL_SRC_ALPHA_SATURATE = 0x0308                          # GL_SRC_ALPHA_SATURATE
+  RL_CONSTANT_COLOR = 0x8001                              # GL_CONSTANT_COLOR
+  RL_ONE_MINUS_CONSTANT_COLOR = 0x8002                    # GL_ONE_MINUS_CONSTANT_COLOR
+  RL_CONSTANT_ALPHA = 0x8003                              # GL_CONSTANT_ALPHA
+  RL_ONE_MINUS_CONSTANT_ALPHA = 0x8004                    # GL_ONE_MINUS_CONSTANT_ALPHA
+  RL_FUNC_ADD = 0x8006                                    # GL_FUNC_ADD
+  RL_MIN = 0x8007                                         # GL_MIN
+  RL_MAX = 0x8008                                         # GL_MAX
+  RL_FUNC_SUBTRACT = 0x800A                               # GL_FUNC_SUBTRACT
+  RL_FUNC_REVERSE_SUBTRACT = 0x800B                       # GL_FUNC_REVERSE_SUBTRACT
+  RL_BLEND_EQUATION = 0x8009                              # GL_BLEND_EQUATION
+  RL_BLEND_EQUATION_RGB = 0x8009                          # GL_BLEND_EQUATION_RGB   // (Same as BLEND_EQUATION)
+  RL_BLEND_EQUATION_ALPHA = 0x883D                        # GL_BLEND_EQUATION_ALPHA
+  RL_BLEND_DST_RGB = 0x80C8                               # GL_BLEND_DST_RGB
+  RL_BLEND_SRC_RGB = 0x80C9                               # GL_BLEND_SRC_RGB
+  RL_BLEND_DST_ALPHA = 0x80CA                             # GL_BLEND_DST_ALPHA
+  RL_BLEND_SRC_ALPHA = 0x80CB                             # GL_BLEND_SRC_ALPHA
+  RL_BLEND_COLOR = 0x8005                                 # GL_BLEND_COLOR
+  RL_READ_FRAMEBUFFER = 0x8CA8                            # GL_READ_FRAMEBUFFER
+  RL_DRAW_FRAMEBUFFER = 0x8CA9                            # GL_DRAW_FRAMEBUFFER
+  RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES = 7
+  RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM = 9
 
   # Enum
 
   # enum rlGlVersion
   # OpenGL version
-  RL_OPENGL_11_SOFTWARE = 0 # Software rendering
-  RL_OPENGL_11 = 1          # OpenGL 1.1
-  RL_OPENGL_21 = 2          # OpenGL 2.1 (GLSL 120)
-  RL_OPENGL_33 = 3          # OpenGL 3.3 (GLSL 330)
-  RL_OPENGL_43 = 4          # OpenGL 4.3 (using GLSL 330)
-  RL_OPENGL_ES_20 = 5       # OpenGL ES 2.0 (GLSL 100)
-  RL_OPENGL_ES_30 = 6       # OpenGL ES 3.0 (GLSL 300 es)
+  RL_OPENGL_SOFTWARE = 0 # Software rendering
+  RL_OPENGL_11 = 1       # OpenGL 1.1
+  RL_OPENGL_21 = 2       # OpenGL 2.1 (GLSL 120)
+  RL_OPENGL_33 = 3       # OpenGL 3.3 (GLSL 330)
+  RL_OPENGL_43 = 4       # OpenGL 4.3 (using GLSL 330)
+  RL_OPENGL_ES_20 = 5    # OpenGL ES 2.0 (GLSL 100)
+  RL_OPENGL_ES_30 = 6    # OpenGL ES 3.0 (GLSL 300 es)
 
   # enum rlTraceLogLevel
   # Trace log level
@@ -132,7 +134,7 @@ module Raylib
 
   # enum rlTextureFilter
   # Texture parameters: filter mode
-  RL_TEXTURE_FILTER_POINT = 0           # No filter, just pixel approximation
+  RL_TEXTURE_FILTER_POINT = 0           # No filter, pixel approximation
   RL_TEXTURE_FILTER_BILINEAR = 1        # Linear filtering
   RL_TEXTURE_FILTER_TRILINEAR = 2       # Trilinear filtering (linear with mipmaps)
   RL_TEXTURE_FILTER_ANISOTROPIC_4X = 3  # Anisotropic filtering 4x
@@ -251,11 +253,11 @@ module Raylib
   # Dynamic vertex buffers (position + texcoords + colors + indices arrays)
   class RlVertexBuffer < FFI::Struct
     layout(
-      :elementCount, :int,  # Number of elements in the buffer (QUADS)
-      :vertices, :pointer,  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
-      :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
-      :normals, :pointer,   # Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)
-      :colors, :pointer,    # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
+      :elementCount, :int, 
+      :vertices, :pointer, 
+      :texcoords, :pointer,
+      :normals, :pointer,  
+      :colors, :pointer,   
       :indices, :pointer,   # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
       :vaoId, :uint,        # OpenGL Vertex Array Object id
       :vboId, [:uint, 5],   # OpenGL Vertex Buffer Objects id (5 types of vertex data)
@@ -1150,9 +1152,9 @@ module Raylib
       #   @return [unsigned int]
       [:rlLoadFramebuffer, :rlLoadFramebuffer, [], :uint],
 
-      # @!method rlFramebufferAttach(fboId, texId, attachType, texType, mipLevel)
+      # @!method rlFramebufferAttach(id, texId, attachType, texType, mipLevel)
       #   rlFramebufferAttach : Attach texture/renderbuffer to a framebuffer
-      #   @param fboId [unsigned int]
+      #   @param id [unsigned int]
       #   @param texId [unsigned int]
       #   @param attachType [int]
       #   @param texType [int]
@@ -1190,26 +1192,38 @@ module Raylib
       #   @return [void]
       [:rlResizeFramebuffer, :rlResizeFramebuffer, [:int, :int], :void],
 
-      # @!method rlLoadShaderCode(vsCode, fsCode)
-      #   rlLoadShaderCode : Load shader from code strings
+      # @!method rlLoadShader(code, type)
+      #   rlLoadShader : Load (compile) shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
+      #   @param code [const char *]
+      #   @param type [int]
+      #   @return [unsigned int]
+      [:rlLoadShader, :rlLoadShader, [:pointer, :int], :uint],
+
+      # @!method rlLoadShaderProgram(vsCode, fsCode)
+      #   rlLoadShaderProgram : Load shader from code strings
       #   @param vsCode [const char *]
       #   @param fsCode [const char *]
       #   @return [unsigned int]
-      [:rlLoadShaderCode, :rlLoadShaderCode, [:pointer, :pointer], :uint],
+      [:rlLoadShaderProgram, :rlLoadShaderProgram, [:pointer, :pointer], :uint],
 
-      # @!method rlCompileShader(shaderCode, type)
-      #   rlCompileShader : Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)
-      #   @param shaderCode [const char *]
-      #   @param type [int]
+      # @!method rlLoadShaderProgramEx(vsId, fsId)
+      #   rlLoadShaderProgramEx : Load shader program, using already loaded shader ids
+      #   @param vsId [unsigned int]
+      #   @param fsId [unsigned int]
       #   @return [unsigned int]
-      [:rlCompileShader, :rlCompileShader, [:pointer, :int], :uint],
+      [:rlLoadShaderProgramEx, :rlLoadShaderProgramEx, [:uint, :uint], :uint],
 
-      # @!method rlLoadShaderProgram(vShaderId, fShaderId)
-      #   rlLoadShaderProgram : Load custom shader program
-      #   @param vShaderId [unsigned int]
-      #   @param fShaderId [unsigned int]
+      # @!method rlLoadShaderProgramCompute(csId)
+      #   rlLoadShaderProgramCompute : Load compute shader program
+      #   @param csId [unsigned int]
       #   @return [unsigned int]
-      [:rlLoadShaderProgram, :rlLoadShaderProgram, [:uint, :uint], :uint],
+      [:rlLoadShaderProgramCompute, :rlLoadShaderProgramCompute, [:uint], :uint],
+
+      # @!method rlUnloadShader(id)
+      #   rlUnloadShader : Unload shader, loaded with rlLoadShader()
+      #   @param id [unsigned int]
+      #   @return [void]
+      [:rlUnloadShader, :rlUnloadShader, [:uint], :void],
 
       # @!method rlUnloadShaderProgram(id)
       #   rlUnloadShaderProgram : Unload shader program
@@ -1217,16 +1231,16 @@ module Raylib
       #   @return [void]
       [:rlUnloadShaderProgram, :rlUnloadShaderProgram, [:uint], :void],
 
-      # @!method rlGetLocationUniform(shaderId, uniformName)
+      # @!method rlGetLocationUniform(id, uniformName)
       #   rlGetLocationUniform : Get shader location uniform, requires shader program id
-      #   @param shaderId [unsigned int]
+      #   @param id [unsigned int]
       #   @param uniformName [const char *]
       #   @return [int]
       [:rlGetLocationUniform, :rlGetLocationUniform, [:uint, :pointer], :int],
 
-      # @!method rlGetLocationAttrib(shaderId, attribName)
+      # @!method rlGetLocationAttrib(id, attribName)
       #   rlGetLocationAttrib : Get shader location attribute, requires shader program id
-      #   @param shaderId [unsigned int]
+      #   @param id [unsigned int]
       #   @param attribName [const char *]
       #   @return [int]
       [:rlGetLocationAttrib, :rlGetLocationAttrib, [:uint, :pointer], :int],
@@ -1268,12 +1282,6 @@ module Raylib
       #   @param locs [int *]
       #   @return [void]
       [:rlSetShader, :rlSetShader, [:uint, :pointer], :void],
-
-      # @!method rlLoadComputeShaderProgram(shaderId)
-      #   rlLoadComputeShaderProgram : Load compute shader program
-      #   @param shaderId [unsigned int]
-      #   @return [unsigned int]
-      [:rlLoadComputeShaderProgram, :rlLoadComputeShaderProgram, [:uint], :uint],
 
       # @!method rlComputeShaderDispatch(groupX, groupY, groupZ)
       #   rlComputeShaderDispatch : Dispatch compute shader (equivalent to *draw* for graphics pipeline)

@@ -8,6 +8,7 @@ raygui_dll/build_arm64
 raylib_dll/build
 raylib_dll/build_x86_64
 raylib_dll/build_arm64
+generator/bak
 generator/build
 generator/backup
 __pycache__

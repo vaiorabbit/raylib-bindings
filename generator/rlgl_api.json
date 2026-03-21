@@ -9,23 +9,17 @@
     {
       "name": "RLGL_VERSION",
       "type": "STRING",
-      "value": "5.0",
+      "value": "6.0",
       "description": ""
     },
     {
       "name": "RLAPI",
       "type": "UNKNOWN",
       "value": "__declspec(dllexport)",
-      "description": "We are building the library as a Win32 shared library (.dll)"
+      "description": "Building the library as a Win32 shared library (.dll)"
     },
     {
       "name": "TRACELOG(level, ...)",
-      "type": "MACRO",
-      "value": "(void)0",
-      "description": ""
-    },
-    {
-      "name": "TRACELOGD(...)",
       "type": "MACRO",
       "value": "(void)0",
       "description": ""
@@ -68,12 +62,6 @@
     },
     {
       "name": "GRAPHICS_API_OPENGL_ES2",
-      "type": "GUARD",
-      "value": "",
-      "description": ""
-    },
-    {
-      "name": "RLGL_RENDER_TEXTURES_HINT",
       "type": "GUARD",
       "value": "",
       "description": ""
@@ -565,7 +553,7 @@
       "description": ""
     },
     {
-      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS",
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEINDICES",
       "type": "INT",
       "value": 7,
       "description": ""
@@ -577,7 +565,7 @@
       "description": ""
     },
     {
-      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCE_TX",
+      "name": "RL_DEFAULT_SHADER_ATTRIB_LOCATION_INSTANCETRANSFORM",
       "type": "INT",
       "value": 9,
       "description": ""
@@ -694,48 +682,48 @@
       "fields": [
         {
           "type": "int",
-          "name": "elementCount",
+          "name": "",
           "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "float *",
-          "name": "vertices",
+          "name": "",
           "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "float *",
-          "name": "texcoords",
+          "name": "",
           "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "float *",
-          "name": "normals",
+          "name": "",
           "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned char *",
-          "name": "colors",
+          "name": "",
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "",
+          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "unsigned int *",
-          "name": "indices",
+          "name": "",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "textureId[QÇe8",
+          "description": "Texture id to be used on the draw -> Use to create new draw call if changes"
         },
         {
           "type": "unsigned short *",
@@ -743,9 +731,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned int",
@@ -830,7 +818,7 @@
       "description": "OpenGL version",
       "values": [
         {
-          "name": "RL_OPENGL_11_SOFTWARE",
+          "name": "RL_OPENGL_SOFTWARE",
           "value": 0,
           "description": "Software rendering"
         },
@@ -1045,7 +1033,7 @@
         {
           "name": "RL_TEXTURE_FILTER_POINT",
           "value": 0,
-          "description": "No filter, just pixel approximation"
+          "description": "No filter, pixel approximation"
         },
         {
           "name": "RL_TEXTURE_FILTER_BILINEAR",
@@ -3059,7 +3047,7 @@
       "params": [
         {
           "type": "unsigned int",
-          "name": "fboId"
+          "name": "id"
         },
         {
           "type": "unsigned int",
@@ -3148,7 +3136,22 @@
       ]
     },
     {
-      "name": "rlLoadShaderCode",
+      "name": "rlLoadShader",
+      "description": "Load (compile) shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)",
+      "returnType": "unsigned int",
+      "params": [
+        {
+          "type": "const char *",
+          "name": "code"
+        },
+        {
+          "type": "int",
+          "name": "type"
+        }
+      ]
+    },
+    {
+      "name": "rlLoadShaderProgram",
       "description": "Load shader from code strings",
       "returnType": "unsigned int",
       "params": [
@@ -3163,32 +3166,39 @@
       ]
     },
     {
-      "name": "rlCompileShader",
-      "description": "Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER)",
+      "name": "rlLoadShaderProgramEx",
+      "description": "Load shader program, using already loaded shader ids",
       "returnType": "unsigned int",
       "params": [
         {
-          "type": "const char *",
-          "name": "shaderCode"
+          "type": "unsigned int",
+          "name": "vsId"
         },
         {
-          "type": "int",
-          "name": "type"
+          "type": "unsigned int",
+          "name": "fsId"
         }
       ]
     },
     {
-      "name": "rlLoadShaderProgram",
-      "description": "Load custom shader program",
+      "name": "rlLoadShaderProgramCompute",
+      "description": "Load compute shader program",
       "returnType": "unsigned int",
       "params": [
         {
           "type": "unsigned int",
-          "name": "vShaderId"
-        },
+          "name": "csId"
+        }
+      ]
+    },
+    {
+      "name": "rlUnloadShader",
+      "description": "Unload shader, loaded with rlLoadShader()",
+      "returnType": "void",
+      "params": [
         {
           "type": "unsigned int",
-          "name": "fShaderId"
+          "name": "id"
         }
       ]
     },
@@ -3210,7 +3220,7 @@
       "params": [
         {
           "type": "unsigned int",
-          "name": "shaderId"
+          "name": "id"
         },
         {
           "type": "const char *",
@@ -3225,7 +3235,7 @@
       "params": [
         {
           "type": "unsigned int",
-          "name": "shaderId"
+          "name": "id"
         },
         {
           "type": "const char *",
@@ -3317,17 +3327,6 @@
         {
           "type": "int *",
           "name": "locs"
-        }
-      ]
-    },
-    {
-      "name": "rlLoadComputeShaderProgram",
-      "description": "Load compute shader program",
-      "returnType": "unsigned int",
-      "params": [
-        {
-          "type": "unsigned int",
-          "name": "shaderId"
         }
       ]
     },

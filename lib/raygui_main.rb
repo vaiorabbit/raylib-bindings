@@ -104,6 +104,7 @@ module Raylib
   # enum GuiProgressBarProperty
   # ProgressBar
   PROGRESS_PADDING = 16 # ProgressBar internal padding
+  PROGRESS_SIDE = 17    # ProgressBar increment side: 0-left->right, 1-right-left 
 
   # enum GuiScrollBarProperty
   # ScrollBar

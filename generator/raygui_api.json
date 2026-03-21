@@ -738,6 +738,11 @@
           "name": "PROGRESS_PADDING",
           "value": 16,
           "description": "ProgressBar internal padding"
+        },
+        {
+          "name": "PROGRESS_SIDE",
+          "value": 17,
+          "description": "ProgressBar increment side: 0-left->right, 1-right-left "
         }
       ]
     },

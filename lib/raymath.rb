@@ -773,6 +773,13 @@ module Raylib
       #   @return [Matrix]
       [:MatrixMultiply, :MatrixMultiply, [Matrix.by_value, Matrix.by_value], Matrix.by_value],
 
+      # @!method MatrixMultiplyValue(left, value)
+      #   MatrixMultiplyValue
+      #   @param left [Matrix]
+      #   @param value [float]
+      #   @return [Matrix]
+      [:MatrixMultiplyValue, :MatrixMultiplyValue, [Matrix.by_value, :float], Matrix.by_value],
+
       # @!method MatrixTranslate(x, y, z)
       #   MatrixTranslate
       #   @param x [float]

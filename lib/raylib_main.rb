@@ -11,10 +11,10 @@ module Raylib
 
   # Define/Macro
 
-  RAYLIB_VERSION_MAJOR = 5
-  RAYLIB_VERSION_MINOR = 6
+  RAYLIB_VERSION_MAJOR = 6
+  RAYLIB_VERSION_MINOR = 0
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "5.6-dev"
+  RAYLIB_VERSION = "6.0"
 
   # Enum
 
@@ -187,7 +187,7 @@ module Raylib
 
   # enum GamepadButton
   # Gamepad buttons
-  GAMEPAD_BUTTON_UNKNOWN = 0          # Unknown button, just for error checking
+  GAMEPAD_BUTTON_UNKNOWN = 0          # Unknown button, for error checking
   GAMEPAD_BUTTON_LEFT_FACE_UP = 1     # Gamepad left DPAD up button
   GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2  # Gamepad left DPAD right button
   GAMEPAD_BUTTON_LEFT_FACE_DOWN = 3   # Gamepad left DPAD down button
@@ -231,36 +231,36 @@ module Raylib
 
   # enum ShaderLocationIndex
   # Shader location index
-  SHADER_LOC_VERTEX_POSITION = 0     # Shader location: vertex attribute: position
-  SHADER_LOC_VERTEX_TEXCOORD01 = 1   # Shader location: vertex attribute: texcoord01
-  SHADER_LOC_VERTEX_TEXCOORD02 = 2   # Shader location: vertex attribute: texcoord02
-  SHADER_LOC_VERTEX_NORMAL = 3       # Shader location: vertex attribute: normal
-  SHADER_LOC_VERTEX_TANGENT = 4      # Shader location: vertex attribute: tangent
-  SHADER_LOC_VERTEX_COLOR = 5        # Shader location: vertex attribute: color
-  SHADER_LOC_MATRIX_MVP = 6          # Shader location: matrix uniform: model-view-projection
-  SHADER_LOC_MATRIX_VIEW = 7         # Shader location: matrix uniform: view (camera transform)
-  SHADER_LOC_MATRIX_PROJECTION = 8   # Shader location: matrix uniform: projection
-  SHADER_LOC_MATRIX_MODEL = 9        # Shader location: matrix uniform: model (transform)
-  SHADER_LOC_MATRIX_NORMAL = 10      # Shader location: matrix uniform: normal
-  SHADER_LOC_VECTOR_VIEW = 11        # Shader location: vector uniform: view
-  SHADER_LOC_COLOR_DIFFUSE = 12      # Shader location: vector uniform: diffuse color
-  SHADER_LOC_COLOR_SPECULAR = 13     # Shader location: vector uniform: specular color
-  SHADER_LOC_COLOR_AMBIENT = 14      # Shader location: vector uniform: ambient color
-  SHADER_LOC_MAP_ALBEDO = 15         # Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
-  SHADER_LOC_MAP_METALNESS = 16      # Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
-  SHADER_LOC_MAP_NORMAL = 17         # Shader location: sampler2d texture: normal
-  SHADER_LOC_MAP_ROUGHNESS = 18      # Shader location: sampler2d texture: roughness
-  SHADER_LOC_MAP_OCCLUSION = 19      # Shader location: sampler2d texture: occlusion
-  SHADER_LOC_MAP_EMISSION = 20       # Shader location: sampler2d texture: emission
-  SHADER_LOC_MAP_HEIGHT = 21         # Shader location: sampler2d texture: height
-  SHADER_LOC_MAP_CUBEMAP = 22        # Shader location: samplerCube texture: cubemap
-  SHADER_LOC_MAP_IRRADIANCE = 23     # Shader location: samplerCube texture: irradiance
-  SHADER_LOC_MAP_PREFILTER = 24      # Shader location: samplerCube texture: prefilter
-  SHADER_LOC_MAP_BRDF = 25           # Shader location: sampler2d texture: brdf
-  SHADER_LOC_VERTEX_BONEIDS = 26     # Shader location: vertex attribute: boneIds
-  SHADER_LOC_VERTEX_BONEWEIGHTS = 27 # Shader location: vertex attribute: boneWeights
-  SHADER_LOC_BONE_MATRICES = 28      # Shader location: array of matrices uniform: boneMatrices
-  SHADER_LOC_VERTEX_INSTANCE_TX = 29 # Shader location: vertex attribute: instanceTransform
+  SHADER_LOC_VERTEX_POSITION = 0           # Shader location: vertex attribute: position
+  SHADER_LOC_VERTEX_TEXCOORD01 = 1         # Shader location: vertex attribute: texcoord01
+  SHADER_LOC_VERTEX_TEXCOORD02 = 2         # Shader location: vertex attribute: texcoord02
+  SHADER_LOC_VERTEX_NORMAL = 3             # Shader location: vertex attribute: normal
+  SHADER_LOC_VERTEX_TANGENT = 4            # Shader location: vertex attribute: tangent
+  SHADER_LOC_VERTEX_COLOR = 5              # Shader location: vertex attribute: color
+  SHADER_LOC_MATRIX_MVP = 6                # Shader location: matrix uniform: model-view-projection
+  SHADER_LOC_MATRIX_VIEW = 7               # Shader location: matrix uniform: view (camera transform)
+  SHADER_LOC_MATRIX_PROJECTION = 8         # Shader location: matrix uniform: projection
+  SHADER_LOC_MATRIX_MODEL = 9              # Shader location: matrix uniform: model (transform)
+  SHADER_LOC_MATRIX_NORMAL = 10            # Shader location: matrix uniform: normal
+  SHADER_LOC_VECTOR_VIEW = 11              # Shader location: vector uniform: view
+  SHADER_LOC_COLOR_DIFFUSE = 12            # Shader location: vector uniform: diffuse color
+  SHADER_LOC_COLOR_SPECULAR = 13           # Shader location: vector uniform: specular color
+  SHADER_LOC_COLOR_AMBIENT = 14            # Shader location: vector uniform: ambient color
+  SHADER_LOC_MAP_ALBEDO = 15               # Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
+  SHADER_LOC_MAP_METALNESS = 16            # Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
+  SHADER_LOC_MAP_NORMAL = 17               # Shader location: sampler2d texture: normal
+  SHADER_LOC_MAP_ROUGHNESS = 18            # Shader location: sampler2d texture: roughness
+  SHADER_LOC_MAP_OCCLUSION = 19            # Shader location: sampler2d texture: occlusion
+  SHADER_LOC_MAP_EMISSION = 20             # Shader location: sampler2d texture: emission
+  SHADER_LOC_MAP_HEIGHT = 21               # Shader location: sampler2d texture: heightmap
+  SHADER_LOC_MAP_CUBEMAP = 22              # Shader location: samplerCube texture: cubemap
+  SHADER_LOC_MAP_IRRADIANCE = 23           # Shader location: samplerCube texture: irradiance
+  SHADER_LOC_MAP_PREFILTER = 24            # Shader location: samplerCube texture: prefilter
+  SHADER_LOC_MAP_BRDF = 25                 # Shader location: sampler2d texture: brdf
+  SHADER_LOC_VERTEX_BONEIDS = 26           # Shader location: vertex attribute: bone indices
+  SHADER_LOC_VERTEX_BONEWEIGHTS = 27       # Shader location: vertex attribute: bone weights
+  SHADER_LOC_MATRIX_BONETRANSFORMS = 28    # Shader location: matrix attribute: bone transforms (animation)
+  SHADER_LOC_VERTEX_INSTANCETRANSFORM = 29 # Shader location: vertex attribute: instance transforms
 
   # enum ShaderUniformDataType
   # Shader uniform data type
@@ -314,7 +314,7 @@ module Raylib
 
   # enum TextureFilter
   # Texture parameters: filter mode
-  TEXTURE_FILTER_POINT = 0           # No filter, just pixel approximation
+  TEXTURE_FILTER_POINT = 0           # No filter, pixel approximation
   TEXTURE_FILTER_BILINEAR = 1        # Linear filtering
   TEXTURE_FILTER_TRILINEAR = 2       # Trilinear filtering (linear with mipmaps)
   TEXTURE_FILTER_ANISOTROPIC_4X = 3  # Anisotropic filtering 4x
@@ -389,6 +389,7 @@ module Raylib
 
   # Typedef
 
+  typedef :pointer, :ModelAnimPose
   typedef :int, :ConfigFlags
   typedef :int, :TraceLogLevel
   typedef :int, :KeyboardKey
@@ -740,12 +741,11 @@ module Raylib
       :tangents, :pointer,     # Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4)
       :colors, :pointer,       # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
       :indices, :pointer,      # Vertex indices (in case vertex data comes indexed)
+      :boneCount, :int,        # Number of bones (MAX: 256 bones)
+      :boneIndices, :pointer,  # Vertex bone indices, up to 4 bones influence by vertex (skinning) (shader-location = 6)
+      :boneWeights, :pointer,  # Vertex bone weight, up to 4 bones influence by vertex (skinning) (shader-location = 7)
       :animVertices, :pointer, # Animated vertex positions (after bones transformations)
       :animNormals, :pointer,  # Animated normals (after bones transformations)
-      :boneIds, :pointer,      # Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) (shader-location = 6)
-      :boneWeights, :pointer,  # Vertex bone weight, up to 4 bones influence by vertex (skinning) (shader-location = 7)
-      :boneMatrices, :pointer, # Bones animated transformation matrices
-      :boneCount, :int,        # Number of bones
       :vaoId, :uint,           # OpenGL Vertex Array Object id
       :vboId, :pointer,        # OpenGL Vertex Buffer Objects id (default vertex data)
     )
@@ -767,18 +767,16 @@ module Raylib
     def colors=(v) self[:colors] = v end
     def indices = self[:indices]
     def indices=(v) self[:indices] = v end
+    def boneCount = self[:boneCount]
+    def boneCount=(v) self[:boneCount] = v end
+    def boneIndices = self[:boneIndices]
+    def boneIndices=(v) self[:boneIndices] = v end
+    def boneWeights = self[:boneWeights]
+    def boneWeights=(v) self[:boneWeights] = v end
     def animVertices = self[:animVertices]
     def animVertices=(v) self[:animVertices] = v end
     def animNormals = self[:animNormals]
     def animNormals=(v) self[:animNormals] = v end
-    def boneIds = self[:boneIds]
-    def boneIds=(v) self[:boneIds] = v end
-    def boneWeights = self[:boneWeights]
-    def boneWeights=(v) self[:boneWeights] = v end
-    def boneMatrices = self[:boneMatrices]
-    def boneMatrices=(v) self[:boneMatrices] = v end
-    def boneCount = self[:boneCount]
-    def boneCount=(v) self[:boneCount] = v end
     def vaoId = self[:vaoId]
     def vaoId=(v) self[:vaoId] = v end
     def vboId = self[:vboId]
@@ -854,18 +852,33 @@ module Raylib
     def parent=(v) self[:parent] = v end
   end
 
+  # Skeleton, animation bones hierarchy
+  class ModelSkeleton < FFI::Struct
+    layout(
+      :boneCount, :int,    # Number of bones
+      :bones, :pointer,    # Bones information (skeleton)
+      :bindPose, :pointer, # Bones base transformation (Transform[])
+    )
+    def boneCount = self[:boneCount]
+    def boneCount=(v) self[:boneCount] = v end
+    def bones = self[:bones]
+    def bones=(v) self[:bones] = v end
+    def bindPose = self[:bindPose]
+    def bindPose=(v) self[:bindPose] = v end
+  end
+
   # Model, meshes, materials and animation data
   class Model < FFI::Struct
     layout(
-      :transform, Matrix,      # Local transform matrix
-      :meshCount, :int,        # Number of meshes
-      :materialCount, :int,    # Number of materials
-      :meshes, :pointer,       # Meshes array
-      :materials, :pointer,    # Materials array
-      :meshMaterial, :pointer, # Mesh material number
-      :boneCount, :int,        # Number of bones
-      :bones, :pointer,        # Bones information (skeleton)
-      :bindPose, :pointer,     # Bones base transformation (pose)
+      :transform, Matrix,       # Local transform matrix
+      :meshCount, :int,         # Number of meshes
+      :materialCount, :int,     # Number of materials
+      :meshes, :pointer,        # Meshes array
+      :materials, :pointer,     # Materials array
+      :meshMaterial, :pointer,  # Mesh material number
+      :skeleton, ModelSkeleton, # Skeleton for animation
+      :currentPose, :pointer,   # Current animation pose (Transform[])
+      :boneMatrices, :pointer,  # Bones animated transformation matrices
     )
     def transform = self[:transform]
     def transform=(v) self[:transform] = v end
@@ -879,33 +892,30 @@ module Raylib
     def materials=(v) self[:materials] = v end
     def meshMaterial = self[:meshMaterial]
     def meshMaterial=(v) self[:meshMaterial] = v end
-    def boneCount = self[:boneCount]
-    def boneCount=(v) self[:boneCount] = v end
-    def bones = self[:bones]
-    def bones=(v) self[:bones] = v end
-    def bindPose = self[:bindPose]
-    def bindPose=(v) self[:bindPose] = v end
+    def skeleton = self[:skeleton]
+    def skeleton=(v) self[:skeleton] = v end
+    def currentPose = self[:currentPose]
+    def currentPose=(v) self[:currentPose] = v end
+    def boneMatrices = self[:boneMatrices]
+    def boneMatrices=(v) self[:boneMatrices] = v end
   end
 
-  # ModelAnimation
+  # ModelAnimation, contains a full animation sequence
   class ModelAnimation < FFI::Struct
     layout(
-      :name, [:char, 32],    # Animation name
-      :boneCount, :int,      # Number of bones
-      :frameCount, :int,     # Number of animation frames
-      :bones, :pointer,      # Bones information (skeleton)
-      :framePoses, :pointer, # Poses array by frame
+      :name, [:char, 32],       # Animation name
+      :boneCount, :int,         # Number of bones (per pose)
+      :keyframeCount, :int,     # Number of animation key frames
+      :keyframePoses, :pointer, # Animation sequence keyframe poses [keyframe][pose]
     )
     def name = self[:name]
     def name=(v) self[:name] = v end
     def boneCount = self[:boneCount]
     def boneCount=(v) self[:boneCount] = v end
-    def frameCount = self[:frameCount]
-    def frameCount=(v) self[:frameCount] = v end
-    def bones = self[:bones]
-    def bones=(v) self[:bones] = v end
-    def framePoses = self[:framePoses]
-    def framePoses=(v) self[:framePoses] = v end
+    def keyframeCount = self[:keyframeCount]
+    def keyframeCount=(v) self[:keyframeCount] = v end
+    def keyframePoses = self[:keyframePoses]
+    def keyframePoses=(v) self[:keyframePoses] = v end
   end
 
   # Ray, ray for raycasting
@@ -4156,6 +4166,16 @@ module Raylib
       #   @return [Vector2]
       [:MeasureTextEx, :MeasureTextEx, [Font.by_value, :pointer, :float, :float], Vector2.by_value],
 
+      # @!method MeasureTextCodepoints(font, codepoints, length, fontSize, spacing)
+      #   MeasureTextCodepoints : Measure string size for an existing array of codepoints for Font
+      #   @param font [Font]
+      #   @param codepoints [const int *]
+      #   @param length [int]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @return [Vector2]
+      [:MeasureTextCodepoints, :MeasureTextCodepoints, [Font.by_value, :pointer, :int, :float, :float], Vector2.by_value],
+
       # @!method GetGlyphIndex(font, codepoint)
       #   GetGlyphIndex : Get glyph index position in font for a codepoint (unicode character), fallback to '?' if not found
       #   @param font [Font]
@@ -4926,43 +4946,23 @@ module Raylib
       [:LoadModelAnimations, :LoadModelAnimations, [:pointer, :pointer], :pointer],
 
       # @!method UpdateModelAnimation(model, anim, frame)
-      #   UpdateModelAnimation : Update model animation pose (CPU)
+      #   UpdateModelAnimation : Update model animation pose (vertex buffers and bone matrices)
       #   @param model [Model]
       #   @param anim [ModelAnimation]
-      #   @param frame [int]
+      #   @param frame [float]
       #   @return [void]
-      [:UpdateModelAnimation, :UpdateModelAnimation, [Model.by_value, ModelAnimation.by_value, :int], :void],
+      [:UpdateModelAnimation, :UpdateModelAnimation, [Model.by_value, ModelAnimation.by_value, :float], :void],
 
-      # @!method UpdateModelAnimationBones(model, anim, frame)
-      #   UpdateModelAnimationBones : Update model animation mesh bone matrices (GPU skinning)
-      #   @param model [Model]
-      #   @param anim [ModelAnimation]
-      #   @param frame [int]
-      #   @return [void]
-      [:UpdateModelAnimationBones, :UpdateModelAnimationBones, [Model.by_value, ModelAnimation.by_value, :int], :void],
-
-      # @!method UpdateModelAnimationBonesLerp(model, animA, frameA, animB, frameB, value)
-      #   UpdateModelAnimationBonesLerp : Update model animation mesh bone matrices with interpolation between two poses(GPU skinning)
+      # @!method UpdateModelAnimationEx(model, animA, frameA, animB, frameB, blend)
+      #   UpdateModelAnimationEx : Update model animation pose, blending two animations
       #   @param model [Model]
       #   @param animA [ModelAnimation]
-      #   @param frameA [int]
+      #   @param frameA [float]
       #   @param animB [ModelAnimation]
-      #   @param frameB [int]
-      #   @param value [float]
+      #   @param frameB [float]
+      #   @param blend [float]
       #   @return [void]
-      [:UpdateModelAnimationBonesLerp, :UpdateModelAnimationBonesLerp, [Model.by_value, ModelAnimation.by_value, :int, ModelAnimation.by_value, :int, :float], :void],
-
-      # @!method UpdateModelVertsToCurrentBones(model)
-      #   UpdateModelVertsToCurrentBones : Update model vertices according to mesh bone matrices (CPU)
-      #   @param model [Model]
-      #   @return [void]
-      [:UpdateModelVertsToCurrentBones, :UpdateModelVertsToCurrentBones, [Model.by_value], :void],
-
-      # @!method UnloadModelAnimation(anim)
-      #   UnloadModelAnimation : Unload animation data
-      #   @param anim [ModelAnimation]
-      #   @return [void]
-      [:UnloadModelAnimation, :UnloadModelAnimation, [ModelAnimation.by_value], :void],
+      [:UpdateModelAnimationEx, :UpdateModelAnimationEx, [Model.by_value, ModelAnimation.by_value, :float, ModelAnimation.by_value, :float, :float], :void],
 
       # @!method UnloadModelAnimations(animations, animCount)
       #   UnloadModelAnimations : Unload animation array data
@@ -5421,7 +5421,7 @@ module Raylib
       [:SetAudioStreamPitch, :SetAudioStreamPitch, [AudioStream.by_value, :float], :void],
 
       # @!method SetAudioStreamPan(stream, pan)
-      #   SetAudioStreamPan : Set pan for audio stream (0.5 is centered)
+      #   SetAudioStreamPan : Set pan for audio stream (-1.0 to 1.0 range, 0.0 is centered)
       #   @param stream [AudioStream]
       #   @param pan [float]
       #   @return [void]
