@@ -3,11 +3,11 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2026-03-21
+*   Last modified : 2026-04-25
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [5.6-dev]( https://github.com/raysan5/raylib/commit/8a685877eb321fe0eaeabab7b8ec69d2f8a0064d )
+*   [raylib](https://github.com/raysan5/raylib) version [6.0]( https://github.com/raysan5/raylib/releases/tag/6.0 )
     *   raylib
     *   raymath
     *   rlgl
@@ -20,10 +20,7 @@ Provides Ruby bindings for raylib-related libraries including:
 
 *   Generated semi-automatically
 *   Based on Ruby/FFI ( https://github.com/ffi/ffi )
-*   Pre-built binaries are inside:
-    *   Windows (x86_64)
-    *   macOS (x86_64, ARM64)
-    *   Linux (x86_64, ARM64)
+*   Pre-built binaries are inside
 
 ## Quick Start ##
 
@@ -74,35 +71,16 @@ Exit code policy:
 
 *   Ruby interpreter
     *   Tested on:
-        *   [macOS] https://rvm.io
-            *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [arm64-darwin24]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x64-mingw-ucrt]
-        *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
-            *   ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]
-        *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
-            *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [aarch64-linux]
+            *   ruby 4.0.2 (2026-03-17 revision d3da9fec82) +PRISM [x64-mingw-ucrt]
 
 *   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
     *   CMake https://cmake.org/download/
     *   C Compiler
         *   Tested compilers:
-            *   [macOS] clang
-
-                    $ clang --version
-                    Apple clang version 16.0.0 (clang-1600.0.26.6)
-                    Target: arm64-apple-darwin24.2.0
-                    Thread model: posix
-                    InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
-
             *   [Windows] gcc
 
 					gcc (Rev8, Built by MSYS2 project) 15.2.0
-
-            *   [Linux] gcc, clang
-
-                    (x86_64) Ubuntu clang version 14.0.0-1ubuntu1
-                    (arm64) Debian clang version 14.0.6
 
 <details>
 <summary>Older versions</summary>
@@ -110,6 +88,7 @@ Exit code policy:
 *   Ruby interpreter
     *   Tested on:
         *   [macOS]
+            *   ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +PRISM [arm64-darwin24]
             *   ruby 3.3.3 (2024-06-12 revision f1c7b6f435) [arm64-darwin23]
             *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [arm64-darwin23]
             *   ruby 3.2.1 (2023-02-08 revision 31819e82c8) [arm64-darwin22]
@@ -118,6 +97,7 @@ Exit code policy:
             *   ruby 3.1.0p0 (2021-12-25 revision fb4df44d16) [arm64-darwin20]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [arm64-darwin20]
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
+            *   ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x64-mingw-ucrt]
             *   ruby 4.0.0 (2025-12-25 revision 553f1675f3) +PRISM [x64-mingw-ucrt]
             *   ruby 3.4.7 (2025-10-08 revision 7a5688e2a2) +PRISM [x64-mingw-ucrt]
             *   ruby 3.4.4 (2025-05-14 revision a38531fd3f) +PRISM [x64-mingw-ucrt]
@@ -129,8 +109,10 @@ Exit code policy:
             *   ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) [x64-mingw-ucrt]
             *   ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32]
         *   [Linux/x86_64 WSL] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]
             *   ruby 3.2.0preview1 (2022-04-03 master f801386f0c) [x86_64-linux]
         *   [Linux/ARM64 Chromebook] https://github.com/rvm/ubuntu_rvm
+            *   ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [aarch64-linux]
             *   ruby 3.2.0 (2022-12-25 revision a528908271) [aarch64-linux]
 
 *   Compiler
@@ -174,10 +156,16 @@ Exit code policy:
 
         *   [Windows] gcc
 
+				gcc (Rev8, Built by MSYS2 project) 15.2.0
                 gcc (Rev3, Built by MSYS2 project) 13.2.0
                 gcc (Rev7, Built by MSYS2 project) 12.2.0
                 gcc (Rev10, Built by MSYS2 project) 11.2.0
                 gcc (Rev9, Built by MSYS2 project) 11.2.0
+
+        *   [Linux] gcc, clang
+
+                (x86_64) Ubuntu clang version 14.0.0-1ubuntu1
+                (arm64) Debian clang version 14.0.6
 
 </details>
 

@@ -43,6 +43,7 @@ module Raylib
   SUPPORT_FILEFORMAT_DDS = 1
   SUPPORT_FILEFORMAT_HDR = 0           # Disabled by default
   SUPPORT_FILEFORMAT_PIC = 0           # Disabled by default
+  SUPPORT_FILEFORMAT_PNM = 0           # Disabled by default
   SUPPORT_FILEFORMAT_KTX = 0           # Disabled by default
   SUPPORT_FILEFORMAT_ASTC = 0          # Disabled by default
   SUPPORT_FILEFORMAT_PKM = 0           # Disabled by default

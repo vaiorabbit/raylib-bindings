@@ -2021,13 +2021,13 @@ module Raylib
       [:IsFileNameValid, :IsFileNameValid, [:pointer], :bool],
 
       # @!method LoadDirectoryFiles(dirPath)
-      #   LoadDirectoryFiles : Load directory filepaths
+      #   LoadDirectoryFiles : Load directory filepaths, files and directories, no subdirs scan
       #   @param dirPath [const char *]
       #   @return [FilePathList]
       [:LoadDirectoryFiles, :LoadDirectoryFiles, [:pointer], FilePathList.by_value],
 
       # @!method LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
-      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result
+      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and subdir scan; some filters available: "*.*", "FILES*", "DIRS*"
       #   @param basePath [const char *]
       #   @param filter [const char *]
       #   @param scanSubdirs [bool]
@@ -2562,6 +2562,23 @@ module Raylib
       #   @return [void]
       [:DrawCircle, :DrawCircle, [:int, :int, :float, Color.by_value], :void],
 
+      # @!method DrawCircleV(center, radius, color)
+      #   DrawCircleV : Draw a color-filled circle (Vector version)
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawCircleV, :DrawCircleV, [Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawCircleGradient(center, radius, inner, outer)
+      #   DrawCircleGradient : Draw a gradient-filled circle
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param inner [Color]
+      #   @param outer [Color]
+      #   @return [void]
+      [:DrawCircleGradient, :DrawCircleGradient, [Vector2.by_value, :float, Color.by_value, Color.by_value], :void],
+
       # @!method DrawCircleSector(center, radius, startAngle, endAngle, segments, color)
       #   DrawCircleSector : Draw a piece of a circle
       #   @param center [Vector2]
@@ -2583,24 +2600,6 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawCircleSectorLines, :DrawCircleSectorLines, [Vector2.by_value, :float, :float, :float, :int, Color.by_value], :void],
-
-      # @!method DrawCircleGradient(centerX, centerY, radius, inner, outer)
-      #   DrawCircleGradient : Draw a gradient-filled circle
-      #   @param centerX [int]
-      #   @param centerY [int]
-      #   @param radius [float]
-      #   @param inner [Color]
-      #   @param outer [Color]
-      #   @return [void]
-      [:DrawCircleGradient, :DrawCircleGradient, [:int, :int, :float, Color.by_value, Color.by_value], :void],
-
-      # @!method DrawCircleV(center, radius, color)
-      #   DrawCircleV : Draw a color-filled circle (Vector version)
-      #   @param center [Vector2]
-      #   @param radius [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawCircleV, :DrawCircleV, [Vector2.by_value, :float, Color.by_value], :void],
 
       # @!method DrawCircleLines(centerX, centerY, radius, color)
       #   DrawCircleLines : Draw circle outline
@@ -3164,7 +3163,7 @@ module Raylib
       [:ExportImage, :ExportImage, [Image.by_value, :pointer], :bool],
 
       # @!method ExportImageToMemory(image, fileType, fileSize)
-      #   ExportImageToMemory : Export image to memory buffer
+      #   ExportImageToMemory : Export image to memory buffer, memory must be MemFree()
       #   @param image [Image]
       #   @param fileType [const char *]
       #   @param fileSize [int *]
@@ -4321,15 +4320,23 @@ module Raylib
       [:GetTextBetween, :GetTextBetween, [:pointer, :pointer, :pointer], :pointer],
 
       # @!method TextReplace(text, search, replacement)
-      #   TextReplace : Replace text string (WARNING: memory must be freed!)
+      #   TextReplace : Replace text string with new string
       #   @param text [const char *]
       #   @param search [const char *]
       #   @param replacement [const char *]
       #   @return [char *]
       [:TextReplace, :TextReplace, [:pointer, :pointer, :pointer], :pointer],
 
+      # @!method TextReplaceAlloc(text, search, replacement)
+      #   TextReplaceAlloc : Replace text string with new string, memory must be MemFree()
+      #   @param text [const char *]
+      #   @param search [const char *]
+      #   @param replacement [const char *]
+      #   @return [char *]
+      [:TextReplaceAlloc, :TextReplaceAlloc, [:pointer, :pointer, :pointer], :pointer],
+
       # @!method TextReplaceBetween(text, begin, end, replacement)
-      #   TextReplaceBetween : Replace text between two specific strings (WARNING: memory must be freed!)
+      #   TextReplaceBetween : Replace text between two specific strings
       #   @param text [const char *]
       #   @param begin [const char *]
       #   @param end [const char *]
@@ -4337,13 +4344,30 @@ module Raylib
       #   @return [char *]
       [:TextReplaceBetween, :TextReplaceBetween, [:pointer, :pointer, :pointer, :pointer], :pointer],
 
+      # @!method TextReplaceBetweenAlloc(text, begin, end, replacement)
+      #   TextReplaceBetweenAlloc : Replace text between two specific strings, memory must be MemFree()
+      #   @param text [const char *]
+      #   @param begin [const char *]
+      #   @param end [const char *]
+      #   @param replacement [const char *]
+      #   @return [char *]
+      [:TextReplaceBetweenAlloc, :TextReplaceBetweenAlloc, [:pointer, :pointer, :pointer, :pointer], :pointer],
+
       # @!method TextInsert(text, insert, position)
-      #   TextInsert : Insert text in a position (WARNING: memory must be freed!)
+      #   TextInsert : Insert text in a defined byte position
       #   @param text [const char *]
       #   @param insert [const char *]
       #   @param position [int]
       #   @return [char *]
       [:TextInsert, :TextInsert, [:pointer, :pointer, :int], :pointer],
+
+      # @!method TextInsertAlloc(text, insert, position)
+      #   TextInsertAlloc : Insert text in a defined byte position, memory must be MemFree()
+      #   @param text [const char *]
+      #   @param insert [const char *]
+      #   @param position [int]
+      #   @return [char *]
+      [:TextInsertAlloc, :TextInsertAlloc, [:pointer, :pointer, :int], :pointer],
 
       # @!method TextJoin(textList, count, delimiter)
       #   TextJoin : Join text strings with delimiter
@@ -4681,26 +4705,6 @@ module Raylib
       #   @param tint [Color]
       #   @return [void]
       [:DrawModelWiresEx, :DrawModelWiresEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
-
-      # @!method DrawModelPoints(model, position, scale, tint)
-      #   DrawModelPoints : Draw a model as points
-      #   @param model [Model]
-      #   @param position [Vector3]
-      #   @param scale [float]
-      #   @param tint [Color]
-      #   @return [void]
-      [:DrawModelPoints, :DrawModelPoints, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawModelPointsEx(model, position, rotationAxis, rotationAngle, scale, tint)
-      #   DrawModelPointsEx : Draw a model as points with extended parameters
-      #   @param model [Model]
-      #   @param position [Vector3]
-      #   @param rotationAxis [Vector3]
-      #   @param rotationAngle [float]
-      #   @param scale [Vector3]
-      #   @param tint [Color]
-      #   @return [void]
-      [:DrawModelPointsEx, :DrawModelPointsEx, [Model.by_value, Vector3.by_value, Vector3.by_value, :float, Vector3.by_value, Color.by_value], :void],
 
       # @!method DrawBoundingBox(box, color)
       #   DrawBoundingBox : Draw bounding box (wires)

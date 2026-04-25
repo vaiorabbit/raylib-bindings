@@ -199,6 +199,12 @@
       "description": "Disabled by default"
     },
     {
+      "name": "SUPPORT_FILEFORMAT_PNM",
+      "type": "INT",
+      "value": 0,
+      "description": "Disabled by default"
+    },
+    {
       "name": "SUPPORT_FILEFORMAT_KTX",
       "type": "INT",
       "value": 0,

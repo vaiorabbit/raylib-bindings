@@ -682,48 +682,48 @@
       "fields": [
         {
           "type": "int",
-          "name": "",
+          "name": "elementCount",
           "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "float *",
-          "name": "",
+          "name": "vertices",
           "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "float *",
-          "name": "",
+          "name": "texcoords",
           "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "float *",
-          "name": "",
+          "name": "normals",
           "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned char *",
-          "name": "",
+          "name": "colors",
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "",
-          "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
+          "name": "mode",
+          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
         },
         {
           "type": "unsigned int *",
-          "name": "",
+          "name": "indices",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "",
+          "name": "vaoId",
           "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "textureId[QÇe8",
-          "description": "Texture id to be used on the draw -> Use to create new draw call if changes"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned short *",
