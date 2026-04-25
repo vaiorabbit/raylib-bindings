@@ -57,11 +57,10 @@ if __FILE__ == $PROGRAM_NAME
     anim0 = modelanims.anim(anim_index0)
     anim1 = modelanims.anim(anim_index1)
 
-    frame0 = anim_current_frame % [anim0.frameCount, 1].max
-    frame1 = anim_current_frame % [anim1.frameCount, 1].max
+    frame0 = anim_current_frame % [anim0.keyframeCount, 1].max
+    frame1 = anim_current_frame % [anim1.keyframeCount, 1].max
 
-    UpdateModelAnimationBonesLerp(character_model, anim0, frame0, anim1, frame1, blend_factor)
-    UpdateModelVertsToCurrentBones(character_model)
+    UpdateModelAnimationEx(character_model, anim0, frame0.to_f, anim1, frame1.to_f, blend_factor)
 
     BeginDrawing()
       ClearBackground(RAYWHITE)

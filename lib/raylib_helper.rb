@@ -363,12 +363,12 @@ module Raylib
     def initialize
       @anims = nil
       @anim_ptrs = nil
-      @framePoses = nil # array of Transform**
+      @keyframePoses = nil # array of Transform**
     end
 
     def anim(index) = @anims[index]
     def anims_count = @anims.length
-    def frame_count(index) = @anims[index][:frameCount]
+    def frame_count(index) = @anims[index][:keyframeCount]
 
     # @return BoneInfo
     def bone_info(anim_index, bone_index)
@@ -377,7 +377,7 @@ module Raylib
 
     # @return Transform*
     def frame_pose(index, frame)
-      @framePoses[index] + frame * FFI::NativeType::POINTER.size # Transform*
+      @keyframePoses[index] + frame * FFI::NativeType::POINTER.size # Transform*
     end
 
     # @return Transform
@@ -393,9 +393,9 @@ module Raylib
     # @return self
     def setup(fileName)
       @anims, @anim_ptrs = LoadAndAllocateModelAnimations(fileName)
-      @framePoses = []
+      @keyframePoses = []
       @anims.each do |anim|
-        @framePoses << anim[:framePoses]
+        @keyframePoses << anim[:keyframePoses]
       end
       self
     end
@@ -423,7 +423,7 @@ module Raylib
   # @param anim_ptrs [pointer to loaded memory]
   def UnloadAndFreeModelAnimations(anims, anim_ptrs)
     anims.each do |anim|
-      UnloadModelAnimation(anim)
+      UnloadModelAnimations(anim, 1)
     end
     MemFree(anim_ptrs)
   end
