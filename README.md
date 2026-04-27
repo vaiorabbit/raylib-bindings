@@ -187,6 +187,10 @@ See the projects below to learn how to use this library:
     *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-flapper/main/doc/screenshot_01.png" width="150">
     *   <https://github.com/vaiorabbit/raylib-bindings-flapper>
 
+*   Animal Tower : Ruby raylib bindings demo
+    *   <img src="https://github.com/vaiorabbit/raylib-bindings-animal-tower/blob/bfda0f669e7f7f43938adb08a04aeaa0aeeb6958/doc/screenshot_00.png" width="600">
+    *   <https://github.com/vaiorabbit/raylib-bindings-animal-tower>
+
 ### Libraries ###
 
 *   raylib-bindings-tileson : Provides Ruby bindings for raylib-tileson ( https://github.com/RobLoach/raylib-tileson )
