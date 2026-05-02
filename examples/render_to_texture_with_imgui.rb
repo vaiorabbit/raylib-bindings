@@ -5,7 +5,7 @@
 
 require 'raylib'
 require 'imgui'
-require 'imgui_impl_raylib'
+require 'imgui_impl_docking_raylib'
 
 if __FILE__ == $PROGRAM_NAME
   shared_lib_suffix = case RUBY_PLATFORM
@@ -44,33 +44,13 @@ if __FILE__ == $PROGRAM_NAME
   ImGui.CreateContext()
   ImGui.StyleColorsDark()
 
-  ImGui.ImplRaylib_Init()
+  ImGui.ImplDockingRaylib_Init()
 
   io = ImGuiIO.new(ImGui.GetIO())
   fonts = ImFontAtlas.new(io[:Fonts])
   fonts.AddFontDefault()
 
-  # Build texture atlas
-  pixels = FFI::MemoryPointer.new :pointer
-  width = FFI::MemoryPointer.new :int
-  height = FFI::MemoryPointer.new :int
-  #io[:Fonts].GetTexDataAsRGBA32(pixels, width, height, nil)
-
-  # Upload texture to graphics system
-  # [TODO] find standard and safe way to convert RGBA32 array into texture
-  image = Raylib.GenImageColor(width.read_int, height.read_int, Raylib::BLUE)
-  original_data = image[:data]
-  image[:data] = pixels.read_pointer
-
-  texture = Raylib.LoadTextureFromImage(image)
-  image[:data] = original_data
-  Raylib.UnloadImage(image)
-
-  # Store our identifier
-  # texture_ptr = FFI::MemoryPointer.new(:uint32)
-  # texture_ptr.write(:uint32, texture[:id])
-  # io[:Fonts].SetTexID(texture_ptr)
-  #io[:Fonts].SetTexID(texture[:id])
+  io[:ConfigFlags] |= ImGuiConfigFlags_DockingEnable
 
   render_target = Raylib.LoadRenderTexture(screen_width / 1.5, screen_height / 1.5)
 
@@ -98,6 +78,7 @@ if __FILE__ == $PROGRAM_NAME
     # [NOTE] We can't use UpdateCamera because Keyboard API (IsKeyDown, etc.) and
     #        Mouse API (GetMouseWheelMove, etc.) are used inside without checking io[:WantCaptureMouse].
     # Raylib.UpdateCamera(camera.pointer, Raylib::CAMERA_ORBITAL)
+    ImGui.ImplRaylib_UpdateCamera(camera.pointer, Raylib::CAMERA_ORBITAL)
 
     Raylib.BeginTextureMode(render_target)
       Raylib.ClearBackground(Raylib::RAYWHITE)
@@ -114,7 +95,7 @@ if __FILE__ == $PROGRAM_NAME
       Raylib.ClearBackground(Raylib::BEIGE)
       Raylib.DrawTextureRec(render_target.texture, Raylib::Rectangle.create(0, 0, render_target.texture.width.to_f, -render_target.texture.height.to_f), Raylib::Vector2.create(0, 0), Raylib::WHITE)
 
-      ImGui.ImplRaylib_NewFrame()
+      ImGui.ImplDockingRaylib_NewFrame()
       ImGui.NewFrame()
       ImGui.ShowDemoWindow()
       sz = ImVec2.create(render_target.texture.width / 2, render_target.texture.height / 2)
@@ -127,11 +108,11 @@ if __FILE__ == $PROGRAM_NAME
         ImGui.Image(tex_ref, sz, uv0, uv1)
       ImGui.End()
       ImGui.Render()
-      ImGui.ImplRaylib_RenderDrawData(ImGui.GetDrawData())
+      ImGui.ImplDockingRaylib_RenderDrawData(ImGui.GetDrawData())
     Raylib.EndDrawing()
   end
 
-  ImGui.ImplRaylib_Shutdown()
+  ImGui.ImplDockingRaylib_Shutdown()
   ImGui.DestroyContext(nil)
   Raylib.CloseWindow()
 end
