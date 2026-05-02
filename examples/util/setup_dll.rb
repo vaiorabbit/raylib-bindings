@@ -26,7 +26,7 @@ if raylib_bindings_gem_available?
     raise RuntimeError, "setup_dll.rb : Unknown OS: #{RUBY_PLATFORM}"
   end
 else
-  # puts("Loaging from local path.")
+  # puts("Loading from local path.")
   require '../lib/raylib'
 
   case RUBY_PLATFORM
