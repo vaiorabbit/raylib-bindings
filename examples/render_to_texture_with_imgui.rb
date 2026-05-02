@@ -47,13 +47,14 @@ if __FILE__ == $PROGRAM_NAME
   ImGui.ImplRaylib_Init()
 
   io = ImGuiIO.new(ImGui.GetIO())
-  io[:Fonts].AddFontDefault()
+  fonts = ImFontAtlas.new(io[:Fonts])
+  fonts.AddFontDefault()
 
   # Build texture atlas
   pixels = FFI::MemoryPointer.new :pointer
   width = FFI::MemoryPointer.new :int
   height = FFI::MemoryPointer.new :int
-  io[:Fonts].GetTexDataAsRGBA32(pixels, width, height, nil)
+  #io[:Fonts].GetTexDataAsRGBA32(pixels, width, height, nil)
 
   # Upload texture to graphics system
   # [TODO] find standard and safe way to convert RGBA32 array into texture
@@ -69,9 +70,13 @@ if __FILE__ == $PROGRAM_NAME
   # texture_ptr = FFI::MemoryPointer.new(:uint32)
   # texture_ptr.write(:uint32, texture[:id])
   # io[:Fonts].SetTexID(texture_ptr)
-  io[:Fonts].SetTexID(texture[:id])
+  #io[:Fonts].SetTexID(texture[:id])
 
   render_target = Raylib.LoadRenderTexture(screen_width / 1.5, screen_height / 1.5)
+
+  tex_ref = ImTextureRef.new
+  tex_ref[:_TexData] = nil
+  tex_ref[:_TexID] = render_target[:texture][:id]
 
   cube_color = Raylib::GREEN
 
@@ -119,7 +124,7 @@ if __FILE__ == $PROGRAM_NAME
         # Flip y coordinate (See https://github.com/ocornut/imgui/wiki/Image-Loading-and-Displaying-Examples )
         uv0 = ImVec2.create(0.0, 1.0)
         uv1 = ImVec2.create(1.0, 0.0)
-        ImGui.Image(render_target[:texture][:id], sz, uv0, uv1)
+        ImGui.Image(tex_ref, sz, uv0, uv1)
       ImGui.End()
       ImGui.Render()
       ImGui.ImplRaylib_RenderDrawData(ImGui.GetDrawData())
