@@ -197,6 +197,22 @@ See the projects below to learn how to use this library:
     *   <img src="https://raw.githubusercontent.com/vaiorabbit/raylib-bindings-tileson/main/doc/screenshot_00.png" width="600">
     *   <https://github.com/vaiorabbit/raylib-bindings-tileson>
 
+## Projects using raylib-bindings
+
+*   <https://github.com/pixelHat/ruby-games-with-raylib>
+*   <https://github.com/IvanShamatov/tiles>
+*   <https://github.com/IvanShamatov/maze3d>
+*   <https://github.com/IvanShamatov/game_of_life>
+*   <https://github.com/IvanShamatov/engine_template>
+*   <https://github.com/IvanShamatov/games-asteroid-lan>
+*   <https://github.com/IvanShamatov/games-2048>
+*   <https://github.com/IvanShamatov/games-stamina>
+*   <https://github.com/IvanShamatov/games-harbor>
+*   <https://github.com/dinau/raywars/tree/main/src/ruby>
+*   <https://github.com/HotWheelzCodez/RubyParticleSimulation>
+*   <https://github.com/julianrubisch/kliipit-pipeline>
+*   <https://github.com/peterc/raylib-bindings-snake>
+
 ## Limitation ##
 
 *   `SetTraceLogCallback` and `TraceLogCallback` are unusable since Ruby-FFI does not support `:varargs` parameter in callbacks (`Proc`, etc.)
