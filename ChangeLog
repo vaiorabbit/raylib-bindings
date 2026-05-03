@@ -1,3 +1,7 @@
+2026-05-03  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/toon_character_sprites.rb : Added
+
 2026-05-02  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* examples/flocking_plain.rb, examples/flocking_optimized.rb : Added
