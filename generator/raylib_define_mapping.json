@@ -1,9 +1,9 @@
 {
       "RAYLIB_H" : null
     , "RAYLIB_VERSION_MAJOR" : "6"
-    , "RAYLIB_VERSION_MINOR" : "0"
+    , "RAYLIB_VERSION_MINOR" : "1"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : "\"6.0\""
+    , "RAYLIB_VERSION" : "\"6.1-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : null
@@ -213,8 +213,8 @@
     , "SUPPORT_FILEFORMAT_XM" : "1"
     , "SUPPORT_FILEFORMAT_MOD" : "1"
     , "RAYGUI_H" : null
-    , "RAYGUI_VERSION_MAJOR" : "4"
-    , "RAYGUI_VERSION_MINOR" : "5"
+    , "RAYGUI_VERSION_MAJOR" : "5"
+    , "RAYGUI_VERSION_MINOR" : "0"
     , "RAYGUI_VERSION_PATCH" : "0"
     , "RAYGUI_VERSION" : "\"5.0-dev\""
     , "_CRT_SECURE_NO_WARNINGS" : null

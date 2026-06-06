@@ -11,8 +11,8 @@ module Raylib
 
   # Define/Macro
 
-  RAYGUI_VERSION_MAJOR = 4
-  RAYGUI_VERSION_MINOR = 5
+  RAYGUI_VERSION_MAJOR = 5
+  RAYGUI_VERSION_MINOR = 0
   RAYGUI_VERSION_PATCH = 0
   RAYGUI_VERSION = "5.0-dev"
   SCROLLBAR_LEFT_SIDE = 0
@@ -104,7 +104,7 @@ module Raylib
   # enum GuiProgressBarProperty
   # ProgressBar
   PROGRESS_PADDING = 16 # ProgressBar internal padding
-  PROGRESS_SIDE = 17    # ProgressBar increment side: 0-left->right, 1-right-left 
+  PROGRESS_SIDE = 17    # ProgressBar increment side: 0-left->right, 1-right-left
 
   # enum GuiScrollBarProperty
   # ScrollBar
@@ -409,12 +409,13 @@ module Raylib
   ICON_CONE = 247
   ICON_ELLIPSOID = 248
   ICON_CAPSULE = 249
-  ICON_250 = 250
-  ICON_251 = 251
-  ICON_252 = 252
-  ICON_253 = 253
-  ICON_254 = 254
-  ICON_255 = 255
+  ICON_FILETYPE_FONT = 250
+  ICON_FILETYPE_3D = 251
+  ICON_FILETYPE_CODE_XML = 252
+  ICON_FILETYPE_CODE_C = 253
+  ICON_FILETYPE_CODE_PYTHON = 254
+  ICON_FILETYPE_CODE_JS = 255
+  ICON_FILETYPE_ICON = 256
 
 
   # Typedef
@@ -535,6 +536,13 @@ module Raylib
       #   @param fileName [const char *]
       #   @return [void]
       [:GuiLoadStyle, :GuiLoadStyle, [:pointer], :void],
+
+      # @!method GuiLoadStyleFromMemory(fileData, dataSize)
+      #   GuiLoadStyleFromMemory : Load style from memory (binary only)
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @return [void]
+      [:GuiLoadStyleFromMemory, :GuiLoadStyleFromMemory, [:pointer, :int], :void],
 
       # @!method GuiLoadStyleDefault()
       #   GuiLoadStyleDefault : Load style default over global style
@@ -823,7 +831,7 @@ module Raylib
       [:GuiListView, :GuiListView, [Rectangle.by_value, :pointer, :pointer, :pointer], :int],
 
       # @!method GuiListViewEx(bounds, text, count, scrollIndex, active, focus)
-      #   GuiListViewEx : List View with extended parameters
+      #   GuiListViewEx : List View using text entries list and returning focus entry
       #   @param bounds [Rectangle]
       #   @param text [char **]
       #   @param count [int]

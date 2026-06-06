@@ -9,13 +9,13 @@
     {
       "name": "RAYGUI_VERSION_MAJOR",
       "type": "INT",
-      "value": 4,
+      "value": 5,
       "description": ""
     },
     {
       "name": "RAYGUI_VERSION_MINOR",
       "type": "INT",
-      "value": 5,
+      "value": 0,
       "description": ""
     },
     {
@@ -742,7 +742,7 @@
         {
           "name": "PROGRESS_SIDE",
           "value": 17,
-          "description": "ProgressBar increment side: 0-left->right, 1-right-left "
+          "description": "ProgressBar increment side: 0-left->right, 1-right-left"
         }
       ]
     },
@@ -2184,33 +2184,38 @@
           "description": ""
         },
         {
-          "name": "ICON_250",
+          "name": "ICON_FILETYPE_FONT",
           "value": 250,
           "description": ""
         },
         {
-          "name": "ICON_251",
+          "name": "ICON_FILETYPE_3D",
           "value": 251,
           "description": ""
         },
         {
-          "name": "ICON_252",
+          "name": "ICON_FILETYPE_CODE_XML",
           "value": 252,
           "description": ""
         },
         {
-          "name": "ICON_253",
+          "name": "ICON_FILETYPE_CODE_C",
           "value": 253,
           "description": ""
         },
         {
-          "name": "ICON_254",
+          "name": "ICON_FILETYPE_CODE_PYTHON",
           "value": 254,
           "description": ""
         },
         {
-          "name": "ICON_255",
+          "name": "ICON_FILETYPE_CODE_JS",
           "value": 255,
+          "description": ""
+        },
+        {
+          "name": "ICON_FILETYPE_ICON",
+          "value": 256,
           "description": ""
         }
       ]
@@ -2329,6 +2334,21 @@
         {
           "type": "const char *",
           "name": "fileName"
+        }
+      ]
+    },
+    {
+      "name": "GuiLoadStyleFromMemory",
+      "description": "Load style from memory (binary only)",
+      "returnType": "void",
+      "params": [
+        {
+          "type": "const unsigned char *",
+          "name": "fileData"
+        },
+        {
+          "type": "int",
+          "name": "dataSize"
         }
       ]
     },
@@ -3002,7 +3022,7 @@
     },
     {
       "name": "GuiListViewEx",
-      "description": "List View with extended parameters",
+      "description": "List View using text entries list and returning focus entry",
       "returnType": "int",
       "params": [
         {

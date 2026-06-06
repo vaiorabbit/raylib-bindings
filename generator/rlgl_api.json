@@ -571,6 +571,12 @@
       "description": ""
     },
     {
+      "name": "RL_BOOL_TYPE",
+      "type": "GUARD",
+      "value": "",
+      "description": ""
+    },
+    {
       "name": "RL_MATRIX_TYPE",
       "type": "GUARD",
       "value": "",
@@ -682,48 +688,48 @@
       "fields": [
         {
           "type": "int",
-          "name": "elementCount",
+          "name": "",
           "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "float *",
-          "name": "vertices",
+          "name": "",
           "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "float *",
-          "name": "texcoords",
+          "name": "",
           "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "float *",
-          "name": "normals",
+          "name": "",
           "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned char *",
-          "name": "colors",
+          "name": "",
           "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "mode",
-          "description": "Drawing mode: LINES, TRIANGLES, QUADS"
+          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
-          "type": "unsigned int *",
-          "name": "indices",
+          "type": "unsigned int *[5]",
+          "name": "indicesd int",
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#endif",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "type",
+          "description": ""
         },
         {
           "type": "unsigned short *",

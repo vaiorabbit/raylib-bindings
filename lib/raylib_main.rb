@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 6
-  RAYLIB_VERSION_MINOR = 0
+  RAYLIB_VERSION_MINOR = 1
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "6.0"
+  RAYLIB_VERSION = "6.1-dev"
 
   # Enum
 
@@ -1420,12 +1420,12 @@ module Raylib
       [:DisableEventWaiting, :DisableEventWaiting, [], :void],
 
       # @!method ShowCursor()
-      #   ShowCursor : Shows cursor
+      #   ShowCursor : Show cursor
       #   @return [void]
       [:ShowCursor, :ShowCursor, [], :void],
 
       # @!method HideCursor()
-      #   HideCursor : Hides cursor
+      #   HideCursor : Hide cursor
       #   @return [void]
       [:HideCursor, :HideCursor, [], :void],
 
@@ -1435,12 +1435,12 @@ module Raylib
       [:IsCursorHidden, :IsCursorHidden, [], :bool],
 
       # @!method EnableCursor()
-      #   EnableCursor : Enables cursor (unlock cursor)
+      #   EnableCursor : Enable cursor (unlock cursor)
       #   @return [void]
       [:EnableCursor, :EnableCursor, [], :void],
 
       # @!method DisableCursor()
-      #   DisableCursor : Disables cursor (lock cursor)
+      #   DisableCursor : Disable cursor (lock cursor)
       #   @return [void]
       [:DisableCursor, :DisableCursor, [], :void],
 
@@ -1450,18 +1450,18 @@ module Raylib
       [:IsCursorOnScreen, :IsCursorOnScreen, [], :bool],
 
       # @!method ClearBackground(color)
-      #   ClearBackground : Set background color (framebuffer clear color)
+      #   ClearBackground : Clear background (framebuffer) to color
       #   @param color [Color]
       #   @return [void]
       [:ClearBackground, :ClearBackground, [Color.by_value], :void],
 
       # @!method BeginDrawing()
-      #   BeginDrawing : Setup canvas (framebuffer) to start drawing
+      #   BeginDrawing : Begin canvas (framebuffer) drawing
       #   @return [void]
       [:BeginDrawing, :BeginDrawing, [], :void],
 
       # @!method EndDrawing()
-      #   EndDrawing : End canvas drawing and swap buffers (double buffering)
+      #   EndDrawing : End canvas (framebuffer) drawing and swap buffers (double buffering)
       #   @return [void]
       [:EndDrawing, :EndDrawing, [], :void],
 
@@ -1472,7 +1472,7 @@ module Raylib
       [:BeginMode2D, :BeginMode2D, [Camera2D.by_value], :void],
 
       # @!method EndMode2D()
-      #   EndMode2D : Ends 2D mode with custom camera
+      #   EndMode2D : End 2D mode with custom camera
       #   @return [void]
       [:EndMode2D, :EndMode2D, [], :void],
 
@@ -1483,7 +1483,7 @@ module Raylib
       [:BeginMode3D, :BeginMode3D, [Camera3D.by_value], :void],
 
       # @!method EndMode3D()
-      #   EndMode3D : Ends 3D mode and returns to default 2D orthographic mode
+      #   EndMode3D : End 3D mode and returns to default 2D orthographic mode
       #   @return [void]
       [:EndMode3D, :EndMode3D, [], :void],
 
@@ -1494,7 +1494,7 @@ module Raylib
       [:BeginTextureMode, :BeginTextureMode, [RenderTexture2D.by_value], :void],
 
       # @!method EndTextureMode()
-      #   EndTextureMode : Ends drawing to render texture
+      #   EndTextureMode : End drawing to render texture
       #   @return [void]
       [:EndTextureMode, :EndTextureMode, [], :void],
 
@@ -1572,7 +1572,7 @@ module Raylib
       [:LoadShaderFromMemory, :LoadShaderFromMemory, [:pointer, :pointer], Shader.by_value],
 
       # @!method IsShaderValid(shader)
-      #   IsShaderValid : Check if a shader is valid (loaded on GPU)
+      #   IsShaderValid : Check if shader is valid (loaded on GPU)
       #   @param shader [Shader]
       #   @return [bool]
       [:IsShaderValid, :IsShaderValid, [Shader.by_value], :bool],
@@ -1649,14 +1649,14 @@ module Raylib
       [:GetScreenToWorldRayEx, :GetScreenToWorldRayEx, [Vector2.by_value, Camera.by_value, :int, :int], Ray.by_value],
 
       # @!method GetWorldToScreen(position, camera)
-      #   GetWorldToScreen : Get the screen space position for a 3d world space position
+      #   GetWorldToScreen : Get screen space position for a 3d world space position
       #   @param position [Vector3]
       #   @param camera [Camera]
       #   @return [Vector2]
       [:GetWorldToScreen, :GetWorldToScreen, [Vector3.by_value, Camera.by_value], Vector2.by_value],
 
       # @!method GetWorldToScreenEx(position, camera, width, height)
-      #   GetWorldToScreenEx : Get size position for a 3d world space position
+      #   GetWorldToScreenEx : Get sized screen space position for a 3d world space position
       #   @param position [Vector3]
       #   @param camera [Camera]
       #   @param width [int]
@@ -1665,14 +1665,14 @@ module Raylib
       [:GetWorldToScreenEx, :GetWorldToScreenEx, [Vector3.by_value, Camera.by_value, :int, :int], Vector2.by_value],
 
       # @!method GetWorldToScreen2D(position, camera)
-      #   GetWorldToScreen2D : Get the screen space position for a 2d camera world space position
+      #   GetWorldToScreen2D : Get screen space position for a 2d camera world space position
       #   @param position [Vector2]
       #   @param camera [Camera2D]
       #   @return [Vector2]
       [:GetWorldToScreen2D, :GetWorldToScreen2D, [Vector2.by_value, Camera2D.by_value], Vector2.by_value],
 
       # @!method GetScreenToWorld2D(position, camera)
-      #   GetScreenToWorld2D : Get the world space position for a 2d camera screen space position
+      #   GetScreenToWorld2D : Get world space position for a 2d camera screen space position
       #   @param position [Vector2]
       #   @param camera [Camera2D]
       #   @return [Vector2]
@@ -1761,7 +1761,7 @@ module Raylib
       [:TakeScreenshot, :TakeScreenshot, [:pointer], :void],
 
       # @!method SetConfigFlags(flags)
-      #   SetConfigFlags : Setup init configuration flags (view FLAGS)
+      #   SetConfigFlags : Set up init configuration flags (view FLAGS)
       #   @param flags [unsigned int]
       #   @return [void]
       [:SetConfigFlags, :SetConfigFlags, [:uint], :void],
@@ -1827,7 +1827,7 @@ module Raylib
       # @!method SaveFileData(fileName, data, dataSize)
       #   SaveFileData : Save data to file from byte array (write), returns true on success
       #   @param fileName [const char *]
-      #   @param data [void *]
+      #   @param data [const void *]
       #   @param dataSize [int]
       #   @return [bool]
       [:SaveFileData, :SaveFileData, [:pointer, :pointer, :int], :bool],
@@ -1884,34 +1884,34 @@ module Raylib
       [:SetSaveFileTextCallback, :SetSaveFileTextCallback, [:SaveFileTextCallback], :void],
 
       # @!method FileRename(fileName, fileRename)
-      #   FileRename : Rename file (if exists)
+      #   FileRename : Rename file (if exists), returns 0 on success
       #   @param fileName [const char *]
       #   @param fileRename [const char *]
       #   @return [int]
       [:FileRename, :FileRename, [:pointer, :pointer], :int],
 
       # @!method FileRemove(fileName)
-      #   FileRemove : Remove file (if exists)
+      #   FileRemove : Remove file (if exists), returns 0 on success
       #   @param fileName [const char *]
       #   @return [int]
       [:FileRemove, :FileRemove, [:pointer], :int],
 
       # @!method FileCopy(srcPath, dstPath)
-      #   FileCopy : Copy file from one path to another, dstPath created if it doesn't exist
+      #   FileCopy : Copy file from one path to another, dstPath created if it doesn't exist, returns 0 on success
       #   @param srcPath [const char *]
       #   @param dstPath [const char *]
       #   @return [int]
       [:FileCopy, :FileCopy, [:pointer, :pointer], :int],
 
       # @!method FileMove(srcPath, dstPath)
-      #   FileMove : Move file from one directory to another, dstPath created if it doesn't exist
+      #   FileMove : Move file from one directory to another, dstPath created if it doesn't exist, returns 0 on success
       #   @param srcPath [const char *]
       #   @param dstPath [const char *]
       #   @return [int]
       [:FileMove, :FileMove, [:pointer, :pointer], :int],
 
       # @!method FileTextReplace(fileName, search, replacement)
-      #   FileTextReplace : Replace text in an existing file
+      #   FileTextReplace : Replace text in an existing file, returns 0 on success
       #   @param fileName [const char *]
       #   @param search [const char *]
       #   @param replacement [const char *]
@@ -1919,7 +1919,7 @@ module Raylib
       [:FileTextReplace, :FileTextReplace, [:pointer, :pointer, :pointer], :int],
 
       # @!method FileTextFindIndex(fileName, search)
-      #   FileTextFindIndex : Find text in existing file
+      #   FileTextFindIndex : Find text in existing file, returns -1 if index not found or index otherwise
       #   @param fileName [const char *]
       #   @param search [const char *]
       #   @return [int]
@@ -1932,7 +1932,7 @@ module Raylib
       [:FileExists, :FileExists, [:pointer], :bool],
 
       # @!method DirectoryExists(dirPath)
-      #   DirectoryExists : Check if a directory path exists
+      #   DirectoryExists : Check if directory path exists
       #   @param dirPath [const char *]
       #   @return [bool]
       [:DirectoryExists, :DirectoryExists, [:pointer], :bool],
@@ -2003,13 +2003,13 @@ module Raylib
       [:MakeDirectory, :MakeDirectory, [:pointer], :int],
 
       # @!method ChangeDirectory(dirPath)
-      #   ChangeDirectory : Change working directory, return true on success
+      #   ChangeDirectory : Change working directory, returns 0 on success
       #   @param dirPath [const char *]
-      #   @return [bool]
-      [:ChangeDirectory, :ChangeDirectory, [:pointer], :bool],
+      #   @return [int]
+      [:ChangeDirectory, :ChangeDirectory, [:pointer], :int],
 
       # @!method IsPathFile(path)
-      #   IsPathFile : Check if a given path is a file or a directory
+      #   IsPathFile : Check if given path is a file or a directory
       #   @param path [const char *]
       #   @return [bool]
       [:IsPathFile, :IsPathFile, [:pointer], :bool],
@@ -2027,7 +2027,7 @@ module Raylib
       [:LoadDirectoryFiles, :LoadDirectoryFiles, [:pointer], FilePathList.by_value],
 
       # @!method LoadDirectoryFilesEx(basePath, filter, scanSubdirs)
-      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and subdir scan; some filters available: "*.*", "FILES*", "DIRS*"
+      #   LoadDirectoryFilesEx : Load directory filepaths with extension filtering and subdir scan; some filters available: '*.*','FILES*','DIRS*'
       #   @param basePath [const char *]
       #   @param filter [const char *]
       #   @param scanSubdirs [bool]
@@ -2041,7 +2041,7 @@ module Raylib
       [:UnloadDirectoryFiles, :UnloadDirectoryFiles, [FilePathList.by_value], :void],
 
       # @!method IsFileDropped()
-      #   IsFileDropped : Check if a file has been dropped into window
+      #   IsFileDropped : Check if file has been dropped into window
       #   @return [bool]
       [:IsFileDropped, :IsFileDropped, [], :bool],
 
@@ -2103,28 +2103,28 @@ module Raylib
 
       # @!method ComputeCRC32(data, dataSize)
       #   ComputeCRC32 : Compute CRC32 hash code
-      #   @param data [unsigned char *]
+      #   @param data [const unsigned char *]
       #   @param dataSize [int]
       #   @return [unsigned int]
       [:ComputeCRC32, :ComputeCRC32, [:pointer, :int], :uint],
 
       # @!method ComputeMD5(data, dataSize)
       #   ComputeMD5 : Compute MD5 hash code, returns static int[4] (16 bytes)
-      #   @param data [unsigned char *]
+      #   @param data [const unsigned char *]
       #   @param dataSize [int]
       #   @return [unsigned int *]
       [:ComputeMD5, :ComputeMD5, [:pointer, :int], :pointer],
 
       # @!method ComputeSHA1(data, dataSize)
       #   ComputeSHA1 : Compute SHA1 hash code, returns static int[5] (20 bytes)
-      #   @param data [unsigned char *]
+      #   @param data [const unsigned char *]
       #   @param dataSize [int]
       #   @return [unsigned int *]
       [:ComputeSHA1, :ComputeSHA1, [:pointer, :int], :pointer],
 
       # @!method ComputeSHA256(data, dataSize)
       #   ComputeSHA256 : Compute SHA256 hash code, returns static int[8] (32 bytes)
-      #   @param data [unsigned char *]
+      #   @param data [const unsigned char *]
       #   @param dataSize [int]
       #   @return [unsigned int *]
       [:ComputeSHA256, :ComputeSHA256, [:pointer, :int], :pointer],
@@ -2177,31 +2177,31 @@ module Raylib
       [:PlayAutomationEvent, :PlayAutomationEvent, [AutomationEvent.by_value], :void],
 
       # @!method IsKeyPressed(key)
-      #   IsKeyPressed : Check if a key has been pressed once
+      #   IsKeyPressed : Check if key has been pressed once
       #   @param key [int]
       #   @return [bool]
       [:IsKeyPressed, :IsKeyPressed, [:int], :bool],
 
       # @!method IsKeyPressedRepeat(key)
-      #   IsKeyPressedRepeat : Check if a key has been pressed again
+      #   IsKeyPressedRepeat : Check if key has been pressed again
       #   @param key [int]
       #   @return [bool]
       [:IsKeyPressedRepeat, :IsKeyPressedRepeat, [:int], :bool],
 
       # @!method IsKeyDown(key)
-      #   IsKeyDown : Check if a key is being pressed
+      #   IsKeyDown : Check if key is being pressed
       #   @param key [int]
       #   @return [bool]
       [:IsKeyDown, :IsKeyDown, [:int], :bool],
 
       # @!method IsKeyReleased(key)
-      #   IsKeyReleased : Check if a key has been released once
+      #   IsKeyReleased : Check if key has been released once
       #   @param key [int]
       #   @return [bool]
       [:IsKeyReleased, :IsKeyReleased, [:int], :bool],
 
       # @!method IsKeyUp(key)
-      #   IsKeyUp : Check if a key is NOT being pressed
+      #   IsKeyUp : Check if key is NOT being pressed
       #   @param key [int]
       #   @return [bool]
       [:IsKeyUp, :IsKeyUp, [:int], :bool],
@@ -2229,7 +2229,7 @@ module Raylib
       [:SetExitKey, :SetExitKey, [:int], :void],
 
       # @!method IsGamepadAvailable(gamepad)
-      #   IsGamepadAvailable : Check if a gamepad is available
+      #   IsGamepadAvailable : Check if gamepad is available
       #   @param gamepad [int]
       #   @return [bool]
       [:IsGamepadAvailable, :IsGamepadAvailable, [:int], :bool],
@@ -2241,28 +2241,28 @@ module Raylib
       [:GetGamepadName, :GetGamepadName, [:int], :pointer],
 
       # @!method IsGamepadButtonPressed(gamepad, button)
-      #   IsGamepadButtonPressed : Check if a gamepad button has been pressed once
+      #   IsGamepadButtonPressed : Check if gamepad button has been pressed once
       #   @param gamepad [int]
       #   @param button [int]
       #   @return [bool]
       [:IsGamepadButtonPressed, :IsGamepadButtonPressed, [:int, :int], :bool],
 
       # @!method IsGamepadButtonDown(gamepad, button)
-      #   IsGamepadButtonDown : Check if a gamepad button is being pressed
+      #   IsGamepadButtonDown : Check if gamepad button is being pressed
       #   @param gamepad [int]
       #   @param button [int]
       #   @return [bool]
       [:IsGamepadButtonDown, :IsGamepadButtonDown, [:int, :int], :bool],
 
       # @!method IsGamepadButtonReleased(gamepad, button)
-      #   IsGamepadButtonReleased : Check if a gamepad button has been released once
+      #   IsGamepadButtonReleased : Check if gamepad button has been released once
       #   @param gamepad [int]
       #   @param button [int]
       #   @return [bool]
       [:IsGamepadButtonReleased, :IsGamepadButtonReleased, [:int, :int], :bool],
 
       # @!method IsGamepadButtonUp(gamepad, button)
-      #   IsGamepadButtonUp : Check if a gamepad button is NOT being pressed
+      #   IsGamepadButtonUp : Check if gamepad button is NOT being pressed
       #   @param gamepad [int]
       #   @param button [int]
       #   @return [bool]
@@ -2302,25 +2302,25 @@ module Raylib
       [:SetGamepadVibration, :SetGamepadVibration, [:int, :float, :float, :float], :void],
 
       # @!method IsMouseButtonPressed(button)
-      #   IsMouseButtonPressed : Check if a mouse button has been pressed once
+      #   IsMouseButtonPressed : Check if mouse button has been pressed once
       #   @param button [int]
       #   @return [bool]
       [:IsMouseButtonPressed, :IsMouseButtonPressed, [:int], :bool],
 
       # @!method IsMouseButtonDown(button)
-      #   IsMouseButtonDown : Check if a mouse button is being pressed
+      #   IsMouseButtonDown : Check if mouse button is being pressed
       #   @param button [int]
       #   @return [bool]
       [:IsMouseButtonDown, :IsMouseButtonDown, [:int], :bool],
 
       # @!method IsMouseButtonReleased(button)
-      #   IsMouseButtonReleased : Check if a mouse button has been released once
+      #   IsMouseButtonReleased : Check if mouse button has been released once
       #   @param button [int]
       #   @return [bool]
       [:IsMouseButtonReleased, :IsMouseButtonReleased, [:int], :bool],
 
       # @!method IsMouseButtonUp(button)
-      #   IsMouseButtonUp : Check if a mouse button is NOT being pressed
+      #   IsMouseButtonUp : Check if mouse button is NOT being pressed
       #   @param button [int]
       #   @return [bool]
       [:IsMouseButtonUp, :IsMouseButtonUp, [:int], :bool],
@@ -2416,7 +2416,7 @@ module Raylib
       [:SetGesturesEnabled, :SetGesturesEnabled, [:uint], :void],
 
       # @!method IsGestureDetected(gesture)
-      #   IsGestureDetected : Check if a gesture have been detected
+      #   IsGestureDetected : Check if gesture has been detected
       #   @param gesture [unsigned int]
       #   @return [bool]
       [:IsGestureDetected, :IsGestureDetected, [:uint], :bool],
@@ -2467,10 +2467,10 @@ module Raylib
       #   @return [void]
       [:UpdateCameraPro, :UpdateCameraPro, [:pointer, Vector3.by_value, Vector3.by_value, :float], :void],
 
-      # @!method SetShapesTexture(texture, source)
+      # @!method SetShapesTexture(texture, rec)
       #   SetShapesTexture : Set texture and rectangle to be used on shapes drawing
       #   @param texture [Texture2D]
-      #   @param source [Rectangle]
+      #   @param rec [Rectangle]
       #   @return [void]
       [:SetShapesTexture, :SetShapesTexture, [Texture2D.by_value, Rectangle.by_value], :void],
 
@@ -2783,7 +2783,7 @@ module Raylib
       [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, Color.by_value], :void],
 
       # @!method DrawRectangleRoundedLinesEx(rec, roundness, segments, lineThick, color)
-      #   DrawRectangleRoundedLinesEx : Draw rectangle with rounded edges outline
+      #   DrawRectangleRoundedLinesEx : Draw rectangle lines with rounded edges outline
       #   @param rec [Rectangle]
       #   @param roundness [float]
       #   @param segments [int]
@@ -2800,6 +2800,17 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawTriangle, :DrawTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method DrawTriangleGradient(v1, v2, v3, c1, c2, c3)
+      #   DrawTriangleGradient : Draw triangle with interpolated colors (vertex in counter-clockwise order!)
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param c1 [Color]
+      #   @param c2 [Color]
+      #   @param c3 [Color]
+      #   @return [void]
+      [:DrawTriangleGradient, :DrawTriangleGradient, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
 
       # @!method DrawTriangleLines(v1, v2, v3, color)
       #   DrawTriangleLines : Draw triangle outline (vertex in counter-clockwise order!)
@@ -2827,7 +2838,7 @@ module Raylib
       [:DrawTriangleStrip, :DrawTriangleStrip, [:pointer, :int, Color.by_value], :void],
 
       # @!method DrawPoly(center, sides, radius, rotation, color)
-      #   DrawPoly : Draw a regular polygon (Vector version)
+      #   DrawPoly : Draw a polygon of n sides
       #   @param center [Vector2]
       #   @param sides [int]
       #   @param radius [float]
@@ -2982,14 +2993,14 @@ module Raylib
       #   @return [Vector2]
       [:GetSplinePointCatmullRom, :GetSplinePointCatmullRom, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
 
-      # @!method GetSplinePointBezierQuad(p1, c2, p3, t)
-      #   GetSplinePointBezierQuad : Get (evaluate) spline point: Quadratic Bezier
+      # @!method GetSplinePointBezierQuadratic(p1, c2, p3, t)
+      #   GetSplinePointBezierQuadratic : Get (evaluate) spline point: Quadratic Bezier
       #   @param p1 [Vector2]
       #   @param c2 [Vector2]
       #   @param p3 [Vector2]
       #   @param t [float]
       #   @return [Vector2]
-      [:GetSplinePointBezierQuad, :GetSplinePointBezierQuad, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
+      [:GetSplinePointBezierQuadratic, :GetSplinePointBezierQuadratic, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float], Vector2.by_value],
 
       # @!method GetSplinePointBezierCubic(p1, c2, c3, p4, t)
       #   GetSplinePointBezierCubic : Get (evaluate) spline point: Cubic Bezier
@@ -3026,7 +3037,7 @@ module Raylib
       [:CheckCollisionCircleRec, :CheckCollisionCircleRec, [Vector2.by_value, :float, Rectangle.by_value], :bool],
 
       # @!method CheckCollisionCircleLine(center, radius, p1, p2)
-      #   CheckCollisionCircleLine : Check if circle collides with a line created betweeen two points [p1] and [p2]
+      #   CheckCollisionCircleLine : Check if circle collides with a line created between two points [p1] and [p2]
       #   @param center [Vector2]
       #   @param radius [float]
       #   @param p1 [Vector2]
@@ -3139,7 +3150,7 @@ module Raylib
       [:LoadImageFromTexture, :LoadImageFromTexture, [Texture2D.by_value], Image.by_value],
 
       # @!method LoadImageFromScreen()
-      #   LoadImageFromScreen : Load image from screen buffer and (screenshot)
+      #   LoadImageFromScreen : Load image from screen buffer (screenshot)
       #   @return [Image]
       [:LoadImageFromScreen, :LoadImageFromScreen, [], Image.by_value],
 
@@ -3458,9 +3469,9 @@ module Raylib
       # @!method ImageColorContrast(image, contrast)
       #   ImageColorContrast : Modify image color: contrast (-100 to 100)
       #   @param image [Image *]
-      #   @param contrast [float]
+      #   @param contrast [int]
       #   @return [void]
-      [:ImageColorContrast, :ImageColorContrast, [:pointer, :float], :void],
+      [:ImageColorContrast, :ImageColorContrast, [:pointer, :int], :void],
 
       # @!method ImageColorBrightness(image, brightness)
       #   ImageColorBrightness : Modify image color: brightness (-255 to 255)
@@ -3638,14 +3649,25 @@ module Raylib
       #   @return [void]
       [:ImageDrawRectangleRec, :ImageDrawRectangleRec, [:pointer, Rectangle.by_value, Color.by_value], :void],
 
-      # @!method ImageDrawRectangleLines(dst, rec, thick, color)
+      # @!method ImageDrawRectangleLines(dst, posX, posY, width, height, color)
       #   ImageDrawRectangleLines : Draw rectangle lines within an image
+      #   @param dst [Image *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleLinesEx(dst, rec, thick, color)
+      #   ImageDrawRectangleLinesEx : Draw rectangle lines within an image with extended parameters
       #   @param dst [Image *]
       #   @param rec [Rectangle]
       #   @param thick [int]
       #   @param color [Color]
       #   @return [void]
-      [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
+      [:ImageDrawRectangleLinesEx, :ImageDrawRectangleLinesEx, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
 
       # @!method ImageDrawTriangle(dst, v1, v2, v3, color)
       #   ImageDrawTriangle : Draw triangle within an image
@@ -3657,8 +3679,8 @@ module Raylib
       #   @return [void]
       [:ImageDrawTriangle, :ImageDrawTriangle, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # @!method ImageDrawTriangleEx(dst, v1, v2, v3, c1, c2, c3)
-      #   ImageDrawTriangleEx : Draw triangle with interpolated colors within an image
+      # @!method ImageDrawTriangleGradient(dst, v1, v2, v3, c1, c2, c3)
+      #   ImageDrawTriangleGradient : Draw triangle with interpolated colors within an image
       #   @param dst [Image *]
       #   @param v1 [Vector2]
       #   @param v2 [Vector2]
@@ -3667,7 +3689,7 @@ module Raylib
       #   @param c2 [Color]
       #   @param c3 [Color]
       #   @return [void]
-      [:ImageDrawTriangleEx, :ImageDrawTriangleEx, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
+      [:ImageDrawTriangleGradient, :ImageDrawTriangleGradient, [:pointer, Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
 
       # @!method ImageDrawTriangleLines(dst, v1, v2, v3, color)
       #   ImageDrawTriangleLines : Draw triangle outline within an image
@@ -3757,7 +3779,7 @@ module Raylib
       [:LoadRenderTexture, :LoadRenderTexture, [:int, :int], RenderTexture2D.by_value],
 
       # @!method IsTextureValid(texture)
-      #   IsTextureValid : Check if a texture is valid (loaded in GPU)
+      #   IsTextureValid : Check if texture is valid (loaded in GPU)
       #   @param texture [Texture2D]
       #   @return [bool]
       [:IsTextureValid, :IsTextureValid, [Texture2D.by_value], :bool],
@@ -3769,7 +3791,7 @@ module Raylib
       [:UnloadTexture, :UnloadTexture, [Texture2D.by_value], :void],
 
       # @!method IsRenderTextureValid(target)
-      #   IsRenderTextureValid : Check if a render texture is valid (loaded in GPU)
+      #   IsRenderTextureValid : Check if render texture is valid (loaded in GPU)
       #   @param target [RenderTexture2D]
       #   @return [bool]
       [:IsRenderTextureValid, :IsRenderTextureValid, [RenderTexture2D.by_value], :bool],
@@ -3842,31 +3864,31 @@ module Raylib
       #   @return [void]
       [:DrawTextureEx, :DrawTextureEx, [Texture2D.by_value, Vector2.by_value, :float, :float, Color.by_value], :void],
 
-      # @!method DrawTextureRec(texture, source, position, tint)
+      # @!method DrawTextureRec(texture, rec, position, tint)
       #   DrawTextureRec : Draw a part of a texture defined by a rectangle
       #   @param texture [Texture2D]
-      #   @param source [Rectangle]
+      #   @param rec [Rectangle]
       #   @param position [Vector2]
       #   @param tint [Color]
       #   @return [void]
       [:DrawTextureRec, :DrawTextureRec, [Texture2D.by_value, Rectangle.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # @!method DrawTexturePro(texture, source, dest, origin, rotation, tint)
-      #   DrawTexturePro : Draw a part of a texture defined by a rectangle with 'pro' parameters
+      # @!method DrawTexturePro(texture, srcrec, dstrec, origin, rotation, tint)
+      #   DrawTexturePro : Draw a part of a texture defined by a source rectangle to destination rectangle, with scaling and rotation
       #   @param texture [Texture2D]
-      #   @param source [Rectangle]
-      #   @param dest [Rectangle]
+      #   @param srcrec [Rectangle]
+      #   @param dstrec [Rectangle]
       #   @param origin [Vector2]
       #   @param rotation [float]
       #   @param tint [Color]
       #   @return [void]
       [:DrawTexturePro, :DrawTexturePro, [Texture2D.by_value, Rectangle.by_value, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
-      # @!method DrawTextureNPatch(texture, nPatchInfo, dest, origin, rotation, tint)
-      #   DrawTextureNPatch : Draws a texture (or part of it) that stretches or shrinks nicely
+      # @!method DrawTextureNPatch(texture, nPatchInfo, dstrec, origin, rotation, tint)
+      #   DrawTextureNPatch : Draw a texture (or part of it) that stretches or shrinks nicely
       #   @param texture [Texture2D]
       #   @param nPatchInfo [NPatchInfo]
-      #   @param dest [Rectangle]
+      #   @param dstrec [Rectangle]
       #   @param origin [Vector2]
       #   @param rotation [float]
       #   @param tint [Color]
@@ -3971,7 +3993,7 @@ module Raylib
 
       # @!method GetPixelColor(srcPtr, format)
       #   GetPixelColor : Get Color from a source pixel pointer of certain format
-      #   @param srcPtr [void *]
+      #   @param srcPtr [const void *]
       #   @param format [int]
       #   @return [Color]
       [:GetPixelColor, :GetPixelColor, [:pointer, :int], Color.by_value],
@@ -4032,7 +4054,7 @@ module Raylib
       [:LoadFontFromMemory, :LoadFontFromMemory, [:pointer, :pointer, :int, :int, :pointer, :int], Font.by_value],
 
       # @!method IsFontValid(font)
-      #   IsFontValid : Check if a font is valid (font data loaded, WARNING: GPU texture not checked)
+      #   IsFontValid : Check if font is valid (font data loaded, WARNING: GPU texture not checked)
       #   @param font [Font]
       #   @return [bool]
       [:IsFontValid, :IsFontValid, [Font.by_value], :bool],
@@ -4132,7 +4154,7 @@ module Raylib
       [:DrawTextCodepoint, :DrawTextCodepoint, [Font.by_value, :int, Vector2.by_value, :float, Color.by_value], :void],
 
       # @!method DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint)
-      #   DrawTextCodepoints : Draw multiple character (codepoint)
+      #   DrawTextCodepoints : Draw multiple characters (codepoint)
       #   @param font [Font]
       #   @param codepoints [const int *]
       #   @param codepointCount [int]
@@ -4278,7 +4300,7 @@ module Raylib
       [:TextCopy, :TextCopy, [:pointer, :pointer], :int],
 
       # @!method TextIsEqual(text1, text2)
-      #   TextIsEqual : Check if two text string are equal
+      #   TextIsEqual : Check if two text strings are equal
       #   @param text1 [const char *]
       #   @param text2 [const char *]
       #   @return [bool]
@@ -4548,13 +4570,13 @@ module Raylib
       #   @return [void]
       [:DrawSphereWires, :DrawSphereWires, [Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # @!method DrawCylinder(position, radiusTop, radiusBottom, height, slices, color)
+      # @!method DrawCylinder(position, radiusTop, radiusBottom, height, sides, color)
       #   DrawCylinder : Draw a cylinder/cone
       #   @param position [Vector3]
       #   @param radiusTop [float]
       #   @param radiusBottom [float]
       #   @param height [float]
-      #   @param slices [int]
+      #   @param sides [int]
       #   @param color [Color]
       #   @return [void]
       [:DrawCylinder, :DrawCylinder, [Vector3.by_value, :float, :float, :float, :int, Color.by_value], :void],
@@ -4570,13 +4592,13 @@ module Raylib
       #   @return [void]
       [:DrawCylinderEx, :DrawCylinderEx, [Vector3.by_value, Vector3.by_value, :float, :float, :int, Color.by_value], :void],
 
-      # @!method DrawCylinderWires(position, radiusTop, radiusBottom, height, slices, color)
+      # @!method DrawCylinderWires(position, radiusTop, radiusBottom, height, sides, color)
       #   DrawCylinderWires : Draw a cylinder/cone wires
       #   @param position [Vector3]
       #   @param radiusTop [float]
       #   @param radiusBottom [float]
       #   @param height [float]
-      #   @param slices [int]
+      #   @param sides [int]
       #   @param color [Color]
       #   @return [void]
       [:DrawCylinderWires, :DrawCylinderWires, [Vector3.by_value, :float, :float, :float, :int, Color.by_value], :void],
@@ -4592,24 +4614,24 @@ module Raylib
       #   @return [void]
       [:DrawCylinderWiresEx, :DrawCylinderWiresEx, [Vector3.by_value, Vector3.by_value, :float, :float, :int, Color.by_value], :void],
 
-      # @!method DrawCapsule(startPos, endPos, radius, slices, rings, color)
+      # @!method DrawCapsule(startPos, endPos, radius, rings, slices, color)
       #   DrawCapsule : Draw a capsule with the center of its sphere caps at startPos and endPos
       #   @param startPos [Vector3]
       #   @param endPos [Vector3]
       #   @param radius [float]
-      #   @param slices [int]
       #   @param rings [int]
+      #   @param slices [int]
       #   @param color [Color]
       #   @return [void]
       [:DrawCapsule, :DrawCapsule, [Vector3.by_value, Vector3.by_value, :float, :int, :int, Color.by_value], :void],
 
-      # @!method DrawCapsuleWires(startPos, endPos, radius, slices, rings, color)
+      # @!method DrawCapsuleWires(startPos, endPos, radius, rings, slices, color)
       #   DrawCapsuleWires : Draw capsule wireframe with the center of its sphere caps at startPos and endPos
       #   @param startPos [Vector3]
       #   @param endPos [Vector3]
       #   @param radius [float]
-      #   @param slices [int]
       #   @param rings [int]
+      #   @param slices [int]
       #   @param color [Color]
       #   @return [void]
       [:DrawCapsuleWires, :DrawCapsuleWires, [Vector3.by_value, Vector3.by_value, :float, :int, :int, Color.by_value], :void],
@@ -4649,7 +4671,7 @@ module Raylib
       [:LoadModelFromMesh, :LoadModelFromMesh, [Mesh.by_value], Model.by_value],
 
       # @!method IsModelValid(model)
-      #   IsModelValid : Check if a model is valid (loaded in GPU, VAO/VBOs)
+      #   IsModelValid : Check if model is valid (loaded in GPU, VAO/VBOs)
       #   @param model [Model]
       #   @return [bool]
       [:IsModelValid, :IsModelValid, [Model.by_value], :bool],
@@ -4723,22 +4745,22 @@ module Raylib
       #   @return [void]
       [:DrawBillboard, :DrawBillboard, [Camera.by_value, Texture2D.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
-      # @!method DrawBillboardRec(camera, texture, source, position, size, tint)
-      #   DrawBillboardRec : Draw a billboard texture defined by source
+      # @!method DrawBillboardRec(camera, texture, rec, position, size, tint)
+      #   DrawBillboardRec : Draw a billboard texture defined by rectangle
       #   @param camera [Camera]
       #   @param texture [Texture2D]
-      #   @param source [Rectangle]
+      #   @param rec [Rectangle]
       #   @param position [Vector3]
       #   @param size [Vector2]
       #   @param tint [Color]
       #   @return [void]
       [:DrawBillboardRec, :DrawBillboardRec, [Camera.by_value, Texture2D.by_value, Rectangle.by_value, Vector3.by_value, Vector2.by_value, Color.by_value], :void],
 
-      # @!method DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint)
-      #   DrawBillboardPro : Draw a billboard texture defined by source and rotation
+      # @!method DrawBillboardPro(camera, texture, rec, position, up, size, origin, rotation, tint)
+      #   DrawBillboardPro : Draw a billboard texture defined by source rectangle with scaling and rotation
       #   @param camera [Camera]
       #   @param texture [Texture2D]
-      #   @param source [Rectangle]
+      #   @param rec [Rectangle]
       #   @param position [Vector3]
       #   @param up [Vector3]
       #   @param size [Vector2]
@@ -4915,7 +4937,7 @@ module Raylib
       [:LoadMaterialDefault, :LoadMaterialDefault, [], Material.by_value],
 
       # @!method IsMaterialValid(material)
-      #   IsMaterialValid : Check if a material is valid (shader assigned, map textures loaded in GPU)
+      #   IsMaterialValid : Check if material is valid (shader assigned, map textures loaded in GPU)
       #   @param material [Material]
       #   @return [bool]
       [:IsMaterialValid, :IsMaterialValid, [Material.by_value], :bool],
@@ -5089,7 +5111,7 @@ module Raylib
       [:LoadWaveFromMemory, :LoadWaveFromMemory, [:pointer, :pointer, :int], Wave.by_value],
 
       # @!method IsWaveValid(wave)
-      #   IsWaveValid : Checks if wave data is valid (data loaded and parameters)
+      #   IsWaveValid : Check if wave data is valid (data loaded and parameters)
       #   @param wave [Wave]
       #   @return [bool]
       [:IsWaveValid, :IsWaveValid, [Wave.by_value], :bool],
@@ -5107,22 +5129,22 @@ module Raylib
       [:LoadSoundFromWave, :LoadSoundFromWave, [Wave.by_value], Sound.by_value],
 
       # @!method LoadSoundAlias(source)
-      #   LoadSoundAlias : Create a new sound that shares the same sample data as the source sound, does not own the sound data
+      #   LoadSoundAlias : Load sound alias, new sound that shares the same sample data as the source sound, does not own the sound data
       #   @param source [Sound]
       #   @return [Sound]
       [:LoadSoundAlias, :LoadSoundAlias, [Sound.by_value], Sound.by_value],
 
       # @!method IsSoundValid(sound)
-      #   IsSoundValid : Checks if a sound is valid (data loaded and buffers initialized)
+      #   IsSoundValid : Check if sound is valid (data loaded and buffers initialized)
       #   @param sound [Sound]
       #   @return [bool]
       [:IsSoundValid, :IsSoundValid, [Sound.by_value], :bool],
 
-      # @!method UpdateSound(sound, data, sampleCount)
+      # @!method UpdateSound(sound, data, frameCount)
       #   UpdateSound : Update sound buffer with new data (default data format: 32 bit float, stereo)
       #   @param sound [Sound]
       #   @param data [const void *]
-      #   @param sampleCount [int]
+      #   @param frameCount [int]
       #   @return [void]
       [:UpdateSound, :UpdateSound, [Sound.by_value, :pointer, :int], :void],
 
@@ -5139,7 +5161,7 @@ module Raylib
       [:UnloadSound, :UnloadSound, [Sound.by_value], :void],
 
       # @!method UnloadSoundAlias(alias)
-      #   UnloadSoundAlias : Unload a sound alias (does not deallocate sample data)
+      #   UnloadSoundAlias : Unload sound alias (does not deallocate sample data)
       #   @param alias [Sound]
       #   @return [void]
       [:UnloadSoundAlias, :UnloadSoundAlias, [Sound.by_value], :void],
@@ -5183,7 +5205,7 @@ module Raylib
       [:ResumeSound, :ResumeSound, [Sound.by_value], :void],
 
       # @!method IsSoundPlaying(sound)
-      #   IsSoundPlaying : Check if a sound is currently playing
+      #   IsSoundPlaying : Check if sound is currently playing
       #   @param sound [Sound]
       #   @return [bool]
       [:IsSoundPlaying, :IsSoundPlaying, [Sound.by_value], :bool],
@@ -5259,7 +5281,7 @@ module Raylib
       [:LoadMusicStreamFromMemory, :LoadMusicStreamFromMemory, [:pointer, :pointer, :int], Music.by_value],
 
       # @!method IsMusicValid(music)
-      #   IsMusicValid : Checks if a music stream is valid (context and buffers initialized)
+      #   IsMusicValid : Check if music stream is valid (context and buffers initialized)
       #   @param music [Music]
       #   @return [bool]
       [:IsMusicValid, :IsMusicValid, [Music.by_value], :bool],
@@ -5283,7 +5305,7 @@ module Raylib
       [:IsMusicStreamPlaying, :IsMusicStreamPlaying, [Music.by_value], :bool],
 
       # @!method UpdateMusicStream(music)
-      #   UpdateMusicStream : Updates buffers for music streaming
+      #   UpdateMusicStream : Update buffers for music streaming
       #   @param music [Music]
       #   @return [void]
       [:UpdateMusicStream, :UpdateMusicStream, [Music.by_value], :void],
@@ -5321,14 +5343,14 @@ module Raylib
       [:SetMusicVolume, :SetMusicVolume, [Music.by_value, :float], :void],
 
       # @!method SetMusicPitch(music, pitch)
-      #   SetMusicPitch : Set pitch for a music (1.0 is base level)
+      #   SetMusicPitch : Set pitch for music (1.0 is base level)
       #   @param music [Music]
       #   @param pitch [float]
       #   @return [void]
       [:SetMusicPitch, :SetMusicPitch, [Music.by_value, :float], :void],
 
       # @!method SetMusicPan(music, pan)
-      #   SetMusicPan : Set pan for a music (-1.0 left, 0.0 center, 1.0 right)
+      #   SetMusicPan : Set pan for music (-1.0 left, 0.0 center, 1.0 right)
       #   @param music [Music]
       #   @param pan [float]
       #   @return [void]
@@ -5355,7 +5377,7 @@ module Raylib
       [:LoadAudioStream, :LoadAudioStream, [:uint, :uint, :uint], AudioStream.by_value],
 
       # @!method IsAudioStreamValid(stream)
-      #   IsAudioStreamValid : Checks if an audio stream is valid (buffers initialized)
+      #   IsAudioStreamValid : Check if an audio stream is valid (buffers initialized)
       #   @param stream [AudioStream]
       #   @return [bool]
       [:IsAudioStreamValid, :IsAudioStreamValid, [AudioStream.by_value], :bool],
@@ -5425,7 +5447,7 @@ module Raylib
       [:SetAudioStreamPitch, :SetAudioStreamPitch, [AudioStream.by_value, :float], :void],
 
       # @!method SetAudioStreamPan(stream, pan)
-      #   SetAudioStreamPan : Set pan for audio stream (-1.0 to 1.0 range, 0.0 is centered)
+      #   SetAudioStreamPan : Set pan for audio stream (-1.0 left, 0.0 center, 1.0 right)
       #   @param stream [AudioStream]
       #   @param pan [float]
       #   @return [void]
