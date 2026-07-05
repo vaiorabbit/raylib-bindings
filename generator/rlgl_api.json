@@ -688,48 +688,48 @@
       "fields": [
         {
           "type": "int",
-          "name": "",
+          "name": "elementCount",
           "description": "Number of elements in the buffer (QUADS)"
         },
         {
           "type": "float *",
-          "name": "",
+          "name": "vertices",
           "description": "Vertex position (XYZ - 3 components per vertex) (shader-location = 0)"
         },
         {
           "type": "float *",
-          "name": "",
+          "name": "texcoords",
           "description": "Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)"
         },
         {
           "type": "float *",
-          "name": "",
-          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
-        },
-        {
-          "type": "unsigned char *",
-          "name": "",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
-        },
-        {
-          "type": "unsigned int *[5]",
-          "name": "indicesd int",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
-        },
-        {
-          "type": "#endif",
           "name": "normals",
           "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "type",
+          "type": "unsigned char *",
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
+          "name": "Matrix",
           "description": ""
+        },
+        {
+          "type": "unsigned int *",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+        },
+        {
+          "type": "#endif",
+          "name": "Matrix",
+          "description": ""
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",
@@ -737,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#endif",
+          "name": "rlVertexBuffer",
+          "description": ""
         },
         {
           "type": "unsigned int",

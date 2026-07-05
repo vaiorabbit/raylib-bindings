@@ -53,7 +53,6 @@
     , "MATERIAL_MAP_SPECULAR" : null
     , "SHADER_LOC_MAP_DIFFUSE" : null
     , "SHADER_LOC_MAP_SPECULAR" : null
-    , "GetMouseRay" : null
     , "RAYMATH_H" : null
     , "RMAPI" : null
     , "EPSILON" : "0.000001"
@@ -183,6 +182,7 @@
     , "SUPPORT_FILEFORMAT_JPG" : "0"
     , "SUPPORT_FILEFORMAT_GIF" : "1"
     , "SUPPORT_FILEFORMAT_QOI" : "1"
+    , "SUPPORT_FILEFORMAT_PEP" : "0"
     , "SUPPORT_FILEFORMAT_PSD" : "0"
     , "SUPPORT_FILEFORMAT_DDS" : "1"
     , "SUPPORT_FILEFORMAT_HDR" : "0"

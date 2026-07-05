@@ -253,11 +253,11 @@ module Raylib
   # Dynamic vertex buffers (position + texcoords + colors + indices arrays)
   class RlVertexBuffer < FFI::Struct
     layout(
-      :elementCount, :int, 
-      :vertices, :pointer, 
-      :texcoords, :pointer,
+      :elementCount, :int,  # Number of elements in the buffer (QUADS)
+      :vertices, :pointer,  # Vertex position (XYZ - 3 components per vertex) (shader-location = 0)
+      :texcoords, :pointer, # Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)
       :normals, :pointer,   # Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)
-      :colors, :pointer,   
+      :colors, :pointer,    # Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)
       :indices, :pointer,   # Vertex indices (in case vertex data comes indexed) (6 indices per quad)
       :vaoId, :uint,        # OpenGL Vertex Array Object id
       :vboId, [:uint, 5],   # OpenGL Vertex Buffer Objects id (5 types of vertex data)

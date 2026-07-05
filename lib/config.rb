@@ -39,6 +39,7 @@ module Raylib
   SUPPORT_FILEFORMAT_JPG = 0           # Disabled by default
   SUPPORT_FILEFORMAT_GIF = 1
   SUPPORT_FILEFORMAT_QOI = 1
+  SUPPORT_FILEFORMAT_PEP = 0
   SUPPORT_FILEFORMAT_PSD = 0           # Disabled by default
   SUPPORT_FILEFORMAT_DDS = 1
   SUPPORT_FILEFORMAT_HDR = 0           # Disabled by default

@@ -58,14 +58,14 @@ module Raylib
   DROPDOWNBOX = 8
   TEXTBOX = 9      # Used also for: TEXTBOXMULTI
   VALUEBOX = 10
-  CONTROL11 = 11
+  TABBAR = 11
   LISTVIEW = 12
   COLORPICKER = 13
   SCROLLBAR = 14
   STATUSBAR = 15
 
   # enum GuiControlProperty
-  # Gui base properties for every control
+  # Controls BASE properties for every control (RAYGUI_MAX_PROPS_BASE = 16)
   BORDER_COLOR_NORMAL = 0   # Control border color in STATE_NORMAL
   BASE_COLOR_NORMAL = 1     # Control base color in STATE_NORMAL
   TEXT_COLOR_NORMAL = 2     # Control text color in STATE_NORMAL
@@ -80,21 +80,24 @@ module Raylib
   TEXT_COLOR_DISABLED = 11  # Control text color in STATE_DISABLED
   BORDER_WIDTH = 12         # Control border size, 0 for no border
   TEXT_PADDING = 13         # Control text padding, not considering border
-  TEXT_ALIGNMENT = 14       # Control text horizontal alignment inside control text bound (after border and padding)
+  TEXT_ALIGNMENT = 14       # Control text horizontal alignment inside control text bound (after border and padding): 0-Left, 1-Center, 2-Right
+  BASEPROP16 = 15           # Not used yet...
 
   # enum GuiDefaultProperty
-  # DEFAULT extended properties
+  # DEFAULT control, extended properties
   TEXT_SIZE = 16               # Text size (glyphs max height)
   TEXT_SPACING = 17            # Text spacing between glyphs
   LINE_COLOR = 18              # Line control color
   BACKGROUND_COLOR = 19        # Background color
   TEXT_LINE_SPACING = 20       # Text spacing between lines
-  TEXT_ALIGNMENT_VERTICAL = 21 # Text vertical alignment inside text bounds (after border and padding)
+  TEXT_ALIGNMENT_VERTICAL = 21 # Text vertical alignment inside text bounds (after border and padding): 0-Top, 1-Middle, 2-Bottom
   TEXT_WRAP_MODE = 22          # Text wrap-mode inside text bounds
+  EXTPROP08 = 23               # Not used yet...
 
   # enum GuiToggleProperty
   # Toggle/ToggleGroup
-  GROUP_PADDING = 16 # ToggleGroup separation between toggles
+  GROUP_PADDING = 16    # ToggleGroup separation between toggles
+  GROUP_WIDTH_FULL = 17 # ToggleGroup bounds width considers all items: 0-Width per item, 1-Full width
 
   # enum GuiSliderProperty
   # Slider/SliderBar
@@ -104,7 +107,7 @@ module Raylib
   # enum GuiProgressBarProperty
   # ProgressBar
   PROGRESS_PADDING = 16 # ProgressBar internal padding
-  PROGRESS_SIDE = 17    # ProgressBar increment side: 0-left->right, 1-right-left
+  PROGRESS_SIDE = 17    # ProgressBar increment side: 0-Left->Right, 1-Right->Left
 
   # enum GuiScrollBarProperty
   # ScrollBar
@@ -129,29 +132,35 @@ module Raylib
   ARROW_PADDING = 16          # DropdownBox arrow separation from border and items
   DROPDOWN_ITEMS_SPACING = 17 # DropdownBox items separation
   DROPDOWN_ARROW_HIDDEN = 18  # DropdownBox arrow hidden
-  DROPDOWN_ROLL_UP = 19       # DropdownBox roll up flag (default rolls down)
+  DROPDOWN_ROLL_UP = 19       # DropdownBox roll up flag: 0-Roll down, 1-Roll up
 
   # enum GuiTextBoxProperty
   # TextBox/TextBoxMulti/ValueBox/Spinner
-  TEXT_READONLY = 16 # TextBox in read-only mode: 0-text editable, 1-text no-editable
+  TEXT_READONLY = 16 # TextBox in read-only mode: 0-Text editable, 1-Text read-only
 
   # enum GuiValueBoxProperty
   # ValueBox/Spinner
   SPINNER_BUTTON_WIDTH = 16   # Spinner left/right buttons width
   SPINNER_BUTTON_SPACING = 17 # Spinner buttons separation
 
+  # enum GuiTabBarProperty
+  # TabBar
+  TAB_ITEMS_WIDTH = 16  # TabBar tab items width
+  TAB_CLOSE_BUTTON = 17 # TabBar tab close button: 0-Not shown, 1-Shown
+  TAB_LINE_SIDE = 18    # TabBar tabs side: 0-Bottom, 1-Top
+
   # enum GuiListViewProperty
-  # ListView
+  # 
   LIST_ITEMS_HEIGHT = 16        # ListView items height
   LIST_ITEMS_SPACING = 17       # ListView items separation
   SCROLLBAR_WIDTH = 18          # ListView scrollbar size (usually width)
-  SCROLLBAR_SIDE = 19           # ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)
+  SCROLLBAR_SIDE = 19           # ListView scrollbar side: 0-Left side, 1-Right Side
   LIST_ITEMS_BORDER_NORMAL = 20 # ListView items border enabled in normal state
   LIST_ITEMS_BORDER_WIDTH = 21  # ListView items border width
 
   # enum GuiColorPickerProperty
   # ColorPicker
-  COLOR_SELECTOR_SIZE = 16
+  COLOR_SELECTOR_SIZE = 16      # ColorPicker selector square size
   HUEBAR_WIDTH = 17             # ColorPicker right hue bar width
   HUEBAR_PADDING = 18           # ColorPicker right hue bar separation from panel
   HUEBAR_SELECTOR_HEIGHT = 19   # ColorPicker right hue bar selector height
@@ -436,6 +445,7 @@ module Raylib
   typedef :int, :GuiDropdownBoxProperty
   typedef :int, :GuiTextBoxProperty
   typedef :int, :GuiValueBoxProperty
+  typedef :int, :GuiTabBarProperty
   typedef :int, :GuiListViewProperty
   typedef :int, :GuiColorPickerProperty
   typedef :int, :GuiIconName
@@ -590,6 +600,14 @@ module Raylib
       #   @return [char **]
       [:GuiLoadIcons, :GuiLoadIcons, [:pointer, :bool], :pointer],
 
+      # @!method GuiLoadIconsFromMemory(fileData, dataSize, loadIconsName)
+      #   GuiLoadIconsFromMemory : Load raygui icons file (.rgi) from memory into internal icons data
+      #   @param fileData [const unsigned char *]
+      #   @param dataSize [int]
+      #   @param loadIconsName [bool]
+      #   @return [char **]
+      [:GuiLoadIconsFromMemory, :GuiLoadIconsFromMemory, [:pointer, :int, :bool], :pointer],
+
       # @!method GuiDrawIcon(iconId, posX, posY, pixelSize, color)
       #   GuiDrawIcon : Draw icon using pixel size at specified position
       #   @param iconId [int]
@@ -633,15 +651,6 @@ module Raylib
       #   @param text [const char *]
       #   @return [int]
       [:GuiPanel, :GuiPanel, [Rectangle.by_value, :pointer], :int],
-
-      # @!method GuiTabBar(bounds, text, count, active)
-      #   GuiTabBar : Tab Bar control, returns TAB to be closed or -1
-      #   @param bounds [Rectangle]
-      #   @param text [char **]
-      #   @param count [int]
-      #   @param active [int *]
-      #   @return [int]
-      [:GuiTabBar, :GuiTabBar, [Rectangle.by_value, :pointer, :int, :pointer], :int],
 
       # @!method GuiScrollPanel(bounds, text, content, scroll, view)
       #   GuiScrollPanel : Scroll Panel control
@@ -831,7 +840,7 @@ module Raylib
       [:GuiListView, :GuiListView, [Rectangle.by_value, :pointer, :pointer, :pointer], :int],
 
       # @!method GuiListViewEx(bounds, text, count, scrollIndex, active, focus)
-      #   GuiListViewEx : List View using text entries list and returning focus entry
+      #   GuiListViewEx : List View control, using text entries list and returning focus entry
       #   @param bounds [Rectangle]
       #   @param text [char **]
       #   @param count [int]
@@ -840,6 +849,26 @@ module Raylib
       #   @param focus [int *]
       #   @return [int]
       [:GuiListViewEx, :GuiListViewEx, [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :pointer], :int],
+
+      # @!method GuiTabBar(bounds, text, hscroll, active)
+      #   GuiTabBar : Tab Bar control
+      #   @param bounds [Rectangle]
+      #   @param text [const char *]
+      #   @param hscroll [int *]
+      #   @param active [int *]
+      #   @return [int]
+      [:GuiTabBar, :GuiTabBar, [Rectangle.by_value, :pointer, :pointer, :pointer], :int],
+
+      # @!method GuiTabBarEx(bounds, text, count, hscroll, active, focus)
+      #   GuiTabBarEx : Tab Bar control, using text entries list and returning focus entry
+      #   @param bounds [Rectangle]
+      #   @param text [char **]
+      #   @param count [int]
+      #   @param hscroll [int *]
+      #   @param active [int *]
+      #   @param focus [int *]
+      #   @return [int]
+      [:GuiTabBarEx, :GuiTabBarEx, [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :pointer], :int],
 
       # @!method GuiMessageBox(bounds, title, message, buttons)
       #   GuiMessageBox : Message Box control, displays a message
@@ -863,7 +892,7 @@ module Raylib
       [:GuiTextInputBox, :GuiTextInputBox, [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer, :int, :pointer], :int],
 
       # @!method GuiColorPicker(bounds, text, color)
-      #   GuiColorPicker : Color Picker control (multiple color controls)
+      #   GuiColorPicker : Color Picker control, includes Color bar controls
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param color [Color *]
@@ -895,7 +924,7 @@ module Raylib
       [:GuiColorBarHue, :GuiColorBarHue, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiColorPickerHSV(bounds, text, colorHsv)
-      #   GuiColorPickerHSV : Color Picker control that avoids conversion to RGB on each call (multiple color controls)
+      #   GuiColorPickerHSV : Color Picker control, using Hue-Saturation-Value color data, includes Color bar controls
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param colorHsv [Vector3 *]
@@ -903,7 +932,7 @@ module Raylib
       [:GuiColorPickerHSV, :GuiColorPickerHSV, [Rectangle.by_value, :pointer, :pointer], :int],
 
       # @!method GuiColorPanelHSV(bounds, text, colorHsv)
-      #   GuiColorPanelHSV : Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()
+      #   GuiColorPanelHSV : Color Panel control, using Hue-Saturation-Value color data
       #   @param bounds [Rectangle]
       #   @param text [const char *]
       #   @param colorHsv [Vector3 *]

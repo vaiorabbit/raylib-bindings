@@ -2009,10 +2009,16 @@ module Raylib
       [:ChangeDirectory, :ChangeDirectory, [:pointer], :int],
 
       # @!method IsPathFile(path)
-      #   IsPathFile : Check if given path is a file or a directory
+      #   IsPathFile : Check if given path points to a file
       #   @param path [const char *]
       #   @return [bool]
       [:IsPathFile, :IsPathFile, [:pointer], :bool],
+
+      # @!method IsPathDirectory(path)
+      #   IsPathDirectory : Check if given path points to a directory
+      #   @param path [const char *]
+      #   @return [bool]
+      [:IsPathDirectory, :IsPathDirectory, [:pointer], :bool],
 
       # @!method IsFileNameValid(fileName)
       #   IsFileNameValid : Check if fileName is valid for the platform/OS
@@ -2553,6 +2559,194 @@ module Raylib
       #   @return [void]
       [:DrawLineDashed, :DrawLineDashed, [Vector2.by_value, Vector2.by_value, :int, :int, Color.by_value], :void],
 
+      # @!method DrawTriangle(v1, v2, v3, color)
+      #   DrawTriangle : Draw a color-filled triangle, counter-clockwise vertex order
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawTriangle, :DrawTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method DrawTriangleGradient(v1, v2, v3, c1, c2, c3)
+      #   DrawTriangleGradient : Draw triangle with interpolated colors, counter-clockwise vertex/color order
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param c1 [Color]
+      #   @param c2 [Color]
+      #   @param c3 [Color]
+      #   @return [void]
+      [:DrawTriangleGradient, :DrawTriangleGradient, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
+
+      # @!method DrawTriangleLines(v1, v2, v3, color)
+      #   DrawTriangleLines : Draw triangle outline, counter-clockwise vertex order
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawTriangleLines, :DrawTriangleLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method DrawTriangleFan(points, pointCount, color)
+      #   DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
+      #   @param points [const Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawTriangleFan, :DrawTriangleFan, [:pointer, :int, Color.by_value], :void],
+
+      # @!method DrawTriangleStrip(points, pointCount, color)
+      #   DrawTriangleStrip : Draw a triangle strip defined by points
+      #   @param points [const Vector2 *]
+      #   @param pointCount [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawTriangleStrip, :DrawTriangleStrip, [:pointer, :int, Color.by_value], :void],
+
+      # @!method DrawRectangle(posX, posY, width, height, color)
+      #   DrawRectangle : Draw a color-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangle, :DrawRectangle, [:int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method DrawRectangleV(position, size, color)
+      #   DrawRectangleV : Draw a color-filled rectangle (Vector version)
+      #   @param position [Vector2]
+      #   @param size [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleV, :DrawRectangleV, [Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method DrawRectangleRec(rec, color)
+      #   DrawRectangleRec : Draw a color-filled rectangle
+      #   @param rec [Rectangle]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleRec, :DrawRectangleRec, [Rectangle.by_value, Color.by_value], :void],
+
+      # @!method DrawRectanglePro(rec, origin, rotation, color)
+      #   DrawRectanglePro : Draw a color-filled rectangle with pro parameters
+      #   @param rec [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectanglePro, :DrawRectanglePro, [Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawRectangleGradientV(posX, posY, width, height, top, bottom)
+      #   DrawRectangleGradientV : Draw a vertical-gradient-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param top [Color]
+      #   @param bottom [Color]
+      #   @return [void]
+      [:DrawRectangleGradientV, :DrawRectangleGradientV, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
+
+      # @!method DrawRectangleGradientH(posX, posY, width, height, left, right)
+      #   DrawRectangleGradientH : Draw a horizontal-gradient-filled rectangle
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param left [Color]
+      #   @param right [Color]
+      #   @return [void]
+      [:DrawRectangleGradientH, :DrawRectangleGradientH, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
+
+      # @!method DrawRectangleGradientEx(rec, col1, col2, col3, col4)
+      #   DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors, counter-clockwise color order
+      #   @param rec [Rectangle]
+      #   @param col1 [Color]
+      #   @param col2 [Color]
+      #   @param col3 [Color]
+      #   @param col4 [Color]
+      #   @return [void]
+      [:DrawRectangleGradientEx, :DrawRectangleGradientEx, [Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
+
+      # @!method DrawRectangleLines(posX, posY, width, height, color)
+      #   DrawRectangleLines : Draw rectangle outline
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleLines, :DrawRectangleLines, [:int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method DrawRectangleLinesEx(rec, thick, color)
+      #   DrawRectangleLinesEx : Draw rectangle outline with line thickness
+      #   @param rec [Rectangle]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleLinesEx, :DrawRectangleLinesEx, [Rectangle.by_value, :float, Color.by_value], :void],
+
+      # @!method DrawRectangleRounded(rec, roundness, segments, color)
+      #   DrawRectangleRounded : Draw rectangle with rounded edges
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleRounded, :DrawRectangleRounded, [Rectangle.by_value, :float, :int, Color.by_value], :void],
+
+      # @!method DrawRectangleRoundedLines(rec, roundness, segments, color)
+      #   DrawRectangleRoundedLines : Draw rectangle lines with rounded edges
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, Color.by_value], :void],
+
+      # @!method DrawRectangleRoundedLinesEx(rec, roundness, segments, thick, color)
+      #   DrawRectangleRoundedLinesEx : Draw rectangle lines with rounded edges outline and line thickness
+      #   @param rec [Rectangle]
+      #   @param roundness [float]
+      #   @param segments [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRectangleRoundedLinesEx, :DrawRectangleRoundedLinesEx, [Rectangle.by_value, :float, :int, :float, Color.by_value], :void],
+
+      # @!method DrawPoly(center, sides, radius, rotation, color)
+      #   DrawPoly : Draw a polygon of n sides
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawPoly, :DrawPoly, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
+
+      # @!method DrawPolyLines(center, sides, radius, rotation, color)
+      #   DrawPolyLines : Draw a polygon outline of n sides
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawPolyLines, :DrawPolyLines, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
+
+      # @!method DrawPolyLinesEx(center, sides, radius, rotation, thick, color)
+      #   DrawPolyLinesEx : Draw a polygon outline of n sides with line thickness
+      #   @param center [Vector2]
+      #   @param sides [int]
+      #   @param radius [float]
+      #   @param rotation [float]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawPolyLinesEx, :DrawPolyLinesEx, [Vector2.by_value, :int, :float, :float, :float, Color.by_value], :void],
+
       # @!method DrawCircle(centerX, centerY, radius, color)
       #   DrawCircle : Draw a color-filled circle
       #   @param centerX [int]
@@ -2618,6 +2812,15 @@ module Raylib
       #   @return [void]
       [:DrawCircleLinesV, :DrawCircleLinesV, [Vector2.by_value, :float, Color.by_value], :void],
 
+      # @!method DrawCircleLinesEx(center, radius, thick, color)
+      #   DrawCircleLinesEx : Draw circle outline with line thickness
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawCircleLinesEx, :DrawCircleLinesEx, [Vector2.by_value, :float, :float, Color.by_value], :void],
+
       # @!method DrawEllipse(centerX, centerY, radiusH, radiusV, color)
       #   DrawEllipse : Draw ellipse
       #   @param centerX [int]
@@ -2679,194 +2882,6 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawRingLines, :DrawRingLines, [Vector2.by_value, :float, :float, :float, :float, :int, Color.by_value], :void],
-
-      # @!method DrawRectangle(posX, posY, width, height, color)
-      #   DrawRectangle : Draw a color-filled rectangle
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangle, :DrawRectangle, [:int, :int, :int, :int, Color.by_value], :void],
-
-      # @!method DrawRectangleV(position, size, color)
-      #   DrawRectangleV : Draw a color-filled rectangle (Vector version)
-      #   @param position [Vector2]
-      #   @param size [Vector2]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleV, :DrawRectangleV, [Vector2.by_value, Vector2.by_value, Color.by_value], :void],
-
-      # @!method DrawRectangleRec(rec, color)
-      #   DrawRectangleRec : Draw a color-filled rectangle
-      #   @param rec [Rectangle]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleRec, :DrawRectangleRec, [Rectangle.by_value, Color.by_value], :void],
-
-      # @!method DrawRectanglePro(rec, origin, rotation, color)
-      #   DrawRectanglePro : Draw a color-filled rectangle with pro parameters
-      #   @param rec [Rectangle]
-      #   @param origin [Vector2]
-      #   @param rotation [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectanglePro, :DrawRectanglePro, [Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawRectangleGradientV(posX, posY, width, height, top, bottom)
-      #   DrawRectangleGradientV : Draw a vertical-gradient-filled rectangle
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param top [Color]
-      #   @param bottom [Color]
-      #   @return [void]
-      [:DrawRectangleGradientV, :DrawRectangleGradientV, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
-
-      # @!method DrawRectangleGradientH(posX, posY, width, height, left, right)
-      #   DrawRectangleGradientH : Draw a horizontal-gradient-filled rectangle
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param left [Color]
-      #   @param right [Color]
-      #   @return [void]
-      [:DrawRectangleGradientH, :DrawRectangleGradientH, [:int, :int, :int, :int, Color.by_value, Color.by_value], :void],
-
-      # @!method DrawRectangleGradientEx(rec, topLeft, bottomLeft, bottomRight, topRight)
-      #   DrawRectangleGradientEx : Draw a gradient-filled rectangle with custom vertex colors
-      #   @param rec [Rectangle]
-      #   @param topLeft [Color]
-      #   @param bottomLeft [Color]
-      #   @param bottomRight [Color]
-      #   @param topRight [Color]
-      #   @return [void]
-      [:DrawRectangleGradientEx, :DrawRectangleGradientEx, [Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
-
-      # @!method DrawRectangleLines(posX, posY, width, height, color)
-      #   DrawRectangleLines : Draw rectangle outline
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleLines, :DrawRectangleLines, [:int, :int, :int, :int, Color.by_value], :void],
-
-      # @!method DrawRectangleLinesEx(rec, lineThick, color)
-      #   DrawRectangleLinesEx : Draw rectangle outline with extended parameters
-      #   @param rec [Rectangle]
-      #   @param lineThick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleLinesEx, :DrawRectangleLinesEx, [Rectangle.by_value, :float, Color.by_value], :void],
-
-      # @!method DrawRectangleRounded(rec, roundness, segments, color)
-      #   DrawRectangleRounded : Draw rectangle with rounded edges
-      #   @param rec [Rectangle]
-      #   @param roundness [float]
-      #   @param segments [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleRounded, :DrawRectangleRounded, [Rectangle.by_value, :float, :int, Color.by_value], :void],
-
-      # @!method DrawRectangleRoundedLines(rec, roundness, segments, color)
-      #   DrawRectangleRoundedLines : Draw rectangle lines with rounded edges
-      #   @param rec [Rectangle]
-      #   @param roundness [float]
-      #   @param segments [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleRoundedLines, :DrawRectangleRoundedLines, [Rectangle.by_value, :float, :int, Color.by_value], :void],
-
-      # @!method DrawRectangleRoundedLinesEx(rec, roundness, segments, lineThick, color)
-      #   DrawRectangleRoundedLinesEx : Draw rectangle lines with rounded edges outline
-      #   @param rec [Rectangle]
-      #   @param roundness [float]
-      #   @param segments [int]
-      #   @param lineThick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawRectangleRoundedLinesEx, :DrawRectangleRoundedLinesEx, [Rectangle.by_value, :float, :int, :float, Color.by_value], :void],
-
-      # @!method DrawTriangle(v1, v2, v3, color)
-      #   DrawTriangle : Draw a color-filled triangle (vertex in counter-clockwise order!)
-      #   @param v1 [Vector2]
-      #   @param v2 [Vector2]
-      #   @param v3 [Vector2]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawTriangle, :DrawTriangle, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
-
-      # @!method DrawTriangleGradient(v1, v2, v3, c1, c2, c3)
-      #   DrawTriangleGradient : Draw triangle with interpolated colors (vertex in counter-clockwise order!)
-      #   @param v1 [Vector2]
-      #   @param v2 [Vector2]
-      #   @param v3 [Vector2]
-      #   @param c1 [Color]
-      #   @param c2 [Color]
-      #   @param c3 [Color]
-      #   @return [void]
-      [:DrawTriangleGradient, :DrawTriangleGradient, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
-
-      # @!method DrawTriangleLines(v1, v2, v3, color)
-      #   DrawTriangleLines : Draw triangle outline (vertex in counter-clockwise order!)
-      #   @param v1 [Vector2]
-      #   @param v2 [Vector2]
-      #   @param v3 [Vector2]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawTriangleLines, :DrawTriangleLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
-
-      # @!method DrawTriangleFan(points, pointCount, color)
-      #   DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
-      #   @param points [const Vector2 *]
-      #   @param pointCount [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawTriangleFan, :DrawTriangleFan, [:pointer, :int, Color.by_value], :void],
-
-      # @!method DrawTriangleStrip(points, pointCount, color)
-      #   DrawTriangleStrip : Draw a triangle strip defined by points
-      #   @param points [const Vector2 *]
-      #   @param pointCount [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawTriangleStrip, :DrawTriangleStrip, [:pointer, :int, Color.by_value], :void],
-
-      # @!method DrawPoly(center, sides, radius, rotation, color)
-      #   DrawPoly : Draw a polygon of n sides
-      #   @param center [Vector2]
-      #   @param sides [int]
-      #   @param radius [float]
-      #   @param rotation [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawPoly, :DrawPoly, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
-
-      # @!method DrawPolyLines(center, sides, radius, rotation, color)
-      #   DrawPolyLines : Draw a polygon outline of n sides
-      #   @param center [Vector2]
-      #   @param sides [int]
-      #   @param radius [float]
-      #   @param rotation [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawPolyLines, :DrawPolyLines, [Vector2.by_value, :int, :float, :float, Color.by_value], :void],
-
-      # @!method DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color)
-      #   DrawPolyLinesEx : Draw a polygon outline of n sides with extended parameters
-      #   @param center [Vector2]
-      #   @param sides [int]
-      #   @param radius [float]
-      #   @param rotation [float]
-      #   @param lineThick [float]
-      #   @param color [Color]
-      #   @return [void]
-      [:DrawPolyLinesEx, :DrawPolyLinesEx, [Vector2.by_value, :int, :float, :float, :float, Color.by_value], :void],
 
       # @!method DrawSplineLinear(points, pointCount, thick, color)
       #   DrawSplineLinear : Draw spline: Linear, minimum 2 points
@@ -3583,91 +3598,14 @@ module Raylib
       #   @return [void]
       [:ImageDrawLineEx, :ImageDrawLineEx, [:pointer, Vector2.by_value, Vector2.by_value, :int, Color.by_value], :void],
 
-      # @!method ImageDrawCircle(dst, centerX, centerY, radius, color)
-      #   ImageDrawCircle : Draw a filled circle within an image
+      # @!method ImageDrawLineStrip(dst, points, pointCount, color)
+      #   ImageDrawLineStrip : Draw a lines sequence within an image
       #   @param dst [Image *]
-      #   @param centerX [int]
-      #   @param centerY [int]
-      #   @param radius [int]
+      #   @param points [const Vector2 *]
+      #   @param pointCount [int]
       #   @param color [Color]
       #   @return [void]
-      [:ImageDrawCircle, :ImageDrawCircle, [:pointer, :int, :int, :int, Color.by_value], :void],
-
-      # @!method ImageDrawCircleV(dst, center, radius, color)
-      #   ImageDrawCircleV : Draw a filled circle within an image (Vector version)
-      #   @param dst [Image *]
-      #   @param center [Vector2]
-      #   @param radius [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawCircleV, :ImageDrawCircleV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
-
-      # @!method ImageDrawCircleLines(dst, centerX, centerY, radius, color)
-      #   ImageDrawCircleLines : Draw circle outline within an image
-      #   @param dst [Image *]
-      #   @param centerX [int]
-      #   @param centerY [int]
-      #   @param radius [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawCircleLines, :ImageDrawCircleLines, [:pointer, :int, :int, :int, Color.by_value], :void],
-
-      # @!method ImageDrawCircleLinesV(dst, center, radius, color)
-      #   ImageDrawCircleLinesV : Draw circle outline within an image (Vector version)
-      #   @param dst [Image *]
-      #   @param center [Vector2]
-      #   @param radius [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawCircleLinesV, :ImageDrawCircleLinesV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
-
-      # @!method ImageDrawRectangle(dst, posX, posY, width, height, color)
-      #   ImageDrawRectangle : Draw rectangle within an image
-      #   @param dst [Image *]
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawRectangle, :ImageDrawRectangle, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
-
-      # @!method ImageDrawRectangleV(dst, position, size, color)
-      #   ImageDrawRectangleV : Draw rectangle within an image (Vector version)
-      #   @param dst [Image *]
-      #   @param position [Vector2]
-      #   @param size [Vector2]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawRectangleV, :ImageDrawRectangleV, [:pointer, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
-
-      # @!method ImageDrawRectangleRec(dst, rec, color)
-      #   ImageDrawRectangleRec : Draw rectangle within an image
-      #   @param dst [Image *]
-      #   @param rec [Rectangle]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawRectangleRec, :ImageDrawRectangleRec, [:pointer, Rectangle.by_value, Color.by_value], :void],
-
-      # @!method ImageDrawRectangleLines(dst, posX, posY, width, height, color)
-      #   ImageDrawRectangleLines : Draw rectangle lines within an image
-      #   @param dst [Image *]
-      #   @param posX [int]
-      #   @param posY [int]
-      #   @param width [int]
-      #   @param height [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
-
-      # @!method ImageDrawRectangleLinesEx(dst, rec, thick, color)
-      #   ImageDrawRectangleLinesEx : Draw rectangle lines within an image with extended parameters
-      #   @param dst [Image *]
-      #   @param rec [Rectangle]
-      #   @param thick [int]
-      #   @param color [Color]
-      #   @return [void]
-      [:ImageDrawRectangleLinesEx, :ImageDrawRectangleLinesEx, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
+      [:ImageDrawLineStrip, :ImageDrawLineStrip, [:pointer, :pointer, :int, Color.by_value], :void],
 
       # @!method ImageDrawTriangle(dst, v1, v2, v3, color)
       #   ImageDrawTriangle : Draw triangle within an image
@@ -3719,15 +3657,165 @@ module Raylib
       #   @return [void]
       [:ImageDrawTriangleStrip, :ImageDrawTriangleStrip, [:pointer, :pointer, :int, Color.by_value], :void],
 
-      # @!method ImageDraw(dst, src, srcRec, dstRec, tint)
-      #   ImageDraw : Draw a source image within a destination image (tint applied to source)
+      # @!method ImageDrawRectangle(dst, posX, posY, width, height, color)
+      #   ImageDrawRectangle : Draw rectangle within an image
+      #   @param dst [Image *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangle, :ImageDrawRectangle, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleV(dst, position, size, color)
+      #   ImageDrawRectangleV : Draw rectangle within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param position [Vector2]
+      #   @param size [Vector2]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangleV, :ImageDrawRectangleV, [:pointer, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleRec(dst, rec, color)
+      #   ImageDrawRectangleRec : Draw rectangle within an image
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangleRec, :ImageDrawRectangleRec, [:pointer, Rectangle.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawRectanglePro(dst, rec, origin, rotation, color)
+      #   ImageDrawRectanglePro : Draw a color-filled rectangle with pro parameters within and image
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectanglePro, :ImageDrawRectanglePro, [:pointer, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleLines(dst, posX, posY, width, height, color)
+      #   ImageDrawRectangleLines : Draw rectangle lines within an image
+      #   @param dst [Image *]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param width [int]
+      #   @param height [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangleLines, :ImageDrawRectangleLines, [:pointer, :int, :int, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleLinesEx(dst, rec, thick, color)
+      #   ImageDrawRectangleLinesEx : Draw rectangle lines within an image with line thickness
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param thick [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawRectangleLinesEx, :ImageDrawRectangleLinesEx, [:pointer, Rectangle.by_value, :int, Color.by_value], :void],
+
+      # @!method ImageDrawRectangleGradientEx(dst, rec, col1, col2, col3, col4)
+      #   ImageDrawRectangleGradientEx : Draw rectangle with gradient colors within an image, counter-clockwise color order
+      #   @param dst [Image *]
+      #   @param rec [Rectangle]
+      #   @param col1 [Color]
+      #   @param col2 [Color]
+      #   @param col3 [Color]
+      #   @param col4 [Color]
+      #   @return [void]
+      [:ImageDrawRectangleGradientEx, :ImageDrawRectangleGradientEx, [:pointer, Rectangle.by_value, Color.by_value, Color.by_value, Color.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawCircle(dst, centerX, centerY, radius, color)
+      #   ImageDrawCircle : Draw a filled circle within an image
+      #   @param dst [Image *]
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawCircle, :ImageDrawCircle, [:pointer, :int, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawCircleV(dst, center, radius, color)
+      #   ImageDrawCircleV : Draw a filled circle within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param center [Vector2]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawCircleV, :ImageDrawCircleV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
+
+      # @!method ImageDrawCircleLines(dst, centerX, centerY, radius, color)
+      #   ImageDrawCircleLines : Draw circle outline within an image
+      #   @param dst [Image *]
+      #   @param centerX [int]
+      #   @param centerY [int]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawCircleLines, :ImageDrawCircleLines, [:pointer, :int, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawCircleLinesV(dst, center, radius, color)
+      #   ImageDrawCircleLinesV : Draw circle outline within an image (Vector version)
+      #   @param dst [Image *]
+      #   @param center [Vector2]
+      #   @param radius [int]
+      #   @param color [Color]
+      #   @return [void]
+      [:ImageDrawCircleLinesV, :ImageDrawCircleLinesV, [:pointer, Vector2.by_value, :int, Color.by_value], :void],
+
+      # @!method ImageDrawCircleGradient(dst, center, radius, inner, outer)
+      #   ImageDrawCircleGradient : Draw a gradient-filled circle within an image
+      #   @param dst [Image *]
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param inner [Color]
+      #   @param outer [Color]
+      #   @return [void]
+      [:ImageDrawCircleGradient, :ImageDrawCircleGradient, [:pointer, Vector2.by_value, :float, Color.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawImage(dst, src, posX, posY, tint)
+      #   ImageDrawImage : Draw an image within an image
+      #   @param dst [Image *]
+      #   @param src [Image]
+      #   @param posX [int]
+      #   @param posY [int]
+      #   @param tint [Color]
+      #   @return [void]
+      [:ImageDrawImage, :ImageDrawImage, [:pointer, Image.by_value, :int, :int, Color.by_value], :void],
+
+      # @!method ImageDrawImageEx(dst, src, position, rotation, scale, tint)
+      #   ImageDrawImageEx : Draw an image with scaling and rotation within an image
+      #   @param dst [Image *]
+      #   @param src [Image]
+      #   @param position [Vector2]
+      #   @param rotation [float]
+      #   @param scale [float]
+      #   @param tint [Color]
+      #   @return [void]
+      [:ImageDrawImageEx, :ImageDrawImageEx, [:pointer, Image.by_value, Vector2.by_value, :float, :float, Color.by_value], :void],
+
+      # @!method ImageDrawImageRec(dst, src, srcRec, position, tint)
+      #   ImageDrawImageRec : Draw a part of an image defined by a rectangle within an image
+      #   @param dst [Image *]
+      #   @param src [Image]
+      #   @param srcRec [Rectangle]
+      #   @param position [Vector2]
+      #   @param tint [Color]
+      #   @return [void]
+      [:ImageDrawImageRec, :ImageDrawImageRec, [:pointer, Image.by_value, Rectangle.by_value, Vector2.by_value, Color.by_value], :void],
+
+      # @!method ImageDrawImagePro(dst, src, srcRec, dstRec, origin, rotation, tint)
+      #   ImageDrawImagePro : Draw a part of an image defined by a rectangle into destination rectangle, with scaling and rotation, within an image
       #   @param dst [Image *]
       #   @param src [Image]
       #   @param srcRec [Rectangle]
       #   @param dstRec [Rectangle]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
       #   @param tint [Color]
       #   @return [void]
-      [:ImageDraw, :ImageDraw, [:pointer, Image.by_value, Rectangle.by_value, Rectangle.by_value, Color.by_value], :void],
+      [:ImageDrawImagePro, :ImageDrawImagePro, [:pointer, Image.by_value, Rectangle.by_value, Rectangle.by_value, Vector2.by_value, :float, Color.by_value], :void],
 
       # @!method ImageDrawText(dst, text, posX, posY, fontSize, color)
       #   ImageDrawText : Draw text (using default font) within an image (destination)
@@ -3751,6 +3839,20 @@ module Raylib
       #   @param tint [Color]
       #   @return [void]
       [:ImageDrawTextEx, :ImageDrawTextEx, [:pointer, Font.by_value, :pointer, Vector2.by_value, :float, :float, Color.by_value], :void],
+
+      # @!method ImageDrawTextPro(dst, font, text, position, origin, rotation, fontSize, spacing, tint)
+      #   ImageDrawTextPro : Draw text using Font and pro parameters (rotation)
+      #   @param dst [Image *]
+      #   @param font [Font]
+      #   @param text [const char *]
+      #   @param position [Vector2]
+      #   @param origin [Vector2]
+      #   @param rotation [float]
+      #   @param fontSize [float]
+      #   @param spacing [float]
+      #   @param tint [Color]
+      #   @return [void]
+      [:ImageDrawTextPro, :ImageDrawTextPro, [:pointer, Font.by_value, :pointer, Vector2.by_value, Vector2.by_value, :float, :float, :float, Color.by_value], :void],
 
       # @!method LoadTexture(fileName)
       #   LoadTexture : Load texture from file into GPU memory (VRAM)
@@ -3855,7 +3957,7 @@ module Raylib
       [:DrawTextureV, :DrawTextureV, [Texture2D.by_value, Vector2.by_value, Color.by_value], :void],
 
       # @!method DrawTextureEx(texture, position, rotation, scale, tint)
-      #   DrawTextureEx : Draw a Texture2D with extended parameters
+      #   DrawTextureEx : Draw a Texture2D with rotation and scale
       #   @param texture [Texture2D]
       #   @param position [Vector2]
       #   @param rotation [float]
@@ -4026,7 +4128,7 @@ module Raylib
       [:LoadFont, :LoadFont, [:pointer], Font.by_value],
 
       # @!method LoadFontEx(fileName, fontSize, codepoints, codepointCount)
-      #   LoadFontEx : Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height
+      #   LoadFontEx : Load font from file with defined codepoints and generation size, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height
       #   @param fileName [const char *]
       #   @param fontSize [int]
       #   @param codepoints [const int *]
@@ -4490,7 +4592,7 @@ module Raylib
       [:DrawCircle3D, :DrawCircle3D, [Vector3.by_value, :float, Vector3.by_value, :float, Color.by_value], :void],
 
       # @!method DrawTriangle3D(v1, v2, v3, color)
-      #   DrawTriangle3D : Draw a color-filled triangle (vertex in counter-clockwise order!)
+      #   DrawTriangle3D : Draw a color-filled triangle, counter-clockwise vertex order
       #   @param v1 [Vector3]
       #   @param v2 [Vector3]
       #   @param v3 [Vector3]
@@ -4551,7 +4653,7 @@ module Raylib
       [:DrawSphere, :DrawSphere, [Vector3.by_value, :float, Color.by_value], :void],
 
       # @!method DrawSphereEx(centerPos, radius, rings, slices, color)
-      #   DrawSphereEx : Draw sphere with extended parameters
+      #   DrawSphereEx : Draw sphere with defined rings and slices
       #   @param centerPos [Vector3]
       #   @param radius [float]
       #   @param rings [int]
@@ -4698,7 +4800,7 @@ module Raylib
       [:DrawModel, :DrawModel, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
       # @!method internalDrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint)
-      #   internalDrawModelEx : Draw a model with extended parameters
+      #   internalDrawModelEx : Draw a model with custom transform
       #   @param model [Model]
       #   @param position [Vector3]
       #   @param rotationAxis [Vector3]
@@ -4718,7 +4820,7 @@ module Raylib
       [:DrawModelWires, :DrawModelWires, [Model.by_value, Vector3.by_value, :float, Color.by_value], :void],
 
       # @!method DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint)
-      #   DrawModelWiresEx : Draw a model wires (with texture if set) with extended parameters
+      #   DrawModelWiresEx : Draw a model wires with custom transform
       #   @param model [Model]
       #   @param position [Vector3]
       #   @param rotationAxis [Vector3]

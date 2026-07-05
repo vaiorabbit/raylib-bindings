@@ -3,11 +3,11 @@
 # Yet another raylib wrapper for Ruby #
 
 *   Created : 2021-10-17
-*   Last modified : 2026-06-06
+*   Last modified : 2026-07-05
 
 Provides Ruby bindings for raylib-related libraries including:
 
-*   [raylib](https://github.com/raysan5/raylib) version [6.1-dev]( https://github.com/raysan5/raylib/commit/ca46387b64d7c1d7505828b2c67d234d1ed0b81d )
+*   [raylib](https://github.com/raysan5/raylib) version [6.1-dev]( https://github.com/raysan5/raylib/commit/5cc802fd9edb9f2dc0bb02aff222791f14a1ab6f )
     *   raylib
     *   raymath
     *   rlgl
@@ -72,7 +72,7 @@ Exit code policy:
 *   Ruby interpreter
     *   Tested on:
         *   [Windows] https://rubyinstaller.org/downloads/ Ruby+Devkit
-            *   ruby 4.0.2 (2026-03-17 revision d3da9fec82) +PRISM [x64-mingw-ucrt]
+            *   ruby 4.0.5 (2026-05-20 revision 64336ffd0e) +PRISM [x64-mingw-ucrt]
 
 *   If you need to build DLLs/shared libralies for your own runtime envrioenment (Linux, etc.):
     *   CMake https://cmake.org/download/
@@ -80,7 +80,7 @@ Exit code policy:
         *   Tested compilers:
             *   [Windows] gcc
 
-					gcc (Rev8, Built by MSYS2 project) 15.2.0
+                    gcc (Rev5, Built by MSYS2 project) 16.1.0
 
 <details>
 <summary>Older versions</summary>

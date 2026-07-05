@@ -73,6 +73,12 @@
       "description": ""
     },
     {
+      "name": "GUI_BUTTON_PRESSED_MID",
+      "type": "UNKNOWN",
+      "value": "(IsMouseButtonPressed(MOUSE_MIDDLE_BUTTON) || IsGamepadButtonPressed(0, GAMEPAD_BUTTON_RIGHT_FACE_UP))",
+      "description": ""
+    },
+    {
       "name": "GUI_BUTTON_RELEASED",
       "type": "UNKNOWN",
       "value": "(IsMouseButtonReleased(MOUSE_LEFT_BUTTON) || IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN))",
@@ -107,6 +113,12 @@
       "type": "UNKNOWN",
       "value": "GetCharPressed()",
       "description": ""
+    },
+    {
+      "name": "BLANK",
+      "type": "UNKNOWN",
+      "value": "(Color){ 0, 0, 0, 0 }",
+      "description": "Blank (Transparent)"
     },
     {
       "name": "SCROLLBAR_LEFT_SIDE",
@@ -555,7 +567,7 @@
           "description": ""
         },
         {
-          "name": "CONTROL11",
+          "name": "TABBAR",
           "value": 11,
           "description": ""
         },
@@ -583,7 +595,7 @@
     },
     {
       "name": "GuiControlProperty",
-      "description": "Gui base properties for every control",
+      "description": "Controls BASE properties for every control (RAYGUI_MAX_PROPS_BASE = 16)",
       "values": [
         {
           "name": "BORDER_COLOR_NORMAL",
@@ -658,13 +670,18 @@
         {
           "name": "TEXT_ALIGNMENT",
           "value": 14,
-          "description": "Control text horizontal alignment inside control text bound (after border and padding)"
+          "description": "Control text horizontal alignment inside control text bound (after border and padding): 0-Left, 1-Center, 2-Right"
+        },
+        {
+          "name": "BASEPROP16",
+          "value": 15,
+          "description": "Not used yet..."
         }
       ]
     },
     {
       "name": "GuiDefaultProperty",
-      "description": "DEFAULT extended properties",
+      "description": "DEFAULT control, extended properties",
       "values": [
         {
           "name": "TEXT_SIZE",
@@ -694,12 +711,17 @@
         {
           "name": "TEXT_ALIGNMENT_VERTICAL",
           "value": 21,
-          "description": "Text vertical alignment inside text bounds (after border and padding)"
+          "description": "Text vertical alignment inside text bounds (after border and padding): 0-Top, 1-Middle, 2-Bottom"
         },
         {
           "name": "TEXT_WRAP_MODE",
           "value": 22,
           "description": "Text wrap-mode inside text bounds"
+        },
+        {
+          "name": "EXTPROP08",
+          "value": 23,
+          "description": "Not used yet..."
         }
       ]
     },
@@ -711,6 +733,11 @@
           "name": "GROUP_PADDING",
           "value": 16,
           "description": "ToggleGroup separation between toggles"
+        },
+        {
+          "name": "GROUP_WIDTH_FULL",
+          "value": 17,
+          "description": "ToggleGroup bounds width considers all items: 0-Width per item, 1-Full width"
         }
       ]
     },
@@ -742,7 +769,7 @@
         {
           "name": "PROGRESS_SIDE",
           "value": 17,
-          "description": "ProgressBar increment side: 0-left->right, 1-right-left"
+          "description": "ProgressBar increment side: 0-Left->Right, 1-Right->Left"
         }
       ]
     },
@@ -831,7 +858,7 @@
         {
           "name": "DROPDOWN_ROLL_UP",
           "value": 19,
-          "description": "DropdownBox roll up flag (default rolls down)"
+          "description": "DropdownBox roll up flag: 0-Roll down, 1-Roll up"
         }
       ]
     },
@@ -842,7 +869,7 @@
         {
           "name": "TEXT_READONLY",
           "value": 16,
-          "description": "TextBox in read-only mode: 0-text editable, 1-text no-editable"
+          "description": "TextBox in read-only mode: 0-Text editable, 1-Text read-only"
         }
       ]
     },
@@ -863,8 +890,29 @@
       ]
     },
     {
+      "name": "GuiTabBarProperty",
+      "description": "TabBar",
+      "values": [
+        {
+          "name": "TAB_ITEMS_WIDTH",
+          "value": 16,
+          "description": "TabBar tab items width"
+        },
+        {
+          "name": "TAB_CLOSE_BUTTON",
+          "value": 17,
+          "description": "TabBar tab close button: 0-Not shown, 1-Shown"
+        },
+        {
+          "name": "TAB_LINE_SIDE",
+          "value": 18,
+          "description": "TabBar tabs side: 0-Bottom, 1-Top"
+        }
+      ]
+    },
+    {
       "name": "GuiListViewProperty",
-      "description": "ListView",
+      "description": "",
       "values": [
         {
           "name": "LIST_ITEMS_HEIGHT",
@@ -884,7 +932,7 @@
         {
           "name": "SCROLLBAR_SIDE",
           "value": 19,
-          "description": "ListView scrollbar side (0-SCROLLBAR_LEFT_SIDE, 1-SCROLLBAR_RIGHT_SIDE)"
+          "description": "ListView scrollbar side: 0-Left side, 1-Right Side"
         },
         {
           "name": "LIST_ITEMS_BORDER_NORMAL",
@@ -905,7 +953,7 @@
         {
           "name": "COLOR_SELECTOR_SIZE",
           "value": 16,
-          "description": ""
+          "description": "ColorPicker selector square size"
         },
         {
           "name": "HUEBAR_WIDTH",
@@ -2425,6 +2473,25 @@
       ]
     },
     {
+      "name": "GuiLoadIconsFromMemory",
+      "description": "Load raygui icons file (.rgi) from memory into internal icons data",
+      "returnType": "char **",
+      "params": [
+        {
+          "type": "const unsigned char *",
+          "name": "fileData"
+        },
+        {
+          "type": "int",
+          "name": "dataSize"
+        },
+        {
+          "type": "bool",
+          "name": "loadIconsName"
+        }
+      ]
+    },
+    {
       "name": "GuiDrawIcon",
       "description": "Draw icon using pixel size at specified position",
       "returnType": "void",
@@ -2519,29 +2586,6 @@
         {
           "type": "const char *",
           "name": "text"
-        }
-      ]
-    },
-    {
-      "name": "GuiTabBar",
-      "description": "Tab Bar control, returns TAB to be closed or -1",
-      "returnType": "int",
-      "params": [
-        {
-          "type": "Rectangle",
-          "name": "bounds"
-        },
-        {
-          "type": "char **",
-          "name": "text"
-        },
-        {
-          "type": "int",
-          "name": "count"
-        },
-        {
-          "type": "int *",
-          "name": "active"
         }
       ]
     },
@@ -3022,7 +3066,7 @@
     },
     {
       "name": "GuiListViewEx",
-      "description": "List View using text entries list and returning focus entry",
+      "description": "List View control, using text entries list and returning focus entry",
       "returnType": "int",
       "params": [
         {
@@ -3040,6 +3084,60 @@
         {
           "type": "int *",
           "name": "scrollIndex"
+        },
+        {
+          "type": "int *",
+          "name": "active"
+        },
+        {
+          "type": "int *",
+          "name": "focus"
+        }
+      ]
+    },
+    {
+      "name": "GuiTabBar",
+      "description": "Tab Bar control",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "const char *",
+          "name": "text"
+        },
+        {
+          "type": "int *",
+          "name": "hscroll"
+        },
+        {
+          "type": "int *",
+          "name": "active"
+        }
+      ]
+    },
+    {
+      "name": "GuiTabBarEx",
+      "description": "Tab Bar control, using text entries list and returning focus entry",
+      "returnType": "int",
+      "params": [
+        {
+          "type": "Rectangle",
+          "name": "bounds"
+        },
+        {
+          "type": "char **",
+          "name": "text"
+        },
+        {
+          "type": "int",
+          "name": "count"
+        },
+        {
+          "type": "int *",
+          "name": "hscroll"
         },
         {
           "type": "int *",
@@ -3111,7 +3209,7 @@
     },
     {
       "name": "GuiColorPicker",
-      "description": "Color Picker control (multiple color controls)",
+      "description": "Color Picker control, includes Color bar controls",
       "returnType": "int",
       "params": [
         {
@@ -3187,7 +3285,7 @@
     },
     {
       "name": "GuiColorPickerHSV",
-      "description": "Color Picker control that avoids conversion to RGB on each call (multiple color controls)",
+      "description": "Color Picker control, using Hue-Saturation-Value color data, includes Color bar controls",
       "returnType": "int",
       "params": [
         {
@@ -3206,7 +3304,7 @@
     },
     {
       "name": "GuiColorPanelHSV",
-      "description": "Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV()",
+      "description": "Color Panel control, using Hue-Saturation-Value color data",
       "returnType": "int",
       "params": [
         {

@@ -175,6 +175,12 @@
       "description": ""
     },
     {
+      "name": "SUPPORT_FILEFORMAT_PEP",
+      "type": "INT",
+      "value": 0,
+      "description": ""
+    },
+    {
       "name": "SUPPORT_FILEFORMAT_PSD",
       "type": "INT",
       "value": 0,

@@ -102,6 +102,7 @@
     , "GuiDropdownBoxProperty" : "TypeKind.ENUM"
     , "GuiTextBoxProperty" : "TypeKind.ENUM"
     , "GuiValueBoxProperty" : "TypeKind.ENUM"
+    , "GuiTabBarProperty" : "TypeKind.ENUM"
     , "GuiListViewProperty" : "TypeKind.ENUM"
     , "GuiColorPickerProperty" : "TypeKind.ENUM"
     , "GuiIconName" : "TypeKind.ENUM"
