@@ -1,11 +1,25 @@
 # [Usage]
 # $ gem install raylib-bindings
 # $ gem install imgui-bindings
-# $ ruby test_raylib.rb
+# $ ruby examples/raylib_with_imgui.rb
 
 require 'raylib'
-require 'imgui'
-require 'imgui_impl_raylib'
+
+def imgui_bindings_gem_available?
+  Gem::Specification.find_by_name('imgui-bindings')
+rescue Gem::LoadError
+  false
+rescue
+  Gem.available?('imgui-bindings')
+end
+
+if imgui_bindings_gem_available?
+  require 'imgui'
+  require 'imgui_impl_docking_raylib'
+else
+  require_relative '../lib/imgui'
+  require_relative '../lib/imgui_impl_docking_raylib'
+end
 
 if __FILE__ == $PROGRAM_NAME
   shared_lib_suffix = case RUBY_PLATFORM
@@ -25,9 +39,14 @@ if __FILE__ == $PROGRAM_NAME
   shared_lib_path = raylib_spec.full_gem_path + '/lib/'
   Raylib.load_lib("#{shared_lib_path}libraylib.#{shared_lib_suffix}")
 
-  imgui_spec = Gem::Specification.find_by_name('imgui-bindings')
-  shared_lib_path = imgui_spec.full_gem_path + '/lib/'
-  ImGui.load_lib("#{shared_lib_path}imgui.#{shared_lib_suffix}")
+  if imgui_bindings_gem_available?
+    imgui_spec = Gem::Specification.find_by_name('imgui-bindings')
+    shared_lib_path = imgui_spec.full_gem_path + '/lib/'
+    ImGui.load_lib("#{shared_lib_path}imgui.#{shared_lib_suffix}")
+  else
+    local_lib_path = File.expand_path('../lib', __dir__) + '/'
+    ImGui.load_lib("#{local_lib_path}imgui.#{shared_lib_suffix}")
+  end
 
   screen_width = 1280
   screen_height = 720
@@ -44,37 +63,25 @@ if __FILE__ == $PROGRAM_NAME
   ImGui.CreateContext()
   ImGui.StyleColorsDark()
 
-  ImGui.ImplRaylib_Init()
+  ImGui.ImplDockingRaylib_Init()
 
   io = ImGuiIO.new(ImGui.GetIO())
-  io[:Fonts].AddFontDefault()
+  fonts = ImFontAtlas.new(io[:Fonts])
+  fonts.AddFontDefault()
 
-  # Build texture atlas
-  pixels = FFI::MemoryPointer.new :pointer
-  width = FFI::MemoryPointer.new :int
-  height = FFI::MemoryPointer.new :int
-  io[:Fonts].GetTexDataAsRGBA32(pixels, width, height, nil)
-
-  # Upload texture to graphics system
-  # [TODO] find standard and safe way to convert RGBA32 array into texture
-  image = Raylib.GenImageColor(width.read_int, height.read_int, Raylib::BLUE)
-  original_data = image[:data]
-  image[:data] = pixels.read_pointer
-
-  texture = Raylib.LoadTextureFromImage(image)
-  image[:data] = original_data
-  Raylib.UnloadImage(image)
-
-  # Store our identifier
-  texture_ptr = FFI::MemoryPointer.new(:uint32)
-  texture_ptr.write(:uint32, texture[:id])
-  io[:Fonts].SetTexID(texture_ptr)
+  # - docking: enabled
+  # - multi-viewports: unsupported by raylib backend (auto-disabled in backend)
+  io[:ConfigFlags] |= ImGuiConfigFlags_DockingEnable
+  io[:ConfigFlags] |= ImGuiConfigFlags_ViewportsEnable
 
   cube_color = Raylib::GREEN
 
   Raylib.SetTargetFPS(60)
 
   until Raylib.WindowShouldClose()
+    ImGui.ImplDockingRaylib_NewFrame()
+    ImGui.NewFrame()
+
     # Check io[:WantCaptureMouse] to detect the timing when ImGui exclusively requires Mosue/Keyboard information
     cube_color = if not io[:WantCaptureMouse]
                    # Change cube color to Raylib::RED when user clicked outside of ImGui window
@@ -87,9 +94,9 @@ if __FILE__ == $PROGRAM_NAME
                    Raylib::GREEN
                  end
 
-    # [NOTE] We can't use UpdateCamera because Keyboard API (IsKeyDown, etc.) and
-    #        Mouse API (GetMouseWheelMove, etc.) are used inside without checking io[:WantCaptureMouse].
-    # Raylib.UpdateCamera(camera.pointer, Raylib::CAMERA_ORBITAL)
+    # ImGui-aware camera update: skips mouse/keyboard camera controls
+    # while ImGui is actively capturing those inputs.
+    ImGui.ImplRaylib_UpdateCamera(camera, Raylib::CAMERA_FIRST_PERSON)
 
     Raylib.BeginDrawing()
       Raylib.ClearBackground(Raylib::RAYWHITE)
@@ -101,15 +108,24 @@ if __FILE__ == $PROGRAM_NAME
       Raylib.DrawGrid(10, 1)
       Raylib.EndMode3D()
 
-      ImGui.ImplRaylib_NewFrame()
-      ImGui.NewFrame()
+      ImGui.Begin('Raylib Backend Check')
+      ImGui.Text('Backend target: Docking ON, Multi-Viewport OFF')
+      ImGui.Separator()
+      ImGui.Text("DockingEnable: #{(io[:ConfigFlags] & ImGuiConfigFlags_DockingEnable) != 0}")
+      ImGui.Text('ViewportsEnable request: true')
+      ImGui.Text("ViewportsEnable effective: #{(io[:ConfigFlags] & ImGuiConfigFlags_ViewportsEnable) != 0}")
+      ImGui.Separator()
+      ImGui.Text('Cube turns red when clicking outside ImGui window.')
+      ImGui.End()
+
       ImGui.ShowDemoWindow()
+
       ImGui.Render()
-      ImGui.ImplRaylib_RenderDrawData(ImGui.GetDrawData())
+      ImGui.ImplDockingRaylib_RenderDrawData(ImGui.GetDrawData())
     Raylib.EndDrawing()
   end
 
-  ImGui.ImplRaylib_Shutdown()
+  ImGui.ImplDockingRaylib_Shutdown()
   ImGui.DestroyContext(nil)
   Raylib.CloseWindow()
 end
