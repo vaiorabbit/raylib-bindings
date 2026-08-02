@@ -855,7 +855,7 @@ module Raylib
   # Skeleton, animation bones hierarchy
   class ModelSkeleton < FFI::Struct
     layout(
-      :boneCount, :int,    # Number of bones
+      :boneCount, :uint,   # Number of bones
       :bones, :pointer,    # Bones information (skeleton)
       :bindPose, :pointer, # Bones base transformation (Transform[])
     )
@@ -904,7 +904,7 @@ module Raylib
   class ModelAnimation < FFI::Struct
     layout(
       :name, [:char, 32],       # Animation name
-      :boneCount, :int,         # Number of bones (per pose)
+      :boneCount, :uint,        # Number of bones (per pose)
       :keyframeCount, :int,     # Number of animation key frames
       :keyframePoses, :pointer, # Animation sequence keyframe poses [keyframe][pose]
     )
@@ -1975,13 +1975,13 @@ module Raylib
       [:GetFileNameWithoutExt, :GetFileNameWithoutExt, [:pointer], :pointer],
 
       # @!method GetDirectoryPath(filePath)
-      #   GetDirectoryPath : Get full path for a given fileName with path (uses static string)
+      #   GetDirectoryPath : Get full path for a provided fileName with path (uses static string)
       #   @param filePath [const char *]
       #   @return [const char *]
       [:GetDirectoryPath, :GetDirectoryPath, [:pointer], :pointer],
 
       # @!method GetPrevDirectoryPath(dirPath)
-      #   GetPrevDirectoryPath : Get previous directory path for a given path (uses static string)
+      #   GetPrevDirectoryPath : Get previous directory path for a provided path (uses static string)
       #   @param dirPath [const char *]
       #   @return [const char *]
       [:GetPrevDirectoryPath, :GetPrevDirectoryPath, [:pointer], :pointer],
@@ -2009,16 +2009,22 @@ module Raylib
       [:ChangeDirectory, :ChangeDirectory, [:pointer], :int],
 
       # @!method IsPathFile(path)
-      #   IsPathFile : Check if given path points to a file
+      #   IsPathFile : Check if provided path points to a file
       #   @param path [const char *]
       #   @return [bool]
       [:IsPathFile, :IsPathFile, [:pointer], :bool],
 
       # @!method IsPathDirectory(path)
-      #   IsPathDirectory : Check if given path points to a directory
+      #   IsPathDirectory : Check if provided path points to a directory
       #   @param path [const char *]
       #   @return [bool]
       [:IsPathDirectory, :IsPathDirectory, [:pointer], :bool],
+
+      # @!method IsPathAbsolute(path)
+      #   IsPathAbsolute : Check if provided path is an absolute path
+      #   @param path [const char *]
+      #   @return [bool]
+      [:IsPathAbsolute, :IsPathAbsolute, [:pointer], :bool],
 
       # @!method IsFileNameValid(fileName)
       #   IsFileNameValid : Check if fileName is valid for the platform/OS
@@ -2405,7 +2411,7 @@ module Raylib
       [:GetTouchPosition, :GetTouchPosition, [:int], Vector2.by_value],
 
       # @!method GetTouchPointId(index)
-      #   GetTouchPointId : Get touch point identifier for given index
+      #   GetTouchPointId : Get touch point identifier for provided index
       #   @param index [int]
       #   @return [int]
       [:GetTouchPointId, :GetTouchPointId, [:int], :int],
@@ -3545,7 +3551,7 @@ module Raylib
       [:GetImageColor, :GetImageColor, [Image.by_value, :int, :int], Color.by_value],
 
       # @!method ImageClearBackground(dst, color)
-      #   ImageClearBackground : Clear image background with given color
+      #   ImageClearBackground : Clear image background with provided color
       #   @param dst [Image *]
       #   @param color [Color]
       #   @return [void]

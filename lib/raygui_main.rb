@@ -14,11 +14,18 @@ module Raylib
   RAYGUI_VERSION_MAJOR = 5
   RAYGUI_VERSION_MINOR = 0
   RAYGUI_VERSION_PATCH = 0
-  RAYGUI_VERSION = "5.0-dev"
+  RAYGUI_VERSION = "5.0"
   SCROLLBAR_LEFT_SIDE = 0
   SCROLLBAR_RIGHT_SIDE = 1
 
   # Enum
+
+  # enum GuiResult
+  # Gui control result
+  RESULT_NONE = 0
+  RESULT_PRESSED = 1
+  RESULT_CHANGED = 2
+  RESULT_TAB_CLOSE = 4 # GuiTabBar(), tab close request
 
   # enum GuiState
   # Gui control state
@@ -429,6 +436,7 @@ module Raylib
 
   # Typedef
 
+  typedef :int, :GuiResult
   typedef :int, :GuiState
   typedef :int, :GuiTextAlignment
   typedef :int, :GuiTextAlignmentVertical
@@ -870,26 +878,28 @@ module Raylib
       #   @return [int]
       [:GuiTabBarEx, :GuiTabBarEx, [Rectangle.by_value, :pointer, :int, :pointer, :pointer, :pointer], :int],
 
-      # @!method GuiMessageBox(bounds, title, message, buttons)
+      # @!method GuiMessageBox(bounds, title, message, btnText, btnActive)
       #   GuiMessageBox : Message Box control, displays a message
       #   @param bounds [Rectangle]
       #   @param title [const char *]
       #   @param message [const char *]
-      #   @param buttons [const char *]
+      #   @param btnText [const char *]
+      #   @param btnActive [int *]
       #   @return [int]
-      [:GuiMessageBox, :GuiMessageBox, [Rectangle.by_value, :pointer, :pointer, :pointer], :int],
+      [:GuiMessageBox, :GuiMessageBox, [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer], :int],
 
-      # @!method GuiTextInputBox(bounds, title, message, buttons, text, textMaxSize, secretViewActive)
+      # @!method GuiTextInputBox(bounds, title, message, text, textSize, btnText, btnActive, secretViewActive)
       #   GuiTextInputBox : Text Input Box control, ask for text, supports secret
       #   @param bounds [Rectangle]
       #   @param title [const char *]
       #   @param message [const char *]
-      #   @param buttons [const char *]
       #   @param text [char *]
-      #   @param textMaxSize [int]
+      #   @param textSize [int]
+      #   @param btnText [const char *]
+      #   @param btnActive [int *]
       #   @param secretViewActive [bool *]
       #   @return [int]
-      [:GuiTextInputBox, :GuiTextInputBox, [Rectangle.by_value, :pointer, :pointer, :pointer, :pointer, :int, :pointer], :int],
+      [:GuiTextInputBox, :GuiTextInputBox, [Rectangle.by_value, :pointer, :pointer, :pointer, :int, :pointer, :pointer, :pointer], :int],
 
       # @!method GuiColorPicker(bounds, text, color)
       #   GuiColorPicker : Color Picker control, includes Color bar controls

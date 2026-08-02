@@ -86,6 +86,7 @@
     , "rlFramebufferAttachTextureType" : "TypeKind.ENUM"
     , "rlCullMode" : "TypeKind.ENUM"
     , "GuiStyleProp" : "TypeKind.RECORD"
+    , "GuiResult" : "TypeKind.ENUM"
     , "GuiState" : "TypeKind.ENUM"
     , "GuiTextAlignment" : "TypeKind.ENUM"
     , "GuiTextAlignmentVertical" : "TypeKind.ENUM"

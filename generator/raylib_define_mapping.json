@@ -216,7 +216,7 @@
     , "RAYGUI_VERSION_MAJOR" : "5"
     , "RAYGUI_VERSION_MINOR" : "0"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"5.0-dev\""
+    , "RAYGUI_VERSION" : "\"5.0\""
     , "_CRT_SECURE_NO_WARNINGS" : null
     , "RAYGUIAPI" : null
     , "RAYGUI_SUPPORT_LOG_INFO" : null
@@ -224,6 +224,7 @@
     , "GUI_BUTTON_DOWN" : null
     , "GUI_BUTTON_DOWN_ALT" : null
     , "GUI_BUTTON_PRESSED" : null
+    , "GUI_BUTTON_PRESSED_MID" : null
     , "GUI_BUTTON_RELEASED" : null
     , "GUI_SCROLL_DELTA" : null
     , "GUI_POINTER_POSITION" : null
