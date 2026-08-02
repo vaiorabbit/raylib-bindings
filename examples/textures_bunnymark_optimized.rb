@@ -31,7 +31,9 @@ if __FILE__ == $PROGRAM_NAME
   InitWindow(screenWidth, screenHeight, "Yet Another Ruby-raylib bindings - bunnymark")
 
   # Load bunny texture
-  texBunny = LoadTexture(RAYLIB_TEXTURE_PATH + "resources/wabbit_alpha.png")
+  bunny_texture_path = RAYLIB_TEXTURE_PATH + "resources/raybunny.png"
+  bunny_texture_path = RAYLIB_TEXTURE_PATH + "resources/wabbit_alpha.png" unless File.exist?(bunny_texture_path)
+  texBunny = LoadTexture(bunny_texture_path)
   texBunnyWidth = texBunny.width
   texBunnyHeight = texBunny.height
   TexBunnyWidth_2 = texBunnyWidth / 2
