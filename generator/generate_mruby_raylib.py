@@ -10,5 +10,6 @@ if __name__ == "__main__":
 
     raylib_generator_mruby.sanitize(ctx)
     raylib_generator_mruby.generate(ctx,
-                              module_name = 'raylib'
+                                    module_name = 'raylib',
+                                    generate_rclassraylib = True
                               )

@@ -2,6 +2,16 @@ import ctypes, re, sys
 import json
 import raylib_parser
 
+
+def is_pointer_like_type(type_name):
+    normalized = re.sub(r"^\s*const\s+", "", type_name).strip()
+    if "*" in normalized:
+        return True
+    if raylib_parser.query_raylib_cindex_mapping_entry_exists(normalized):
+        mapped = raylib_parser.get_raylib_cindex_mapping_value(normalized)
+        return mapped in ("TypeKind.POINTER", "TypeKind.FUNCTIONPROTO", "TypeKind.NULLPTR")
+    return False
+
 def sanitize_enum(ctx):
     pass
 
@@ -79,7 +89,7 @@ def generate_macrodefine(ctx, indent = "", json_schema=None):
                 mrbval = "mrb_str_new_cstr_frozen"
             elif "." in macro_value[0]:
                 mrbval = "mrb_float_value"
-            elif any(elem in macro_value[0] for elem in r"\:\/"): # Math::PI / 180.0, etc.
+            elif ":" in macro_value[0] or "/" in macro_value[0]: # Math::PI / 180.0, etc.
                 continue
             else:
                 mrbval = "mrb_int_value"
@@ -137,24 +147,26 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
     # Initializer
     print(indent + f'static mrb_value mrb_raylib_{struct_name}_initialize(mrb_state* mrb, mrb_value self)', file = sys.stdout)
     print(indent + '{', file = sys.stdout)
-    print(indent + f'    {struct_name}* instance = ({struct_name}*)mrb_malloc(mrb, sizeof({struct_name}));', file = sys.stdout)
     print(indent + f'    mrb_int argc = mrb_get_argc(mrb);', file = sys.stdout)
-    print(indent + f'    switch (argc) {{', file = sys.stdout)
-    print(indent + f'    case 0:', file = sys.stdout)
-    print(indent + f'    {{', file = sys.stdout)
+    if len_members > 0:
+        print(indent + f'    if (argc != 0 && argc != {len_members}) {{', file = sys.stdout)
+        print(indent + f'        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or {len_members})", argc);', file = sys.stdout)
+        print(indent + f'    }}', file = sys.stdout)
+    print(indent + f'    {struct_name}* instance = ({struct_name}*)mrb_malloc(mrb, sizeof({struct_name}));', file = sys.stdout)
+    print("", file = sys.stdout)
+    print(indent + f'    if (argc == 0) {{', file = sys.stdout)
     print(indent + f'        memset(instance, 0, sizeof({struct_name}));', file = sys.stdout)
-    print(indent + f'        break;', file = sys.stdout)
-    print(indent + f'    }}', file = sys.stdout)
-    print(indent + f'    case {len_members}:', file = sys.stdout)
-    print(indent + f'    {{', file = sys.stdout)
-    print(indent + f'        mrb_value argv[{len_members}];', file = sys.stdout)
-    argv_ptrs = "{ "
-    for i in range(len_members):
-        argv_ptrs += f'&argv[{i}], '
-    argv_ptrs += "}"
-    print(indent + f'        void* ptrs[{len_members}] = {argv_ptrs};', file = sys.stdout)
-    format_string = "o" * len_members
-    print(indent + f'        mrb_get_args_a(mrb, "{format_string}", ptrs);', file = sys.stdout)
+    if len_members > 0:
+        print(indent + f'    }}', file = sys.stdout)
+        print(indent + f'    else {{', file = sys.stdout)
+        print(indent + f'        mrb_value argv[{len_members}];', file = sys.stdout)
+        argv_ptrs = "{ "
+        for i in range(len_members):
+            argv_ptrs += f'&argv[{i}], '
+        argv_ptrs += "}"
+        print(indent + f'        void* ptrs[{len_members}] = {argv_ptrs};', file = sys.stdout)
+        format_string = "o" * len_members
+        print(indent + f'        mrb_get_args_a(mrb, "{format_string}", ptrs);', file = sys.stdout)
 
     for idx, field in enumerate(struct_info.fields):
         if field.element_count > 1:
@@ -162,20 +174,29 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
                 print(indent + f'        strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv[{idx}]), sizeof(char) * {field.element_count});', file = sys.stdout)
             else:
                 print(indent + f'        memcpy(instance->{field.element_name}, DATA_PTR(argv[{idx}]), sizeof({field.type_name}) * {field.element_count});', file = sys.stdout)
-        elif "*" in field.type_name:
+        elif is_pointer_like_type(field.type_name):
             print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]);', file = sys.stdout)
         elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv[{idx}]);', file = sys.stdout)
-        elif "float" in field.type_name:
+            field_type_name_alias = field.type_name
+            if field.type_name == "Texture2D":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "TextureCubemap":
+                field_type_name_alias = "Texture"
+            elif field.type_name == "RenderTexture2D":
+                field_type_name_alias = "RenderTexture"
+            elif field.type_name == "Quaternion":
+                field_type_name_alias = "Vector4"
+            print(indent + f'        instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv[{idx}], &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
+        elif "float" in field.type_name or "double" in field.type_name:
             print(indent + f'        instance->{field.element_name} = mrb_as_float(mrb, argv[{idx}]);', file = sys.stdout)
         else:
             print(indent + f'        instance->{field.element_name} = mrb_as_int(mrb, argv[{idx}]);', file = sys.stdout)
 
-    print(indent + f'    }}', file = sys.stdout)
-    print(indent + f'    break;', file = sys.stdout)
-    print(indent + f'    }}', file = sys.stdout)
+    if len_members > 0:
+        print(indent + f'    }}', file = sys.stdout)
 
     print(indent + f'    mrb_data_init(self, instance, &mrb_raylib_struct_{struct_name});', file = sys.stdout)
+    print("", file = sys.stdout)
     print(indent + '    return self;', file = sys.stdout)
     print(indent + '}', file = sys.stdout)
     print("", file = sys.stdout)
@@ -190,54 +211,98 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
 
     len_members = len(struct_info.fields)
 
+    # sizeof class
+    print(indent + f'static mrb_value mrb_raylib_{struct_name}_class_size(mrb_state* mrb, mrb_value self)', file = sys.stdout)
+    print(indent + '{', file = sys.stdout)
+    print(indent + f'    return mrb_int_value(mrb, sizeof({struct_name}));', file = sys.stdout)
+    print(indent + '}', file = sys.stdout)
+    print("", file = sys.stdout)
+
+    # accessors
     for idx, field in enumerate(struct_info.fields):
-        if field.element_count > 1:
-            if not "char" in field.type_name:
-                print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array', file = sys.stdout)
-                print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO add accessor which can handle array', file = sys.stdout)
-                print("", file = sys.stdout)
-                continue # TODO add accessor which can handle array
-        elif "*" in field.type_name:
-            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
-            print(indent + f'// static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self); // TODO prepare Buffer version of classes', file = sys.stdout)
-            print("", file = sys.stdout)
-            continue # TODO prepare Buffer version of classes
+        #
+        # Getter
+        #
 
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_get(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_{struct_name}, {struct_name});', file = sys.stdout)
+        print("", file = sys.stdout)
 
-        if any(ch.isupper() for ch in field.type_name):
-            print(indent + f'    return mrb_obj_value(&instance->{field.element_name});', file = sys.stdout);
-        elif "char" in field.type_name and field.element_count > 1:
-            print(indent + f'    return mrb_str_new_cstr(mrb, (const char*)&instance->{field.element_name});', file = sys.stdout);
-        elif "float" in field.type_name:
-            print(indent + f'    return mrb_float_value(mrb, instance->{field.element_name});', file = sys.stdout)
+        if field.element_count > 1:
+            if "char" in field.type_name:
+                print(indent + f'    return mrb_str_new_cstr(mrb, (const char*)&instance->{field.element_name});', file = sys.stdout);
+            else:
+                val_strs = "{ "
+                for i in range(field.element_count):
+                    if any(ch.isupper() for ch in field.type_name):
+                        val_strs += f'mrb_obj_value(&instance->{field.element_name}[{i}]), '
+                    elif "float" in field.type_name or "double" in field.type_name:
+                        val_strs += f'mrb_float_value(mrb, instance->{field.element_name}[{i}]), '
+                    else:
+                        val_strs += f'mrb_int_value(mrb, instance->{field.element_name}[{i}]), '
+                val_strs += "}"
+                print(indent + f'    mrb_value vals[{field.element_count}] = {val_strs};', file = sys.stdout)
+                print("", file = sys.stdout)
+                print(indent + f'    return mrb_ary_new_from_values(mrb, {field.element_count}, vals);', file = sys.stdout)
         else:
-            print(indent + f'    return mrb_int_value(mrb, instance->{field.element_name});', file = sys.stdout)
+            if is_pointer_like_type(field.type_name):
+                print(indent + f'    return mrb_cptr_value(mrb, instance->{field.element_name});', file = sys.stdout)
+            elif any(ch.isupper() for ch in field.type_name):
+                print(indent + f'    return mrb_obj_value(&instance->{field.element_name});', file = sys.stdout);
+            elif "float" in field.type_name:
+                print(indent + f'    return mrb_float_value(mrb, instance->{field.element_name});', file = sys.stdout)
+            else:
+                print(indent + f'    return mrb_int_value(mrb, instance->{field.element_name});', file = sys.stdout)
 
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
 
+        #
+        # Setter
+        #
+
         print(indent + f'static mrb_value mrb_raylib_{struct_name}_{field.element_name}_set(mrb_state* mrb, mrb_value self)', file = sys.stdout)
         print(indent + '{', file = sys.stdout)
         print(indent + f'    {struct_name}* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_{struct_name}, {struct_name});', file = sys.stdout)
-        print(indent + '    mrb_value argv;', file = sys.stdout)
-        print(indent + '    mrb_get_args(mrb, "o", &argv);', file = sys.stdout)
+        print("", file = sys.stdout)
         if field.element_count > 1:
             if "char" in field.type_name:
+                print(indent + '    mrb_value argv;', file = sys.stdout)
+                print(indent + '    mrb_get_args(mrb, "o", &argv);', file = sys.stdout)
                 print(indent + f'    strncpy(instance->{field.element_name}, mrb_string_cstr(mrb, argv), sizeof(char) * {field.element_count});', file = sys.stdout)
             else:
-                print(indent + f'    memcpy(instance->{field.element_name}, DATA_PTR(argv), sizeof({field.type_name}) * {field.element_count});', file = sys.stdout)
-        elif "*" in field.type_name:
-            print(indent + f'    instance->{field.element_name} = DATA_PTR(argv);', file = sys.stdout)
-        elif any(ch.isupper() for ch in field.type_name):
-            print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_PTR(argv);', file = sys.stdout)
-        elif "float" in field.type_name:
-            print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
+                print(indent + '    mrb_value argv;', file = sys.stdout)
+                print(indent + '    mrb_get_args(mrb, "A", &argv);', file = sys.stdout)
+                for i in range(field.element_count):
+                    if any(ch.isupper() for ch in field.type_name):
+                        print(indent + f'    instance->{field.element_name}[{i}] = *({field.type_name}*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[{i}], &mrb_raylib_struct_{field.type_name}, {field.type_name});', file = sys.stdout)
+                    elif "float" in field.type_name or "double" in field.type_name:
+                        print(indent + f'    instance->{field.element_name}[{i}] = mrb_as_float(mrb, RARRAY_PTR(argv)[{i}]);', file = sys.stdout)
+                    else:
+                        print(indent + f'    instance->{field.element_name}[{i}] = mrb_as_int(mrb, RARRAY_PTR(argv)[{i}]);', file = sys.stdout)
         else:
-            print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
-        print(indent + '    return self;', file = sys.stdout)
+            print(indent + '    mrb_value argv;', file = sys.stdout)
+            print(indent + '    mrb_get_args(mrb, "o", &argv);', file = sys.stdout)
+            if is_pointer_like_type(field.type_name):
+                print(indent + f'    instance->{field.element_name} = DATA_PTR(argv);', file = sys.stdout)
+            elif any(ch.isupper() for ch in field.type_name):
+                field_type_name_alias = field.type_name
+                if field.type_name == "Texture2D":
+                    field_type_name_alias = "Texture"
+                elif field.type_name == "TextureCubemap":
+                    field_type_name_alias = "Texture"
+                elif field.type_name == "RenderTexture2D":
+                    field_type_name_alias = "RenderTexture"
+                elif field.type_name == "Quaternion":
+                    field_type_name_alias = "Vector4"
+                print(indent + f'    instance->{field.element_name} = *({field.type_name}*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_{field_type_name_alias}, {field.type_name});', file = sys.stdout)
+            elif "float" in field.type_name or "double" in field.type_name:
+                print(indent + f'    instance->{field.element_name} = mrb_as_float(mrb, argv);', file = sys.stdout)
+            else:
+                print(indent + f'    instance->{field.element_name} = mrb_as_int(mrb, argv);', file = sys.stdout)
+        print("", file = sys.stdout)
+        print(indent + '    return mrb_nil_value();', file = sys.stdout)
         print(indent + '}', file = sys.stdout)
         print("", file = sys.stdout)
 
@@ -262,22 +327,16 @@ def generate_structunion_define_class(ctx, indent = "", struct_prefix="", struct
 
         # Name of struct/class must be start with capital letter
         struct_name = struct_name[0].upper() + struct_name[1:]
+        len_members = len(struct_info.fields)
+        initializer_arg_spec = "MRB_ARGS_NONE()" if len_members <= 0 else f"MRB_ARGS_OPT({len_members})"
 
         # Definition
         print(indent + f'    cRaylib{struct_name} = mrb_define_class_under(mrb, mRaylib, "{struct_name}", mrb->object_class);', file = sys.stdout)
         print(indent + f'    MRB_SET_INSTANCE_TT(cRaylib{struct_name}, MRB_TT_DATA);', file = sys.stdout)
-        print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "initialize", mrb_raylib_{struct_name}_initialize, MRB_ARGS_OPT(1));', file = sys.stdout)
+        print(indent + f'    mrb_define_class_method(mrb, cRaylib{struct_name}, "size", mrb_raylib_{struct_name}_class_size, MRB_ARGS_NONE());', file = sys.stdout)
+        print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "initialize", mrb_raylib_{struct_name}_initialize, {initializer_arg_spec});', file = sys.stdout)
         # Accessors
         for idx, field in enumerate(struct_info.fields):
-            if field.element_count > 1:
-                if not "char" in field.type_name:
-                    print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO add accessor which can handle array', file = sys.stdout)
-                    print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO add accessor which can handle array', file = sys.stdout)
-                    continue # TODO add accessor which can handle array
-            elif "*" in field.type_name:
-                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE()); // TODO prepare Buffer version of classes', file = sys.stdout)
-                print(indent + f'    // mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1)); // TODO prepare Buffer version of classes', file = sys.stdout)
-                continue # TODO prepare Buffer version of classes
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}", mrb_raylib_{struct_name}_{field.element_name}_get, MRB_ARGS_NONE());', file = sys.stdout)
             print(indent + f'    mrb_define_method(mrb, cRaylib{struct_name}, "{field.element_name}=", mrb_raylib_{struct_name}_{field.element_name}_set, MRB_ARGS_REQ(1));', file = sys.stdout)
             pass
@@ -327,11 +386,24 @@ def generate_function_body(ctx, indent = "", module_name = ""):
 
             for i, arg in enumerate(func_info.args):
                 arg_value = ""
-                if "*" in arg.type_name:
+                if "const char *" == arg.type_name:
+                    arg_value = f'RSTRING_PTR(argv[{i}])'
+                elif is_pointer_like_type(arg.type_name) or "Callback" in arg.type_name:
                     arg_value = f'DATA_PTR(argv[{i}])'
                 elif any(ch.isupper() for ch in arg.type_name):
-                    arg_value = f'*({arg.type_name}*)DATA_PTR(argv[{i}])'
-                elif "float" in arg.type_name:
+                    arg_type_name_alias = arg.type_name
+                    if arg.type_name == "Texture2D":
+                        arg_type_name_alias = "Texture"
+                    elif arg.type_name == "TextureCubemap":
+                        arg_type_name_alias = "Texture"
+                    elif arg.type_name == "RenderTexture2D":
+                        arg_type_name_alias = "RenderTexture"
+                    elif arg.type_name == "Quaternion":
+                        arg_type_name_alias = "Vector4"
+                    elif arg.type_name == "Camera":
+                        arg_type_name_alias = "Camera3D"
+                    arg_value = f'*({arg.type_name}*)DATA_GET_PTR(mrb, argv[{i}], &mrb_raylib_struct_{arg_type_name_alias}, {arg.type_name});'
+                elif "float" in arg.type_name or "double" in arg.type_name:
                     arg_value = f'mrb_as_float(mrb, argv[{i}])'
                 else:
                     arg_value = f'mrb_as_int(mrb, argv[{i}])'
@@ -346,29 +418,32 @@ def generate_function_body(ctx, indent = "", module_name = ""):
 
         if have_retval:
             retval_str = ""
-            if any(ch.isupper() for ch in retval_type_name):
-                if "*" in retval_type_name:
-                    retval_str = f'/* TODO return wrapped object */ {retval_type_name} retval = '
-                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
-                else:
-                    retval_type_name_alias = retval_type_name
-                    if retval_type_name == "Texture2D":
-                        retval_type_name_alias = "Texture"
-                    elif retval_type_name == "TextureCubemap":
-                        retval_type_name_alias = "Texture"
-                    elif retval_type_name == "RenderTexture2D":
-                        retval_type_name_alias = "RenderTexture"
-                    print(indent + f'{retval_type_name}* retval;', file = sys.stdout)
-                    print(indent + f'/* TODO return newly allocated object */ *retval = {func_name}({arg_names});', file = sys.stdout)
-                    print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
+            if is_pointer_like_type(retval_type_name):
+                print(indent + f'{retval_type_name} retval = {func_name}({arg_names});', file = sys.stdout)
+                print("", file = sys.stdout)
+                print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
+            elif any(ch.isupper() for ch in retval_type_name):
+                retval_type_name_alias = retval_type_name
+                if retval_type_name == "Texture2D":
+                    retval_type_name_alias = "Texture"
+                elif retval_type_name == "TextureCubemap":
+                    retval_type_name_alias = "Texture"
+                elif retval_type_name == "RenderTexture2D":
+                    retval_type_name_alias = "RenderTexture"
+                print(indent + f'{retval_type_name}* retval = ({retval_type_name}*)mrb_malloc(mrb, sizeof({retval_type_name}));', file = sys.stdout)
+                print(indent + f'*retval = {func_name}({arg_names});', file = sys.stdout)
+                print("", file = sys.stdout)
+                print(indent + f'return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylib{retval_type_name_alias}, &mrb_raylib_struct_{retval_type_name_alias}, retval));', file = sys.stdout)
             else:
                 retval_str = f'{retval_type_name} retval = '
                 print(indent + f'{retval_str}{func_name}({arg_names});', file = sys.stdout)
                 print("", file = sys.stdout)
 
-                if "*" in retval_type_name:
-                    print(indent + f'return self; /* TODO return wrapped object */', file = sys.stdout)
-                elif "float" in retval_type_name:
+                if "const char *" == retval_type_name:
+                    print(indent + f'return mrb_str_new_cstr(mrb, retval);', file = sys.stdout)
+                elif "*" in retval_type_name:
+                    print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
+                elif "float" in retval_type_name or "double" in retval_type_name:
                     print(indent + f'return mrb_float_value(mrb, retval);', file = sys.stdout)
                 elif "bool" in retval_type_name:
                     print(indent + f'return retval ? mrb_true_value() : mrb_false_value();', file = sys.stdout)
@@ -398,14 +473,17 @@ def generate_function_entry(ctx, indent = "", module_name = ""):
         print(indent + f'mrb_define_module_function(mrb, mRaylib, "{func_name}", mrb_raylib_{func_name}, {retval_str});', file = sys.stdout)
 
 
-def generate(ctx, *, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
+def generate(ctx, *, generate_rclassraylib = True, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
     indent = "    "
 
-    print("// Copyright (c) 2023 vaiorabbit <http://twitter.com/vaiorabbit>", file = sys.stdout)
-    print("// Autogenerated. Do NOT edit.\n", file = sys.stdout)
+    print("// Copyright (c) 2023-2026 vaiorabbit <http://twitter.com/vaiorabbit>", file = sys.stdout)
+    print("// - Autogenerated. Do NOT edit.", file = sys.stdout)
+    print("// - [Experimental] May contain incorrect codes.", file = sys.stdout)
+    print("", file = sys.stdout)
 
     print("""
 #include <mruby.h>
+#include <mruby/array.h>
 #include <mruby/class.h>
 #include <mruby/compile.h>
 #include <mruby/data.h>
@@ -413,8 +491,10 @@ def generate(ctx, *, module_name = "", table_prefix = "Raylib_", typedef_prefix=
 
 #include <raylib.h>
 
-#include <string.h>
+#include <string.h>""", file = sys.stdout)
 
+    if generate_rclassraylib:
+        print("""
 struct RClass* mRaylib;
 
 """, file = sys.stdout)
@@ -438,13 +518,17 @@ struct RClass* mRaylib;
         print("// Function\n", file = sys.stdout)
         generate_function_body(ctx, indent, module_name)
 
-    print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
+    if generate_rclassraylib:
+        print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
+    else:
+        print(f'void mrb_{module_name}_module_init(struct RClass* mRaylib, mrb_state* mrb)', file = sys.stdout)
+
     print('{', file = sys.stdout)
-    print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
+    if generate_rclassraylib:
+        print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
 
     # macro
     if len(ctx.decl_macros) > 0:
-        print("", file = sys.stdout)
         print(indent + "// Define/Macro\n", file = sys.stdout)
         generate_macrodefine(ctx, indent, json_schema)
         print("", file = sys.stdout)
@@ -453,13 +537,11 @@ struct RClass* mRaylib;
     if len(ctx.decl_enums) > 0:
         print(indent + "// Enum\n", file = sys.stdout)
         generate_enum(ctx, indent, json_schema)
-        print("", file = sys.stdout)
 
     # struct/union define class
     if len(ctx.decl_structs) > 0:
         print(indent + "// Struct\n", file = sys.stdout)
         generate_structunion_define_class(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
-        print("", file = sys.stdout)
 
     # function
     if len(ctx.decl_functions) > 0:
