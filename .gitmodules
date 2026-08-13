@@ -7,3 +7,6 @@
 [submodule "physac_dll/physac"]
 	path = physac_dll/physac
 	url = https://github.com/raysan5/physac.git
+[submodule "mruby/third_party/mruby"]
+	path = mruby/third_party/mruby
+	url = https://github.com/mruby/mruby.git

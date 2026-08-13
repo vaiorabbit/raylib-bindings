@@ -12,5 +12,5 @@ generator/bak
 generator/build
 generator/backup
 __pycache__
+mruby/bin
 mruby/build
-mruby/*.dSYM
