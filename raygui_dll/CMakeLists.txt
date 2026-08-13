@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 project(raygui C)
+
+include(GNUInstallDirs)
 
 option(BUILD_PLATFORM "arm64, aarch64, x86_64, etc." "x86_64")
 
@@ -12,11 +14,13 @@ include_directories(.)
 
 if (APPLE)
     link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build_${BUILD_PLATFORM}/raylib)
+elsif(EMSCRIPTEN)
+    link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build_wasm/raylib)
 else()
     link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build/raylib)
 endif()
 
-add_definitions("-DBUILD_LIBTYPE_SHARED")
+# add_definitions("-DBUILD_LIBTYPE_SHARED")
 # add_definitions("-DRAYGUI_STANDALONE")
 # add_definitions("-DBLANK=(Color){0, 0, 0, 0}")
 
@@ -29,11 +33,22 @@ if (APPLE)
     set(CMAKE_MACOSX_RPATH ON)
 endif (APPLE)
 
-add_library(raygui SHARED ${RAYGUI_SOURCES})
+if (BUILD_LIBTYPE_SHARED)
+    add_library(raygui SHARED ${RAYGUI_SOURCES})
+else()
+    add_library(raygui STATIC ${RAYGUI_SOURCES})
+endif()
 
-set_target_properties(raygui PROPERTIES PREFIX "")
+set_target_properties(raygui PROPERTIES
+    PREFIX ""
+    PUBLIC_HEADER ${CMAKE_CURRENT_LIST_DIR}/raygui/src/raygui.h
+    )
 
-target_link_libraries(raygui raylib)
+if(WIN32)
+    target_link_libraries(raygui raylib winmm)
+else()
+    target_link_libraries(raygui raylib)
+endif()
 
 if (APPLE)
     set_target_properties(raygui PROPERTIES
@@ -44,7 +59,8 @@ endif (APPLE)
 
 #install
 install(TARGETS raygui
-              RUNTIME DESTINATION  .
-              LIBRARY DESTINATION  .
-              ARCHIVE DESTINATION  .
+              RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+              LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+              ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+              PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
               )

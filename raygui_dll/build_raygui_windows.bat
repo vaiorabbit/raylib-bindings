@@ -19,7 +19,7 @@ if not exist build (
     mkdir build
 )
 cd build
-%CMAKE_EXE% -G "MSYS Makefiles" -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_C_COMPILER=gcc ../
+%CMAKE_EXE% -G "MSYS Makefiles" -D BUILD_LIBTYPE_SHARED=1 -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D BUILD_LIBTYPE_SHARED=1 -D CMAKE_C_COMPILER=gcc ../
 make
 copy raygui.dll ..\..\lib
 popd
