@@ -1,0 +1,36 @@
+<!doctypehtml>
+<html>
+  <head>
+	<meta charset=utf-8>
+	<meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+	<title>Yet another raylib mruby bindings</title>
+	<style>
+	  body {
+		  margin:0;
+		  padding:0
+	  }
+	  canvas.emscripten {
+		  display:block;
+		  padding-left: 0;
+		  padding-right: 0;
+		  margin-left: auto;
+		  margin-right: auto;
+		  width:auto;
+		  height:auto;
+		  max-width:100vw;
+		  max-height:100vh;
+	  }
+	</style>
+  </head>
+  <body>
+	<canvas class=emscripten id=canvas oncontextmenu=event.preventDefault() tabindex=-1>
+	</canvas>
+	<script>
+	  var Module={
+		  canvas:document.getElementById("canvas")
+	  }
+	</script>
+	{{{ SCRIPT }}}
+  </body>
+</html>
+

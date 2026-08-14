@@ -18,6 +18,7 @@ mruby/bin
 mruby/bin_web
 mruby/build
 mruby/examples/embedding/build
+mruby/examples/flapper/build
 mruby/examples/funcall/build
 mruby/examples/string/build
 mruby/examples/web/build

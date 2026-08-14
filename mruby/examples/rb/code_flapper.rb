@@ -480,7 +480,8 @@ class Player
   def failed? = @state == :Failed
 
   def update(dt)
-    if !failed? && (Raylib.IsKeyPressed(Raylib::KEY_SPACE) || Raylib.IsMouseButtonPressed(Raylib::MOUSE_BUTTON_LEFT))
+    fly = (Raylib.IsKeyPressed(Raylib::KEY_SPACE) || Raylib.IsMouseButtonPressed(Raylib::MOUSE_BUTTON_LEFT) || (Raylib.GetGestureDetected() == Raylib::GESTURE_TAP))
+    if !failed? && fly
       @vel_y = -VEL_BOOST
     end
     if @state == :Alive
