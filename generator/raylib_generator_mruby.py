@@ -13,7 +13,14 @@ def is_pointer_like_type(type_name):
     return False
 
 def sanitize_enum(ctx):
-    pass
+    # Track enum typedef names so struct/function generators don't mistake them for bindable structs.
+    ctx.enum_typedef_names = set(ctx.decl_enums.keys())
+    for enum_constant_info in ctx.enum_constants.values():
+        ctx.enum_typedef_names.add(enum_constant_info.typedef_name)
+
+def is_enum_type_name(ctx, type_name):
+    normalized = re.sub(r"^\s*const\s+", "", type_name).strip()
+    return normalized in getattr(ctx, "enum_typedef_names", set())
 
 def sanitize_macro(ctx):
     # 0x____u -> 0x____
@@ -176,7 +183,7 @@ def generate_structunion_initialize(ctx, indent, struct_name, struct_info):
                 print(indent + f'        memcpy(instance->{field.element_name}, DATA_PTR(argv[{idx}]), sizeof({field.type_name}) * {field.element_count});', file = sys.stdout)
         elif is_pointer_like_type(field.type_name):
             print(indent + f'        instance->{field.element_name} = DATA_PTR(argv[{idx}]);', file = sys.stdout)
-        elif any(ch.isupper() for ch in field.type_name):
+        elif any(ch.isupper() for ch in field.type_name) and not is_enum_type_name(ctx, field.type_name):
             field_type_name_alias = field.type_name
             if field.type_name == "Texture2D":
                 field_type_name_alias = "Texture"
@@ -235,7 +242,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
             else:
                 val_strs = "{ "
                 for i in range(field.element_count):
-                    if any(ch.isupper() for ch in field.type_name):
+                    if any(ch.isupper() for ch in field.type_name) and not is_enum_type_name(ctx, field.type_name):
                         val_strs += f'mrb_obj_value(&instance->{field.element_name}[{i}]), '
                     elif "float" in field.type_name or "double" in field.type_name:
                         val_strs += f'mrb_float_value(mrb, instance->{field.element_name}[{i}]), '
@@ -248,7 +255,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
         else:
             if is_pointer_like_type(field.type_name):
                 print(indent + f'    return mrb_cptr_value(mrb, instance->{field.element_name});', file = sys.stdout)
-            elif any(ch.isupper() for ch in field.type_name):
+            elif any(ch.isupper() for ch in field.type_name) and not is_enum_type_name(ctx, field.type_name):
                 print(indent + f'    return mrb_obj_value(&instance->{field.element_name});', file = sys.stdout);
             elif "float" in field.type_name:
                 print(indent + f'    return mrb_float_value(mrb, instance->{field.element_name});', file = sys.stdout)
@@ -275,7 +282,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
                 print(indent + '    mrb_value argv;', file = sys.stdout)
                 print(indent + '    mrb_get_args(mrb, "A", &argv);', file = sys.stdout)
                 for i in range(field.element_count):
-                    if any(ch.isupper() for ch in field.type_name):
+                    if any(ch.isupper() for ch in field.type_name) and not is_enum_type_name(ctx, field.type_name):
                         print(indent + f'    instance->{field.element_name}[{i}] = *({field.type_name}*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[{i}], &mrb_raylib_struct_{field.type_name}, {field.type_name});', file = sys.stdout)
                     elif "float" in field.type_name or "double" in field.type_name:
                         print(indent + f'    instance->{field.element_name}[{i}] = mrb_as_float(mrb, RARRAY_PTR(argv)[{i}]);', file = sys.stdout)
@@ -286,7 +293,7 @@ def generate_structunion_accessor(ctx, indent, struct_name, struct_info):
             print(indent + '    mrb_get_args(mrb, "o", &argv);', file = sys.stdout)
             if is_pointer_like_type(field.type_name):
                 print(indent + f'    instance->{field.element_name} = DATA_PTR(argv);', file = sys.stdout)
-            elif any(ch.isupper() for ch in field.type_name):
+            elif any(ch.isupper() for ch in field.type_name) and not is_enum_type_name(ctx, field.type_name):
                 field_type_name_alias = field.type_name
                 if field.type_name == "Texture2D":
                     field_type_name_alias = "Texture"
@@ -390,7 +397,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                     arg_value = f'RSTRING_PTR(argv[{i}])'
                 elif is_pointer_like_type(arg.type_name) or "Callback" in arg.type_name:
                     arg_value = f'DATA_PTR(argv[{i}])'
-                elif any(ch.isupper() for ch in arg.type_name):
+                elif any(ch.isupper() for ch in arg.type_name) and not is_enum_type_name(ctx, arg.type_name):
                     arg_type_name_alias = arg.type_name
                     if arg.type_name == "Texture2D":
                         arg_type_name_alias = "Texture"
@@ -422,7 +429,7 @@ def generate_function_body(ctx, indent = "", module_name = ""):
                 print(indent + f'{retval_type_name} retval = {func_name}({arg_names});', file = sys.stdout)
                 print("", file = sys.stdout)
                 print(indent + f'return mrb_cptr_value(mrb, retval);', file = sys.stdout)
-            elif any(ch.isupper() for ch in retval_type_name):
+            elif any(ch.isupper() for ch in retval_type_name) and not is_enum_type_name(ctx, retval_type_name):
                 retval_type_name_alias = retval_type_name
                 if retval_type_name == "Texture2D":
                     retval_type_name_alias = "Texture"
@@ -473,14 +480,19 @@ def generate_function_entry(ctx, indent = "", module_name = ""):
         print(indent + f'mrb_define_module_function(mrb, mRaylib, "{func_name}", mrb_raylib_{func_name}, {retval_str});', file = sys.stdout)
 
 
-def generate(ctx, *, generate_rclassraylib = True, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
-    indent = "    "
+####################################################################################################
+# Composable pieces, so that multiple libraries (raylib/raygui/physac) can share one preamble
+# and be emitted into a single translation unit without duplicating shared struct bindings.
+####################################################################################################
 
+def generate_header_comment():
     print("// Copyright (c) 2023-2026 vaiorabbit <http://twitter.com/vaiorabbit>", file = sys.stdout)
     print("// - Autogenerated. Do NOT edit.", file = sys.stdout)
     print("// - [Experimental] May contain incorrect codes.", file = sys.stdout)
     print("", file = sys.stdout)
 
+
+def generate_includes(*, include_raygui=True, include_physac=True):
     print("""
 #include <mruby.h>
 #include <mruby/array.h>
@@ -489,42 +501,52 @@ def generate(ctx, *, generate_rclassraylib = True, module_name = "", table_prefi
 #include <mruby/data.h>
 #include <mruby/string.h>
 
-#include <raylib.h>
-
+#include <raylib.h>""", file = sys.stdout)
+    if include_raygui:
+        print("#include <raygui.h>", file = sys.stdout)
+    if include_physac:
+        print("#include <physac.h>", file = sys.stdout)
+    print("""
 #include <string.h>""", file = sys.stdout)
 
-    if generate_rclassraylib:
-        print("""
+
+def generate_mRaylib_global():
+    print("""
 struct RClass* mRaylib;
 
 """, file = sys.stdout)
 
-    # struct/union : RClass and mrb_data_type
 
-    # struct/union
-    if len(ctx.decl_structs) > 0:
-        print("// Struct\n", file = sys.stdout)
-        generate_structunion_rclass_datatype(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
-        print("", file = sys.stdout)
+def generate_structs(ctx, struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    if len(ctx.decl_structs) <= 0:
+        return
+    print("// Struct\n", file = sys.stdout)
+    generate_structunion_rclass_datatype(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
+    print("", file = sys.stdout)
+    print("// Struct\n", file = sys.stdout)
+    generate_structunion_methods(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
+    print("", file = sys.stdout)
 
-    # struct/union methods
-    if len(ctx.decl_structs) > 0:
-        print("// Struct\n", file = sys.stdout)
-        generate_structunion_methods(ctx, "", struct_prefix, struct_postfix, struct_alias, json_schema)
-        print("", file = sys.stdout)
 
-    # function
-    if len(ctx.decl_functions) > 0:
-        print("// Function\n", file = sys.stdout)
-        generate_function_body(ctx, indent, module_name)
+def generate_functions(ctx, indent = "    ", module_name = ""):
+    if len(ctx.decl_functions) <= 0:
+        return
+    print("// Function\n", file = sys.stdout)
+    generate_function_body(ctx, indent, module_name)
 
-    if generate_rclassraylib:
+
+def generate_module_init(ctx, *, module_name, define_module, indent = "    ", struct_prefix="", struct_postfix="", struct_alias=None, json_schema=None):
+    """Emits mrb_<module_name>_module_init(). `define_module` selects between the raylib
+    entry point (creates the Raylib module) and the raygui/physac entry points (which
+    receive the already-created Raylib module's RClass and register into it)."""
+
+    if define_module:
         print(f'void mrb_{module_name}_module_init(mrb_state* mrb)', file = sys.stdout)
     else:
         print(f'void mrb_{module_name}_module_init(struct RClass* mRaylib, mrb_state* mrb)', file = sys.stdout)
 
     print('{', file = sys.stdout)
-    if generate_rclassraylib:
+    if define_module:
         print(indent + "mRaylib = mrb_define_module(mrb, \"Raylib\");\n", file = sys.stdout)
 
     # macro
@@ -549,6 +571,24 @@ struct RClass* mRaylib;
         generate_function_entry(ctx, indent, module_name)
 
     print('}', file = sys.stdout)
+
+
+def generate(ctx, *, generate_rclassraylib = True, module_name = "", table_prefix = "Raylib_", typedef_prefix="", typedef_postfix="", struct_prefix="", struct_postfix="", struct_alias=None, function_prefix="", function_postfix="", json_schema=None):
+    """Single-library convenience wrapper kept for backward compatibility: emits the full
+    preamble + one module_init for a single ctx. For multi-library output (raylib + raygui +
+    physac in one file), call generate_header_comment/generate_includes/generate_mRaylib_global
+    once, then generate_structs/generate_functions/generate_module_init once per ctx instead."""
+    indent = "    "
+
+    generate_header_comment()
+    generate_includes()
+    if generate_rclassraylib:
+        generate_mRaylib_global()
+    generate_structs(ctx, struct_prefix, struct_postfix, struct_alias, json_schema)
+    generate_functions(ctx, indent, module_name)
+    generate_module_init(ctx, module_name = module_name, define_module = generate_rclassraylib,
+                         indent = indent, struct_prefix = struct_prefix, struct_postfix = struct_postfix,
+                         struct_alias = struct_alias, json_schema = json_schema)
 
 
 if __name__ == "__main__":

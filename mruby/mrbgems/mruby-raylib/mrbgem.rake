@@ -7,25 +7,33 @@ MRuby::Gem::Specification.new('mruby-raylib') do |spec|
   raylib_include = File.join(raylib_root, 'include')
   raylib_lib = File.join(raylib_root, 'lib')
 
+  raygui_root = ENV['RAYGUI_ROOT'] || File.expand_path('../../third_party/raygui', __dir__)
+  raygui_include = File.join(raygui_root, 'include')
+  raygui_lib = File.join(raygui_root, 'lib')
+
+  physac_root = ENV['PHYSAC_ROOT'] || File.expand_path('../../third_party/physac', __dir__)
+  physac_include = File.join(physac_root, 'include')
+  physac_lib = File.join(physac_root, 'lib')
+  
   for_wasm = ENV['BUILD_FOR_WASM'] != nil
 
-  unless File.exist?(File.join(raylib_include, 'raylib.h'))
-    raise "raylib headers not found: #{raylib_include}"
-  end
+  # unless File.exist?(File.join(raylib_include, 'raylib.h'))
+  #   raise "raylib headers not found: #{raylib_include}"
+  # end
 
-  if for_wasm or !spec.for_windows?
-    unless File.exist?(File.join(raylib_lib, 'libraylib.a'))
-      raise "raylib library not found: #{File.join(raylib_lib, 'libraylib.a')}"
-    end
-  else ## if spec.for_windows?
-    unless File.exist?(File.join(raylib_lib, 'raylib.lib'))
-      raise "raylib library not found: #{File.join(raylib_lib, 'raylib.lib')}"
-    end
-  end    
+  # if for_wasm or !spec.for_windows?
+  #   unless File.exist?(File.join(raylib_lib, 'libraylib.a'))
+  #     raise "raylib library not found: #{File.join(raylib_lib, 'libraylib.a')}"
+  #   end
+  # else ## if spec.for_windows?
+  #   unless File.exist?(File.join(raylib_lib, 'raylib.lib'))
+  #     raise "raylib library not found: #{File.join(raylib_lib, 'raylib.lib')}"
+  #   end
+  # end    
 
-  spec.cc.include_paths << raylib_include
-  spec.linker.library_paths << raylib_lib
-  spec.linker.libraries << 'raylib'
+  spec.cc.include_paths << raylib_include << raygui_include << physac_include
+  spec.linker.library_paths << raylib_lib << raygui_lib << physac_lib
+  spec.linker.libraries << 'raylib' << 'raygui' << 'physac'
 
   spec.build.defines << "HAVE_MRUBY_RAYLIB_GEM"
 

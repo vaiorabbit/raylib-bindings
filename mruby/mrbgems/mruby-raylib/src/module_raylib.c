@@ -11,6 +11,8 @@
 #include <mruby/string.h>
 
 #include <raylib.h>
+#include <raygui.h>
+#include <physac.h>
 
 #include <string.h>
 
@@ -4320,6 +4322,1093 @@ static mrb_value mrb_raylib_AutomationEventList_events_set(mrb_state* mrb, mrb_v
     mrb_value argv;
     mrb_get_args(mrb, "o", &argv);
     instance->events = DATA_PTR(argv);
+
+    return mrb_nil_value();
+}
+
+
+// Struct
+
+struct RClass* cRaylibGuiStyleProp;
+static const struct mrb_data_type mrb_raylib_struct_GuiStyleProp = {
+    "GuiStyleProp", mrb_free
+};
+
+
+// Struct
+
+static mrb_value mrb_raylib_GuiStyleProp_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 3) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 3)", argc);
+    }
+    GuiStyleProp* instance = (GuiStyleProp*)mrb_malloc(mrb, sizeof(GuiStyleProp));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(GuiStyleProp));
+    }
+    else {
+        mrb_value argv[3];
+        void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+        mrb_get_args_a(mrb, "ooo", ptrs);
+        instance->controlId = mrb_as_int(mrb, argv[0]);
+        instance->propertyId = mrb_as_int(mrb, argv[1]);
+        instance->propertyValue = mrb_as_int(mrb, argv[2]);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_GuiStyleProp);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(GuiStyleProp));
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_controlId_get(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    return mrb_int_value(mrb, instance->controlId);
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_controlId_set(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->controlId = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_propertyId_get(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    return mrb_int_value(mrb, instance->propertyId);
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_propertyId_set(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->propertyId = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_propertyValue_get(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    return mrb_int_value(mrb, instance->propertyValue);
+}
+
+static mrb_value mrb_raylib_GuiStyleProp_propertyValue_set(mrb_state* mrb, mrb_value self)
+{
+    GuiStyleProp* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_GuiStyleProp, GuiStyleProp);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->propertyValue = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+
+// Struct
+
+struct RClass* cRaylibMatrix2x2;
+static const struct mrb_data_type mrb_raylib_struct_Matrix2x2 = {
+    "Matrix2x2", mrb_free
+};
+
+struct RClass* cRaylibPhysicsVertexData;
+static const struct mrb_data_type mrb_raylib_struct_PhysicsVertexData = {
+    "PhysicsVertexData", mrb_free
+};
+
+struct RClass* cRaylibPhysicsShape;
+static const struct mrb_data_type mrb_raylib_struct_PhysicsShape = {
+    "PhysicsShape", mrb_free
+};
+
+struct RClass* cRaylibPhysicsBodyData;
+static const struct mrb_data_type mrb_raylib_struct_PhysicsBodyData = {
+    "PhysicsBodyData", mrb_free
+};
+
+struct RClass* cRaylibPhysicsManifoldData;
+static const struct mrb_data_type mrb_raylib_struct_PhysicsManifoldData = {
+    "PhysicsManifoldData", mrb_free
+};
+
+
+// Struct
+
+static mrb_value mrb_raylib_Matrix2x2_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 4) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 4)", argc);
+    }
+    Matrix2x2* instance = (Matrix2x2*)mrb_malloc(mrb, sizeof(Matrix2x2));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(Matrix2x2));
+    }
+    else {
+        mrb_value argv[4];
+        void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+        mrb_get_args_a(mrb, "oooo", ptrs);
+        instance->m00 = mrb_as_float(mrb, argv[0]);
+        instance->m01 = mrb_as_float(mrb, argv[1]);
+        instance->m10 = mrb_as_float(mrb, argv[2]);
+        instance->m11 = mrb_as_float(mrb, argv[3]);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_Matrix2x2);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_Matrix2x2_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(Matrix2x2));
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m00_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    return mrb_float_value(mrb, instance->m00);
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m00_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m00 = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m01_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    return mrb_float_value(mrb, instance->m01);
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m01_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m01 = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m10_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    return mrb_float_value(mrb, instance->m10);
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m10_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m10 = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m11_get(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    return mrb_float_value(mrb, instance->m11);
+}
+
+static mrb_value mrb_raylib_Matrix2x2_m11_set(mrb_state* mrb, mrb_value self)
+{
+    Matrix2x2* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->m11 = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 3) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 3)", argc);
+    }
+    PhysicsVertexData* instance = (PhysicsVertexData*)mrb_malloc(mrb, sizeof(PhysicsVertexData));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(PhysicsVertexData));
+    }
+    else {
+        mrb_value argv[3];
+        void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+        mrb_get_args_a(mrb, "ooo", ptrs);
+        instance->vertexCount = mrb_as_int(mrb, argv[0]);
+        memcpy(instance->positions, DATA_PTR(argv[1]), sizeof(Vector2) * 24);
+        memcpy(instance->normals, DATA_PTR(argv[2]), sizeof(Vector2) * 24);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_PhysicsVertexData);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(PhysicsVertexData));
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_vertexCount_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    return mrb_int_value(mrb, instance->vertexCount);
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_vertexCount_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vertexCount = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_positions_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    mrb_value vals[24] = { mrb_obj_value(&instance->positions[0]), mrb_obj_value(&instance->positions[1]), mrb_obj_value(&instance->positions[2]), mrb_obj_value(&instance->positions[3]), mrb_obj_value(&instance->positions[4]), mrb_obj_value(&instance->positions[5]), mrb_obj_value(&instance->positions[6]), mrb_obj_value(&instance->positions[7]), mrb_obj_value(&instance->positions[8]), mrb_obj_value(&instance->positions[9]), mrb_obj_value(&instance->positions[10]), mrb_obj_value(&instance->positions[11]), mrb_obj_value(&instance->positions[12]), mrb_obj_value(&instance->positions[13]), mrb_obj_value(&instance->positions[14]), mrb_obj_value(&instance->positions[15]), mrb_obj_value(&instance->positions[16]), mrb_obj_value(&instance->positions[17]), mrb_obj_value(&instance->positions[18]), mrb_obj_value(&instance->positions[19]), mrb_obj_value(&instance->positions[20]), mrb_obj_value(&instance->positions[21]), mrb_obj_value(&instance->positions[22]), mrb_obj_value(&instance->positions[23]), };
+
+    return mrb_ary_new_from_values(mrb, 24, vals);
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_positions_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->positions[0] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[0], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[1] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[1], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[2] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[2], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[3] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[3], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[4] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[4], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[5] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[5], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[6] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[6], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[7] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[7], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[8] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[8], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[9] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[9], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[10] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[10], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[11] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[11], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[12] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[12], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[13] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[13], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[14] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[14], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[15] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[15], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[16] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[16], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[17] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[17], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[18] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[18], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[19] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[19], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[20] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[20], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[21] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[21], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[22] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[22], &mrb_raylib_struct_Vector2, Vector2);
+    instance->positions[23] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[23], &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_normals_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    mrb_value vals[24] = { mrb_obj_value(&instance->normals[0]), mrb_obj_value(&instance->normals[1]), mrb_obj_value(&instance->normals[2]), mrb_obj_value(&instance->normals[3]), mrb_obj_value(&instance->normals[4]), mrb_obj_value(&instance->normals[5]), mrb_obj_value(&instance->normals[6]), mrb_obj_value(&instance->normals[7]), mrb_obj_value(&instance->normals[8]), mrb_obj_value(&instance->normals[9]), mrb_obj_value(&instance->normals[10]), mrb_obj_value(&instance->normals[11]), mrb_obj_value(&instance->normals[12]), mrb_obj_value(&instance->normals[13]), mrb_obj_value(&instance->normals[14]), mrb_obj_value(&instance->normals[15]), mrb_obj_value(&instance->normals[16]), mrb_obj_value(&instance->normals[17]), mrb_obj_value(&instance->normals[18]), mrb_obj_value(&instance->normals[19]), mrb_obj_value(&instance->normals[20]), mrb_obj_value(&instance->normals[21]), mrb_obj_value(&instance->normals[22]), mrb_obj_value(&instance->normals[23]), };
+
+    return mrb_ary_new_from_values(mrb, 24, vals);
+}
+
+static mrb_value mrb_raylib_PhysicsVertexData_normals_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsVertexData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->normals[0] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[0], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[1] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[1], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[2] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[2], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[3] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[3], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[4] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[4], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[5] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[5], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[6] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[6], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[7] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[7], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[8] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[8], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[9] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[9], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[10] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[10], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[11] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[11], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[12] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[12], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[13] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[13], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[14] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[14], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[15] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[15], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[16] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[16], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[17] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[17], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[18] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[18], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[19] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[19], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[20] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[20], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[21] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[21], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[22] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[22], &mrb_raylib_struct_Vector2, Vector2);
+    instance->normals[23] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[23], &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShape_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 5) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 5)", argc);
+    }
+    PhysicsShape* instance = (PhysicsShape*)mrb_malloc(mrb, sizeof(PhysicsShape));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(PhysicsShape));
+    }
+    else {
+        mrb_value argv[5];
+        void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+        mrb_get_args_a(mrb, "ooooo", ptrs);
+        instance->type = mrb_as_int(mrb, argv[0]);
+        instance->body = DATA_PTR(argv[1]);
+        instance->vertexData = *(PhysicsVertexData*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+        instance->radius = mrb_as_float(mrb, argv[3]);
+        instance->transform = *(Matrix2x2*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_PhysicsShape);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_PhysicsShape_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(PhysicsShape));
+}
+
+static mrb_value mrb_raylib_PhysicsShape_type_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_int_value(mrb, instance->type);
+}
+
+static mrb_value mrb_raylib_PhysicsShape_type_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->type = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShape_body_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_cptr_value(mrb, instance->body);
+}
+
+static mrb_value mrb_raylib_PhysicsShape_body_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->body = DATA_PTR(argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShape_vertexData_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_obj_value(&instance->vertexData);
+}
+
+static mrb_value mrb_raylib_PhysicsShape_vertexData_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->vertexData = *(PhysicsVertexData*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_PhysicsVertexData, PhysicsVertexData);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShape_radius_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_float_value(mrb, instance->radius);
+}
+
+static mrb_value mrb_raylib_PhysicsShape_radius_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->radius = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShape_transform_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_obj_value(&instance->transform);
+}
+
+static mrb_value mrb_raylib_PhysicsShape_transform_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsShape* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->transform = *(Matrix2x2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Matrix2x2, Matrix2x2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 19) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 19)", argc);
+    }
+    PhysicsBodyData* instance = (PhysicsBodyData*)mrb_malloc(mrb, sizeof(PhysicsBodyData));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(PhysicsBodyData));
+    }
+    else {
+        mrb_value argv[19];
+        void* ptrs[19] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], &argv[9], &argv[10], &argv[11], &argv[12], &argv[13], &argv[14], &argv[15], &argv[16], &argv[17], &argv[18], };
+        mrb_get_args_a(mrb, "ooooooooooooooooooo", ptrs);
+        instance->id = mrb_as_int(mrb, argv[0]);
+        instance->enabled = mrb_as_int(mrb, argv[1]);
+        instance->position = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);
+        instance->velocity = *(Vector2*)DATA_GET_PTR(mrb, argv[3], &mrb_raylib_struct_Vector2, Vector2);
+        instance->force = *(Vector2*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector2, Vector2);
+        instance->angularVelocity = mrb_as_float(mrb, argv[5]);
+        instance->torque = mrb_as_float(mrb, argv[6]);
+        instance->orient = mrb_as_float(mrb, argv[7]);
+        instance->inertia = mrb_as_float(mrb, argv[8]);
+        instance->inverseInertia = mrb_as_float(mrb, argv[9]);
+        instance->mass = mrb_as_float(mrb, argv[10]);
+        instance->inverseMass = mrb_as_float(mrb, argv[11]);
+        instance->staticFriction = mrb_as_float(mrb, argv[12]);
+        instance->dynamicFriction = mrb_as_float(mrb, argv[13]);
+        instance->restitution = mrb_as_float(mrb, argv[14]);
+        instance->useGravity = mrb_as_int(mrb, argv[15]);
+        instance->isGrounded = mrb_as_int(mrb, argv[16]);
+        instance->freezeOrient = mrb_as_int(mrb, argv[17]);
+        instance->shape = *(PhysicsShape*)DATA_GET_PTR(mrb, argv[18], &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_PhysicsBodyData);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(PhysicsBodyData));
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_id_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_int_value(mrb, instance->id);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_id_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->id = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_enabled_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_int_value(mrb, instance->enabled);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_enabled_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->enabled = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_position_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_obj_value(&instance->position);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_position_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->position = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_velocity_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_obj_value(&instance->velocity);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_velocity_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->velocity = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_force_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_obj_value(&instance->force);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_force_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->force = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_angularVelocity_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->angularVelocity);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_angularVelocity_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->angularVelocity = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_torque_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->torque);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_torque_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->torque = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_orient_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->orient);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_orient_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->orient = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inertia_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->inertia);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inertia_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->inertia = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inverseInertia_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->inverseInertia);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inverseInertia_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->inverseInertia = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_mass_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->mass);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_mass_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->mass = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inverseMass_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->inverseMass);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_inverseMass_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->inverseMass = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_staticFriction_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->staticFriction);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_staticFriction_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->staticFriction = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_dynamicFriction_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->dynamicFriction);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_dynamicFriction_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->dynamicFriction = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_restitution_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_float_value(mrb, instance->restitution);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_restitution_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->restitution = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_useGravity_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_int_value(mrb, instance->useGravity);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_useGravity_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->useGravity = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_isGrounded_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_int_value(mrb, instance->isGrounded);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_isGrounded_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->isGrounded = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_freezeOrient_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_int_value(mrb, instance->freezeOrient);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_freezeOrient_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->freezeOrient = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_shape_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    return mrb_obj_value(&instance->shape);
+}
+
+static mrb_value mrb_raylib_PhysicsBodyData_shape_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsBodyData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsBodyData, PhysicsBodyData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->shape = *(PhysicsShape*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_PhysicsShape, PhysicsShape);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_initialize(mrb_state* mrb, mrb_value self)
+{
+    mrb_int argc = mrb_get_argc(mrb);
+    if (argc != 0 && argc != 10) {
+        mrb_raisef(mrb, E_ARGUMENT_ERROR, "wrong number of arguments (given %i, expected 0 or 10)", argc);
+    }
+    PhysicsManifoldData* instance = (PhysicsManifoldData*)mrb_malloc(mrb, sizeof(PhysicsManifoldData));
+
+    if (argc == 0) {
+        memset(instance, 0, sizeof(PhysicsManifoldData));
+    }
+    else {
+        mrb_value argv[10];
+        void* ptrs[10] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], &argv[8], &argv[9], };
+        mrb_get_args_a(mrb, "oooooooooo", ptrs);
+        instance->id = mrb_as_int(mrb, argv[0]);
+        instance->bodyA = DATA_PTR(argv[1]);
+        instance->bodyB = DATA_PTR(argv[2]);
+        instance->penetration = mrb_as_float(mrb, argv[3]);
+        instance->normal = *(Vector2*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Vector2, Vector2);
+        memcpy(instance->contacts, DATA_PTR(argv[5]), sizeof(Vector2) * 2);
+        instance->contactsCount = mrb_as_int(mrb, argv[6]);
+        instance->restitution = mrb_as_float(mrb, argv[7]);
+        instance->dynamicFriction = mrb_as_float(mrb, argv[8]);
+        instance->staticFriction = mrb_as_float(mrb, argv[9]);
+    }
+    mrb_data_init(self, instance, &mrb_raylib_struct_PhysicsManifoldData);
+
+    return self;
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_class_size(mrb_state* mrb, mrb_value self)
+{
+    return mrb_int_value(mrb, sizeof(PhysicsManifoldData));
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_id_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_int_value(mrb, instance->id);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_id_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->id = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_bodyA_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_cptr_value(mrb, instance->bodyA);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_bodyA_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bodyA = DATA_PTR(argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_bodyB_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_cptr_value(mrb, instance->bodyB);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_bodyB_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->bodyB = DATA_PTR(argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_penetration_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_float_value(mrb, instance->penetration);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_penetration_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->penetration = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_normal_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_obj_value(&instance->normal);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_normal_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->normal = *(Vector2*)DATA_GET_PTR(mrb, argv, &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_contacts_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value vals[2] = { mrb_obj_value(&instance->contacts[0]), mrb_obj_value(&instance->contacts[1]), };
+
+    return mrb_ary_new_from_values(mrb, 2, vals);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_contacts_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "A", &argv);
+    instance->contacts[0] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[0], &mrb_raylib_struct_Vector2, Vector2);
+    instance->contacts[1] = *(Vector2*)DATA_GET_PTR(mrb, RARRAY_PTR(argv)[1], &mrb_raylib_struct_Vector2, Vector2);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_contactsCount_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_int_value(mrb, instance->contactsCount);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_contactsCount_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->contactsCount = mrb_as_int(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_restitution_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_float_value(mrb, instance->restitution);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_restitution_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->restitution = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_dynamicFriction_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_float_value(mrb, instance->dynamicFriction);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_dynamicFriction_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->dynamicFriction = mrb_as_float(mrb, argv);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_staticFriction_get(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    return mrb_float_value(mrb, instance->staticFriction);
+}
+
+static mrb_value mrb_raylib_PhysicsManifoldData_staticFriction_set(mrb_state* mrb, mrb_value self)
+{
+    PhysicsManifoldData* instance = DATA_GET_PTR(mrb, self, &mrb_raylib_struct_PhysicsManifoldData, PhysicsManifoldData);
+
+    mrb_value argv;
+    mrb_get_args(mrb, "o", &argv);
+    instance->staticFriction = mrb_as_float(mrb, argv);
 
     return mrb_nil_value();
 }
@@ -12221,6 +13310,1020 @@ static mrb_value mrb_raylib_DetachAudioMixedProcessor(mrb_state* mrb, mrb_value 
     return mrb_nil_value();
 }
 
+// Function
+
+static mrb_value mrb_raylib_GuiEnable(mrb_state* mrb, mrb_value self)
+{
+    GuiEnable();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiDisable(mrb_state* mrb, mrb_value self)
+{
+    GuiDisable();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiLock(mrb_state* mrb, mrb_value self)
+{
+    GuiLock();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiUnlock(mrb_state* mrb, mrb_value self)
+{
+    GuiUnlock();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiIsLocked(mrb_state* mrb, mrb_value self)
+{
+    bool retval = GuiIsLocked();
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
+static mrb_value mrb_raylib_GuiSetAlpha(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    float alpha = mrb_as_float(mrb, argv[0]);
+
+    GuiSetAlpha(alpha);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiSetState(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int state = mrb_as_int(mrb, argv[0]);
+
+    GuiSetState(state);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiGetState(mrb_state* mrb, mrb_value self)
+{
+    int retval = GuiGetState();
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiSetFont(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    Font font = *(Font*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Font, Font);;
+
+    GuiSetFont(font);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiGetFont(mrb_state* mrb, mrb_value self)
+{
+    Font* retval = (Font*)mrb_malloc(mrb, sizeof(Font));
+    *retval = GuiGetFont();
+
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibFont, &mrb_raylib_struct_Font, retval));
+}
+
+static mrb_value mrb_raylib_GuiSetStyle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    int control = mrb_as_int(mrb, argv[0]);
+    int property = mrb_as_int(mrb, argv[1]);
+    int value = mrb_as_int(mrb, argv[2]);
+
+    GuiSetStyle(control, property, value);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiGetStyle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    int control = mrb_as_int(mrb, argv[0]);
+    int property = mrb_as_int(mrb, argv[1]);
+
+    int retval = GuiGetStyle(control, property);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLoadStyle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * fileName = RSTRING_PTR(argv[0]);
+
+    GuiLoadStyle(fileName);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiLoadStyleFromMemory(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    const unsigned char * fileData = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+
+    GuiLoadStyleFromMemory(fileData, dataSize);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiLoadStyleDefault(mrb_state* mrb, mrb_value self)
+{
+    GuiLoadStyleDefault();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiEnableTooltip(mrb_state* mrb, mrb_value self)
+{
+    GuiEnableTooltip();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiDisableTooltip(mrb_state* mrb, mrb_value self)
+{
+    GuiDisableTooltip();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiSetTooltip(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * tooltip = RSTRING_PTR(argv[0]);
+
+    GuiSetTooltip(tooltip);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiIconText(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    int iconId = mrb_as_int(mrb, argv[0]);
+    const char * text = RSTRING_PTR(argv[1]);
+
+    const char * retval = GuiIconText(iconId, text);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiSetIconScale(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int scale = mrb_as_int(mrb, argv[0]);
+
+    GuiSetIconScale(scale);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiGetIcons(mrb_state* mrb, mrb_value self)
+{
+    unsigned int * retval = GuiGetIcons();
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLoadIcons(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    const char * fileName = RSTRING_PTR(argv[0]);
+    bool loadIconsName = mrb_as_int(mrb, argv[1]);
+
+    char ** retval = GuiLoadIcons(fileName, loadIconsName);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLoadIconsFromMemory(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    const unsigned char * fileData = DATA_PTR(argv[0]);
+    int dataSize = mrb_as_int(mrb, argv[1]);
+    bool loadIconsName = mrb_as_int(mrb, argv[2]);
+
+    char ** retval = GuiLoadIconsFromMemory(fileData, dataSize, loadIconsName);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiDrawIcon(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    int iconId = mrb_as_int(mrb, argv[0]);
+    int posX = mrb_as_int(mrb, argv[1]);
+    int posY = mrb_as_int(mrb, argv[2]);
+    int pixelSize = mrb_as_int(mrb, argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+
+    GuiDrawIcon(iconId, posX, posY, pixelSize, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GuiGetTextWidth(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * text = RSTRING_PTR(argv[0]);
+
+    int retval = GuiGetTextWidth(text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiWindowBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * title = RSTRING_PTR(argv[1]);
+
+    int retval = GuiWindowBox(bounds, title);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiGroupBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiGroupBox(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLine(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiLine(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiPanel(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiPanel(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiScrollPanel(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    Rectangle content = *(Rectangle*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Rectangle, Rectangle);;
+    Vector2 * scroll = DATA_PTR(argv[3]);
+    Rectangle * view = DATA_PTR(argv[4]);
+
+    int retval = GuiScrollPanel(bounds, text, content, scroll, view);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLabel(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiLabel(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiButton(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiButton(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiLabelButton(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiLabelButton(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiToggle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    bool * active = DATA_PTR(argv[2]);
+
+    int retval = GuiToggle(bounds, text, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiToggleGroup(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * active = DATA_PTR(argv[2]);
+
+    int retval = GuiToggleGroup(bounds, text, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiToggleSlider(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * active = DATA_PTR(argv[2]);
+
+    int retval = GuiToggleSlider(bounds, text, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiCheckBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    bool * checked = DATA_PTR(argv[2]);
+
+    int retval = GuiCheckBox(bounds, text, checked);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiComboBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * active = DATA_PTR(argv[2]);
+
+    int retval = GuiComboBox(bounds, text, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiDropdownBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * active = DATA_PTR(argv[2]);
+    bool editMode = mrb_as_int(mrb, argv[3]);
+
+    int retval = GuiDropdownBox(bounds, text, active, editMode);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiSpinner(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * value = DATA_PTR(argv[2]);
+    int minValue = mrb_as_int(mrb, argv[3]);
+    int maxValue = mrb_as_int(mrb, argv[4]);
+    bool editMode = mrb_as_int(mrb, argv[5]);
+
+    int retval = GuiSpinner(bounds, text, value, minValue, maxValue, editMode);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiValueBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * value = DATA_PTR(argv[2]);
+    int minValue = mrb_as_int(mrb, argv[3]);
+    int maxValue = mrb_as_int(mrb, argv[4]);
+    bool editMode = mrb_as_int(mrb, argv[5]);
+
+    int retval = GuiValueBox(bounds, text, value, minValue, maxValue, editMode);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiValueBoxFloat(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    char * textValue = DATA_PTR(argv[2]);
+    float * value = DATA_PTR(argv[3]);
+    bool editMode = mrb_as_int(mrb, argv[4]);
+
+    int retval = GuiValueBoxFloat(bounds, text, textValue, value, editMode);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiTextBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    char * text = DATA_PTR(argv[1]);
+    int textSize = mrb_as_int(mrb, argv[2]);
+    bool editMode = mrb_as_int(mrb, argv[3]);
+
+    int retval = GuiTextBox(bounds, text, textSize, editMode);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiSlider(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * textLeft = RSTRING_PTR(argv[1]);
+    const char * textRight = RSTRING_PTR(argv[2]);
+    float * value = DATA_PTR(argv[3]);
+    float minValue = mrb_as_float(mrb, argv[4]);
+    float maxValue = mrb_as_float(mrb, argv[5]);
+
+    int retval = GuiSlider(bounds, textLeft, textRight, value, minValue, maxValue);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiSliderBar(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * textLeft = RSTRING_PTR(argv[1]);
+    const char * textRight = RSTRING_PTR(argv[2]);
+    float * value = DATA_PTR(argv[3]);
+    float minValue = mrb_as_float(mrb, argv[4]);
+    float maxValue = mrb_as_float(mrb, argv[5]);
+
+    int retval = GuiSliderBar(bounds, textLeft, textRight, value, minValue, maxValue);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiProgressBar(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * textLeft = RSTRING_PTR(argv[1]);
+    const char * textRight = RSTRING_PTR(argv[2]);
+    float * value = DATA_PTR(argv[3]);
+    float minValue = mrb_as_float(mrb, argv[4]);
+    float maxValue = mrb_as_float(mrb, argv[5]);
+
+    int retval = GuiProgressBar(bounds, textLeft, textRight, value, minValue, maxValue);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiStatusBar(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiStatusBar(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiDummyRec(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+
+    int retval = GuiDummyRec(bounds, text);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiGrid(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    float spacing = mrb_as_float(mrb, argv[2]);
+    int subdivs = mrb_as_int(mrb, argv[3]);
+    Vector2 * mouseCell = DATA_PTR(argv[4]);
+
+    int retval = GuiGrid(bounds, text, spacing, subdivs, mouseCell);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiListView(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * scrollIndex = DATA_PTR(argv[2]);
+    int * active = DATA_PTR(argv[3]);
+
+    int retval = GuiListView(bounds, text, scrollIndex, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiListViewEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    char ** text = DATA_PTR(argv[1]);
+    int count = mrb_as_int(mrb, argv[2]);
+    int * scrollIndex = DATA_PTR(argv[3]);
+    int * active = DATA_PTR(argv[4]);
+    int * focus = DATA_PTR(argv[5]);
+
+    int retval = GuiListViewEx(bounds, text, count, scrollIndex, active, focus);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiTabBar(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    int * hscroll = DATA_PTR(argv[2]);
+    int * active = DATA_PTR(argv[3]);
+
+    int retval = GuiTabBar(bounds, text, hscroll, active);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiTabBarEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[6];
+    void* ptrs[6] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], };
+    mrb_get_args_a(mrb, "oooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    char ** text = DATA_PTR(argv[1]);
+    int count = mrb_as_int(mrb, argv[2]);
+    int * hscroll = DATA_PTR(argv[3]);
+    int * active = DATA_PTR(argv[4]);
+    int * focus = DATA_PTR(argv[5]);
+
+    int retval = GuiTabBarEx(bounds, text, count, hscroll, active, focus);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiMessageBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * title = RSTRING_PTR(argv[1]);
+    const char * message = RSTRING_PTR(argv[2]);
+    const char * btnText = RSTRING_PTR(argv[3]);
+    int * btnActive = DATA_PTR(argv[4]);
+
+    int retval = GuiMessageBox(bounds, title, message, btnText, btnActive);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiTextInputBox(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[8];
+    void* ptrs[8] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], };
+    mrb_get_args_a(mrb, "oooooooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * title = RSTRING_PTR(argv[1]);
+    const char * message = RSTRING_PTR(argv[2]);
+    char * text = DATA_PTR(argv[3]);
+    int textSize = mrb_as_int(mrb, argv[4]);
+    const char * btnText = RSTRING_PTR(argv[5]);
+    int * btnActive = DATA_PTR(argv[6]);
+    bool * secretViewActive = DATA_PTR(argv[7]);
+
+    int retval = GuiTextInputBox(bounds, title, message, text, textSize, btnText, btnActive, secretViewActive);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorPicker(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    Color * color = DATA_PTR(argv[2]);
+
+    int retval = GuiColorPicker(bounds, text, color);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorPanel(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    Color * color = DATA_PTR(argv[2]);
+
+    int retval = GuiColorPanel(bounds, text, color);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorBarAlpha(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    float * alpha = DATA_PTR(argv[2]);
+
+    int retval = GuiColorBarAlpha(bounds, text, alpha);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorBarHue(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    float * value = DATA_PTR(argv[2]);
+
+    int retval = GuiColorBarHue(bounds, text, value);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorPickerHSV(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    Vector3 * colorHsv = DATA_PTR(argv[2]);
+
+    int retval = GuiColorPickerHSV(bounds, text, colorHsv);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GuiColorPanelHSV(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Rectangle bounds = *(Rectangle*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Rectangle, Rectangle);;
+    const char * text = RSTRING_PTR(argv[1]);
+    Vector3 * colorHsv = DATA_PTR(argv[2]);
+
+    int retval = GuiColorPanelHSV(bounds, text, colorHsv);
+
+    return mrb_int_value(mrb, retval);
+}
+
+// Function
+
+static mrb_value mrb_raylib_InitPhysics(mrb_state* mrb, mrb_value self)
+{
+    InitPhysics();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_UpdatePhysics(mrb_state* mrb, mrb_value self)
+{
+    UpdatePhysics();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_ResetPhysics(mrb_state* mrb, mrb_value self)
+{
+    ResetPhysics();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_ClosePhysics(mrb_state* mrb, mrb_value self)
+{
+    ClosePhysics();
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetPhysicsTimeStep(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    double delta = mrb_as_float(mrb, argv[0]);
+
+    SetPhysicsTimeStep(delta);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetPhysicsGravity(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    float x = mrb_as_float(mrb, argv[0]);
+    float y = mrb_as_float(mrb, argv[1]);
+
+    SetPhysicsGravity(x, y);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_CreatePhysicsBodyCircle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    Vector2 pos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float radius = mrb_as_float(mrb, argv[1]);
+    float density = mrb_as_float(mrb, argv[2]);
+
+    PhysicsBody retval = CreatePhysicsBodyCircle(pos, radius, density);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_CreatePhysicsBodyRectangle(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 pos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float width = mrb_as_float(mrb, argv[1]);
+    float height = mrb_as_float(mrb, argv[2]);
+    float density = mrb_as_float(mrb, argv[3]);
+
+    PhysicsBody retval = CreatePhysicsBodyRectangle(pos, width, height, density);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_CreatePhysicsBodyPolygon(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[4];
+    void* ptrs[4] = { &argv[0], &argv[1], &argv[2], &argv[3], };
+    mrb_get_args_a(mrb, "oooo", ptrs);
+    Vector2 pos = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float radius = mrb_as_float(mrb, argv[1]);
+    int sides = mrb_as_int(mrb, argv[2]);
+    float density = mrb_as_float(mrb, argv[3]);
+
+    PhysicsBody retval = CreatePhysicsBodyPolygon(pos, radius, sides, density);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_DestroyPhysicsBody(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+
+    DestroyPhysicsBody(body);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsAddForce(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+    Vector2 force = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+
+    PhysicsAddForce(body, force);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsAddTorque(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+    float amount = mrb_as_float(mrb, argv[1]);
+
+    PhysicsAddTorque(body, amount);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_PhysicsShatter(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+    Vector2 position = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    float force = mrb_as_float(mrb, argv[2]);
+
+    PhysicsShatter(body, position, force);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_SetPhysicsBodyRotation(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+    float radians = mrb_as_float(mrb, argv[1]);
+
+    SetPhysicsBodyRotation(body, radians);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_GetPhysicsBody(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int index = mrb_as_int(mrb, argv[0]);
+
+    PhysicsBody retval = GetPhysicsBody(index);
+
+    return mrb_cptr_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GetPhysicsBodiesCount(mrb_state* mrb, mrb_value self)
+{
+    int retval = GetPhysicsBodiesCount();
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GetPhysicsShapeType(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int index = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetPhysicsShapeType(index);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GetPhysicsShapeVerticesCount(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    int index = mrb_as_int(mrb, argv[0]);
+
+    int retval = GetPhysicsShapeVerticesCount(index);
+
+    return mrb_int_value(mrb, retval);
+}
+
+static mrb_value mrb_raylib_GetPhysicsShapeVertex(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[2];
+    void* ptrs[2] = { &argv[0], &argv[1], };
+    mrb_get_args_a(mrb, "oo", ptrs);
+    PhysicsBody body = DATA_PTR(argv[0]);
+    int vertex = mrb_as_int(mrb, argv[1]);
+
+    Vector2* retval = (Vector2*)mrb_malloc(mrb, sizeof(Vector2));
+    *retval = GetPhysicsShapeVertex(body, vertex);
+
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibVector2, &mrb_raylib_struct_Vector2, retval));
+}
+
 void mrb_raylib_module_init(mrb_state* mrb)
 {
     mRaylib = mrb_define_module(mrb, "Raylib");
@@ -13705,4 +15808,635 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DetachAudioStreamProcessor", mrb_raylib_DetachAudioStreamProcessor, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "AttachAudioMixedProcessor", mrb_raylib_AttachAudioMixedProcessor, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "DetachAudioMixedProcessor", mrb_raylib_DetachAudioMixedProcessor, MRB_ARGS_REQ(1));
+}
+void mrb_raygui_module_init(struct RClass* mRaylib, mrb_state* mrb)
+{
+    // Define/Macro
+
+    mrb_define_const(mrb, mRaylib, "RAYGUI_VERSION_MAJOR", mrb_int_value(mrb, 5));
+    mrb_define_const(mrb, mRaylib, "RAYGUI_VERSION_MINOR", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "RAYGUI_VERSION_PATCH", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "RAYGUI_VERSION", mrb_str_new_cstr_frozen(mrb, "5.0"));
+    mrb_define_const(mrb, mRaylib, "SCROLLBAR_LEFT_SIDE", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "SCROLLBAR_RIGHT_SIDE", mrb_int_value(mrb, 1));
+
+    // Enum
+
+    // enum GuiResult
+    mrb_define_const(mrb, mRaylib, "RESULT_NONE", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "RESULT_PRESSED", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "RESULT_CHANGED", mrb_int_value(mrb, 2));
+    mrb_define_const(mrb, mRaylib, "RESULT_TAB_CLOSE", mrb_int_value(mrb, 4));
+
+    // enum GuiState
+    mrb_define_const(mrb, mRaylib, "STATE_NORMAL", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "STATE_FOCUSED", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "STATE_PRESSED", mrb_int_value(mrb, 2));
+    mrb_define_const(mrb, mRaylib, "STATE_DISABLED", mrb_int_value(mrb, 3));
+
+    // enum GuiTextAlignment
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_LEFT", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_CENTER", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_RIGHT", mrb_int_value(mrb, 2));
+
+    // enum GuiTextAlignmentVertical
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_TOP", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_MIDDLE", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGN_BOTTOM", mrb_int_value(mrb, 2));
+
+    // enum GuiTextWrapMode
+    mrb_define_const(mrb, mRaylib, "TEXT_WRAP_NONE", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "TEXT_WRAP_CHAR", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "TEXT_WRAP_WORD", mrb_int_value(mrb, 2));
+
+    // enum GuiControl
+    mrb_define_const(mrb, mRaylib, "DEFAULT", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "LABEL", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "BUTTON", mrb_int_value(mrb, 2));
+    mrb_define_const(mrb, mRaylib, "TOGGLE", mrb_int_value(mrb, 3));
+    mrb_define_const(mrb, mRaylib, "SLIDER", mrb_int_value(mrb, 4));
+    mrb_define_const(mrb, mRaylib, "PROGRESSBAR", mrb_int_value(mrb, 5));
+    mrb_define_const(mrb, mRaylib, "CHECKBOX", mrb_int_value(mrb, 6));
+    mrb_define_const(mrb, mRaylib, "COMBOBOX", mrb_int_value(mrb, 7));
+    mrb_define_const(mrb, mRaylib, "DROPDOWNBOX", mrb_int_value(mrb, 8));
+    mrb_define_const(mrb, mRaylib, "TEXTBOX", mrb_int_value(mrb, 9));
+    mrb_define_const(mrb, mRaylib, "VALUEBOX", mrb_int_value(mrb, 10));
+    mrb_define_const(mrb, mRaylib, "TABBAR", mrb_int_value(mrb, 11));
+    mrb_define_const(mrb, mRaylib, "LISTVIEW", mrb_int_value(mrb, 12));
+    mrb_define_const(mrb, mRaylib, "COLORPICKER", mrb_int_value(mrb, 13));
+    mrb_define_const(mrb, mRaylib, "SCROLLBAR", mrb_int_value(mrb, 14));
+    mrb_define_const(mrb, mRaylib, "STATUSBAR", mrb_int_value(mrb, 15));
+
+    // enum GuiControlProperty
+    mrb_define_const(mrb, mRaylib, "BORDER_COLOR_NORMAL", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "BASE_COLOR_NORMAL", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "TEXT_COLOR_NORMAL", mrb_int_value(mrb, 2));
+    mrb_define_const(mrb, mRaylib, "BORDER_COLOR_FOCUSED", mrb_int_value(mrb, 3));
+    mrb_define_const(mrb, mRaylib, "BASE_COLOR_FOCUSED", mrb_int_value(mrb, 4));
+    mrb_define_const(mrb, mRaylib, "TEXT_COLOR_FOCUSED", mrb_int_value(mrb, 5));
+    mrb_define_const(mrb, mRaylib, "BORDER_COLOR_PRESSED", mrb_int_value(mrb, 6));
+    mrb_define_const(mrb, mRaylib, "BASE_COLOR_PRESSED", mrb_int_value(mrb, 7));
+    mrb_define_const(mrb, mRaylib, "TEXT_COLOR_PRESSED", mrb_int_value(mrb, 8));
+    mrb_define_const(mrb, mRaylib, "BORDER_COLOR_DISABLED", mrb_int_value(mrb, 9));
+    mrb_define_const(mrb, mRaylib, "BASE_COLOR_DISABLED", mrb_int_value(mrb, 10));
+    mrb_define_const(mrb, mRaylib, "TEXT_COLOR_DISABLED", mrb_int_value(mrb, 11));
+    mrb_define_const(mrb, mRaylib, "BORDER_WIDTH", mrb_int_value(mrb, 12));
+    mrb_define_const(mrb, mRaylib, "TEXT_PADDING", mrb_int_value(mrb, 13));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGNMENT", mrb_int_value(mrb, 14));
+    mrb_define_const(mrb, mRaylib, "BASEPROP16", mrb_int_value(mrb, 15));
+
+    // enum GuiDefaultProperty
+    mrb_define_const(mrb, mRaylib, "TEXT_SIZE", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "TEXT_SPACING", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "LINE_COLOR", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "BACKGROUND_COLOR", mrb_int_value(mrb, 19));
+    mrb_define_const(mrb, mRaylib, "TEXT_LINE_SPACING", mrb_int_value(mrb, 20));
+    mrb_define_const(mrb, mRaylib, "TEXT_ALIGNMENT_VERTICAL", mrb_int_value(mrb, 21));
+    mrb_define_const(mrb, mRaylib, "TEXT_WRAP_MODE", mrb_int_value(mrb, 22));
+    mrb_define_const(mrb, mRaylib, "EXTPROP08", mrb_int_value(mrb, 23));
+
+    // enum GuiToggleProperty
+    mrb_define_const(mrb, mRaylib, "GROUP_PADDING", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "GROUP_WIDTH_FULL", mrb_int_value(mrb, 17));
+
+    // enum GuiSliderProperty
+    mrb_define_const(mrb, mRaylib, "SLIDER_WIDTH", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "SLIDER_PADDING", mrb_int_value(mrb, 17));
+
+    // enum GuiProgressBarProperty
+    mrb_define_const(mrb, mRaylib, "PROGRESS_PADDING", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "PROGRESS_SIDE", mrb_int_value(mrb, 17));
+
+    // enum GuiScrollBarProperty
+    mrb_define_const(mrb, mRaylib, "ARROWS_SIZE", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "ARROWS_VISIBLE", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "SCROLL_SLIDER_PADDING", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "SCROLL_SLIDER_SIZE", mrb_int_value(mrb, 19));
+    mrb_define_const(mrb, mRaylib, "SCROLL_PADDING", mrb_int_value(mrb, 20));
+    mrb_define_const(mrb, mRaylib, "SCROLL_SPEED", mrb_int_value(mrb, 21));
+
+    // enum GuiCheckBoxProperty
+    mrb_define_const(mrb, mRaylib, "CHECK_PADDING", mrb_int_value(mrb, 16));
+
+    // enum GuiComboBoxProperty
+    mrb_define_const(mrb, mRaylib, "COMBO_BUTTON_WIDTH", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "COMBO_BUTTON_SPACING", mrb_int_value(mrb, 17));
+
+    // enum GuiDropdownBoxProperty
+    mrb_define_const(mrb, mRaylib, "ARROW_PADDING", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "DROPDOWN_ITEMS_SPACING", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "DROPDOWN_ARROW_HIDDEN", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "DROPDOWN_ROLL_UP", mrb_int_value(mrb, 19));
+
+    // enum GuiTextBoxProperty
+    mrb_define_const(mrb, mRaylib, "TEXT_READONLY", mrb_int_value(mrb, 16));
+
+    // enum GuiValueBoxProperty
+    mrb_define_const(mrb, mRaylib, "SPINNER_BUTTON_WIDTH", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "SPINNER_BUTTON_SPACING", mrb_int_value(mrb, 17));
+
+    // enum GuiTabBarProperty
+    mrb_define_const(mrb, mRaylib, "TAB_ITEMS_WIDTH", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "TAB_CLOSE_BUTTON", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "TAB_LINE_SIDE", mrb_int_value(mrb, 18));
+
+    // enum GuiListViewProperty
+    mrb_define_const(mrb, mRaylib, "LIST_ITEMS_HEIGHT", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "LIST_ITEMS_SPACING", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "SCROLLBAR_WIDTH", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "SCROLLBAR_SIDE", mrb_int_value(mrb, 19));
+    mrb_define_const(mrb, mRaylib, "LIST_ITEMS_BORDER_NORMAL", mrb_int_value(mrb, 20));
+    mrb_define_const(mrb, mRaylib, "LIST_ITEMS_BORDER_WIDTH", mrb_int_value(mrb, 21));
+
+    // enum GuiColorPickerProperty
+    mrb_define_const(mrb, mRaylib, "COLOR_SELECTOR_SIZE", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "HUEBAR_WIDTH", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "HUEBAR_PADDING", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "HUEBAR_SELECTOR_HEIGHT", mrb_int_value(mrb, 19));
+    mrb_define_const(mrb, mRaylib, "HUEBAR_SELECTOR_OVERFLOW", mrb_int_value(mrb, 20));
+
+    // enum GuiIconName
+    mrb_define_const(mrb, mRaylib, "ICON_NONE", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "ICON_FOLDER_FILE_OPEN", mrb_int_value(mrb, 1));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_SAVE_CLASSIC", mrb_int_value(mrb, 2));
+    mrb_define_const(mrb, mRaylib, "ICON_FOLDER_OPEN", mrb_int_value(mrb, 3));
+    mrb_define_const(mrb, mRaylib, "ICON_FOLDER_SAVE", mrb_int_value(mrb, 4));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_OPEN", mrb_int_value(mrb, 5));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_SAVE", mrb_int_value(mrb, 6));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_EXPORT", mrb_int_value(mrb, 7));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_ADD", mrb_int_value(mrb, 8));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_DELETE", mrb_int_value(mrb, 9));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_TEXT", mrb_int_value(mrb, 10));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_AUDIO", mrb_int_value(mrb, 11));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_IMAGE", mrb_int_value(mrb, 12));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_PLAY", mrb_int_value(mrb, 13));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_VIDEO", mrb_int_value(mrb, 14));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_INFO", mrb_int_value(mrb, 15));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_COPY", mrb_int_value(mrb, 16));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_CUT", mrb_int_value(mrb, 17));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_PASTE", mrb_int_value(mrb, 18));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_HAND", mrb_int_value(mrb, 19));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_POINTER", mrb_int_value(mrb, 20));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_CLASSIC", mrb_int_value(mrb, 21));
+    mrb_define_const(mrb, mRaylib, "ICON_PENCIL", mrb_int_value(mrb, 22));
+    mrb_define_const(mrb, mRaylib, "ICON_PENCIL_BIG", mrb_int_value(mrb, 23));
+    mrb_define_const(mrb, mRaylib, "ICON_BRUSH_CLASSIC", mrb_int_value(mrb, 24));
+    mrb_define_const(mrb, mRaylib, "ICON_BRUSH_PAINTER", mrb_int_value(mrb, 25));
+    mrb_define_const(mrb, mRaylib, "ICON_WATER_DROP", mrb_int_value(mrb, 26));
+    mrb_define_const(mrb, mRaylib, "ICON_COLOR_PICKER", mrb_int_value(mrb, 27));
+    mrb_define_const(mrb, mRaylib, "ICON_RUBBER", mrb_int_value(mrb, 28));
+    mrb_define_const(mrb, mRaylib, "ICON_COLOR_BUCKET", mrb_int_value(mrb, 29));
+    mrb_define_const(mrb, mRaylib, "ICON_TEXT_T", mrb_int_value(mrb, 30));
+    mrb_define_const(mrb, mRaylib, "ICON_TEXT_A", mrb_int_value(mrb, 31));
+    mrb_define_const(mrb, mRaylib, "ICON_SCALE", mrb_int_value(mrb, 32));
+    mrb_define_const(mrb, mRaylib, "ICON_RESIZE", mrb_int_value(mrb, 33));
+    mrb_define_const(mrb, mRaylib, "ICON_FILTER_POINT", mrb_int_value(mrb, 34));
+    mrb_define_const(mrb, mRaylib, "ICON_FILTER_BILINEAR", mrb_int_value(mrb, 35));
+    mrb_define_const(mrb, mRaylib, "ICON_CROP", mrb_int_value(mrb, 36));
+    mrb_define_const(mrb, mRaylib, "ICON_CROP_ALPHA", mrb_int_value(mrb, 37));
+    mrb_define_const(mrb, mRaylib, "ICON_SQUARE_TOGGLE", mrb_int_value(mrb, 38));
+    mrb_define_const(mrb, mRaylib, "ICON_SYMMETRY", mrb_int_value(mrb, 39));
+    mrb_define_const(mrb, mRaylib, "ICON_SYMMETRY_HORIZONTAL", mrb_int_value(mrb, 40));
+    mrb_define_const(mrb, mRaylib, "ICON_SYMMETRY_VERTICAL", mrb_int_value(mrb, 41));
+    mrb_define_const(mrb, mRaylib, "ICON_LENS", mrb_int_value(mrb, 42));
+    mrb_define_const(mrb, mRaylib, "ICON_LENS_BIG", mrb_int_value(mrb, 43));
+    mrb_define_const(mrb, mRaylib, "ICON_EYE_ON", mrb_int_value(mrb, 44));
+    mrb_define_const(mrb, mRaylib, "ICON_EYE_OFF", mrb_int_value(mrb, 45));
+    mrb_define_const(mrb, mRaylib, "ICON_FILTER_TOP", mrb_int_value(mrb, 46));
+    mrb_define_const(mrb, mRaylib, "ICON_FILTER", mrb_int_value(mrb, 47));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_POINT", mrb_int_value(mrb, 48));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_SMALL", mrb_int_value(mrb, 49));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_BIG", mrb_int_value(mrb, 50));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_MOVE", mrb_int_value(mrb, 51));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_MOVE", mrb_int_value(mrb, 52));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE", mrb_int_value(mrb, 53));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE_RIGHT", mrb_int_value(mrb, 54));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE_LEFT", mrb_int_value(mrb, 55));
+    mrb_define_const(mrb, mRaylib, "ICON_UNDO", mrb_int_value(mrb, 56));
+    mrb_define_const(mrb, mRaylib, "ICON_REDO", mrb_int_value(mrb, 57));
+    mrb_define_const(mrb, mRaylib, "ICON_REREDO", mrb_int_value(mrb, 58));
+    mrb_define_const(mrb, mRaylib, "ICON_MUTATE", mrb_int_value(mrb, 59));
+    mrb_define_const(mrb, mRaylib, "ICON_ROTATE", mrb_int_value(mrb, 60));
+    mrb_define_const(mrb, mRaylib, "ICON_REPEAT", mrb_int_value(mrb, 61));
+    mrb_define_const(mrb, mRaylib, "ICON_SHUFFLE", mrb_int_value(mrb, 62));
+    mrb_define_const(mrb, mRaylib, "ICON_EMPTYBOX", mrb_int_value(mrb, 63));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET", mrb_int_value(mrb, 64));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_SMALL_FILL", mrb_int_value(mrb, 65));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_BIG_FILL", mrb_int_value(mrb, 66));
+    mrb_define_const(mrb, mRaylib, "ICON_TARGET_MOVE_FILL", mrb_int_value(mrb, 67));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_MOVE_FILL", mrb_int_value(mrb, 68));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE_FILL", mrb_int_value(mrb, 69));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE_RIGHT_FILL", mrb_int_value(mrb, 70));
+    mrb_define_const(mrb, mRaylib, "ICON_CURSOR_SCALE_LEFT_FILL", mrb_int_value(mrb, 71));
+    mrb_define_const(mrb, mRaylib, "ICON_UNDO_FILL", mrb_int_value(mrb, 72));
+    mrb_define_const(mrb, mRaylib, "ICON_REDO_FILL", mrb_int_value(mrb, 73));
+    mrb_define_const(mrb, mRaylib, "ICON_REREDO_FILL", mrb_int_value(mrb, 74));
+    mrb_define_const(mrb, mRaylib, "ICON_MUTATE_FILL", mrb_int_value(mrb, 75));
+    mrb_define_const(mrb, mRaylib, "ICON_ROTATE_FILL", mrb_int_value(mrb, 76));
+    mrb_define_const(mrb, mRaylib, "ICON_REPEAT_FILL", mrb_int_value(mrb, 77));
+    mrb_define_const(mrb, mRaylib, "ICON_SHUFFLE_FILL", mrb_int_value(mrb, 78));
+    mrb_define_const(mrb, mRaylib, "ICON_EMPTYBOX_SMALL", mrb_int_value(mrb, 79));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX", mrb_int_value(mrb, 80));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_TOP", mrb_int_value(mrb, 81));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_TOP_RIGHT", mrb_int_value(mrb, 82));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_RIGHT", mrb_int_value(mrb, 83));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_BOTTOM_RIGHT", mrb_int_value(mrb, 84));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_BOTTOM", mrb_int_value(mrb, 85));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_BOTTOM_LEFT", mrb_int_value(mrb, 86));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_LEFT", mrb_int_value(mrb, 87));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_TOP_LEFT", mrb_int_value(mrb, 88));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_CENTER", mrb_int_value(mrb, 89));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_CIRCLE_MASK", mrb_int_value(mrb, 90));
+    mrb_define_const(mrb, mRaylib, "ICON_POT", mrb_int_value(mrb, 91));
+    mrb_define_const(mrb, mRaylib, "ICON_ALPHA_MULTIPLY", mrb_int_value(mrb, 92));
+    mrb_define_const(mrb, mRaylib, "ICON_ALPHA_CLEAR", mrb_int_value(mrb, 93));
+    mrb_define_const(mrb, mRaylib, "ICON_DITHERING", mrb_int_value(mrb, 94));
+    mrb_define_const(mrb, mRaylib, "ICON_MIPMAPS", mrb_int_value(mrb, 95));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_GRID", mrb_int_value(mrb, 96));
+    mrb_define_const(mrb, mRaylib, "ICON_GRID", mrb_int_value(mrb, 97));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_CORNERS_SMALL", mrb_int_value(mrb, 98));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_CORNERS_BIG", mrb_int_value(mrb, 99));
+    mrb_define_const(mrb, mRaylib, "ICON_FOUR_BOXES", mrb_int_value(mrb, 100));
+    mrb_define_const(mrb, mRaylib, "ICON_GRID_FILL", mrb_int_value(mrb, 101));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_MULTISIZE", mrb_int_value(mrb, 102));
+    mrb_define_const(mrb, mRaylib, "ICON_ZOOM_SMALL", mrb_int_value(mrb, 103));
+    mrb_define_const(mrb, mRaylib, "ICON_ZOOM_MEDIUM", mrb_int_value(mrb, 104));
+    mrb_define_const(mrb, mRaylib, "ICON_ZOOM_BIG", mrb_int_value(mrb, 105));
+    mrb_define_const(mrb, mRaylib, "ICON_ZOOM_ALL", mrb_int_value(mrb, 106));
+    mrb_define_const(mrb, mRaylib, "ICON_ZOOM_CENTER", mrb_int_value(mrb, 107));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_DOTS_SMALL", mrb_int_value(mrb, 108));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_DOTS_BIG", mrb_int_value(mrb, 109));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_CONCENTRIC", mrb_int_value(mrb, 110));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_GRID_BIG", mrb_int_value(mrb, 111));
+    mrb_define_const(mrb, mRaylib, "ICON_OK_TICK", mrb_int_value(mrb, 112));
+    mrb_define_const(mrb, mRaylib, "ICON_CROSS", mrb_int_value(mrb, 113));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_LEFT", mrb_int_value(mrb, 114));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_RIGHT", mrb_int_value(mrb, 115));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_DOWN", mrb_int_value(mrb, 116));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_UP", mrb_int_value(mrb, 117));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_LEFT_FILL", mrb_int_value(mrb, 118));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_RIGHT_FILL", mrb_int_value(mrb, 119));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_DOWN_FILL", mrb_int_value(mrb, 120));
+    mrb_define_const(mrb, mRaylib, "ICON_ARROW_UP_FILL", mrb_int_value(mrb, 121));
+    mrb_define_const(mrb, mRaylib, "ICON_AUDIO", mrb_int_value(mrb, 122));
+    mrb_define_const(mrb, mRaylib, "ICON_FX", mrb_int_value(mrb, 123));
+    mrb_define_const(mrb, mRaylib, "ICON_WAVE", mrb_int_value(mrb, 124));
+    mrb_define_const(mrb, mRaylib, "ICON_WAVE_SINUS", mrb_int_value(mrb, 125));
+    mrb_define_const(mrb, mRaylib, "ICON_WAVE_SQUARE", mrb_int_value(mrb, 126));
+    mrb_define_const(mrb, mRaylib, "ICON_WAVE_TRIANGULAR", mrb_int_value(mrb, 127));
+    mrb_define_const(mrb, mRaylib, "ICON_CROSS_SMALL", mrb_int_value(mrb, 128));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_PREVIOUS", mrb_int_value(mrb, 129));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_PLAY_BACK", mrb_int_value(mrb, 130));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_PLAY", mrb_int_value(mrb, 131));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_PAUSE", mrb_int_value(mrb, 132));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_STOP", mrb_int_value(mrb, 133));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_NEXT", mrb_int_value(mrb, 134));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_RECORD", mrb_int_value(mrb, 135));
+    mrb_define_const(mrb, mRaylib, "ICON_MAGNET", mrb_int_value(mrb, 136));
+    mrb_define_const(mrb, mRaylib, "ICON_LOCK_CLOSE", mrb_int_value(mrb, 137));
+    mrb_define_const(mrb, mRaylib, "ICON_LOCK_OPEN", mrb_int_value(mrb, 138));
+    mrb_define_const(mrb, mRaylib, "ICON_CLOCK", mrb_int_value(mrb, 139));
+    mrb_define_const(mrb, mRaylib, "ICON_TOOLS", mrb_int_value(mrb, 140));
+    mrb_define_const(mrb, mRaylib, "ICON_GEAR", mrb_int_value(mrb, 141));
+    mrb_define_const(mrb, mRaylib, "ICON_GEAR_BIG", mrb_int_value(mrb, 142));
+    mrb_define_const(mrb, mRaylib, "ICON_BIN", mrb_int_value(mrb, 143));
+    mrb_define_const(mrb, mRaylib, "ICON_HAND_POINTER", mrb_int_value(mrb, 144));
+    mrb_define_const(mrb, mRaylib, "ICON_LASER", mrb_int_value(mrb, 145));
+    mrb_define_const(mrb, mRaylib, "ICON_COIN", mrb_int_value(mrb, 146));
+    mrb_define_const(mrb, mRaylib, "ICON_EXPLOSION", mrb_int_value(mrb, 147));
+    mrb_define_const(mrb, mRaylib, "ICON_1UP", mrb_int_value(mrb, 148));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER", mrb_int_value(mrb, 149));
+    mrb_define_const(mrb, mRaylib, "ICON_PLAYER_JUMP", mrb_int_value(mrb, 150));
+    mrb_define_const(mrb, mRaylib, "ICON_KEY", mrb_int_value(mrb, 151));
+    mrb_define_const(mrb, mRaylib, "ICON_DEMON", mrb_int_value(mrb, 152));
+    mrb_define_const(mrb, mRaylib, "ICON_TEXT_POPUP", mrb_int_value(mrb, 153));
+    mrb_define_const(mrb, mRaylib, "ICON_GEAR_EX", mrb_int_value(mrb, 154));
+    mrb_define_const(mrb, mRaylib, "ICON_CRACK", mrb_int_value(mrb, 155));
+    mrb_define_const(mrb, mRaylib, "ICON_CRACK_POINTS", mrb_int_value(mrb, 156));
+    mrb_define_const(mrb, mRaylib, "ICON_STAR", mrb_int_value(mrb, 157));
+    mrb_define_const(mrb, mRaylib, "ICON_DOOR", mrb_int_value(mrb, 158));
+    mrb_define_const(mrb, mRaylib, "ICON_EXIT", mrb_int_value(mrb, 159));
+    mrb_define_const(mrb, mRaylib, "ICON_MODE_2D", mrb_int_value(mrb, 160));
+    mrb_define_const(mrb, mRaylib, "ICON_MODE_3D", mrb_int_value(mrb, 161));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE", mrb_int_value(mrb, 162));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_TOP", mrb_int_value(mrb, 163));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_LEFT", mrb_int_value(mrb, 164));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_FRONT", mrb_int_value(mrb, 165));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_BOTTOM", mrb_int_value(mrb, 166));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_RIGHT", mrb_int_value(mrb, 167));
+    mrb_define_const(mrb, mRaylib, "ICON_CUBE_FACE_BACK", mrb_int_value(mrb, 168));
+    mrb_define_const(mrb, mRaylib, "ICON_CAMERA", mrb_int_value(mrb, 169));
+    mrb_define_const(mrb, mRaylib, "ICON_SPECIAL", mrb_int_value(mrb, 170));
+    mrb_define_const(mrb, mRaylib, "ICON_LINK_NET", mrb_int_value(mrb, 171));
+    mrb_define_const(mrb, mRaylib, "ICON_LINK_BOXES", mrb_int_value(mrb, 172));
+    mrb_define_const(mrb, mRaylib, "ICON_LINK_MULTI", mrb_int_value(mrb, 173));
+    mrb_define_const(mrb, mRaylib, "ICON_LINK", mrb_int_value(mrb, 174));
+    mrb_define_const(mrb, mRaylib, "ICON_LINK_BROKE", mrb_int_value(mrb, 175));
+    mrb_define_const(mrb, mRaylib, "ICON_TEXT_NOTES", mrb_int_value(mrb, 176));
+    mrb_define_const(mrb, mRaylib, "ICON_NOTEBOOK", mrb_int_value(mrb, 177));
+    mrb_define_const(mrb, mRaylib, "ICON_SUITCASE", mrb_int_value(mrb, 178));
+    mrb_define_const(mrb, mRaylib, "ICON_SUITCASE_ZIP", mrb_int_value(mrb, 179));
+    mrb_define_const(mrb, mRaylib, "ICON_MAILBOX", mrb_int_value(mrb, 180));
+    mrb_define_const(mrb, mRaylib, "ICON_MONITOR", mrb_int_value(mrb, 181));
+    mrb_define_const(mrb, mRaylib, "ICON_PRINTER", mrb_int_value(mrb, 182));
+    mrb_define_const(mrb, mRaylib, "ICON_PHOTO_CAMERA", mrb_int_value(mrb, 183));
+    mrb_define_const(mrb, mRaylib, "ICON_PHOTO_CAMERA_FLASH", mrb_int_value(mrb, 184));
+    mrb_define_const(mrb, mRaylib, "ICON_HOUSE", mrb_int_value(mrb, 185));
+    mrb_define_const(mrb, mRaylib, "ICON_HEART", mrb_int_value(mrb, 186));
+    mrb_define_const(mrb, mRaylib, "ICON_CORNER", mrb_int_value(mrb, 187));
+    mrb_define_const(mrb, mRaylib, "ICON_VERTICAL_BARS", mrb_int_value(mrb, 188));
+    mrb_define_const(mrb, mRaylib, "ICON_VERTICAL_BARS_FILL", mrb_int_value(mrb, 189));
+    mrb_define_const(mrb, mRaylib, "ICON_LIFE_BARS", mrb_int_value(mrb, 190));
+    mrb_define_const(mrb, mRaylib, "ICON_INFO", mrb_int_value(mrb, 191));
+    mrb_define_const(mrb, mRaylib, "ICON_CROSSLINE", mrb_int_value(mrb, 192));
+    mrb_define_const(mrb, mRaylib, "ICON_HELP", mrb_int_value(mrb, 193));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_ALPHA", mrb_int_value(mrb, 194));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_HOME", mrb_int_value(mrb, 195));
+    mrb_define_const(mrb, mRaylib, "ICON_LAYERS_VISIBLE", mrb_int_value(mrb, 196));
+    mrb_define_const(mrb, mRaylib, "ICON_LAYERS", mrb_int_value(mrb, 197));
+    mrb_define_const(mrb, mRaylib, "ICON_WINDOW", mrb_int_value(mrb, 198));
+    mrb_define_const(mrb, mRaylib, "ICON_HIDPI", mrb_int_value(mrb, 199));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_BINARY", mrb_int_value(mrb, 200));
+    mrb_define_const(mrb, mRaylib, "ICON_HEX", mrb_int_value(mrb, 201));
+    mrb_define_const(mrb, mRaylib, "ICON_SHIELD", mrb_int_value(mrb, 202));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE_NEW", mrb_int_value(mrb, 203));
+    mrb_define_const(mrb, mRaylib, "ICON_FOLDER_ADD", mrb_int_value(mrb, 204));
+    mrb_define_const(mrb, mRaylib, "ICON_ALARM", mrb_int_value(mrb, 205));
+    mrb_define_const(mrb, mRaylib, "ICON_CPU", mrb_int_value(mrb, 206));
+    mrb_define_const(mrb, mRaylib, "ICON_ROM", mrb_int_value(mrb, 207));
+    mrb_define_const(mrb, mRaylib, "ICON_STEP_OVER", mrb_int_value(mrb, 208));
+    mrb_define_const(mrb, mRaylib, "ICON_STEP_INTO", mrb_int_value(mrb, 209));
+    mrb_define_const(mrb, mRaylib, "ICON_STEP_OUT", mrb_int_value(mrb, 210));
+    mrb_define_const(mrb, mRaylib, "ICON_RESTART", mrb_int_value(mrb, 211));
+    mrb_define_const(mrb, mRaylib, "ICON_BREAKPOINT_ON", mrb_int_value(mrb, 212));
+    mrb_define_const(mrb, mRaylib, "ICON_BREAKPOINT_OFF", mrb_int_value(mrb, 213));
+    mrb_define_const(mrb, mRaylib, "ICON_BURGER_MENU", mrb_int_value(mrb, 214));
+    mrb_define_const(mrb, mRaylib, "ICON_CASE_SENSITIVE", mrb_int_value(mrb, 215));
+    mrb_define_const(mrb, mRaylib, "ICON_REG_EXP", mrb_int_value(mrb, 216));
+    mrb_define_const(mrb, mRaylib, "ICON_FOLDER", mrb_int_value(mrb, 217));
+    mrb_define_const(mrb, mRaylib, "ICON_FILE", mrb_int_value(mrb, 218));
+    mrb_define_const(mrb, mRaylib, "ICON_SAND_TIMER", mrb_int_value(mrb, 219));
+    mrb_define_const(mrb, mRaylib, "ICON_WARNING", mrb_int_value(mrb, 220));
+    mrb_define_const(mrb, mRaylib, "ICON_HELP_BOX", mrb_int_value(mrb, 221));
+    mrb_define_const(mrb, mRaylib, "ICON_INFO_BOX", mrb_int_value(mrb, 222));
+    mrb_define_const(mrb, mRaylib, "ICON_PRIORITY", mrb_int_value(mrb, 223));
+    mrb_define_const(mrb, mRaylib, "ICON_LAYERS_ISO", mrb_int_value(mrb, 224));
+    mrb_define_const(mrb, mRaylib, "ICON_LAYERS2", mrb_int_value(mrb, 225));
+    mrb_define_const(mrb, mRaylib, "ICON_MLAYERS", mrb_int_value(mrb, 226));
+    mrb_define_const(mrb, mRaylib, "ICON_MAPS", mrb_int_value(mrb, 227));
+    mrb_define_const(mrb, mRaylib, "ICON_HOT", mrb_int_value(mrb, 228));
+    mrb_define_const(mrb, mRaylib, "ICON_LABEL", mrb_int_value(mrb, 229));
+    mrb_define_const(mrb, mRaylib, "ICON_NAME_ID", mrb_int_value(mrb, 230));
+    mrb_define_const(mrb, mRaylib, "ICON_SLICING", mrb_int_value(mrb, 231));
+    mrb_define_const(mrb, mRaylib, "ICON_MANUAL_CONTROL", mrb_int_value(mrb, 232));
+    mrb_define_const(mrb, mRaylib, "ICON_COLLISION", mrb_int_value(mrb, 233));
+    mrb_define_const(mrb, mRaylib, "ICON_CIRCLE_ADD", mrb_int_value(mrb, 234));
+    mrb_define_const(mrb, mRaylib, "ICON_CIRCLE_ADD_FILL", mrb_int_value(mrb, 235));
+    mrb_define_const(mrb, mRaylib, "ICON_CIRCLE_WARNING", mrb_int_value(mrb, 236));
+    mrb_define_const(mrb, mRaylib, "ICON_CIRCLE_WARNING_FILL", mrb_int_value(mrb, 237));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_MORE", mrb_int_value(mrb, 238));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_MORE_FILL", mrb_int_value(mrb, 239));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_MINUS", mrb_int_value(mrb, 240));
+    mrb_define_const(mrb, mRaylib, "ICON_BOX_MINUS_FILL", mrb_int_value(mrb, 241));
+    mrb_define_const(mrb, mRaylib, "ICON_UNION", mrb_int_value(mrb, 242));
+    mrb_define_const(mrb, mRaylib, "ICON_INTERSECTION", mrb_int_value(mrb, 243));
+    mrb_define_const(mrb, mRaylib, "ICON_DIFFERENCE", mrb_int_value(mrb, 244));
+    mrb_define_const(mrb, mRaylib, "ICON_SPHERE", mrb_int_value(mrb, 245));
+    mrb_define_const(mrb, mRaylib, "ICON_CYLINDER", mrb_int_value(mrb, 246));
+    mrb_define_const(mrb, mRaylib, "ICON_CONE", mrb_int_value(mrb, 247));
+    mrb_define_const(mrb, mRaylib, "ICON_ELLIPSOID", mrb_int_value(mrb, 248));
+    mrb_define_const(mrb, mRaylib, "ICON_CAPSULE", mrb_int_value(mrb, 249));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_FONT", mrb_int_value(mrb, 250));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_3D", mrb_int_value(mrb, 251));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_CODE_XML", mrb_int_value(mrb, 252));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_CODE_C", mrb_int_value(mrb, 253));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_CODE_PYTHON", mrb_int_value(mrb, 254));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_CODE_JS", mrb_int_value(mrb, 255));
+    mrb_define_const(mrb, mRaylib, "ICON_FILETYPE_ICON", mrb_int_value(mrb, 256));
+
+    // Struct
+
+    cRaylibGuiStyleProp = mrb_define_class_under(mrb, mRaylib, "GuiStyleProp", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibGuiStyleProp, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibGuiStyleProp, "size", mrb_raylib_GuiStyleProp_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "initialize", mrb_raylib_GuiStyleProp_initialize, MRB_ARGS_OPT(3));
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "controlId", mrb_raylib_GuiStyleProp_controlId_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "controlId=", mrb_raylib_GuiStyleProp_controlId_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "propertyId", mrb_raylib_GuiStyleProp_propertyId_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "propertyId=", mrb_raylib_GuiStyleProp_propertyId_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "propertyValue", mrb_raylib_GuiStyleProp_propertyValue_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibGuiStyleProp, "propertyValue=", mrb_raylib_GuiStyleProp_propertyValue_set, MRB_ARGS_REQ(1));
+
+    // Function
+
+    mrb_define_module_function(mrb, mRaylib, "GuiEnable", mrb_raylib_GuiEnable, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiDisable", mrb_raylib_GuiDisable, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiLock", mrb_raylib_GuiLock, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiUnlock", mrb_raylib_GuiUnlock, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiIsLocked", mrb_raylib_GuiIsLocked, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiSetAlpha", mrb_raylib_GuiSetAlpha, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiSetState", mrb_raylib_GuiSetState, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiGetState", mrb_raylib_GuiGetState, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiSetFont", mrb_raylib_GuiSetFont, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiGetFont", mrb_raylib_GuiGetFont, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiSetStyle", mrb_raylib_GuiSetStyle, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiGetStyle", mrb_raylib_GuiGetStyle, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiLoadStyle", mrb_raylib_GuiLoadStyle, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiLoadStyleFromMemory", mrb_raylib_GuiLoadStyleFromMemory, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiLoadStyleDefault", mrb_raylib_GuiLoadStyleDefault, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiEnableTooltip", mrb_raylib_GuiEnableTooltip, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiDisableTooltip", mrb_raylib_GuiDisableTooltip, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiSetTooltip", mrb_raylib_GuiSetTooltip, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiIconText", mrb_raylib_GuiIconText, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiSetIconScale", mrb_raylib_GuiSetIconScale, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiGetIcons", mrb_raylib_GuiGetIcons, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GuiLoadIcons", mrb_raylib_GuiLoadIcons, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiLoadIconsFromMemory", mrb_raylib_GuiLoadIconsFromMemory, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiDrawIcon", mrb_raylib_GuiDrawIcon, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GuiGetTextWidth", mrb_raylib_GuiGetTextWidth, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GuiWindowBox", mrb_raylib_GuiWindowBox, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiGroupBox", mrb_raylib_GuiGroupBox, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiLine", mrb_raylib_GuiLine, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiPanel", mrb_raylib_GuiPanel, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiScrollPanel", mrb_raylib_GuiScrollPanel, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GuiLabel", mrb_raylib_GuiLabel, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiButton", mrb_raylib_GuiButton, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiLabelButton", mrb_raylib_GuiLabelButton, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiToggle", mrb_raylib_GuiToggle, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiToggleGroup", mrb_raylib_GuiToggleGroup, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiToggleSlider", mrb_raylib_GuiToggleSlider, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiCheckBox", mrb_raylib_GuiCheckBox, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiComboBox", mrb_raylib_GuiComboBox, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiDropdownBox", mrb_raylib_GuiDropdownBox, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "GuiSpinner", mrb_raylib_GuiSpinner, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiValueBox", mrb_raylib_GuiValueBox, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiValueBoxFloat", mrb_raylib_GuiValueBoxFloat, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GuiTextBox", mrb_raylib_GuiTextBox, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "GuiSlider", mrb_raylib_GuiSlider, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiSliderBar", mrb_raylib_GuiSliderBar, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiProgressBar", mrb_raylib_GuiProgressBar, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiStatusBar", mrb_raylib_GuiStatusBar, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiDummyRec", mrb_raylib_GuiDummyRec, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GuiGrid", mrb_raylib_GuiGrid, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GuiListView", mrb_raylib_GuiListView, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "GuiListViewEx", mrb_raylib_GuiListViewEx, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiTabBar", mrb_raylib_GuiTabBar, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "GuiTabBarEx", mrb_raylib_GuiTabBarEx, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "GuiMessageBox", mrb_raylib_GuiMessageBox, MRB_ARGS_REQ(5));
+    mrb_define_module_function(mrb, mRaylib, "GuiTextInputBox", mrb_raylib_GuiTextInputBox, MRB_ARGS_REQ(8));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorPicker", mrb_raylib_GuiColorPicker, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorPanel", mrb_raylib_GuiColorPanel, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorBarAlpha", mrb_raylib_GuiColorBarAlpha, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorBarHue", mrb_raylib_GuiColorBarHue, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorPickerHSV", mrb_raylib_GuiColorPickerHSV, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "GuiColorPanelHSV", mrb_raylib_GuiColorPanelHSV, MRB_ARGS_REQ(3));
+}
+void mrb_physac_module_init(struct RClass* mRaylib, mrb_state* mrb)
+{
+    // Define/Macro
+
+    mrb_define_const(mrb, mRaylib, "PHYSAC_MAX_BODIES", mrb_int_value(mrb, 64));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_MAX_MANIFOLDS", mrb_int_value(mrb, 4096));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_MAX_VERTICES", mrb_int_value(mrb, 24));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_DEFAULT_CIRCLE_VERTICES", mrb_int_value(mrb, 24));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_COLLISION_ITERATIONS", mrb_int_value(mrb, 100));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_PENETRATION_ALLOWANCE", mrb_float_value(mrb, 0.05));
+    mrb_define_const(mrb, mRaylib, "PHYSAC_PENETRATION_CORRECTION", mrb_float_value(mrb, 0.4));
+
+    // Enum
+
+    // enum PhysicsShapeType
+    mrb_define_const(mrb, mRaylib, "PHYSICS_CIRCLE", mrb_int_value(mrb, 0));
+    mrb_define_const(mrb, mRaylib, "PHYSICS_POLYGON", mrb_int_value(mrb, 1));
+
+    // Struct
+
+    cRaylibMatrix2x2 = mrb_define_class_under(mrb, mRaylib, "Matrix2x2", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibMatrix2x2, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibMatrix2x2, "size", mrb_raylib_Matrix2x2_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix2x2, "initialize", mrb_raylib_Matrix2x2_initialize, MRB_ARGS_OPT(4));
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m00", mrb_raylib_Matrix2x2_m00_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m00=", mrb_raylib_Matrix2x2_m00_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m01", mrb_raylib_Matrix2x2_m01_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m01=", mrb_raylib_Matrix2x2_m01_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m10", mrb_raylib_Matrix2x2_m10_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m10=", mrb_raylib_Matrix2x2_m10_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m11", mrb_raylib_Matrix2x2_m11_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibMatrix2x2, "m11=", mrb_raylib_Matrix2x2_m11_set, MRB_ARGS_REQ(1));
+
+    cRaylibPhysicsVertexData = mrb_define_class_under(mrb, mRaylib, "PhysicsVertexData", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibPhysicsVertexData, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibPhysicsVertexData, "size", mrb_raylib_PhysicsVertexData_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "initialize", mrb_raylib_PhysicsVertexData_initialize, MRB_ARGS_OPT(3));
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "vertexCount", mrb_raylib_PhysicsVertexData_vertexCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "vertexCount=", mrb_raylib_PhysicsVertexData_vertexCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "positions", mrb_raylib_PhysicsVertexData_positions_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "positions=", mrb_raylib_PhysicsVertexData_positions_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "normals", mrb_raylib_PhysicsVertexData_normals_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsVertexData, "normals=", mrb_raylib_PhysicsVertexData_normals_set, MRB_ARGS_REQ(1));
+
+    cRaylibPhysicsShape = mrb_define_class_under(mrb, mRaylib, "PhysicsShape", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibPhysicsShape, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibPhysicsShape, "size", mrb_raylib_PhysicsShape_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "initialize", mrb_raylib_PhysicsShape_initialize, MRB_ARGS_OPT(5));
+    mrb_define_method(mrb, cRaylibPhysicsShape, "type", mrb_raylib_PhysicsShape_type_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "type=", mrb_raylib_PhysicsShape_type_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsShape, "body", mrb_raylib_PhysicsShape_body_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "body=", mrb_raylib_PhysicsShape_body_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsShape, "vertexData", mrb_raylib_PhysicsShape_vertexData_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "vertexData=", mrb_raylib_PhysicsShape_vertexData_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsShape, "radius", mrb_raylib_PhysicsShape_radius_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "radius=", mrb_raylib_PhysicsShape_radius_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsShape, "transform", mrb_raylib_PhysicsShape_transform_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsShape, "transform=", mrb_raylib_PhysicsShape_transform_set, MRB_ARGS_REQ(1));
+
+    cRaylibPhysicsBodyData = mrb_define_class_under(mrb, mRaylib, "PhysicsBodyData", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibPhysicsBodyData, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibPhysicsBodyData, "size", mrb_raylib_PhysicsBodyData_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "initialize", mrb_raylib_PhysicsBodyData_initialize, MRB_ARGS_OPT(19));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "id", mrb_raylib_PhysicsBodyData_id_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "id=", mrb_raylib_PhysicsBodyData_id_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "enabled", mrb_raylib_PhysicsBodyData_enabled_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "enabled=", mrb_raylib_PhysicsBodyData_enabled_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "position", mrb_raylib_PhysicsBodyData_position_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "position=", mrb_raylib_PhysicsBodyData_position_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "velocity", mrb_raylib_PhysicsBodyData_velocity_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "velocity=", mrb_raylib_PhysicsBodyData_velocity_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "force", mrb_raylib_PhysicsBodyData_force_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "force=", mrb_raylib_PhysicsBodyData_force_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "angularVelocity", mrb_raylib_PhysicsBodyData_angularVelocity_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "angularVelocity=", mrb_raylib_PhysicsBodyData_angularVelocity_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "torque", mrb_raylib_PhysicsBodyData_torque_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "torque=", mrb_raylib_PhysicsBodyData_torque_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "orient", mrb_raylib_PhysicsBodyData_orient_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "orient=", mrb_raylib_PhysicsBodyData_orient_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inertia", mrb_raylib_PhysicsBodyData_inertia_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inertia=", mrb_raylib_PhysicsBodyData_inertia_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inverseInertia", mrb_raylib_PhysicsBodyData_inverseInertia_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inverseInertia=", mrb_raylib_PhysicsBodyData_inverseInertia_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "mass", mrb_raylib_PhysicsBodyData_mass_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "mass=", mrb_raylib_PhysicsBodyData_mass_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inverseMass", mrb_raylib_PhysicsBodyData_inverseMass_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "inverseMass=", mrb_raylib_PhysicsBodyData_inverseMass_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "staticFriction", mrb_raylib_PhysicsBodyData_staticFriction_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "staticFriction=", mrb_raylib_PhysicsBodyData_staticFriction_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "dynamicFriction", mrb_raylib_PhysicsBodyData_dynamicFriction_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "dynamicFriction=", mrb_raylib_PhysicsBodyData_dynamicFriction_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "restitution", mrb_raylib_PhysicsBodyData_restitution_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "restitution=", mrb_raylib_PhysicsBodyData_restitution_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "useGravity", mrb_raylib_PhysicsBodyData_useGravity_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "useGravity=", mrb_raylib_PhysicsBodyData_useGravity_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "isGrounded", mrb_raylib_PhysicsBodyData_isGrounded_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "isGrounded=", mrb_raylib_PhysicsBodyData_isGrounded_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "freezeOrient", mrb_raylib_PhysicsBodyData_freezeOrient_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "freezeOrient=", mrb_raylib_PhysicsBodyData_freezeOrient_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "shape", mrb_raylib_PhysicsBodyData_shape_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsBodyData, "shape=", mrb_raylib_PhysicsBodyData_shape_set, MRB_ARGS_REQ(1));
+
+    cRaylibPhysicsManifoldData = mrb_define_class_under(mrb, mRaylib, "PhysicsManifoldData", mrb->object_class);
+    MRB_SET_INSTANCE_TT(cRaylibPhysicsManifoldData, MRB_TT_DATA);
+    mrb_define_class_method(mrb, cRaylibPhysicsManifoldData, "size", mrb_raylib_PhysicsManifoldData_class_size, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "initialize", mrb_raylib_PhysicsManifoldData_initialize, MRB_ARGS_OPT(10));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "id", mrb_raylib_PhysicsManifoldData_id_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "id=", mrb_raylib_PhysicsManifoldData_id_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "bodyA", mrb_raylib_PhysicsManifoldData_bodyA_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "bodyA=", mrb_raylib_PhysicsManifoldData_bodyA_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "bodyB", mrb_raylib_PhysicsManifoldData_bodyB_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "bodyB=", mrb_raylib_PhysicsManifoldData_bodyB_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "penetration", mrb_raylib_PhysicsManifoldData_penetration_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "penetration=", mrb_raylib_PhysicsManifoldData_penetration_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "normal", mrb_raylib_PhysicsManifoldData_normal_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "normal=", mrb_raylib_PhysicsManifoldData_normal_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "contacts", mrb_raylib_PhysicsManifoldData_contacts_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "contacts=", mrb_raylib_PhysicsManifoldData_contacts_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "contactsCount", mrb_raylib_PhysicsManifoldData_contactsCount_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "contactsCount=", mrb_raylib_PhysicsManifoldData_contactsCount_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "restitution", mrb_raylib_PhysicsManifoldData_restitution_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "restitution=", mrb_raylib_PhysicsManifoldData_restitution_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "dynamicFriction", mrb_raylib_PhysicsManifoldData_dynamicFriction_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "dynamicFriction=", mrb_raylib_PhysicsManifoldData_dynamicFriction_set, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "staticFriction", mrb_raylib_PhysicsManifoldData_staticFriction_get, MRB_ARGS_NONE());
+    mrb_define_method(mrb, cRaylibPhysicsManifoldData, "staticFriction=", mrb_raylib_PhysicsManifoldData_staticFriction_set, MRB_ARGS_REQ(1));
+
+    // Function
+
+    mrb_define_module_function(mrb, mRaylib, "InitPhysics", mrb_raylib_InitPhysics, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "UpdatePhysics", mrb_raylib_UpdatePhysics, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "ResetPhysics", mrb_raylib_ResetPhysics, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "ClosePhysics", mrb_raylib_ClosePhysics, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "SetPhysicsTimeStep", mrb_raylib_SetPhysicsTimeStep, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "SetPhysicsGravity", mrb_raylib_SetPhysicsGravity, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "CreatePhysicsBodyCircle", mrb_raylib_CreatePhysicsBodyCircle, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "CreatePhysicsBodyRectangle", mrb_raylib_CreatePhysicsBodyRectangle, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "CreatePhysicsBodyPolygon", mrb_raylib_CreatePhysicsBodyPolygon, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DestroyPhysicsBody", mrb_raylib_DestroyPhysicsBody, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "PhysicsAddForce", mrb_raylib_PhysicsAddForce, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "PhysicsAddTorque", mrb_raylib_PhysicsAddTorque, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "PhysicsShatter", mrb_raylib_PhysicsShatter, MRB_ARGS_REQ(3));
+    mrb_define_module_function(mrb, mRaylib, "SetPhysicsBodyRotation", mrb_raylib_SetPhysicsBodyRotation, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "GetPhysicsBody", mrb_raylib_GetPhysicsBody, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetPhysicsBodiesCount", mrb_raylib_GetPhysicsBodiesCount, MRB_ARGS_NONE());
+    mrb_define_module_function(mrb, mRaylib, "GetPhysicsShapeType", mrb_raylib_GetPhysicsShapeType, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetPhysicsShapeVerticesCount", mrb_raylib_GetPhysicsShapeVerticesCount, MRB_ARGS_REQ(1));
+    mrb_define_module_function(mrb, mRaylib, "GetPhysicsShapeVertex", mrb_raylib_GetPhysicsShapeVertex, MRB_ARGS_REQ(2));
 }
