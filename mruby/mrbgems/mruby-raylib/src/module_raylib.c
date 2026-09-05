@@ -6815,6 +6815,18 @@ static mrb_value mrb_raylib_IsFileExtension(mrb_state* mrb, mrb_value self)
     return retval ? mrb_true_value() : mrb_false_value();
 }
 
+static mrb_value mrb_raylib_IsFileHidden(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[1];
+    void* ptrs[1] = { &argv[0], };
+    mrb_get_args_a(mrb, "o", ptrs);
+    const char * filePath = RSTRING_PTR(argv[0]);
+
+    bool retval = IsFileHidden(filePath);
+
+    return retval ? mrb_true_value() : mrb_false_value();
+}
+
 static mrb_value mrb_raylib_GetFileLength(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[1];
@@ -7985,6 +7997,22 @@ static mrb_value mrb_raylib_DrawTriangleLines(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_DrawTriangleLinesEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 v1 = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v2 = *(Vector2*)DATA_GET_PTR(mrb, argv[1], &mrb_raylib_struct_Vector2, Vector2);;
+    Vector2 v3 = *(Vector2*)DATA_GET_PTR(mrb, argv[2], &mrb_raylib_struct_Vector2, Vector2);;
+    float thick = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+
+    DrawTriangleLinesEx(v1, v2, v3, thick, color);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_DrawTriangleFan(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[3];
@@ -8324,6 +8352,24 @@ static mrb_value mrb_raylib_DrawCircleSectorLines(mrb_state* mrb, mrb_value self
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_DrawCircleSectorLinesEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[7];
+    void* ptrs[7] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], };
+    mrb_get_args_a(mrb, "ooooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float radius = mrb_as_float(mrb, argv[1]);
+    float startAngle = mrb_as_float(mrb, argv[2]);
+    float endAngle = mrb_as_float(mrb, argv[3]);
+    int segments = mrb_as_int(mrb, argv[4]);
+    float thick = mrb_as_float(mrb, argv[5]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
+
+    DrawCircleSectorLinesEx(center, radius, startAngle, endAngle, segments, thick, color);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_DrawCircleLines(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[4];
@@ -8430,6 +8476,22 @@ static mrb_value mrb_raylib_DrawEllipseLinesV(mrb_state* mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+static mrb_value mrb_raylib_DrawEllipseLinesEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[5];
+    void* ptrs[5] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], };
+    mrb_get_args_a(mrb, "ooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float radiusH = mrb_as_float(mrb, argv[1]);
+    float radiusV = mrb_as_float(mrb, argv[2]);
+    float thick = mrb_as_float(mrb, argv[3]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[4], &mrb_raylib_struct_Color, Color);;
+
+    DrawEllipseLinesEx(center, radiusH, radiusV, thick, color);
+
+    return mrb_nil_value();
+}
+
 static mrb_value mrb_raylib_DrawRing(mrb_state* mrb, mrb_value self)
 {
     mrb_value argv[7];
@@ -8462,6 +8524,25 @@ static mrb_value mrb_raylib_DrawRingLines(mrb_state* mrb, mrb_value self)
     Color color = *(Color*)DATA_GET_PTR(mrb, argv[6], &mrb_raylib_struct_Color, Color);;
 
     DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
+
+    return mrb_nil_value();
+}
+
+static mrb_value mrb_raylib_DrawRingLinesEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[8];
+    void* ptrs[8] = { &argv[0], &argv[1], &argv[2], &argv[3], &argv[4], &argv[5], &argv[6], &argv[7], };
+    mrb_get_args_a(mrb, "oooooooo", ptrs);
+    Vector2 center = *(Vector2*)DATA_GET_PTR(mrb, argv[0], &mrb_raylib_struct_Vector2, Vector2);;
+    float innerRadius = mrb_as_float(mrb, argv[1]);
+    float outerRadius = mrb_as_float(mrb, argv[2]);
+    float startAngle = mrb_as_float(mrb, argv[3]);
+    float endAngle = mrb_as_float(mrb, argv[4]);
+    int segments = mrb_as_int(mrb, argv[5]);
+    float thick = mrb_as_float(mrb, argv[6]);
+    Color color = *(Color*)DATA_GET_PTR(mrb, argv[7], &mrb_raylib_struct_Color, Color);;
+
+    DrawRingLinesEx(center, innerRadius, outerRadius, startAngle, endAngle, segments, thick, color);
 
     return mrb_nil_value();
 }
@@ -10196,6 +10277,21 @@ static mrb_value mrb_raylib_LoadRenderTexture(mrb_state* mrb, mrb_value self)
 
     RenderTexture2D* retval = (RenderTexture2D*)mrb_malloc(mrb, sizeof(RenderTexture2D));
     *retval = LoadRenderTexture(width, height);
+
+    return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRenderTexture, &mrb_raylib_struct_RenderTexture, retval));
+}
+
+static mrb_value mrb_raylib_LoadRenderTextureEx(mrb_state* mrb, mrb_value self)
+{
+    mrb_value argv[3];
+    void* ptrs[3] = { &argv[0], &argv[1], &argv[2], };
+    mrb_get_args_a(mrb, "ooo", ptrs);
+    int width = mrb_as_int(mrb, argv[0]);
+    int height = mrb_as_int(mrb, argv[1]);
+    int format = mrb_as_int(mrb, argv[2]);
+
+    RenderTexture2D* retval = (RenderTexture2D*)mrb_malloc(mrb, sizeof(RenderTexture2D));
+    *retval = LoadRenderTextureEx(width, height, format);
 
     return mrb_obj_value(Data_Wrap_Struct(mrb, cRaylibRenderTexture, &mrb_raylib_struct_RenderTexture, retval));
 }
@@ -15328,6 +15424,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "FileExists", mrb_raylib_FileExists, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "DirectoryExists", mrb_raylib_DirectoryExists, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsFileExtension", mrb_raylib_IsFileExtension, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "IsFileHidden", mrb_raylib_IsFileHidden, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetFileLength", mrb_raylib_GetFileLength, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetFileModTime", mrb_raylib_GetFileModTime, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "GetFileExtension", mrb_raylib_GetFileExtension, MRB_ARGS_REQ(1));
@@ -15430,6 +15527,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawTriangle", mrb_raylib_DrawTriangle, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleGradient", mrb_raylib_DrawTriangleGradient, MRB_ARGS_REQ(6));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleLines", mrb_raylib_DrawTriangleLines, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawTriangleLinesEx", mrb_raylib_DrawTriangleLinesEx, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleFan", mrb_raylib_DrawTriangleFan, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawTriangleStrip", mrb_raylib_DrawTriangleStrip, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawRectangle", mrb_raylib_DrawRectangle, MRB_ARGS_REQ(5));
@@ -15452,6 +15550,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawCircleGradient", mrb_raylib_DrawCircleGradient, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleSector", mrb_raylib_DrawCircleSector, MRB_ARGS_REQ(6));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleSectorLines", mrb_raylib_DrawCircleSectorLines, MRB_ARGS_REQ(6));
+    mrb_define_module_function(mrb, mRaylib, "DrawCircleSectorLinesEx", mrb_raylib_DrawCircleSectorLinesEx, MRB_ARGS_REQ(7));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleLines", mrb_raylib_DrawCircleLines, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleLinesV", mrb_raylib_DrawCircleLinesV, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "DrawCircleLinesEx", mrb_raylib_DrawCircleLinesEx, MRB_ARGS_REQ(4));
@@ -15459,8 +15558,10 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "DrawEllipseV", mrb_raylib_DrawEllipseV, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawEllipseLines", mrb_raylib_DrawEllipseLines, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawEllipseLinesV", mrb_raylib_DrawEllipseLinesV, MRB_ARGS_REQ(4));
+    mrb_define_module_function(mrb, mRaylib, "DrawEllipseLinesEx", mrb_raylib_DrawEllipseLinesEx, MRB_ARGS_REQ(5));
     mrb_define_module_function(mrb, mRaylib, "DrawRing", mrb_raylib_DrawRing, MRB_ARGS_REQ(7));
     mrb_define_module_function(mrb, mRaylib, "DrawRingLines", mrb_raylib_DrawRingLines, MRB_ARGS_REQ(7));
+    mrb_define_module_function(mrb, mRaylib, "DrawRingLinesEx", mrb_raylib_DrawRingLinesEx, MRB_ARGS_REQ(8));
     mrb_define_module_function(mrb, mRaylib, "DrawSplineLinear", mrb_raylib_DrawSplineLinear, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawSplineBasis", mrb_raylib_DrawSplineBasis, MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mRaylib, "DrawSplineCatmullRom", mrb_raylib_DrawSplineCatmullRom, MRB_ARGS_REQ(4));
@@ -15579,6 +15680,7 @@ void mrb_raylib_module_init(mrb_state* mrb)
     mrb_define_module_function(mrb, mRaylib, "LoadTextureFromImage", mrb_raylib_LoadTextureFromImage, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "LoadTextureCubemap", mrb_raylib_LoadTextureCubemap, MRB_ARGS_REQ(2));
     mrb_define_module_function(mrb, mRaylib, "LoadRenderTexture", mrb_raylib_LoadRenderTexture, MRB_ARGS_REQ(2));
+    mrb_define_module_function(mrb, mRaylib, "LoadRenderTextureEx", mrb_raylib_LoadRenderTextureEx, MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mRaylib, "IsTextureValid", mrb_raylib_IsTextureValid, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "UnloadTexture", mrb_raylib_UnloadTexture, MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mRaylib, "IsRenderTextureValid", mrb_raylib_IsRenderTextureValid, MRB_ARGS_REQ(1));
