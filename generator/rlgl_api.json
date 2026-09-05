@@ -713,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "indices",
-          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
         },
         {
           "type": "unsigned int *",
@@ -722,29 +722,14 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif[5]",
+          "type": "#endif",
+          "name": "normals",
+          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+        },
+        {
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)[5]",
           "name": "vboId",
           "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m1",
-          "description": "Matrix second row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m5",
-          "description": "Matrix second row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m9",
-          "description": "Matrix second row (4 components)"
-        },
-        {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "m13",
-          "description": "Matrix second row (4 components)"
         },
         {
           "type": "unsigned short *",
@@ -752,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "",
-          "name": "",
-          "description": ""
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned int",

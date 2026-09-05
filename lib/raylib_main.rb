@@ -1944,6 +1944,12 @@ module Raylib
       #   @return [bool]
       [:IsFileExtension, :IsFileExtension, [:pointer, :pointer], :bool],
 
+      # @!method IsFileHidden(filePath)
+      #   IsFileHidden : Check if file path (file or directory) is hidden by OS
+      #   @param filePath [const char *]
+      #   @return [bool]
+      [:IsFileHidden, :IsFileHidden, [:pointer], :bool],
+
       # @!method GetFileLength(fileName)
       #   GetFileLength : Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
       #   @param fileName [const char *]
@@ -2594,6 +2600,16 @@ module Raylib
       #   @return [void]
       [:DrawTriangleLines, :DrawTriangleLines, [Vector2.by_value, Vector2.by_value, Vector2.by_value, Color.by_value], :void],
 
+      # @!method DrawTriangleLinesEx(v1, v2, v3, thick, color)
+      #   DrawTriangleLinesEx : Draw triangle outline with line thickness, counter-clockwise vertex order
+      #   @param v1 [Vector2]
+      #   @param v2 [Vector2]
+      #   @param v3 [Vector2]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawTriangleLinesEx, :DrawTriangleLinesEx, [Vector2.by_value, Vector2.by_value, Vector2.by_value, :float, Color.by_value], :void],
+
       # @!method DrawTriangleFan(points, pointCount, color)
       #   DrawTriangleFan : Draw a triangle fan defined by points (first vertex is the center)
       #   @param points [const Vector2 *]
@@ -2801,6 +2817,18 @@ module Raylib
       #   @return [void]
       [:DrawCircleSectorLines, :DrawCircleSectorLines, [Vector2.by_value, :float, :float, :float, :int, Color.by_value], :void],
 
+      # @!method DrawCircleSectorLinesEx(center, radius, startAngle, endAngle, segments, thick, color)
+      #   DrawCircleSectorLinesEx : Draw circle sector outline with thickness
+      #   @param center [Vector2]
+      #   @param radius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawCircleSectorLinesEx, :DrawCircleSectorLinesEx, [Vector2.by_value, :float, :float, :float, :int, :float, Color.by_value], :void],
+
       # @!method DrawCircleLines(centerX, centerY, radius, color)
       #   DrawCircleLines : Draw circle outline
       #   @param centerX [int]
@@ -2865,6 +2893,16 @@ module Raylib
       #   @return [void]
       [:DrawEllipseLinesV, :DrawEllipseLinesV, [Vector2.by_value, :float, :float, Color.by_value], :void],
 
+      # @!method DrawEllipseLinesEx(center, radiusH, radiusV, thick, color)
+      #   DrawEllipseLinesEx : Draw ellipse outline with line thickness
+      #   @param center [Vector2]
+      #   @param radiusH [float]
+      #   @param radiusV [float]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawEllipseLinesEx, :DrawEllipseLinesEx, [Vector2.by_value, :float, :float, :float, Color.by_value], :void],
+
       # @!method DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color)
       #   DrawRing : Draw ring
       #   @param center [Vector2]
@@ -2888,6 +2926,19 @@ module Raylib
       #   @param color [Color]
       #   @return [void]
       [:DrawRingLines, :DrawRingLines, [Vector2.by_value, :float, :float, :float, :float, :int, Color.by_value], :void],
+
+      # @!method DrawRingLinesEx(center, innerRadius, outerRadius, startAngle, endAngle, segments, thick, color)
+      #   DrawRingLinesEx : Draw ring outline with line thickness
+      #   @param center [Vector2]
+      #   @param innerRadius [float]
+      #   @param outerRadius [float]
+      #   @param startAngle [float]
+      #   @param endAngle [float]
+      #   @param segments [int]
+      #   @param thick [float]
+      #   @param color [Color]
+      #   @return [void]
+      [:DrawRingLinesEx, :DrawRingLinesEx, [Vector2.by_value, :float, :float, :float, :float, :int, :float, Color.by_value], :void],
 
       # @!method DrawSplineLinear(points, pointCount, thick, color)
       #   DrawSplineLinear : Draw spline: Linear, minimum 2 points
@@ -3885,6 +3936,14 @@ module Raylib
       #   @param height [int]
       #   @return [RenderTexture2D]
       [:LoadRenderTexture, :LoadRenderTexture, [:int, :int], RenderTexture2D.by_value],
+
+      # @!method LoadRenderTextureEx(width, height, format)
+      #   LoadRenderTextureEx : Load texture for rendering (framebuffer), with specific format
+      #   @param width [int]
+      #   @param height [int]
+      #   @param format [int]
+      #   @return [RenderTexture2D]
+      [:LoadRenderTextureEx, :LoadRenderTextureEx, [:int, :int, :int], RenderTexture2D.by_value],
 
       # @!method IsTextureValid(texture)
       #   IsTextureValid : Check if texture is valid (loaded in GPU)
