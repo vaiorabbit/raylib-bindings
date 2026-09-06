@@ -1,3 +1,7 @@
+2026-09-06  vaiorabbit  <http://twitter.com/vaiorabbit>
+
+	* examples/shapes_digital_clock.rb : Added
+
 2026-09-05  vaiorabbit  <http://twitter.com/vaiorabbit>
 
 	* Updated with latest raylib ( https://github.com/raysan5/raylib/commit/550dd0e3a86a0261f3cc7dd0bf59d1b8d03ea138 ) and raygui ( https://github.com/raysan5/raygui/commit/181e77961bef8ba763f9098063072e7faa0e0e67 )
