@@ -1,9 +1,9 @@
 {
       "RAYLIB_H" : null
     , "RAYLIB_VERSION_MAJOR" : "6"
-    , "RAYLIB_VERSION_MINOR" : "1"
+    , "RAYLIB_VERSION_MINOR" : "2"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : "\"6.1-dev\""
+    , "RAYLIB_VERSION" : "\"6.2\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : null
@@ -204,7 +204,7 @@
     , "SUPPORT_FILEFORMAT_VOX" : "1"
     , "SUPPORT_FILEFORMAT_M3D" : "1"
     , "SUPPORT_MESH_GENERATION" : "1"
-    , "SUPPORT_GPU_SKINNING" : "0"
+    , "SUPPORT_GPU_SKINNING" : "1"
     , "SUPPORT_FILEFORMAT_WAV" : "1"
     , "SUPPORT_FILEFORMAT_OGG" : "1"
     , "SUPPORT_FILEFORMAT_MP3" : "1"
@@ -214,10 +214,9 @@
     , "SUPPORT_FILEFORMAT_MOD" : "1"
     , "RAYGUI_H" : null
     , "RAYGUI_VERSION_MAJOR" : "5"
-    , "RAYGUI_VERSION_MINOR" : "0"
+    , "RAYGUI_VERSION_MINOR" : "1"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"5.0\""
-    , "_CRT_SECURE_NO_WARNINGS" : null
+    , "RAYGUI_VERSION" : "\"5.1-dev\""
     , "RAYGUIAPI" : null
     , "RAYGUI_SUPPORT_LOG_INFO" : null
     , "RAYGUI_LOG" : null

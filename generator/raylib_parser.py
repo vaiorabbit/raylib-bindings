@@ -9,6 +9,10 @@ if platform.system() == 'Windows':
     Config.set_library_path('C:/Program Files/LLVM/bin')
 elif platform.system() == 'Darwin':
     Config.set_library_path("/opt/homebrew/opt/llvm/lib")
+elif platform.system() == 'Linux':
+    libclang_path = os.environ.get('LIBCLANG_PATH')
+    if libclang_path:
+        Config.set_library_file(libclang_path)
 else:
     raise Exception("Unsupported platform")
 

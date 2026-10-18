@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 6
-  RAYLIB_VERSION_MINOR = 1
+  RAYLIB_VERSION_MINOR = 2
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "6.1-dev"
+  RAYLIB_VERSION = "6.2"
 
   # Enum
 

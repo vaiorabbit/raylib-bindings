@@ -12,9 +12,9 @@ module Raylib
   # Define/Macro
 
   RAYGUI_VERSION_MAJOR = 5
-  RAYGUI_VERSION_MINOR = 0
+  RAYGUI_VERSION_MINOR = 1
   RAYGUI_VERSION_PATCH = 0
-  RAYGUI_VERSION = "5.0"
+  RAYGUI_VERSION = "5.1-dev"
   SCROLLBAR_LEFT_SIDE = 0
   SCROLLBAR_RIGHT_SIDE = 1
 
@@ -140,6 +140,7 @@ module Raylib
   DROPDOWN_ITEMS_SPACING = 17 # DropdownBox items separation
   DROPDOWN_ARROW_HIDDEN = 18  # DropdownBox arrow hidden
   DROPDOWN_ROLL_UP = 19       # DropdownBox roll up flag: 0-Roll down, 1-Roll up
+  DROPDOWN_MAX_HEIGHT = 20
 
   # enum GuiTextBoxProperty
   # TextBox/TextBoxMulti/ValueBox/Spinner
