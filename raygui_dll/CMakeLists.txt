@@ -14,7 +14,7 @@ include_directories(.)
 
 if (APPLE)
     link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build_${BUILD_PLATFORM}/raylib)
-elsif(EMSCRIPTEN)
+elseif(EMSCRIPTEN)
     link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build_wasm/raylib)
 else()
     link_directories(${CMAKE_CURRENT_LIST_DIR}/../raylib_dll/build/raylib)
