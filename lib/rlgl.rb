@@ -382,25 +382,25 @@ module Raylib
 
       # @!method rlFrustum(left, right, bottom, top, znear, zfar)
       #   rlFrustum
-      #   @param left [double]
-      #   @param right [double]
-      #   @param bottom [double]
-      #   @param top [double]
-      #   @param znear [double]
-      #   @param zfar [double]
+      #   @param left [float]
+      #   @param right [float]
+      #   @param bottom [float]
+      #   @param top [float]
+      #   @param znear [float]
+      #   @param zfar [float]
       #   @return [void]
-      [:rlFrustum, :rlFrustum, [:double, :double, :double, :double, :double, :double], :void],
+      [:rlFrustum, :rlFrustum, [:float, :float, :float, :float, :float, :float], :void],
 
       # @!method rlOrtho(left, right, bottom, top, znear, zfar)
       #   rlOrtho
-      #   @param left [double]
-      #   @param right [double]
-      #   @param bottom [double]
-      #   @param top [double]
-      #   @param znear [double]
-      #   @param zfar [double]
+      #   @param left [float]
+      #   @param right [float]
+      #   @param bottom [float]
+      #   @param top [float]
+      #   @param znear [float]
+      #   @param zfar [float]
       #   @return [void]
-      [:rlOrtho, :rlOrtho, [:double, :double, :double, :double, :double, :double], :void],
+      [:rlOrtho, :rlOrtho, [:float, :float, :float, :float, :float, :float], :void],
 
       # @!method rlViewport(x, y, width, height)
       #   rlViewport : Set the viewport area
@@ -413,20 +413,20 @@ module Raylib
 
       # @!method rlSetClipPlanes(nearPlane, farPlane)
       #   rlSetClipPlanes : Set clip planes distances
-      #   @param nearPlane [double]
-      #   @param farPlane [double]
+      #   @param nearPlane [float]
+      #   @param farPlane [float]
       #   @return [void]
-      [:rlSetClipPlanes, :rlSetClipPlanes, [:double, :double], :void],
+      [:rlSetClipPlanes, :rlSetClipPlanes, [:float, :float], :void],
 
       # @!method rlGetCullDistanceNear()
       #   rlGetCullDistanceNear : Get cull plane distance near
-      #   @return [double]
-      [:rlGetCullDistanceNear, :rlGetCullDistanceNear, [], :double],
+      #   @return [float]
+      [:rlGetCullDistanceNear, :rlGetCullDistanceNear, [], :float],
 
       # @!method rlGetCullDistanceFar()
       #   rlGetCullDistanceFar : Get cull plane distance far
-      #   @return [double]
-      [:rlGetCullDistanceFar, :rlGetCullDistanceFar, [], :double],
+      #   @return [float]
+      [:rlGetCullDistanceFar, :rlGetCullDistanceFar, [], :float],
 
       # @!method rlBegin(mode)
       #   rlBegin : Initialize drawing mode (how to organize vertex)

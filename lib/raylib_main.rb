@@ -12,9 +12,8 @@ module Raylib
   # Define/Macro
 
   RAYLIB_VERSION_MAJOR = 6
-  RAYLIB_VERSION_MINOR = 1
+  RAYLIB_VERSION_MINOR = 5
   RAYLIB_VERSION_PATCH = 0
-  RAYLIB_VERSION = "6.1-dev"
 
   # Enum
 
@@ -714,7 +713,7 @@ module Raylib
   # Camera2D, defines position/orientation in 2d space
   class Camera2D < FFI::Struct
     layout(
-      :offset, Vector2,  # Camera offset (screen space offset from window origin)
+      :offset, Vector2,  # Camera offset (screen space offset from window origin, unscaled by DPI, real pixel size)
       :target, Vector2,  # Camera target (world space target point that is mapped to screen space offset)
       :rotation, :float, # Camera rotation in degrees (pivots around target)
       :zoom, :float,     # Camera zoom (scaling around target), must not be set to 0, set to 1.0f for no scale
@@ -1761,7 +1760,7 @@ module Raylib
       [:TakeScreenshot, :TakeScreenshot, [:pointer], :void],
 
       # @!method SetConfigFlags(flags)
-      #   SetConfigFlags : Set up init configuration flags (view FLAGS)
+      #   SetConfigFlags : Set init configuration flags (view FLAGS)
       #   @param flags [unsigned int]
       #   @return [void]
       [:SetConfigFlags, :SetConfigFlags, [:uint], :void],

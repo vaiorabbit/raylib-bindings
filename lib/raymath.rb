@@ -835,34 +835,34 @@ module Raylib
 
       # @!method MatrixFrustum(left, right, bottom, top, nearPlane, farPlane)
       #   MatrixFrustum
-      #   @param left [double]
-      #   @param right [double]
-      #   @param bottom [double]
-      #   @param top [double]
-      #   @param nearPlane [double]
-      #   @param farPlane [double]
+      #   @param left [float]
+      #   @param right [float]
+      #   @param bottom [float]
+      #   @param top [float]
+      #   @param nearPlane [float]
+      #   @param farPlane [float]
       #   @return [Matrix]
-      [:MatrixFrustum, :MatrixFrustum, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
+      [:MatrixFrustum, :MatrixFrustum, [:float, :float, :float, :float, :float, :float], Matrix.by_value],
 
       # @!method MatrixPerspective(fovY, aspect, nearPlane, farPlane)
       #   MatrixPerspective
-      #   @param fovY [double]
-      #   @param aspect [double]
-      #   @param nearPlane [double]
-      #   @param farPlane [double]
+      #   @param fovY [float]
+      #   @param aspect [float]
+      #   @param nearPlane [float]
+      #   @param farPlane [float]
       #   @return [Matrix]
-      [:MatrixPerspective, :MatrixPerspective, [:double, :double, :double, :double], Matrix.by_value],
+      [:MatrixPerspective, :MatrixPerspective, [:float, :float, :float, :float], Matrix.by_value],
 
       # @!method MatrixOrtho(left, right, bottom, top, nearPlane, farPlane)
       #   MatrixOrtho
-      #   @param left [double]
-      #   @param right [double]
-      #   @param bottom [double]
-      #   @param top [double]
-      #   @param nearPlane [double]
-      #   @param farPlane [double]
+      #   @param left [float]
+      #   @param right [float]
+      #   @param bottom [float]
+      #   @param top [float]
+      #   @param nearPlane [float]
+      #   @param farPlane [float]
       #   @return [Matrix]
-      [:MatrixOrtho, :MatrixOrtho, [:double, :double, :double, :double, :double, :double], Matrix.by_value],
+      [:MatrixOrtho, :MatrixOrtho, [:float, :float, :float, :float, :float, :float], Matrix.by_value],
 
       # @!method MatrixLookAt(eye, target, up)
       #   MatrixLookAt

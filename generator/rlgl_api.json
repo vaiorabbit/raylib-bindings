@@ -104,13 +104,13 @@
     },
     {
       "name": "RL_CULL_DISTANCE_NEAR",
-      "type": "DOUBLE",
+      "type": "FLOAT",
       "value": 0.05,
       "description": "Default near cull distance"
     },
     {
       "name": "RL_CULL_DISTANCE_FAR",
-      "type": "DOUBLE",
+      "type": "FLOAT",
       "value": 4000.0,
       "description": "Default far cull distance"
     },
@@ -713,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "normals",
-          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+          "name": "vaoId",
+          "description": "OpenGL Vertex Array Object id"
         },
         {
           "type": "unsigned int *",
@@ -723,13 +723,13 @@
         },
         {
           "type": "#endif",
-          "name": "normals",
-          "description": "Vertex normal (XYZ - 3 components per vertex) (shader-location = 2)"
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
-          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "unsigned short *",
@@ -737,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif[5]",
-          "name": "vboId",
-          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
+          "type": "#endif",
+          "name": "colors",
+          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
         },
         {
           "type": "unsigned int",
@@ -1573,27 +1573,27 @@
       "returnType": "void",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "left"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "right"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "bottom"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "top"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "znear"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "zfar"
         }
       ]
@@ -1604,27 +1604,27 @@
       "returnType": "void",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "left"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "right"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "bottom"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "top"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "znear"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "zfar"
         }
       ]
@@ -1658,11 +1658,11 @@
       "returnType": "void",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "nearPlane"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "farPlane"
         }
       ]
@@ -1670,12 +1670,12 @@
     {
       "name": "rlGetCullDistanceNear",
       "description": "Get cull plane distance near",
-      "returnType": "double"
+      "returnType": "float"
     },
     {
       "name": "rlGetCullDistanceFar",
       "description": "Get cull plane distance far",
-      "returnType": "double"
+      "returnType": "float"
     },
     {
       "name": "rlBegin",

@@ -1981,27 +1981,27 @@
       "returnType": "Matrix",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "left"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "right"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "bottom"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "top"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "nearPlane"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "farPlane"
         }
       ]
@@ -2012,19 +2012,19 @@
       "returnType": "Matrix",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "fovY"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "aspect"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "nearPlane"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "farPlane"
         }
       ]
@@ -2035,27 +2035,27 @@
       "returnType": "Matrix",
       "params": [
         {
-          "type": "double",
+          "type": "float",
           "name": "left"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "right"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "bottom"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "top"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "nearPlane"
         },
         {
-          "type": "double",
+          "type": "float",
           "name": "farPlane"
         }
       ]

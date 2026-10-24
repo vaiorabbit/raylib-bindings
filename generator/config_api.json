@@ -309,7 +309,7 @@
     {
       "name": "SUPPORT_GPU_SKINNING",
       "type": "INT",
-      "value": 0,
+      "value": 1,
       "description": ""
     },
     {
