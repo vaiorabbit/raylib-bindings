@@ -713,8 +713,8 @@
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENunsigned int *",
-          "name": "vaoId",
-          "description": "OpenGL Vertex Array Object id"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned int *",
@@ -723,13 +723,13 @@
         },
         {
           "type": "#endif",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "#if defined(GRAPHICS_API_OPENGL_ES2)",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+          "name": "indices",
+          "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
           "type": "unsigned short *",
@@ -737,9 +737,9 @@
           "description": "Vertex indices (in case vertex data comes indexed) (6 indices per quad)"
         },
         {
-          "type": "#endif",
-          "name": "colors",
-          "description": "Vertex colors (RGBA - 4 components per vertex) (shader-location = 3)"
+          "type": "#endif[5]",
+          "name": "vboId",
+          "description": "OpenGL Vertex Buffer Objects id (5 types of vertex data)"
         },
         {
           "type": "unsigned int",

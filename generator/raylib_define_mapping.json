@@ -3,7 +3,7 @@
     , "RAYLIB_VERSION_MAJOR" : "6"
     , "RAYLIB_VERSION_MINOR" : "5"
     , "RAYLIB_VERSION_PATCH" : "0"
-    , "RAYLIB_VERSION" : null
+    , "RAYLIB_VERSION" : "\"6.5-dev\""
     , "RLAPI" : null
     , "PI" : null
     , "DEG2RAD" : null
@@ -216,7 +216,7 @@
     , "RAYGUI_VERSION_MAJOR" : "5"
     , "RAYGUI_VERSION_MINOR" : "1"
     , "RAYGUI_VERSION_PATCH" : "0"
-    , "RAYGUI_VERSION" : "\"5.0\""
+    , "RAYGUI_VERSION" : "\"5.1-dev\""
     , "_CRT_SECURE_NO_WARNINGS" : null
     , "RAYGUIAPI" : null
     , "RAYGUI_SUPPORT_LOG_INFO" : null

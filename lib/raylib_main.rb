@@ -14,6 +14,7 @@ module Raylib
   RAYLIB_VERSION_MAJOR = 6
   RAYLIB_VERSION_MINOR = 5
   RAYLIB_VERSION_PATCH = 0
+  RAYLIB_VERSION = "6.5-dev"
 
   # Enum
 
